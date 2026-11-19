@@ -188,7 +188,15 @@ func _input(event: InputEvent) -> void :
 	elif Input.is_action_just_pressed("move_down"):
 		switch_armor(1)
 		
-	if Input.is_action_just_pressed("ui_accept") and accept_pressed <= 0:
+	if Input.is_action_just_pressed("ui_accept"):
+		accept_selection()
+
+# 현재 가운데 캐릭터를 팀에 넣거나 빼고, 팀이 완성되면 게임을 시작한다.
+# ui_accept(키/패드)와 SELECT TEAM 버튼 터치(GameStart.on_press)가 함께 사용한다.
+func accept_selection() -> void :
+	if gamestart_button.game_started or animating:
+		return
+	if accept_pressed <= 0:
 		accept_pressed = accept_timer
 		
 		var char_name = "none"
