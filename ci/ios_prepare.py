@@ -12,7 +12,7 @@ import os
 import re
 import sys
 
-BUNDLE_ID = os.environ.get("BUNDLE_ID", "com.example.mmx8")
+BUNDLE_ID = os.environ.get("BUNDLE_ID", "com.mmx8.teamtag.ios")
 TEAM_ID = os.environ.get("TEAM_ID", "AAAAAAAAAA")  # 서명 안 하므로 형식만 맞는 더미
 
 
