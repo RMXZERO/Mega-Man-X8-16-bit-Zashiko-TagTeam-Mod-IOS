@@ -94,14 +94,22 @@ uppercase = true
 
 [node name="scrollContainer" type="ScrollContainer" parent="Menu"]
 margin_left = 66.0
-margin_top = 42.0
+margin_top = 37.0
 margin_right = 332.0
 margin_bottom = 201.0
 theme = ExtResource( 17 )
 follow_focus = true
 scroll_horizontal_enabled = false
 
-[node name="OptionHolder" type="VBoxContainer" parent="Menu/scrollContainer"]
+[node name="Pad" type="MarginContainer" parent="Menu/scrollContainer"]
+margin_right = 266.0
+margin_bottom = 5.0
+custom_constants/margin_top = 5
+
+[node name="OptionHolder" type="VBoxContainer" parent="Menu/scrollContainer/Pad"]
+margin_top = 5.0
+margin_right = 266.0
+margin_bottom = 5.0
 grow_horizontal = 2
 custom_constants/separation = 3
 

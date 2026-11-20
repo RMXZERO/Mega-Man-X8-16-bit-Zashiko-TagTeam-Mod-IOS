@@ -14,7 +14,7 @@ onready var equip: AudioStreamPlayer = $equip
 onready var pick: AudioStreamPlayer = $pick
 onready var loaded: AudioStreamPlayer = $load
 onready var cancel: AudioStreamPlayer = $cancel
-onready var save_button_container: VBoxContainer = $Menu / scrollContainer / OptionHolder
+onready var save_button_container: VBoxContainer = $Menu / scrollContainer / Pad / OptionHolder
 
 var active: bool = false
 var locked: bool = true
