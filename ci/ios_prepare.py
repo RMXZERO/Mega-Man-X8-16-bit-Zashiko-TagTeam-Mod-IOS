@@ -1000,7 +1000,7 @@ def patch_tagteam_fonts():
 def patch_tagteam_layout():
     """한글 폰트에 맞춰 태그팀 소스의 글자 위치를 보정한다 (멱등).
     - 옵션 화면: 글자 세로 오프셋을 iOS 원본 값(-7->-4, -9->-6)으로, 첫 줄이 잘리지 않게 위쪽 여백 추가
-    - 불러오기 슬롯: 맨 윗줄(난이도/NEW GAME+)이 스크롤 영역에 잘리지 않게 아래로 이동"""
+    - 불러오기 슬롯: Loading.tscn 에서 스크롤 영역 위쪽 여백으로 직접 처리하므로 여기서는 건드리지 않음"""
     opt = "src/Options/Options.tscn"
     if os.path.exists(opt):
         src = read(opt)
@@ -1025,12 +1025,6 @@ def patch_tagteam_layout():
              "margin_left = 96.0\nmargin_top = 31.0\nmargin_right = 346.0\nmargin_bottom = 194.0",
              "margin_left = 96.0\nmargin_top = 28.0\nmargin_right = 346.0\nmargin_bottom = 198.0",
              "스크롤 영역 확장")
-    slot = "System/Screens/Loading/SlotButton.tscn"
-    if os.path.exists(slot):
-        _sub(slot, "margin_left = -129.0\nmargin_top = -27.0\nmargin_right = 131.0\nmargin_bottom = -13.0",
-             "margin_left = -129.0\nmargin_top = -21.0\nmargin_right = 131.0\nmargin_bottom = -7.0", "난이도 줄 아래로")
-        _sub(slot, "margin_left = -14.0\nmargin_top = -27.0\nmargin_right = 130.0\nmargin_bottom = -13.0",
-             "margin_left = -14.0\nmargin_top = -21.0\nmargin_right = 130.0\nmargin_bottom = -7.0", "NEW GAME+ 줄 아래로")
 
 
 if __name__ == "__main__":
