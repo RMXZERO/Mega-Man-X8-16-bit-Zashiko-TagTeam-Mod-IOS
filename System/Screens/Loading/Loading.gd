@@ -135,7 +135,7 @@ func load_all_slots() -> void :
 		child.free()
 	# 첫 슬롯 위쪽에 여백을 둬서 난이도 글씨(한글)가 스크롤 영역 위에서 잘리지 않게 함
 	var top_spacer: = Control.new()
-	top_spacer.rect_min_size = Vector2(0, 9)
+	top_spacer.rect_min_size = Vector2(0, 8)
 	top_spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	save_button_container.add_child(top_spacer)
 	for slot_index in range(Savefile.max_slots):

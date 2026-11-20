@@ -103,7 +103,7 @@ scroll_horizontal_enabled = false
 
 [node name="OptionHolder" type="VBoxContainer" parent="Menu/scrollContainer"]
 grow_horizontal = 2
-custom_constants/separation = 3
+custom_constants/separation = 1
 
 [node name="exit" type="TextureButton" parent="Menu"]
 self_modulate = Color( 1, 1, 1, 0 )
