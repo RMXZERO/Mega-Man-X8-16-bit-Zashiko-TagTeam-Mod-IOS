@@ -107,8 +107,8 @@ application/app_store_team_id="{team}"
 application/identifier="{bundle}"
 application/bundle_identifier="{bundle}"
 icons/app_store_1024x1024="res://ci_icon_1024.png"
-application/short_version="0.9"
-application/version="0.9"
+application/short_version="0.9.1"
+application/version="0.9.1"
 application/launch_screens_interpolation=0
 application/targeted_device_family=2
 orientation/portrait=false
@@ -996,6 +996,43 @@ def patch_tagteam_fonts():
     _sub(os.path.join(fonts, "menuFont.tres"), "height = 8.0\n", "height = 14.0\n", "menuFont 높이 8 -> 14")
 
 
+
+def patch_tagteam_layout():
+    """한글 폰트에 맞춰 태그팀 소스의 글자 위치를 보정한다 (멱등).
+    - 옵션 화면: 글자 세로 오프셋을 iOS 원본 값(-7->-4, -9->-6)으로, 첫 줄이 잘리지 않게 위쪽 여백 추가
+    - 불러오기 슬롯: 맨 윗줄(난이도/NEW GAME+)이 스크롤 영역에 잘리지 않게 아래로 이동"""
+    opt = "src/Options/Options.tscn"
+    if os.path.exists(opt):
+        src = read(opt)
+        nl = "\r\n" if "\r\n" in src else "\n"
+        if "TopPad" in src:
+            print(f"[skip] {opt}: 글자 위치 보정 (이미 적용됨)")
+        else:
+            n7 = src.count("margin_top = -7.0")
+            n9 = src.count("margin_top = -9.0")
+            src = src.replace("margin_top = -7.0", "margin_top = -4.0").replace("margin_top = -9.0", "margin_top = -6.0")
+            hold = '[node name="Language" type="Control" parent="Menu/scrollContainer/OptionHolder"]'
+            pad = ('[node name="TopPad" type="Control" parent="Menu/scrollContainer/OptionHolder"]' + nl +
+                   "margin_right = 200.0" + nl + "rect_min_size = Vector2( 200, 0 )" + nl +
+                   "mouse_filter = 2" + nl + nl)
+            if src.count(hold) == 1:
+                src = src.replace(hold, pad + hold)
+            else:
+                print(f"[warn] {opt}: Language 노드 위치를 찾지 못함 - 위쪽 여백 생략")
+            write(opt, src)
+            print(f"[ok]   {opt}: 글자 오프셋 보정 (-7 {n7}곳, -9 {n9}곳) + 위쪽 여백")
+        _sub(opt,
+             "margin_left = 96.0\nmargin_top = 31.0\nmargin_right = 346.0\nmargin_bottom = 194.0",
+             "margin_left = 96.0\nmargin_top = 28.0\nmargin_right = 346.0\nmargin_bottom = 198.0",
+             "스크롤 영역 확장")
+    slot = "System/Screens/Loading/SlotButton.tscn"
+    if os.path.exists(slot):
+        _sub(slot, "margin_left = -129.0\nmargin_top = -27.0\nmargin_right = 131.0\nmargin_bottom = -13.0",
+             "margin_left = -129.0\nmargin_top = -21.0\nmargin_right = 131.0\nmargin_bottom = -7.0", "난이도 줄 아래로")
+        _sub(slot, "margin_left = -14.0\nmargin_top = -27.0\nmargin_right = 130.0\nmargin_bottom = -13.0",
+             "margin_left = -14.0\nmargin_top = -21.0\nmargin_right = 130.0\nmargin_bottom = -7.0", "NEW GAME+ 줄 아래로")
+
+
 if __name__ == "__main__":
     if not os.path.exists("project.godot"):
         sys.exit("[error] 저장소 루트(project.godot가 있는 곳)에서 실행하세요")
@@ -1008,3 +1045,4 @@ if __name__ == "__main__":
     patch_clear_color()
     apply_korean()
     patch_tagteam_fonts()
+    patch_tagteam_layout()
