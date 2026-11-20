@@ -23,6 +23,6 @@ func get_special_title():
 
 func display():
 	if get_special_title():
-		display_value("TITLE_MEGAMAN_OPTION")
+		display_value("메가맨")
 	else:
-		display_value("TITLE_ROCKMAN_OPTION")
+		display_value("록맨")
