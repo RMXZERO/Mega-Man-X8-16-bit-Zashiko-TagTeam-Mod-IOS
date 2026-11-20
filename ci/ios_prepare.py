@@ -1027,6 +1027,159 @@ def patch_tagteam_layout():
              "스크롤 영역 확장")
 
 
+# iOS 에서는 게임에 원래 들어있는 안드로이드용 터치 UI(System/Android)를 지운다.
+# (엑박패드 UI 는 IOSTouchOverlay 가 담당. 둘이 같이 뜨면 화면이 겹치고 입력도 두 번 들어감)
+# 숨기기만 하면 Area2D 조이스틱의 _input 이 계속 살아있으므로, 아예 노드를 지워 버린다.
+# 단, 위쪽의 동그라미 퀵 버튼(weaponround = 무기 선택 링 + 가운데 reset_weapon 버튼)은 남긴다.
+IOS_HIDE_MARK = "# iOS-PORT: 안드로이드 터치 UI 제거 (v2, 퀵 버튼 유지)"
+OLD_HIDE_MARK = "# iOS-PORT: 안드로이드 터치 UI 제거"
+
+KEY_GUARD = [
+    "\t" + IOS_HIDE_MARK,
+    "\tif OS.get_name() == \"iOS\":",
+    "\t\tfor c in get_children():",
+    "\t\t\tif c.name != \"weaponround\":",
+    "\t\t\t\tc.queue_free()",
+    "\t\tvar wr = get_node_or_null(\"weaponround\")",
+    "\t\tif wr != null:",
+    "\t\t\twr.position = Vector2(CharacterManager.weaponround_position_x * 0.1, CharacterManager.weaponround_position_y * 0.1)",
+    "\t\tmodulate.a = 1.0",
+    "\t\tvisible = true",
+    "\t\treturn",
+    "",
+]
+BTN_GUARD = [
+    "\t" + IOS_HIDE_MARK,
+    "\tif OS.get_name() == \"iOS\" and name != \"weaponcenter\":",
+    "\t\tqueue_free()",
+    "\t\treturn",
+    "",
+]
+ANDROID_UI_SCRIPTS = {
+    "System/Android/ShowControls.gd": KEY_GUARD,      # AndroidControls.tscn 의 Key (조이스틱/버튼 전체의 부모)
+    "System/Android/AndroidControls.gd": BTN_GUARD,   # 각 씬(일시정지/컷신 등)의 Pause/Jump 터치 버튼
+    "System/Android/button.gd": BTN_GUARD,
+    "System/Android/AndroidKeyConfig.gd": BTN_GUARD,
+}
+
+
+def patch_hide_android_controls():
+    for path, guard_lines in ANDROID_UI_SCRIPTS.items():
+        if not os.path.exists(path):
+            print(f"[warn] {path} 없음 - 건너뜀")
+            continue
+        src = read(path)
+        if IOS_HIDE_MARK in src:
+            print(f"[skip] {path} (이미 패치됨)")
+            continue
+        nl = "\r\n" if "\r\n" in src else "\n"
+        # 이전 버전(퀵 버튼까지 지우던) 패치가 남아 있으면 먼저 걷어낸다
+        src = re.sub(r"\t" + re.escape(OLD_HIDE_MARK) + r"\r?\n\tif OS\.get_name\(\) == \"iOS\":\r?\n\t\tqueue_free\(\)\r?\n\t\treturn\r?\n", "", src)
+        m = re.search(r"^func _ready\(\)[^\n]*\n", src, re.M)
+        if not m:
+            print(f"[warn] {path}: _ready 를 찾지 못함 - 건너뜀")
+            continue
+        src = src[:m.end()] + nl.join(guard_lines) + src[m.end():]
+        write(path, src)
+        print(f"[ok]   {path}: iOS 에서는 터치 UI 제거 (퀵 버튼 유지)")
+
+
+# 무기 선택 링(HotSwap): 캐릭터 기준으로 3x3 으로 뜨기 때문에 낮은 지형(화면 맨 아래)에 서 있으면
+# 아래쪽 아이콘 3개가 화면 밖으로 나가 안 보인다. iOS 에서는 링 전체를 캐릭터 머리 위로 올리고,
+# 그래도 화면 밖으로 나가면 화면 안쪽으로 밀어 넣는다.
+# (아이콘/커서/선택 영역이 모두 같은 부모 아래라 같이 움직이므로 선택 동작은 그대로)
+HOTSWAP_SCRIPTS = [
+    "src/Options/HotSwap.gd",
+    "Zero_mod/Player/Weapons/HotSwapZero.gd",
+    "Axl_mod/HUD/HotSwapAxl.gd",
+]
+HOTSWAP_MARK = "# iOS-PORT: 무기 선택 링 화면 안으로"
+HOTSWAP_CODE = """
+
+# iOS-PORT: 무기 선택 링 화면 안으로
+var _ios_base_pos = null
+const _IOS_WHEEL_UP: float = 84.0  # 링 전체를 캐릭터 머리 위로 올리는 높이
+
+func _process(_delta: float) -> void :
+	if OS.get_name() != "iOS":
+		return
+	if _ios_base_pos == null:
+		_ios_base_pos = position
+	position = _ios_base_pos
+	if modulate.a <= 0.01 or not is_visible_in_tree():
+		return
+	global_position += Vector2(0, - _IOS_WHEEL_UP)
+	var vp = get_viewport()
+	if vp == null:
+		return
+	var inv = vp.get_canvas_transform().affine_inverse()
+	var vr = vp.get_visible_rect()
+	var tl = inv.xform(vr.position)
+	var br = inv.xform(vr.position + vr.size)
+	var lo = Vector2(INF, INF)
+	var hi = Vector2(-INF, -INF)
+	for c in get_children():
+		if c is Sprite and c.name != "cursor":
+			var g = to_global(c.position)
+			lo.x = min(lo.x, g.x)
+			lo.y = min(lo.y, g.y)
+			hi.x = max(hi.x, g.x)
+			hi.y = max(hi.y, g.y)
+	if lo.x == INF:
+		return
+	var half = 18.0
+	var margin = 6.0
+	var shift = Vector2.ZERO
+	if hi.y + half > br.y - margin:
+		shift.y = (br.y - margin) - (hi.y + half)
+	elif lo.y - half < tl.y + margin:
+		shift.y = (tl.y + margin) - (lo.y - half)
+	if hi.x + half > br.x - margin:
+		shift.x = (br.x - margin) - (hi.x + half)
+	elif lo.x - half < tl.x + margin:
+		shift.x = (tl.x + margin) - (lo.x - half)
+	if shift != Vector2.ZERO:
+		global_position += shift
+"""
+
+
+def patch_hotswap_onscreen():
+    for path in HOTSWAP_SCRIPTS:
+        if not os.path.exists(path):
+            print(f"[warn] {path} 없음 - 건너뜀")
+            continue
+        src = read(path)
+        if HOTSWAP_MARK in src:
+            print(f"[skip] {path} (이미 패치됨)")
+            continue
+        if re.search(r"^func _process\(", src, re.M):
+            print(f"[warn] {path}: 이미 _process 가 있어 건너뜀")
+            continue
+        nl = "\r\n" if "\r\n" in src else "\n"
+        code = HOTSWAP_CODE.replace("\n", nl)
+        write(path, src.rstrip() + nl + code)
+        print(f"[ok]   {path}: 무기 선택 링을 화면 안으로 유지")
+
+
+# 불러오기: 세이브 파일의 version 값이 "1.0.0.4" 와 정확히 같을 때만 내용을 적용하고 있어서,
+# 다른 버전(PC 태그팀 모드 등)에서 가져온 세이브는 슬롯 목록에는 보이는데 눌러도 아무것도 안 불러와졌다.
+# 필요한 데이터(collectibles / variables)가 들어있으면 버전이 달라도 적용한다.
+def patch_save_version():
+    path = "src/System/Savefile.gd"
+    src = read(path)
+    if "# iOS-PORT" in src:
+        print(f"[skip] {path} (이미 패치됨)")
+        return
+    old = 'if game_data.has("version") and game_data["version"] == save_version:'
+    new = ('# iOS-PORT: 세이브 버전이 달라도 필요한 데이터가 있으면 불러오기\n'
+           '\tif game_data.has("collectibles") and game_data.has("variables") and typeof(game_data["variables"]) == TYPE_DICTIONARY:')
+    if old not in src:
+        print(f"[warn] {path}: 버전 비교 줄을 찾지 못함")
+        return
+    write(path, src.replace(old, new, 1))
+    print(f"[ok]   {path}: 버전이 달라도 세이브 적용")
+
+
 if __name__ == "__main__":
     if not os.path.exists("project.godot"):
         sys.exit("[error] 저장소 루트(project.godot가 있는 곳)에서 실행하세요")
@@ -1035,6 +1188,9 @@ if __name__ == "__main__":
     patch_project_godot()
     patch_presets()
     patch_overlay()
+    patch_hide_android_controls()
+    patch_hotswap_onscreen()
+    patch_save_version()
     patch_stretch()
     patch_clear_color()
     apply_korean()
