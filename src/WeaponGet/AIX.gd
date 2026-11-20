@@ -1,11 +1,102 @@
 extends X
 
-var less_buggy_pressed_dir: int = 0
+onready var alia_sprites: Resource = preload("res://src/Actors/Player/alia_sprites/alia.tres")
+onready var alia_sprites_arm: Resource = preload("res://src/Actors/Player/alia_sprites/alia_arm.tres")
+onready var infinite_x_sprites: Resource = preload("res://X_mod/InfiniteX/Sprites/InfiniteX.tres")
+onready var infinite_x_sprites_arm: Resource = preload("res://X_mod/InfiniteX/Sprites/InfiniteX_leftarm.tres")
 
+export var alia: bool = false
+var less_buggy_pressed_dir: int = 0
 
 func _ready():
 	is_current_player = true
+	CharacterManager.weaponget = true
+	equip_hermes_arms_parts()
+	Input.action_release("dash_emulated")
+	Input.action_release("fire_emulated")
+	Input.action_release("alt_fire_emulated")
+	Input.action_release("up_emulated")
+	Input.action_release("left_emulated")
+	Input.action_release("right_emulated")
+	Input.action_release("down_emulated")
+	Input.action_release("jump_emulated")
+	if alia:
+		alia_weaponget()
+	if not alia and not CharacterManager.use_old_sprite:
+		x_x8_weaponget()
+	if not alia and CharacterManager.infinite_x_activated and CharacterManager.use_old_sprite:
+		infinite_x_weaponget()
 
+func set_sprite():
+	pass
+
+func alia_weaponget():
+	get_node("animatedSprite").frames = alia_sprites
+	get_node("animatedSprite").get_node("head_armor").self_modulate = Color(1, 1, 1, 0)
+	get_node("animatedSprite").get_node("body_armor").self_modulate = Color(1, 1, 1, 0)
+	get_node("animatedSprite").get_node("arms_armor").self_modulate = Color(1, 1, 1, 0)
+	get_node("animatedSprite").get_node("cannon_armor").self_modulate = Color(1, 1, 1, 0)
+	get_node("animatedSprite").get_node("legs_armor").self_modulate = Color(1, 1, 1, 0)
+	get_node("animatedSprite").get_node("ultimate_armor").frames = alia_sprites
+	get_node("animatedSprite").get_node("ultimate_canon").frames = alia_sprites_arm
+	get_node("Shot").normal_sprites = alia_sprites
+	get_node("Shot").arm_pointing_sprites = alia_sprites_arm
+
+	animatedSprite.material.set_shader_param("MainColor1", Color("#5c5c5c"))
+	animatedSprite.material.set_shader_param("MainColor2", Color("#484848"))
+	animatedSprite.material.set_shader_param("MainColor3", Color("#343434"))
+#	animatedSprite.material.set_shader_param("MainColor4", Color("#D73252"))
+#	animatedSprite.material.set_shader_param("MainColor5", Color("#78201e"))
+#	animatedSprite.material.set_shader_param("MainColor6", Color("#df8d91"))
+	animatedSprite.material.set_shader_param("R_MainColor1", Color("#5c5c5c"))
+	animatedSprite.material.set_shader_param("R_MainColor2", Color("#484848"))
+	animatedSprite.material.set_shader_param("R_MainColor3", Color("#343434"))
+#	animatedSprite.material.set_shader_param("R_MainColor4", Color("#D73252"))
+#	animatedSprite.material.set_shader_param("R_MainColor5", Color("#78201e"))
+#	animatedSprite.material.set_shader_param("R_MainColor6", Color("#df8d91"))
+
+	animatedSprite.material.set_shader_param("CrystalColor2", Color("#63e763"))
+	animatedSprite.material.set_shader_param("R_CrystalColor2", Color("#63e763"))
+
+	icarus.MainColor1 = Color("#5c5c5c")
+	icarus.MainColor2 = Color("#484848")
+	icarus.MainColor3 = Color("#343434")
+	icarus.MainColor4 = Color("#D73252")
+	icarus.MainColor5 = Color("#78201e")
+	icarus.MainColor6 = Color("#df8d91")
+
+	hermes.MainColor1 = Color("#5c5c5c")
+	hermes.MainColor2 = Color("#484848")
+	hermes.MainColor3 = Color("#343434")
+	hermes.MainColor4 = Color("#D73252")
+	hermes.MainColor5 = Color("#78201e")
+	hermes.MainColor6 = Color("#df8d91")
+
+func x_x8_weaponget():
+	get_node("animatedSprite").frames = x_x8_sprites
+	get_node("Shot").normal_sprites = x_x8_sprites
+	get_node("Shot").arm_pointing_sprites = x_x8_sprites_arm
+	if CharacterManager.infinite_x_activated:
+		get_node("animatedSprite").get_node("head_armor").self_modulate = Color(1, 1, 1, 0)
+		get_node("animatedSprite").get_node("body_armor").self_modulate = Color(1, 1, 1, 0)
+		get_node("animatedSprite").get_node("arms_armor").self_modulate = Color(1, 1, 1, 0)
+		get_node("animatedSprite").get_node("cannon_armor").self_modulate = Color(1, 1, 1, 0)
+		get_node("animatedSprite").get_node("legs_armor").self_modulate = Color(1, 1, 1, 0)
+
+func infinite_x_weaponget():
+	get_node("animatedSprite").frames = infinite_x_sprites
+	get_node("animatedSprite").get_node("head_armor").self_modulate = Color(1, 1, 1, 0)
+	get_node("animatedSprite").get_node("body_armor").self_modulate = Color(1, 1, 1, 0)
+	get_node("animatedSprite").get_node("arms_armor").self_modulate = Color(1, 1, 1, 0)
+	get_node("animatedSprite").get_node("cannon_armor").self_modulate = Color(1, 1, 1, 0)
+	get_node("animatedSprite").get_node("legs_armor").self_modulate = Color(1, 1, 1, 0)
+	get_node("animatedSprite").get_node("ultimate_armor").frames = infinite_x_sprites
+	get_node("animatedSprite").get_node("ultimate_canon").frames = infinite_x_sprites_arm
+	get_node("Shot").normal_sprites = infinite_x_sprites
+	get_node("Shot").arm_pointing_sprites = infinite_x_sprites_arm
+
+func _process(delta: float) -> void :
+	._process(delta)
 
 func has_just_pressed_left() -> bool:
 	return get_action_just_pressed("left_emulated")
@@ -44,6 +135,7 @@ func equip_hermes_head_parts():
 
 func equip_hermes_body_parts():
 	var dmg = get_node("Damage")
+	dmg.active = false
 	dmg.damage_reduction = 33
 	dmg.prevent_knockbacks = false
 	dmg.conflicting_moves = ["Death", "WallSlide", "Ride"]
@@ -105,6 +197,7 @@ func equip_icarus_head_parts():
 
 func equip_icarus_body_parts():
 	var dmg = get_node("Damage")
+	dmg.active = false
 	dmg.damage_reduction = 50
 	dmg.prevent_knockbacks = true
 	dmg.conflicting_moves = ["Death", "Nothing"]
@@ -160,3 +253,39 @@ func equip_icarus_legs_parts():
 	airdash.horizontal_velocity = 210
 	fall.horizontal_velocity = 90
 	fall.dash_momentum = 210
+
+func equip_ultima_head_parts():
+	pass
+
+func equip_ultima_body_parts():
+	pass
+
+func equip_ultima_arms_parts():
+	pass
+
+func equip_ultima_legs_parts():
+	pass
+
+func equip_parts(collectible: String):
+	if CharacterManager.ultimate_buster:
+		using_upgrades = true
+	
+	if is_armor_part(collectible):
+		add_part_to_current_armor(collectible)
+		call("equip_" + collectible + "_parts")
+		get_node("Armor").display(collectible)
+		emit_signal("equipped_armor")
+		using_upgrades = true
+		
+	elif is_heart(collectible):
+		equip_heart()
+		using_upgrades = true
+		
+	elif is_subtank(collectible):
+		equip_subtank(collectible)
+		using_upgrades = true
+		
+	elif is_weapon(collectible):
+		equip_weapon(collectible)
+
+

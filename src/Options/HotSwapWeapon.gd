@@ -1,10 +1,9 @@
 extends Sprite
 
 export  var weapon: Resource
-export  var selectable: bool = false
-export  var already_selected: bool = false
-
 onready var _select: AnimatedSprite = $"../select"
+export  var selectable: = false
+export  var already_selected: = false
 
 
 func _ready() -> void :
@@ -12,6 +11,9 @@ func _ready() -> void :
 	get_parent().connect("weapon_selected", self, "on_select")
 	get_parent().connect("unselected_all", self, "unselect")
 	Event.listen("refresh_hud", self, "_on_hotswap_opened")
+	Event.listen("collected_zero_weapon", self, "_on_hotswap_opened")
+	Event.listen("select_weapon", self, "false_select_icon")
+	Event.connect("pause_menu_closed", self, "unselect")
 
 func _on_hotswap_opened() -> void :
 	modulate.a = 0.5
@@ -22,7 +24,7 @@ func _on_hotswap_opened() -> void :
 			remove_icon()
 	else:
 		deactivate()
-		
+
 func remove_icon() -> void :
 	selectable = false
 	texture = null
@@ -34,6 +36,10 @@ func make_selectable() -> void :
 	selectable = true
 	texture = weapon.faded_icon
 	pass
+
+func false_select_icon(_sweapon) -> void :
+	if selectable:
+		already_selected = false
 
 func on_select(sweapon) -> void :
 	if selectable and sweapon != self:
@@ -57,3 +63,4 @@ func select() -> void :
 	_select.visible = true
 	_select.frame = 0
 	already_selected = true
+

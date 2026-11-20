@@ -6,6 +6,9 @@ var facing_direction := 0
 func get_facing_direction() -> int:
 	return get_parent().character.get_facing_direction()
 
+func destroy():
+	pass
+
 func leave(_body):
 	get_parent().leave(_body)
 

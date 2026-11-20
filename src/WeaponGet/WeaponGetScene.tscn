@@ -567,7 +567,6 @@ script = ExtResource( 42 )
 
 [node name="animatedSprite" parent="Objects/Servbot" index="1"]
 material = SubResource( 69 )
-frame = 3
 
 [node name="EnemyDeath" parent="Objects/Servbot" index="8"]
 should_spawn_item = false
@@ -577,7 +576,6 @@ position = Vector2( 238, -23 )
 
 [node name="animatedSprite" parent="Objects/Servbot2" index="1"]
 material = SubResource( 70 )
-frame = 3
 
 [node name="EnemyDeath" parent="Objects/Servbot2" index="8"]
 should_spawn_item = false
@@ -587,7 +585,6 @@ position = Vector2( 286, -35 )
 
 [node name="animatedSprite" parent="Objects/Servbot3" index="1"]
 material = SubResource( 71 )
-frame = 3
 
 [node name="EnemyDeath" parent="Objects/Servbot3" index="8"]
 should_spawn_item = false
@@ -622,7 +619,6 @@ position = Vector2( 0, -16 )
 z_index = 1
 frames = ExtResource( 46 )
 animation = "idle"
-frame = 11
 playing = true
 flip_h = true
 
@@ -752,7 +748,7 @@ should_spawn_item = false
 position = Vector2( 457, 20 )
 
 [node name="DestructibleSpike11" parent="Objects/SpikeRow" instance=ExtResource( 38 )]
-position = Vector2( 16, -10 )
+position = Vector2( 0, -10 )
 frames = SubResource( 68 )
 flip_h = true
 
@@ -773,7 +769,7 @@ frames = SubResource( 68 )
 flip_h = true
 
 [node name="DestructibleSpike14" parent="Objects/SpikeRow" instance=ExtResource( 38 )]
-position = Vector2( 32, -10 )
+position = Vector2( 16, -10 )
 frames = SubResource( 68 )
 animation = "side"
 

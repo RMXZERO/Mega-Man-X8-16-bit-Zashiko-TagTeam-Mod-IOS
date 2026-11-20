@@ -12,14 +12,7 @@ func set_player() -> void :
 	IGT.reset_rta()
 	IGT.should_run_rta = true
 
-onready var char_container = get_node_or_null("../../characters/panel/char_container")
-
 func on_press() -> void :
-	# 터치/클릭: 아직 시작 가능 상태가 아니면 ui_accept 와 같은 팀 선택 동작을 수행
-	if not can_start_game:
-		if not game_started and char_container != null:
-			char_container.accept_selection()
-		return
 	if can_start_game:
 		CharacterManager.started_fresh_game = true
 		set_player()

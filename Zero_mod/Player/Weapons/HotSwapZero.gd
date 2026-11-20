@@ -7,6 +7,7 @@ export  var locked_icon: Texture
 
 onready var character = get_parent().get_parent()
 onready var cursor: Sprite = $cursor
+onready var cursor_area: Area2D = $cursor/cursor_area
 onready var tweenx: = TweenController.new(self, false)
 onready var tweeny: = TweenController.new(self, false)
 onready var choice: AudioStreamPlayer2D = $choice
@@ -37,29 +38,36 @@ func _input(event: InputEvent) -> void :
 	if using_buttons:
 		if event.is_action_pressed("analog_left"):
 			cursor.position.x = - travel_distance
+			cursor_area.position.x = - travel_distance * 10
 			tweenx.reset()
 		elif event.is_action_pressed("analog_right"):
 			cursor.position.x = travel_distance
+			cursor_area.position.x = travel_distance * 10
 			tweenx.reset()
 		elif event.is_action_released("analog_right") or event.is_action_released("analog_left"):
 			slowly_reset_x_cursor()
 			
 		if event.is_action_pressed("analog_up"):
 			cursor.position.y = - travel_distance
+			cursor_area.position.y = - travel_distance * 10
 			tweeny.reset()
 		elif event.is_action_pressed("analog_down"):
 			cursor.position.y = travel_distance
+			cursor_area.position.y = travel_distance * 10
 			tweeny.reset()
 		elif event.is_action_released("analog_down") or event.is_action_released("analog_up"):
 			slowly_reset_y_cursor()
+			
 
 func slowly_reset_x_cursor():
 	tweenx.reset()
 	tweenx.attribute("position:x", 0.0, 0.1, cursor)
+	tweenx.attribute("position:x", 0.0, 0.1, cursor_area)
 	
 func slowly_reset_y_cursor():
 	tweeny.reset()
 	tweeny.attribute("position:y", 0.0, 0.1, cursor)
+	tweeny.attribute("position:y", 0.0, 0.1, cursor_area)
 
 func _ready() -> void :
 	Event.listen("weapon_select_buster", self, "selected_buster")
@@ -79,6 +87,8 @@ func _physics_process(delta: float) -> void :
 		var analog_down = Input.get_action_strength("analog_down")
 		cursor.position.x = (analog_right - analog_left) * travel_distance
 		cursor.position.y = (analog_down - analog_up) * travel_distance
+		cursor_area.position.x = (analog_right - analog_left) * travel_distance * 10
+		cursor_area.position.y = (analog_down - analog_up) * travel_distance * 10
 	
 	if cursor.position == Vector2.ZERO:
 		idle_time += delta
@@ -97,11 +107,11 @@ func selected_buster() -> void :
 func _on_cursor_area_entered(area: Area2D) -> void :
 	var _animation = get_parent().get_parent().get_animation()
 	if _animation in character.saber_animations:
-		return
-	if get_parent().get_parent().is_executing("Intro") or get_parent().get_parent().is_executing("Finish"):
-		return
+		if not "victory" in _animation:
+			return
 	var selected = area.get_parent()
-	if selected.selectable and not selected.already_selected:
-		selected.select()
-		choice.play()
-		emit_signal("weapon_selected", selected)
+	if get_parent().get_parent().active and get_parent().active:
+		if selected.selectable and not selected.already_selected:
+			selected.select()
+			#choice.play()
+			emit_signal("weapon_selected", selected)

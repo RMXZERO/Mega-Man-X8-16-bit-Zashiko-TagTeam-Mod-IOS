@@ -9,6 +9,12 @@ export  var leeway: float = 0.1
 onready var animatedSprite = character.get_node("animatedSprite")
 onready var during_image = get_node("duringImage")
 
+func _ready():
+	Event.listen("select_weapon", self, "animatedspriteframe")
+
+func animatedspriteframe(_d = null):
+	if executing:
+		animatedSprite.frame += 1
 
 func get_activation_leeway_time() -> float:
 	return leeway
@@ -23,6 +29,7 @@ func _process(_delta: float) -> void :
 
 func _Update(_delta: float) -> void :
 	process_invulnerability()
+	timer += _delta
 	if character.get_animation() == "dodge":
 		if animatedSprite.frame <= 5:
 			force_movement(horizontal_velocity)
@@ -71,7 +78,6 @@ func invulnerable(state: bool) -> void :
 
 func process_invulnerability() -> void :
 	if upgraded and invulnerability_duration > 0:
-		
 		if timer > invulnerability_duration:
 			invulnerable(false)
 

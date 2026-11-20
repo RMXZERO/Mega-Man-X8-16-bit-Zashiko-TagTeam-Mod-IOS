@@ -40,7 +40,7 @@ func _ready() -> void :
 func play_animation_on_initialize() -> void :
 	if prevent_knockbacks:
 		return
-	if damage_reduction > 0.0:
+	if damage_reduction > 30.0:
 		play_animation("damage_resist")
 	else:
 		.play_animation_on_initialize()
@@ -50,7 +50,9 @@ func _Setup() -> void :
 	reduce_health()
 	character.flash()
 	character.set_invulnerability(invulnerability_time)
+	character.last_hit_time = 0
 	if not prevent_knockbacks:
+		character.global_position.y -= 5
 		set_direction( - damage_direction)
 		character.set_vertical_speed( - jump_velocity)
 	else:
@@ -63,6 +65,7 @@ func _Setup() -> void :
 	zero_bonus_horizontal_speed()
 	character.global_position.y -= 1
 	character.emit_signal("received_damage", character)
+	Event.emit_signal("damage")
 
 func reduce_health() -> void :
 	var actual_damage = round(((damage_taken * (1 - damage_reduction / 100)) * CharacterManager.damage_get_multiplier) * extra_damage_reduction)
@@ -116,7 +119,10 @@ func on_damage(value: float, inflicter: Object) -> void :
 				character.current_health = 1
 
 func should_be_damaged() -> bool:
-	return character.listening_to_inputs and character.has_health() and not character.is_invulnerable() and active
+	if character.is_executing("Forced"):
+		return character.has_health() and not character.is_invulnerable() and active and character.last_hit_time > 0.1
+	else:
+		return character.listening_to_inputs and character.has_health() and not character.is_invulnerable() and active and character.last_hit_time > 0.1
 
 func define_knockback_direction(inflicter: Object) -> int:
 	if inflicter:

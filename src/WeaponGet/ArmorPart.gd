@@ -11,9 +11,13 @@ var armor_name: String
 
 
 func _ready() -> void :
-	if CharacterManager.ultimate_x_armor and self.name != "Ultimate":
+	if CharacterManager.ultimate_x_armor and not CharacterManager.infinite_x_activated and self.name != "Ultimate":
 		self.visible = false
-	elif CharacterManager.ultimate_x_armor and self.name == "Ultimate":
+	elif CharacterManager.ultimate_x_armor and not CharacterManager.infinite_x_activated and self.name == "Ultimate":
+		self.visible = true
+	if CharacterManager.infinite_x_activated and self.name != "Infinite":
+		self.visible = false
+	elif CharacterManager.infinite_x_activated and self.name == "Infinite":
 		self.visible = true
 	var _s = get_parent().connect("color", self, "change_palette")
 	_s = $"../..".connect("reset", self, "reset_palette")

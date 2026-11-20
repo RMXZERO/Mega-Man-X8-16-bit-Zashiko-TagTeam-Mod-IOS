@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/no_sound.ogg-4934a376c8357dbc1ecdd45b3f08e897.oggstr"
+
+[deps]
+
+source_file="res://Zero_mod/SFX/no_sound.ogg"
+dest_files=[ "res://.import/no_sound.ogg-4934a376c8357dbc1ecdd45b3f08e897.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

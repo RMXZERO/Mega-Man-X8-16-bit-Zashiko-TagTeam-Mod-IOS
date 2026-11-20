@@ -1,7 +1,7 @@
 extends Node
 
 const codename: String = "X8DMOD"
-var version: String = "TagTeam v0.9.0, Zashiko v1.0.0.4"
+var version: String = "Touch Mod After 3 Ver"
 var current_demo: String = ""
 
 var player: Character
@@ -37,7 +37,6 @@ var Resolution = Vector2(398, 224)
 var rng
 var true_delta: float = 0.0
 
-
 #Life System
 const player_life_count: String = "player_lives"
 var current_stage_info
@@ -47,7 +46,7 @@ var ta_status := "Recording..."
 
 var ghost_file = "user://score.save"
 
-var maximum_distance := Vector2(480,320)
+var maximum_distance := Vector2(400,320)
 var maximum_bike_distance := Vector2(199,100)
 var debug_go_to_next_stage := false
 var best_recording := []
@@ -185,7 +184,12 @@ func go_to_lumine_boss_test() -> void:
 	var _dv = get_tree().change_scene("res://src/Levels/SigmaPalace/SeraphTest.tscn")
 	GameManager.checkpoint = null
 	GameManager.call_deferred("restart_level")
-	
+
+func go_to_dj_sigma() -> void:
+	print_debug(":::::::: start final level with djsigma")
+	var _dv = get_tree().change_scene("res://src/Levels/SigmaPalace/Stage_DJSigma.tscn")
+	GameManager.checkpoint = null
+	GameManager.call_deferred("restart_level")
 
 func end_level():
 	Event.emit_signal("fade_out")
@@ -269,7 +273,13 @@ func go_to_weapon_get() -> void :
 	elif CharacterManager.player_character == "Axl":
 		var _dv = get_tree().change_scene("res://Axl_mod/WeaponGet/WeaponGetScene.tscn")
 	elif CharacterManager.player_character == "Zero":
-		var _dv = get_tree().change_scene("res://src/StageSelect/StageSelectScreen.tscn")
+		var _dv = get_tree().change_scene("res://Zero_mod/WeaponGet/Screen/WeaponGetScene.tscn")
+	elif CharacterManager.player_character == "Alia":
+		var _dv = get_tree().change_scene("res://src/WeaponGet/WeaponGetSceneAlia.tscn")
+	elif CharacterManager.player_character == "Layer":
+		var _dv = get_tree().change_scene("res://Zero_mod/WeaponGet/Screen/WeaponGetSceneLayer.tscn")
+	elif CharacterManager.player_character == "Pallette":
+		var _dv = get_tree().change_scene("res://Axl_mod/WeaponGet/WeaponGetScenePallette.tscn")
 	call_deferred("force_unpause")
 	call_deferred("on_level_start")
 	IGT.set_timer_running(false)

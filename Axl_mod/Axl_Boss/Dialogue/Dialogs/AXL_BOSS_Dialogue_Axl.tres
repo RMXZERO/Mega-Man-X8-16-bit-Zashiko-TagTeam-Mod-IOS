@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://src/DialogSystem/Profiles/DialogueText.gd" type="Script" id=1]
+[ext_resource path="res://Axl_mod/DialogSystem/Profiles/Axl.tres" type="Resource" id=2]
+[ext_resource path="res://Axl_mod/DialogSystem/Profiles/Axl_Serious.tres" type="Resource" id=3]
+[ext_resource path="res://Axl_mod/Axl_Boss/Dialogue/Profiles/Alternate_Axl.tres" type="Resource" id=4]
+
+[resource]
+script = ExtResource( 1 )
+dialog = [ ExtResource( 2 ), "AXLSECRET1_AXL", "AXLSECRET2_AXL", ExtResource( 4 ), "AXLSECRET3_AXL", "AXLSECRET4_AXL", "AXLSECRET5_AXL", "AXLSECRET6_AXL", "AXLSECRET7_AXL", "AXLSECRET8_AXL", ExtResource( 2 ), "AXLSECRET9_AXL", "AXLSECRET10_AXL", ExtResource( 4 ), "AXLSECRET11_AXL", "AXLSECRET12_AXL", "AXLSECRET13_AXL", "AXLSECRET14_AXL", ExtResource( 2 ), "AXLSECRET15_AXL", "AXLSECRET16_AXL", ExtResource( 3 ), "AXLSECRET17_AXL", "AXLSECRET18_AXL", ExtResource( 4 ), "AXLSECRET19_AXL", ExtResource( 3 ), "AXLSECRET20_AXL", ExtResource( 4 ), "AXLSECRET21_AXL", ExtResource( 3 ), "AXLSECRET22_AXL", ExtResource( 4 ), "AXLSECRET23_AXL", ExtResource( 3 ), "AXLSECRET24_AXL", "AXLSECRET25_AXL", "AXLSECRET26_AXL", ExtResource( 4 ), "AXLSECRET27_AXL", "AXLSECRET28_AXL", "AXLSECRET29_AXL", "AXLSECRET30_AXL", "AXLSECRET31_AXL" ]

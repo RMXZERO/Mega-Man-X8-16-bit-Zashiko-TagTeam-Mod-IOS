@@ -1,6 +1,12 @@
 extends Movement
 class_name SaberJuuhazan
 
+onready var squeezebomb: PackedScene = preload("res://src/Actors/Player/BossWeapons/SqueezeBomb/SqueezeBombCharged.tscn")
+onready var zbuster: PackedScene = preload("res://Zero_mod/X8/Sprites/zbuster/object/zbuster.tscn")
+onready var use_genmu: Node2D = $"../Special/Genmuzero"
+var creator: Node2D
+onready var zbuster_sound: AudioStreamPlayer = $zbuster
+
 export  var saber_hitbox: Resource = preload("res://Zero_mod/Player/Hitboxes/Juuhazan_Hitbox.tscn")
 var current_hitbox = null
 var hitbox_upleft = Vector2(0, 0)
@@ -20,9 +26,11 @@ var hitbox_extra_break_guard_value = 1
 
 var deflectable: bool = false
 
+var hitbox_extra_scale = 1
+
 export  var upgraded: = true
 onready var animatedSprite = character.get_node("animatedSprite")
-onready var effect_animation = preload("res://Zero_mod/Sprites/BossAbilities/Juuhazan_effect.tres")
+onready var effect_animation = preload("res://Zero_mod/X8/Sprites/Saber/BossAbilities/ability_effects.tres")
 onready var saber_sound: AudioStreamPlayer = $saber
 
 
@@ -61,6 +69,7 @@ func spawn_hitbox(_hitbox_upleft: Vector2, _hitbox_downright: Vector2):
 	current_hitbox.break_guards = hitbox_break_guards
 	current_hitbox.saber_rehit = hitbox_rehit_time
 	current_hitbox.upgraded = hitbox_upgraded
+	current_hitbox.scale *= hitbox_extra_scale
 	
 	current_hitbox.deflectable = deflectable
 
@@ -87,10 +96,11 @@ func hitbox_and_position():
 	reset_hitbox()
 
 var effect: AnimatedSprite
-func effect_emit():
+func effect_emit(_animation):
 	effect = AnimatedSprite.new()
 	add_child(effect)
 	effect.frames = effect_animation
+	effect.animation = _animation
 	effect.frame = animatedSprite.frame
 	effect.playing = true
 	effect.global_position = global_position
@@ -102,18 +112,63 @@ func effect_emit():
 	effect.offset.y = animatedSprite.offset.y - 3
 	effect.flip_h = animatedSprite.flip_h
 	effect.flip_v = animatedSprite.flip_v
-		
+	if CharacterManager.awakened_zero_armor:
+		effect.modulate = Color(1, 1, 1, 0)
 
 func end_saber_state():
-	return animatedSprite.frame >= 24
+	if animatedSprite.animation == "juuhazan":
+		return animatedSprite.frame >= 24
+	if animatedSprite.animation == "saber_shot_normal":
+		return animatedSprite.frame >= 14
 
 func movement_speed_frames():
 	return animatedSprite.frame >= 5 and animatedSprite.frame < 13
 
 func set_saber_animations():
-	animatedSprite.animation = "juuhazan"
-	saber_sound.play()
-	
+	if CharacterManager.awakened_zero_armor:
+		horizontal_speed = 0
+		animatedSprite.animation = "saber_shot_normal"
+		animatedSprite.frame = 5
+		create_nightmare_buster()
+		Tools.timer(0.1, "create_nightmare_buster", self)
+		Tools.timer(0.2, "create_nightmare_buster", self)
+		Tools.timer(0.3, "create_nightmare_buster", self)
+		Tools.timer(0.4, "create_nightmare_buster", self)
+		Tools.timer(0.5, "create_nightmare_buster", self)
+		Tools.timer(0.6, "create_nightmare_buster", self)
+		Tools.timer(0.7, "create_nightmare_buster", self)
+		Tools.timer(0.8, "create_nightmare_buster", self)
+		Tools.timer(0.9, "reset_speed", self)
+	else:
+		animatedSprite.animation = "juuhazan"
+		saber_sound.play()
+
+func reset_speed() -> void :
+	animatedSprite.speed_scale = 1
+
+func create_nightmare_buster() -> void :
+	if not CharacterManager.player_character == "Zero":
+		return
+	if not animatedSprite.animation == "saber_shot_normal":
+		return
+	animatedSprite.frame = 5
+	animatedSprite.speed_scale = 0
+	zbuster_sound.play()
+	create_zbuster(global_position, CharacterManager.z_buster_base_damage * 0.5)
+
+func create_zbuster(ground_position, damage_value) -> void :
+	var instance = zbuster.instance()
+	ground_position.y += -9
+	instance.name = "SqueezeBombCharged_B"
+	instance.damage = damage_value * 2 * hitbox_extra_damage
+	instance.damage_to_bosses = damage_value * hitbox_extra_damage_boss
+	instance.damage_to_weakness = damage_value * 5 * hitbox_extra_damage_weakness
+	instance.nightmare = true
+	get_tree().current_scene.get_node("Objects").call_deferred("add_child", instance, true)
+	instance.set_global_position(ground_position)
+	instance.set_creator(creator)
+	instance.call_deferred("initialize", get_facing_direction())
+
 func _StartCondition() -> bool:
 	if not character.Juuhazan:
 		return false
@@ -133,7 +188,7 @@ func _ResetCondition() -> bool:
 func _EndCondition() -> bool:
 	var _animation = get_parent().get_animation()
 	if _animation in character.saber_animations:
-		if not _animation == "juuhazan":
+		if not _animation == "juuhazan" and not _animation == "saber_shot_normal":
 			return true
 		if end_saber_state():
 			return true
@@ -145,7 +200,7 @@ func _Setup() -> void :
 	horizontal_speed = start_speed
 	update_bonus_horizontal_only_conveyor()
 	set_saber_animations()
-	effect_emit()
+	effect_emit("juuhazan")
 
 func reduce_speed():
 	horizontal_speed = 0
@@ -182,4 +237,4 @@ func _Interrupt():
 	if is_instance_valid(effect):
 		effect.queue_free()
 		effect = null
-
+	animatedSprite.speed_scale = 1

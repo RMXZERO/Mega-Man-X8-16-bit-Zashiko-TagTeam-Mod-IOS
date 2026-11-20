@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://src/DialogSystem/Profiles/DialogueText.gd" type="Script" id=1]
+[ext_resource path="res://src/DialogSystem/Profiles/DrLight.tres" type="Resource" id=2]
+[ext_resource path="res://Zero_mod/DialogSystem/Profiles/Zero.tres" type="Resource" id=3]
+
+[resource]
+script = ExtResource( 1 )
+dialog = [ ExtResource( 2 ), "PLAYER_DESPERATION_UNLOCK1_ZERO", "PLAYER_DESPERATION_UNLOCK2_ZERO", "PLAYER_DESPERATION_UNLOCK3_ZERO", ExtResource( 3 ), "PLAYER_DESPERATION_UNLOCK4_ZERO", ExtResource( 2 ), "PLAYER_DESPERATION_UNLOCK5_ZERO", "PLAYER_DESPERATION_UNLOCK6_ZERO" ]

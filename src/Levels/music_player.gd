@@ -136,7 +136,7 @@ func set_music_to_boss_beaten(value: int) -> void :
 	angry_boss_song.loop = true
 
 func play_different_song_on_difficulty(stage) -> void :
-	if CharacterManager.game_mode > 1:
+	if CharacterManager.game_mode > 2:
 		if "JakobElevator" in stage:
 			boss_intro = vile_boss_intro
 			boss_song = vile_boss_song
@@ -171,9 +171,15 @@ func _ready() -> void :
 	
 	if not stage_song and stream:
 		stage_song = stream
+		
 	play_korrekt_boss_music()
 
 func play_korrekt_boss_music() -> void :
+	if Configurations.exists("SongRemix"):
+		if Configurations.get("SongRemix"):
+			if Configurations.exists("BossBattleTheme"):
+				if Configurations.get("BossBattleTheme") == 0:
+					return
 	if check_for_stages() != 0:
 		if check_for_stages() == 9:
 			set_music_to_boss_beaten(check_for_weapons())
@@ -241,6 +247,7 @@ func play_stage_clear_song() -> void :
 	fade_out = false
 	slow_fade_out = false
 	volume_db = volume
+	volume_db = -6
 	play()
 
 func play_boss_song() -> void :
@@ -286,6 +293,9 @@ func is_stream(song, intro = false) -> bool:
 
 func is_playing_boss_song() -> bool:
 	return stream == boss_intro or stream == boss_song
+
+func is_playing_angry_boss_song() -> bool:
+	return stream == angry_boss_intro or stream == angry_boss_song
 
 func is_playing_miniboss_song() -> bool:
 	return stream == miniboss_intro or stream == miniboss_song

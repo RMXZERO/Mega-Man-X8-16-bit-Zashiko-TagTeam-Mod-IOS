@@ -19,19 +19,28 @@ onready var _zero_sprite: AnimatedSprite = $Visuals / ElevatorPlatform / Zero
 onready var finalrta = $FinalTime / RTADisplay / Time
 onready var finaltime = $FinalTime / IGTDisplay / Time
 onready var bitmap_font: BitmapFont = preload("res://src/Fonts/X8bitmapfont.fnt")
+onready var x_sprites: Resource = preload("res://src/Actors/Player/x_sprites/x.res")
+onready var x_x8_sprites: Resource = preload("res://X_mod/X8/Sprites/X_X8.tres")
 
 var scroll_speed: float = 1.0
 var base_duration: float = 158.0
 var total_height: float = 0
 var fade_out_duration: float = 6.0
 
+func x_credits():
+	if CharacterManager.use_old_sprite:
+		_x_sprite.frames = x_sprites
+	else:
+		_x_sprite.frames = x_x8_sprites
+
 func axl_credits():
-	CharacterManager.set_axl_colors(_axl_sprite)
+	CharacterManager.set_axl_normal_colors(_axl_sprite)
 
 func zero_credits():
-	CharacterManager.set_zero_colors(_zero_sprite)
+	CharacterManager.set_zeroX8_normal_colors(_zero_sprite)
 
 func _ready() -> void :
+	x_credits()
 	axl_credits()
 	zero_credits()
 	

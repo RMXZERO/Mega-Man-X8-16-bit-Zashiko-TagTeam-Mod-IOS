@@ -1,0 +1,176 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://src/Sounds/Mantis - Dash2.ogg" type="AudioStream" id=1]
+[ext_resource path="res://src/Levels/PitchBlack/X_Lightsource.gd" type="Script" id=2]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossSpecials/FlameBurner/smoke_material.tres" type="Material" id=3]
+[ext_resource path="res://src/Levels/PitchBlack/light.png" type="Texture" id=4]
+[ext_resource path="res://Axl_mod/SFX/Hover.wav" type="AudioStream" id=5]
+[ext_resource path="res://src/Sounds/FX - Electric Spark.ogg" type="AudioStream" id=6]
+[ext_resource path="res://src/Effects/Textures/smoke.png" type="Texture" id=7]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossSpecials/Other Character/FlameBurner_Other_Special.gd" type="Script" id=8]
+[ext_resource path="res://src/Sounds/DAMAGE.wav" type="AudioStream" id=9]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossSpecials/Other Character/Other_Special_main.gd" type="Script" id=10]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossSpecials/PlasmaGun/lightning_aura.tres" type="SpriteFrames" id=11]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossSpecials/FlameBurner/burn_effects.tres" type="SpriteFrames" id=12]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossSpecials/BoundBlaster/Crystal_Shield.tres" type="SpriteFrames" id=13]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossSpecials/BlastLauncher/heal_aura.tres" type="SpriteFrames" id=14]
+[ext_resource path="res://src/Sounds/biketurn.wav" type="AudioStream" id=15]
+[ext_resource path="res://src/Sounds/Vile - Defeat.ogg" type="AudioStream" id=16]
+[ext_resource path="res://src/Sounds/Antionion - GravityCrash.wav" type="AudioStream" id=17]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossSpecials/Other Character/PlasmaGun_Other_Special.gd" type="Script" id=18]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossSpecials/Other Character/BlackArrow_Other_Special.gd" type="Script" id=19]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossSpecials/Other Character/BlackArrow_Special_afterImages.gd" type="Script" id=20]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossSpecials/Other Character/BlastLauncher_Other_Special.gd" type="Script" id=21]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossSpecials/Other Character/BoundBlaster_Other_Special.gd" type="Script" id=22]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossSpecials/Other Character/SpiralMagnum_Other_Special.gd" type="Script" id=23]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossSpecials/Other Character/BlackArrow_Special_afterImages2.gd" type="Script" id=24]
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [  ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CanvasItemMaterial" id=4]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 3
+particles_anim_loop = true
+
+[node name="Axl_Buff_Other_Character" type="Node2D"]
+script = ExtResource( 10 )
+
+[node name="BlackArrow Special" type="Node2D" parent="."]
+script = ExtResource( 19 )
+
+[node name="animatedSprite" type="AnimatedSprite" parent="BlackArrow Special"]
+visible = false
+position = Vector2( 0, -4 )
+z_index = 5
+frames = SubResource( 5 )
+playing = true
+
+[node name="sfx" type="AudioStreamPlayer2D" parent="BlackArrow Special"]
+stream = ExtResource( 1 )
+volume_db = -3.0
+max_distance = 600.0
+bus = "SFX"
+
+[node name="afterImages" type="Node" parent="BlackArrow Special"]
+script = ExtResource( 20 )
+active = true
+
+[node name="afterImages2" type="Node" parent="BlackArrow Special"]
+script = ExtResource( 24 )
+active = true
+
+[node name="BlastLauncher Special" type="Node2D" parent="."]
+script = ExtResource( 21 )
+
+[node name="animatedSprite" type="AnimatedSprite" parent="BlastLauncher Special"]
+visible = false
+position = Vector2( 0, -4 )
+z_index = 5
+frames = ExtResource( 14 )
+animation = "aura"
+playing = true
+
+[node name="sfx" type="AudioStreamPlayer2D" parent="BlastLauncher Special"]
+stream = ExtResource( 15 )
+max_distance = 600.0
+bus = "SFX"
+
+[node name="BoundBlaster Special" type="Node2D" parent="."]
+script = ExtResource( 22 )
+
+[node name="animatedSprite" type="AnimatedSprite" parent="BoundBlaster Special"]
+visible = false
+position = Vector2( 0, -2 )
+z_index = 5
+frames = ExtResource( 13 )
+animation = "shield_loop"
+playing = true
+
+[node name="FlameBurner Special" type="Node2D" parent="."]
+script = ExtResource( 8 )
+
+[node name="animatedSprite" type="AnimatedSprite" parent="FlameBurner Special"]
+visible = false
+modulate = Color( 1, 1, 1, 0.694118 )
+position = Vector2( 0, -4 )
+z_index = 5
+frames = ExtResource( 12 )
+animation = "aura_flame"
+playing = true
+
+[node name="sfx" type="AudioStreamPlayer2D" parent="FlameBurner Special"]
+stream = ExtResource( 5 )
+max_distance = 600.0
+bus = "SFX"
+
+[node name="smoke" type="Particles2D" parent="FlameBurner Special"]
+material = SubResource( 4 )
+z_index = 5
+emitting = false
+amount = 15
+lifetime = 0.5
+speed_scale = 0.5
+process_material = ExtResource( 3 )
+texture = ExtResource( 7 )
+
+[node name="light" type="Light2D" parent="FlameBurner Special"]
+position = Vector2( 9, 0 )
+scale = Vector2( 0.75, 0.75 )
+z_index = 277
+texture = ExtResource( 4 )
+energy = 0.35
+range_layer_min = -2
+range_layer_max = -1
+script = ExtResource( 2 )
+
+[node name="damage" type="AudioStreamPlayer" parent="FlameBurner Special"]
+pause_mode = 1
+stream = ExtResource( 9 )
+bus = "SFX"
+
+[node name="PlasmaGun Special" type="Node2D" parent="."]
+script = ExtResource( 18 )
+
+[node name="animatedSprite" type="AnimatedSprite" parent="PlasmaGun Special"]
+visible = false
+position = Vector2( 0, -4 )
+z_index = 5
+frames = ExtResource( 11 )
+animation = "aura"
+playing = true
+
+[node name="sfx" type="AudioStreamPlayer" parent="PlasmaGun Special"]
+pause_mode = 1
+stream = ExtResource( 6 )
+volume_db = -16.0
+bus = "SFX"
+
+[node name="sparks" type="AudioStreamPlayer2D" parent="PlasmaGun Special"]
+pause_mode = 2
+stream = ExtResource( 16 )
+pitch_scale = 1.05
+max_distance = 600.0
+attenuation = 0.951366
+bus = "SFX"
+
+[node name="SpiraMagnum Special" type="Node2D" parent="."]
+script = ExtResource( 23 )
+
+[node name="animatedSprite" type="AnimatedSprite" parent="SpiraMagnum Special"]
+visible = false
+position = Vector2( 0, -4 )
+z_index = 5
+frames = SubResource( 5 )
+playing = true
+
+[node name="sfx" type="AudioStreamPlayer2D" parent="SpiraMagnum Special"]
+stream = ExtResource( 17 )
+max_distance = 600.0
+bus = "SFX"

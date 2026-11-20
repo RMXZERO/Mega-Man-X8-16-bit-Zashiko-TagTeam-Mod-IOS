@@ -15,6 +15,7 @@ func _ready() -> void :
 
 func on_character_switch_end() -> void:
 	EndAbility()
+	character.interrupt_all_moves()
 	
 func _Setup():
 	character.deactivate()
@@ -42,6 +43,7 @@ func on_animation_finished():
 func _Interrupt():
 	if enable_movement:
 		character.activate()
+		character.check_if_should_set_alpha_to_1()
 
 func _EndCondition() -> bool:
 	return false

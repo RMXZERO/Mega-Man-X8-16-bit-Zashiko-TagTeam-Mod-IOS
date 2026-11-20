@@ -31,17 +31,19 @@ func recharge(_d = null):
 				last_time_hit = timer
 				current_ammo = clamp(current_ammo + 1.0, 0.0, max_ammo)
 		elif current_ammo >= max_ammo:
-			set_process(false)
-			active = false
-			current_ammo = 0
-			last_time_hit = 0
-			timer = 0
-			character.current_health = 0
-			character.recover_health(2)
-			character.emitted_zero_health = false
-			CharacterManager.alive_team.append(character.name)
-			CharacterManager.both_alive = true
+			character_alive()
 
+func character_alive() -> void :
+	set_process(false)
+	active = false
+	current_ammo = 0
+	last_time_hit = 0
+	timer = 0
+	character.current_health = 0
+	character.recover_health(2)
+	character.emitted_zero_health = false
+	CharacterManager.alive_team.append(character.name)
+	CharacterManager.both_alive = true
 
 func on_activate_revive() -> void :
 	active = true

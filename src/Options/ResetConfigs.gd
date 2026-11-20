@@ -9,7 +9,6 @@ onready var text: Label = $text
 var times_pressed: int = 0
 var flashed: bool = false
 
-
 func _ready() -> void :
 	text.text = tr(default_label)
 	Event.connect("translation_updated", self, "on_update")
@@ -53,19 +52,42 @@ func action() -> void :
 	GameManager.remove_collectible_from_savedata("life_up_antonion")
 	GameManager.remove_collectible_from_savedata("life_up_mantis")
 	
+	GameManager.remove_collectible_from_savedata("life_up_ex1")
+	GameManager.remove_collectible_from_savedata("life_up_ex2")
+	GameManager.remove_collectible_from_savedata("life_up_ex3")
+	GameManager.remove_collectible_from_savedata("life_up_ex4")
+	
 	GameManager.remove_collectible_from_savedata("subtank_trilobyte")
 	GameManager.remove_collectible_from_savedata("subtank_sunflower")
 	GameManager.remove_collectible_from_savedata("subtank_yeti")
 	GameManager.remove_collectible_from_savedata("subtank_rooster")
 	
+	for character in CharacterManager.equipped_hearts.keys():
+		CharacterManager.equipped_hearts[character] = 0
+	
+	GameManager.remove_collectible_from_savedata("x_defeated")
+	GameManager.remove_collectible_from_savedata("x_seen")
+	GameManager.remove_collectible_from_savedata("zero_seen_x_boss")
+	GameManager.remove_collectible_from_savedata("axl_seen_x_boss")
 	GameManager.remove_collectible_from_savedata("zero_defeated")
 	GameManager.remove_collectible_from_savedata("zero_seen")
 	GameManager.remove_collectible_from_savedata("seen_zero")
+	GameManager.remove_collectible_from_savedata("axl_seen")
+	GameManager.remove_collectible_from_savedata("axl_defeated")
 	GameManager.remove_collectible_from_savedata("z_saber_zero")
 	GameManager.remove_collectible_from_savedata("b_fan_zero")
 	GameManager.remove_collectible_from_savedata("d_glaive_zero")
 	GameManager.remove_collectible_from_savedata("k_knuckle_zero")
 	GameManager.remove_collectible_from_savedata("t_breaker_zero")
+	
+	GameManager.remove_collectible_from_savedata("z_breaker_zero")
+	GameManager.remove_collectible_from_savedata("rogue_blade_zero")
+	GameManager.remove_collectible_from_savedata("v_hanger_zero")
+	GameManager.remove_collectible_from_savedata("sigma_blade_zero")
+	
+	GameManager.remove_collectible_from_savedata("axl_first_time")
+	GameManager.remove_collectible_from_savedata("axl_second_time")
+	
 	GameManager.remove_collectible_from_savedata("icarus_head")
 	GameManager.remove_collectible_from_savedata("icarus_body")
 	GameManager.remove_collectible_from_savedata("icarus_arms")
@@ -80,7 +102,27 @@ func action() -> void :
 	GameManager.remove_collectible_from_savedata("ultima_legs")
 	GameManager.remove_collectible_from_savedata("black_zero_armor")
 	GameManager.remove_collectible_from_savedata("white_axl_armor")
+	GameManager.remove_collectible_from_savedata("awakened_zero_armor")
+	GameManager.remove_collectible_from_savedata("floppa_axl_activated")
+	GameManager.remove_collectible_from_savedata("extra_saber_combo")
+	GameManager.remove_collectible_from_savedata("track_bullet")
+	GameManager.remove_collectible_from_savedata("share_axl_buff")
+	GameManager.remove_collectible_from_savedata("axl_saber_combo")
+	GameManager.remove_collectible_from_savedata("player_desperation")
+
+	GameManager.remove_collectible_from_savedata("dj_sigma_seen")
+	GameManager.remove_collectible_from_savedata("omega_seen")
+	GameManager.remove_collectible_from_savedata("dj_sigma_defeated")
+	GameManager.remove_collectible_from_savedata("omega_defeated")
+	GameManager.remove_collectible_from_savedata("sigma_virus_fist")
+	GameManager.remove_collectible_from_savedata("sigma_virus_fist_first_time")
+
+	GameManager.remove_collectible_from_savedata("vile_ex_seen")
+	GameManager.remove_collectible_from_savedata("vile_ex_defeated")
+
 	GameManager.collectibles = []
+
+	GlobalVariables.erase("vile_ex_defeated")
 
 	GlobalVariables.erase("IGT_NoahsPark")
 	GlobalVariables.erase("igt")

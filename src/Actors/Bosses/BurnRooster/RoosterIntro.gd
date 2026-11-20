@@ -4,11 +4,17 @@ onready var jump: AudioStreamPlayer2D = $jump
 onready var kick: AudioStreamPlayer2D = $kick
 signal prepared
 
+func _ready() -> void:
+	._ready()
+	if CharacterManager.nightshade_zero_armor:
+		call_deferred("prepare_for_intro")
+
 func prepare_for_intro() -> void:
 	animatedSprite.visible = true
 	animatedSprite.modulate = Color("97764a")
 	set_starting_position()
 	character.scale = Vector2(0.5,0.5)
+	animatedSprite.modulate.a = 1.0
 	play_animation("appear_loop")
 	screenshakes()
 	emit_signal("prepared")

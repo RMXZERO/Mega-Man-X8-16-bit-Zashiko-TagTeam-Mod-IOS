@@ -8,6 +8,7 @@ export  var text_palette: Texture
 onready var parts: Array = get_children()
 onready var tween: = TweenController.new(self, false)
 onready var music: AudioStreamPlayer = $"../audioStreamPlayer"
+onready var music_demake: AudioStreamPlayer = $"../audioStreamPlayer2"
 onready var text: Node2D = $"../text"
 onready var you_get: Label = $"../text/you_get"
 onready var weapon_name: Label = $"../text/weapon_name"
@@ -23,7 +24,6 @@ onready var you_get_pos: Vector2 = you_get.rect_position
 onready var weapon_name_pos: Vector2 = weapon_name.rect_position
 onready var fullblack: Sprite = $"../fullblack"
 onready var lines_2: Node2D = $"../lines2"
-onready var audio: AudioStreamPlayer = $"../audioStreamPlayer"
 
 var current_weapon: WeaponResource
 var ending: bool = false
@@ -56,7 +56,11 @@ func delayed_initialize() -> void :
 func initialize() -> void :
 	if ending:
 		return
-	music.play()
+	if Configurations.exists("SongRemix"):
+		if Configurations.get("SongRemix"):
+			music_demake.play()
+		else:
+			music.play()
 	bars_expand()
 	Tools.timer(5.5, "start", self, null, true)
 	Tools.timer(7.2, "flash", self, null, true)
@@ -131,7 +135,8 @@ func fadeout(duration: float = 1.0):
 		tween.create(Tween.EASE_OUT, Tween.TRANS_LINEAR, true)
 		tween.set_ignore_pause_mode()
 		tween.add_attribute("modulate:a", 1.0, duration, fullblack)
-		tween.add_attribute("volume_db", - 40, duration, audio)
+		tween.add_attribute("volume_db", - 40, duration, music)
+		tween.add_attribute("volume_db", - 40, duration, music_demake)
 		tween.add_callback("end", self, [duration + 0.5])
 		fading_out = true
 

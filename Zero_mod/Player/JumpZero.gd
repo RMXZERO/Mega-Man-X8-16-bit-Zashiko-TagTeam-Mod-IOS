@@ -8,6 +8,7 @@ export  var minimum_upwards_time: = 0.0
 var fullspeed_time: = 0.0
 var slowdown_time: = 0.0
 var stopped_input: = false
+onready var jumpanimatedSprite = get_parent().get_node("animatedSprite")
 
 func _ready() -> void :
 	if active:
@@ -26,12 +27,15 @@ func _EndCondition() -> bool:
 	if _animation in character.saber_animations:
 		if "saber_jump" in _animation:
 			return false
+		if "saber_ensuizan" in _animation:
+			return false
+		if "charge_saber_jump" in _animation:
+			return false
 		return true
 	if character.is_on_floor() and changed_animation:
 		on_touch_floor()
 		return true
 	return false
-
 func get_activation_leeway_time() -> float:
 	if not character.is_executing("Jump"):
 		return leeway_time
@@ -53,6 +57,9 @@ func _Update(_delta: float) -> void :
 	if_no_input_zero_vertical_speed()
 	ascent_with_slowdown_after_delay(_delta)
 	._Update(_delta)
+	if jumpanimatedSprite.animation == "jump":
+		if jumpanimatedSprite.frame >= 15:
+			jumpanimatedSprite.frame = 3
 
 func if_no_input_zero_vertical_speed() -> void :
 	if character.get_vertical_speed() < 0:

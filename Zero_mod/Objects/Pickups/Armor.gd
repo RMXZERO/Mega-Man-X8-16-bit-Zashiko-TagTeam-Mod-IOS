@@ -11,6 +11,9 @@ onready var armor_foot: = $Foot
 onready var head_start_y: float = armor_head.position.y
 onready var body_start_y: float = armor_body.position.y
 onready var foot_start_y: float = armor_foot.position.y
+onready var up_land: CollisionShape2D = $staticBody2D/collisionShape2D
+onready var down_land: CollisionShape2D = $staticBody2D2/collisionShape2D
+onready var finish_land: CollisionShape2D = $staticBody2D3/collisionShape2D
 var time_offset: float = 0.0
 var amplitude: float = 1.0
 var speed: float = 1.0
@@ -42,7 +45,13 @@ func call_deferred_already_got() -> void :
 
 func handle_already_got() -> void :
 	if collectible_name in GameManager.collectibles:
-		queue_free()
+		capsule.play("end")
+		collisionShape.disabled = true
+		armor_head.visible = false
+		armor_body.visible = false
+		armor_foot.visible = false
+		call_deferred("close_capsule_collider")
+		#queue_free()
 
 func _physics_process(delta: float) -> void :
 	time_offset += delta * speed * 5
@@ -58,6 +67,9 @@ func _physics_process(delta: float) -> void :
 				GameManager.player.equip_subtank(collectible_name)
 				GlobalVariables.set(collectible_name, 0)
 				capsule.animation = "finished"
+				up_land.disabled = false
+				down_land.disabled = false
+				finish_land.disabled = true
 				
 
 func process_increase_health(_delta: float) -> void :
@@ -77,6 +89,19 @@ func _on_area2D_body_entered(body: Node) -> void :
 				armor_foot.visible = false
 				collisionShape.disabled = true
 				achievement_check()
+
+func _on_area2D_body_exited(body):
+	if executing:
+		if body.is_in_group("Player"):
+			if capsule.animation == "finished":
+				if collectible_name in GameManager.collectibles:
+					capsule.play("close")
+					call_deferred("close_capsule_collider")
+
+func close_capsule_collider() -> void :
+	up_land.disabled = true
+	down_land.disabled = true
+	finish_land.disabled = false
 
 func lock_black_zero_armor() -> void :
 	if CharacterManager.player_character == "Zero":

@@ -11,7 +11,9 @@ onready var land = $land
 onready var arms = $arms
 
 func _ready() -> void:
-	prepare_for_intro()
+	._ready()
+	if CharacterManager.nightshade_zero_armor:
+		call_deferred("prepare_for_intro")
 
 func prepare_for_intro() -> void:
 	animatedSprite.visible = true
@@ -27,6 +29,7 @@ func _Update(delta):
 		next_attack_stage_on_next_frame()
 
 	elif attack_stage == 1:
+		animatedSprite.modulate.a = 1.0
 		make_visible()
 		set_vertical_speed(-350)
 		turn_player_towards_boss()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://src/Levels/Primrose/rotation_disabler.gd" type="Script" id=1]
 [ext_resource path="res://SpriteEffect.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://src/Effects/Textures/mega_blast.png" type="Texture" id=9]
 [ext_resource path="res://src/Sounds/TRIPLE_SHOT.wav" type="AudioStream" id=10]
 [ext_resource path="res://src/Effects/Materials/megabuster_particles.tres" type="Material" id=11]
+[ext_resource path="res://src/Actors/Weapons/Projectiles/Triad Charged Buster Weak.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=21]
 extents = Vector2( 23, 19 )
@@ -69,6 +70,7 @@ time_outside_screen = 0.6
 fire_sound = ExtResource( 10 )
 break_guards = true
 auxiliary_projectiles = ExtResource( 5 )
+charge2_projectiles = ExtResource( 12 )
 
 [node name="Deflectable" type="RigidBody2D" parent="." groups=["Deflectable", "Player Projectile"]]
 collision_layer = 4
@@ -86,7 +88,6 @@ shape = SubResource( 21 )
 z_index = 2
 frames = SubResource( 18 )
 animation = "Tag"
-frame = 4
 playing = true
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="."]

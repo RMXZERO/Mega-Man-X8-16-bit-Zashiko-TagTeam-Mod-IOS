@@ -54,12 +54,12 @@ animations = [ {
 [node name="TransformReploid" type="KinematicBody2D"]
 collision_layer = 0
 script = ExtResource( 3 )
+max_health = 64.0
 
 [node name="animatedSprite" type="AnimatedSprite" parent="."]
 z_index = 5
 frames = ExtResource( 1 )
 animation = "land"
-frame = 3
 playing = true
 flip_h = true
 
@@ -110,7 +110,6 @@ script = ExtResource( 5 )
 pause_mode = 2
 z_index = 20
 frames = SubResource( 71 )
-frame = 6
 playing = true
 
 [connection signal="new_direction" from="." to="Intro" method="_on_new_direction"]

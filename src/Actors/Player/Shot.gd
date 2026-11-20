@@ -12,14 +12,28 @@ var arm_point_dur: float = 0.0
 var disabled_layer: bool = false
 var weapons: Array = []
 var current_weapon
-
+var rapid_shot: bool = false
+var rapid_alt_shot: bool = false
+var rapid_shot_first: bool = false
+var rapid_alt_shot_first: bool = false
 
 func _ready() -> void :
 	if active:
+		rapid_shot = false
+		rapid_alt_shot = false
 		update_list_of_weapons()
 		set_buster_as_weapon()
 		Event.listen("shot_layer_disabled", self, "on_shot_layer_disabled")
 		Event.listen("shot_layer_enabled", self, "on_shot_layer_enabled")
+		Event.listen("ridearmor_deactivate", self, "check")
+		Event.listen("character_switch", self, "check")
+		check()
+
+func check() -> void :
+	if not CharacterManager.weaponget:
+		if CharacterManager.auto_charge and not character.is_executing("Ride"):
+			if not character.get_action_pressed("auto_charge"):
+				Input.action_press("auto_charge")
 
 func _StartCondition() -> bool:
 	if current_weapon:
@@ -54,6 +68,34 @@ func _Update(_delta: float) -> void :
 	if action_just_pressed() and not is_initial_frame():
 		if _StartCondition():
 			fire(current_weapon)
+
+	if not character.is_executing("Ride") and not CharacterManager.weaponget:
+		if CharacterManager.auto_charge:
+			if character.get_action_pressed("fire"):
+				Input.action_release("auto_charge")
+			if not character.get_action_pressed("auto_charge"):
+				Input.action_press("auto_charge")
+		if CharacterManager.rapid_fire:
+			if character.get_action_pressed("alt_fire") and not rapid_alt_shot:
+				if _StartCondition():
+					if rapid_alt_shot_first:
+						fire(current_weapon)
+					rapid_alt_shot = true
+					rapid_alt_shot_first = true
+					Tools.timer(0.1, "reset_rapid_alt_shot", self)
+			if character.get_action_pressed("fire") and not rapid_shot:
+				if _StartCondition():
+					if rapid_shot_first:
+						fire(current_weapon)
+					rapid_shot = true
+					rapid_shot_first = true
+					Tools.timer(0.1, "reset_rapid_shot", self)
+
+func reset_rapid_shot() -> void :
+	rapid_shot = false
+
+func reset_rapid_alt_shot() -> void :
+	rapid_alt_shot = false
 
 func update_list_of_weapons() -> void :
 	weapons.clear()
@@ -120,3 +162,5 @@ func disable_animation_layer() -> void :
 	if not disabled_layer:
 		character.set_animation_layer(normal_sprites)
 		Event.emit_signal("shot_layer_disabled")
+		rapid_shot_first = false
+		rapid_alt_shot_first = false

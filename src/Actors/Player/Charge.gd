@@ -40,6 +40,15 @@ func _ready() -> void :
 	audio = get_node("audioStreamPlayer")
 	audio2 = get_node("audioStreamPlayer2")
 	Tools.timer_p(0.1, "set_deferred", self, ["debug_logs", false])
+	reset_input()
+	
+func reset_input() -> void :
+	if CharacterManager.auto_charge and not CharacterManager.ultimate_buster:
+		actions[0] = "auto_charge"
+	if CharacterManager.ultimate_buster:
+		actions[0] = "shoryuuken"
+	if not CharacterManager.auto_charge and not CharacterManager.ultimate_buster:
+		actions[0] = "fire"
 
 func on_pause():
 	if executing:
@@ -160,7 +169,7 @@ func charge(_delta: float):
 				change_color(super_color)
 				emit_supercharge_particle()
 				play_super_sound()
-	
+
 func emit_fire_charged_signal(_charged_time):
 	if character.listening_to_inputs:
 		Log("Shot Release")

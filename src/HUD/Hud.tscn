@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://src/Levels/HUD.gd" type="Script" id=1]
 [ext_resource path="res://src/HUD/BossBar.gd" type="Script" id=2]
@@ -23,6 +23,9 @@
 [ext_resource path="res://src/HUD/R2_bar.png" type="Texture" id=21]
 [ext_resource path="res://src/Effects/Materials/crt_shader_1.tres" type="Material" id=22]
 [ext_resource path="res://System/IGT/HUD/InGame_Timer.tscn" type="PackedScene" id=23]
+[ext_resource path="res://src/HUD/boss_hp_fill.png" type="Texture" id=24]
+[ext_resource path="res://src/HUD/boss_hp_fill_2.png" type="Texture" id=25]
+[ext_resource path="res://src/HUD/boss_hp_fill_3.png" type="Texture" id=26]
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
@@ -110,15 +113,16 @@ custom_fonts/normal_font = ExtResource( 8 )
 text = "MM:SS:MM"
 
 [node name="Bars" type="Control" parent="."]
+margin_top = 97.0
 margin_right = 40.0
-margin_bottom = 40.0
+margin_bottom = 137.0
 
 [node name="X Bar2" type="NinePatchRect" parent="."]
 modulate = Color( 0.490196, 0.490196, 0.490196, 1 )
 material = SubResource( 1 )
-margin_left = 14.0
-margin_top = 64.0
-margin_right = 28.0
+margin_left = 15.0
+margin_top = 56.0
+margin_right = 29.0
 margin_bottom = 108.0
 texture = ExtResource( 5 )
 patch_margin_top = 4
@@ -131,23 +135,23 @@ modulate = Color( 0.737255, 0.0941176, 0.0941176, 1 )
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
-margin_top = -80.0
+margin_top = -144.0
 margin_right = 10.0
 margin_bottom = -17.0
-max_value = 32.0
-texture_progress = ExtResource( 7 )
+max_value = 64.0
+texture_progress = ExtResource( 24 )
 fill_mode = 3
 
 [node name="textureProgress" type="TextureProgress" parent="X Bar2"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
-margin_top = -80.0
+margin_top = -144.0
 margin_right = 10.0
 margin_bottom = -17.0
-max_value = 32.0
-value = 12.0
-texture_progress = ExtResource( 7 )
+max_value = 64.0
+value = 16.0
+texture_progress = ExtResource( 24 )
 fill_mode = 3
 
 [node name="WeaponIcon" type="TextureRect" parent="X Bar2"]
@@ -199,7 +203,7 @@ margin_bottom = 1.0
 [node name="X Bar" type="NinePatchRect" parent="."]
 material = SubResource( 1 )
 margin_left = 8.0
-margin_top = 64.0
+margin_top = 56.0
 margin_right = 22.0
 margin_bottom = 108.0
 texture = ExtResource( 5 )
@@ -212,23 +216,23 @@ modulate = Color( 0.737255, 0.0941176, 0.0941176, 1 )
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
-margin_top = -80.0
+margin_top = -144.0
 margin_right = 10.0
 margin_bottom = -17.0
-max_value = 32.0
-texture_progress = ExtResource( 7 )
+max_value = 64.0
+texture_progress = ExtResource( 24 )
 fill_mode = 3
 
 [node name="textureProgress" type="TextureProgress" parent="X Bar"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
-margin_top = -80.0
+margin_top = -144.0
 margin_right = 10.0
 margin_bottom = -17.0
-max_value = 32.0
-value = 12.0
-texture_progress = ExtResource( 7 )
+max_value = 64.0
+value = 16.0
+texture_progress = ExtResource( 24 )
 fill_mode = 3
 
 [node name="WeaponIcon" type="TextureRect" parent="X Bar"]
@@ -321,20 +325,78 @@ fill_mode = 3
 margin_left = 377.0
 margin_top = 24.0
 margin_right = 391.0
-margin_bottom = 108.0
+margin_bottom = 172.0
 texture = ExtResource( 4 )
 patch_margin_top = 4
 patch_margin_bottom = 17
 script = ExtResource( 2 )
 
+[node name="texturesteal" type="TextureProgress" parent="Boss Bar"]
+visible = false
+modulate = Color( 0.737255, 0.0941176, 0.0941176, 1 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 10.0
+margin_bottom = 131.0
+max_value = 64.0
+value = 64.0
+texture_progress = ExtResource( 24 )
+fill_mode = 3
+
 [node name="textureProgress" type="TextureProgress" parent="Boss Bar"]
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 10.0
-margin_bottom = 67.0
-max_value = 32.0
-value = 32.0
-texture_progress = ExtResource( 7 )
+margin_bottom = 131.0
+max_value = 64.0
+value = 64.0
+texture_progress = ExtResource( 24 )
+fill_mode = 3
+
+[node name="texturesteal2" type="TextureProgress" parent="Boss Bar"]
+visible = false
+modulate = Color( 0.737255, 0.0941176, 0.0941176, 1 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 10.0
+margin_bottom = 131.0
+max_value = 64.0
+value = 64.0
+texture_progress = ExtResource( 24 )
+fill_mode = 3
+
+[node name="textureProgress2" type="TextureProgress" parent="Boss Bar"]
+visible = false
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 10.0
+margin_bottom = 131.0
+max_value = 64.0
+value = 64.0
+texture_progress = ExtResource( 25 )
+fill_mode = 3
+
+[node name="texturesteal3" type="TextureProgress" parent="Boss Bar"]
+visible = false
+modulate = Color( 0.737255, 0.0941176, 0.0941176, 1 )
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 10.0
+margin_bottom = 131.0
+max_value = 64.0
+value = 64.0
+texture_progress = ExtResource( 24 )
+fill_mode = 3
+
+[node name="textureProgress3" type="TextureProgress" parent="Boss Bar"]
+visible = false
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 10.0
+margin_bottom = 131.0
+max_value = 64.0
+value = 64.0
+texture_progress = ExtResource( 26 )
 fill_mode = 3
 
 [node name="audioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -397,12 +459,8 @@ text = "Input Info"
 layer = 128
 
 [node name="DebugAndCheats" parent="Boss and Weapon Info/canvasLayer" instance=ExtResource( 11 )]
+visible = false
 margin_left = 397.0
 margin_right = 397.0
 
 [node name="IGTHUD" parent="." instance=ExtResource( 23 )]
-
-[connection signal="displayed" from="X Bar2/WeaponBar" to="X Bar/SpecialBar" method="_on_WeaponBar_displayed"]
-[connection signal="hidden" from="X Bar2/WeaponBar" to="X Bar/SpecialBar" method="_on_WeaponBar_hidden"]
-[connection signal="displayed" from="X Bar/WeaponBar" to="X Bar/SpecialBar" method="_on_WeaponBar_displayed"]
-[connection signal="hidden" from="X Bar/WeaponBar" to="X Bar/SpecialBar" method="_on_WeaponBar_hidden"]

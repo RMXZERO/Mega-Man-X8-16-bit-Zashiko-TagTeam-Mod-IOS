@@ -43,7 +43,7 @@ func _Update(delta):
 		if seen_dialog():
 			next_attack_stage()
 
-	elif attack_stage == 4 and timer > .5:
+	elif attack_stage == 4:
 		play_animation("appear")
 		Event.emit_signal("play_boss_music")
 		next_attack_stage()

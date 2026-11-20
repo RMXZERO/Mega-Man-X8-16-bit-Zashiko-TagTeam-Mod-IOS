@@ -10,8 +10,6 @@ var spawn_ride_armor: bool = false
 
 var _musicmanager_script: Script = preload("res://Remix/Music_Manager.gd")
 
-
-
 var _start_cutscene_script: Script = preload("res://src/Levels/NoahsPark/StartCutscene.gd")
 var _intro_dialogue: Resource = preload("res://src/DialogSystem/Dialogs/Stages/Intro_Dialogue.tres")
 
@@ -75,6 +73,12 @@ func on_character_switch() -> void :
 
 func _ready() -> void :
 	teleport_to_boss = CharacterManager.teleport_to_boss
+	
+	if Configurations.exists("SongRemix"):
+		var remix: Node = Node.new()
+		remix.set_name("Remix")
+		remix.set_script(_musicmanager_script)
+		add_child(remix)
 	
 	if self.name == "NoahsPark":
 		var node: Node = Node.new()

@@ -6,8 +6,8 @@ var damping = 0.97
 
 func hitbox_and_position():
 	if animatedSprite.animation == "saber_dash":
-		hitbox_damage = 4
-		hitbox_damage_boss = 4
+		hitbox_damage = 6
+		hitbox_damage_boss = 6
 		hitbox_damage_weakness = 24
 		hitbox_break_guards = true
 		hitbox_rehit_time = 0.025
@@ -15,22 +15,51 @@ func hitbox_and_position():
 			hitbox_upleft = Vector2(7, - 22)
 			hitbox_downright = Vector2(74, 18)
 			spawn_hitbox(hitbox_upleft, hitbox_downright)
-			
+
+	if animatedSprite.animation == "saber_dash2":
+		hitbox_damage = 3
+		hitbox_damage_boss = 3
+		hitbox_damage_weakness = 24
+		hitbox_rehit_time = 0.0125
+		hitbox_break_guards = true
+		if animatedSprite.frame >= 3 and animatedSprite.frame < 9:
+			hitbox_upleft = Vector2( - 17, - 15)
+			hitbox_downright = Vector2(95, 15)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
+
 	reset_hitbox()
 
 func end_saber_state():
-	return animatedSprite.frame >= 10
+	if animatedSprite.animation == "ryuenjin":
+		return animatedSprite.frame >= 20
+	elif animatedSprite.animation == "saber_dash2":
+		return animatedSprite.frame >= 12
+	elif animatedSprite.animation == "genmuzero":
+		return animatedSprite.frame >= 23
+	elif animatedSprite.animation == "genmuzeroair":
+		return animatedSprite.frame >= 23
+	else:
+		return animatedSprite.frame >= 10
 
 func should_add_saber_combo():
 	return false
 
 func set_saber_animations():
-	animatedSprite.animation = "saber_dash"
-	saber_sound.play()
-	
+	if character.get_action_pressed("move_down") and CharacterManager.extra_saber_combo and CharacterManager.extra_saber_02:
+		animatedSprite.animation = "saber_dash2"
+		saber_sound.play()
+	else:
+		animatedSprite.animation = "saber_dash"
+		saber_sound.play()
+
 func _StartCondition() -> bool:
 	var _animation = get_parent().get_animation()
 	if _animation in character.saber_animations:
+		return false
+	var saber_charge = character.get_node_or_null("Charge")
+	if saber_charge != null and saber_charge.get_charge_level() >= 1:
+		return false
+	if character.get_action_pressed("move_up") and CharacterManager.extra_saber_combo and CharacterManager.extra_saber_03:
 		return false
 	if not executing:
 		if _animation == "dash":
@@ -67,6 +96,9 @@ func _Update(_delta: float) -> void :
 
 	
 	update_bonus_horizontal_only_conveyor()
+
+	if animatedSprite.animation == "saber_dash2":
+		force_movement(horizontal_velocity)
 
 func change_animation_if_falling(_s) -> void :
 	pass

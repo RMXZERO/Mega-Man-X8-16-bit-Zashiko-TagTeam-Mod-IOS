@@ -61,15 +61,29 @@ func action() -> void :
 	GameManager.remove_collectible_from_savedata("life_up_antonion")
 	GameManager.remove_collectible_from_savedata("life_up_mantis")
 	
+	GameManager.remove_collectible_from_savedata("life_up_ex1")
+	GameManager.remove_collectible_from_savedata("life_up_ex2")
+	GameManager.remove_collectible_from_savedata("life_up_ex3")
+	GameManager.remove_collectible_from_savedata("life_up_ex4")
+	
 	GameManager.remove_collectible_from_savedata("subtank_trilobyte")
 	GameManager.remove_collectible_from_savedata("subtank_sunflower")
 	GameManager.remove_collectible_from_savedata("subtank_yeti")
 	GameManager.remove_collectible_from_savedata("subtank_rooster")
 	
+	for character in CharacterManager.equipped_hearts.keys():
+		CharacterManager.equipped_hearts[character] = 0
+	
+	GameManager.remove_collectible_from_savedata("zero_seen_x_boss")
+	GameManager.remove_collectible_from_savedata("axl_seen_x_boss")
 	GameManager.remove_collectible_from_savedata("zero_defeated")
-
-
-
+	GameManager.remove_collectible_from_savedata("x_defeated")
+	GameManager.remove_collectible_from_savedata("axl_defeated")
+	GameManager.remove_collectible_from_savedata("dj_sigma_defeated")
+	GameManager.remove_collectible_from_savedata("omega_defeated")
+	GameManager.remove_collectible_from_savedata("sigma_virus_fist_first_time")
+	GameManager.remove_collectible_from_savedata("vile_ex_defeated")
+	GlobalVariables.erase("vile_ex_defeated")
 
 
 

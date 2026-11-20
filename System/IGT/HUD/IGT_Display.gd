@@ -12,7 +12,7 @@ func _ready():
 	else:
 		self.visible = false
 
-func _process(delta):
+func _process(_delta):
 	rta_time.text = IGT.time_formatting(IGT.rta_timer)
 	total_time.text = IGT.time_formatting(IGT.in_game_timer)
 	if IGT.times.has(IGT.current_section):

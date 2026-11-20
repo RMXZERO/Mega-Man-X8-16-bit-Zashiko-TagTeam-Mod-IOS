@@ -25,6 +25,7 @@ func _on_removed_armor() -> void:
 
 func _on_armor_catch(armor) -> void:
 	if not active and armor_cooldown <= 0.0 and character.has_health():
+		visible = true
 		armor.catch()
 		activate()
 		flash.frame = 0

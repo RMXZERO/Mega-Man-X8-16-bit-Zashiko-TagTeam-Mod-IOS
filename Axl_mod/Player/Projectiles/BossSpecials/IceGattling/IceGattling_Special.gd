@@ -8,6 +8,8 @@ onready var sharp_particles: Particles2D = $IceShards
 
 var storm_timer: float = 20.0
 
+func _ready() -> void :
+	._ready()
 
 func deactivate() -> void :
 	shooter.deactivate()
@@ -21,6 +23,13 @@ func destroy(enemy) -> void :
 
 func _physics_process(delta: float) -> void :
 	._physics_process(delta)
+	if not CharacterManager.player_character == "Axl":
+		if "share_axl_buff" in GameManager.collectibles:
+			if not CharacterManager.share_axl_buff:
+				deactivate()
+		else:
+			deactivate()
+	
 	global_position = GameManager.camera.global_position
 	snow_particles.global_position.x = character.global_position.x
 	snow_particles.global_position.y = character.global_position.y + 12

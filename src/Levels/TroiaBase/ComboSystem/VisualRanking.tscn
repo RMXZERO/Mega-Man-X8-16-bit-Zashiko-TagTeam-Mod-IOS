@@ -166,7 +166,6 @@ modulate = Color( 1, 1, 1, 0.670588 )
 position = Vector2( -1, 3 )
 z_index = 25
 frames = ExtResource( 10 )
-frame = 9
 playing = true
 
 [node name="sound" type="AudioStreamPlayer2D" parent="."]

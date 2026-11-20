@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/sigma_lauch3.ogg-e95a3e965b8c551ff631872ff0de879a.oggstr"
+
+[deps]
+
+source_file="res://Zero_mod/Boss_DJSigma/SFX/sigma_lauch3.ogg"
+dest_files=[ "res://.import/sigma_lauch3.ogg-e95a3e965b8c551ff631872ff0de879a.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

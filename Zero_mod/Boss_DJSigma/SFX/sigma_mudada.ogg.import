@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/sigma_mudada.ogg-28e1e8bd961407acb8fcd5ac4748707b.oggstr"
+
+[deps]
+
+source_file="res://Zero_mod/Boss_DJSigma/SFX/sigma_mudada.ogg"
+dest_files=[ "res://.import/sigma_mudada.ogg-28e1e8bd961407acb8fcd5ac4748707b.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

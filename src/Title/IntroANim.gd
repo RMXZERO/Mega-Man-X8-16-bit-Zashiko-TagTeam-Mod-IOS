@@ -1,6 +1,8 @@
 extends Node
 onready var megaman: Sprite = $megaman
 onready var megaman2: Sprite = $megaman2
+onready var rockman: Sprite = $rockman
+onready var rockman2: Sprite = $rockman2
 onready var x8_big: Sprite = $x8_big
 onready var x8_outer: Sprite = $x8_outer
 onready var x8_color: Sprite = $x8_color
@@ -19,6 +21,7 @@ export  var final_megaman_position: Vector2
 onready var blackness: Sprite = $blackness
 onready var demo: Label = $demo_02
 
+var is_rockman: bool = true
 var timer: = 0.0
 var step: = 0
 func next_step() -> void :
@@ -33,11 +36,24 @@ func _ready() -> void :
 		else:
 			break
 	
+	if Configurations.exists("TitleType"):
+		if Configurations.get("TitleType"):
+			is_rockman = false
+		else:
+			is_rockman = true
+	
 	set_physics_process(false)
 
 func _physics_process(delta: float) -> void :
 	timer += delta
-	appear_megaman_logo()
+	if is_rockman:
+		appear_rockman_logo()
+		megaman.visible = false
+		megaman2.visible = false
+	else:
+		appear_megaman_logo()
+		rockman.visible = false
+		rockman2.visible = false
 	appear_x8()
 		
 	pass
@@ -144,6 +160,44 @@ func appear_megaman_logo() -> void :
 		send_downwards(megaman2)
 		next_step()
 	
+func appear_rockman_logo() -> void :
+	if step == 0 and timer > 0.5:
+		send_downwards(rockman)
+		next_step()
+	
+	elif step == 1 and timer > 0.3:
+		fade(rockman)
+		send_downwards(rockman2)
+		next_step()
+
+	elif step == 2 and timer > 0.3:
+		send_downwards(rockman)
+		fade(rockman2)
+		next_step()
+
+	elif step == 3 and timer > 0.3:
+		fade(rockman)
+		send_downwards(rockman2)
+		next_step()
+
+	elif step == 4 and timer > 0.3:
+		send_downwards(rockman)
+		fade(rockman2)
+		next_step()
+	
+	elif step == 5 and timer > 0.25:
+		fade(rockman)
+		send_downwards(rockman2)
+		next_step()
+
+	elif step == 6 and timer > 0.25:
+		send_downwards(rockman)
+		fade(rockman2)
+		next_step()
+	
+	elif step == 7 and timer > 0.25:
+		send_downwards(rockman2)
+		next_step()
 
 func send_downwards(object, duration: = 0.3) -> void :
 	object.z_index = - 1

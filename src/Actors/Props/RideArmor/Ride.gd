@@ -66,6 +66,8 @@ func is_rideable(player) -> bool:
 	if GameManager.player:
 		if not GameManager.player.listening_to_inputs:
 			return false
+		if not GameManager.player.can_eject:
+			return false
 	if player.has_method("get_character"):
 		var character = player.get_character()
 		if character.has_method("is_executing_either"):

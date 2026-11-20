@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://src/Objects/Capsule.gd" type="Script" id=1]
 [ext_resource path="res://src/Objects/Light Capsule/capsule.res" type="SpriteFrames" id=2]
@@ -10,24 +10,32 @@
 [ext_resource path="res://src/DialogSystem/Dialogs/Capsules/DefaultCapsuleDialogue.tres" type="Resource" id=8]
 [ext_resource path="res://src/Objects/Light Capsule/light.res" type="SpriteFrames" id=9]
 [ext_resource path="res://src/Objects/Light Capsule/drLight.gd" type="Script" id=10]
+[ext_resource path="res://src/Levels/PitchBlack/light.png" type="Texture" id=11]
+[ext_resource path="res://src/Objects/Light Capsule/capsulelight.gd" type="Script" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 24, 8 )
+extents = Vector2( 20, 6 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 24, 12.5 )
+extents = Vector2( 20, 7 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 20, 11.5 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 16, 23 )
+extents = Vector2( 20, 40 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 24, 11.5 )
 
 [sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 24, 43.5 )
+extents = Vector2( 24, 38 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 51, 42 )
+extents = Vector2( 51, 80 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 2, 22 )
+extents = Vector2( 2, 24.5 )
 
 [sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 2
@@ -47,7 +55,7 @@ dialogue_x = ExtResource( 8 )
 dialogue_not_x = ExtResource( 8 )
 
 [node name="drLight" type="AnimatedSprite" parent="."]
-position = Vector2( 0, -36 )
+position = Vector2( 0, -32 )
 z_index = 4096
 z_as_relative = false
 frames = ExtResource( 9 )
@@ -59,7 +67,6 @@ script = ExtResource( 10 )
 position = Vector2( 0, -146 )
 frames = ExtResource( 2 )
 animation = "idle"
-frame = 19
 playing = true
 
 [node name="staticBody2D" type="StaticBody2D" parent="."]
@@ -68,8 +75,9 @@ position = Vector2( 0, -146 )
 collision_mask = 0
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="staticBody2D"]
-position = Vector2( 0, 138 )
+position = Vector2( 0, 140 )
 shape = SubResource( 1 )
+disabled = true
 
 [node name="staticBody2D2" type="StaticBody2D" parent="."]
 visible = false
@@ -77,8 +85,17 @@ position = Vector2( 0, -146 )
 collision_mask = 0
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="staticBody2D2"]
-position = Vector2( 0, 71.5 )
+position = Vector2( 0, 77 )
 shape = SubResource( 2 )
+disabled = true
+
+[node name="staticBody2D3" type="StaticBody2D" parent="."]
+visible = false
+collision_mask = 0
+
+[node name="collisionShape2D" type="CollisionShape2D" parent="staticBody2D3"]
+position = Vector2( 0, -11.5 )
+shape = SubResource( 8 )
 
 [node name="glass" type="StaticBody2D" parent="."]
 visible = false
@@ -86,8 +103,9 @@ position = Vector2( 0, -121 )
 collision_mask = 0
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="glass"]
-position = Vector2( 0, 82 )
+position = Vector2( 0, 81 )
 shape = SubResource( 6 )
+disabled = true
 
 [node name="rideblocker" type="StaticBody2D" parent="."]
 visible = false
@@ -95,9 +113,14 @@ position = Vector2( 0, -121 )
 collision_layer = 536870912
 collision_mask = 0
 
-[node name="collisionShape2D" type="CollisionShape2D" parent="rideblocker"]
-position = Vector2( 0, 77.5 )
+[node name="closecollisionShape2D" type="CollisionShape2D" parent="rideblocker"]
+position = Vector2( 0, 109.5 )
+shape = SubResource( 9 )
+
+[node name="opencollisionShape2D" type="CollisionShape2D" parent="rideblocker"]
+position = Vector2( 0, 83 )
 shape = SubResource( 7 )
+disabled = true
 
 [node name="area2D" type="Area2D" parent="."]
 visible = false
@@ -106,17 +129,19 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="area2D"]
-position = Vector2( 0, 104 )
+position = Vector2( 0, 66 )
 shape = SubResource( 4 )
 
 [node name="area2D2" type="Area2D" parent="."]
+visible = false
 position = Vector2( 0, -146 )
 collision_layer = 0
 collision_mask = 2
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="area2D2"]
-position = Vector2( 0, 107 )
+position = Vector2( 0, 109.5 )
 shape = SubResource( 3 )
+disabled = true
 
 [node name="open" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
@@ -142,6 +167,15 @@ volume_db = -8.0
 max_distance = 600.0
 bus = "SFX"
 
+[node name="light2D" type="Light2D" parent="."]
+visible = false
+position = Vector2( 0, -73 )
+scale = Vector2( 5, 5 )
+z_index = 277
+texture = ExtResource( 11 )
+range_layer_min = -100
+script = ExtResource( 12 )
+
 [node name="particles2D" type="Particles2D" parent="."]
 position = Vector2( 0, -61 )
 z_index = -1
@@ -151,6 +185,8 @@ lifetime = 0.5
 process_material = SubResource( 5 )
 texture = ExtResource( 7 )
 
+[connection signal="lightning" from="." to="light2D" method="_on_Capsule_lightning"]
 [connection signal="animation_finished" from="animatedSprite" to="." method="_on_animatedSprite_animation_finished"]
 [connection signal="body_entered" from="area2D" to="." method="_on_area2D_body_entered"]
+[connection signal="body_exited" from="area2D" to="." method="_on_area2D_body_exited"]
 [connection signal="body_entered" from="area2D2" to="." method="_on_area2D2_body_entered"]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/sigma_kejia.ogg-da2c1f16fe4364f35aecc8878afb3d21.oggstr"
+
+[deps]
+
+source_file="res://Zero_mod/Boss_DJSigma/SFX/sigma_kejia.ogg"
+dest_files=[ "res://.import/sigma_kejia.ogg-da2c1f16fe4364f35aecc8878afb3d21.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

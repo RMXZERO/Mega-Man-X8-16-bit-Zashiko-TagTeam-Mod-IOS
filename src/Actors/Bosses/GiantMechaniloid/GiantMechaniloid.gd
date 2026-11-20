@@ -1,9 +1,5 @@
 extends Panda
 
-const intro: AudioStream = preload("res://src/Sounds/OST - Metal Valley 1 - Intro.ogg")
-const loop: AudioStream = preload("res://src/Sounds/OST - Metal Valley 1 - Loop.ogg")
-
-
 func _ready() -> void :
 	Event.listen("moved_player_to_checkpoint", self, "on_checkpoint")
 	listen("zero_health", self, "_on_zero_health")
@@ -26,7 +22,14 @@ func _on_zero_health() -> void :
 	Tools.timer(2.0, "start_music", self)
 
 func start_music() -> void :
-	GameManager.music_player.play_song(loop, intro)
+	var current_scene = get_tree().current_scene
+	var remix = current_scene.get_node_or_null("Remix")
+	if current_scene and remix:
+		if Configurations.exists("SongRemix"):
+			if Configurations.get("SongRemix"):
+				GameManager.music_player.play_song(remix._metalvalley2_loop, remix._metalvalley2_intro)
+			else:
+				GameManager.music_player.play_song(remix._original_alt_stage_loop, remix._original_alt_stage_intro)
 
 func _on_rising_platform_started() -> void :
 	GameManager.music_player.start_fade_out()

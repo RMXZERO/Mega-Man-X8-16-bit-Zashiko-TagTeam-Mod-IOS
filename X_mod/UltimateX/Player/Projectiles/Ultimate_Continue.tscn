@@ -50,7 +50,6 @@ damage_to_weakness = 5.0
 [node name="animatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 22 )
 animation = "loop"
-frame = 1
 playing = true
 flip_h = true
 

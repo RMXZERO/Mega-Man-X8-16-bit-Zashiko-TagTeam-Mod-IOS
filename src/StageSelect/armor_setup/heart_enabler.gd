@@ -65,6 +65,10 @@ func refresh_equipped_hearts() -> void:
 func refresh_character_name() -> void:
 	if character_name.text == "Zero (BETA)":
 		character = "Zero"
+	elif character_name.text == "Zero (Awakened)":
+		character = "Zero"
+	elif character_name.text == "X (Infinite)":
+		character = "X"
 	else:
 		character = character_name.text
 

@@ -42,6 +42,8 @@ onready var icon_black_zero_body_replace: Texture = preload("res://Zero_mod/HUD/
 onready var icon_black_zero_arms_replace: Texture = preload("res://Zero_mod/HUD/Pause/Armor/beta_black_zero_arms.png")
 onready var icon_black_zero_legs_replace: Texture = preload("res://Zero_mod/HUD/Pause/Armor/beta_black_zero_legs.png")
 
+onready var awaken_zero: = $"../../awakenedzero_holder/awakened_zero"
+onready var custom_zero: = $"../../customzero_holder/custom_zero"
 
 func _ready() -> void :
 	_on_focus_exited()
@@ -57,10 +59,13 @@ func _on_focus_exited() -> void :
 	dim()
 
 func on_press() -> void :
-	if not CharacterManager.custom_zero_armor:
-		toggle_beta_zero()
-		strong_flash()
-		icon.material.set_shader_param("grayscale", not CharacterManager.betazero_activated)
+	#CharacterManager.awakened_zero_armor = false
+	#CharacterManager.custom_zero_armor = false
+	#custom_zero.icon.material.set_shader_param("grayscale", not CharacterManager.custom_zero_armor)
+	#awaken_zero.icon.material.set_shader_param("grayscale", not CharacterManager.awakened_zero_armor)
+	toggle_beta_zero()
+	strong_flash()
+	icon.material.set_shader_param("grayscale", not CharacterManager.betazero_activated)
 
 func display_info() -> void :
 	name_display.text = legible_name
@@ -75,6 +80,7 @@ func toggle_beta_zero() -> void :
 	if CharacterManager.betazero_activated:
 		Tools.timer(0.075, "play", equip)
 		char_name.text = "Zero (BETA)"
+		$animatedSprite.frame = 0
 	else:
 		Tools.timer(0.075, "play", unequip)
 		char_name.text = "Zero"

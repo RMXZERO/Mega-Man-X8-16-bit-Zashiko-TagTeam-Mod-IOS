@@ -178,3 +178,4 @@ func Log(msg) -> void :
 	if msg != last_message and debug_logs:
 		
 		last_message = msg
+

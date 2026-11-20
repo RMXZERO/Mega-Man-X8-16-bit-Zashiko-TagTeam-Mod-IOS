@@ -2,13 +2,39 @@ extends GenericProjectile
 onready var vanish: AudioStreamPlayer2D = $vanish
 export  var mini_projectile: PackedScene
 var exploded: = false
-onready var fire_1: Particles2D = $fire1
-onready var fire_2: Particles2D = $fire2
-onready var fire_3: Particles2D = $fire3
+onready var fire_1: Particles2D = $animatedSprite/fire1
+onready var fire_2: Particles2D = $animatedSprite/fire2
+onready var fire_3: Particles2D = $animatedSprite/fire3
+
+onready var animatedSprite_zero = $animatedSprite_zero
+onready var fire_zero_1: Particles2D = $animatedSprite_zero/fire1
+onready var fire_zero_2: Particles2D = $animatedSprite_zero/fire2
+onready var fire_zero_3: Particles2D = $animatedSprite_zero/fire3
+
 var zero: bool = false
 
+func set_direction(new_direction):
+	facing_direction = new_direction
+	if not animatedSprite:
+		animatedSprite = get_node("animatedSprite")
+	animatedSprite.scale.x = new_direction
+	if not animatedSprite_zero:
+		animatedSprite_zero = get_node("animatedSprite_zero")
+	animatedSprite_zero.scale.x = new_direction
+	if zero:
+		animatedSprite.hide()
+		animatedSprite_zero.show()
+	else:
+		animatedSprite.show()
+		animatedSprite_zero.hide()
 
 func _Update(delta: float) -> void :
+	if zero:
+		animatedSprite.hide()
+		animatedSprite_zero.show()
+	else:
+		animatedSprite.show()
+		animatedSprite_zero.hide()
 	if not exploded and is_on_wall():
 		explode()
 
@@ -18,6 +44,11 @@ func explode() -> void :
 	fire_3.emitting = false
 	exploded = true
 	animatedSprite.play("explode")
+	if zero:
+		fire_zero_1.emitting = false
+		fire_zero_2.emitting = false
+		fire_zero_3.emitting = false
+		animatedSprite_zero.play("explode")
 	disable_damage()
 	Tools.timer(1, "destroy", self)
 	vanish.play_rp()

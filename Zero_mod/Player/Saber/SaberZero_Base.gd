@@ -32,6 +32,8 @@ var interrupted_cutscene: bool = false
 var slashing: bool = false
 var slashes = 0
 
+var hitbox_extra_scale = 1
+
 func reset_hitbox():
 	hitbox_upleft = Vector2(0, 0)
 	hitbox_downright = Vector2(0, 0)
@@ -60,6 +62,7 @@ func spawn_hitbox(_hitbox_upleft: Vector2, _hitbox_downright: Vector2):
 	current_hitbox.break_guards = hitbox_break_guards
 	current_hitbox.saber_rehit = hitbox_rehit_time
 	current_hitbox.upgraded = hitbox_upgraded
+	current_hitbox.scale *= hitbox_extra_scale
 	
 	current_hitbox.deflectable = deflectable
 	

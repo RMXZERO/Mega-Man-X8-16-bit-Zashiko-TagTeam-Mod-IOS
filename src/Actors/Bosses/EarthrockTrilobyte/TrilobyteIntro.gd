@@ -7,6 +7,13 @@ onready var crystals = [crystal, crystal_2, crystal_3]
 onready var break_sound: AudioStreamPlayer2D = $break
 onready var appear: AudioStreamPlayer2D = $appear
 
+func _ready() -> void:
+	._ready()
+	if CharacterManager.nightshade_zero_armor:
+		call_deferred("prepare_for_intro")
+	if CharacterManager.nightshade_zero_armor:
+		animatedSprite.modulate.a = 0.0
+
 func prepare_for_intro() -> void:
 	make_invisible()
 	for c in crystals:
@@ -20,6 +27,7 @@ func _Setup() -> void:
 func _Update(delta) -> void:
 	process_gravity(delta)
 	if attack_stage == 0 and timer > 1:
+		animatedSprite.modulate.a = 1.0
 		repeat_for_all_crystals("shatter_and_break")
 		turn_player_towards_boss()
 		make_visible()

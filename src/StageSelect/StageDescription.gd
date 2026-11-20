@@ -46,9 +46,9 @@ func get_stage_completion_percentage(info: StageInfo) -> String:
 		var count_this: bool = true
 		if CharacterManager.game_mode < 0 and ("black_zero_armor" in item or "white_axl_armor" in item):
 			count_this = false
-		if CharacterManager.game_mode == 1 and "subtank" in item and total_collected_subtanks >= 2:
+		if CharacterManager.game_mode == 1 and "subtank" in item and total_collected_subtanks >= 4:
 			count_this = false
-		elif CharacterManager.game_mode >= 2 and "subtank" in item:
+		elif CharacterManager.game_mode >= 2 and "subtank" in item and total_collected_subtanks >= 2:
 			count_this = false
 		elif CharacterManager.game_mode >= 3 and "life_up" in item:
 			count_this = false
@@ -66,4 +66,10 @@ func has_weapon(info: StageInfo) -> bool:
 			return item in GameManager.collectibles
 		if "weapon" in item:
 			return item in GameManager.collectibles
+		if "Jakob Elevator" in text:
+			return GlobalVariables.exists("vile3_defeated") and GlobalVariables.get("vile3_defeated")
+		if "Gateway" in text:
+			return GlobalVariables.exists("copy_sigma_defeated") and GlobalVariables.get("copy_sigma_defeated")
+		if "Sigma Palace" in text:
+			return GlobalVariables.exists("seraph_lumine_defeated") and GlobalVariables.get("seraph_lumine_defeated")
 	return false

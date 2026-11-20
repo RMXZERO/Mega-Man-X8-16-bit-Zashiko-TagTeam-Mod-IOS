@@ -1,6 +1,13 @@
 extends Movement
 class_name SaberRaikousen
 
+onready var z_slash: PackedScene = preload("res://Zero_mod/X8/Sprites/zbuster/object/PlayerZSlash.tscn")
+var creator: Node2D
+
+var angles = [0, 33, - 33, 90, 44, - 44, 25, - 25, 0, 90, 44, - 25, - 33]
+var create_slash: bool = false
+var h = 0
+
 export  var saber_hitbox: Resource = preload("res://Zero_mod/Player/Hitboxes/Raikousen_Hitbox.tscn")
 var current_hitbox = null
 var hitbox_upleft = Vector2(0, 0)
@@ -19,6 +26,8 @@ var hitbox_extra_damage_weakness = 1
 var hitbox_extra_break_guard_value = 1
 
 var deflectable: bool = false
+
+var hitbox_extra_scale = 1
 
 export  var upgraded: = false
 onready var animatedSprite = character.get_node("animatedSprite")
@@ -84,6 +93,7 @@ func spawn_hitbox(_hitbox_upleft: Vector2, _hitbox_downright: Vector2):
 	current_hitbox.break_guards = hitbox_break_guards
 	current_hitbox.saber_rehit = hitbox_rehit_time
 	current_hitbox.upgraded = hitbox_upgraded
+	current_hitbox.scale *= hitbox_extra_scale
 	
 	current_hitbox.deflectable = deflectable
 
@@ -175,6 +185,7 @@ func _Setup() -> void :
 	set_saber_animations()
 	sound_played = false
 	sound2_played = false
+	create_slash = false
 
 func reduce_speed():
 	horizontal_speed = 0
@@ -200,11 +211,48 @@ func _Update(_delta: float) -> void :
 		force_movement(horizontal_speed)
 		character.set_vertical_speed(0)
 		damp_horizontal_speed(_delta)
+		player_desperation()
 	else:
 		force_movement(0)
 		character.set_vertical_speed(0)
 	
 	process_invulnerability()
+
+func player_desperation() -> void :
+	if character.get_actual_horizontal_speed() < 100 and character.get_actual_horizontal_speed() > -100:
+		return
+	if not CharacterManager.awakened_zero_armor:
+		return
+	if not animatedSprite.animation == "raikousen":
+		return
+	if not create_slash:
+		create_slash = true
+		Tools.timer_p(0.075, "create_desperation", self, angles[h])
+
+func create_desperation(degrees: float):
+	var slash = z_slash.instance()
+	get_tree().current_scene.get_node("Objects").call_deferred("add_child", slash, true)
+	slash.damage = hitbox_damage * hitbox_extra_damage
+	slash.damage_to_bosses = hitbox_damage_boss * hitbox_extra_damage_boss
+	slash.damage_to_weakness = hitbox_damage_weakness * hitbox_extra_damage_weakness
+	slash.set_global_position(global_position)
+	slash.rotate_degrees(degrees)
+	slash.set_creator(creator)
+	slash.call_deferred("initialize", get_facing_direction())
+	create_desperation2(degrees)
+
+func create_desperation2(degrees: float):
+	var slash = z_slash.instance()
+	get_tree().current_scene.get_node("Objects").call_deferred("add_child", slash, true)
+	slash.set_global_position(global_position)
+	slash.rotate_degrees(degrees)
+	slash.set_creator(creator)
+	slash.hide()
+	
+	h += 1
+	if h > angles.size() - 1:
+		h = 0
+	create_slash = false
 
 func change_animation_if_falling(_s) -> void :
 	pass

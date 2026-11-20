@@ -14,6 +14,9 @@ export  var bullet_speed: float = 300
 export  var projectile_damage: float = 1.0
 export  var projectile_damage_to_bosses: float = 1.0
 export  var projectile_damage_to_weakness: float = 1.0
+export  var extra_damage: float = 1.0
+export  var extra_delay: float = 1.0
+export  var extra_speed: float = 1.0
 
 onready var arm_cannon = get_parent()
 onready var character: = get_parent().get_parent()
@@ -132,13 +135,13 @@ func add_projectile_to_scene(charge_level: int):
 	elif Input.is_action_pressed("move_down"):
 		vertical_dir = 1
 	character.get_node("offset manager").get_offset()
-	shot_direction_node.projectile_speed_control(_shot, bullet_speed, horizontal_dir, vertical_dir)
+	shot_direction_node.projectile_speed_control(_shot, bullet_speed * extra_speed, horizontal_dir, vertical_dir)
 	get_tree().current_scene.add_child(_shot, true)
 	position_shot(_shot)
 	connect_shot_event(_shot)
-	_shot.damage = projectile_damage
-	_shot.damage_to_bosses = projectile_damage_to_bosses
-	_shot.damage_to_weakness = projectile_damage_to_weakness
+	_shot.damage = projectile_damage * extra_damage
+	_shot.damage_to_bosses = projectile_damage_to_bosses * extra_damage
+	_shot.damage_to_weakness = projectile_damage_to_weakness * extra_damage
 	return _shot
 
 func connect_shot_event(_shot):

@@ -103,6 +103,10 @@ func _EndCondition() -> bool:
 	if _animation in character.saber_animations:
 		if "saber_jump" in _animation:
 			return false
+		if "saber_ensuizan" in _animation:
+			return false
+		if "charge_saber_jump" in _animation:
+			return false
 		return true
 	return ._EndCondition()
 

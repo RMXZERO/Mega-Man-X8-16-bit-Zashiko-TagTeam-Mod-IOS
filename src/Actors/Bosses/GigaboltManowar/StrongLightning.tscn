@@ -209,7 +209,6 @@ texture = ExtResource( 16 )
 
 [node name="start" type="AnimatedSprite" parent="."]
 frames = SubResource( 11 )
-frame = 9
 playing = true
 
 [node name="line" type="Line2D" parent="."]
@@ -222,7 +221,6 @@ texture_mode = 1
 [node name="joint" type="AnimatedSprite" parent="."]
 position = Vector2( 0, 64 )
 frames = SubResource( 11 )
-frame = 9
 playing = true
 
 [node name="line2" type="Line2D" parent="."]
@@ -236,7 +234,6 @@ texture_mode = 1
 [node name="finish" type="AnimatedSprite" parent="."]
 position = Vector2( 0, 256 )
 frames = SubResource( 11 )
-frame = 9
 playing = true
 
 [node name="start_right_raycast" type="RayCast2D" parent="."]

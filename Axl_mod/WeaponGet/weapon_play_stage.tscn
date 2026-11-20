@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=2]
+[gd_scene load_steps=76 format=2]
 
 [ext_resource path="res://src/Levels/StageSegmentManager.gd" type="Script" id=1]
 [ext_resource path="res://src/Levels/music_player.gd" type="Script" id=2]
@@ -22,9 +22,10 @@
 [ext_resource path="res://src/Objects/Spikes/spike_00.png" type="Texture" id=20]
 [ext_resource path="res://src/Objects/Spikes/spike_03.png" type="Texture" id=21]
 [ext_resource path="res://src/Objects/Spikes/DestructibleSpike.tscn" type="PackedScene" id=22]
-[ext_resource path="res://src/WeaponGet/TestLevelModifier.gd" type="Script" id=23]
+[ext_resource path="res://src/HUD/BarFader.gd" type="Script" id=23]
 [ext_resource path="res://src/Actors/Enemies/Drone/Drone.tscn" type="PackedScene" id=24]
 [ext_resource path="res://Axl_mod/WeaponGet/PlayerAI.gd" type="Script" id=25]
+[ext_resource path="res://Axl_mod/WeaponGet/TestLevelModifier.gd" type="Script" id=26]
 [ext_resource path="res://src/Effects/enemy_shader.tres" type="Shader" id=89]
 [ext_resource path="res://src/Effects/ShieldBreak/shieldbreak.res" type="SpriteFrames" id=121]
 [ext_resource path="res://src/Actors/Player/BossWeapons/firedash_palette.png" type="Texture" id=124]
@@ -65,7 +66,7 @@
 [ext_resource path="res://src/Sounds/RockThrow Prepare.ogg" type="AudioStream" id=160]
 [ext_resource path="res://src/Sounds/64 - MMX - Enemy Sound (01).wav" type="AudioStream" id=161]
 
-[sub_resource type="ShaderMaterial" id=52]
+[sub_resource type="ShaderMaterial" id=76]
 resource_local_to_scene = true
 shader = ExtResource( 89 )
 shader_param/Flash = 0.0
@@ -74,11 +75,11 @@ shader_param/Darken = 1.0
 shader_param/Alpha = 1.0
 shader_param/Alpha_Blink = 0.0
 
-[sub_resource type="AtlasTexture" id=2]
+[sub_resource type="AtlasTexture" id=77]
 atlas = ExtResource( 135 )
 region = Rect2( 3, 3, 10, 10 )
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=78]
 shader = ExtResource( 6 )
 shader_param/skip_first_row = true
 shader_param/use_palette_alpha = false
@@ -203,7 +204,7 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="X Bar" type="NinePatchRect" parent="Hud"]
-material = SubResource( 52 )
+material = SubResource( 76 )
 margin_left = 8.0
 margin_top = 56.0
 margin_right = 22.0
@@ -211,6 +212,7 @@ margin_bottom = 108.0
 texture = ExtResource( 132 )
 patch_margin_top = 4
 patch_margin_bottom = 17
+script = ExtResource( 23 )
 
 [node name="textureProgress2" type="TextureProgress" parent="Hud/X Bar"]
 modulate = Color( 0.737255, 0.0941176, 0.0941176, 1 )
@@ -246,10 +248,10 @@ margin_bottom = 2.0
 rect_clip_content = true
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = SubResource( 2 )
+texture = SubResource( 77 )
 
 [node name="WeaponBar" type="NinePatchRect" parent="Hud/X Bar"]
-material = SubResource( 52 )
+material = SubResource( 76 )
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 15.0
@@ -261,7 +263,79 @@ patch_margin_bottom = 17
 script = ExtResource( 128 )
 
 [node name="textureProgress" type="TextureProgress" parent="Hud/X Bar/WeaponBar"]
-material = SubResource( 3 )
+material = SubResource( 78 )
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = -80.0
+margin_right = 10.0
+margin_bottom = -17.0
+max_value = 32.0
+value = 28.0
+texture_progress = ExtResource( 134 )
+fill_mode = 3
+
+[node name="X Bar2" type="NinePatchRect" parent="Hud"]
+material = SubResource( 76 )
+margin_left = 8.0
+margin_top = 56.0
+margin_right = 22.0
+margin_bottom = 108.0
+texture = ExtResource( 132 )
+patch_margin_top = 4
+patch_margin_bottom = 17
+script = ExtResource( 23 )
+
+[node name="textureProgress2" type="TextureProgress" parent="Hud/X Bar2"]
+modulate = Color( 0.737255, 0.0941176, 0.0941176, 1 )
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = -80.0
+margin_right = 10.0
+margin_bottom = -17.0
+max_value = 32.0
+texture_progress = ExtResource( 134 )
+fill_mode = 3
+
+[node name="textureProgress" type="TextureProgress" parent="Hud/X Bar2"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = -80.0
+margin_right = 10.0
+margin_bottom = -17.0
+max_value = 32.0
+value = 16.0
+texture_progress = ExtResource( 134 )
+fill_mode = 3
+
+[node name="WeaponIcon" type="TextureRect" parent="Hud/X Bar2"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 17.0
+margin_top = -14.0
+margin_right = 33.0
+margin_bottom = 2.0
+rect_clip_content = true
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource( 77 )
+
+[node name="WeaponBar" type="NinePatchRect" parent="Hud/X Bar2"]
+material = SubResource( 76 )
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 15.0
+margin_top = -76.0
+margin_right = 29.0
+texture = ExtResource( 137 )
+patch_margin_top = 4
+patch_margin_bottom = 17
+script = ExtResource( 128 )
+
+[node name="textureProgress" type="TextureProgress" parent="Hud/X Bar2/WeaponBar"]
+material = SubResource( 78 )
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -495,7 +569,6 @@ position = Vector2( 0, -16 )
 z_index = 1
 frames = ExtResource( 152 )
 animation = "idle"
-frame = 8
 playing = true
 flip_h = true
 
@@ -666,7 +739,7 @@ shape = SubResource( 53 )
 [node name="recorder" parent="." instance=ExtResource( 7 )]
 
 [node name="LevelModifier" type="Node" parent="."]
-script = ExtResource( 23 )
+script = ExtResource( 26 )
 
 [connection signal="animation_finished" from="StateCamera/Ready Warning Text" to="StateCamera/Ready Warning Text" method="_on_animatedSprite_animation_finished"]
 [connection signal="initialize" from="StateCamera/WeaponGetScreen" to="InputEmulator" method="start"]

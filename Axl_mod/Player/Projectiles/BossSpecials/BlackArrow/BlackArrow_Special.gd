@@ -4,6 +4,7 @@ onready var player_damage: = character.get_node("Damage")
 onready var player_shot_node: = character.get_node("Shot")
 onready var player_altshot_node: = character.get_node("AltFire")
 onready var player_afterimages: = character.get_node("animatedSprite/afterImages")
+onready var player_afterimages3: = character.get_node("animatedSprite/afterImages3")
 onready var sfx: = $sfx
 
 var aura_time: float = 16.0
@@ -55,13 +56,19 @@ func _physics_process(delta: float) -> void :
 
 func invulnerable(state: bool) -> void :
 	player_afterimages.upgraded = state
+	player_afterimages3.upgraded = state
 	if state:
 		character.add_invulnerability(name)
+		#player_afterimages3.activate()
+		character.alpha_alway_1 = true
 	else:
 		player_afterimages.activate()
+		player_afterimages3.activate()
 		character.remove_invulnerability(name)
+		character.alpha_alway_1 = false
 
 func set_aura_buff() -> void :
+	Event.emit_signal("axl_special_ability", "blackarrow")
 	invulnerable(true)
 	for shot in player_shot_node.get_children():
 		if shot is WeaponAxl:
@@ -87,6 +94,7 @@ func set_aura_buff() -> void :
 			shot.projectile_damage_to_weakness *= damage_factor
 
 func unset_aura_buff() -> void :
+	Event.emit_signal("axl_special_ability", "remove")
 	invulnerable(false)
 	for shot in player_shot_node.get_children():
 		if shot is WeaponAxl:

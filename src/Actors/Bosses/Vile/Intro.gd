@@ -3,10 +3,11 @@ extends GenericIntro
 export var boss_vile := false
 const sprite_y := -19.0
 onready var beam_in: AudioStreamPlayer2D = $beam_in
+onready var space = character.get_node_or_null("Space")
 
-	
 func _ready() -> void :
 	._ready()
+	animatedSprite.modulate.a = 0.0
 
 func connect_start_events() -> void :
 	Event.listen("vile_door_open", self, "prepare_for_intro")
@@ -24,11 +25,12 @@ func start_dialog_or_go_to_attack_stage(skip_dialog_stage: = 0) -> void :
 		dialogue = CharacterManager._set_correct_dialogues("Vile Primrose", dialogue)
 	if "Jakob" in _level_name:
 		dialogue = CharacterManager._set_correct_dialogues("Vile", dialogue)
-
+	
 	if dialogue:
 		connect_dialogue()
 	if not seen_dialog():
 		GameManager.start_dialog(dialogue)
+		play_demo_music()
 		next_attack_stage()
 	elif seen_dialog():
 		go_to_attack_stage(skip_dialog_stage)
@@ -40,6 +42,7 @@ func prepare_for_intro() -> void:
 func _Update(delta):
 	process_gravity(delta)
 	if attack_stage == 0 and timer > 0.5:
+		animatedSprite.modulate.a = 1.0
 		Event.emit_signal("vile_intro")
 		turn_player_towards_boss()
 		turn_and_face_player()
@@ -90,11 +93,14 @@ func _Update(delta):
 			EndAbility()
 
 func _Interrupt() -> void :
+	animatedSprite.modulate.a = 1.0
 	Event.emit_signal("boss_start", character)
 	GameManager.end_cutscene()
 	character.emit_signal("intro_concluded")
 	if boss_vile:
 		deactivate_air_attacks()
+	if space:
+		space.define_arena()
 
 export  var ignore_deactivate: = false
 func deactivate_air_attacks() -> void :
@@ -108,3 +114,4 @@ func seen_dialog() -> bool:
 	if GameManager.has_beaten_the_game():
 		return true
 	return .seen_dialog()
+

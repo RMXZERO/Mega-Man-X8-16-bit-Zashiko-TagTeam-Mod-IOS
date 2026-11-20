@@ -3,8 +3,13 @@ extends X8OptionButton
 export  var legible_name: String
 export  var description: String
 
-onready var name_display: Label = $"../../Description/name"
-onready var disc_display: Label = $"../../Description/disc"
+onready var equip: AudioStreamPlayer = $"../../../../../equip"
+onready var unequip: AudioStreamPlayer = $"../../../../../unequip"
+onready var choice: AudioStreamPlayer = $"../../../../../choice"
+onready var icon: TextureRect = $"icon"
+onready var name_display: Label = $"../../../../Description/name"
+onready var disc_display: Label = $"../../../../Description/disc"
+onready var char_name: Label = $"../../../../CharacterName"
 
 
 func setup() -> void :

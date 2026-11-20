@@ -35,6 +35,7 @@ func _ready() -> void :
 	add_weakness("NovaStrike")
 	add_weakness("Shoryuuken")
 	add_weakness("GigaCrash")
+	add_weakness("Genmuzero")
 	deactivate()
 	if activated:
 		activate()

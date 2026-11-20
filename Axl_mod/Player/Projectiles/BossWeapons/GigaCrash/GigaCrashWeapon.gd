@@ -4,6 +4,8 @@ const minimum_time_between_recharges: float = 0.2
 
 export  var recharge_rate: float = 1.0
 export  var weapon: Resource
+export  var _sprites_weapon: SpriteFrames
+export  var _sprites_weapon_B: SpriteFrames
 
 onready var parent: = get_parent()
 onready var animatedsprite: AnimatedSprite = $"../../animatedSprite"
@@ -15,6 +17,9 @@ onready var tween: SceneTreeTween
 onready var sprite_floor: Resource = preload("res://Axl_mod/Player/Projectiles/BossWeapons/GigaCrash/gigacrash.res")
 onready var sprite_air: Resource = preload("res://Axl_mod/Player/Projectiles/BossWeapons/GigaCrash/gigacrash_air.tres")
 
+var stop_recover: bool = false
+var recover_ammo: bool = false
+var recover_speed: float = 0.0
 var timer: float = 0.0
 var last_time_hit: float = 0.0
 var recharge_exceptions: Array = [
@@ -27,24 +32,24 @@ func _ready() -> void :
 	character.listen("zero_health", self, "on_zero_health")
 	Event.listen("hit_enemy", self, "recharge")
 	Event.listen("enemy_kill", self, "recharge")
-	Event.listen("special_end", self, "reset_ammo_to_zero")
-	
-func reset_ammo_to_zero() -> void:
-	current_ammo = 0
+	current_ammo = max_ammo
 
 func recharge(_d = null) -> void :
+	if is_instance_valid(GameManager.player):
+		if GameManager.player.ride:
+			return
 	if current_ammo < max_ammo:
 		for child in parent.get_parent().get_children():
 			if child is SpecialAbilityAxl:
 				if child.name in recharge_exceptions:
 					return
-		if timer > last_time_hit + minimum_time_between_recharges:
-			last_time_hit = timer
-			current_ammo = clamp(current_ammo + recharge_rate, 0.0, max_ammo)
+		if not stop_recover:
+			if timer > last_time_hit + minimum_time_between_recharges:
+				last_time_hit = timer
+				current_ammo = clamp(current_ammo + recharge_rate, 0.0, max_ammo)
 
 func on_equip() -> void :
 	active = true
-	current_ammo = max_ammo
 	Event.emit_signal("special_activated", self, character)
 	parent.update_list_of_weapons()
 	set_physics_process(active)
@@ -56,6 +61,15 @@ func reduce_ammo(expent):
 	current_ammo -= expent
 
 func fire(_charge_level: = 0) -> void :
+	if character.get_node("Desperation").active:
+		if character.get_action_pressed("move_up") and character.is_on_floor():
+			character.get_node("Desperation").ExecuteOnce()
+		else:
+			start_giga()
+	else:
+		start_giga()
+
+func start_giga() -> void :
 	parent.set_pistol_as_weapon()
 	add_projectile_to_scene(0)
 	reduce_ammo(ammo_per_shot)
@@ -110,9 +124,22 @@ func on_shot_end(_shot) -> void :
 func _physics_process(delta: float) -> void :
 	timer += delta
 
-
 	if has_ammo() and not vfx_casted:
 		vfx.frame = 0
 		vfx_casted = true
 	elif not has_ammo() and vfx_casted:
 		vfx_casted = false
+
+	if is_instance_valid(GameManager.player):
+		if GameManager.player.ride:
+			return
+	if current_ammo < max_ammo:
+		for child in parent.get_parent().get_children():
+			if child is SpecialAbilityAxl:
+				if child.name in recharge_exceptions:
+					return
+		if recover_ammo and not stop_recover:
+			if current_ammo < max_ammo:
+				current_ammo = clamp(current_ammo + delta * recover_speed, 0.0, max_ammo)
+
+

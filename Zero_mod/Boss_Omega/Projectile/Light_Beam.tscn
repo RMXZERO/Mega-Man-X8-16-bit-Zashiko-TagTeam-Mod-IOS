@@ -1,0 +1,105 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Zero_mod/X8/Sprites/ZeroX8_Material_Shader.tres" type="Material" id=1]
+[ext_resource path="res://src/Actors/Props/RideArmor/RepeatAnimation.gd" type="Script" id=2]
+[ext_resource path="res://Zero_mod/X8/Sprites/zbuster/object/object.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://src/Actors/Enemies/ProjectileDoT.gd" type="Script" id=4]
+[ext_resource path="res://Zero_mod/Boss_Omega/Projectile/Omega_Crash_beam.gd" type="Script" id=5]
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 40, 300 )
+
+[node name="CrashBeam" type="KinematicBody2D" groups=["Enemy Projectile"]]
+z_index = 8
+collision_layer = 16
+collision_mask = 0
+script = ExtResource( 5 )
+
+[node name="animatedSprite" type="AnimatedSprite" parent="."]
+visible = false
+material = ExtResource( 1 )
+scale = Vector2( 1e-05, 1e-05 )
+z_index = 2
+frames = ExtResource( 3 )
+animation = "omega_crash_beam"
+flip_h = true
+
+[node name="area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 6
+input_pickable = false
+
+[node name="collisionShape2D" type="CollisionShape2D" parent="area2D"]
+shape = SubResource( 13 )
+disabled = true
+
+[node name="DamageOnTouch" type="Node2D" parent="."]
+script = ExtResource( 4 )
+damage = 16.0
+hit_through_invulnerability = true
+
+[node name="visibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+visible = false
+position = Vector2( 6.10352e-05, 7.62939e-06 )
+scale = Vector2( 81, 22.4 )
+
+[node name="collisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 13 )
+disabled = true
+
+[node name="oz_crash_beam" type="AnimatedSprite" parent="."]
+material = ExtResource( 1 )
+position = Vector2( -32, 0 )
+scale = Vector2( 1, 28 )
+frames = ExtResource( 3 )
+animation = "omega_crash_beam_loop"
+playing = true
+flip_h = true
+script = ExtResource( 2 )
+reference = NodePath("../animatedSprite")
+
+[node name="oz_crash_beam2" type="AnimatedSprite" parent="."]
+material = ExtResource( 1 )
+scale = Vector2( 1, 28 )
+frames = ExtResource( 3 )
+animation = "omega_crash_beam_loop"
+playing = true
+flip_h = true
+script = ExtResource( 2 )
+reference = NodePath("../animatedSprite")
+
+[node name="oz_crash_beam3" type="AnimatedSprite" parent="."]
+material = ExtResource( 1 )
+position = Vector2( 32, 0 )
+scale = Vector2( 1, 28 )
+frames = ExtResource( 3 )
+animation = "omega_crash_beam_loop"
+playing = true
+flip_h = true
+script = ExtResource( 2 )
+reference = NodePath("../animatedSprite")
+
+[node name="oz_crash_beam4" type="AnimatedSprite" parent="."]
+material = ExtResource( 1 )
+position = Vector2( 16, 0 )
+scale = Vector2( 1, 28 )
+frames = ExtResource( 3 )
+animation = "omega_crash_beam_loop"
+playing = true
+flip_h = true
+script = ExtResource( 2 )
+reference = NodePath("../animatedSprite")
+
+[node name="oz_crash_beam5" type="AnimatedSprite" parent="."]
+material = ExtResource( 1 )
+position = Vector2( -16, 0 )
+scale = Vector2( 1, 28 )
+frames = ExtResource( 3 )
+animation = "omega_crash_beam_loop"
+playing = true
+flip_h = true
+script = ExtResource( 2 )
+reference = NodePath("../animatedSprite")
+
+[connection signal="area_entered" from="area2D" to="." method="_on_area2D_body_entered"]
+[connection signal="body_entered" from="area2D" to="." method="_on_area2D_body_entered"]

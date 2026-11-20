@@ -47,10 +47,22 @@ var ability_states: Array = [
 	"Enkoujin", 
 	"Enkoukyaku"
 ]
-
+var saber_states: Array = [
+	"SaberCombo", 
+	"KnuckleCombo", 
+	"Rekuhouha", 
+	"Ryuenjin",
+	"Enkoujin_Extra",
+	"SaberCharge",
+	"Genmuzero",
+]
 
 func _process(_delta):
 	if upgraded:
+		for state in saber_states:
+			if character.is_executing(state):
+				activate()
+				return
 		for state in ability_states:
 			if character.is_executing(state):
 				activate()
@@ -75,8 +87,15 @@ func check_horizontal_velocity(state: String) -> bool:
 func set_shader_colors():
 	var material = original.get_material()
 	if material is ShaderMaterial:
-		initial_color = material.get_shader_param("R_SaberColor4")
-		final_color = Color("#00000000")
+		if character.name == "Layer":
+			initial_color = material.get_shader_param("R_LayerAfterimagesColor")
+			final_color = Color("#00000000")
+		elif character.name == "Zero":
+			initial_color = material.get_shader_param("R_AfterimagesColor")
+			final_color = Color("#00000000")
+		else:
+			initial_color = Color("#00000000")
+			final_color = Color("#00000000")
 	elif material is CanvasItemMaterial:
 		initial_color = Color("#00000000")
 		final_color = Color("#00000000")
@@ -124,8 +143,12 @@ func afterimage_emit() -> void :
 func fade_and_delete(afterimage: AnimatedSprite) -> void :
 	afterimage.modulate = initial_color
 	var tween: = afterimage.create_tween().set_parallel(true)
-	tween.tween_property(afterimage, "modulate", final_color, duration)
-	tween.tween_property(afterimage, "position", afterimage.position + get_motion(), duration)
+	if character.is_executing("Rasetsusen"):
+		tween.tween_property(afterimage, "modulate", final_color, 0.125)
+		tween.tween_property(afterimage, "position", afterimage.position + get_motion(), 0.125)
+	else:
+		tween.tween_property(afterimage, "modulate", final_color, duration)
+		tween.tween_property(afterimage, "position", afterimage.position + get_motion(), duration)
 	tween.set_parallel(false)
 	tween.tween_callback(afterimage, "queue_free")
 
@@ -142,6 +165,7 @@ func equate_settings(afterimage: AnimatedSprite) -> void :
 	afterimage.z_index = 1
 	afterimage.global_position = original.global_position
 	afterimage.rotation_degrees = original.rotation_degrees
+	afterimage.visible = character.visible
 
 func get_motion() -> Vector2:
 	current_motion += 1

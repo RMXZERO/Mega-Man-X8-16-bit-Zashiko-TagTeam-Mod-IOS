@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Zero_mod/Objects/Pickups/Armor.gd" type="Script" id=1]
 [ext_resource path="res://Zero_mod/Objects/Pickups/Armor.tres" type="SpriteFrames" id=2]
@@ -9,11 +9,17 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 20 )
 
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 51, 80 )
+
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 24, 8 )
+extents = Vector2( 20, 6 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 24, 12.5 )
+extents = Vector2( 20, 7 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 20, 11.5 )
 
 [node name="Black_Zero" type="Node2D"]
 pause_mode = 2
@@ -25,26 +31,36 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="area2D"]
-position = Vector2( 0, -36 )
+position = Vector2( 0, -34 )
 shape = SubResource( 1 )
+
+[node name="area2D2" type="Area2D" parent="."]
+visible = false
+position = Vector2( 0, -146 )
+collision_layer = 0
+collision_mask = 2
+
+[node name="collisionShape2D" type="CollisionShape2D" parent="area2D2"]
+position = Vector2( 0, 66 )
+shape = SubResource( 5 )
 
 [node name="Head" type="AnimatedSprite" parent="."]
 pause_mode = 1
-position = Vector2( 0, -58 )
+position = Vector2( 0, -56 )
 frames = ExtResource( 2 )
 animation = "Head"
 playing = true
 
 [node name="Body" type="AnimatedSprite" parent="."]
 pause_mode = 1
-position = Vector2( 0, -36 )
+position = Vector2( 0, -34 )
 frames = ExtResource( 2 )
 animation = "Body"
 playing = true
 
 [node name="Foot" type="AnimatedSprite" parent="."]
 pause_mode = 1
-position = Vector2( 0, -27 )
+position = Vector2( 0, -25 )
 frames = ExtResource( 2 )
 animation = "Foot"
 playing = true
@@ -65,7 +81,6 @@ bus = "SFX"
 position = Vector2( 0, -146 )
 frames = ExtResource( 5 )
 animation = "idle"
-frame = 8
 playing = true
 
 [node name="staticBody2D" type="StaticBody2D" parent="."]
@@ -74,7 +89,7 @@ position = Vector2( 0, -146 )
 collision_mask = 0
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="staticBody2D"]
-position = Vector2( 0, 138 )
+position = Vector2( 0, 140 )
 shape = SubResource( 2 )
 
 [node name="staticBody2D2" type="StaticBody2D" parent="."]
@@ -83,7 +98,18 @@ position = Vector2( 0, -146 )
 collision_mask = 0
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="staticBody2D2"]
-position = Vector2( 0, 71.5 )
+position = Vector2( 0, 77 )
 shape = SubResource( 3 )
 
+[node name="staticBody2D3" type="StaticBody2D" parent="."]
+visible = false
+position = Vector2( 0, -146 )
+collision_mask = 0
+
+[node name="collisionShape2D" type="CollisionShape2D" parent="staticBody2D3"]
+position = Vector2( 0, 134.5 )
+shape = SubResource( 4 )
+disabled = true
+
 [connection signal="body_entered" from="area2D" to="." method="_on_area2D_body_entered"]
+[connection signal="body_exited" from="area2D2" to="." method="_on_area2D_body_exited"]

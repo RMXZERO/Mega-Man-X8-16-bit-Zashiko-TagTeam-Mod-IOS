@@ -1,4 +1,4 @@
-[gd_scene load_steps=233 format=2]
+[gd_scene load_steps=246 format=2]
 
 [ext_resource path="res://src/Actors/Player/x_sprites/x.res" type="SpriteFrames" id=1]
 [ext_resource path="res://Axl_mod/Player/Scripts/PlayerAxl.gd" type="Script" id=2]
@@ -20,7 +20,7 @@
 [ext_resource path="res://src/Actors/Player/Modules/Fall.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Axl_mod/Player/Scripts/FallAxl.gd" type="Script" id=19]
 [ext_resource path="res://Axl_mod/Player/Scripts/DashWallJumpAxl.gd" type="Script" id=20]
-[ext_resource path="res://Axl_mod/Player/Projectiles/BulletAxl.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BulletAxlTrack.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Axl_mod/Player/Scripts/PrimaryShotAxl.gd" type="Script" id=22]
 [ext_resource path="res://src/Sounds/17 - MMX - X Fade In.wav" type="AudioStream" id=23]
 [ext_resource path="res://Axl_mod/Player/Scripts/AltFireAxl.gd" type="Script" id=24]
@@ -41,7 +41,7 @@
 [ext_resource path="res://src/Sounds/11 - MMX - X Die.wav" type="AudioStream" id=39]
 [ext_resource path="res://src/Effects/Player Death.tscn" type="PackedScene" id=40]
 [ext_resource path="res://src/Effects/Textures/blue_screen.png" type="Texture" id=41]
-[ext_resource path="res://Axl_mod/Ride/RideAxl.gd" type="Script" id=42]
+[ext_resource path="res://Axl_mod/Player/Sprites/Ride/RideAxl.gd" type="Script" id=42]
 [ext_resource path="res://src/Actors/Weapons/Icarus Buster.tscn" type="PackedScene" id=43]
 [ext_resource path="res://src/Actors/Player/Subtank.tscn" type="PackedScene" id=44]
 [ext_resource path="res://Axl_mod/Player/Scripts/HoverAxl.gd" type="Script" id=45]
@@ -133,6 +133,19 @@
 [ext_resource path="res://TagTeam_Mod/CharacterSwitchWarpOut.gd" type="Script" id=131]
 [ext_resource path="res://TagTeam_Mod/CharacterSwitchWarpIn.gd" type="Script" id=132]
 [ext_resource path="res://TagTeam_Mod/CharSwitchRevive.gd" type="Script" id=133]
+[ext_resource path="res://Axl_mod/Player/afterImages2.gd" type="Script" id=134]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossWeapons/SpiralMagnum/GravityBox.tscn" type="PackedScene" id=135]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossWeapons/FlameBurner/PhoenixProjectile.tscn" type="PackedScene" id=136]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossWeapons/PlasmaGun/PlasmaGunAlt.tscn" type="PackedScene" id=137]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossWeapons/RayGun/VileShot.tscn" type="PackedScene" id=138]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossWeapons/BoundBlaster/VileMissiles.tscn" type="PackedScene" id=139]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossWeapons/IceGattling/IceGattlingCharge.tscn" type="PackedScene" id=140]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossWeapons/BlastLauncher/BlastLauncherCharge.tscn" type="PackedScene" id=141]
+[ext_resource path="res://Axl_mod/Player/afterImages3.gd" type="Script" id=142]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossWeapons/GigaCrash/gigacrash.res" type="SpriteFrames" id=143]
+[ext_resource path="res://Axl_mod/Player/Scripts/Desperation.gd" type="Script" id=145]
+[ext_resource path="res://Zero_mod/SFX/Saber_X6.ogg" type="AudioStream" id=149]
+[ext_resource path="res://Axl_mod/Player/Scripts/Saber/AxlSaberCombo.gd" type="Script" id=150]
 
 [sub_resource type="RectangleShape2D" id=32]
 extents = Vector2( 6.995, 7 )
@@ -1370,7 +1383,6 @@ position = Vector2( 0, -4 )
 z_index = 5
 frames = ExtResource( 120 )
 animation = "victory"
-frame = 20
 playing = true
 
 [node name="visibilityNotifier2D" type="VisibilityNotifier2D" parent="animatedSprite"]
@@ -1459,10 +1471,21 @@ texture = ExtResource( 33 )
 
 [node name="Talk" type="Node" parent="animatedSprite"]
 script = ExtResource( 107 )
+character = "Axl"
 _animatedSprite = NodePath("..")
 
 [node name="afterImages" type="Node" parent="animatedSprite"]
 script = ExtResource( 109 )
+
+[node name="afterImagesn" type="Node" parent="animatedSprite"]
+script = ExtResource( 134 )
+
+[node name="afterImages3" type="Node" parent="animatedSprite"]
+script = ExtResource( 142 )
+frequency = 0.01
+duration = 0.01
+extra_y_position = -4.0
+extra_scale = 1.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = ExtResource( 26 )
@@ -1643,9 +1666,8 @@ actions = [ "Event" ]
 
 [node name="LifeSteal" parent="." instance=ExtResource( 59 )]
 debug_logs = false
-first_decay = 1.5
-lifesteal_decay = 0.65
-minimum_time_between_heals = 0.33
+first_decay = 10.0
+lifesteal_decay = 8.0
 
 [node name="Damage" type="Node2D" parent="."]
 script = ExtResource( 15 )
@@ -1666,7 +1688,6 @@ position = Vector2( 0, -8 )
 z_index = 5
 frames = SubResource( 44 )
 animation = "sparks"
-frame = 15
 playing = true
 
 [node name="back" type="AnimatedSprite" parent="Damage"]
@@ -1674,7 +1695,6 @@ visible = false
 position = Vector2( 0, -8 )
 frames = SubResource( 44 )
 animation = "back"
-frame = 6
 playing = true
 
 [node name="Shot" type="Node2D" parent="."]
@@ -1682,7 +1702,7 @@ script = ExtResource( 22 )
 __meta__ = {
 "_editor_description_": ""
 }
-conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "Nothing", "Dash", "AirDash", "Dodge", "Special", "AltFire" ]
+conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "Nothing", "Dash", "AirDash", "Dodge", "Special", "AltFire", "Desperation" ]
 actions = [ "fire" ]
 default_arm_point_duration = 0.1
 
@@ -1825,7 +1845,7 @@ script = ExtResource( 24 )
 __meta__ = {
 "_editor_description_": ""
 }
-conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "Nothing", "Dash", "AirDash", "Dodge", "Special", "Shot" ]
+conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "Nothing", "Dash", "AirDash", "Dodge", "Special", "Shot", "Desperation" ]
 actions = [ "alt_fire" ]
 normal_sprites = ExtResource( 120 )
 arm_pointing_sprites = ExtResource( 92 )
@@ -1845,6 +1865,9 @@ bullet_speed = 300.0
 projectile_damage = 1.0
 projectile_damage_to_bosses = 1.0
 projectile_damage_to_weakness = 1.0
+extra_damage = 1.0
+extra_delay = 1.0
+extra_speed = 1.0
 weapon = null
 _sprites_weapon = ExtResource( 120 )
 _sprites_weapon_B = ExtResource( 92 )
@@ -1852,10 +1875,14 @@ _sprites_weapon_B = ExtResource( 92 )
 [node name="Alternate RayGun" parent="AltFire" instance=ExtResource( 49 )]
 script = ExtResource( 103 )
 active = false
-shots = [ ExtResource( 74 ) ]
-max_shots_alive = 1
-shoot_delay = 0.05
-bullet_speed = 250.0
+shots = [ ExtResource( 138 ) ]
+max_shots_alive = 9
+ammo_per_shot = 1.0
+shoot_delay = 0.25
+bullet_speed = 400.0
+projectile_damage = 5.0
+projectile_damage_to_bosses = 5.0
+projectile_damage_to_weakness = 25.0
 weapon = ExtResource( 111 )
 _sprites_weapon = ExtResource( 12 )
 _sprites_weapon_B = ExtResource( 12 )
@@ -1863,14 +1890,15 @@ _sprites_weapon_B = ExtResource( 12 )
 [node name="Alternate SpiralMagnum" parent="AltFire" instance=ExtResource( 49 )]
 script = ExtResource( 103 )
 active = false
-shots = [ ExtResource( 113 ) ]
+shots = [ ExtResource( 135 ) ]
 max_shots_alive = 1
 max_charged_shots_alive = 1
+ammo_per_shot = 4.0
 shoot_delay = 0.3
 bullet_speed = 350.0
-projectile_damage = 7.5
-projectile_damage_to_bosses = 8.0
-projectile_damage_to_weakness = 15.0
+projectile_damage = 20.0
+projectile_damage_to_bosses = 20.0
+projectile_damage_to_weakness = 32.0
 weapon = ExtResource( 112 )
 _sprites_weapon = ExtResource( 71 )
 _sprites_weapon_B = ExtResource( 79 )
@@ -1883,9 +1911,9 @@ max_shots_alive = 5
 ammo_per_shot = 1.0
 shoot_delay = 0.25
 bullet_speed = 350.0
-projectile_damage = 4.0
-projectile_damage_to_bosses = 3.0
-projectile_damage_to_weakness = 15.0
+projectile_damage = 5.0
+projectile_damage_to_bosses = 5.0
+projectile_damage_to_weakness = 25.0
 weapon = ExtResource( 93 )
 _sprites_weapon = ExtResource( 99 )
 _sprites_weapon_B = ExtResource( 99 )
@@ -1893,9 +1921,13 @@ _sprites_weapon_B = ExtResource( 99 )
 [node name="Alternate PlasmaGun" parent="AltFire" instance=ExtResource( 49 )]
 script = ExtResource( 103 )
 active = false
-shots = [ ExtResource( 76 ) ]
+shots = [ ExtResource( 137 ) ]
+ammo_per_shot = 1.0
 shoot_delay = 0.32
 bullet_speed = 50.0
+projectile_damage = 7.5
+projectile_damage_to_bosses = 5.0
+projectile_damage_to_weakness = 25.0
 weapon = ExtResource( 73 )
 _sprites_weapon = ExtResource( 118 )
 _sprites_weapon_B = ExtResource( 118 )
@@ -1903,12 +1935,15 @@ _sprites_weapon_B = ExtResource( 118 )
 [node name="Alternate BlastLauncher" parent="AltFire" instance=ExtResource( 49 )]
 script = ExtResource( 103 )
 active = false
-shots = [ ExtResource( 88 ) ]
+shots = [ ExtResource( 141 ) ]
 max_shots_alive = 9
 max_charged_shots_alive = 9
 ammo_per_shot = 2.0
 shoot_delay = 0.5
-bullet_speed = 400.0
+bullet_speed = 540.0
+projectile_damage = 8.0
+projectile_damage_to_bosses = 5.0
+projectile_damage_to_weakness = 25.0
 weapon = ExtResource( 25 )
 _sprites_weapon = ExtResource( 119 )
 _sprites_weapon_B = ExtResource( 90 )
@@ -1916,11 +1951,15 @@ _sprites_weapon_B = ExtResource( 90 )
 [node name="Alternate BoundBlaster" parent="AltFire" instance=ExtResource( 49 )]
 script = ExtResource( 103 )
 active = false
-shots = [ ExtResource( 61 ) ]
+shots = [ ExtResource( 139 ) ]
 max_shots_alive = 3
 max_charged_shots_alive = 3
+ammo_per_shot = 1.0
 shoot_delay = 0.2
-bullet_speed = 420.0
+bullet_speed = 170.0
+projectile_damage = 5.0
+projectile_damage_to_bosses = 5.0
+projectile_damage_to_weakness = 25.0
 weapon = ExtResource( 27 )
 _sprites_weapon = ExtResource( 116 )
 _sprites_weapon_B = ExtResource( 117 )
@@ -1928,10 +1967,14 @@ _sprites_weapon_B = ExtResource( 117 )
 [node name="Alternate IceGattling" parent="AltFire" instance=ExtResource( 49 )]
 script = ExtResource( 103 )
 active = false
-shots = [ ExtResource( 78 ) ]
-shoot_delay = 0.05
+shots = [ ExtResource( 140 ) ]
+ammo_per_shot = 1.0
+shoot_delay = 0.5
 sprite_delay = 2.0
 bullet_speed = 400.0
+projectile_damage = 5.0
+projectile_damage_to_bosses = 5.0
+projectile_damage_to_weakness = 25.0
 weapon = ExtResource( 77 )
 _sprites_weapon = ExtResource( 114 )
 _sprites_weapon_B = ExtResource( 115 )
@@ -1939,9 +1982,15 @@ _sprites_weapon_B = ExtResource( 115 )
 [node name="Alternate FlameBurner" parent="AltFire" instance=ExtResource( 49 )]
 script = ExtResource( 103 )
 active = false
-shots = [ ExtResource( 89 ) ]
-shoot_delay = 0.05
+shots = [ ExtResource( 136 ) ]
+max_shots_alive = 1
+max_charged_shots_alive = 1
+ammo_per_shot = 2.0
+shoot_delay = 0.3
 bullet_speed = 200.0
+projectile_damage = 12.0
+projectile_damage_to_bosses = 12.0
+projectile_damage_to_weakness = 25.0
 weapon = ExtResource( 60 )
 _sprites_weapon = ExtResource( 56 )
 _sprites_weapon_B = ExtResource( 56 )
@@ -1951,7 +2000,7 @@ script = ExtResource( 121 )
 __meta__ = {
 "_editor_description_": ""
 }
-conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "Dash", "AirDash", "Dodge", "Shot", "AltFire" ]
+conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "Dash", "AirDash", "Dodge", "Shot", "AltFire", "Desperation" ]
 actions = [ "select_special" ]
 
 [node name="RayGun Special" type="Node2D" parent="Special"]
@@ -2034,7 +2083,6 @@ max_charged_shots_alive = 1
 max_ammo = 64.0
 ammo_per_shot = 64.0
 sprite_delay = 100.0
-bullet_speed = 0.0
 recharge_rate = 2.0
 weapon = ExtResource( 102 )
 
@@ -2042,12 +2090,33 @@ weapon = ExtResource( 102 )
 position = Vector2( -1, 3 )
 z_index = 25
 frames = ExtResource( 101 )
-frame = 9
+playing = true
+
+[node name="Desperation" type="Node2D" parent="."]
+script = ExtResource( 145 )
+active = false
+conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "Forced" ]
+actions = [ "select_special" ]
+animation = "victory"
+
+[node name="victory" type="AudioStreamPlayer2D" parent="Desperation"]
+stream = ExtResource( 68 )
+volume_db = -8.0
+max_distance = 600.0
+bus = "SFX"
+
+[node name="animatedSpriteAxl" type="AnimatedSprite" parent="Desperation"]
+visible = false
+material = ExtResource( 47 )
+position = Vector2( 0, -6 )
+z_index = 5
+frames = ExtResource( 143 )
+animation = "fire_loop"
 playing = true
 
 [node name="DashWallJump" type="Node2D" parent="."]
 script = ExtResource( 20 )
-conflicting_moves = [ "DashWallJump", "WallJump", "AirDash", "Dodge" ]
+conflicting_moves = [ "DashWallJump", "WallJump", "AirDash", "Dodge", "Desperation" ]
 actions = [ "jump" ]
 animation = "walljump"
 sound = ExtResource( 3 )
@@ -2064,7 +2133,7 @@ bus = "SFX"
 
 [node name="WallJump" type="Node2D" parent="."]
 script = ExtResource( 9 )
-conflicting_moves = [ "WallJump", "DashWallJump", "AirDash", "Dodge" ]
+conflicting_moves = [ "WallJump", "DashWallJump", "AirDash", "Dodge", "Desperation" ]
 actions = [ "jump" ]
 animation = "walljump"
 sound = ExtResource( 3 )
@@ -2080,7 +2149,7 @@ bus = "SFX"
 
 [node name="AirDash" type="Node2D" parent="."]
 script = ExtResource( 7 )
-conflicting_moves = [ "DashWallJump", "WallJump", "WallSlide", "DashJump", "AirDash", "AirJump", "Dodge" ]
+conflicting_moves = [ "DashWallJump", "WallJump", "WallSlide", "DashJump", "AirDash", "AirJump", "Dodge", "Desperation" ]
 actions = [ "dash" ]
 animation = "dash"
 sound = ExtResource( 6 )
@@ -2118,7 +2187,6 @@ position = Vector2( 0, -4 )
 z_index = 4
 frames = ExtResource( 1 )
 animation = "dash"
-frame = 15
 playing = true
 
 [node name="particles2D" type="Particles2D" parent="AirDash"]
@@ -2147,7 +2215,7 @@ text = "3w"
 
 [node name="WallSlide" type="Node2D" parent="."]
 script = ExtResource( 11 )
-conflicting_moves = [ "WallJump", "DashWallJump", "Walk", "dodge" ]
+conflicting_moves = [ "WallJump", "DashWallJump", "Walk", "dodge", "Desperation" ]
 actions = [ "move_right", "move_left" ]
 animation = "slide"
 sound = ExtResource( 13 )
@@ -2160,7 +2228,7 @@ bus = "SFX"
 
 [node name="DashJump" type="Node2D" parent="."]
 script = ExtResource( 17 )
-conflicting_moves = [ "WallSlide", "WallJump", "DashWallJump", "AirJump", "AirDash", "Dodge" ]
+conflicting_moves = [ "WallSlide", "WallJump", "DashWallJump", "AirJump", "AirDash", "Dodge", "Desperation" ]
 actions = [ "jump" ]
 animation = "jump"
 sound = ExtResource( 3 )
@@ -2173,7 +2241,7 @@ bus = "SFX"
 
 [node name="Jump" type="Node2D" parent="."]
 script = ExtResource( 4 )
-conflicting_moves = [ "DashJump", "WallSlide", "AirDash", "WallJump", "DashWallJump", "AirJump", "Dodge", "Shot", "AltFire" ]
+conflicting_moves = [ "DashJump", "WallSlide", "AirDash", "WallJump", "DashWallJump", "AirJump", "Dodge", "Shot", "AltFire", "Desperation" ]
 actions = [ "jump" ]
 animation = "jump"
 sound = ExtResource( 3 )
@@ -2188,7 +2256,7 @@ script = ExtResource( 45 )
 __meta__ = {
 "_editor_description_": ""
 }
-conflicting_moves = [ "WallSlide", "AirDash", "Dodge" ]
+conflicting_moves = [ "WallSlide", "AirDash", "Dodge", "Desperation" ]
 actions = [ "jump" ]
 animation = "hover"
 shot_pos_adjust = Vector2( 4, 0 )
@@ -2204,7 +2272,7 @@ bus = "SFX"
 
 [node name="Dash" type="Node2D" parent="."]
 script = ExtResource( 5 )
-conflicting_moves = [ "Jump", "DashJump", "WallJump", "WallSlide", "AirDash", "Dodge" ]
+conflicting_moves = [ "Jump", "DashJump", "WallJump", "WallSlide", "AirDash", "Dodge", "Desperation" ]
 actions = [ "dash" ]
 animation = "dash"
 sound = ExtResource( 6 )
@@ -2239,7 +2307,6 @@ position = Vector2( 0, -4 )
 z_index = 4
 frames = ExtResource( 1 )
 animation = "dash"
-frame = 15
 playing = true
 
 [node name="particles2D" type="Particles2D" parent="Dash"]
@@ -2259,7 +2326,7 @@ fade_out = true
 
 [node name="Dodge" type="Node2D" parent="."]
 script = ExtResource( 91 )
-conflicting_moves = [ "DashWallJump", "AirDash", "WallSlide", "DashJump", "Jump", "AirJump", "Fall", "Idle" ]
+conflicting_moves = [ "DashWallJump", "AirDash", "WallSlide", "DashJump", "Jump", "AirJump", "Fall", "Idle", "Desperation" ]
 actions = [ "move_down", "dash" ]
 animation = "dodge"
 sound = ExtResource( 127 )
@@ -2293,7 +2360,6 @@ position = Vector2( 0, -4 )
 z_index = 4
 frames = ExtResource( 120 )
 animation = "dodge"
-frame = 7
 playing = true
 
 [node name="particles2D" type="Particles2D" parent="Dodge"]
@@ -2314,7 +2380,7 @@ fade_out = true
 
 [node name="Walk" type="Node2D" parent="."]
 script = ExtResource( 48 )
-conflicting_moves = [ "Dash", "Jump", "WallJump", "DashJump", "Fall", "Dodge" ]
+conflicting_moves = [ "Dash", "Jump", "WallJump", "DashJump", "Fall", "Dodge", "Desperation" ]
 actions = [ "move_right", "move_left" ]
 animation = "walk"
 
@@ -2400,6 +2466,31 @@ bus = "SFX"
 
 [node name="CharSwitchRevive" type="Node" parent="."]
 script = ExtResource( 133 )
+
+[node name="SaberCombo" type="Node2D" parent="."]
+script = ExtResource( 150 )
+active = false
+conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "Desperation" ]
+actions = [ "alt_fire" ]
+animation = "saber_1"
+
+[node name="saber" type="AudioStreamPlayer" parent="SaberCombo"]
+pause_mode = 1
+stream = ExtResource( 149 )
+volume_db = -8.0
+bus = "SFX"
+
+[node name="saber2" type="AudioStreamPlayer" parent="SaberCombo"]
+pause_mode = 1
+stream = ExtResource( 149 )
+volume_db = -8.0
+bus = "SFX"
+
+[node name="saber3" type="AudioStreamPlayer" parent="SaberCombo"]
+pause_mode = 1
+stream = ExtResource( 149 )
+volume_db = -8.0
+bus = "SFX"
 
 [connection signal="at_max_hp" from="." to="Damage" method="set_death_protection"]
 [connection signal="zero_health" from="." to="animatedSprite/afterImages" method="deactivate"]

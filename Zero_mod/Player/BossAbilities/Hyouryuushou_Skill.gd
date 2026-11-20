@@ -1,6 +1,10 @@
 extends FallZero
 class_name SaberHyouryuushou
 
+onready var driftdiamond: PackedScene = preload("res://src/Actors/Player/BossWeapons/DriftDiamond/DriftDiamond.tscn")
+var creator: Node2D
+onready var use_genmu: Node2D = $"../Special/Genmuzero"
+
 export  var saber_hitbox: Resource = preload("res://Zero_mod/Player/Hitboxes/Hyouryuushou_Hitbox.tscn")
 var current_hitbox = null
 var hitbox_upleft = Vector2(0, 0)
@@ -20,6 +24,8 @@ var hitbox_extra_break_guard_value = 1
 
 var deflectable: bool = false
 
+var hitbox_extra_scale = 1
+
 onready var animatedSprite = character.get_node("animatedSprite")
 onready var saber_sound: AudioStreamPlayer = $saber
 
@@ -34,7 +40,7 @@ var loop_start_frame = 10
 var end_frame = 26
 
 func _ready():
-	Event.connect("saber_has_hit_boss", self, "reduce_speed")
+	pass
 
 func reset_hitbox():
 	hitbox_upleft = Vector2(0, 0)
@@ -64,6 +70,7 @@ func spawn_hitbox(_hitbox_upleft: Vector2, _hitbox_downright: Vector2):
 	current_hitbox.break_guards = hitbox_break_guards
 	current_hitbox.saber_rehit = hitbox_rehit_time
 	current_hitbox.upgraded = hitbox_upgraded
+	current_hitbox.scale *= hitbox_extra_scale
 	
 	current_hitbox.deflectable = deflectable
 
@@ -96,6 +103,42 @@ func jump_frame():
 			particles.z_index = animatedSprite.z_index + 1
 			character.set_vertical_speed( - jump_velocity)
 			jumped = true
+			if CharacterManager.awakened_zero_armor or character.get_action_pressed("select_special"):
+				if CharacterManager.awakened_zero_armor:
+					create()
+				else:
+					if CharacterManager.extra_saber_combo and use_genmu.has_ammo_expent(CharacterManager.buster_base_energy * 0.25):
+						create()
+						use_genmu.reduce_ammo(CharacterManager.buster_base_energy * 0.25)
+
+func create() -> void :
+	create_driftdiamond(global_position, 520 , 2 , 0.8)
+	create_driftdiamond(global_position, 520 , 1.75 , 0.7)
+	create_driftdiamond(global_position, 520 , 1.5 , 0.6)
+	create_driftdiamond(global_position, 520 , 1.25 , 0.5)
+	create_driftdiamond(global_position, 520 , 1 , 0.4)
+	create_driftdiamond(global_position, 520 , 0.75 , 0.3)
+	create_driftdiamond(global_position, 520 , 0.5 , 0.2)
+	create_driftdiamond(global_position, 520 , 0.25 , 0.1)
+
+	create_driftdiamond(global_position, 520 , 0 , 0)
+
+	create_driftdiamond(global_position, 520 , - 0.25 , 0.1)
+	create_driftdiamond(global_position, 520 , - 0.5 , 0.2)
+	create_driftdiamond(global_position, 520 , - 0.75 , 0.3)
+	create_driftdiamond(global_position, 520 , - 1 , 0.4)
+
+func create_driftdiamond(ground_position, speed: float, rotation_degress, rotation_speed) -> void :
+	var facing_direction = get_facing_direction()
+	var instance = driftdiamond.instance()
+	ground_position.y += -9
+	instance.rotation = rotation_degress * facing_direction
+	instance.set_horizontal_speed(speed * facing_direction - facing_direction * speed * rotation_speed)
+	instance.set_vertical_speed(rotation_degress * speed)
+	get_tree().current_scene.get_node("Objects").call_deferred("add_child", instance, true)
+	instance.set_global_position(ground_position)
+	instance.set_creator(creator)
+	instance.call_deferred("initialize", get_facing_direction())
 
 func loop_animation():
 	if jumped:
@@ -115,7 +158,7 @@ func set_saber_animations():
 	else:
 		animatedSprite.frame = 6
 	saber_sound.play()
-	
+
 func _StartCondition() -> bool:
 	if not character.Hyouryuushou:
 		return false
@@ -125,20 +168,7 @@ func _StartCondition() -> bool:
 		return false
 	var _animation = get_parent().get_animation()
 	if _animation in character.saber_animations:
-		if _animation == "saber_dash":
-			return false
-		if _animation == "saber_jump":
-			return false
-		if _animation == "rasetsusen":
-			return false
-		if _animation == "youdantotsu":
-			return false
-		if _animation == "enkoujin":
-			return false
-		if _animation == "juuhazan":
-			return false
-		if _animation == "raikousen":
-			return false
+		return false
 	if not executing:
 		if character.is_on_floor():
 			return true

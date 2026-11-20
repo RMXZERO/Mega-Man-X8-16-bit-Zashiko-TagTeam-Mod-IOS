@@ -1,4 +1,4 @@
-[gd_scene load_steps=112 format=2]
+[gd_scene load_steps=113 format=2]
 
 [ext_resource path="res://src/Actors/Panda.gd" type="Script" id=1]
 [ext_resource path="res://src/Actors/Bosses/Lumine/lumine_main.res" type="SpriteFrames" id=2]
@@ -63,6 +63,7 @@
 [ext_resource path="res://src/AchievementSystem/Achievements/SERAPHNAKED.tres" type="Resource" id=61]
 [ext_resource path="res://src/AchievementSystem/Achievements/SERAPHNODAMAGE.tres" type="Resource" id=62]
 [ext_resource path="res://src/AchievementSystem/Achievements/SERAPHDEFEATED.tres" type="Resource" id=63]
+[ext_resource path="res://Remix/Songs/ParadiseLost.ogg" type="AudioStream" id=64]
 
 [sub_resource type="RectangleShape2D" id=49]
 extents = Vector2( 15, 20 )
@@ -322,7 +323,7 @@ z_index = 4
 collision_layer = 0
 collision_mask = 0
 script = ExtResource( 1 )
-max_health = 400.0
+max_health = 800.0
 
 [node name="Space" type="Node" parent="."]
 script = ExtResource( 9 )
@@ -344,7 +345,6 @@ shape = SubResource( 49 )
 [node name="backWings" type="AnimatedSprite" parent="."]
 frames = ExtResource( 7 )
 animation = "idle"
-frame = 5
 playing = true
 flip_h = true
 script = ExtResource( 32 )
@@ -357,7 +357,6 @@ material = ExtResource( 25 )
 z_index = 1
 frames = ExtResource( 2 )
 animation = "punch"
-frame = 11
 playing = true
 flip_h = true
 
@@ -367,7 +366,6 @@ rotation = 0.811578
 z_index = 15
 frames = SubResource( 90 )
 animation = "cannon_end"
-frame = 8
 playing = true
 offset = Vector2( 0, -6 )
 flip_h = true
@@ -434,14 +432,12 @@ material = SubResource( 60 )
 position = Vector2( 4, -113 )
 z_index = 5
 frames = SubResource( 73 )
-frame = 11
 playing = true
 
 [node name="frontWings" type="AnimatedSprite" parent="."]
 z_index = 2
 frames = ExtResource( 8 )
 animation = "idle"
-frame = 6
 playing = true
 flip_h = true
 script = ExtResource( 32 )
@@ -695,6 +691,7 @@ script = ExtResource( 23 )
 desperation_attack = true
 death_walls = ExtResource( 22 )
 music = ExtResource( 27 )
+music_demake = ExtResource( 64 )
 
 [node name="flap" type="AudioStreamPlayer2D" parent="ParadiseLost"]
 stream = ExtResource( 16 )

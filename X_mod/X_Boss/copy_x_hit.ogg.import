@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/copy_x_hit.ogg-52e2b282767cb305fbb8fcc83a2c07b5.oggstr"
+
+[deps]
+
+source_file="res://X_mod/X_Boss/copy_x_hit.ogg"
+dest_files=[ "res://.import/copy_x_hit.ogg-52e2b282767cb305fbb8fcc83a2c07b5.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,0 +1,110 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://X_mod/InfiniteX/Player/Projectiles/hadoken.png" type="Texture" id=1]
+[ext_resource path="res://X_mod/InfiniteX/Player/Projectiles/Hadoken.gd" type="Script" id=2]
+[ext_resource path="res://src/Levels/Primrose/rotation_disabler.gd" type="Script" id=3]
+[ext_resource path="res://src/Actors/Bosses/GiantMechaniloid/BossDamagerPlayer.gd" type="Script" id=4]
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 32, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 64, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 64, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=28]
+animations = [ {
+"frames": [ SubResource( 22 ), SubResource( 23 ), SubResource( 23 ), SubResource( 23 ), SubResource( 23 ), SubResource( 23 ), SubResource( 23 ), SubResource( 23 ), SubResource( 23 ), SubResource( 23 ), SubResource( 23 ), SubResource( 24 ), SubResource( 24 ), SubResource( 25 ), SubResource( 25 ), SubResource( 26 ), SubResource( 26 ), SubResource( 27 ) ],
+"loop": false,
+"name": "default",
+"speed": 20.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=19]
+extents = Vector2( 9.5, 8.5 )
+
+[sub_resource type="RectangleShape2D" id=20]
+extents = Vector2( 9.5, 8.5 )
+
+[sub_resource type="RectangleShape2D" id=21]
+extents = Vector2( 9.5, 8.5 )
+
+[sub_resource type="RectangleShape2D" id=29]
+extents = Vector2( 9.5, 8.5 )
+
+[node name="GenmuzeroCharged" type="KinematicBody2D" groups=["Player Projectile"]]
+z_index = 8
+collision_layer = 4
+collision_mask = 0
+script = ExtResource( 2 )
+damage = 128.0
+damage_to_bosses = 128.0
+damage_to_weakness = 128.0
+break_guards = true
+
+[node name="animatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 28 )
+playing = true
+flip_v = true
+
+[node name="visibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 0.5, 0.500008 )
+scale = Vector2( 0.95, 0.85 )
+
+[node name="collisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.5, 0.5 )
+shape = SubResource( 19 )
+
+[node name="disabler" type="Node" parent="."]
+script = ExtResource( 3 )
+fade_out = true
+delete_after_fade = true
+undo_on_rotation_end = false
+
+[node name="area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 24
+
+[node name="collisionShape2D" type="CollisionShape2D" parent="area2D"]
+position = Vector2( 0.5, 0.5 )
+shape = SubResource( 20 )
+
+[node name="MechaKiller" type="RigidBody2D" parent="."]
+collision_layer = 262144
+collision_mask = 0
+mode = 1
+
+[node name="collisionShape2D" type="CollisionShape2D" parent="MechaKiller"]
+position = Vector2( 0.5, 0.5 )
+shape = SubResource( 21 )
+
+[node name="PlayerDamager" type="RigidBody2D" parent="." groups=["Player Projectile"]]
+collision_layer = 262144
+collision_mask = 0
+mode = 3
+gravity_scale = 0.0
+script = ExtResource( 4 )
+
+[node name="collisionShape2D" type="CollisionShape2D" parent="PlayerDamager"]
+position = Vector2( 0.5, 0.5 )
+shape = SubResource( 29 )
+
+[connection signal="area_entered" from="area2D" to="." method="_on_area2D_body_entered"]
+[connection signal="body_entered" from="area2D" to="." method="_on_area2D_body_entered"]

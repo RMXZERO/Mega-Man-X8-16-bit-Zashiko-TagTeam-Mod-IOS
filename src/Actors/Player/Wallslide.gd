@@ -10,6 +10,7 @@ var horizontal_speed = 90
 var wallgrab_direction := 0
 
 func _Setup() -> void:
+	character.dashfall = false
 	character.emit_signal("wallslide")
 	character.set_direction(- get_pressed_direction())
 	wallgrab_direction =  get_pressed_direction()

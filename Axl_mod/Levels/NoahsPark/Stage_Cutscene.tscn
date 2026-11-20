@@ -248,20 +248,17 @@ position = Vector2( 284, 155 )
 [node name="fire" type="AnimatedSprite" parent="Visuals"]
 position = Vector2( 72, -37 )
 frames = SubResource( 13 )
-frame = 7
 playing = true
 
 [node name="fire2" type="AnimatedSprite" parent="Visuals"]
 position = Vector2( -65, -27 )
 frames = SubResource( 13 )
-frame = 4
 playing = true
 
 [node name="fire3" type="AnimatedSprite" parent="Visuals"]
 position = Vector2( 77, 26 )
 z_index = 4
 frames = SubResource( 13 )
-frame = 6
 playing = true
 flip_h = true
 
@@ -281,7 +278,6 @@ flip_h = true
 position = Vector2( 54, 37 )
 z_index = 4
 frames = SubResource( 22 )
-frame = 3
 playing = true
 flip_h = true
 

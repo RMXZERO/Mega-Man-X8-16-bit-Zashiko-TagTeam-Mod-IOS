@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Problem.mp3-a31a4a3df49abdbdd5b1ded16c2f54ca.mp3str"
+
+[deps]
+
+source_file="res://Remix/Songs/Problem.mp3"
+dest_files=[ "res://.import/Problem.mp3-a31a4a3df49abdbdd5b1ded16c2f54ca.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

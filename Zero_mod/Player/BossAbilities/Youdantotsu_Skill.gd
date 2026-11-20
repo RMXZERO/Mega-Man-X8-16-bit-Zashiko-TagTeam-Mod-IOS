@@ -20,6 +20,8 @@ var hitbox_extra_break_guard_value = 1
 
 var deflectable: bool = false
 
+var hitbox_extra_scale = 1
+
 export  var upgraded: = true
 onready var animatedSprite = character.get_node("animatedSprite")
 onready var saber_sound: AudioStreamPlayer = $saber
@@ -60,6 +62,7 @@ func spawn_hitbox(_hitbox_upleft: Vector2, _hitbox_downright: Vector2):
 	current_hitbox.break_guards = hitbox_break_guards
 	current_hitbox.saber_rehit = hitbox_rehit_time
 	current_hitbox.upgraded = hitbox_upgraded
+	current_hitbox.scale *= hitbox_extra_scale
 	
 	current_hitbox.deflectable = deflectable
 
@@ -73,9 +76,19 @@ func hitbox_and_position():
 		if animatedSprite.frame >= 5 and animatedSprite.frame < 12:
 			hitbox_upleft = Vector2(7, - 30)
 			hitbox_downright = Vector2(94, 15)
-			
 			spawn_hitbox(hitbox_upleft, hitbox_downright)
-			
+
+	if animatedSprite.animation == "youdantotsuawaken":
+		hitbox_damage = 8
+		hitbox_damage_boss = 8
+		hitbox_damage_weakness = 48
+		hitbox_break_guards = true
+		hitbox_rehit_time = 0.075
+		if animatedSprite.frame >= 5 and animatedSprite.frame < 12:
+			hitbox_upleft = Vector2(0, - 50)
+			hitbox_downright = Vector2(175, 45)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
+
 	reset_hitbox()
 
 func end_saber_state():
@@ -86,6 +99,8 @@ func movement_speed_frames():
 
 func set_saber_animations():
 	animatedSprite.animation = "youdantotsu"
+	if CharacterManager.awakened_zero_armor:
+		animatedSprite.animation = "youdantotsuawaken"
 	saber_sound.play()
 	
 func _StartCondition() -> bool:
@@ -109,7 +124,7 @@ func _ResetCondition() -> bool:
 func _EndCondition() -> bool:
 	var _animation = get_parent().get_animation()
 	if _animation in character.saber_animations:
-		if not _animation == "youdantotsu":
+		if not _animation == "youdantotsu" and not _animation == "youdantotsuawaken":
 			return true
 		if end_saber_state():
 			return true
@@ -123,7 +138,8 @@ func _Setup() -> void :
 	set_saber_animations()
 
 func reduce_speed():
-	horizontal_speed = 0
+	if not CharacterManager.awakened_zero_armor:
+		horizontal_speed = 0
 
 func damp_horizontal_speed(_delta: float) -> void :
 	var reference_delta = 1.0 / 120
@@ -136,8 +152,14 @@ func _Update(_delta: float) -> void :
 		horizontal_velocity = horizontal_speed
 		force_movement(horizontal_speed)
 		damp_horizontal_speed(_delta)
+		if CharacterManager.awakened_zero_armor:
+			character.alpha_alway_1 = true
+			character.add_invulnerability("Youdantotsu")
 	else:
 		force_movement(0)
+		if CharacterManager.awakened_zero_armor:
+			character.alpha_alway_1 = false
+			character.remove_invulnerability("Youdantotsu")
 	character.set_vertical_speed(0)
 
 	
@@ -151,4 +173,5 @@ func _Interrupt():
 	character.play_animation("saber_recover")
 	if is_instance_valid(current_hitbox):
 		current_hitbox.queue_free()
-
+	character.alpha_alway_1 = false
+	character.remove_invulnerability("Youdantotsu")

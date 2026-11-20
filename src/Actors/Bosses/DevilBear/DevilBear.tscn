@@ -110,7 +110,7 @@ particles_anim_loop = true
 z_index = 4
 collision_layer = 0
 script = ExtResource( 1 )
-max_health = 500.0
+max_health = 1000.0
 
 [node name="BossAI" type="Node2D" parent="."]
 script = ExtResource( 10 )
@@ -125,8 +125,9 @@ shape = SubResource( 47 )
 [node name="back" type="AnimatedSprite" parent="."]
 material = ExtResource( 14 )
 position = Vector2( 0, -12 )
+scale = Vector2( -1, 1 )
 frames = ExtResource( 5 )
-animation = "idle"
+animation = "deactivated"
 script = ExtResource( 12 )
 reference = NodePath("../animatedSprite")
 copy_scale_x = true
@@ -134,17 +135,18 @@ copy_scale_x = true
 [node name="vile" type="AnimatedSprite" parent="."]
 visible = false
 position = Vector2( 0, -12 )
+scale = Vector2( -1, 1 )
 frames = ExtResource( 6 )
-animation = "idle"
+animation = "deactivated"
 script = ExtResource( 12 )
 reference = NodePath("../animatedSprite")
 copy_scale_x = true
 
 [node name="flying_prop_vile" type="AnimatedSprite" parent="."]
+scale = Vector2( -1, 1 )
 z_index = 1
 frames = ExtResource( 43 )
 animation = "flight"
-frame = 3
 playing = true
 offset = Vector2( 0, -48 )
 
@@ -159,6 +161,7 @@ script = ExtResource( 30 )
 [node name="animatedSprite" type="AnimatedSprite" parent="."]
 material = ExtResource( 14 )
 position = Vector2( 0, -12 )
+scale = Vector2( -1, 1 )
 frames = ExtResource( 29 )
 animation = "deactivated"
 

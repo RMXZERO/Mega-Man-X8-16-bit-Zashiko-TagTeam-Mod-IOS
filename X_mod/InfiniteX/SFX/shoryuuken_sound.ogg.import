@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/shoryuuken_sound.ogg-75276955419f21ca34be5ea31374a076.oggstr"
+
+[deps]
+
+source_file="res://X_mod/InfiniteX/SFX/shoryuuken_sound.ogg"
+dest_files=[ "res://.import/shoryuuken_sound.ogg-75276955419f21ca34be5ea31374a076.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

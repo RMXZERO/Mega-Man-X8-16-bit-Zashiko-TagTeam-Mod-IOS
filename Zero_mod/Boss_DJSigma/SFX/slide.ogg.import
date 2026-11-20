@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/slide.ogg-9cd0fc4bcd3a323abf55342f3b47631e.oggstr"
+
+[deps]
+
+source_file="res://Zero_mod/Boss_DJSigma/SFX/slide.ogg"
+dest_files=[ "res://.import/slide.ogg-9cd0fc4bcd3a323abf55342f3b47631e.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

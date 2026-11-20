@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Cannon-Ball-Hard-Revenge-Intro.ogg-a09aadc756d5fb5713219abe0594688b.oggstr"
+
+[deps]
+
+source_file="res://Remix/Songs/Cannon-Ball-Hard-Revenge-Intro.ogg"
+dest_files=[ "res://.import/Cannon-Ball-Hard-Revenge-Intro.ogg-a09aadc756d5fb5713219abe0594688b.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

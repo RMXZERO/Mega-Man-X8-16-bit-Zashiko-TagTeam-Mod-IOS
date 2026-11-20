@@ -27,7 +27,6 @@ transform_time = 0.85
 [node name="animatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 5 )
 animation = "normal"
-frame = 3
 playing = true
 offset = Vector2( -16, 0 )
 flip_h = true

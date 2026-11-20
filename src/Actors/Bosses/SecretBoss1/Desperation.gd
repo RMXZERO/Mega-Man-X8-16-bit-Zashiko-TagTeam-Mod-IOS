@@ -12,6 +12,7 @@ onready var charge: AudioStreamPlayer2D = $charge
 onready var cuts_prepare: AudioStreamPlayer2D = $cuts_prepare
 
 func _ready() -> void :
+	visible = true
 	for object in get_children():
 		if object is AnimatedSprite:
 			images.append(object)

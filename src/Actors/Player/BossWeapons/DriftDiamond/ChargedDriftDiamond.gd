@@ -11,7 +11,7 @@ func _Update(delta: float) -> void :
 	var rotate_speed = (delta * 12) * get_facing_direction()
 	animatedSprite.rotate(rotate_speed)
 	
-func _OnHit(target_remaining_HP) -> void :
+func _OnHit(_target_remaining_HP) -> void :
 	shatter()
 
 func _OnDeflect() -> void :

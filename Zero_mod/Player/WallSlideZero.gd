@@ -40,6 +40,7 @@ func _StartCondition() -> bool:
 	return false
 
 func _EndCondition() -> bool:
+	var _animation = get_parent().get_animation()
 	if character.is_on_floor():
 		Log("Floor detected")
 		return true
@@ -56,7 +57,7 @@ func _EndCondition() -> bool:
 	if get_pressed_direction() == 0:
 		Log("Not pressing")
 		return true
-	
+		
 	return false
 
 func _physics_process(delta: float) -> void :

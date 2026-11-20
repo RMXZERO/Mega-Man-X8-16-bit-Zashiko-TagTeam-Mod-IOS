@@ -11,5 +11,5 @@ dest_files=[ "res://.import/final_sigma_loop.ogg-9d3e2d825c96c5b870caa8fa1958806
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

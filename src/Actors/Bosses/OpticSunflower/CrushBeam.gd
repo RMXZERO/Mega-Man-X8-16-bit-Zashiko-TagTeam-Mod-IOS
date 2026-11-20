@@ -6,11 +6,14 @@ onready var animated_sprite_2: AnimatedSprite = $animatedSprite2
 signal started
 signal ended
 
+var mid_animation_time: float = 0.12
+var end_animation_time: float = 1.45
+
 func _ready() -> void :
 	animatedSprite.playing = true
 	animated_sprite_2.playing = true
-	Tools.timer(0.12, "mid_animation", self)
-	Tools.timer(1.45, "end_animation", self)
+	Tools.timer(mid_animation_time, "mid_animation", self)
+	Tools.timer(end_animation_time, "end_animation", self)
 	Event.emit_signal("screenshake", 2.0)
 
 func mid_animation() -> void :

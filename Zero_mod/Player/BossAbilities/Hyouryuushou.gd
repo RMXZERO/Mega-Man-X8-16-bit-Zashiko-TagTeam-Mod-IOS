@@ -11,5 +11,6 @@ func set_ability():
 		character.Hyouryuushou = true
 
 
-func should_unlock(collectible: String) -> bool:
-	return collectible == weapon.collectible
+func should_unlock(_collectible: String) -> bool:
+	return weapon.collectible in GameManager.collectibles
+

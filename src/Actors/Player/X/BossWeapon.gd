@@ -15,21 +15,56 @@ onready var character: Character = get_parent().get_parent()
 onready var buster: = get_parent()
 onready var shot_position: Node2D = $"../../Shot Position"
 var last_fired_shot_was_charged: = false
-
+onready var arm_cannon = character.get_node("Shot")
+onready var charge_max = character.get_node_or_null("Charge")
+var extra_damage: float = 1
 
 func fire(charge_level) -> void :
-	if charge_level >= 3:
-		Log("Firing Charged Shot")
-		reduce_charged_ammo()
-		fire_charged()
-		start_cooldown()
-		last_fired_shot_was_charged = true
+	if CharacterManager.ultimate_buster and not CharacterManager.weaponget:
+		if arm_cannon.upgraded:
+			if has_ammo() and not buster.has_infinite_charged_ammo():#Hermes
+				Log("Firing Charged Shot")
+				reduce_charged_ammo()
+				fire_charged()
+				start_charge_cooldown()
+				last_fired_shot_was_charged = true
+			elif buster.has_infinite_charged_ammo():#Icarus
+				Log("Firing Charged Shot")
+				reduce_charged_ammo()
+				fire_charged()
+				start_charge_cooldown()
+				last_fired_shot_was_charged = true
+			else:#Hermes no ammo
+				Log("Firing Regular Shot")
+				reduce_regular_ammo()
+				fire_regular()
+				start_cooldown()
+				last_fired_shot_was_charged = false
+				arm_cannon.actions[0] = "fire"
+		else:#Normal
+			Log("Firing Regular Shot")
+			reduce_regular_ammo()
+			fire_regular()
+			start_cooldown()
+			last_fired_shot_was_charged = false
+			arm_cannon.actions[0] = "fire"
 	else:
-		Log("Firing Regular Shot")
-		reduce_regular_ammo()
-		fire_regular()
-		start_cooldown()
-		last_fired_shot_was_charged = false
+		if charge_level >= 3:
+			if charge_max != null:
+				if charge_max.max_charge:
+					Log("Firing Charged Shot")
+					reduce_charged_ammo()
+					fire_charged()
+					start_charge_cooldown()
+					last_fired_shot_was_charged = true
+		else:
+			if charge_max != null:
+				if not charge_max.max_charge:
+					Log("Firing Regular Shot")
+					reduce_regular_ammo()
+					fire_regular()
+					start_cooldown()
+					last_fired_shot_was_charged = false
 
 func start_cooldown() -> void :
 	if cooldown:
@@ -38,6 +73,33 @@ func start_cooldown() -> void :
 	Log("Setting cooldown to " + str(weapon.cooldown))
 	cooldown = create_tween()
 	cooldown.tween_property(self, "timer", 0, weapon.cooldown)
+	cooldown.tween_callback(self, "buster_notify_cooldown_end")
+
+func start_charge_cooldown() -> void :
+	if CharacterManager.ultimate_buster:
+		start_ultimate_buster_cooldown()
+		return
+	if cooldown:
+		cooldown.kill()
+	timer = weapon.cooldown
+	Log("Setting cooldown to " + str(weapon.cooldown))
+	cooldown = create_tween()
+	if weapon.collectible == "mantis_weapon" or weapon.collectible == "sunflower_weapon":
+		cooldown.tween_property(self, "timer", 0, weapon.cooldown * 6)
+	else:
+		cooldown.tween_property(self, "timer", 0, weapon.cooldown)
+	cooldown.tween_callback(self, "buster_notify_cooldown_end")
+
+func start_ultimate_buster_cooldown() -> void :
+	if cooldown:
+		cooldown.kill()
+	timer = weapon.cooldown
+	Log("Setting cooldown to " + str(weapon.cooldown))
+	cooldown = create_tween()
+	if CharacterManager.xdrive:
+		cooldown.tween_property(self, "timer", 0, charge_max.level_4_charge * (1 - charge_max.charge_time_reduction) * 0.5)
+	else:
+		cooldown.tween_property(self, "timer", 0, charge_max.level_4_charge * (1 - charge_max.charge_time_reduction))
 	cooldown.tween_callback(self, "buster_notify_cooldown_end")
 
 func buster_notify_cooldown_end() -> void :
@@ -53,11 +115,13 @@ func fire_regular() -> void :
 	play(weapon.sound)
 	var shot = instantiate_projectile(weapon.regular_shot)
 	set_position_as_shot_position(shot)
+	set_shot_extra_damage(shot)
 
 func fire_charged() -> void :
 	play(weapon.charged_sound)
 	var shot = instantiate_projectile(weapon.charged_shot)
 	set_position_as_shot_position(shot, - 24.0)
+	set_shot_extra_damage(shot)
 
 func set_position_as_shot_position(shot, offset: = 0.0) -> void :
 	var dir = character.get_facing_direction()
@@ -69,6 +133,10 @@ func set_position_as_character_position(shot) -> void :
 	var pos = Vector2(character.global_position.x, character.global_position.y)
 	shot.global_position = pos
 	
+func set_shot_extra_damage(shot) -> void :
+	shot.damage *= extra_damage
+	shot.damage_to_bosses *= extra_damage
+	shot.damage_to_weakness *= extra_damage
 
 func reduce_regular_ammo() -> void :
 	if not buster.has_infinite_regular_ammo():
@@ -77,6 +145,12 @@ func reduce_regular_ammo() -> void :
 func reduce_charged_ammo() -> void :
 	if not buster.has_infinite_charged_ammo():
 		reduce_ammo(weapon.charged_ammo_cost)
+
+func has_max_ammo() -> bool:
+	return current_ammo >= max_ammo
+
+func reduce_all_ammo() -> void :
+	reduce_ammo(max_ammo)
 
 func reduce_ammo(value) -> void :
 	Log("Reducing ammo by " + str(value))

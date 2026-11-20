@@ -20,11 +20,18 @@ func activate_different_alternates() -> void :
 		deactivate_all_alternates()
 		if "Pistol" in _main_weapon.name:
 			set_current_weapon(alternate_pistol)
-			_alternate_active = true
+			if CharacterManager.axl_saber_combo:
+				_alternate_active = false
+			else:
+				_alternate_active = true
+
 		elif "Transform" in _main_weapon.name:
 			set_current_weapon(alternate_pistol)
-			_alternate_active = true
-			
+			if CharacterManager.axl_saber_combo:
+				_alternate_active = false
+			else:
+				_alternate_active = true
+
 		elif "RayGun" in _main_weapon.name:
 			set_current_weapon(alternate_raygun)
 			_alternate_active = true
@@ -61,6 +68,8 @@ func _Update(_delta: float) -> void :
 	._Update(_delta)
 
 func _StartCondition() -> bool:
+	if character.is_executing("SaberCombo"):
+		return false
 	if name == "AltFire" and Input.is_action_pressed("fire"):
 		return false
 	activate_different_alternates()

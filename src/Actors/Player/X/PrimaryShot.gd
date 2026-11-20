@@ -8,7 +8,8 @@ var charged_shot: = true
 onready var damage: Node2D = $"../Damage"
 onready var charge: Node2D = $"../Charge"
 onready var chargesound: AudioStreamPlayer = $charge
-
+onready var arm_cannon = character.get_node("Shot")
+var ultimate_buster_cooldown: bool = false
 
 func _ready() -> void :
 	if active:
@@ -18,6 +19,7 @@ func _ready() -> void :
 		Event.listen("weapon_select_buster", self, "set_buster_as_weapon")
 		Event.listen("select_weapon", self, "direct_weapon_select")
 		Event.listen("add_to_ammo_reserve", self, "_on_add_to_ammo_reserve")
+		reset_cooldown()
 
 func charged_shot_release(_charge_level):
 	if not character.has_control():
@@ -72,9 +74,37 @@ func manual_save_shot() -> void :
 func fire(weapon):
 	enable_animation_layer()
 	restart_animation()
-	weapon.fire(charge_level)
 	timer = 0.0
+	if character.get_action_pressed("shoryuuken"):
+		reset_cooldown()
+	if CharacterManager.ultimate_buster and not CharacterManager.weaponget:
+		ultimate_buster_level()
+	weapon.fire(charge_level)
 	charge_level = 0
+
+func ultimate_buster_level() -> void :
+	if CharacterManager.ultimate_buster and not ultimate_buster_cooldown and not CharacterManager.weaponget:
+		if "Buster" in current_weapon.name:
+			ultimate_buster_cooldown = true
+			if arm_cannon.upgraded:
+				if CharacterManager.xdrive:
+					Tools.timer(charge.level_4_charge * (1 - charge.charge_time_reduction) * 0.5, "reset_cooldown", self)
+				else:
+					Tools.timer(charge.level_4_charge * (1 - charge.charge_time_reduction), "reset_cooldown", self)
+			else:
+				if CharacterManager.xdrive:
+					Tools.timer(charge.level_3_charge * (1 - charge.charge_time_reduction) * 0.5, "reset_cooldown", self)
+				else:
+					Tools.timer(charge.level_3_charge * (1 - charge.charge_time_reduction), "reset_cooldown", self)
+			actions[0] = "shoryuuken"
+		if arm_cannon.upgraded:
+			charge_level = 3
+		else:
+			charge_level = 2
+
+func reset_cooldown() -> void :
+	ultimate_buster_cooldown = false
+	actions[0] = "fire"
 
 func change_current_weapon_left():
 	Log("Changing weapon left")

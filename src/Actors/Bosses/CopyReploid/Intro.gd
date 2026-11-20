@@ -48,12 +48,13 @@ func _Update(_delta) -> void:
 	elif stage.currently_is(4) and animation.has_finished_last():
 		animation.play("select_loop")
 		stage.next()
+		CharacterManager.nightshade_zero_armor = false
 		
 	elif stage.currently_is(5) and timer > 1:
 		animation.play("transform")
 		start_transform.play_rp(0.3)
 		stage.next()
-
+		
 	elif stage.currently_is(6) and animation.has_finished_last():
 		animation.set_visible(false)
 		spawn_boss()
@@ -77,6 +78,7 @@ func spawn_boss():
 	boss.add_child(new_death.instance(),true)
 	boss.spawn_direction = physics.get_player_direction_relative()
 	boss.visible = false
+	boss.modulate.a = 1.0
 	boss.current_health = 120.0
 	Tools.timer_p(0.1,"set_visible",boss,true)
 	character.emit_signal("spawned_boss",boss)

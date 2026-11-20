@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Relation_vs_Red_Intro.ogg-ce659d122676263603b599dd311a5347.oggstr"
+
+[deps]
+
+source_file="res://Remix/Songs/Relation_vs_Red_Intro.ogg"
+dest_files=[ "res://.import/Relation_vs_Red_Intro.ogg-ce659d122676263603b599dd311a5347.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

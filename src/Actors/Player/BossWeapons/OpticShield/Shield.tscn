@@ -20,13 +20,11 @@ projectile = ExtResource( 8 )
 z_index = 12
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 7
 playing = true
 
 [node name="back_shield" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 2
 playing = true
 flip_h = true
 

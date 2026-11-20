@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/DJ Sigma_Fifght_Loop.ogg-9b7539c924120358c4c340e26f124c6e.oggstr"
+
+[deps]
+
+source_file="res://Zero_mod/Boss_DJSigma/SFX/DJ Sigma_Fifght_Loop.ogg"
+dest_files=[ "res://.import/DJ Sigma_Fifght_Loop.ogg-9b7539c924120358c4c340e26f124c6e.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

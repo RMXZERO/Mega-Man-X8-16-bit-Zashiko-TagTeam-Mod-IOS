@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource( 1 )
 short_name = "G. Impact"
-collectible = ""
+collectible = "axl_giga_crash"
 icon = ExtResource( 3 )
 palette = ExtResource( 2 )
 regular_ammo_cost = 1.0

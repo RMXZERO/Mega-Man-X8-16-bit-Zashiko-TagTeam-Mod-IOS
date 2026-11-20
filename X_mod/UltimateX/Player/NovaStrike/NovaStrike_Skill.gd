@@ -6,6 +6,7 @@ export  var upgraded: bool = true
 
 onready var animatedSprite: = character.get_node("animatedSprite")
 onready var sfx: = $sfx
+onready var giga_attack = $"../Shot/NovaStrike"
 
 var current_hitbox: Object = null
 var hitbox_upleft: Vector2 = Vector2(0, 0)
@@ -82,12 +83,12 @@ func spawn_hitbox(_hitbox_upleft: Vector2, _hitbox_downright: Vector2) -> void :
 	current_hitbox.rehit = hitbox_rehit_time
 
 func hitbox_and_position() -> void :
-	hitbox_damage = 30
-	hitbox_damage_boss = 30
-	hitbox_damage_weakness = 50
+	hitbox_damage = 256
+	hitbox_damage_boss = 256
+	hitbox_damage_weakness = 256
 	hitbox_break_guards = true
-	hitbox_rehit_time = 0.075
-	if animatedSprite.frame >= 10 and animatedSprite.frame < 19:
+	hitbox_rehit_time = 1
+	if animatedSprite.frame >= 10 and animatedSprite.frame <= 22:
 		hitbox_upleft = Vector2( - 57, - 33)
 		hitbox_downright = Vector2(28, 17)
 		spawn_hitbox(hitbox_upleft, hitbox_downright)
@@ -98,19 +99,24 @@ func play_sfx() -> void :
 		if not sfx_played:
 			sfx.play()
 			sfx_played = true
+			giga_attack.reduce_ammo(giga_attack.ammo_per_shot)
 
 func end_state() -> bool:
-	return animatedSprite.frame >= 21
+	return animatedSprite.frame >= 22
 
 func invicible_frames() -> bool:
-	return animatedSprite.frame >= 9 and animatedSprite.frame < 19
+	return animatedSprite.frame >= 0 and animatedSprite.frame < 22
 
 func movement_frames() -> bool:
-	return animatedSprite.frame >= 9 and animatedSprite.frame < 21
+	return animatedSprite.frame >= 9 and animatedSprite.frame < 22
 
 func _StartCondition() -> bool:
+	if not giga_attack.has_ammo():
+		return false
+	if character.get_action_pressed("move_up") and character.get_node("Desperation").active:
+		return false
 	if not executing:
-		if character.execute_nova_strike:
+		if character.get_action_pressed("select_special"):
 			return true
 	return false
 
@@ -125,6 +131,11 @@ func _EndCondition() -> bool:
 	return false
 
 func _Setup() -> void :
+	character.can_eject = false
+	if character.get_action_pressed("move_down"):
+		vertical_start_speed = 185
+	else:
+		vertical_start_speed = 250
 	sfx_played = false
 	horizontal_speed = start_speed
 	vertical_speed = vertical_start_speed
@@ -168,7 +179,12 @@ func change_animation_if_falling(_s) -> void :
 
 func _Interrupt() -> void :
 	._Interrupt()
-	character.execute_nova_strike = false
+	character.can_eject = true
 	character.remove_invulnerability("NovaStrike")
 	if is_instance_valid(current_hitbox):
 		current_hitbox.queue_free()
+	if not character.is_on_floor():
+		animatedSprite.animation = "fall"
+	else:
+		animatedSprite.animation = "recover"
+

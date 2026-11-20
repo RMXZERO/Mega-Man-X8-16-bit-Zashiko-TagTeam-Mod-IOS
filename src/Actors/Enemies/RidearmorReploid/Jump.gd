@@ -16,7 +16,7 @@ func _Setup() -> void:
 	skill.play_animation("jump")
 	Tools.timer(1.5,"able_to_jump_again",self)
 
-func _Update(delta) -> void:
+func _Update(_delta) -> void:
 	if character.get_vertical_speed() > 0:
 		skill.play_animation_once("fall")
 	

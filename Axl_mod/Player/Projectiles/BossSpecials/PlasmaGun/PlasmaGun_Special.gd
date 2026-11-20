@@ -100,6 +100,7 @@ func _physics_process(delta: float) -> void :
 		EndAbility()
 
 func set_aura_buff() -> void :
+	Event.emit_signal("axl_special_ability", "plasmagun")
 	backup_original_values()
 	
 	player_walk.horizontal_velocity *= speed_factor
@@ -165,6 +166,7 @@ func set_aura_debuff() -> void :
 	player_fall.default_gravity *= debuff_gravity_factor
 
 func unset_aura_buff() -> void :
+	Event.emit_signal("axl_special_ability", "remove")
 	restore_original_values()
 
 func restore_original_values() -> void :

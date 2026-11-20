@@ -25,7 +25,6 @@ modulate = Color( 1, 1, 1, 0.694118 )
 position = Vector2( 0, -4 )
 frames = ExtResource( 1 )
 animation = "aura_flame"
-frame = 5
 playing = true
 
 [node name="sfx" type="AudioStreamPlayer2D" parent="."]

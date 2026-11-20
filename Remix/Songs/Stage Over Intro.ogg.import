@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Stage Over Intro.ogg-1c941158da500e512d109d734ed3e34b.oggstr"
+
+[deps]
+
+source_file="res://Remix/Songs/Stage Over Intro.ogg"
+dest_files=[ "res://.import/Stage Over Intro.ogg-1c941158da500e512d109d734ed3e34b.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

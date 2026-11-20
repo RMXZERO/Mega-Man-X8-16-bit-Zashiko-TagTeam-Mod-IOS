@@ -35,6 +35,8 @@ var colors: Array = []
 var debug_position_y: float = 0.0
 var should_die_to_spikes: bool = true
 var spike_invincibility: bool = false
+var alpha_alway_1: bool = false
+var can_eject: bool = true
 
 signal headbump
 signal land
@@ -52,7 +54,7 @@ signal character_switch_in
 signal activate_revive
 var is_current_player: bool = false
 var is_executing_special: bool = false
-
+var last_hit_time: float = 0.0
 var num_equipped_hearts
 
 func check_for_char_switch_input() -> void :
@@ -78,6 +80,14 @@ func max_out_air_abilities() -> void :
 	set_horizontal_speed(0)
 ####
 
+func interrupt_all_moves():
+	.interrupt_all_moves()
+	
+	if not is_executing("Forced"):
+		if is_on_floor():
+			animatedSprite.play("recover")
+		else:
+			animatedSprite.play("fall")
 
 func _ready() -> void :
 	connect_cutscene_events()
@@ -98,11 +108,14 @@ func _process(_delta: float) -> void :
 	if not is_current_player:
 		global_position = GameManager.player.global_position
 		direction = GameManager.player.direction
+		
 
 func _physics_process(delta: float) -> void :
 	if is_current_player:
 		var actual_delta = delta
+		last_hit_time += delta
 		if time_stop_active:
+			last_hit_time += GameManager.true_delta
 			actual_delta = GameManager.true_delta
 		check_if_should_set_alpha_to_1()
 		check_for_headbump()
@@ -139,15 +152,19 @@ func lava_touch() -> void :
 		zero_health_team()
 
 func void_touch() -> void :
-	if is_current_player:
-		zero_health_team()
+	zero_health_team()
 
 func zero_health_team() -> void :
+	current_health = 0
 	CharacterManager.both_alive = false
 	CharacterManager.alive_team = []
 	emit_signal("zero_health")
 	if is_instance_valid(GameManager.inactive_player):
+		GameManager.inactive_player.current_health = 0
 		GameManager.inactive_player.emit_signal("zero_health")
+	if is_instance_valid(GameManager.player):
+		GameManager.player.current_health = 0
+		GameManager.player.emit_signal("zero_health")
 
 func should_instantly_die() -> bool:
 	return not is_executing("Ride")
@@ -228,7 +245,7 @@ func check_for_dash() -> void :
 		Event.emit_signal("input_dash")
 
 func check_if_should_set_alpha_to_1() -> void :
-	if invulnerability < 0 and not has_invulnerability_from_skills() and not full_alpha:
+	if invulnerability < 0 and not has_invulnerability_from_skills() and not full_alpha or alpha_alway_1:
 		remove_invulnerability_shader()
 		full_alpha = true
 

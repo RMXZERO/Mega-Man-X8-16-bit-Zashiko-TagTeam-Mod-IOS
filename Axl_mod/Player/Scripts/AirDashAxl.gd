@@ -2,6 +2,7 @@ extends DashAxl
 class_name AirDashAxl
 
 onready var animatedSprite: AnimatedSprite = character.get_node("animatedSprite")
+onready var duringImage: AnimatedSprite = $duringImage
 onready var hover: Node2D = character.get_node("Hover")
 onready var wall_jump: Node2D = $"../WallJump"
 onready var dash_wall_jump: Node2D = $"../DashWallJump"
@@ -15,6 +16,9 @@ var initial_sound: bool = true
 var facing_direction: int = 1
 var rotation_value: int = 90
 var go_upwards: bool = false
+var go_down: bool = false
+var go_tilt: bool = false
+var go_downtilt: bool = false
 var initial_duration: float
 
 
@@ -38,6 +42,9 @@ func _Setup() -> void :
 	character.airdash_signal()
 	$label.text = str(airdash_count)
 	go_upwards = false
+	go_down = false
+	go_tilt = false
+	go_downtilt = false
 	initial_duration = dash_duration
 	if upgraded:
 		if character.facing_right:
@@ -45,19 +52,56 @@ func _Setup() -> void :
 		else:
 			facing_direction = - 1
 		if execute_dash_up():
-			dash_duration = 0.3
+			dash_duration = 0.6 * initial_duration
 			rotation_value = - 90 * facing_direction
 			dash_particle.rotation_degrees = rotation_value
 			dash_particle.position = Vector2( - 4, 16)
 			animatedSprite.frame = 1
 			animatedSprite.rotation_degrees = rotation_value
 			animatedSprite.position.x = - 10 * facing_direction
+			duringImage.rotation_degrees = rotation_value
+			duringImage.position.x = - 10 * facing_direction
 			go_upwards = true
+		if execute_dash_down():
+			dash_duration = 1.2 * initial_duration
+			rotation_value = 90 * facing_direction
+			dash_particle.rotation_degrees = rotation_value
+			dash_particle.position = Vector2( - 4, 16)
+			animatedSprite.frame = 1
+			animatedSprite.rotation_degrees = rotation_value
+			animatedSprite.position.x = - 10 * facing_direction
+			duringImage.rotation_degrees = rotation_value
+			duringImage.position.x = - 10 * facing_direction
+			go_down = true
+			airdash_count += 1
+		if execute_dash_tilt():
+			dash_duration = 0.6 * initial_duration
+			rotation_value = - 45 * facing_direction
+			dash_particle.rotation_degrees = rotation_value
+			dash_particle.position = Vector2( - 4, 16)
+			animatedSprite.frame = 1
+			animatedSprite.rotation_degrees = rotation_value
+			animatedSprite.position.x = - 10 * facing_direction
+			duringImage.rotation_degrees = rotation_value
+			duringImage.position.x = - 10 * facing_direction
+			go_tilt = true
+		if execute_dash_downtilt():
+			dash_duration = 1.2 * initial_duration
+			rotation_value = 45 * facing_direction
+			dash_particle.rotation_degrees = rotation_value
+			dash_particle.position = Vector2( - 4, 16)
+			animatedSprite.frame = 1
+			animatedSprite.rotation_degrees = rotation_value
+			animatedSprite.position.x = - 10 * facing_direction
+			duringImage.rotation_degrees = rotation_value
+			duringImage.position.x = - 10 * facing_direction
+			go_downtilt = true
+			airdash_count += 1
 
 func _Update(_delta: float) -> void :
 	process_invulnerability()
 	increase_left_ground_timer(_delta)
-	if can_dash and should_dash() and not go_upwards:
+	if can_dash and should_dash() and not go_upwards and not go_down and not go_tilt and not go_downtilt:
 		on_dash()
 		force_movement(horizontal_velocity)
 		emit_dash_particle()
@@ -70,6 +114,35 @@ func _Update(_delta: float) -> void :
 		character.set_vertical_speed( - horizontal_velocity)
 		animatedSprite.rotation_degrees = rotation_value
 		animatedSprite.position.x = - 10 * facing_direction
+		duringImage.rotation_degrees = rotation_value
+		duringImage.position.x = - 10 * facing_direction
+	elif can_dash and should_dash_up() and go_down:
+		on_dash()
+		force_movement(0)
+		emit_dash_particle()
+		character.set_vertical_speed(2 * horizontal_velocity)
+		animatedSprite.rotation_degrees = rotation_value
+		animatedSprite.position.x = - 0 * facing_direction
+		duringImage.rotation_degrees = rotation_value
+		duringImage.position.x = - 0 * facing_direction
+	elif can_dash and should_dash_up() and go_tilt:
+		on_dash()
+		force_movement(horizontal_velocity)
+		emit_dash_particle()
+		character.set_vertical_speed( - horizontal_velocity)
+		animatedSprite.rotation_degrees = rotation_value
+		animatedSprite.position.x = - 10 * facing_direction
+		duringImage.rotation_degrees = rotation_value
+		duringImage.position.x = - 10 * facing_direction
+	elif can_dash and should_dash_up() and go_downtilt:
+		on_dash()
+		force_movement(horizontal_velocity)
+		emit_dash_particle()
+		character.set_vertical_speed(2 * horizontal_velocity)
+		animatedSprite.rotation_degrees = rotation_value
+		animatedSprite.position.x = - 0 * facing_direction
+		duringImage.rotation_degrees = rotation_value
+		duringImage.position.x = - 0 * facing_direction
 	else:
 		if go_upwards:
 			animatedSprite.frame = 0
@@ -80,6 +153,9 @@ func _Update(_delta: float) -> void :
 		change_animation_if_falling("fall")
 		set_movement_and_direction(horizontal_velocity)
 		process_gravity(_delta)
+
+	if character.is_executing("SaberCombo"):
+		EndAbility()
 
 func reset_airdash_count() -> void :
 	airdash_count = max_airdashes
@@ -106,7 +182,7 @@ func should_dash_up() -> bool:
 
 func on_headbump() -> void :
 	if executing:
-		if go_upwards:
+		if go_upwards or go_tilt:
 			character.set_vertical_speed(0)
 			EndAbility()
 
@@ -116,9 +192,27 @@ func execute_dash_up() -> bool:
 			return true
 	return false
 
+func execute_dash_down() -> bool:
+	if character.get_action_pressed("move_down"):
+		if not character.get_action_pressed("move_left") and not character.get_action_pressed("move_right"):
+			return true
+	return false
+
+func execute_dash_tilt() -> bool:
+	if character.get_action_pressed("move_up"):
+		if character.get_action_pressed("move_left") or character.get_action_pressed("move_right"):
+			return true
+	return false
+
+func execute_dash_downtilt() -> bool:
+	if character.get_action_pressed("move_down"):
+		if character.get_action_pressed("move_left") or character.get_action_pressed("move_right"):
+			return true
+	return false
+
 func change_animation_if_falling(_s) -> void :
 	EndAbility()
-	if not go_upwards:
+	if not go_upwards or not go_down or not go_tilt  or not go_downtilt:
 		character.start_dashfall()
 
 func on_dash() -> void :
@@ -190,13 +284,14 @@ func _Interrupt() -> void :
 	dash_particle.position = Vector2( - 16, 4)
 	animatedSprite.rotation_degrees = 0
 	animatedSprite.position.x = 0
+	duringImage.rotation_degrees = 0
+	duringImage.position.x = 0
 	if not changed_animation:
 		character.call_deferred("increase_hitbox")
 	emit_particles(particles, false)
 	invulnerable(false)
 	character.set_horizontal_speed(0)
-	if not go_upwards:
-		character.set_vertical_speed(0)
+
 	zero_bonus_horizontal_speed()
 	
 

@@ -3,7 +3,7 @@ class_name Fall
 
 export  var shot_pos_adjust: Vector2 = Vector2(4, - 5)
 
-var dash_momentum: float = 210
+var dash_momentum: float = 260
 var normal_momentum: float = 90
 
 
@@ -39,6 +39,10 @@ func _Update(_delta: float) -> void :
 
 func _Setup():
 	character.global_position.y += 1
+	if character.dashjumps_since_jump > 0:
+		horizontal_velocity = dash_momentum
+	else:
+		horizontal_velocity = normal_momentum
 
 func _Interrupt() -> void :
 	character.dashfall = false

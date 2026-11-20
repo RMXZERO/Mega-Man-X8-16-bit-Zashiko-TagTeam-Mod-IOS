@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=204 format=2]
+[gd_resource type="SpriteFrames" load_steps=210 format=2]
 
 [ext_resource path="res://Axl_mod/Player/Sprites/grande_thrower/Balance.png" type="Texture" id=1]
 [ext_resource path="res://Axl_mod/Player/Sprites/grande_thrower/Shot_B.png" type="Texture" id=2]
@@ -21,7 +21,7 @@
 [ext_resource path="res://Axl_mod/Player/Sprites/grande_thrower/Stance_Weak.png" type="Texture" id=19]
 [ext_resource path="res://Axl_mod/Player/Sprites/grande_thrower/Hover.png" type="Texture" id=20]
 [ext_resource path="res://Axl_mod/Player/Sprites/grande_thrower/Jump.png" type="Texture" id=21]
-[ext_resource path="res://src/Actors/Player/axl_sprites/axl.png" type="Texture" id=22]
+[ext_resource path="res://Axl_mod/Player/Sprites/Ride/axl.png" type="Texture" id=22]
 [ext_resource path="res://Axl_mod/Player/Sprites/grande_thrower/DodgeRoll.png" type="Texture" id=23]
 
 [sub_resource type="AtlasTexture" id=587]
@@ -343,6 +343,30 @@ region = Rect2( 0, 0, 64, 64 )
 [sub_resource type="AtlasTexture" id=340]
 atlas = ExtResource( 22 )
 region = Rect2( 128, 560, 64, 56 )
+
+[sub_resource type="AtlasTexture" id=610]
+atlas = ExtResource( 23 )
+region = Rect2( 320, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=611]
+atlas = ExtResource( 23 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=612]
+atlas = ExtResource( 23 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=613]
+atlas = ExtResource( 23 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=614]
+atlas = ExtResource( 23 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=615]
+atlas = ExtResource( 23 )
+region = Rect2( 0, 0, 64, 64 )
 
 [sub_resource type="AtlasTexture" id=592]
 atlas = ExtResource( 2 )
@@ -864,6 +888,11 @@ animations = [ {
 "loop": false,
 "name": "ride",
 "speed": 23.0
+}, {
+"frames": [ SubResource( 610 ), SubResource( 611 ), SubResource( 612 ), SubResource( 613 ), SubResource( 614 ), SubResource( 615 ) ],
+"loop": false,
+"name": "rolling",
+"speed": 25.0
 }, {
 "frames": [ SubResource( 592 ), SubResource( 593 ), SubResource( 594 ), SubResource( 595 ), SubResource( 596 ) ],
 "loop": false,

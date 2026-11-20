@@ -35,12 +35,6 @@ extents = Vector2( 199, 112 )
 boss_intro = ExtResource( 13 )
 boss_song = ExtResource( 15 )
 
-[node name="X" parent="." index="3"]
-position = Vector2( 661, 72 )
-
-[node name="node" type="Node" parent="X" index="35"]
-script = ExtResource( 18 )
-
 [node name="Collision" parent="Scenery" index="0"]
 visible = false
 modulate = Color( 0.305882, 0.329412, 0.376471, 1 )
@@ -111,8 +105,8 @@ z_index = -1
 [node name="BossSpawner" parent="Objects" index="0" instance=ExtResource( 4 )]
 position = Vector2( 894, 41 )
 script = ExtResource( 1 )
-active = false
 object_to_spawn = ExtResource( 7 )
+active = false
 spawn_at_start = true
 make_child_of_this_object = true
 set_direction_to_right = false
@@ -122,8 +116,8 @@ skip_intro = true
 [node name="BossSpawner2" parent="Objects" index="1" instance=ExtResource( 4 )]
 position = Vector2( 779, 287 )
 script = ExtResource( 1 )
-active = false
 object_to_spawn = ExtResource( 17 )
+active = false
 spawn_at_start = true
 set_direction_to_right = false
 despawnable = false
@@ -166,3 +160,6 @@ amount = 6
 lifetime = 12.0
 process_material = ExtResource( 16 )
 texture = ExtResource( 14 )
+
+[node name="X@node" type="Node" parent="." index="9"]
+script = ExtResource( 18 )

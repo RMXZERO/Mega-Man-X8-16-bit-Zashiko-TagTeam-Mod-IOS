@@ -123,7 +123,6 @@ disabled = true
 position = Vector2( 0, -34 )
 frames = ExtResource( 10 )
 animation = "start"
-frame = 7
 playing = true
 
 [node name="visibilityNotifier2D" type="VisibilityNotifier2D" parent="."]

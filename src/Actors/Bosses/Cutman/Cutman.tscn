@@ -58,7 +58,7 @@ extents = Vector2( 9, 12 )
 max_value = 3.0
 _data = [ Vector2( 0, 3 ), 0.0, -6.06097, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=62]
+[sub_resource type="CurveTexture" id=69]
 curve = SubResource( 42 )
 
 [sub_resource type="ParticlesMaterial" id=61]
@@ -71,7 +71,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 7.69
 anim_speed = 1.0
-anim_speed_curve = SubResource( 62 )
+anim_speed_curve = SubResource( 69 )
 
 [node name="Cutman" type="KinematicBody2D" groups=["Bosses"]]
 z_index = 5
@@ -93,7 +93,6 @@ material = ExtResource( 39 )
 z_index = 1
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 1
 playing = true
 offset = Vector2( 0, 1 )
 flip_h = true
@@ -102,7 +101,6 @@ flip_h = true
 material = ExtResource( 39 )
 frames = ExtResource( 10 )
 animation = "idle"
-frame = 1
 playing = true
 offset = Vector2( 0, 1 )
 flip_h = true

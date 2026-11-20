@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/X VS ZERO Breis INTRO.ogg-a03b95e759041f08ba9ff9977af15018.oggstr"
+
+[deps]
+
+source_file="res://Remix/Songs/X VS ZERO Breis INTRO.ogg"
+dest_files=[ "res://.import/X VS ZERO Breis INTRO.ogg-a03b95e759041f08ba9ff9977af15018.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

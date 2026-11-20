@@ -37,6 +37,10 @@ func _ready() -> void :
 	pause.character_menu_visibility()
 	var _s = pause.connect("pause_starting", self, "show_weapons")
 	_s = pause.connect("unlock_buttons", self, "on_unlock_buttons")
+	Event.listen("collected_zero_weapon", self, "show_weapons")
+
+func switch_weapon(_collectible: String) -> void :
+	show_weapons()
 
 func show_weapons() -> void :
 	if CharacterManager.player_character != "X":
@@ -53,6 +57,8 @@ func show_weapons() -> void :
 		elif weapon.name == "Nova Strike":
 			if GameManager.is_player_in_scene():
 				weapon.visible = GameManager.player.is_full_armor() == "ultimate"
+				if CharacterManager.infinite_x_activated:
+					weapon.visible = GameManager.player.is_full_armor() == "infinite"
 		else:
 			weapon.visible = false
 	weapons[0].visible = true

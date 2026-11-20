@@ -10,11 +10,18 @@ func _ready() -> void :
 		
 
 func start():
+	if GameManager.player:
+		if GameManager.player.global_position.x > 400:
+			return
 	dialogue = CharacterManager._set_correct_dialogues(name, dialogue)
 	if not GameManager.was_dialogue_seen(dialogue):
 		if GameManager.player:
 			GameManager.player.deactivate()
 			if GameManager.player.name == "X":
+				GameManager.player.reactivate_charge()
+			if GameManager.player.name == "Alia":
+				GameManager.player.reactivate_charge()
+			if GameManager.player.name == "Zero":
 				GameManager.player.reactivate_charge()
 		GameManager.start_dialog(dialogue)
 	else:

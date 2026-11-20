@@ -61,7 +61,6 @@ disabled = true
 position = Vector2( 0, -29 )
 frames = ExtResource( 3 )
 animation = "intro"
-frame = 5
 playing = true
 
 [node name="body1" type="AnimatedSprite" parent="."]
@@ -115,8 +114,8 @@ position = Vector2( 0, -29 )
 collision_layer = 0
 collision_mask = 4
 script = ExtResource( 4 )
-health_path = NodePath("../Health")
 active = false
+health_path = NodePath("../Health")
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="DamageReceiver"]
 position = Vector2( 0, -96 )

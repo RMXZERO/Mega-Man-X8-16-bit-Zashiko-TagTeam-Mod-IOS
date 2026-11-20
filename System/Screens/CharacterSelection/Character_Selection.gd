@@ -24,6 +24,10 @@ signal end
 signal lock_buttons
 signal unlock_buttons
 
+onready var _demake_song_intro: AudioStream = preload("res://Remix/Songs/Char Selection Intro.ogg")#Not ready
+onready var _demake_song_loop: AudioStream = preload("res://Remix/Songs/Char Selection Loop.ogg")#Not ready
+onready var _stage_over_intro: AudioStream = preload("res://Remix/Songs/Stage Over Intro.ogg")
+onready var _stage_over_loop: AudioStream = preload("res://Remix/Songs/Stage Over Loop.ogg")
 
 func _input(event: InputEvent) -> void :
 	if active:
@@ -40,8 +44,15 @@ func end() -> void :
 	active = false
 
 func play_music() -> void :
-	song_loop.loop = true
-	musicplayer.play_song(song_loop, song_intro)
+	if Configurations.exists("SongRemix"):
+		if Configurations.get("SongRemix"):
+			_demake_song_loop.loop = true
+			_stage_over_loop.loop = true
+			#musicplayer.play_song(_demake_song_loop, _demake_song_intro)
+			musicplayer.play_song(_stage_over_loop, _stage_over_intro)
+		else:
+			song_loop.loop = true
+			musicplayer.play_song(song_loop, song_intro)
 
 func _ready() -> void :
 	if get_parent().name == "root":

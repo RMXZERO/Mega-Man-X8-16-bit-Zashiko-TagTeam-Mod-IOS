@@ -11,28 +11,22 @@
 [ext_resource path="res://src/Options/AutonomousMenuButton.gd" type="Script" id=9]
 [ext_resource path="res://src/Sounds/CHARGED_SHOT.wav" type="AudioStream" id=10]
 [ext_resource path="res://System/SFX/move_cursor.ogg" type="AudioStream" id=11]
-[ext_resource path="res://src/Title/title_megaman.png" type="Texture" id=12]
+[ext_resource path="res://src/Title/title_rockman.png" type="Texture" id=12]
 [ext_resource path="res://src/Title/title_bg.png" type="Texture" id=13]
 [ext_resource path="res://src/Fonts/x8_bitmapfont.tres" type="BitmapFont" id=14]
 [ext_resource path="res://src/Actors/Player/x_sprites/x.res" type="SpriteFrames" id=15]
 [ext_resource path="res://src/Options/LilMegamanOnScreen.gd" type="Script" id=16]
 [ext_resource path="res://src/Actors/Weapons/Projectiles/medium_shot.res" type="SpriteFrames" id=17]
-[ext_resource path="res://src/Actors/Player/x_sprites/x_crystal_pallette.png" type="Texture" id=18]
-[ext_resource path="res://addons/PaletteSwap/PaletteSwap.gdshader" type="Shader" id=19]
+[ext_resource path="res://src/Effects/Materials/Player_Material_Shader.tres" type="Material" id=18]
+[ext_resource path="res://src/Title/title_megaman.png" type="Texture" id=19]
 [ext_resource path="res://System/Screens/Loading/Loading.tscn" type="PackedScene" id=20]
 [ext_resource path="res://System/SFX/open_option.ogg" type="AudioStream" id=21]
 [ext_resource path="res://Axl_mod/SFX/copy_bullet.wav" type="AudioStream" id=22]
 [ext_resource path="res://System/SFX/window_close.ogg" type="AudioStream" id=23]
 [ext_resource path="res://Zero_mod/SFX/sfx_Saber.wav" type="AudioStream" id=24]
+[ext_resource path="res://System/Android/AndroidKeyConfig.tscn" type="PackedScene" id=25]
 
 [sub_resource type="ShortCut" id=1]
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = ExtResource( 19 )
-shader_param/skip_first_row = true
-shader_param/use_palette_alpha = false
-shader_param/fps = 6.0
-shader_param/palette = ExtResource( 18 )
 
 [node name="MainMenu" type="CanvasLayer"]
 pause_mode = 2
@@ -54,17 +48,51 @@ margin_bottom = 226.0
 texture = ExtResource( 13 )
 
 [node name="MegaMan" type="TextureRect" parent="Menu"]
-margin_left = 83.0
-margin_top = 12.0
-margin_right = 236.0
-margin_bottom = 107.0
+visible = false
+margin_left = 94.0
+margin_top = 14.0
+margin_right = 247.0
+margin_bottom = 109.0
+texture = ExtResource( 19 )
+
+[node name="X8" type="TextureRect" parent="Menu/MegaMan"]
+margin_left = 53.0
+margin_top = -46.0
+margin_right = 303.0
+margin_bottom = 134.0
+texture = ExtResource( 6 )
+
+[node name="MegaMan" type="TextureRect" parent="Menu/MegaMan"]
+margin_right = 153.0
+margin_bottom = 95.0
+texture = ExtResource( 19 )
+
+[node name="RockMan" type="TextureRect" parent="Menu"]
+visible = false
+margin_left = 72.0
+margin_top = 15.0
+margin_right = 272.0
+margin_bottom = 110.0
+texture = ExtResource( 12 )
+
+[node name="X8" type="TextureRect" parent="Menu/RockMan"]
+margin_left = 75.0
+margin_top = -47.0
+margin_right = 325.0
+margin_bottom = 133.0
+texture = ExtResource( 6 )
+
+[node name="RockMan" type="TextureRect" parent="Menu/RockMan"]
+margin_right = 200.0
+margin_bottom = 95.0
 texture = ExtResource( 12 )
 
 [node name="X8" type="TextureRect" parent="Menu"]
-margin_left = 135.0
-margin_top = -34.0
-margin_right = 385.0
-margin_bottom = 146.0
+visible = false
+margin_left = 147.0
+margin_top = -32.0
+margin_right = 397.0
+margin_bottom = 148.0
 texture = ExtResource( 6 )
 
 [node name="EVENT" type="TextureRect" parent="Menu"]
@@ -126,9 +154,9 @@ alignment = 1
 [node name="GameStart" type="TextureButton" parent="Menu/OptionHolder"]
 modulate = Color( 0.407843, 0.792157, 1, 1 )
 self_modulate = Color( 1, 1, 1, 0 )
-margin_top = 14.0
+margin_top = 6.0
 margin_right = 397.0
-margin_bottom = 30.0
+margin_bottom = 22.0
 rect_min_size = Vector2( 200, 16 )
 action_mode = 0
 script = ExtResource( 8 )
@@ -153,9 +181,9 @@ uppercase = true
 
 [node name="Loading" type="TextureButton" parent="Menu/OptionHolder"]
 modulate = Color( 0.407843, 0.792157, 1, 1 )
-margin_top = 30.0
+margin_top = 22.0
 margin_right = 397.0
-margin_bottom = 46.0
+margin_bottom = 38.0
 rect_min_size = Vector2( 18, 16 )
 action_mode = 0
 shortcut = SubResource( 1 )
@@ -186,9 +214,9 @@ uppercase = true
 
 [node name="Options" type="TextureButton" parent="Menu/OptionHolder"]
 modulate = Color( 0.407843, 0.792157, 1, 1 )
-margin_top = 46.0
+margin_top = 38.0
 margin_right = 397.0
-margin_bottom = 62.0
+margin_bottom = 54.0
 rect_min_size = Vector2( 18, 16 )
 action_mode = 0
 shortcut = SubResource( 1 )
@@ -220,9 +248,9 @@ uppercase = true
 
 [node name="Keycfg" type="TextureButton" parent="Menu/OptionHolder"]
 modulate = Color( 0.407843, 0.792157, 1, 1 )
-margin_top = 62.0
+margin_top = 54.0
 margin_right = 397.0
-margin_bottom = 78.0
+margin_bottom = 70.0
 rect_min_size = Vector2( 18, 16 )
 action_mode = 0
 shortcut = SubResource( 1 )
@@ -248,6 +276,38 @@ custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 custom_fonts/font = ExtResource( 1 )
 text = "KEYCFG_START"
+align = 1
+uppercase = true
+
+[node name="AndroidKeycfg" type="TextureButton" parent="Menu/OptionHolder"]
+modulate = Color( 0.407843, 0.792157, 1, 1 )
+margin_top = 70.0
+margin_right = 397.0
+margin_bottom = 86.0
+rect_min_size = Vector2( 18, 16 )
+action_mode = 0
+shortcut = SubResource( 1 )
+script = ExtResource( 9 )
+idle_color = Color( 0.407843, 0.792157, 1, 1 )
+focus_color = Color( 0.984314, 1, 0.686275, 1 )
+menu_path = NodePath("../../..")
+pick_sound = NodePath("../../../equip")
+
+[node name="AndroidKeyConfig" parent="Menu/OptionHolder/AndroidKeycfg" instance=ExtResource( 25 )]
+visible = false
+
+[node name="text" type="Label" parent="Menu/OptionHolder/AndroidKeycfg"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -7.0
+margin_right = 398.0
+margin_bottom = 7.0
+rect_min_size = Vector2( 64, 14 )
+custom_colors/font_color_shadow = Color( 0.415686, 0.415686, 0.415686, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+custom_fonts/font = ExtResource( 1 )
+text = "ANDROID_KEYCFG_START"
 align = 1
 uppercase = true
 
@@ -284,7 +344,7 @@ text = "16-BIT_TITLE"
 align = 1
 
 [node name="MegamanCursor" type="AnimatedSprite" parent="."]
-material = SubResource( 2 )
+material = ExtResource( 18 )
 position = Vector2( 110, 144 )
 frames = ExtResource( 15 )
 animation = "idle"
@@ -296,7 +356,6 @@ position = Vector2( 13, 2 )
 z_index = -1
 frames = ExtResource( 17 )
 animation = "loop"
-frame = 6
 playing = true
 
 [node name="equip" type="AudioStreamPlayer" parent="."]
@@ -362,3 +421,8 @@ bus = "SFX"
 [connection signal="mouse_entered" from="Menu/OptionHolder/Keycfg" to="Menu/OptionHolder/Keycfg" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Menu/OptionHolder/Keycfg" to="Menu/OptionHolder/Keycfg" method="_on_mouse_exited"]
 [connection signal="pressed" from="Menu/OptionHolder/Keycfg" to="Menu/OptionHolder/Keycfg" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/OptionHolder/AndroidKeycfg" to="Menu/OptionHolder/AndroidKeycfg" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/OptionHolder/AndroidKeycfg" to="Menu/OptionHolder/AndroidKeycfg" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/OptionHolder/AndroidKeycfg" to="Menu/OptionHolder/AndroidKeycfg" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/OptionHolder/AndroidKeycfg" to="Menu/OptionHolder/AndroidKeycfg" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/OptionHolder/AndroidKeycfg" to="Menu/OptionHolder/AndroidKeycfg" method="_on_pressed"]

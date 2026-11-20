@@ -46,6 +46,10 @@ func execute_dashwalljump_on_input() -> bool:
 	return false
 
 func _StartCondition() -> bool:
+	
+	if character.is_executing("HoverAxl") or character.is_executing("Hover"):
+		return false
+	
 	if character.is_executing("Shot") or character.is_executing("AltFire"):
 		return false
 	if character.is_on_floor():

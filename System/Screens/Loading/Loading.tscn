@@ -94,7 +94,7 @@ uppercase = true
 
 [node name="scrollContainer" type="ScrollContainer" parent="Menu"]
 margin_left = 66.0
-margin_top = 37.0
+margin_top = 42.0
 margin_right = 332.0
 margin_bottom = 201.0
 theme = ExtResource( 17 )
@@ -103,7 +103,7 @@ scroll_horizontal_enabled = false
 
 [node name="OptionHolder" type="VBoxContainer" parent="Menu/scrollContainer"]
 grow_horizontal = 2
-custom_constants/separation = 1
+custom_constants/separation = 3
 
 [node name="exit" type="TextureButton" parent="Menu"]
 self_modulate = Color( 1, 1, 1, 0 )

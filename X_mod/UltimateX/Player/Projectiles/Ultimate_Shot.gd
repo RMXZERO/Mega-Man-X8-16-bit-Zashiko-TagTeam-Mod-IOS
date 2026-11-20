@@ -9,9 +9,17 @@ onready var ray: RayCast2D = $rayCast2D
 
 
 func _physics_process(_delta: float) -> void :
-	pass
+	if animatedSprite.animation == "Tag_X8":
+		if animatedSprite.frame >= 2:
+			animatedSprite.animation = "Tag_X8_Loop"
 
 func references_setup(direction) -> void :
+	if CharacterManager.use_old_sprite:
+		if animatedSprite.frames.has_animation("Tag"):
+			animatedSprite.animation = "Tag"
+	else:
+		if animatedSprite.frames.has_animation("Tag_X8"):
+			animatedSprite.animation = "Tag_X8"
 	set_direction(direction)
 	animatedSprite.scale.x = direction
 	$particles2D.scale.x = direction

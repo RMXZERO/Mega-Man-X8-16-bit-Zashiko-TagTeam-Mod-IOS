@@ -6,7 +6,7 @@ func _ready() -> void :
 	pass
 
 func check_for_armor():
-	if CharacterManager.player_character == "X":
+	if CharacterManager.player_character == "X" and not CharacterManager.hide_x_armor:
 		for item in GameManager.current_armor:
 			if "hermes" in item:
 				return

@@ -9,6 +9,8 @@ func _on_body_entered(_body: Node) -> void :
 		emit_signal("activated")
 		GameManager.start_cutscene()
 		Tools.timer(1.5, "show_warning", self)
+		if _body.is_in_group("Props"):
+			_body.get_parent().force_eject()
 	
 func show_warning() -> void :
 	Event.emit_signal("show_warning")

@@ -1,5 +1,7 @@
 extends Node2D
 
+onready var collider: CollisionShape2D = $"../../Checkpoints/2/collisionShape2D"
+
 export  var final_section_intro: AudioStream
 export  var final_section_loop: AudioStream
 
@@ -156,6 +158,7 @@ func _on_Door_closing_freeway() -> void :
 func start_final_section() -> void :
 	GameManager.music_player.play_song_wo_fadein(final_section_loop, final_section_intro)
 	emit_signal("prepare_for_sigma")
+	collider.set_deferred("disabled", false)
 
 func _on_Door_close() -> void :
 	Tools.timer(4.7, "play_battle_song", self)

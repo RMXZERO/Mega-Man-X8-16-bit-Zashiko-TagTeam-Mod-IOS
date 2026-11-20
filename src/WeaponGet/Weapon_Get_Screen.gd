@@ -1,5 +1,7 @@
 extends Node2D
 
+export var alia: bool = false
+
 signal initialize
 signal reset
 signal start
@@ -9,6 +11,26 @@ signal weapon_defined(weapon)
 
 func _ready() -> void :
 	Tools.timer(0.2, "initialize", self)
+	if alia:
+		$Armor/Alia.visible = true
+		$Armor/Cannon.self_modulate = Color(1, 1, 1, 0)
+		$Armor/FrontBShoulder.self_modulate = Color(1, 1, 1, 0)
+		$Armor/FrontShoulder.self_modulate = Color(1, 1, 1, 0)
+		$Armor/FrontArm.self_modulate = Color(1, 1, 1, 0)
+		$Armor/Protector.self_modulate = Color(1, 1, 1, 0)
+		$Armor/Head.self_modulate = Color(1, 1, 1, 0)
+		$Armor/FrontShoulderBack.self_modulate = Color(1, 1, 1, 0)
+		$Armor/Chest.self_modulate = Color(1, 1, 1, 0)
+		$Armor/Hand.self_modulate = Color(1, 1, 1, 0)
+		$Armor/BackBShoulder.self_modulate = Color(1, 1, 1, 0)
+		$Armor/BackShoulder.self_modulate = Color(1, 1, 1, 0)
+		$Armor/BackArm.self_modulate = Color(1, 1, 1, 0)
+		$Armor/FrontFoot.self_modulate = Color(1, 1, 1, 0)
+		$Armor/FrontLeg.self_modulate = Color(1, 1, 1, 0)
+		$Armor/BackFoot.self_modulate = Color(1, 1, 1, 0)
+		$Armor/BackLeg.self_modulate = Color(1, 1, 1, 0)
+		$Armor/Ultimate.self_modulate = Color(1, 1, 1, 0)
+		$Armor/Infinite.self_modulate = Color(1, 1, 1, 0)
 
 func initialize() -> void :
 	emit_signal("initialize")

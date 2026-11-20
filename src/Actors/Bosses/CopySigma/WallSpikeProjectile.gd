@@ -20,14 +20,20 @@ func set_direction(new_direction):
 	if not animatedSprite_zero:
 		animatedSprite_zero = get_node("animatedSprite_zero")
 	animatedSprite_zero.scale.x = new_direction
+	if zero:
+		animatedSprite.hide()
+		animatedSprite_zero.show()
+	else:
+		animatedSprite.show()
+		animatedSprite_zero.hide()
 
 func _Update(delta: float) -> void :
 	if zero:
 		animatedSprite.hide()
 		animatedSprite_zero.show()
-		fire_zero_1.emitting = true
-		fire_zero_2.emitting = true
-		fire_zero_3.emitting = true
+	else:
+		animatedSprite.show()
+		animatedSprite_zero.hide()
 	if not exploded and is_on_ceiling():
 		explode()
 

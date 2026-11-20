@@ -24,7 +24,6 @@ func _Setup():
 	character.stop_all_movement()
 	if victory_pose_and_music:
 		Event.emit_signal("play_stage_clear_music")
-	Event.emit_signal("weapon_select_buster")
 
 func _Update(_delta):
 	process_gravity(_delta)
@@ -54,6 +53,7 @@ func on_animation_finished():
 	if executing:
 		if character.get_animation() == "victory":
 			character.play_animation("beam_out")
+			Event.emit_signal("beamout")
 
 		elif character.get_animation() == "beam_out":
 			play_animation_once("beam")

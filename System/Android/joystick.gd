@@ -1,6 +1,6 @@
 extends Area2D
 
-onready var _player = get_parent().get_node(CharacterManager.player_character)
+onready var _player = get_parent().get_parent().get_parent().get_parent().get_node(CharacterManager.player_character)
 
 onready var background = $background
 onready var outline = $outline
@@ -27,11 +27,12 @@ func _input(event):
 			if touch_id == event.index:
 				reset_joystick()
 				touch_id = null
+		
 
 	elif event is InputEventScreenDrag and touch_id == event.index:
 		var distance = event.position.distance_to(outline.global_position)
 		
-		if distance <= max_distance + 50:
+		if distance <= max_distance + 200:
 			set_visibility()
 			pointer.global_position = outline.global_position + (event.position - outline.global_position).clamped(max_distance)
 		else:
@@ -39,7 +40,7 @@ func _input(event):
 		
 		press_direction()
 
-func _process(delta):
+func _process(_delta):
 	if touch_id != null:
 		press_direction()
 

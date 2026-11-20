@@ -30,11 +30,13 @@ func _Update(delta) -> void:
 		next_attack_stage()
 		
 	elif attack_stage == 2 and timer > 1:
+		character.emit_signal("intro_concluded") 
 		EndAbility()
 
 func _Interrupt() -> void:
 	finished = true
-	GameManager.player.start_listening_to_inputs()
+	if GameManager.player:
+		GameManager.player.start_listening_to_inputs()
 	
 func _StartCondition() -> bool:
 	return not finished

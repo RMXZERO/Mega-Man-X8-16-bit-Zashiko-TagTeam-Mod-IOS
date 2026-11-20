@@ -32,7 +32,7 @@ func set_bosssong(value) -> void :
 func get_bosssong():
 	if Configurations.exists("BossBattleTheme"):
 		return Configurations.get("BossBattleTheme")
-	return 9
+	return 0
 
 func display(_current_option):
 	if _current_option == 0:

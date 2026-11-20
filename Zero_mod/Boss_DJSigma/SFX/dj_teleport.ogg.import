@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/dj_teleport.ogg-bf33eb08634d73f15fa9e08fcdb99233.oggstr"
+
+[deps]
+
+source_file="res://Zero_mod/Boss_DJSigma/SFX/dj_teleport.ogg"
+dest_files=[ "res://.import/dj_teleport.ogg-bf33eb08634d73f15fa9e08fcdb99233.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

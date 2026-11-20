@@ -83,6 +83,8 @@ z_index = 10
 texture = ExtResource( 5 )
 
 [node name="cursor_area" type="Area2D" parent="cursor"]
+visible = false
+scale = Vector2( 5, 5 )
 collision_layer = 0
 collision_mask = 2147483648
 
@@ -96,6 +98,9 @@ script = ExtResource( 2 )
 weapon = ExtResource( 7 )
 
 [node name="weapon_area" type="Area2D" parent="sprite1"]
+visible = false
+position = Vector2( -360, -360 )
+scale = Vector2( 10, 10 )
 collision_layer = 2147483648
 collision_mask = 0
 
@@ -110,7 +115,9 @@ script = ExtResource( 2 )
 weapon = ExtResource( 11 )
 
 [node name="weapon_area" type="Area2D" parent="sprite2"]
-position = Vector2( 0, -14 )
+visible = false
+position = Vector2( 0, -374 )
+scale = Vector2( 10, 10 )
 collision_layer = 2147483648
 collision_mask = 0
 
@@ -124,6 +131,9 @@ script = ExtResource( 2 )
 weapon = ExtResource( 9 )
 
 [node name="weapon_area" type="Area2D" parent="sprite3"]
+visible = false
+position = Vector2( 360, -360 )
+scale = Vector2( 10, 10 )
 collision_layer = 2147483648
 collision_mask = 0
 
@@ -138,7 +148,9 @@ script = ExtResource( 2 )
 weapon = ExtResource( 6 )
 
 [node name="weapon_area" type="Area2D" parent="sprite4"]
-position = Vector2( -14, 0 )
+visible = false
+position = Vector2( -374, 0 )
+scale = Vector2( 10, 10 )
 collision_layer = 2147483648
 collision_mask = 0
 
@@ -152,7 +164,9 @@ script = ExtResource( 2 )
 weapon = ExtResource( 4 )
 
 [node name="weapon_area" type="Area2D" parent="sprite5"]
-position = Vector2( 14, 0 )
+visible = false
+position = Vector2( 374, 0 )
+scale = Vector2( 10, 10 )
 collision_layer = 2147483648
 collision_mask = 0
 
@@ -166,6 +180,9 @@ script = ExtResource( 2 )
 weapon = ExtResource( 10 )
 
 [node name="weapon_area" type="Area2D" parent="sprite6"]
+visible = false
+position = Vector2( -360, 360 )
+scale = Vector2( 10, 10 )
 collision_layer = 2147483648
 collision_mask = 0
 
@@ -180,7 +197,9 @@ script = ExtResource( 2 )
 weapon = ExtResource( 8 )
 
 [node name="weapon_area" type="Area2D" parent="sprite7"]
-position = Vector2( 0, 14 )
+visible = false
+position = Vector2( 0, 374 )
+scale = Vector2( 10, 10 )
 collision_layer = 2147483648
 collision_mask = 0
 
@@ -194,6 +213,9 @@ script = ExtResource( 2 )
 weapon = ExtResource( 12 )
 
 [node name="weapon_area" type="Area2D" parent="sprite8"]
+visible = false
+position = Vector2( 360, 360 )
+scale = Vector2( 10, 10 )
 collision_layer = 2147483648
 collision_mask = 0
 
@@ -204,7 +226,6 @@ shape = SubResource( 1 )
 [node name="select" type="AnimatedSprite" parent="."]
 visible = false
 frames = SubResource( 14 )
-frame = 10
 playing = true
 
 [node name="choice" type="AudioStreamPlayer2D" parent="."]

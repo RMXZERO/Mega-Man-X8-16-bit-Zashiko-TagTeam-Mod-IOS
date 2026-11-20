@@ -1,19 +1,16 @@
-extends CanvasLayer
+extends TouchScreenButton
 
-onready var _pause_menu = get_parent().get_node("Pause")
-onready var _paused = _pause_menu.paused
+export  var _action: String
 
-onready var exceptions = [
-	"Pause", 
-]
+func _ready():
+	connect("pressed", self, "_on_button_pressed")
+	connect("released", self, "_on_button_released")
 
-func _process(delta):
-	_paused = _pause_menu.paused
-	set_button_visibility( not _paused)
+func _on_button_pressed() -> void :
+	Input.action_press(_action)
+	self.modulate.a = 1.0
 
-func set_button_visibility(_visible):
-	var touch_key = self.get_children()
-	
-	for child in touch_key:
-		if not child.name in exceptions:
-			child.visible = _visible
+
+func _on_button_released() -> void :
+	Input.action_release(_action)
+	self.modulate.a = 0.5

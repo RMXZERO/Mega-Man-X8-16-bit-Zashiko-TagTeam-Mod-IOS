@@ -49,5 +49,8 @@ func handle_collider_solidness():
 	else:
 		disable_surfing()
 
+func is_player_name(body) -> bool:
+	return body.get_character().name == "X" or body.get_character().name == "Zero" or body.get_character().name == "Axl" or body.get_character().name == "Alia" or body.get_character().name == "Layer" or body.get_character().name == "Pallette"
+	
 func is_player(body) -> bool:
-	return body.get_character().name == "X"
+	return body.is_in_group("Player")

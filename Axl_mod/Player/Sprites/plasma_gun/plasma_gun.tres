@@ -1,6 +1,6 @@
-[gd_resource type="SpriteFrames" load_steps=191 format=2]
+[gd_resource type="SpriteFrames" load_steps=199 format=2]
 
-[ext_resource path="res://src/Actors/Player/axl_sprites/axl.png" type="Texture" id=1]
+[ext_resource path="res://Axl_mod/Player/Sprites/Ride/axl.png" type="Texture" id=1]
 [ext_resource path="res://Axl_mod/Player/Sprites/Ladder.png" type="Texture" id=2]
 [ext_resource path="res://Axl_mod/Player/Sprites/Ladder_Start.png" type="Texture" id=3]
 [ext_resource path="res://Axl_mod/Player/Sprites/Ladder_End.png" type="Texture" id=4]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Axl_mod/Player/Sprites/plasma_gun/Hover.png" type="Texture" id=14]
 [ext_resource path="res://Axl_mod/Player/Sprites/plasma_gun/WallJump_mirror.png" type="Texture" id=15]
 [ext_resource path="res://Axl_mod/Player/Sprites/plasma_gun/Walk.png" type="Texture" id=16]
+[ext_resource path="res://Axl_mod/Player/Sprites/Diagonal_Dash.png" type="Texture" id=17]
 [ext_resource path="res://Axl_mod/Player/Sprites/plasma_gun/Stance_Weak.png" type="Texture" id=18]
 [ext_resource path="res://Axl_mod/Player/Sprites/plasma_gun/DodgeRoll.png" type="Texture" id=20]
 [ext_resource path="res://Axl_mod/Player/Sprites/plasma_gun/Crouch.png" type="Texture" id=21]
@@ -244,6 +245,10 @@ region = Rect2( 0, 0, 80, 80 )
 atlas = ExtResource( 7 )
 region = Rect2( 80, 0, 80, 80 )
 
+[sub_resource type="AtlasTexture" id=1187]
+atlas = ExtResource( 17 )
+region = Rect2( 384, 0, 128, 128 )
+
 [sub_resource type="AtlasTexture" id=1128]
 atlas = ExtResource( 20 )
 region = Rect2( 0, 0, 80, 80 )
@@ -311,6 +316,30 @@ region = Rect2( 80, 0, 80, 80 )
 [sub_resource type="AtlasTexture" id=340]
 atlas = ExtResource( 1 )
 region = Rect2( 128, 560, 64, 56 )
+
+[sub_resource type="AtlasTexture" id=1181]
+atlas = ExtResource( 20 )
+region = Rect2( 400, 0, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=1182]
+atlas = ExtResource( 20 )
+region = Rect2( 320, 0, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=1183]
+atlas = ExtResource( 20 )
+region = Rect2( 240, 0, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=1184]
+atlas = ExtResource( 20 )
+region = Rect2( 160, 0, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=1185]
+atlas = ExtResource( 20 )
+region = Rect2( 80, 0, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=1186]
+atlas = ExtResource( 20 )
+region = Rect2( 0, 0, 80, 80 )
 
 [sub_resource type="AtlasTexture" id=1109]
 atlas = ExtResource( 9 )
@@ -778,6 +807,11 @@ animations = [ {
 "name": "dash",
 "speed": 23.0
 }, {
+"frames": [ SubResource( 1187 ) ],
+"loop": true,
+"name": "diagonal_dash",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 1128 ), SubResource( 1129 ), SubResource( 1130 ), SubResource( 1131 ), SubResource( 1132 ), SubResource( 1133 ), SubResource( 1139 ), SubResource( 1138 ) ],
 "loop": false,
 "name": "dodge",
@@ -812,6 +846,11 @@ animations = [ {
 "loop": false,
 "name": "ride",
 "speed": 23.0
+}, {
+"frames": [ SubResource( 1181 ), SubResource( 1182 ), SubResource( 1183 ), SubResource( 1184 ), SubResource( 1185 ), SubResource( 1186 ) ],
+"loop": false,
+"name": "rolling",
+"speed": 25.0
 }, {
 "frames": [ SubResource( 1109 ), SubResource( 1110 ), SubResource( 1111 ), SubResource( 1112 ), SubResource( 1113 ) ],
 "loop": false,

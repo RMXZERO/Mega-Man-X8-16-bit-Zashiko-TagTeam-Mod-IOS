@@ -22,8 +22,13 @@ func _Setup() -> void :
 	set_horizontal_speed(initial_speed * get_facing_direction())
 	Tools.timer(duration, "fire_laser", self)
 	Tools.tween(animatedSprite, "speed_scale", 2, duration)
+	max_beam_offset = 32
+	beam_1_offset = 0
+	beam_2_offset = 1.57
+	beam_3_offset = 3.14
 
 func _Update(_delta: float) -> void :
+	crash_beam_rotation(_delta)
 	if is_tracking():
 		if is_distant_enough():
 			var target_angle = get_angle_to(tracked.global_position)
@@ -33,6 +38,31 @@ func _Update(_delta: float) -> void :
 		else:
 			set_horizontal_speed(0)
 			set_vertical_speed(0)
+
+var max_beam_offset: float = 32
+var beam_1_offset: float = 0
+var beam_2_offset: float = 1.57
+var beam_3_offset: float = 3.14
+
+onready var beam_1 = animatedSprite.get_node("crash_beam")
+onready var beam_2 = animatedSprite.get_node("crash_beam2")
+onready var beam_3 = animatedSprite.get_node("crash_beam3")
+
+func crash_beam_rotation(delta: float) -> void :
+	if max_beam_offset > 0:
+		max_beam_offset -= delta * 16
+		beam_1_offset -= delta * 15 * get_facing_direction()
+		beam_2_offset -= delta * 15 * get_facing_direction()
+		beam_3_offset -= delta * 15 * get_facing_direction()
+		beam_1.visible = true
+		beam_2.visible = true
+		beam_3.visible = true
+	beam_1.position.y = GameManager.camera.get_camera_screen_center().y - position.y
+	beam_2.position.y = GameManager.camera.get_camera_screen_center().y - position.y
+	beam_3.position.y = GameManager.camera.get_camera_screen_center().y - position.y
+	beam_1.position.x = 0 + max_beam_offset * sin(beam_1_offset)
+	beam_2.position.x = 0 + max_beam_offset * sin(beam_2_offset)
+	beam_3.position.x = 0 + max_beam_offset * sin(beam_3_offset)
 
 func fire_laser() -> void :
 	var ground_position = Vector2(global_position.x, global_position.y + 256)

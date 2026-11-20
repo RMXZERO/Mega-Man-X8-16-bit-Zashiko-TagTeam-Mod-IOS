@@ -2,7 +2,7 @@ extends EventAbility
 
 export var first_decay := 1.25
 export var lifesteal_decay := 0.5
-export var minimum_time_between_heals := 0.2
+export var minimum_time_between_heals := 0.1
 var first_decayed := false
 var last_time_hit := 0.0
 var last_time_decay := 0.0
@@ -96,7 +96,7 @@ func remove_healable_amount (adjust : int):
 	if executing:
 		healable_amount -= adjust
 # warning-ignore:narrowing_conversion
-		healable_amount = clamp(healable_amount,0,16)
+		healable_amount = clamp(healable_amount,0,128)
 		Event.emit_signal("healable_amount", healable_amount, character)
 		Log("Healed through other means. Removed: " + str(adjust))
 		Log("Healable Amount: " + str(healable_amount))

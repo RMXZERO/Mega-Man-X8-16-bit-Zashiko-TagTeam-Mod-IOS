@@ -1,5 +1,7 @@
 extends AnimatedSprite
 
+onready var x_sprites: Resource = preload("res://src/Actors/Player/x_sprites/x.res")
+onready var x_x8_sprites: Resource = preload("res://X_mod/X8/Sprites/X_X8.tres")
 onready var option_holder: VBoxContainer = $"../Menu/OptionHolder"
 onready var shot = get_child(0)
 onready var initial_shot_pos: Vector2 = get_child(0).position
@@ -16,6 +18,15 @@ func _ready() -> void :
 		var _s = option.connect("focus_entered", self, "_on_focus", [option])
 		_s = option.connect("pressed", self, "_on_pressed", [option])
 	connect("animation_finished", self, "_on_anim_finished")
+	set_sprite()
+
+func set_sprite() -> void :
+	if CharacterManager.use_old_sprite:
+		frames = x_sprites
+		shot.animation = "loop"
+	else:
+		frames = x_x8_sprites
+		shot.animation = "loop2"
 
 func _on_focus(option) -> void :
 	initial_shot_pos = Vector2(13, 2)
@@ -28,7 +39,7 @@ func _process(_delta: float) -> void :
 		visible = menu.visible
 
 func _on_pressed(option) -> void :
-	if option.name != "Options" and option.name != "Keycfg" and option.name != "Loading" and option.name != "Leaderboards":
+	if option.name != "Options" and option.name != "Keycfg" and option.name != "Loading" and option.name != "Leaderboards" and option.name != "AndroidKeycfg":
 		if option.name != "GameStartZero":
 			shot.visible = true
 			shot.position = initial_shot_pos

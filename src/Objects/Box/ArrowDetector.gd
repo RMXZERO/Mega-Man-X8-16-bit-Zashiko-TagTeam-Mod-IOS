@@ -39,6 +39,12 @@ func _on_ArrowDetector_body_entered(body: Node) -> void :
 					on_saber_hit(40)
 				else:
 					on_saber_hit(1)
+		elif "SaberCharged" in body.name:
+			if body.upgraded:
+				if body.break_guards:
+					on_saber_hit(40)
+				else:
+					on_saber_hit(1)
 		elif "Rekkyoudan" in body.name:
 			if body.break_guards:
 				on_saber_hit(40)
@@ -75,11 +81,43 @@ func _on_ArrowDetector_body_entered(body: Node) -> void :
 				else:
 					on_saber_hit(5)
 		elif "Juuhazan" in body.name:
-			if body.upgraded:
-				if body.break_guards:
-					on_saber_hit(40)
-				else:
-					on_saber_hit(5)
+			if "Juuhazan_Charged_C" in body.name:
+				on_saber_hit(40)
+			elif "Juuhazan_Charged_B" in body.name:
+				on_saber_hit(40)
+			elif "Juuhazan_Charged" in body.name:
+				on_saber_hit(5)
+			else:
+				if body.upgraded:
+					if body.break_guards:
+						on_saber_hit(40)
+					else:
+						on_saber_hit(5)
+		elif "SqueezeBombCharged" in body.name:
+			if "Charged_B" in body.name:
+				on_saber_hit(5)
+			else:
+				on_darkarrow_hit(3)
+		elif "RogueSwordWave" in body.name:
+			on_darkarrow_hit(1)
+		elif "RogueWave" in body.name:
+			on_darkarrow_hit(3)
+		elif "SwordWave" in body.name:
+			on_darkarrow_hit(1)
+		elif "ZBuster" in body.name:
+			on_darkarrow_hit(1)
+		elif "HangerArrow" in body.name:
+			on_darkarrow_hit(1)
+		elif "Rekohouha" in body.name:
+			on_darkarrow_hit(3)
+		elif "Shingetsurin" in body.name:
+			on_darkarrow_hit(3)
+		elif "Genmuzerowave" in body.name:
+			on_darkarrow_hit(3)
+		elif "GenmuzeroCharged" in body.name:
+			on_saber_hit(40)
+		elif "Player_Desperation" in body.name:
+			on_darkarrow_hit(3)
 
 func on_saber_hit(amount: int) -> void :
 	blink()

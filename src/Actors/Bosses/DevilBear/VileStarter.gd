@@ -8,7 +8,7 @@ onready var vile_riding: CollisionShape2D = $"../DamageOnTouch/area2D/VileRiding
 
 func _ready() -> void:
 	Tools.timer(0.1,"get_health",self)
-
+	devilbear.connect("zero_health", self, "_on_took_damage")
 
 func get_health() -> void:
 	total_health = devilbear.current_health
@@ -18,6 +18,7 @@ func _on_took_damage() -> void:
 		Event.emit_signal("vile_eject",devilbear)
 		vile.visible = false
 		vile_riding.set_deferred("disabled",true)
+		devilbear.disconnect("zero_health", self, "_on_took_damage")
 		queue_free()
 	
 func has_taken_enough_damage() -> bool:

@@ -2,26 +2,34 @@ extends Character
 
 export  var skip_intro: bool = false
 
+onready var duringimage = $Dash/duringImage
+onready var airduringimage = $AirDash/duringImage
+
 onready var lowjumpcast: Label = $lowjumpcast
 onready var saber_node = get_node("Shot")
-onready var ability_animation: Resource = preload("res://Zero_mod/X8/Sprites/BossAbilities/ability_effects.tres")
+onready var ability_animation: Resource = preload("res://Zero_mod/X8/Sprites/Saber/BossAbilities/ability_effects.tres")
 
-onready var _saber_sprites: Resource = preload("res://Zero_mod/X8/Sprites/zerox8.tres")
+onready var _saber_sprites: Resource = preload("res://Zero_mod/X8/Sprites/Saber/zerox8.tres")
 onready var _fan_sprites: Resource = preload("res://Zero_mod/X8/Sprites/bfan/bfan.tres")
 onready var _glaive_sprites: Resource = preload("res://Zero_mod/X8/Sprites/dglaive/dglaive.tres")
 onready var _knuckle_sprites: Resource = preload("res://Zero_mod/X8/Sprites/kknuckle/zerox8knuckle.tres")
 onready var _breaker_sprites: Resource = preload("res://Zero_mod/X8/Sprites/tbreaker/tbreaker.tres")
-onready var _hanger_sprites: Resource = preload("res://Zero_mod/X8/Sprites/zerox8.tres")
-onready var _sigmablade_sprites: Resource = preload("res://Zero_mod/X8/Sprites/zerox8.tres")
+onready var _hanger_sprites: Resource = preload("res://Zero_mod/X8/Sprites/vhanger/vhanger.tres")
+onready var _zbuster_sprites: Resource = preload("res://Zero_mod/X8/Sprites/zbuster/zbuster.tres")
+onready var _rogueblade_sprites: Resource = preload("res://Zero_mod/X8/Sprites/rogueblade/rogueblade.tres")
+onready var _sigmablade_sprites: Resource = preload("res://Zero_mod/X8/Sprites/sigmablade/sigmablade.tres")
+onready var _genmuzero_sprites: Resource = preload("res://Zero_mod/X8/Sprites/Saber/zerox8.tres")
 
 onready var rekkyoudan_hitbox = preload("res://Zero_mod/Player/Hitboxes/Rekkyoudan_Hitbox.tscn")
 onready var saber_hitbox = preload("res://Zero_mod/Player/Hitboxes/Saber_Hitbox.tscn")
 onready var bfan_shield: = get_node("FanShield")
+onready var awakenaura_shield: = get_node("awakenaura")
 
 onready var saber_combo: = get_node("SaberCombo")
 onready var saber_dash: = get_node("SaberDash")
 onready var saber_jump: = get_node("SaberJump")
 onready var saber_wall: = get_node("SaberWall")
+onready var saber_charge: = get_node("SaberCharge")
 
 onready var knuckle_combo: = get_node("KnuckleCombo")
 onready var knuckle_dash: = get_node("KnuckleDash")
@@ -42,11 +50,15 @@ onready var skill_hyouryuushou: = get_node("Hyouryuushou")
 onready var skill_enkoujin: = get_node("Enkoujin")
 onready var skill_enkoukyaku: = get_node("Enkoukyaku")
 
+onready var skill_ryuenjin: = get_node("Ryuenjin")
+onready var skill_enkoujin_extra: = get_node("Enkoujin_Extra")
+
 onready var attack_nodes: Array = [
 	saber_combo, 
 	saber_dash, 
 	saber_jump, 
 	saber_wall, 
+	saber_charge, 
 	knuckle_combo, 
 	knuckle_dash, 
 	knuckle_jump, 
@@ -57,7 +69,9 @@ onready var attack_nodes: Array = [
 	skill_youdantotsu, 
 	skill_hyouryuushou, 
 	skill_enkoujin, 
-	skill_enkoukyaku
+	skill_enkoukyaku,
+	skill_ryuenjin,
+	skill_enkoujin_extra
 ]
 
 var Tenshouha: bool = false
@@ -76,6 +90,13 @@ var saber_animations = [
 	"saber_1", 
 	"saber_2", 
 	"saber_3", 
+	"saber_4", 
+	"saber_5", 
+	"saber_6", 
+	"saber_shot_normal", 
+	"saber_shot_fast1", 
+	"saber_shot_fast2", 
+	"saber_dash2", 
 	"saber_dash", 
 	"saber_jump", 
 	"saber_jump_1", 
@@ -86,10 +107,23 @@ var saber_animations = [
 	"rasetsusen", 
 	"tenshouha", 
 	"youdantotsu", 
+	"youdantotsua", 
+	"youdantotsuawaken", 
+	"youdantotsuawakena", 
 	"hyouryuushou", 
 	"hyouryuushou_air", 
 	"enkoujin", 
-	"raikousen", 
+	"raikousen",
+	"ryuenjin", 
+	"genmuzero",
+	"genmuzeroair",
+	"rekuhouha",
+	"victory",
+	"desperation",
+	"saber_ensuizan",
+	"charge_saber_jump",
+	"charge_saber_land",
+	"charge_sentsuizan",
 ]
 
 var current_armor: Array = ["no_head", "no_body", "no_arms", "no_legs"]
@@ -141,7 +175,7 @@ func combo_connection_youdantotsu() -> bool:
 func combo_connection_hyouryuushou() -> bool:
 	if get_action_pressed("dash"):
 		return false
-	if saber_node.current_weapon.name == "Saber" or saber_node.current_weapon.name == "D-Glaive":
+	if saber_node.current_weapon.name == "Saber" or saber_node.current_weapon.name == "D-Glaive" or saber_node.current_weapon.name == "Rogue-Blade" or saber_node.current_weapon.name == "Sigma-Blade":
 		var _animation = get_animation()
 		if _animation == "saber_1" and animatedSprite.frame >= 7:
 			return true
@@ -149,13 +183,14 @@ func combo_connection_hyouryuushou() -> bool:
 			return true
 		elif _animation == "saber_3" and animatedSprite.frame >= 8:
 			return true
-
-
-
-
-
-
+		elif _animation == "saber_4" and animatedSprite.frame >= 8:
+			return true
+		elif _animation == "saber_5" and animatedSprite.frame >= 10:
+			return true
+		elif _animation == "saber_6" and animatedSprite.frame >= 6:
+			return true
 	return false
+
 
 func deactivate() -> void :
 	stop_listening_to_inputs()
@@ -213,6 +248,9 @@ func update_facing_direction() -> void :
 	if animatedSprite.scale.x != get_facing_direction():
 		animatedSprite.scale.x = get_facing_direction()
 
+func get_material():
+	return animatedSprite.material
+
 func reactivate_charge() -> void :
 	block_charging = false
 
@@ -228,6 +266,8 @@ func _ready() -> void :
 	Event.listen("collected", self, "collect")
 	listen("land", self, "on_land")
 	equip_zero_parts()
+	call("equip_parts", "collectible")
+	CharacterManager.weaponget = false
 	if is_current_player:
 		GameManager.set_player(self)
 		Event.call_deferred("emit_signal", "player_set")
@@ -235,10 +275,12 @@ func _ready() -> void :
 	change_ride_chaser_sprites()
 	if not "z_saber_zero" in GameManager.collectibles:
 		GameManager.add_collectible_to_savedata("z_saber_zero")
+	if not "genmuzero_zero" in GameManager.collectibles:
+		GameManager.add_collectible_to_savedata("genmuzero_zero")
 
 func change_ride_chaser_sprites() -> void :
-	var _texture = load("res://Zero_mod/X8/Sprites/zero_ride_chaser.png")
-	var _reference_frames = load("res://Zero_mod/X8/Sprites/zerox8.tres")
+	var _texture = load("res://Zero_mod/X8/Sprites/Ride/zero_ride_chaser.png")
+	var _reference_frames = load("res://Zero_mod/X8/Sprites/Saber/zerox8.tres")
 	var _replace_animations = [
 		"empty", 
 	]
@@ -257,6 +299,7 @@ func _process(delta: float) -> void :
 	if ride_eject_delay >= 0:
 		ride_eject_delay -= delta
 	process_flash(delta)
+	update_duringimage_color()
 
 func process_flash(delta: float) -> void :
 	if flash_timer > 0:
@@ -264,33 +307,57 @@ func process_flash(delta: float) -> void :
 		if flash_timer > 0.034:
 			end_flash()
 
+func update_duringimage_color() -> void :
+	var initial_color: Color = Color("#00000000")
+	var material = $animatedSprite.get_material()
+	if material is ShaderMaterial:
+		initial_color = material.get_shader_param("R_AfterimagesColor")
+		duringimage.modulate = initial_color
+		airduringimage.modulate = initial_color
+
 func equip_zero_parts() -> void :
 	var dash = get_node("Dash")
 	var airdash = get_node("AirDash")
 	var airjump = get_node("AirJump")
 	var fall = get_node("Fall")
-	dash.invulnerability_duration = 0
-	airdash.upgraded = false
-	airdash.max_airdashes = 1
+	airdash.set_max_air_dash(1)
 	airjump.set_max_air_jumps(1)
 	airjump.upgraded = false
 	fall.upgraded = false
+
+	dash.upgraded = false
+	airdash.upgraded = false
+	dash.invulnerability_duration = 0
+	airdash.invulnerability_duration = 0
 	
+	dash.get_node("particles2D").texture = load("res://Zero_mod/Effects/follow_shot_hide.png")
+	airdash.get_node("particles2D").texture = load("res://Zero_mod/Effects/follow_shot_hide.png")
+
 	var lifesteal = get_node("LifeSteal")
-	lifesteal.deactivate()
+	lifesteal.activate()
+	lifesteal.first_decay = 0.5
+	lifesteal.lifesteal_decay = 0.5
+	lifesteal.minimum_time_between_heals = 0.2
 	
 	var dmg = get_node("Damage")
-	dmg.damage_reduction = 15
+	dmg.damage_reduction = 50
 	dmg.prevent_knockbacks = false
 	dmg.conflicting_moves = ["Death", "WallSlide", "Ride"]
 	
-	
-	dash.horizontal_velocity = 260
-	airdash.horizontal_velocity = 260
-	saber_dash.horizontal_velocity = 260
-	fall.dashjump_speed = 260
+	dash.horizontal_velocity = 300
+	airdash.horizontal_velocity = 300
+	saber_dash.horizontal_velocity = 300
+	saber_jump.horizontal_velocity = 300
+	saber_jump.dashjump_speed = 300
+	knuckle_jump.dashjump_speed = 300
+	get_node("DashJump").horizontal_velocity = 300
+	get_node("DashWallJump").horizontal_velocity = 300
+	airjump.dashjump_speed = 300
+	fall.dashjump_speed = 300
+	skill_rasetsusen.dashjump_speed = 300
 	var _afterimage = animatedSprite.get_node("afterImages")
 	_afterimage.upgraded = false
+	
 
 	
 	if CharacterManager.NO_MOVEMENT_CHALLENGE:
@@ -317,42 +384,73 @@ func equip_zero_parts() -> void :
 		_saber_node.hitbox_extra_break_guard_value = dmg_multiplikator
 
 	skill_youdantotsu.hitbox_upgraded = true
+	skill_youdantotsu.start_speed = 500
+	skill_raikousen.start_speed = 900
 	for node in attack_nodes:
 		if node != skill_youdantotsu:
 			node.hitbox_upgraded = false
 	skill_rasetsusen.upgraded = false
 	bfan_shield.hitbox_upgraded = false
+	awakenaura_shield.hitbox_upgraded = true
+
+	var genmuzero_ammo = get_node("Special").get_node("Genmuzero")
+	var genmuzero = get_node("Genmuzero")
+	var desperation = get_node("Desperation")
+	genmuzero_ammo.reduce_ammo_at_start = false
+	genmuzero_ammo.recover_ammo = 0.5
+	genmuzero_ammo.upgraded_recover_ammo = 0.5
+	genmuzero_ammo.recharge_ammo = 1.0
+	genmuzero.genmuzero_damage = 80
+	genmuzero.upgraded = false #double wave genmuzero
+	genmuzero.checkmate = false
+	desperation.desperation_reduce_ammo = 0.75
+	desperation.desperation_damage = 5
+	desperation.extra_damage = dmg_multiplikator
+	#z_buster#
+	saber_combo.use_shingetsurin = false
+	saber_jump.use_shingetsurin = false
+	saber_wall.use_shingetsurin = false
 
 func equip_black_zero_parts() -> void :
 	var dash = get_node("Dash")
 	var airdash = get_node("AirDash")
 	var airjump = get_node("AirJump")
 	var fall = get_node("Fall")
-	dash.invulnerability_duration = 0
-	airdash.upgraded = false
-	airdash.max_airdashes = 2
+	airdash.set_max_air_dash(2)
 	airjump.set_max_air_jumps(2)
 	airjump.upgraded = true
 	fall.upgraded = true
-	
+
+	dash.upgraded = true
+	airdash.upgraded = true
+	dash.invulnerability_duration = 1.0
+	airdash.invulnerability_duration = 1.0
+
+	dash.get_node("particles2D").texture = load("res://Zero_mod/Effects/follow_shot_hide.png")
+	airdash.get_node("particles2D").texture = load("res://Zero_mod/Effects/follow_shot_hide.png")
+
 	var lifesteal = get_node("LifeSteal")
 	lifesteal.activate()
 	lifesteal.first_decay = 1.5
-	lifesteal.lifesteal_decay = 0.75
-	lifesteal.minimum_time_between_heals = 0.3
+	lifesteal.lifesteal_decay = 0.65
+	lifesteal.minimum_time_between_heals = 0.1
 	
 	var dmg = get_node("Damage")
-	dmg.damage_reduction = 15
+	dmg.damage_reduction = 0
 	dmg.prevent_knockbacks = true
 	dmg.conflicting_moves = ["Death", "Nothing"]
-	
 	
 	dash.horizontal_velocity = 300
 	airdash.horizontal_velocity = 300
 	saber_dash.horizontal_velocity = 300
+	saber_jump.horizontal_velocity = 300
+	saber_jump.dashjump_speed = 300
+	knuckle_jump.dashjump_speed = 300
 	get_node("DashJump").horizontal_velocity = 300
 	get_node("DashWallJump").horizontal_velocity = 300
+	airjump.dashjump_speed = 300
 	fall.dashjump_speed = 300
+	skill_rasetsusen.dashjump_speed = 300
 	var _afterimage = animatedSprite.get_node("afterImages")
 	_afterimage.upgraded = true
 	
@@ -373,40 +471,66 @@ func equip_black_zero_parts() -> void :
 		fall.fall_base_velocity = 0.0
 	
 	
-	var dmg_multiplikator = 1.2
+	var dmg_multiplikator = 1.5
 	for node in attack_nodes:
 		node.hitbox_upgraded = true
 		node.hitbox_extra_damage = dmg_multiplikator
 		node.hitbox_extra_damage_boss = dmg_multiplikator
 		node.hitbox_extra_damage_weakness = dmg_multiplikator
 		node.hitbox_extra_break_guard_value = dmg_multiplikator
+	skill_youdantotsu.start_speed = 500
+	skill_raikousen.start_speed = 900
 	skill_rasetsusen.upgraded = true
 	bfan_shield.hitbox_upgraded = true
+	awakenaura_shield.hitbox_upgraded = true
 
-func equip_custom_zero_parts() -> void :
+	var genmuzero_ammo = get_node("Special").get_node("Genmuzero")
+	var genmuzero = get_node("Genmuzero")
+	var desperation = get_node("Desperation")
+	genmuzero_ammo.reduce_ammo_at_start = false
+	genmuzero_ammo.recover_ammo = 0.5
+	genmuzero_ammo.upgraded_recover_ammo = 0.5
+	genmuzero_ammo.recharge_ammo = 1.0
+	genmuzero.genmuzero_damage = 80
+	genmuzero.upgraded = false #double wave genmuzero
+	genmuzero.checkmate = false
+	desperation.desperation_reduce_ammo = 0.75
+	desperation.desperation_damage = 5
+	desperation.extra_damage = dmg_multiplikator
+	#z_buster#
+	saber_combo.use_shingetsurin = false
+	saber_jump.use_shingetsurin = false
+	saber_wall.use_shingetsurin = false
+
+func equip_awakened_zero_parts() -> void :
 	spike_invincibility = true
 	var dash = get_node("Dash")
 	var airdash = get_node("AirDash")
 	var airjump = get_node("AirJump")
 	var fall = get_node("Fall")
-	dash.invulnerability_duration = 0
-	airdash.upgraded = false
-	airdash.max_airdashes = 3
-	airjump.set_max_air_jumps(3)
+	airdash.set_max_air_dash(4)
+	airjump.set_max_air_jumps(4)
 	airjump.upgraded = true
 	fall.upgraded = true
-	
+
+	dash.upgraded = true
+	airdash.upgraded = true
+	dash.invulnerability_duration = 1.0
+	airdash.invulnerability_duration = 1.0
+
+	dash.get_node("particles2D").texture = load("res://Zero_mod/Effects/follow_shot_hide.png")
+	airdash.get_node("particles2D").texture = load("res://Zero_mod/Effects/follow_shot_hide.png")
+
 	var lifesteal = get_node("LifeSteal")
 	lifesteal.activate()
-	lifesteal.first_decay = 1.5
-	lifesteal.lifesteal_decay = 1.5
+	lifesteal.first_decay = 5.0
+	lifesteal.lifesteal_decay = 2.5
 	lifesteal.minimum_time_between_heals = 0.1
 	
 	var dmg = get_node("Damage")
-	dmg.damage_reduction = 99
+	dmg.damage_reduction = 80
 	dmg.prevent_knockbacks = true
 	dmg.conflicting_moves = ["Death", "Nothing"]
-	
 	
 	get_node("Jump").max_jump_time = 0.75
 	get_node("Jump").jump_velocity = 420
@@ -423,9 +547,15 @@ func equip_custom_zero_parts() -> void :
 	dash.horizontal_velocity = 400
 	airdash.horizontal_velocity = 400
 	saber_dash.horizontal_velocity = 400
+	saber_jump.horizontal_velocity = 400
+	saber_jump.dashjump_speed = 400
+	knuckle_jump.dashjump_speed = 400
+	get_node("SaberJump").horizontal_velocity = 400
 	get_node("DashJump").horizontal_velocity = 400
 	get_node("DashWallJump").horizontal_velocity = 400
+	airjump.dashjump_speed = 400
 	fall.dashjump_speed = 400
+	skill_rasetsusen.dashjump_speed = 400
 	var _afterimage = animatedSprite.get_node("afterImages")
 	_afterimage.upgraded = true
 	
@@ -446,6 +576,55 @@ func equip_custom_zero_parts() -> void :
 		fall.fall_base_velocity = 0.0
 	
 	
+	var dmg_multiplikator = 1.5
+	for node in attack_nodes:
+		node.hitbox_upgraded = true
+		node.hitbox_extra_damage = dmg_multiplikator
+		node.hitbox_extra_damage_boss = dmg_multiplikator
+		node.hitbox_extra_damage_weakness = dmg_multiplikator
+		node.hitbox_extra_break_guard_value = dmg_multiplikator
+	skill_youdantotsu.start_speed = 1000
+	skill_raikousen.start_speed = 1500
+	skill_rasetsusen.upgraded = true
+	bfan_shield.hitbox_upgraded = true
+	awakenaura_shield.hitbox_upgraded = true
+
+	var genmuzero_ammo = get_node("Special").get_node("Genmuzero")
+	var genmuzero = get_node("Genmuzero")
+	var desperation = get_node("Desperation")
+	genmuzero_ammo.reduce_ammo_at_start = true
+	genmuzero_ammo.recover_ammo = 0.5
+	genmuzero_ammo.upgraded_recover_ammo = 10
+	genmuzero_ammo.recharge_ammo = 0
+	genmuzero.genmuzero_damage = 256
+	genmuzero.upgraded = true #double wave genmuzero
+	genmuzero.checkmate = false
+	desperation.desperation_reduce_ammo = 0.375
+	desperation.desperation_damage = 5
+	desperation.extra_damage = dmg_multiplikator
+	#z_buster#
+	saber_combo.use_shingetsurin = true
+	saber_jump.use_shingetsurin = true
+	saber_wall.use_shingetsurin = true
+
+func equip_custom_zero_parts() -> void :
+	var _afterimage = animatedSprite.get_node("afterImages")
+	_afterimage.upgraded = true
+
+func equip_awakened_zero_up_parts() -> void :
+	var lifesteal = get_node("LifeSteal")
+	lifesteal.activate()
+	lifesteal.first_decay = 10.0
+	lifesteal.lifesteal_decay = 5.0
+	lifesteal.minimum_time_between_heals = 0.1
+	
+	var dmg = get_node("Damage")
+	dmg.damage_reduction = 99
+	dmg.prevent_knockbacks = true
+	dmg.conflicting_moves = ["Death", "Nothing"]
+	var _afterimage = animatedSprite.get_node("afterImages")
+	_afterimage.upgraded = true
+	
 	var dmg_multiplikator = 2.0
 	for node in attack_nodes:
 		node.hitbox_upgraded = true
@@ -453,21 +632,74 @@ func equip_custom_zero_parts() -> void :
 		node.hitbox_extra_damage_boss = dmg_multiplikator
 		node.hitbox_extra_damage_weakness = dmg_multiplikator
 		node.hitbox_extra_break_guard_value = dmg_multiplikator
+	skill_youdantotsu.start_speed = 1000
+	skill_raikousen.start_speed = 1500
 	skill_rasetsusen.upgraded = true
 	bfan_shield.hitbox_upgraded = true
+	awakenaura_shield.hitbox_upgraded = true
+	
+	var genmuzero_ammo = get_node("Special").get_node("Genmuzero")
+	var genmuzero = get_node("Genmuzero")
+	var desperation = get_node("Desperation")
+	genmuzero_ammo.reduce_ammo_at_start = false
+	genmuzero_ammo.recover_ammo = 120
+	genmuzero_ammo.upgraded_recover_ammo = 120
+	genmuzero_ammo.recharge_ammo = 0
+	genmuzero.genmuzero_damage = 512
+	genmuzero.upgraded = true #double wave genmuzero
+	genmuzero.checkmate = false
+	desperation.desperation_reduce_ammo = 0.1875
+	desperation.desperation_damage = 5
+	desperation.extra_damage = dmg_multiplikator
+	#z_buster#
+	saber_combo.use_shingetsurin = true
+	saber_jump.use_shingetsurin = true
+	saber_wall.use_shingetsurin = true
+	
+func equip_axl_flameburner_parts() -> void :
+	var dmg_multiplikator = 1.5
+	var desperation = get_node("Desperation")
+	if CharacterManager.black_zero_armor or CharacterManager.awakened_zero_armor:
+		dmg_multiplikator = 2.25
+	elif CharacterManager.awakened_zero_full_power_max and CharacterManager.awakened_zero_armor:
+		dmg_multiplikator = 3
+	else:
+		dmg_multiplikator = 1.5
+	for node in attack_nodes:
+		node.hitbox_upgraded = true
+		node.hitbox_extra_damage = dmg_multiplikator
+		node.hitbox_extra_damage_boss = dmg_multiplikator
+		node.hitbox_extra_damage_weakness = dmg_multiplikator
+		node.hitbox_extra_break_guard_value = dmg_multiplikator
+		desperation.extra_damage = dmg_multiplikator
+	
+func equip_cancel_axl_flameburner_parts() -> void :
+	var dmg_multiplikator = 1
+	var desperation = get_node("Desperation")
+	if CharacterManager.black_zero_armor or CharacterManager.awakened_zero_armor:
+		dmg_multiplikator = 1.5
+	elif CharacterManager.awakened_zero_full_power_max and CharacterManager.awakened_zero_armor:
+		dmg_multiplikator = 2
+	else:
+		dmg_multiplikator = 1
+	for node in attack_nodes:
+		node.hitbox_upgraded = true
+		node.hitbox_extra_damage = dmg_multiplikator
+		node.hitbox_extra_damage_boss = dmg_multiplikator
+		node.hitbox_extra_damage_weakness = dmg_multiplikator
+		node.hitbox_extra_break_guard_value = dmg_multiplikator
+		desperation.extra_damage = dmg_multiplikator
+
+func equip_color_parts() -> void :
+	var _afterimage = animatedSprite.get_node("afterImages")
+	_afterimage.upgraded = true
+	_afterimage.duration = 0.4
+
+func _Update(_delta: float) -> void :
+	pass
 
 func is_full_armor() -> String:
-	var armor_set: = 0
-	for piece in current_armor:
-		if "hermes" in piece:
-			armor_set += 1
-		elif "icarus" in piece:
-			armor_set -= 1
-	if armor_set == 4:
-		return "hermes"
-	elif armor_set == - 4:
-		return "icarus"
-	return "no_armor"
+	return "zero"
 
 func equip_parts(collectible: String) -> void :
 	CharacterManager.set_zeroX8_colors(animatedSprite)
@@ -480,7 +712,23 @@ func equip_parts(collectible: String) -> void :
 		
 	if CharacterManager.custom_zero_armor:
 		equip_custom_zero_parts()
+		
+	if CharacterManager.awakened_zero_armor:
+		equip_awakened_zero_parts()
+		
+	if CharacterManager.awakened_zero_full_power_max and CharacterManager.awakened_zero_armor:
+		equip_awakened_zero_up_parts()
 		using_upgrades = true
+		
+	if CharacterManager.ultimate_buster:
+		using_upgrades = true
+		
+	if CharacterManager.player_desperation:
+		get_node("Desperation").active = true
+		using_upgrades = true
+		
+	if CharacterManager.extra_saber_color:
+		equip_color_parts()
 		
 	if is_heart(collectible):
 		equip_heart()

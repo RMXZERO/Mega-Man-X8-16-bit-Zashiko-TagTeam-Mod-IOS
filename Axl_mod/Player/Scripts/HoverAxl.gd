@@ -44,6 +44,8 @@ func reduce_air_jumps(amount: = 1):
 	current_air_jumps -= amount
 
 func _StartCondition() -> bool:
+	if character.is_executing("SaberCombo"):
+		return false
 	var _animation = get_parent().get_animation()
 	if _animation == "dodge":
 		return false
@@ -120,11 +122,6 @@ func _Update(_delta: float) -> void :
 		change_animation_if_falling("fall")
 		set_movement_and_direction(horizontal_velocity)
 		process_gravity(_delta)
-		
-
-
-
-
 
 func reset_interrupt_bools():
 	should_end_walljump = false
@@ -145,6 +142,7 @@ func interrupt(ability: String):
 
 func _Interrupt() -> void :
 	character.dashfall = false
+	$audioStreamPlayer.playing = false
 	._Interrupt()
 	reset_hover_effect()
 
@@ -168,6 +166,8 @@ func Has_time_ran_out() -> bool:
 	return max_jump_time < timer
 
 func _EndCondition() -> bool:
+	if character.is_executing("SaberCombo"):
+		return true
 	if Has_time_ran_out() and not upgraded:
 		reset_hover_effect()
 		return true

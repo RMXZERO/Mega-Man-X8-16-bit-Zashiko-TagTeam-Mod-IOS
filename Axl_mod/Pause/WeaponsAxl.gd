@@ -42,6 +42,9 @@ func show_weapons() -> void :
 	for weapon in weapons:
 		if weapon.name in GameManager.collectibles:
 			weapon.visible = true
+		elif weapon.name == "Giga Impact":
+			if GameManager.is_player_in_scene():
+				weapon.visible = GameManager.player.is_full_armor() == "axl"
 		else:
 			weapon.visible = false
 	weapons[0].visible = true

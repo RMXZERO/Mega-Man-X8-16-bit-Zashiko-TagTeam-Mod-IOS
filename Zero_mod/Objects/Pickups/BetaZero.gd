@@ -101,6 +101,6 @@ func unlock_black_zero_armor(zero) -> void :
 	CharacterManager.betazero_unlocked = true
 
 func achievement_check() -> void :
-	
+	Achievements.unlock("COLLECTBETAZERO")
 	Savefile.save(Savefile.save_slot)
 	CharacterManager._save()

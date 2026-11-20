@@ -18,6 +18,8 @@ func _ready() -> void :
 	character.get_node("animatedSprite").connect("animation_finished", self, "_on_animatedSprite_animation_finished")
 
 func _StartCondition() -> bool:
+	if character.is_executing("SaberCombo"):
+		return false
 	var _animation = get_parent().get_animation()
 	if character.is_shooting and _animation in excluded_animations:
 		return false
@@ -53,6 +55,8 @@ func _Update(_delta: float) -> void :
 	update_bonus_horizontal_only_conveyor()
 
 func _EndCondition() -> bool:
+	if character.is_executing("SaberCombo"):
+		return true
 	if not character.is_on_floor():
 		return true
 	

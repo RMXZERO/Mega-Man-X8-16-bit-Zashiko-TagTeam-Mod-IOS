@@ -104,6 +104,8 @@ func _ready() -> void :
 	save_original_colors()
 	GameManager.set_player(self)
 	Event.call_deferred("emit_signal", "player_set")
+	CharacterManager.switch_armor_in_stage = false
+	print("start level as base x, need block switch armor")
 
 func get_armor_sprites() -> Array:
 	var sprites = []

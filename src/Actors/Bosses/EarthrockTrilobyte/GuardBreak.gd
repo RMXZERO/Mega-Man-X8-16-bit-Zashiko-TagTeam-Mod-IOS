@@ -7,6 +7,10 @@ var armor : Node2D
 signal removed_armor
 signal created_armor(armor)
 
+func _ready():
+	break_vfx.frame = 9
+	break_vfx.visible = true
+
 func _on_guard_break(projectile) -> void:
 	if not is_instance_valid(armor):
 		armor = armor_scene.instance()

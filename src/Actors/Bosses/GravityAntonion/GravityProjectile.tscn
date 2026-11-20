@@ -98,7 +98,6 @@ material = SubResource( 63 )
 z_index = 1
 frames = ExtResource( 15 )
 animation = "idle"
-frame = 13
 playing = true
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="."]

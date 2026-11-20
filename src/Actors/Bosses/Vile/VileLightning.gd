@@ -1,6 +1,7 @@
 extends AttackAbility
 
 export  var damage_reduction: = 0.5
+export  var axl_ver: bool = false
 var desperation_finished: = false
 onready var lightnings: = [$VileLightning, $VileLightning3, $VileLightning5]
 onready var lightnings2: = [$VileLightning2, $VileLightning4, $VileLightning6]
@@ -126,11 +127,16 @@ func generate_lighting_pattern(
 		"sequence": sequence
 	}
 
+func _ready() -> void :
+	._ready()
+	visible = true
+
 func _Setup() -> void :
 	desperation_damage_reduction = CharacterManager.boss_damage_reduction / 2
 	character.emit_signal("damage_reduction", desperation_damage_reduction)
-	deactivate_ground_attacks()
-	activate_air_attacks()
+	if not axl_ver:
+		deactivate_ground_attacks()
+		activate_air_attacks()
 	desperation_finished = false
 
 func _Update(_delta: float) -> void :
@@ -265,7 +271,10 @@ func move_upward() -> void :
 func go_to_center() -> void :
 	tween.create(Tween.EASE_IN_OUT, Tween.TRANS_CUBIC)
 	var final_pos = space.get_center()
-	final_pos.y += 8
+	if axl_ver:
+		final_pos.y -= 32
+	else:
+		final_pos.y += 8
 	tween.add_attribute("global_position", final_pos, 1.25, character)
 	tween.add_callback("at_center")
 

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://src/DialogSystem/Profiles/DialogueText.gd" type="Script" id=1]
+[ext_resource path="res://Axl_mod/DialogSystem/Profiles/Axl.tres" type="Resource" id=2]
+[ext_resource path="res://Zero_mod/Boss_DJSigma/Dialogue/Profiles/DJSigma.tres" type="Resource" id=3]
+[ext_resource path="res://Axl_mod/DialogSystem/Profiles/Axl_Serious.tres" type="Resource" id=4]
+
+[resource]
+script = ExtResource( 1 )
+dialog = [ ExtResource( 3 ), "DJSIGMA1_AXL", "DJSIGMA2_AXL", ExtResource( 4 ), "DJSIGMA3_AXL", ExtResource( 3 ), "DJSIGMA4_AXL", ExtResource( 4 ), "DJSIGMA5_AXL", ExtResource( 3 ), "DJSIGMA6_AXL", ExtResource( 2 ), "DJSIGMA7_AXL", "DJSIGMA8_AXL", ExtResource( 3 ), "DJSIGMA9_AXL", "DJSIGMA10_AXL", ExtResource( 2 ), "DJSIGMA11_AXL", ExtResource( 3 ), "DJSIGMA12_AXL", "DJSIGMA13_AXL", ExtResource( 2 ), "DJSIGMA14_AXL", "DJSIGMA15_AXL" ]

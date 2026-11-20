@@ -23,7 +23,6 @@ time_off_screen = 1.0
 [node name="animatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "intro"
-frame = 7
 playing = true
 flip_h = true
 

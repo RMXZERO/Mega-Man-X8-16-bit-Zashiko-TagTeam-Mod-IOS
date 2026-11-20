@@ -12,7 +12,7 @@ func _on_area2D_body_entered(body: Node) -> void :
 			bodies.append(body.get_parent())
 			set_physics_process(true)
 		else:
-			if CharacterManager.game_mode > 0:
+			if CharacterManager.game_mode > 2:
 				return
 				
 			if detect_charged and body.name == "DriftDiamondCharged":

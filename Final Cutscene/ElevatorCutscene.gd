@@ -6,6 +6,8 @@ export  var song2_intro: AudioStream
 export  var song2_loop: AudioStream
 onready var musicplayer: AudioStreamPlayer = $Music_Player
 onready var dialog_box: Label = $DialogBox
+onready var problem_demake: AudioStream = preload("res://Remix/Songs/Problem.mp3")
+onready var fate_to_fight_demake: AudioStream = preload("res://Remix/Songs/Fate to Fight.ogg")#Not ready
 export  var text_second_dialog: Resource
 var second_dialog: = false
 
@@ -23,6 +25,8 @@ onready var loop: AudioStreamPlayer2D = $Visuals / ElevatorPlatform / loop
 onready var x: AnimatedSprite = get_node("Visuals").get_node("ElevatorPlatform").get_node("X")
 onready var axl: AnimatedSprite = get_node("Visuals").get_node("ElevatorPlatform").get_node("Axl")
 onready var zero: AnimatedSprite = get_node("Visuals").get_node("ElevatorPlatform").get_node("Zero")
+onready var x_sprites: Resource = preload("res://src/Actors/Player/x_sprites/x.res")
+onready var x_x8_sprites: Resource = preload("res://X_mod/X8/Sprites/X_X8.tres")
 
 onready var victory_sfx = $victory
 
@@ -30,7 +34,15 @@ var fade_out_duration = 3.0
 
 signal movement_finished(sprite, animation)
 
+func axl_credits():
+	CharacterManager.set_axl_normal_colors(axl)
+
+func zero_credits():
+	CharacterManager.set_zeroX8_normal_colors(zero)
+
 func _ready() -> void :
+	axl_credits()
+	zero_credits()
 	CharacterManager.white_axl_armor = false
 	CharacterManager.black_zero_armor = false
 	screencover.visible = true
@@ -38,7 +50,10 @@ func _ready() -> void :
 	Tools.timer(4, "start_dialog", self)
 	Tools.timer(0.1, "start_music", self)
 	Event.connect("character_talking", self, "on_talk")
-	
+	if CharacterManager.use_old_sprite:
+		x.frames = x_sprites
+	else:
+		x.frames = x_x8_sprites
 
 func on_talk(character_name: String):
 		if character_name == "Zero":
@@ -48,7 +63,11 @@ func on_talk(character_name: String):
 
 func start_music():
 	#song_loop.loop = false
-	musicplayer.play_song(song_loop, false)
+	if Configurations.exists("SongRemix"):
+		if Configurations.get("SongRemix"):
+			musicplayer.play_song(problem_demake, false)
+		else:
+			musicplayer.play_song(song_loop, false)
 
 func start_dialog():
 	dialog_box.startup()
@@ -58,7 +77,11 @@ func start_second_dialog():
 	musicplayer.fast_fade_out = false
 	musicplayer.volume_db = 0
 	musicplayer.playing = true
-	musicplayer.play_song(song2_loop, false)
+	if Configurations.exists("SongRemix"):
+		if Configurations.get("SongRemix"):
+			musicplayer.play_song(fate_to_fight_demake, false)
+		else:
+			musicplayer.play_song(song2_loop, false)
 	second_dialog = true
 	dialog_box.dialog_tree = text_second_dialog
 	dialog_box.startup()

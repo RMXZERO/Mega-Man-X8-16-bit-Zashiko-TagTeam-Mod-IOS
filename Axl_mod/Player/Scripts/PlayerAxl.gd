@@ -3,7 +3,6 @@ class_name Axl
 
 export  var skip_intro: bool = false
 
-
 onready var _sprites_pistol_A: Resource = preload("res://Axl_mod/Player/Sprites/axl.tres")
 onready var _sprites_pistol_B: Resource = preload("res://Axl_mod/Player/Sprites/axl_pistol.tres")
 
@@ -126,10 +125,14 @@ func _ready() -> void :
 	Event.listen("collected", self, "collect")
 	listen("land", self, "on_land")
 	equip_axl_parts()
+	call("equip_parts", "collectible")
 	save_original_colors()
+	CharacterManager.weaponget = false
 	if is_current_player:
 		GameManager.set_player(self)
 		Event.call_deferred("emit_signal", "player_set")
+	if not "axl_giga_crash" in GameManager.collectibles:
+		GameManager.add_collectible_to_savedata("axl_giga_crash")
 
 func get_armor_sprites() -> Array:
 	var sprites = []
@@ -166,12 +169,16 @@ func process_flash(delta: float) -> void :
 
 func equip_axl_parts() -> void :
 	get_node("JumpDamage").deactivate()
-	get_node("LifeSteal").deactivate()
+	var lifesteal = get_node("LifeSteal")
+	lifesteal.activate()
+	lifesteal.first_decay = 0.5
+	lifesteal.lifesteal_decay = 0.5
+	lifesteal.minimum_time_between_heals = 0.2
 	var dmg = get_node("Damage")
 	dmg.damage_reduction = 0
 	dmg.prevent_knockbacks = false
 	dmg.conflicting_moves = ["Death", "WallSlide", "Ride"]
-	
+
 	var shot = get_node("Shot")
 	shot.update_list_of_weapons()
 	shot.ammo_cost_reduction = 1
@@ -179,36 +186,59 @@ func equip_axl_parts() -> void :
 	shot.set_current_weapon(normal_pistol)
 	var dash = get_node("Dash")
 	dash.dash_duration = 0.55
-	dash.horizontal_velocity = 210
+	dash.horizontal_velocity = 260
 	var airdash = get_node("AirDash")
-	airdash.upgraded = false
+	airdash.upgraded = true
 	airdash.dash_duration = 0.55
-	airdash.horizontal_velocity = 210
-	airdash.max_airdashes = 1
-	airdash.airdash_count = 1
+	airdash.horizontal_velocity = 260
+	airdash.max_airdashes = 2
+	airdash.airdash_count = 2
 	var hover = get_node("Hover")
 	hover.upgraded = false
 	hover.horizontal_velocity = 90
 	hover.vertical_velocity = 30
-	get_node("DashWallJump").horizontal_velocity = 210
-	get_node("DashJump").horizontal_velocity = 210
-	get_node("Fall").dash_momentum = 210
+	get_node("DashWallJump").horizontal_velocity = 260
+	get_node("DashJump").horizontal_velocity = 260
+	get_node("Fall").dash_momentum = 260
+	var _afterimagen = animatedSprite.get_node("afterImagesn")
+	_afterimagen.upgraded = true
+
+	var player_shot_node: = get_node("Shot")
+	var player_altshot_node: = get_node("AltFire")
+	var player_giga_crash: = get_node("Special").get_node("GigaCrash")
+	var desperation: = get_node("Desperation")
+	var dmg_multiplikator = 1.0
+	var shot_delay = 1.0
+	var bullet_speed = 1.0
+
+	desperation.desperation_reduce_ammo = 1.0
+	desperation.desperation_damage = 3
+	player_giga_crash.recover_ammo = false
+	player_giga_crash.recover_speed = 0
+	
+	for shots in player_shot_node.get_children():
+		if shots is WeaponAxl:
+			shots.extra_damage = dmg_multiplikator
+			shots.extra_delay = shot_delay
+			shots.extra_speed = bullet_speed
+	for shots in player_altshot_node.get_children():
+		if shots is WeaponAxl:
+			shots.extra_damage = dmg_multiplikator
+			shots.extra_delay = shot_delay
+			shots.extra_speed = bullet_speed
 
 func equip_axl_white_parts() -> void :
 	get_node("JumpDamage").deactivate()
 	var lifesteal = get_node("LifeSteal")
 	lifesteal.activate()
-	lifesteal.first_decay = 0.5
-	lifesteal.lifesteal_decay = 0.5
-	lifesteal.minimum_time_between_heals = 0.2
+	lifesteal.first_decay = 1.5
+	lifesteal.lifesteal_decay = 0.65
+	lifesteal.minimum_time_between_heals = 0.1
 	var dmg = get_node("Damage")
 	dmg.damage_reduction = 30
 	dmg.prevent_knockbacks = true
 	dmg.conflicting_moves = ["Death", "Nothing"]
 
-
-
-	
 	var shot = get_node("Shot")
 	shot.update_list_of_weapons()
 	shot.ammo_cost_reduction = 0.5
@@ -217,80 +247,114 @@ func equip_axl_white_parts() -> void :
 	var _transform = shot.get_node("Transform")
 	_transform.ammo_per_shot = 0
 	var dash = get_node("Dash")
-	dash.dash_duration = 0.65
-	dash.horizontal_velocity = 260
+	dash.dash_duration = 0.44
+	dash.horizontal_velocity = 300
 	var airdash = get_node("AirDash")
 	airdash.upgraded = true
-	airdash.dash_duration = 0.65
-	airdash.horizontal_velocity = 260
-	airdash.max_airdashes = 2
-	airdash.airdash_count = 2
+	airdash.dash_duration = 0.44
+	airdash.horizontal_velocity = 300
+	airdash.max_airdashes = 4
+	airdash.airdash_count = 4
 	var hover = get_node("Hover")
 	hover.upgraded = true
 	hover.horizontal_velocity = 115
 	hover.vertical_velocity = 90
-	get_node("DashWallJump").horizontal_velocity = 260
-	get_node("DashJump").horizontal_velocity = 260
-	get_node("Fall").dash_momentum = 260
+	get_node("DashWallJump").horizontal_velocity = 300
+	get_node("DashJump").horizontal_velocity = 300
+	get_node("Fall").dash_momentum = 300
+	var _afterimagen = animatedSprite.get_node("afterImagesn")
+	_afterimagen.upgraded = true
 
-func equip_hermes_head_parts():
-	get_node("JumpDamage").deactivate()
-func equip_icarus_head_parts():
-	get_node("JumpDamage").deactivate()
-func equip_hermes_body_parts():
+	var player_shot_node: = get_node("Shot")
+	var player_altshot_node: = get_node("AltFire")
+	var player_giga_crash: = get_node("Special").get_node("GigaCrash")
+	var desperation: = get_node("Desperation")
+	var dmg_multiplikator = 1.2
+	var shot_delay = 0.8
+	var bullet_speed = 1.2
+
+	desperation.desperation_reduce_ammo = 0.75
+	desperation.desperation_damage = 4
+	player_giga_crash.recover_ammo = false
+	player_giga_crash.recover_speed = 0
+	
+	for shots in player_shot_node.get_children():
+		if shots is WeaponAxl:
+			shots.extra_damage = dmg_multiplikator
+			shots.extra_delay = shot_delay
+			shots.extra_speed = bullet_speed
+	for shots in player_altshot_node.get_children():
+		if shots is WeaponAxl:
+			shots.extra_damage = dmg_multiplikator
+			shots.extra_delay = shot_delay
+			shots.extra_speed = bullet_speed
+
+func equip_cheat_axl_parts() -> void :
+	spike_invincibility = true
+	var player_shot_node: = get_node("Shot")
+	var player_altshot_node: = get_node("AltFire")
+	var player_giga_crash: = get_node("Special").get_node("GigaCrash")
+	var desperation: = get_node("Desperation")
+	var dmg_multiplikator = 2.0
+	var shot_delay = 0.5
+	var bullet_speed = 1.5
+	
+	desperation.desperation_reduce_ammo = 0.5
+	desperation.desperation_damage = 6
+	player_giga_crash.recover_ammo = true
+	player_giga_crash.recover_speed = 10
+	
+	for shots in player_shot_node.get_children():
+		if shots is WeaponAxl:
+			shots.extra_damage = dmg_multiplikator
+			shots.extra_delay = shot_delay
+			shots.extra_speed = bullet_speed
+			shots.ammo_per_shot = 0
+			shots.max_shots_alive = 99
+	for shots in player_altshot_node.get_children():
+		if shots is WeaponAxl:
+			shots.extra_damage = dmg_multiplikator
+			shots.extra_delay = shot_delay
+			shots.extra_speed = bullet_speed
+			shots.ammo_per_shot = 0
+			shots.max_shots_alive = 99
+	
+	var lifesteal = get_node("LifeSteal")
+	lifesteal.activate()
+	lifesteal.first_decay = 10.0
+	lifesteal.lifesteal_decay = 5.0
+	lifesteal.minimum_time_between_heals = 0.1
+	
 	var dmg = get_node("Damage")
-	dmg.damage_reduction = 0
-	dmg.prevent_knockbacks = false
-	dmg.conflicting_moves = ["Death", "WallSlide", "Ride"]
-	get_node("LifeSteal").deactivate()
-func equip_icarus_body_parts():
-	var dmg = get_node("Damage")
-	dmg.damage_reduction = 0
-	dmg.prevent_knockbacks = false
-	dmg.conflicting_moves = ["Death", "WallSlide", "Ride"]
-	get_node("LifeSteal").deactivate()
-func equip_hermes_arms_parts():
-	var cannon = get_node("Shot")
-	var normal_pistol = cannon.get_node("Pistol")
-	var altfire = get_node("AltFire")
-	normal_pistol.active = true
-	cannon.upgraded = false
-	cannon.infinite_charged_ammo = false
-	cannon.infinite_regular_ammo = false
-	cannon.update_list_of_weapons()
-	cannon.set_current_weapon(normal_pistol)
-	altfire.switch_to_alternate()
-func equip_icarus_arms_parts():
-	var cannon = get_node("Shot")
-	var normal_pistol = cannon.get_node("Pistol")
-	var altfire = get_node("AltFire")
-	normal_pistol.active = true
-	cannon.upgraded = false
-	cannon.infinite_charged_ammo = false
-	cannon.infinite_regular_ammo = false
-	cannon.update_list_of_weapons()
-	cannon.set_current_weapon(normal_pistol)
-	altfire.switch_to_alternate()
-func equip_hermes_legs_parts():
+	dmg.damage_reduction = 80
+	dmg.prevent_knockbacks = true
+	dmg.conflicting_moves = ["Death", "Nothing"]
+	var _afterimagen = animatedSprite.get_node("afterImagesn")
+	_afterimagen.upgraded = true
+
+	var shot = get_node("Shot")
+	shot.update_list_of_weapons()
+	shot.ammo_cost_reduction = 0.5
+	var normal_pistol = shot.get_node("Pistol")
+	shot.set_current_weapon(normal_pistol)
+	var _transform = shot.get_node("Transform")
+	_transform.ammo_per_shot = 0
 	var dash = get_node("Dash")
+	dash.dash_duration = 0.44
+	dash.horizontal_velocity = 400
 	var airdash = get_node("AirDash")
-	get_node("Hover").set_max_air_jumps(1)
-	dash.upgraded = false
-	dash.dash_duration = 0.55
-	dash.invulnerability_duration = 0
-	airdash.upgraded = false
-	airdash.max_airdashes = 1
-	airdash.airdash_count = 1
-func equip_icarus_legs_parts():
-	var dash = get_node("Dash")
-	var airdash = get_node("AirDash")
-	get_node("Hover").set_max_air_jumps(1)
-	dash.upgraded = false
-	dash.dash_duration = 0.55
-	dash.invulnerability_duration = 0
-	airdash.upgraded = false
-	airdash.max_airdashes = 1
-	airdash.airdash_count = 1
+	airdash.upgraded = true
+	airdash.dash_duration = 0.44
+	airdash.horizontal_velocity = 400
+	airdash.max_airdashes = 4
+	airdash.airdash_count = 4
+	var hover = get_node("Hover")
+	hover.upgraded = true
+	hover.horizontal_velocity = 150
+	hover.vertical_velocity = 120
+	get_node("DashWallJump").horizontal_velocity = 400
+	get_node("DashJump").horizontal_velocity = 400
+	get_node("Fall").dash_momentum = 400
 
 func is_full_armor() -> String:
 	return "axl"
@@ -303,6 +367,20 @@ func equip_parts(collectible: String) -> void :
 	if CharacterManager.white_axl_armor:
 		equip_axl_white_parts()
 		using_upgrades = true
+		
+	if CharacterManager.cheat_axl_activated:
+		equip_cheat_axl_parts()
+		using_upgrades = true
+	
+	if CharacterManager.ultimate_buster:
+		using_upgrades = true
+		
+	if CharacterManager.player_desperation:
+		get_node("Desperation").active = true
+		using_upgrades = true
+		
+	if CharacterManager.axl_saber_combo:
+		get_node("SaberCombo").active = true
 		
 	if is_heart(collectible):
 		equip_heart()
@@ -377,25 +455,25 @@ func collect(collectible: String) -> void :
 	GameManager.add_collectible_to_savedata(collectible)
 
 func save_original_colors() -> void :
-	colors.append(animatedSprite.material.get_shader_param("MainColor1"))
-	colors.append(animatedSprite.material.get_shader_param("MainColor2"))
-	colors.append(animatedSprite.material.get_shader_param("MainColor3"))
-	colors.append(animatedSprite.material.get_shader_param("MainColor4"))
-	colors.append(animatedSprite.material.get_shader_param("MainColor5"))
-	colors.append(animatedSprite.material.get_shader_param("MainColor6"))
-	colors.append(animatedSprite.material.get_shader_param("CrystalColor1"))
-	colors.append(animatedSprite.material.get_shader_param("CrystalColor2"))
-	colors.append(animatedSprite.material.get_shader_param("CrystalColor3"))
-	colors.append(animatedSprite.material.get_shader_param("HairColor1"))
-	colors.append(animatedSprite.material.get_shader_param("HairColor2"))
-	colors.append(animatedSprite.material.get_shader_param("HairColor3"))
-	colors.append(animatedSprite.material.get_shader_param("YellowColor1"))
-	colors.append(animatedSprite.material.get_shader_param("YellowColor2"))
-	colors.append(animatedSprite.material.get_shader_param("RedColor1"))
-	colors.append(animatedSprite.material.get_shader_param("RedColor2"))
-	colors.append(animatedSprite.material.get_shader_param("FlameColor1"))
-	colors.append(animatedSprite.material.get_shader_param("FlameColor2"))
-	colors.append(animatedSprite.material.get_shader_param("FlameColor3"))
+	colors.append(animatedSprite.material.get_shader_param("AxlMainColor1"))
+	colors.append(animatedSprite.material.get_shader_param("AxlMainColor2"))
+	colors.append(animatedSprite.material.get_shader_param("AxlMainColor3"))
+	colors.append(animatedSprite.material.get_shader_param("AxlMainColor4"))
+	colors.append(animatedSprite.material.get_shader_param("AxlMainColor5"))
+	colors.append(animatedSprite.material.get_shader_param("AxlMainColor6"))
+	colors.append(animatedSprite.material.get_shader_param("AxlCrystalColor1"))
+	colors.append(animatedSprite.material.get_shader_param("AxlCrystalColor2"))
+	colors.append(animatedSprite.material.get_shader_param("AxlCrystalColor3"))
+	colors.append(animatedSprite.material.get_shader_param("AxlHairColor1"))
+	colors.append(animatedSprite.material.get_shader_param("AxlHairColor2"))
+	colors.append(animatedSprite.material.get_shader_param("AxlHairColor3"))
+	colors.append(animatedSprite.material.get_shader_param("AxlYellowColor1"))
+	colors.append(animatedSprite.material.get_shader_param("AxlYellowColor2"))
+	colors.append(animatedSprite.material.get_shader_param("AxlRedColor1"))
+	colors.append(animatedSprite.material.get_shader_param("AxlRedColor2"))
+	colors.append(animatedSprite.material.get_shader_param("AxlFlameColor1"))
+	colors.append(animatedSprite.material.get_shader_param("AxlFlameColor2"))
+	colors.append(animatedSprite.material.get_shader_param("AxlFlameColor3"))
 
 func change_palette(new_colors: Color, paint_armor: bool = true) -> void :
 	if not animatedSprite:
@@ -409,16 +487,16 @@ func change_palette(new_colors: Color, paint_armor: bool = true) -> void :
 			set_new_colors_for_armor_on_shader_parameters(sprite, $Armor.BodyColors)
 
 func set_new_colors_on_shader_parameters(object, new_colors) -> void :
-	object.material.set_shader_param("R_MainColor1", new_colors[0])
-	object.material.set_shader_param("R_MainColor2", new_colors[1])
-	object.material.set_shader_param("R_MainColor3", new_colors[2])
-	object.material.set_shader_param("R_MainColor4", new_colors[3])
-	object.material.set_shader_param("R_MainColor5", new_colors[4])
-	object.material.set_shader_param("R_MainColor6", new_colors[5])
+	object.material.set_shader_param("R_AxlMainColor1", new_colors[0])
+	object.material.set_shader_param("R_AxlMainColor2", new_colors[1])
+	object.material.set_shader_param("R_AxlMainColor3", new_colors[2])
+	object.material.set_shader_param("R_AxlMainColor4", new_colors[3])
+	object.material.set_shader_param("R_AxlMainColor5", new_colors[4])
+	object.material.set_shader_param("R_AxlMainColor6", new_colors[5])
 	
 func set_new_colors_for_armor_on_shader_parameters(object, new_colors) -> void :
-	object.material.set_shader_param("R_MainColor2", new_colors[1])
-	object.material.set_shader_param("R_MainColor3", new_colors[2])
+	object.material.set_shader_param("R_AxlMainColor2", new_colors[1])
+	object.material.set_shader_param("R_AxlMainColor3", new_colors[2])
 
 func disable_collision() -> void :
 	colliding = false

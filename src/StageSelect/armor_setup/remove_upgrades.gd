@@ -47,7 +47,6 @@ func unequip_all_upgrades() -> void :
 	zero_head.base_black.visible = CharacterManager.black_zero_armor
 	axl_head.unequip_white_axl()
 	axl_head.base_white.visible = CharacterManager.white_axl_armor
-	
 
 func process_inputs() -> void :
 	pass

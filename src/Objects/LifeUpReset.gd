@@ -40,8 +40,14 @@ func process_increase_health(delta: float) -> void :
 
 func increase_health() -> void :
 	if timer > last_time_increased + 0.06 and amount_to_increase > 0:
-		GameManager.player.max_health += 1
-		GameManager.player.recover_health(1)
+		if is_instance_valid(GameManager.player):
+			GameManager.player.max_health = CharacterManager.starting_max_health
+			if GameManager.player.current_health > CharacterManager.starting_max_health:
+				GameManager.player.current_health = CharacterManager.starting_max_health
+		if is_instance_valid(GameManager.inactive_player):
+			GameManager.inactive_player.max_health = CharacterManager.starting_max_health
+			if GameManager.inactive_player.current_health > CharacterManager.starting_max_health:
+				GameManager.inactive_player.current_health = CharacterManager.starting_max_health
 		last_time_increased = timer
 		amount_to_increase -= 1
 		$audioStreamPlayer2D.play()
@@ -64,7 +70,7 @@ func achievement_check() -> void :
 	for collectible in GameManager.collectibles:
 		if "life_up" in collectible:
 			hearts += 1
-	if hearts == 8:
+	if hearts == 12:
 		Achievements.unlock("COLLECTALLHEARTS")
 	else:
 		Savefile.save(Savefile.save_slot)

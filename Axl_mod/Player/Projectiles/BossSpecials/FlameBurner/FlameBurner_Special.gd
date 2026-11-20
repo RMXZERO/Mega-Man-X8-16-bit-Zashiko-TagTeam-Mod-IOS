@@ -28,6 +28,8 @@ var damage_tick_timer: float = 0.0
 var damage_tick_time: float = 1.0
 var damage_per_tick: float = 1.0
 
+var end: bool = false
+
 func deactivate() -> void :
 	go_to_attack_stage(10)
 	Tools.timer(1.0, "queue_free", self)
@@ -41,6 +43,7 @@ func initialize() -> void :
 	Tools.timer(animation_time, "set_stage", self)
 	small_flame_time = 0.1
 	flame_aura_time = 0.2
+	end = false
 
 func set_stage() -> void :
 	attack_stage = 1
@@ -48,7 +51,7 @@ func set_stage() -> void :
 func _physics_process(delta: float) -> void :
 	._physics_process(delta)
 	if attack_stage == 1:
-		play_animation("aura")
+		play_animation("aura_flame")
 		set_aura_buff()
 		
 		next_attack_stage()
@@ -73,6 +76,9 @@ func _physics_process(delta: float) -> void :
 		unset_aura_buff()
 		next_attack_stage()
 		EndAbility()
+		if not end:
+			end = true
+			Event.emit_signal("axl_special_ability", "remove")
 
 func spawn_aura_flame() -> void :
 	var flame = flame_hitbox.instance()
@@ -106,6 +112,8 @@ func spawn_small_flame(x_pos: float = global_position.x, y_pos: float = global_p
 	flame.global_position.y = y_pos
 
 func reduce_health(delta: float) -> void :
+	if not character.is_current_player:
+		return
 	damage_tick_timer += delta
 	if damage_tick_timer >= damage_tick_time:
 		damage_tick_timer = 0.0
@@ -116,6 +124,7 @@ func reduce_health(delta: float) -> void :
 			damage_sfx.play()
 
 func set_aura_buff() -> void :
+	Event.emit_signal("axl_special_ability", "flameburner")
 	smoke_particles.emitting = true
 	for shot in player_shot_node.get_children():
 		if shot is WeaponAxl:

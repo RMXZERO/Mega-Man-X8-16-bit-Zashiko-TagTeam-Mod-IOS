@@ -6,6 +6,9 @@ onready var tween: TweenController = TweenController.new(self, false)
 onready var x_bar_texture: Texture = preload("res://src/HUD/X_bar.png")
 onready var axl_bar_texture: Texture = preload("res://Axl_mod/HUD/Axl_bar.png")
 onready var zero_bar_texture: Texture = preload("res://Zero_mod/HUD/Zero_bar.png")
+onready var alia_bar_texture: Texture = preload("res://src/HUD/Alia_bar.png")
+onready var layer_bar_texture: Texture = preload("res://src/HUD/Layer_bar.png")
+onready var pallette_bar_texture: Texture = preload("res://src/HUD/Pallette_bar.png")
 onready var special_bar = $SpecialBar
 
 var fading_out: bool = false
@@ -26,6 +29,13 @@ func set_player_hud():
 			texture = zero_bar_texture
 		"Axl":
 			texture = axl_bar_texture
+		"Alia":
+			texture = alia_bar_texture
+		"Layer":
+			texture = layer_bar_texture
+		"Pallette":
+			texture = pallette_bar_texture
+
 
 func _ready() -> void :
 	call_deferred("set_player_hud")

@@ -20,7 +20,7 @@ func apply_stuck_state() -> void:
 		set_player_state_and_animation()
 
 func can_apply_stuck() -> bool:
-	return not GameManager.player.is_invulnerable()
+	return not GameManager.player.is_invulnerable() and GameManager.player.has_health()
 
 func handle_riding_player() -> void:
 	if GameManager.player.is_executing("Ride"):

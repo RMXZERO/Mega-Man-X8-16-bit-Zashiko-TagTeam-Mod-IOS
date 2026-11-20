@@ -15,6 +15,8 @@ var damage: float = 4
 var damage_to_bosses: float = 0.75
 var damage_to_weakness: float = 15
 
+func _ready() -> void :
+	._ready()
 
 func deactivate() -> void :
 	queue_free()
@@ -31,6 +33,13 @@ func initialize() -> void :
 	first_instantiate()
 
 func _physics_process(delta: float) -> void :
+	if not CharacterManager.player_character == "Axl":
+		if "share_axl_buff" in GameManager.collectibles:
+			if not CharacterManager.share_axl_buff:
+				deactivate()
+		else:
+			deactivate()
+	
 	if should_cast:
 		if casts < max_casts:
 			cast_timer += delta

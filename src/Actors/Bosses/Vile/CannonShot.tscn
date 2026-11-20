@@ -67,7 +67,6 @@ damage = 4.0
 
 [node name="animatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 15 )
-frame = 1
 playing = true
 flip_h = true
 

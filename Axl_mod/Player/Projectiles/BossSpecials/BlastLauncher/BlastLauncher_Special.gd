@@ -11,7 +11,7 @@ onready var sfx: = $sfx
 
 var lifesteal_active: bool = false
 var lifesteal_should_decay: bool = false
-
+var player_should_die_to_spikes: bool = false
 var aura_time: float = 8.0
 var heal_time: float = 1.0
 var heal_timer: float = 0.0
@@ -62,9 +62,10 @@ func _physics_process(delta: float) -> void :
 		EndAbility()
 
 func set_aura_buff() -> void :
+	Event.emit_signal("axl_special_ability", "blastlauncher")
 	lifesteal_active = player_lifesteal.active
 	lifesteal_should_decay = player_lifesteal.should_decay
-	
+	player_should_die_to_spikes = character.should_die_to_spikes
 	
 	player_lifesteal.should_decay = false
 	
@@ -76,6 +77,7 @@ func set_aura_buff() -> void :
 	character.should_die_to_spikes = false
 
 func unset_aura_buff() -> void :
+	Event.emit_signal("axl_special_ability", "remove")
 	player_lifesteal.should_decay = lifesteal_should_decay
 	if not lifesteal_active:
 		player_lifesteal.deactivate()
@@ -84,4 +86,4 @@ func unset_aura_buff() -> void :
 	player_dashjump.activate()
 	player_airdash.activate()
 	player_hover.activate()
-	character.should_die_to_spikes = true
+	character.should_die_to_spikes = player_should_die_to_spikes

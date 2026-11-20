@@ -109,7 +109,6 @@ max_health = 10.0
 material = ExtResource( 9 )
 z_index = 1
 frames = SubResource( 52 )
-frame = 1
 playing = true
 flip_h = true
 

@@ -6,6 +6,9 @@ export  var damage_boss: float = 2.0
 export  var damage_weakness: float = 24.0
 export  var saber_hitbox: Resource = preload("res://Zero_mod/Player/Hitboxes/Rasetsusen_Hitbox.tscn")
 
+onready var darkarrow: PackedScene = preload("res://Zero_mod/X8/Sprites/zbuster/object/DarkArrow.tscn")
+var creator: Node2D
+
 onready var animatedSprite: = character.get_node("animatedSprite")
 onready var saber_sound: = get_node("saber")
 
@@ -28,6 +31,7 @@ var hitbox_extra_damage: float = 0.0
 var hitbox_extra_damage_boss: float = 0.0
 var hitbox_extra_damage_weakness: float = 0.0
 var hitbox_extra_break_guard_value: float = 0.0
+var hitbox_extra_scale: float = 1.0
 var deflectable: bool = false
 var deflectable_type: int = 0
 var only_deflect_weak: bool = false
@@ -59,6 +63,7 @@ var angle_index: int = 0
 var angle_timer: float = 0.0
 var angle_interval: float = 1.0 / 60.0
 
+var create_dark_arrow: bool = false
 
 func _ready() -> void :
 	saber_sound.stream.loop = true
@@ -97,16 +102,83 @@ func spawn_hitbox(position: Vector2, _hitbox_upleft: Vector2, _hitbox_downright:
 	current_hitbox.deflectable = deflectable
 	current_hitbox.deflectable_type = deflectable_type
 	current_hitbox.only_deflect_weak = only_deflect_weak
+	current_hitbox.scale *= hitbox_extra_scale
+
 
 func hitbox_and_position() -> void :
 	hitbox_damage = damage
 	hitbox_damage_boss = damage_boss
 	hitbox_damage_weakness = damage_weakness
 	if animatedSprite.animation == "rasetsusen":
-		hitbox_upleft = Vector2( - hitbox_radius, - hitbox_radius)
-		hitbox_downright = Vector2(hitbox_radius, hitbox_radius)
-	spawn_hitbox(Vector2(0, - 8), hitbox_upleft, hitbox_downright)
+		if character.saber_node.current_weapon.name == "Saber":
+			hitbox_upleft = Vector2( - hitbox_radius, - hitbox_radius)
+			hitbox_downright = Vector2(hitbox_radius, hitbox_radius)
+			spawn_hitbox(Vector2(0, - 8), hitbox_upleft, hitbox_downright)
+		elif character.saber_node.current_weapon.name == "B-Fan":
+			hitbox_upleft = Vector2( - hitbox_radius, - hitbox_radius)
+			hitbox_downright = Vector2(hitbox_radius, hitbox_radius)
+			spawn_hitbox(Vector2(0, - 8), hitbox_upleft, hitbox_downright)
+		elif character.saber_node.current_weapon.name == "D-Glaive":
+			hitbox_upleft = Vector2( - hitbox_radius, - hitbox_radius)
+			hitbox_downright = Vector2(hitbox_radius, hitbox_radius)
+			spawn_hitbox(Vector2(0, - 8), hitbox_upleft, hitbox_downright)
+		elif character.saber_node.current_weapon.name == "T-Breaker":
+			hitbox_upleft = Vector2( - hitbox_radius, - hitbox_radius)
+			hitbox_downright = Vector2(hitbox_radius, hitbox_radius)
+			spawn_hitbox(Vector2(0, - 8), hitbox_upleft, hitbox_downright)
+		elif character.saber_node.current_weapon.name == "K-Knuckle":
+			hitbox_upleft = Vector2( - hitbox_radius, - hitbox_radius)
+			hitbox_downright = Vector2(hitbox_radius, hitbox_radius)
+			spawn_hitbox(Vector2(0, - 8), hitbox_upleft, hitbox_downright)
+		elif character.saber_node.current_weapon.name == "V-Hanger":
+			hitbox_upleft = Vector2( - hitbox_radius, - hitbox_radius)
+			hitbox_downright = Vector2(hitbox_radius, hitbox_radius)
+			spawn_hitbox(Vector2(0, - 8), hitbox_upleft, hitbox_downright)
+		elif character.saber_node.current_weapon.name == "Rogue-Blade":
+			hitbox_upleft = Vector2( - hitbox_radius, - hitbox_radius)
+			hitbox_downright = Vector2(hitbox_radius, hitbox_radius)
+			spawn_hitbox(Vector2(0, - 8), hitbox_upleft, hitbox_downright)
+		elif character.saber_node.current_weapon.name == "Sigma-Blade":
+			hitbox_upleft = Vector2( - hitbox_radius, - hitbox_radius)
+			hitbox_downright = Vector2(hitbox_radius, hitbox_radius)
+			spawn_hitbox(Vector2(0, - 8), hitbox_upleft, hitbox_downright)
+		elif character.saber_node.current_weapon.name == "Z-Breaker":
+			hitbox_upleft = Vector2( - hitbox_radius, - hitbox_radius)
+			hitbox_downright = Vector2(hitbox_radius, hitbox_radius)
+			spawn_hitbox(Vector2(0, - 8), hitbox_upleft, hitbox_downright)
+			if not create_dark_arrow:
+				create_dark_arrow = true
+				Tools.timer(0.3, "reset_dark_arrow", self)
+				if CharacterManager.awakened_zero_armor:
+					create_darkarrow(global_position, CharacterManager.z_buster_base_damage * 2)
+				elif CharacterManager.black_zero_armor and not CharacterManager.awakened_zero_armor:
+					create_darkarrow(global_position, CharacterManager.z_buster_base_damage * 1.2)
+				else:
+					create_darkarrow(global_position, CharacterManager.z_buster_base_damage)
 	reset_hitbox()
+	if not create_dark_arrow and CharacterManager.awakened_zero_armor and \
+	not character.saber_node.current_weapon.name == "Z-Breaker" and \
+	not character.saber_node.current_weapon.name == "K-Knuckle" and \
+	not character.saber_node.current_weapon.name == "Sigma-Blade" and \
+	not character.saber_node.current_weapon.name == "V-Hanger":
+		create_dark_arrow = true
+		Tools.timer(0.3, "reset_dark_arrow", self)
+		create_darkarrow(global_position, CharacterManager.z_buster_base_damage * 2)
+
+func reset_dark_arrow() -> void :
+	create_dark_arrow = false
+
+func create_darkarrow(ground_position, damage_value) -> void :
+	var instance = darkarrow.instance()
+	ground_position.y += -9
+	instance.damage = damage_value * 2
+	instance.damage_to_bosses = damage_value
+	instance.damage_to_weakness = damage_value
+	get_tree().current_scene.get_node("Objects").call_deferred("add_child", instance, true)
+	instance.set_global_position(ground_position)
+	instance.set_creator(creator)
+	instance.call_deferred("initialize", get_facing_direction())
+
 
 func effect_emit(_delta: float) -> void :
 	effect_position()
@@ -114,7 +186,7 @@ func effect_emit(_delta: float) -> void :
 	if effect_spawn_timer >= effect_spawn_time:
 		effect_spawn_timer = 0
 		var effect_instance = effect_scene.instance()
-		effect_instance.frames = load("res://Zero_mod/X8/Sprites/BossAbilities/ability_effects.tres")
+		effect_instance.frames = load("res://Zero_mod/X8/Sprites/Saber/BossAbilities/ability_effects.tres")
 		effect_instance.animation = "senpukyaku"
 		effect_instance.global_position = effect_spawn_position
 		effect_instance.z_index = animatedSprite.z_index + 2
@@ -142,8 +214,13 @@ func reset_saber_animation() -> void :
 	if not character.is_on_floor():
 		animatedSprite.animation = "rasetsusen"
 		animatedSprite.frame = 1
-		if character.saber_node.current_weapon.name == "B-Fan" or \
+		if character.saber_node.current_weapon.name == "Saber" or \
+		character.saber_node.current_weapon.name == "Z-Breaker" or \
+		character.saber_node.current_weapon.name == "B-Fan" or \
 		character.saber_node.current_weapon.name == "D-Glaive" or \
+		character.saber_node.current_weapon.name == "Rogue-Blade" or \
+		character.saber_node.current_weapon.name == "Sigma-Blade" or \
+		character.saber_node.current_weapon.name == "V-Hanger" or \
 		character.saber_node.current_weapon.name == "T-Breaker":
 			animatedSprite.frame = 0
 		ending_saber_state = false
@@ -158,27 +235,8 @@ func _StartCondition() -> bool:
 	if character.get_action_pressed("move_down"):
 		return false
 	var _animation = get_parent().get_animation()
-	for _ani in character.saber_animations:
-		if _animation == "saber_dash":
-			return false
-		if _animation == "saber_jump":
-			return false
-		if _animation == "saber_jump_1":
-			return false
-		if _animation == "saber_jump_2":
-			return false
-		if _animation == "youdantotsu":
-			return false
-		if _animation == "enkoujin":
-			return false
-		if _animation == "juuhazan":
-			return false
-		if _animation == "raikousen":
-			return false
-		if _animation == "hyouryuushou":
-			return false
-		if _animation == "hyouryuushou_air":
-			return false
+	if _animation in character.saber_animations:
+		return false
 	if not executing:
 		if not character.is_on_floor():
 			vertical_last = character.velocity.y

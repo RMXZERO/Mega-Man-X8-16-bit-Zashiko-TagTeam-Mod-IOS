@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://addons/PaletteSwap/PaletteSwap.gdshader" type="Shader" id=1]
 [ext_resource path="res://src/Effects/Materials/Player_Material_Shader.tres" type="Material" id=2]
@@ -28,11 +28,14 @@
 [ext_resource path="res://src/Title/title_megaman.png" type="Texture" id=26]
 [ext_resource path="res://src/Title/title_x8_06.png" type="Texture" id=27]
 [ext_resource path="res://src/Effects/Textures/simple_gradient4.png" type="Texture" id=28]
+[ext_resource path="res://System/Android/AndroidControls.gd" type="Script" id=29]
 [ext_resource path="res://src/Fonts/X8bitmapfont_0.png" type="Texture" id=30]
+[ext_resource path="res://Zero_mod/X8/Sprites/zbuster/zbuster.tres" type="SpriteFrames" id=31]
 [ext_resource path="res://Axl_mod/Player/Sprites/axl.tres" type="SpriteFrames" id=32]
-[ext_resource path="res://Zero_mod/Sprites/zero.tres" type="SpriteFrames" id=33]
-[ext_resource path="res://Zero_mod/Sprites/Zero_Material_Shader.tres" type="Material" id=34]
+[ext_resource path="res://Zero_mod/X8/Sprites/ZeroX8_Material_Shader.tres" type="Material" id=33]
+[ext_resource path="res://src/Title/title_rockman.png" type="Texture" id=34]
 [ext_resource path="res://Axl_mod/Player/Axl_Material_Shader.tres" type="Material" id=35]
+[ext_resource path="res://System/Android/Sprites/android_nothing.png" type="Texture" id=36]
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 1 )
@@ -78,16 +81,14 @@ position = Vector2( 19, -30 )
 z_index = 1
 frames = ExtResource( 9 )
 animation = "crouch"
-frame = 3
 playing = true
 
 [node name="Zero" type="AnimatedSprite" parent="Visuals/ElevatorPlatform"]
-material = ExtResource( 34 )
+material = ExtResource( 33 )
 position = Vector2( -12, -31 )
 z_index = 1
-frames = ExtResource( 33 )
+frames = ExtResource( 31 )
 animation = "blink"
-frame = 10
 playing = true
 
 [node name="loop" type="AudioStreamPlayer2D" parent="Visuals/ElevatorPlatform"]
@@ -124,15 +125,20 @@ position = Vector2( 0, 308 )
 z_index = 50
 z_as_relative = false
 
+[node name="x8" type="Sprite" parent="Credits"]
+visible = false
+position = Vector2( 41, 117 )
+texture = ExtResource( 27 )
+
 [node name="megaman" type="Sprite" parent="Credits"]
 visible = false
 position = Vector2( -60, 119 )
 texture = ExtResource( 26 )
 
-[node name="x8" type="Sprite" parent="Credits"]
+[node name="rockman" type="Sprite" parent="Credits"]
 visible = false
-position = Vector2( 41, 117 )
-texture = ExtResource( 27 )
+position = Vector2( -60, 119 )
+texture = ExtResource( 34 )
 
 [node name="richTextLabel" type="RichTextLabel" parent="Credits"]
 anchor_left = 0.5
@@ -2325,3 +2331,27 @@ align = 1
 valign = 2
 autowrap = true
 clip_text = true
+
+[node name="AndroidControls" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="Pause" type="TouchScreenButton" parent="AndroidControls"]
+modulate = Color( 1, 1, 1, 0.705882 )
+self_modulate = Color( 1, 1, 1, 0.705882 )
+scale = Vector2( 12.4375, 7 )
+normal = ExtResource( 36 )
+action = "pause"
+visibility_mode = 1
+script = ExtResource( 29 )
+_action = "pause"
+
+[node name="Jump" type="TouchScreenButton" parent="AndroidControls"]
+modulate = Color( 1, 1, 1, 0.392157 )
+self_modulate = Color( 1, 1, 1, 0.392157 )
+scale = Vector2( 12.4375, 7 )
+normal = ExtResource( 36 )
+passby_press = true
+action = "ui_accept"
+visibility_mode = 1
+script = ExtResource( 29 )
+_action = "ui_accept"

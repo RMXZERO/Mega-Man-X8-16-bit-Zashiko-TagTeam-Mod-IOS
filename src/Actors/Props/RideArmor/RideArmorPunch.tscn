@@ -25,6 +25,7 @@ collision_layer = 4
 collision_mask = 0
 script = ExtResource( 2 )
 damage = 10.0
+damage_to_bosses = 2.0
 damage_to_weakness = 20.0
 break_guards = true
 

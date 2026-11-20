@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/OST - RMEXE6 Decisive Battle Cybeasts! Intro.ogg-1a8795cc3028bdd341c132700db9391c.oggstr"
+
+[deps]
+
+source_file="res://src/Sounds/OST - RMEXE6 Decisive Battle Cybeasts! Intro.ogg"
+dest_files=[ "res://.import/OST - RMEXE6 Decisive Battle Cybeasts! Intro.ogg-1a8795cc3028bdd341c132700db9391c.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

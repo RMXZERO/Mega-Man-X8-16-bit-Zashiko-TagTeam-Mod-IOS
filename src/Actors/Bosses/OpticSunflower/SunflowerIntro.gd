@@ -1,7 +1,15 @@
 extends GenericIntro
 onready var appear: AudioStreamPlayer2D = $"../OpticTeleport/appear"
 onready var leaves: Particles2D = $"../OpticTeleport/leaves"
+onready var space: Node = $"../Space"
 export var bar : Texture
+
+func _ready() -> void:
+	._ready()
+	if CharacterManager.nightshade_zero_armor:
+		call_deferred("prepare_for_intro")
+	if CharacterManager.nightshade_zero_armor:
+		animatedSprite.modulate.a = 0.0
 
 func _Setup() -> void:
 	Log("Setup Intro")
@@ -12,6 +20,7 @@ func _Update(delta) -> void:
 	process_gravity(delta)
 	if attack_stage == 0 and timer > 1:
 		Log("Setup Intro")
+		animatedSprite.modulate.a = 1.0
 		make_visible()
 		turn_player_towards_boss()
 		appear.play()
@@ -56,3 +65,4 @@ func _Interrupt() -> void:
 	Event.emit_signal("boss_start", character)
 	GameManager.end_cutscene()
 	character.emit_signal("intro_concluded")
+	space.define_arena()

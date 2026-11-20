@@ -33,6 +33,12 @@ func set_correct_player_icon():
 			play(get_correct_animation("Axl"))
 		"Zero":
 			play(get_correct_animation("Zero"))
+		"Alia":
+			play(get_correct_animation("Alia"))
+		"Layer":
+			play(get_correct_animation("Layer"))
+		"Pallette":
+			play(get_correct_animation("Pallette"))
 
 func synchronize_visibility(selectable) -> void :
 	visible = selectable.visible

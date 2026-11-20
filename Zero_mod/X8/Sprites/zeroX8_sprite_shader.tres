@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=122 format=2]
+[gd_resource type="VisualShader" load_steps=153 format=2]
 
 [sub_resource type="VisualShaderNodeScalarOp" id=105]
 default_input_values = [ 0, 0.0, 1, 2.0 ]
@@ -173,12 +173,124 @@ uniform_name = "GreyColor4"
 [sub_resource type="VisualShaderNodeColorUniform" id=163]
 uniform_name = "R_GreyColor4"
 
+[sub_resource type="VisualShaderNodeColorUniform" id=164]
+uniform_name = "AuraColor"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=165]
+uniform_name = "R_AuraColor"
+
 [sub_resource type="VisualShaderNodeScalarOp" id=41]
 default_input_values = [ 0, 0.0, 1, 0.3 ]
 operator = 1
 
+[sub_resource type="VisualShaderNodeColorUniform" id=166]
+uniform_name = "AfterimagesColor"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=167]
+uniform_name = "R_AfterimagesColor"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=168]
+uniform_name = "SaberColor5"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=169]
+uniform_name = "R_SaberColor5"
+
+[sub_resource type="VisualShaderNodeVectorOp" id=170]
+operator = 2
+
+[sub_resource type="VisualShaderNodeColorUniform" id=171]
+uniform_name = "AwakenedEffect1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=172]
+uniform_name = "AwakenedEffect2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=173]
+uniform_name = "AwakenedEffect3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=174]
+uniform_name = "AwakenedEffect4"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=175]
+uniform_name = "R_AwakenedEffect1"
+
 [sub_resource type="VisualShaderNodeScalarUniform" id=42]
 uniform_name = "Charge"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=176]
+uniform_name = "R_AwakenedEffect2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=177]
+uniform_name = "R_AwakenedEffect3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=178]
+uniform_name = "R_AwakenedEffect4"
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=179]
+uniform_name = "Flash"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=180]
+uniform_name = "ChestColor4"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=181]
+uniform_name = "R_ChestColor4"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=182]
+uniform_name = "OutlineColor2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=183]
+uniform_name = "R_OutlineColor2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=184]
+uniform_name = "SigmaBladeColor1"
+default_value_enabled = true
+default_value = Color( 0.607843, 0.607843, 0.67451, 1 )
+
+[sub_resource type="VisualShaderNodeColorUniform" id=185]
+uniform_name = "SigmaBladeColor2"
+default_value_enabled = true
+default_value = Color( 0.407843, 0.407843, 0.501961, 1 )
+
+[sub_resource type="VisualShaderNodeColorUniform" id=186]
+uniform_name = "SigmaBladeColor3"
+default_value_enabled = true
+default_value = Color( 0.219608, 0.25098, 0.345098, 1 )
+
+[sub_resource type="VisualShaderNodeColorUniform" id=187]
+uniform_name = "SigmaBladeColor4"
+default_value_enabled = true
+default_value = Color( 0.211765, 0.407843, 0.415686, 1 )
+
+[sub_resource type="VisualShaderNodeColorUniform" id=188]
+uniform_name = "R_SigmaBladeColor1"
+default_value_enabled = true
+default_value = Color( 0.607843, 0.607843, 0.67451, 1 )
+
+[sub_resource type="VisualShaderNodeColorUniform" id=189]
+uniform_name = "R_SigmaBladeColor2"
+default_value_enabled = true
+default_value = Color( 0.407843, 0.407843, 0.501961, 1 )
+
+[sub_resource type="VisualShaderNodeColorUniform" id=190]
+uniform_name = "R_SigmaBladeColor3"
+default_value_enabled = true
+default_value = Color( 0.219608, 0.25098, 0.345098, 1 )
+
+[sub_resource type="VisualShaderNodeColorUniform" id=191]
+uniform_name = "R_SigmaBladeColor4"
+default_value_enabled = true
+default_value = Color( 0.211765, 0.407843, 0.415686, 1 )
+
+[sub_resource type="VisualShaderNodeColorUniform" id=192]
+uniform_name = "BackCrystalColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=193]
+uniform_name = "BackCrystalColor2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=194]
+uniform_name = "R_BackCrystalColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=195]
+uniform_name = "R_BackCrystalColor2"
 
 [sub_resource type="VisualShaderNodeTexture" id=1]
 source = 2
@@ -232,12 +344,15 @@ operator = 7
 constant = 0.5
 
 [sub_resource type="VisualShaderNodeExpression" id=67]
-size = Vector2( 1020.96, 2452.83 )
+size = Vector2( 1035.9, 3334.88 )
 expression = "vec3 current_color = texture(TEXTURE, UV).rgb;
 
 if (replace (current_color, crystal_color_1, crystal_replace_1, final_color, tolerance)){}
 else if (replace (current_color, crystal_color_2, crystal_replace_2, final_color, tolerance)){}
 else if (replace (current_color, crystal_color_3, crystal_replace_3, final_color, tolerance)){}
+
+else if (replace (current_color, back_crystal_color_1, back_crystal_replace_1, final_color, tolerance)){}
+else if (replace (current_color, back_crystal_color_2, back_crystal_replace_2, final_color, tolerance)){}
 
 else if (replace (current_color, light_red_color_1, light_red_color_1_replace, final_color, tolerance)){}
 else if (replace (current_color, main_color_1, replace_color_1, final_color, tolerance)){}
@@ -250,15 +365,18 @@ else if (replace (current_color, main_color_5, replace_color_5, final_color, tol
 else if (replace (current_color, main_color_6, replace_color_6, final_color, tolerance)){}
 
 else if (replace (current_color, outline_color, replace_outline_color, final_color, tolerance)){}
+else if (replace (current_color, outline_color_2, replace_outline_color_2, final_color, tolerance)){}
 
 else if (replace (current_color, saber_color_1, saber_replace_1, final_color, tolerance)){}
 else if (replace (current_color, saber_color_2, saber_replace_2, final_color, tolerance)){}
 else if (replace (current_color, saber_color_3, saber_replace_3, final_color, tolerance)){}
 else if (replace (current_color, saber_color_4, saber_replace_4, final_color, tolerance)){}
+else if (replace (current_color, saber_color_5, saber_replace_5, final_color, tolerance)){}
 
 else if (replace (current_color, chest_color_1, chest_replace_1, final_color, tolerance)){}
 else if (replace (current_color, chest_color_2, chest_replace_2, final_color, tolerance)){}
 else if (replace (current_color, chest_color_3, chest_replace_3, final_color, tolerance)){}
+else if (replace (current_color, chest_color_4, chest_replace_4, final_color, tolerance)){}
 
 else if (replace (current_color, armor_color_1, armor_replace_1, final_color, tolerance)){}
 else if (replace (current_color, armor_color_2, armor_replace_2, final_color, tolerance)){}
@@ -272,6 +390,18 @@ else if (replace (current_color, grey_color_4, grey_replace_4, final_color, tole
 else if (replace (current_color, skin_color_1, skin_replace_1, final_color, tolerance)){}
 else if (replace (current_color, skin_color_2, skin_replace_2, final_color, tolerance)){}
 else if (replace (current_color, skin_color_3, skin_replace_3, final_color, tolerance)){}
+
+else if (replace (current_color, aura_color, aura_color_replace, final_color, tolerance)){}
+else if (replace (current_color, awakened_effect1, awakened_effect_replace1, final_color, tolerance)){}
+else if (replace (current_color, awakened_effect2, awakened_effect_replace2, final_color, tolerance)){}
+else if (replace (current_color, awakened_effect3, awakened_effect_replace3, final_color, tolerance)){}
+else if (replace (current_color, awakened_effect4, awakened_effect_replace4, final_color, tolerance)){}
+else if (replace (current_color, afterimages_color, afterimages_color_replace, final_color, tolerance)){}
+
+else if (replace (current_color, sigma_blade_color_1, sigma_blade_replace_color_1, final_color, tolerance)){}
+else if (replace (current_color, sigma_blade_color_2, sigma_blade_replace_color_2, final_color, tolerance)){}
+else if (replace (current_color, sigma_blade_color_3, sigma_blade_replace_color_3, final_color, tolerance)){}
+else if (replace (current_color, sigma_blade_color_4, sigma_blade_replace_color_4, final_color, tolerance)){}
 
 else {final_color = current_color}"
 
@@ -393,9 +523,6 @@ constant = 1.0
 [sub_resource type="VisualShaderNodeScalarOp" id=100]
 default_input_values = [ 0, 0.0, 1, 1.4 ]
 
-[sub_resource type="VisualShaderNodeScalarUniform" id=101]
-uniform_name = "Flash"
-
 [sub_resource type="VisualShaderNodeIf" id=102]
 default_input_values = [ 0, 0.0, 1, 0.5, 2, 1e-05, 3, Vector3( 0, 0, 0 ), 4, Vector3( 0, 0, 0 ), 5, Vector3( 0, 0, 0 ) ]
 
@@ -458,12 +585,6 @@ uniform vec4 R_SaberColor3 : hint_color;
 uniform vec4 R_SaberColor4 : hint_color;
 uniform vec4 LightRedColor1 : hint_color;
 uniform vec4 R_LightRedColor1 : hint_color;
-uniform vec4 ChestColor1 : hint_color;
-uniform vec4 ChestColor2 : hint_color;
-uniform vec4 ChestColor3 : hint_color;
-uniform vec4 R_ChestColor1 : hint_color;
-uniform vec4 R_ChestColor2 : hint_color;
-uniform vec4 R_ChestColor3 : hint_color;
 uniform vec4 ArmorColor1 : hint_color;
 uniform vec4 ArmorColor2 : hint_color;
 uniform vec4 R_ArmorColor1 : hint_color;
@@ -486,6 +607,42 @@ uniform vec4 LightHairColor : hint_color;
 uniform vec4 R_LightHairColor : hint_color;
 uniform vec4 GreyColor4 : hint_color;
 uniform vec4 R_GreyColor4 : hint_color;
+uniform vec4 AuraColor : hint_color;
+uniform vec4 R_AuraColor : hint_color;
+uniform vec4 AfterimagesColor : hint_color;
+uniform vec4 R_AfterimagesColor : hint_color;
+uniform vec4 SaberColor5 : hint_color;
+uniform vec4 R_SaberColor5 : hint_color;
+uniform vec4 AwakenedEffect1 : hint_color;
+uniform vec4 AwakenedEffect2 : hint_color;
+uniform vec4 AwakenedEffect3 : hint_color;
+uniform vec4 AwakenedEffect4 : hint_color;
+uniform vec4 R_AwakenedEffect1 : hint_color;
+uniform vec4 R_AwakenedEffect2 : hint_color;
+uniform vec4 R_AwakenedEffect3 : hint_color;
+uniform vec4 R_AwakenedEffect4 : hint_color;
+uniform vec4 ChestColor1 : hint_color;
+uniform vec4 ChestColor2 : hint_color;
+uniform vec4 ChestColor3 : hint_color;
+uniform vec4 ChestColor4 : hint_color;
+uniform vec4 R_ChestColor1 : hint_color;
+uniform vec4 R_ChestColor2 : hint_color;
+uniform vec4 R_ChestColor3 : hint_color;
+uniform vec4 R_ChestColor4 : hint_color;
+uniform vec4 OutlineColor2 : hint_color;
+uniform vec4 R_OutlineColor2 : hint_color;
+uniform vec4 SigmaBladeColor1 : hint_color = vec4(0.607843, 0.607843, 0.674510, 1.000000);
+uniform vec4 SigmaBladeColor2 : hint_color = vec4(0.407843, 0.407843, 0.501961, 1.000000);
+uniform vec4 SigmaBladeColor3 : hint_color = vec4(0.219608, 0.250980, 0.345098, 1.000000);
+uniform vec4 SigmaBladeColor4 : hint_color = vec4(0.211765, 0.407843, 0.415686, 1.000000);
+uniform vec4 R_SigmaBladeColor1 : hint_color = vec4(0.607843, 0.607843, 0.674510, 1.000000);
+uniform vec4 R_SigmaBladeColor2 : hint_color = vec4(0.407843, 0.407843, 0.501961, 1.000000);
+uniform vec4 R_SigmaBladeColor3 : hint_color = vec4(0.219608, 0.250980, 0.345098, 1.000000);
+uniform vec4 R_SigmaBladeColor4 : hint_color = vec4(0.211765, 0.407843, 0.415686, 1.000000);
+uniform vec4 BackCrystalColor1 : hint_color;
+uniform vec4 BackCrystalColor2 : hint_color;
+uniform vec4 R_BackCrystalColor1 : hint_color;
+uniform vec4 R_BackCrystalColor2 : hint_color;
 uniform float Alpha;
 
 
@@ -508,8 +665,8 @@ void vertex() {
 }
 
 void fragment() {
-// ScalarUniform:95
-	float n_out95p0 = Flash;
+// ScalarUniform:173
+	float n_out173p0 = Flash;
 
 // Input:6
 	float n_out6p0 = TIME;
@@ -773,30 +930,6 @@ void fragment() {
 	vec3 n_out118p0 = R_LightRedColor1.rgb;
 	float n_out118p1 = R_LightRedColor1.a;
 
-// ColorUniform:102
-	vec3 n_out102p0 = ChestColor1.rgb;
-	float n_out102p1 = ChestColor1.a;
-
-// ColorUniform:101
-	vec3 n_out101p0 = ChestColor2.rgb;
-	float n_out101p1 = ChestColor2.a;
-
-// ColorUniform:134
-	vec3 n_out134p0 = ChestColor3.rgb;
-	float n_out134p1 = ChestColor3.a;
-
-// ColorUniform:105
-	vec3 n_out105p0 = R_ChestColor1.rgb;
-	float n_out105p1 = R_ChestColor1.a;
-
-// ColorUniform:104
-	vec3 n_out104p0 = R_ChestColor2.rgb;
-	float n_out104p1 = R_ChestColor2.a;
-
-// ColorUniform:135
-	vec3 n_out135p0 = R_ChestColor3.rgb;
-	float n_out135p1 = R_ChestColor3.a;
-
 // ColorUniform:136
 	vec3 n_out136p0 = ArmorColor1.rgb;
 	float n_out136p1 = ArmorColor1.a;
@@ -885,6 +1018,153 @@ void fragment() {
 	vec3 n_out157p0 = R_GreyColor4.rgb;
 	float n_out157p1 = R_GreyColor4.a;
 
+// ColorUniform:158
+	vec3 n_out158p0 = AuraColor.rgb;
+	float n_out158p1 = AuraColor.a;
+
+// ColorUniform:159
+	vec3 n_out159p0 = R_AuraColor.rgb;
+	float n_out159p1 = R_AuraColor.a;
+
+// ColorUniform:160
+	vec3 n_out160p0 = AfterimagesColor.rgb;
+	float n_out160p1 = AfterimagesColor.a;
+
+// ColorUniform:161
+	vec3 n_out161p0 = R_AfterimagesColor.rgb;
+	float n_out161p1 = R_AfterimagesColor.a;
+
+// ColorUniform:162
+	vec3 n_out162p0 = SaberColor5.rgb;
+	float n_out162p1 = SaberColor5.a;
+
+// ColorUniform:163
+	vec3 n_out163p0 = R_SaberColor5.rgb;
+	float n_out163p1 = R_SaberColor5.a;
+
+// VectorOp:164
+	vec3 n_out164p0 = n_out163p0 * n_out127p0;
+
+// ColorUniform:165
+	vec3 n_out165p0 = AwakenedEffect1.rgb;
+	float n_out165p1 = AwakenedEffect1.a;
+
+// ColorUniform:166
+	vec3 n_out166p0 = AwakenedEffect2.rgb;
+	float n_out166p1 = AwakenedEffect2.a;
+
+// ColorUniform:167
+	vec3 n_out167p0 = AwakenedEffect3.rgb;
+	float n_out167p1 = AwakenedEffect3.a;
+
+// ColorUniform:168
+	vec3 n_out168p0 = AwakenedEffect4.rgb;
+	float n_out168p1 = AwakenedEffect4.a;
+
+// ColorUniform:169
+	vec3 n_out169p0 = R_AwakenedEffect1.rgb;
+	float n_out169p1 = R_AwakenedEffect1.a;
+
+// ColorUniform:170
+	vec3 n_out170p0 = R_AwakenedEffect2.rgb;
+	float n_out170p1 = R_AwakenedEffect2.a;
+
+// ColorUniform:171
+	vec3 n_out171p0 = R_AwakenedEffect3.rgb;
+	float n_out171p1 = R_AwakenedEffect3.a;
+
+// ColorUniform:172
+	vec3 n_out172p0 = R_AwakenedEffect4.rgb;
+	float n_out172p1 = R_AwakenedEffect4.a;
+
+// ColorUniform:102
+	vec3 n_out102p0 = ChestColor1.rgb;
+	float n_out102p1 = ChestColor1.a;
+
+// ColorUniform:101
+	vec3 n_out101p0 = ChestColor2.rgb;
+	float n_out101p1 = ChestColor2.a;
+
+// ColorUniform:134
+	vec3 n_out134p0 = ChestColor3.rgb;
+	float n_out134p1 = ChestColor3.a;
+
+// ColorUniform:174
+	vec3 n_out174p0 = ChestColor4.rgb;
+	float n_out174p1 = ChestColor4.a;
+
+// ColorUniform:105
+	vec3 n_out105p0 = R_ChestColor1.rgb;
+	float n_out105p1 = R_ChestColor1.a;
+
+// ColorUniform:104
+	vec3 n_out104p0 = R_ChestColor2.rgb;
+	float n_out104p1 = R_ChestColor2.a;
+
+// ColorUniform:135
+	vec3 n_out135p0 = R_ChestColor3.rgb;
+	float n_out135p1 = R_ChestColor3.a;
+
+// ColorUniform:175
+	vec3 n_out175p0 = R_ChestColor4.rgb;
+	float n_out175p1 = R_ChestColor4.a;
+
+// ColorUniform:176
+	vec3 n_out176p0 = OutlineColor2.rgb;
+	float n_out176p1 = OutlineColor2.a;
+
+// ColorUniform:177
+	vec3 n_out177p0 = R_OutlineColor2.rgb;
+	float n_out177p1 = R_OutlineColor2.a;
+
+// ColorUniform:178
+	vec3 n_out178p0 = SigmaBladeColor1.rgb;
+	float n_out178p1 = SigmaBladeColor1.a;
+
+// ColorUniform:179
+	vec3 n_out179p0 = SigmaBladeColor2.rgb;
+	float n_out179p1 = SigmaBladeColor2.a;
+
+// ColorUniform:180
+	vec3 n_out180p0 = SigmaBladeColor3.rgb;
+	float n_out180p1 = SigmaBladeColor3.a;
+
+// ColorUniform:181
+	vec3 n_out181p0 = SigmaBladeColor4.rgb;
+	float n_out181p1 = SigmaBladeColor4.a;
+
+// ColorUniform:182
+	vec3 n_out182p0 = R_SigmaBladeColor1.rgb;
+	float n_out182p1 = R_SigmaBladeColor1.a;
+
+// ColorUniform:183
+	vec3 n_out183p0 = R_SigmaBladeColor2.rgb;
+	float n_out183p1 = R_SigmaBladeColor2.a;
+
+// ColorUniform:184
+	vec3 n_out184p0 = R_SigmaBladeColor3.rgb;
+	float n_out184p1 = R_SigmaBladeColor3.a;
+
+// ColorUniform:185
+	vec3 n_out185p0 = R_SigmaBladeColor4.rgb;
+	float n_out185p1 = R_SigmaBladeColor4.a;
+
+// ColorUniform:186
+	vec3 n_out186p0 = BackCrystalColor1.rgb;
+	float n_out186p1 = BackCrystalColor1.a;
+
+// ColorUniform:187
+	vec3 n_out187p0 = BackCrystalColor2.rgb;
+	float n_out187p1 = BackCrystalColor2.a;
+
+// ColorUniform:188
+	vec3 n_out188p0 = R_BackCrystalColor1.rgb;
+	float n_out188p1 = R_BackCrystalColor1.a;
+
+// ColorUniform:189
+	vec3 n_out189p0 = R_BackCrystalColor2.rgb;
+	float n_out189p1 = R_BackCrystalColor2.a;
+
 // Expression:54
 	vec3 n_out54p0;
 	vec3 n_out54p1;
@@ -897,6 +1177,9 @@ void fragment() {
 		else if (replace (current_color, n_out78p0, n_out88p0, n_out54p0, n_out72p0)){}
 		else if (replace (current_color, n_out73p0, n_out89p0, n_out54p0, n_out72p0)){}
 		
+		else if (replace (current_color, n_out186p0, n_out188p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out187p0, n_out189p0, n_out54p0, n_out72p0)){}
+		
 		else if (replace (current_color, n_out117p0, n_out118p0, n_out54p0, n_out72p0)){}
 		else if (replace (current_color, n_out55p0, n_out65p0, n_out54p0, n_out72p0)){}
 		else if (replace (current_color, n_out56p0, n_out66p0, n_out54p0, n_out72p0)){}
@@ -908,15 +1191,18 @@ void fragment() {
 		else if (replace (current_color, n_out60p0, n_out70p0, n_out54p0, n_out72p0)){}
 		
 		else if (replace (current_color, n_out103p0, n_out106p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out176p0, n_out177p0, n_out54p0, n_out72p0)){}
 		
 		else if (replace (current_color, n_out107p0, n_out133p0, n_out54p0, n_out72p0)){}
 		else if (replace (current_color, n_out108p0, n_out130p0, n_out54p0, n_out72p0)){}
 		else if (replace (current_color, n_out109p0, n_out131p0, n_out54p0, n_out72p0)){}
 		else if (replace (current_color, n_out110p0, n_out132p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out162p0, n_out164p0, n_out54p0, n_out72p0)){}
 		
 		else if (replace (current_color, n_out102p0, n_out105p0, n_out54p0, n_out72p0)){}
 		else if (replace (current_color, n_out101p0, n_out104p0, n_out54p0, n_out72p0)){}
 		else if (replace (current_color, n_out134p0, n_out135p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out174p0, n_out175p0, n_out54p0, n_out72p0)){}
 		
 		else if (replace (current_color, n_out136p0, n_out137p0, n_out54p0, n_out72p0)){}
 		else if (replace (current_color, n_out138p0, n_out139p0, n_out54p0, n_out72p0)){}
@@ -930,6 +1216,18 @@ void fragment() {
 		else if (replace (current_color, n_out146p0, n_out147p0, n_out54p0, n_out72p0)){}
 		else if (replace (current_color, n_out148p0, n_out149p0, n_out54p0, n_out72p0)){}
 		else if (replace (current_color, n_out150p0, n_out151p0, n_out54p0, n_out72p0)){}
+		
+		else if (replace (current_color, n_out158p0, n_out159p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out165p0, n_out169p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out166p0, n_out170p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out167p0, n_out171p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out168p0, n_out172p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out160p0, n_out161p0, n_out54p0, n_out72p0)){}
+		
+		else if (replace (current_color, n_out178p0, n_out182p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out179p0, n_out183p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out180p0, n_out184p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out181p0, n_out185p0, n_out54p0, n_out72p0)){}
 		
 		else {n_out54p0 = current_color}
 	}
@@ -986,17 +1284,17 @@ void fragment() {
 	float n_in96p2 = 0.00001;
 	vec3 n_in96p3 = vec3(0.00000, 0.00000, 0.00000);
 	vec3 n_out96p0;
-	if(abs(n_out95p0 - n_in96p1) < n_in96p2)
+	if(abs(n_out173p0 - n_in96p1) < n_in96p2)
 	{
 		n_out96p0 = n_in96p3;
 	}
-	else if(n_out95p0 < n_in96p1)
+	else if(n_out173p0 < n_in96p1)
 	{
 		n_out96p0 = n_out37p0;
 	}
 	else
 	{
-		n_out96p0 = vec3(n_out95p0);
+		n_out96p0 = vec3(n_out173p0);
 	}
 
 // Texture:98
@@ -1066,11 +1364,11 @@ void fragment() {
 	float n_in97p2 = 0.00001;
 	vec3 n_in97p3 = vec3(0.00000, 0.00000, 0.00000);
 	vec3 n_out97p0;
-	if(abs(n_out95p0 - n_in97p1) < n_in97p2)
+	if(abs(n_out173p0 - n_in97p1) < n_in97p2)
 	{
 		n_out97p0 = n_in97p3;
 	}
-	else if(n_out95p0 < n_in97p1)
+	else if(n_out173p0 < n_in97p1)
 	{
 		n_out97p0 = n_out50p0;
 	}
@@ -1090,7 +1388,7 @@ void light() {
 
 }
 "
-graph_offset = Vector2( -601.602, 302.889 )
+graph_offset = Vector2( -3257.73, 2957.14 )
 mode = 1
 flags/light_only = false
 nodes/vertex/2/node = SubResource( 20 )
@@ -1153,15 +1451,18 @@ nodes/fragment/51/position = Vector2( 1080, 1480 )
 nodes/fragment/52/node = SubResource( 65 )
 nodes/fragment/52/position = Vector2( 860, 1600 )
 nodes/fragment/54/node = SubResource( 67 )
-nodes/fragment/54/position = Vector2( -1280, 960 )
-nodes/fragment/54/size = Vector2( 1020.96, 2452.83 )
-nodes/fragment/54/input_ports = "0,1,main_color_1;1,1,main_color_2;2,1,main_color_3;3,1,main_color_4;4,1,main_color_5;5,1,main_color_6;6,1,replace_color_1;7,1,replace_color_2;8,1,replace_color_3;9,1,replace_color_4;10,1,replace_color_5;11,1,replace_color_6;12,1,crystal_color_1;13,1,crystal_color_2;14,1,crystal_color_3;15,1,crystal_replace_1;16,1,crystal_replace_2;17,1,crystal_replace_3;18,0,tolerance;19,1,outline_color;20,1,replace_outline_color;21,1,saber_color_1;22,1,saber_color_2;23,1,saber_color_3;24,1,saber_color_4;25,1,saber_replace_1;26,1,saber_replace_2;27,1,saber_replace_3;28,1,saber_replace_4;29,1,light_red_color_1;30,1,light_red_color_1_replace;31,1,chest_color_1;32,1,chest_color_2;33,1,chest_color_3;34,1,chest_replace_1;35,1,chest_replace_2;36,1,chest_replace_3;37,1,armor_color_1;38,1,armor_color_2;39,1,armor_replace_1;40,1,armor_replace_2;41,1,grey_color_1;42,1,grey_color_2;43,1,grey_color_3;44,1,grey_replace_1;45,1,grey_replace_2;46,1,grey_replace_3;47,1,skin_color_1;48,1,skin_color_2;49,1,skin_color_3;50,1,skin_replace_1;51,1,skin_replace_2;52,1,skin_replace_3;53,1,armor_color_3;54,1,armor_replace_3;55,1,light_hair_color;56,1,light_hair_replace;57,1,grey_color_4;58,1,grey_replace_4;"
+nodes/fragment/54/position = Vector2( -1280, 1000 )
+nodes/fragment/54/size = Vector2( 1035.9, 3334.88 )
+nodes/fragment/54/input_ports = "0,1,main_color_1;1,1,main_color_2;2,1,main_color_3;3,1,main_color_4;4,1,main_color_5;5,1,main_color_6;6,1,replace_color_1;7,1,replace_color_2;8,1,replace_color_3;9,1,replace_color_4;10,1,replace_color_5;11,1,replace_color_6;12,1,crystal_color_1;13,1,crystal_color_2;14,1,crystal_color_3;15,1,crystal_replace_1;16,1,crystal_replace_2;17,1,crystal_replace_3;18,0,tolerance;19,1,outline_color;20,1,replace_outline_color;21,1,saber_color_1;22,1,saber_color_2;23,1,saber_color_3;24,1,saber_color_4;25,1,saber_replace_1;26,1,saber_replace_2;27,1,saber_replace_3;28,1,saber_replace_4;29,1,light_red_color_1;30,1,light_red_color_1_replace;31,1,armor_color_1;32,1,armor_color_2;33,1,armor_replace_1;34,1,armor_replace_2;35,1,grey_color_1;36,1,grey_color_2;37,1,grey_color_3;38,1,grey_replace_1;39,1,grey_replace_2;40,1,grey_replace_3;41,1,skin_color_1;42,1,skin_color_2;43,1,skin_color_3;44,1,skin_replace_1;45,1,skin_replace_2;46,1,skin_replace_3;47,1,armor_color_3;48,1,armor_replace_3;49,1,light_hair_color;50,1,light_hair_replace;51,1,grey_color_4;52,1,grey_replace_4;53,1,aura_color;54,1,aura_color_replace;55,1,afterimages_color;56,1,afterimages_color_replace;57,1,saber_color_5;58,1,saber_replace_5;59,1,awakened_effect1;60,1,awakened_effect2;61,1,awakened_effect3;62,1,awakened_effect4;63,1,awakened_effect_replace1;64,1,awakened_effect_replace2;65,1,awakened_effect_replace3;66,1,awakened_effect_replace4;67,1,chest_color_1;68,1,chest_color_2;69,1,chest_color_3;70,1,chest_color_4;71,1,chest_replace_1;72,1,chest_replace_2;73,1,chest_replace_3;74,1,chest_replace_4;75,1,outline_color_2;76,1,replace_outline_color_2;77,1,sigma_blade_color_1;78,1,sigma_blade_color_2;79,1,sigma_blade_color_3;80,1,sigma_blade_color_4;81,1,sigma_blade_replace_color_1;82,1,sigma_blade_replace_color_2;83,1,sigma_blade_replace_color_3;84,1,sigma_blade_replace_color_4;85,1,back_crystal_color_1;86,1,back_crystal_color_2;87,1,back_crystal_replace_1;88,1,back_crystal_replace_2;"
 nodes/fragment/54/output_ports = "0,1,final_color;1,1,crystal_colors;"
 nodes/fragment/54/expression = "vec3 current_color = texture(TEXTURE, UV).rgb;
 
 if (replace (current_color, crystal_color_1, crystal_replace_1, final_color, tolerance)){}
 else if (replace (current_color, crystal_color_2, crystal_replace_2, final_color, tolerance)){}
 else if (replace (current_color, crystal_color_3, crystal_replace_3, final_color, tolerance)){}
+
+else if (replace (current_color, back_crystal_color_1, back_crystal_replace_1, final_color, tolerance)){}
+else if (replace (current_color, back_crystal_color_2, back_crystal_replace_2, final_color, tolerance)){}
 
 else if (replace (current_color, light_red_color_1, light_red_color_1_replace, final_color, tolerance)){}
 else if (replace (current_color, main_color_1, replace_color_1, final_color, tolerance)){}
@@ -1174,15 +1475,18 @@ else if (replace (current_color, main_color_5, replace_color_5, final_color, tol
 else if (replace (current_color, main_color_6, replace_color_6, final_color, tolerance)){}
 
 else if (replace (current_color, outline_color, replace_outline_color, final_color, tolerance)){}
+else if (replace (current_color, outline_color_2, replace_outline_color_2, final_color, tolerance)){}
 
 else if (replace (current_color, saber_color_1, saber_replace_1, final_color, tolerance)){}
 else if (replace (current_color, saber_color_2, saber_replace_2, final_color, tolerance)){}
 else if (replace (current_color, saber_color_3, saber_replace_3, final_color, tolerance)){}
 else if (replace (current_color, saber_color_4, saber_replace_4, final_color, tolerance)){}
+else if (replace (current_color, saber_color_5, saber_replace_5, final_color, tolerance)){}
 
 else if (replace (current_color, chest_color_1, chest_replace_1, final_color, tolerance)){}
 else if (replace (current_color, chest_color_2, chest_replace_2, final_color, tolerance)){}
 else if (replace (current_color, chest_color_3, chest_replace_3, final_color, tolerance)){}
+else if (replace (current_color, chest_color_4, chest_replace_4, final_color, tolerance)){}
 
 else if (replace (current_color, armor_color_1, armor_replace_1, final_color, tolerance)){}
 else if (replace (current_color, armor_color_2, armor_replace_2, final_color, tolerance)){}
@@ -1196,6 +1500,18 @@ else if (replace (current_color, grey_color_4, grey_replace_4, final_color, tole
 else if (replace (current_color, skin_color_1, skin_replace_1, final_color, tolerance)){}
 else if (replace (current_color, skin_color_2, skin_replace_2, final_color, tolerance)){}
 else if (replace (current_color, skin_color_3, skin_replace_3, final_color, tolerance)){}
+
+else if (replace (current_color, aura_color, aura_color_replace, final_color, tolerance)){}
+else if (replace (current_color, awakened_effect1, awakened_effect_replace1, final_color, tolerance)){}
+else if (replace (current_color, awakened_effect2, awakened_effect_replace2, final_color, tolerance)){}
+else if (replace (current_color, awakened_effect3, awakened_effect_replace3, final_color, tolerance)){}
+else if (replace (current_color, awakened_effect4, awakened_effect_replace4, final_color, tolerance)){}
+else if (replace (current_color, afterimages_color, afterimages_color_replace, final_color, tolerance)){}
+
+else if (replace (current_color, sigma_blade_color_1, sigma_blade_replace_color_1, final_color, tolerance)){}
+else if (replace (current_color, sigma_blade_color_2, sigma_blade_replace_color_2, final_color, tolerance)){}
+else if (replace (current_color, sigma_blade_color_3, sigma_blade_replace_color_3, final_color, tolerance)){}
+else if (replace (current_color, sigma_blade_color_4, sigma_blade_replace_color_4, final_color, tolerance)){}
 
 else {final_color = current_color}"
 nodes/fragment/55/node = SubResource( 68 )
@@ -1223,7 +1539,7 @@ nodes/fragment/69/position = Vector2( -1780, 920 )
 nodes/fragment/70/node = SubResource( 79 )
 nodes/fragment/70/position = Vector2( -1780, 1040 )
 nodes/fragment/71/node = SubResource( 80 )
-nodes/fragment/71/position = Vector2( -1300, 3500 )
+nodes/fragment/71/position = Vector2( -1280, 4340 )
 nodes/fragment/71/size = Vector2( 1036.64, 317.838 )
 nodes/fragment/71/input_ports = ""
 nodes/fragment/71/output_ports = ""
@@ -1276,8 +1592,6 @@ nodes/fragment/92/node = SubResource( 99 )
 nodes/fragment/92/position = Vector2( -2160, 2420 )
 nodes/fragment/93/node = SubResource( 100 )
 nodes/fragment/93/position = Vector2( -2380, 2380 )
-nodes/fragment/95/node = SubResource( 101 )
-nodes/fragment/95/position = Vector2( 1060, 680 )
 nodes/fragment/96/node = SubResource( 102 )
 nodes/fragment/96/position = Vector2( 1500, 740 )
 nodes/fragment/97/node = SubResource( 103 )
@@ -1289,67 +1603,67 @@ nodes/fragment/99/position = Vector2( 360, 1520 )
 nodes/fragment/100/node = SubResource( 105 )
 nodes/fragment/100/position = Vector2( 520, 1520 )
 nodes/fragment/101/node = SubResource( 107 )
-nodes/fragment/101/position = Vector2( -2080, 1380 )
+nodes/fragment/101/position = Vector2( -2000, 3520 )
 nodes/fragment/102/node = SubResource( 108 )
-nodes/fragment/102/position = Vector2( -2080, 1280 )
+nodes/fragment/102/position = Vector2( -2000, 3400 )
 nodes/fragment/103/node = SubResource( 109 )
 nodes/fragment/103/position = Vector2( -2080, 1140 )
 nodes/fragment/104/node = SubResource( 110 )
-nodes/fragment/104/position = Vector2( -1780, 1380 )
+nodes/fragment/104/position = Vector2( -1700, 3520 )
 nodes/fragment/105/node = SubResource( 111 )
-nodes/fragment/105/position = Vector2( -1780, 1280 )
+nodes/fragment/105/position = Vector2( -1700, 3400 )
 nodes/fragment/106/node = SubResource( 112 )
 nodes/fragment/106/position = Vector2( -1780, 1140 )
 nodes/fragment/107/node = SubResource( 113 )
-nodes/fragment/107/position = Vector2( -1800, -320 )
+nodes/fragment/107/position = Vector2( -1800, -480 )
 nodes/fragment/108/node = SubResource( 114 )
-nodes/fragment/108/position = Vector2( -1800, -200 )
+nodes/fragment/108/position = Vector2( -1800, -360 )
 nodes/fragment/109/node = SubResource( 115 )
-nodes/fragment/109/position = Vector2( -1800, -80 )
+nodes/fragment/109/position = Vector2( -1800, -240 )
 nodes/fragment/110/node = SubResource( 116 )
-nodes/fragment/110/position = Vector2( -1800, 40 )
+nodes/fragment/110/position = Vector2( -1800, -120 )
 nodes/fragment/111/node = SubResource( 117 )
-nodes/fragment/111/position = Vector2( -1520, -320 )
+nodes/fragment/111/position = Vector2( -1520, -480 )
 nodes/fragment/112/node = SubResource( 118 )
-nodes/fragment/112/position = Vector2( -1520, -200 )
+nodes/fragment/112/position = Vector2( -1520, -360 )
 nodes/fragment/113/node = SubResource( 119 )
-nodes/fragment/113/position = Vector2( -1520, -80 )
+nodes/fragment/113/position = Vector2( -1520, -240 )
 nodes/fragment/114/node = SubResource( 120 )
-nodes/fragment/114/position = Vector2( -1520, 40 )
+nodes/fragment/114/position = Vector2( -1520, -120 )
 nodes/fragment/117/node = SubResource( 123 )
 nodes/fragment/117/position = Vector2( -2080, 320 )
 nodes/fragment/118/node = SubResource( 124 )
 nodes/fragment/118/position = Vector2( -1780, 320 )
 nodes/fragment/121/node = SubResource( 127 )
-nodes/fragment/121/position = Vector2( -2000, -420 )
+nodes/fragment/121/position = Vector2( -2000, -580 )
 nodes/fragment/122/node = SubResource( 128 )
-nodes/fragment/122/position = Vector2( -1600, -420 )
+nodes/fragment/122/position = Vector2( -1600, -580 )
 nodes/fragment/123/node = SubResource( 129 )
-nodes/fragment/123/position = Vector2( -1800, -440 )
+nodes/fragment/123/position = Vector2( -1800, -600 )
 nodes/fragment/124/node = SubResource( 130 )
-nodes/fragment/124/position = Vector2( -1800, -560 )
+nodes/fragment/124/position = Vector2( -1800, -720 )
 nodes/fragment/125/node = SubResource( 131 )
-nodes/fragment/125/position = Vector2( -1200, -520 )
+nodes/fragment/125/position = Vector2( -1200, -680 )
 nodes/fragment/126/node = SubResource( 132 )
-nodes/fragment/126/position = Vector2( -1400, -560 )
+nodes/fragment/126/position = Vector2( -1400, -720 )
 nodes/fragment/127/node = SubResource( 133 )
-nodes/fragment/127/position = Vector2( -1000, -560 )
+nodes/fragment/127/position = Vector2( -1000, -720 )
 nodes/fragment/128/node = SubResource( 134 )
-nodes/fragment/128/position = Vector2( -1200, -400 )
+nodes/fragment/128/position = Vector2( -1200, -560 )
 nodes/fragment/129/node = SubResource( 135 )
-nodes/fragment/129/position = Vector2( -1400, -440 )
+nodes/fragment/129/position = Vector2( -1400, -600 )
 nodes/fragment/130/node = SubResource( 136 )
-nodes/fragment/130/position = Vector2( -1120, -180 )
+nodes/fragment/130/position = Vector2( -1120, -340 )
 nodes/fragment/131/node = SubResource( 137 )
-nodes/fragment/131/position = Vector2( -1120, -60 )
+nodes/fragment/131/position = Vector2( -1120, -220 )
 nodes/fragment/132/node = SubResource( 138 )
-nodes/fragment/132/position = Vector2( -1120, 60 )
+nodes/fragment/132/position = Vector2( -1120, -100 )
 nodes/fragment/133/node = SubResource( 139 )
-nodes/fragment/133/position = Vector2( -1120, -300 )
+nodes/fragment/133/position = Vector2( -1120, -460 )
 nodes/fragment/134/node = SubResource( 140 )
-nodes/fragment/134/position = Vector2( -2080, 1480 )
+nodes/fragment/134/position = Vector2( -2000, 3640 )
 nodes/fragment/135/node = SubResource( 141 )
-nodes/fragment/135/position = Vector2( -1780, 1480 )
+nodes/fragment/135/position = Vector2( -1700, 3640 )
 nodes/fragment/136/node = SubResource( 142 )
 nodes/fragment/136/position = Vector2( -2800, 1240 )
 nodes/fragment/137/node = SubResource( 143 )
@@ -1394,4 +1708,68 @@ nodes/fragment/156/node = SubResource( 162 )
 nodes/fragment/156/position = Vector2( -1200, 740 )
 nodes/fragment/157/node = SubResource( 163 )
 nodes/fragment/157/position = Vector2( -900, 740 )
-nodes/fragment/connections = PoolIntArray( 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 127, 0, 130, 1, 127, 0, 131, 1, 127, 0, 132, 1, 112, 0, 130, 0, 113, 0, 131, 0, 114, 0, 132, 0, 127, 0, 133, 1, 111, 0, 133, 0, 103, 0, 54, 19, 103, 0, 54, 19, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 130, 0, 54, 26, 131, 0, 54, 27, 132, 0, 54, 28, 133, 0, 54, 25, 117, 0, 54, 29, 118, 0, 54, 30, 117, 0, 54, 29, 118, 0, 54, 30, 102, 0, 54, 31, 101, 0, 54, 32, 134, 0, 54, 33, 105, 0, 54, 34, 104, 0, 54, 35, 135, 0, 54, 36, 136, 0, 54, 37, 138, 0, 54, 38, 137, 0, 54, 39, 139, 0, 54, 40, 140, 0, 54, 41, 142, 0, 54, 42, 144, 0, 54, 43, 141, 0, 54, 44, 143, 0, 54, 45, 145, 0, 54, 46, 146, 0, 54, 47, 148, 0, 54, 48, 150, 0, 54, 49, 147, 0, 54, 50, 149, 0, 54, 51, 151, 0, 54, 52, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 127, 0, 130, 1, 127, 0, 131, 1, 127, 0, 132, 1, 112, 0, 130, 0, 113, 0, 131, 0, 114, 0, 132, 0, 127, 0, 133, 1, 111, 0, 133, 0, 103, 0, 54, 19, 103, 0, 54, 19, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 130, 0, 54, 26, 131, 0, 54, 27, 132, 0, 54, 28, 133, 0, 54, 25, 117, 0, 54, 29, 118, 0, 54, 30, 117, 0, 54, 29, 118, 0, 54, 30, 102, 0, 54, 31, 101, 0, 54, 32, 134, 0, 54, 33, 105, 0, 54, 34, 104, 0, 54, 35, 135, 0, 54, 36, 136, 0, 54, 37, 138, 0, 54, 38, 137, 0, 54, 39, 139, 0, 54, 40, 140, 0, 54, 41, 142, 0, 54, 42, 144, 0, 54, 43, 141, 0, 54, 44, 143, 0, 54, 45, 145, 0, 54, 46, 146, 0, 54, 47, 148, 0, 54, 48, 150, 0, 54, 49, 147, 0, 54, 50, 149, 0, 54, 51, 151, 0, 54, 52, 152, 0, 54, 53, 153, 0, 54, 54, 154, 0, 54, 55, 155, 0, 54, 56, 156, 0, 54, 57, 157, 0, 54, 58, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 127, 0, 130, 1, 127, 0, 131, 1, 127, 0, 132, 1, 112, 0, 130, 0, 113, 0, 131, 0, 114, 0, 132, 0, 127, 0, 133, 1, 111, 0, 133, 0, 103, 0, 54, 19, 103, 0, 54, 19, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 130, 0, 54, 26, 131, 0, 54, 27, 132, 0, 54, 28, 133, 0, 54, 25, 117, 0, 54, 29, 118, 0, 54, 30, 117, 0, 54, 29, 118, 0, 54, 30, 102, 0, 54, 31, 101, 0, 54, 32, 134, 0, 54, 33, 105, 0, 54, 34, 104, 0, 54, 35, 135, 0, 54, 36, 136, 0, 54, 37, 138, 0, 54, 38, 137, 0, 54, 39, 139, 0, 54, 40, 140, 0, 54, 41, 142, 0, 54, 42, 144, 0, 54, 43, 141, 0, 54, 44, 143, 0, 54, 45, 145, 0, 54, 46, 146, 0, 54, 47, 148, 0, 54, 48, 150, 0, 54, 49, 147, 0, 54, 50, 149, 0, 54, 51, 151, 0, 54, 52, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 127, 0, 130, 1, 127, 0, 131, 1, 127, 0, 132, 1, 112, 0, 130, 0, 113, 0, 131, 0, 114, 0, 132, 0, 127, 0, 133, 1, 111, 0, 133, 0, 103, 0, 54, 19, 103, 0, 54, 19, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 130, 0, 54, 26, 131, 0, 54, 27, 132, 0, 54, 28, 133, 0, 54, 25, 117, 0, 54, 29, 118, 0, 54, 30, 117, 0, 54, 29, 118, 0, 54, 30, 102, 0, 54, 31, 101, 0, 54, 32, 134, 0, 54, 33, 105, 0, 54, 34, 104, 0, 54, 35, 135, 0, 54, 36, 136, 0, 54, 37, 138, 0, 54, 38, 137, 0, 54, 39, 139, 0, 54, 40, 140, 0, 54, 41, 142, 0, 54, 42, 144, 0, 54, 43, 141, 0, 54, 44, 143, 0, 54, 45, 145, 0, 54, 46, 146, 0, 54, 47, 148, 0, 54, 48, 150, 0, 54, 49, 147, 0, 54, 50, 149, 0, 54, 51, 151, 0, 54, 52, 152, 0, 54, 53, 153, 0, 54, 54, 154, 0, 54, 55, 155, 0, 54, 56, 156, 0, 54, 57, 157, 0, 54, 58 )
+nodes/fragment/158/node = SubResource( 164 )
+nodes/fragment/158/position = Vector2( -2000, 3000 )
+nodes/fragment/159/node = SubResource( 165 )
+nodes/fragment/159/position = Vector2( -1700, 3000 )
+nodes/fragment/160/node = SubResource( 166 )
+nodes/fragment/160/position = Vector2( -2000, 3140 )
+nodes/fragment/161/node = SubResource( 167 )
+nodes/fragment/161/position = Vector2( -1700, 3140 )
+nodes/fragment/162/node = SubResource( 168 )
+nodes/fragment/162/position = Vector2( -1800, 0 )
+nodes/fragment/163/node = SubResource( 169 )
+nodes/fragment/163/position = Vector2( -1520, 0 )
+nodes/fragment/164/node = SubResource( 170 )
+nodes/fragment/164/position = Vector2( -1120, 20 )
+nodes/fragment/165/node = SubResource( 171 )
+nodes/fragment/165/position = Vector2( -2600, 2600 )
+nodes/fragment/166/node = SubResource( 172 )
+nodes/fragment/166/position = Vector2( -2600, 2740 )
+nodes/fragment/167/node = SubResource( 173 )
+nodes/fragment/167/position = Vector2( -2600, 2880 )
+nodes/fragment/168/node = SubResource( 174 )
+nodes/fragment/168/position = Vector2( -2600, 3020 )
+nodes/fragment/169/node = SubResource( 175 )
+nodes/fragment/169/position = Vector2( -2300, 2600 )
+nodes/fragment/170/node = SubResource( 176 )
+nodes/fragment/170/position = Vector2( -2300, 2740 )
+nodes/fragment/171/node = SubResource( 177 )
+nodes/fragment/171/position = Vector2( -2300, 2880 )
+nodes/fragment/172/node = SubResource( 178 )
+nodes/fragment/172/position = Vector2( -2300, 3020 )
+nodes/fragment/173/node = SubResource( 179 )
+nodes/fragment/173/position = Vector2( 1060, 740 )
+nodes/fragment/174/node = SubResource( 180 )
+nodes/fragment/174/position = Vector2( -2000, 3760 )
+nodes/fragment/175/node = SubResource( 181 )
+nodes/fragment/175/position = Vector2( -1700, 3760 )
+nodes/fragment/176/node = SubResource( 182 )
+nodes/fragment/176/position = Vector2( -2000, 3920 )
+nodes/fragment/177/node = SubResource( 183 )
+nodes/fragment/177/position = Vector2( -1700, 3920 )
+nodes/fragment/178/node = SubResource( 184 )
+nodes/fragment/178/position = Vector2( -2660, 3400 )
+nodes/fragment/179/node = SubResource( 185 )
+nodes/fragment/179/position = Vector2( -2660, 3560 )
+nodes/fragment/180/node = SubResource( 186 )
+nodes/fragment/180/position = Vector2( -2660, 3720 )
+nodes/fragment/181/node = SubResource( 187 )
+nodes/fragment/181/position = Vector2( -2660, 3880 )
+nodes/fragment/182/node = SubResource( 188 )
+nodes/fragment/182/position = Vector2( -2360, 3400 )
+nodes/fragment/183/node = SubResource( 189 )
+nodes/fragment/183/position = Vector2( -2360, 3560 )
+nodes/fragment/184/node = SubResource( 190 )
+nodes/fragment/184/position = Vector2( -2360, 3720 )
+nodes/fragment/185/node = SubResource( 191 )
+nodes/fragment/185/position = Vector2( -2360, 3880 )
+nodes/fragment/186/node = SubResource( 192 )
+nodes/fragment/186/position = Vector2( -2000, 4120 )
+nodes/fragment/187/node = SubResource( 193 )
+nodes/fragment/187/position = Vector2( -2000, 4260 )
+nodes/fragment/188/node = SubResource( 194 )
+nodes/fragment/188/position = Vector2( -1700, 4120 )
+nodes/fragment/189/node = SubResource( 195 )
+nodes/fragment/189/position = Vector2( -1700, 4260 )
+nodes/fragment/connections = PoolIntArray( 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 127, 0, 130, 1, 127, 0, 131, 1, 127, 0, 132, 1, 112, 0, 130, 0, 113, 0, 131, 0, 114, 0, 132, 0, 127, 0, 133, 1, 111, 0, 133, 0, 103, 0, 54, 19, 103, 0, 54, 19, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 130, 0, 54, 26, 131, 0, 54, 27, 132, 0, 54, 28, 133, 0, 54, 25, 117, 0, 54, 29, 118, 0, 54, 30, 117, 0, 54, 29, 118, 0, 54, 30, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 127, 0, 130, 1, 127, 0, 131, 1, 127, 0, 132, 1, 112, 0, 130, 0, 113, 0, 131, 0, 114, 0, 132, 0, 127, 0, 133, 1, 111, 0, 133, 0, 103, 0, 54, 19, 103, 0, 54, 19, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 130, 0, 54, 26, 131, 0, 54, 27, 132, 0, 54, 28, 133, 0, 54, 25, 117, 0, 54, 29, 118, 0, 54, 30, 117, 0, 54, 29, 118, 0, 54, 30, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 127, 0, 130, 1, 127, 0, 131, 1, 127, 0, 132, 1, 112, 0, 130, 0, 113, 0, 131, 0, 114, 0, 132, 0, 127, 0, 133, 1, 111, 0, 133, 0, 103, 0, 54, 19, 103, 0, 54, 19, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 130, 0, 54, 26, 131, 0, 54, 27, 132, 0, 54, 28, 133, 0, 54, 25, 117, 0, 54, 29, 118, 0, 54, 30, 117, 0, 54, 29, 118, 0, 54, 30, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 127, 0, 130, 1, 127, 0, 131, 1, 127, 0, 132, 1, 112, 0, 130, 0, 113, 0, 131, 0, 114, 0, 132, 0, 127, 0, 133, 1, 111, 0, 133, 0, 103, 0, 54, 19, 103, 0, 54, 19, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 130, 0, 54, 26, 131, 0, 54, 27, 132, 0, 54, 28, 133, 0, 54, 25, 117, 0, 54, 29, 118, 0, 54, 30, 117, 0, 54, 29, 118, 0, 54, 30, 163, 0, 164, 0, 127, 0, 164, 1, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 127, 0, 130, 1, 127, 0, 131, 1, 127, 0, 132, 1, 112, 0, 130, 0, 113, 0, 131, 0, 114, 0, 132, 0, 127, 0, 133, 1, 111, 0, 133, 0, 103, 0, 54, 19, 103, 0, 54, 19, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 130, 0, 54, 26, 131, 0, 54, 27, 132, 0, 54, 28, 133, 0, 54, 25, 117, 0, 54, 29, 118, 0, 54, 30, 117, 0, 54, 29, 118, 0, 54, 30, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 127, 0, 130, 1, 127, 0, 131, 1, 127, 0, 132, 1, 112, 0, 130, 0, 113, 0, 131, 0, 114, 0, 132, 0, 127, 0, 133, 1, 111, 0, 133, 0, 103, 0, 54, 19, 103, 0, 54, 19, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 130, 0, 54, 26, 131, 0, 54, 27, 132, 0, 54, 28, 133, 0, 54, 25, 117, 0, 54, 29, 118, 0, 54, 30, 117, 0, 54, 29, 118, 0, 54, 30, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 127, 0, 130, 1, 127, 0, 131, 1, 127, 0, 132, 1, 112, 0, 130, 0, 113, 0, 131, 0, 114, 0, 132, 0, 127, 0, 133, 1, 111, 0, 133, 0, 103, 0, 54, 19, 103, 0, 54, 19, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 130, 0, 54, 26, 131, 0, 54, 27, 132, 0, 54, 28, 133, 0, 54, 25, 117, 0, 54, 29, 118, 0, 54, 30, 117, 0, 54, 29, 118, 0, 54, 30, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 127, 0, 130, 1, 127, 0, 131, 1, 127, 0, 132, 1, 112, 0, 130, 0, 113, 0, 131, 0, 114, 0, 132, 0, 127, 0, 133, 1, 111, 0, 133, 0, 103, 0, 54, 19, 103, 0, 54, 19, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 130, 0, 54, 26, 131, 0, 54, 27, 132, 0, 54, 28, 133, 0, 54, 25, 117, 0, 54, 29, 118, 0, 54, 30, 117, 0, 54, 29, 118, 0, 54, 30, 163, 0, 164, 0, 127, 0, 164, 1, 14, 0, 37, 0, 173, 0, 96, 0, 173, 0, 96, 4, 173, 0, 97, 0, 136, 0, 54, 31, 138, 0, 54, 32, 137, 0, 54, 33, 139, 0, 54, 34, 140, 0, 54, 35, 142, 0, 54, 36, 144, 0, 54, 37, 141, 0, 54, 38, 143, 0, 54, 39, 145, 0, 54, 40, 146, 0, 54, 41, 148, 0, 54, 42, 150, 0, 54, 43, 147, 0, 54, 44, 149, 0, 54, 45, 151, 0, 54, 46, 136, 0, 54, 31, 138, 0, 54, 32, 137, 0, 54, 33, 139, 0, 54, 34, 140, 0, 54, 35, 142, 0, 54, 36, 144, 0, 54, 37, 141, 0, 54, 38, 143, 0, 54, 39, 145, 0, 54, 40, 146, 0, 54, 41, 148, 0, 54, 42, 150, 0, 54, 43, 147, 0, 54, 44, 149, 0, 54, 45, 151, 0, 54, 46, 152, 0, 54, 47, 153, 0, 54, 48, 154, 0, 54, 49, 155, 0, 54, 50, 156, 0, 54, 51, 157, 0, 54, 52, 136, 0, 54, 31, 138, 0, 54, 32, 137, 0, 54, 33, 139, 0, 54, 34, 140, 0, 54, 35, 142, 0, 54, 36, 144, 0, 54, 37, 141, 0, 54, 38, 143, 0, 54, 39, 145, 0, 54, 40, 146, 0, 54, 41, 148, 0, 54, 42, 150, 0, 54, 43, 147, 0, 54, 44, 149, 0, 54, 45, 151, 0, 54, 46, 136, 0, 54, 31, 138, 0, 54, 32, 137, 0, 54, 33, 139, 0, 54, 34, 140, 0, 54, 35, 142, 0, 54, 36, 144, 0, 54, 37, 141, 0, 54, 38, 143, 0, 54, 39, 145, 0, 54, 40, 146, 0, 54, 41, 148, 0, 54, 42, 150, 0, 54, 43, 147, 0, 54, 44, 149, 0, 54, 45, 151, 0, 54, 46, 152, 0, 54, 47, 153, 0, 54, 48, 154, 0, 54, 49, 155, 0, 54, 50, 156, 0, 54, 51, 157, 0, 54, 52, 158, 0, 54, 53, 159, 0, 54, 54, 160, 0, 54, 55, 161, 0, 54, 56, 162, 0, 54, 57, 164, 0, 54, 58, 165, 0, 54, 59, 166, 0, 54, 60, 167, 0, 54, 61, 168, 0, 54, 62, 169, 0, 54, 63, 170, 0, 54, 64, 171, 0, 54, 65, 172, 0, 54, 66, 136, 0, 54, 31, 138, 0, 54, 32, 137, 0, 54, 33, 139, 0, 54, 34, 140, 0, 54, 35, 142, 0, 54, 36, 144, 0, 54, 37, 141, 0, 54, 38, 143, 0, 54, 39, 145, 0, 54, 40, 146, 0, 54, 41, 148, 0, 54, 42, 150, 0, 54, 43, 147, 0, 54, 44, 149, 0, 54, 45, 151, 0, 54, 46, 136, 0, 54, 31, 138, 0, 54, 32, 137, 0, 54, 33, 139, 0, 54, 34, 140, 0, 54, 35, 142, 0, 54, 36, 144, 0, 54, 37, 141, 0, 54, 38, 143, 0, 54, 39, 145, 0, 54, 40, 146, 0, 54, 41, 148, 0, 54, 42, 150, 0, 54, 43, 147, 0, 54, 44, 149, 0, 54, 45, 151, 0, 54, 46, 152, 0, 54, 47, 153, 0, 54, 48, 154, 0, 54, 49, 155, 0, 54, 50, 156, 0, 54, 51, 157, 0, 54, 52, 136, 0, 54, 31, 138, 0, 54, 32, 137, 0, 54, 33, 139, 0, 54, 34, 140, 0, 54, 35, 142, 0, 54, 36, 144, 0, 54, 37, 141, 0, 54, 38, 143, 0, 54, 39, 145, 0, 54, 40, 146, 0, 54, 41, 148, 0, 54, 42, 150, 0, 54, 43, 147, 0, 54, 44, 149, 0, 54, 45, 151, 0, 54, 46, 136, 0, 54, 31, 138, 0, 54, 32, 137, 0, 54, 33, 139, 0, 54, 34, 140, 0, 54, 35, 142, 0, 54, 36, 144, 0, 54, 37, 141, 0, 54, 38, 143, 0, 54, 39, 145, 0, 54, 40, 146, 0, 54, 41, 148, 0, 54, 42, 150, 0, 54, 43, 147, 0, 54, 44, 149, 0, 54, 45, 151, 0, 54, 46, 152, 0, 54, 47, 153, 0, 54, 48, 154, 0, 54, 49, 155, 0, 54, 50, 156, 0, 54, 51, 157, 0, 54, 52, 158, 0, 54, 53, 159, 0, 54, 54, 160, 0, 54, 55, 161, 0, 54, 56, 162, 0, 54, 57, 164, 0, 54, 58, 165, 0, 54, 59, 166, 0, 54, 60, 167, 0, 54, 61, 168, 0, 54, 62, 169, 0, 54, 63, 170, 0, 54, 64, 171, 0, 54, 65, 172, 0, 54, 66, 102, 0, 54, 67, 101, 0, 54, 68, 174, 0, 54, 70, 175, 0, 54, 74, 105, 0, 54, 71, 104, 0, 54, 72, 135, 0, 54, 73, 134, 0, 54, 69, 176, 0, 54, 75, 177, 0, 54, 76, 178, 0, 54, 77, 179, 0, 54, 78, 180, 0, 54, 79, 181, 0, 54, 80, 182, 0, 54, 81, 183, 0, 54, 82, 184, 0, 54, 83, 185, 0, 54, 84, 186, 0, 54, 85, 187, 0, 54, 86, 188, 0, 54, 87, 189, 0, 54, 88 )

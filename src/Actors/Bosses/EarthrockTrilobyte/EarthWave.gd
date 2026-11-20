@@ -3,6 +3,7 @@ extends AttackAbility
 const crystal_height: float = 54.0
 
 export  var crystal: PackedScene
+export  var new_position = 0
 
 onready var roar: AudioStreamPlayer2D = $roar
 
@@ -155,13 +156,13 @@ func create_crystal(offset: Vector2 = Vector2.ZERO, inverted: bool = false) -> v
 	c.initialize( - crystal_speed * desperation_direction)
 
 func create_ground_crystal() -> void :
-	create_crystal()
+	create_crystal(Vector2(0, 0 - new_position))
 
 func create_second_ground_crystal() -> void :
-	create_crystal(Vector2(0, - crystal_height - 4))
+	create_crystal(Vector2(0, - crystal_height - 4 - new_position))
 
 func create_ceiling_crystal() -> void :
-	create_crystal(Vector2(32, - 116 - 16), true)
+	create_crystal(Vector2(32, - 116 - 16 - new_position), true)
 
 func create_second_ceiling_crystal() -> void :
-	create_crystal(Vector2(32, - 58 - 16), true)
+	create_crystal(Vector2(32, - 58 - 16 - new_position), true)

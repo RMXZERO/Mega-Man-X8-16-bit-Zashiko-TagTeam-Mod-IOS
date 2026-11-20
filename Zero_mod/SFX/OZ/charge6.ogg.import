@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/charge6.ogg-8db4649842703bdbe6772969887291f0.oggstr"
+
+[deps]
+
+source_file="res://Zero_mod/SFX/OZ/charge6.ogg"
+dest_files=[ "res://.import/charge6.ogg-8db4649842703bdbe6772969887291f0.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

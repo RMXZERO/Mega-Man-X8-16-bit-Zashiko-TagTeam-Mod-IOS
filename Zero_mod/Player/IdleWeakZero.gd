@@ -1,7 +1,7 @@
 extends IdleZero
 
 onready var animatedSprite = get_parent().get_node("animatedSprite")
-onready var fanshield = get_parent().get_node("FanShield")
+onready var fanshield = get_parent().get_node_or_null("FanShield")
 
 
 func _on_animatedSprite_animation_finished() -> void :
@@ -16,7 +16,8 @@ func _on_animatedSprite_animation_finished() -> void :
 		
 		if character.saber_node.current_weapon.name == "B-Fan":
 			character.play_animation("idle")
-			fanshield.activate()
+			if fanshield != null:
+				fanshield.activate()
 
 func is_playing_recover() -> bool:
 	return character.get_animation() == "recover"

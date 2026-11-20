@@ -5,6 +5,7 @@ onready var particles: = get_all_particles()
 onready var prepare: = $prepare
 onready var storm: = $storm
 onready var scream: = $scream
+var only_ones_times: = false
 
 var desperation_damage_reduction: float = 0.5
 
@@ -25,7 +26,7 @@ func _Update(_delta: float) -> void :
 		scream.play()
 		next_attack_stage_on_next_frame()
 		screenshake()
-			
+		
 	elif attack_stage == 1 and timer > 0.5:
 		next_attack_stage_on_next_frame()
 			
@@ -40,7 +41,7 @@ func _Update(_delta: float) -> void :
 			next_attack_stage()
 			toggle_emit(particles, true)
 			emit_signal("ready_for_stun")
-			
+		
 	elif attack_stage == 3:
 		play_animation_once("icestorm_loop")
 		screenshake()
@@ -50,9 +51,13 @@ func _Update(_delta: float) -> void :
 		toggle_emit(particles, false)
 		play_animation_once("icestorm_end")
 		next_attack_stage()
-		
+	
 	elif attack_stage == 5 and has_finished_last_animation():
 		EndAbility()
+		deactivate_attacks()
+
+func deactivate_attacks() -> void :
+	active = false
 
 func _Interrupt() -> void :
 	._Interrupt()

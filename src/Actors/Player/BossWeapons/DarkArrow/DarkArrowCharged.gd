@@ -27,13 +27,22 @@ func track():
 		set_horizontal_speed(420 * dir.x)
 		set_vertical_speed(420 * dir.y)
 		set_rotation(Vector2(get_horizontal_speed(), get_vertical_speed()).angle())
+		if facing_direction == - 1:
+			scale.y=-1
+		else:
+			scale.y=1
 	else:
 		set_horizontal_speed(420 * get_facing_direction())
 		set_rotation(Vector2(get_horizontal_speed(), get_vertical_speed()).angle())
+		if facing_direction == - 1:
+			scale.y=-1
+		else:
+			scale.y=1
 	tracking = true
 
 func _Update(delta: float) -> void :
 	._Update(delta)
+	CharacterManager.set_zeroX8_colors(animatedSprite)
 	if not tracking:
 		track()
 

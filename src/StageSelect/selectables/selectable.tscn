@@ -62,7 +62,6 @@ animations = [ {
 position = Vector2( 103, 38 )
 frames = ExtResource( 2 )
 animation = "idle"
-frame = 3
 playing = true
 script = ExtResource( 3 )
 
@@ -70,5 +69,4 @@ script = ExtResource( 3 )
 visible = false
 z_index = 1
 frames = SubResource( 7 )
-frame = 1
 playing = true

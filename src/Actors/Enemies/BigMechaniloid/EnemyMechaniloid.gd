@@ -22,6 +22,10 @@ func on_spike_land(_discard = null):
 	current_health = 0
 	emit_zero_health_signal()
 
+func destroy_ridearmor(body: Node) -> void :
+	if body.is_in_group("Props"):
+		body.get_parent().void_touch()
+
 func _on_MechaStarter_body_entered(body: Node) -> void:
 	active = true
 	started_pursuit = true

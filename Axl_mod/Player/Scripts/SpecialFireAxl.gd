@@ -24,7 +24,7 @@ func _ready() -> void :
 func _physics_process(_delta: float) -> void :
 	activate_different_alternates()
 
-func activate_different_alternates() -> void :
+func activate_different_alternates(_d = null) -> void :
 	var _shot_node = character.get_node("Shot")
 	if _shot_node != null:
 		var index = _shot_node.weapons.find(_shot_node.current_weapon)
@@ -74,6 +74,8 @@ func _Setup() -> void :
 	current_weapon.fire(0)
 
 func _StartCondition() -> bool:
+	if character.is_executing("SaberCombo"):
+		return false
 	if _special_active:
 		if current_weapon and character.has_control():
 			if special_pistol.current_ammo >= current_weapon.ammo_per_shot:

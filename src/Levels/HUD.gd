@@ -8,6 +8,12 @@ onready var b_info = $"Boss and Weapon Info"
 onready var chronometer: RichTextLabel = $Chronometer
 onready var boss_bar = $"Boss Bar"
 onready var boss_hp: TextureProgress = $"Boss Bar/textureProgress"
+onready var boss_hp_2: TextureProgress = $"Boss Bar/textureProgress2"
+onready var boss_hp_3: TextureProgress = $"Boss Bar/textureProgress3"
+
+onready var boss_steal: TextureProgress = $"Boss Bar/texturesteal"
+onready var boss_steal_2: TextureProgress = $"Boss Bar/texturesteal2"
+onready var boss_steal_3: TextureProgress = $"Boss Bar/texturesteal3"
 
 onready var player_bar: Array = [$"X Bar", $"X Bar2"]
 onready var player_hp: Array = [$"X Bar/textureProgress", $"X Bar2/textureProgress"]
@@ -203,7 +209,11 @@ func _process(delta: float) -> void:
 func process_player_bar_size():
 	for i in range(GameManager.team.size()):
 		if is_instance_valid(GameManager.team[i]):
-			var health_rect_pos = 56 - (GameManager.team[i].max_health - 16) * 2
+			var base_position = 56
+			var tag_position = 56 + (GameManager.team[i].max_health - 40) * 2
+			if GameManager.team[i].max_health >= 40:
+				base_position = tag_position
+			var health_rect_pos = base_position - (GameManager.team[i].max_health - 16) * 2
 			var health_rect_size = 52 + (GameManager.team[i].max_health - 16) * 2
 			if player_bar[i].rect_position.y != health_rect_pos:
 				blink_player_bar()
@@ -252,6 +262,30 @@ func hide_healable_amount(character) -> void:
 	var i = GameManager.team.find(character)
 	player_healable[i].value = 0
 
+func is_2_bar_boss() -> bool:
+	if "SeraphLumine" in boss.name:
+		return true
+	if boss.name == "Sigma":
+		return true
+	if "DJSigma" in boss.name:
+		return true
+	if "X_Boss" in boss.name:
+		return true
+	if "Zero_Boss" in boss.name:
+		return true
+	if "Axl_Boss" in boss.name:
+		return true
+	return false
+
+func is_3_bar_boss() -> bool:
+	if "Omega_Zero" in boss.name:
+		return true
+	if "Vile Awaken" in boss.name:
+		return true
+	if "FinalSigmaW" in boss.name:
+		return true
+	return false
+
 func show_boss_health_and_weapon(delta) -> String:
 	var text := ""
 	for i in range(GameManager.team.size()):
@@ -274,21 +308,118 @@ func show_boss_health_and_weapon(delta) -> String:
 		if not boss_hp_filled:
 			fill_boss_hp(delta)
 		else:
-			boss_hp.value = ceil((boss.current_health * 32)/ boss.max_health)
+			if is_3_bar_boss():
+				if boss.current_health < boss.max_health * 1/3:
+					boss_hp.value = ceil((boss.current_health * 64)/ (boss.max_health) * 3)
+					boss_hp_2.visible = false
+					boss_hp_3.visible = false
+					
+					boss_steal_2.visible = false
+					boss_steal_3.visible = false
+				elif boss.current_health > boss.max_health * 1/3 and boss.current_health < boss.max_health * 2/3:
+					boss_hp.value = 64
+					boss_hp_2.value = ceil((boss.current_health * 64 - boss.max_health * 64*1/3)/ (boss.max_health) * 3)
+					boss_hp_2.visible = true
+					boss_hp_3.visible = false
+					
+					boss_steal_2.visible = boss_steal.visible
+					boss_steal_3.visible = false
+				elif boss.current_health > boss.max_health * 2/3:
+					boss_hp.value = 64
+					boss_hp_2.value = 64
+					boss_hp_3.value = ceil((boss.current_health * 64 - boss.max_health * 64*2/3)/ (boss.max_health) * 3)
+					boss_hp_2.visible = true
+					boss_hp_3.visible = true
+					
+					boss_steal_2.visible = false
+					boss_steal_3.visible = boss_steal.visible
+			elif is_2_bar_boss():
+				if boss.current_health < boss.max_health * 1/2:
+					boss_hp.value = ceil((boss.current_health * 64)/ (boss.max_health) * 2)
+					boss_hp_2.visible = false
+					boss_hp_3.visible = false
+					
+					boss_steal_2.visible = false
+					boss_steal_3.visible = false
+				elif boss.current_health > boss.max_health * 1/2:
+					boss_hp.value = 64
+					boss_hp_2.value = ceil((boss.current_health * 64 - boss.max_health * 64*1/2)/ (boss.max_health) * 2)
+					boss_hp_2.visible = true
+					boss_hp_3.visible = false
+					
+					boss_steal_2.visible = boss_steal.visible
+					boss_steal_3.visible = false
+			else:
+				boss_hp.value = ceil((boss.current_health * 64)/ boss.max_health)
+				boss_hp_2.visible = false
+				boss_hp_3.visible = false
+				
+				boss_steal_2.visible = false
+				boss_steal_3.visible = false
 			if boss_hp.value <= 1 and boss.current_health > 1:
 				boss_hp.value = 2
 	return text
 
 func fill_boss_hp(_delta):
-	boss_hp.value = boss_filling_hp
-	if timer > 0.033:
-		boss_filling_hp += 1
-		$audioStreamPlayer.volume_db = -18
-		$audioStreamPlayer.play()
-		timer = 0
+	if boss_filling_hp <= 64:
+		boss_hp.value = boss_filling_hp
+	else:
+		boss_hp.value = 64
 	
-	if boss_filling_hp >= 32:
-		boss_hp_filled = true
+	if is_instance_valid(boss):
+		if is_3_bar_boss():
+			if boss_filling_hp - 64 > 0:
+				boss_hp_2.visible = true
+				boss_hp_2.value = boss_filling_hp - 64
+			else:
+				boss_hp_2.visible = false
+				boss_hp_2.value = 0
+			if boss_filling_hp - 128 > 0:
+				boss_hp_3.visible = true
+				boss_hp_3.value = boss_filling_hp - 128
+			else:
+				boss_hp_3.visible = false
+				boss_hp_3.value = 0
+		elif is_2_bar_boss():
+			if boss_filling_hp - 64 > 0:
+				boss_hp_2.visible = true
+				boss_hp_2.value = boss_filling_hp - 64
+			else:
+				boss_hp_2.visible = false
+				boss_hp_2.value = 0
+			boss_hp_3.visible = false
+		else:
+			boss_hp_2.visible = false
+			boss_hp_3.visible = false
+	
+	if is_3_bar_boss():
+		if timer > 0.005:
+			boss_filling_hp += 1
+			$audioStreamPlayer.volume_db = -18
+			$audioStreamPlayer.play()
+			timer = 0
+	elif is_2_bar_boss():
+		if timer > 0.01:
+			boss_filling_hp += 1
+			$audioStreamPlayer.volume_db = -18
+			$audioStreamPlayer.play()
+			timer = 0
+	else:
+		if timer > 0.015:
+			boss_filling_hp += 1
+			$audioStreamPlayer.volume_db = -18
+			$audioStreamPlayer.play()
+			timer = 0
+	
+	if boss_filling_hp >= 64:
+		if is_3_bar_boss():
+			if boss_filling_hp >= 192:
+				boss_hp_filled = true
+		elif is_2_bar_boss():
+			if boss_filling_hp >= 128:
+				boss_hp_filled = true
+		else:
+			boss_hp_filled = true
 	
 
 func show_input_info() -> String:

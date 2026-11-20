@@ -35,9 +35,10 @@ var end_frame = 13
 
 var combo_sequence = ["move_right", "move_down", "move_right", "fire"]
 var combo_sequence_flipped = ["move_left", "move_down", "move_left", "fire"]
+var combo_sequence_easy = ["move_up", "fire"]
 
 func _ready():
-	Event.connect("saber_has_hit_boss", self, "reduce_speed")
+	pass
 
 func reset_hitbox():
 	hitbox_upleft = Vector2(0, 0)
@@ -91,11 +92,11 @@ func spawn_hitbox(_hitbox_upleft: Vector2, _hitbox_downright: Vector2):
 	
 
 func hitbox_and_position():
-	hitbox_damage = 50
-	hitbox_damage_boss = 50
-	hitbox_damage_weakness = 50
+	hitbox_damage = 24
+	hitbox_damage_boss = 24
+	hitbox_damage_weakness = 48
 	hitbox_break_guards = true
-	hitbox_rehit_time = 0.075
+	hitbox_rehit_time = 0.2
 	if animatedSprite.frame >= 4 and animatedSprite.frame < 10:
 		hitbox_upleft = Vector2( - 28, - 40)
 		hitbox_downright = Vector2(28, 10)
@@ -103,10 +104,14 @@ func hitbox_and_position():
 	reset_hitbox()
 
 func end_state():
-	return animatedSprite.frame >= animatedSprite.frames.get_frame_count("shoryuuken") - 1
+	return animatedSprite.frame >= animatedSprite.frames.get_frame_count("shoryuuken_rolling") - 1
+
+func end_state_2():
+	return animatedSprite.frame >= 11
 
 func invicible_frames():
-	return animatedSprite.frame >= 4 and animatedSprite.frame < 10
+	animatedSprite.material.set_shader_param("Alpha", 1)
+	return animatedSprite.frame >= 0 and animatedSprite.frame < 13
 
 func movement_speed_frames():
 	return animatedSprite.frame >= 4 and animatedSprite.frame < loop_frame
@@ -129,9 +134,11 @@ func loop_animation():
 				descend = true
 
 func set_animations():
-	animatedSprite.animation = "shoryuuken"
+	animatedSprite.animation = "shoryuuken_rolling"
 
 func _StartCondition() -> bool:
+	if not character.get_action_pressed("move_up"):
+		return false
 	if character.is_on_floor():
 		return true
 	return false
@@ -140,9 +147,11 @@ func _ResetCondition() -> bool:
 	return false
 
 func _EndCondition() -> bool:
-	if animatedSprite.animation != "shoryuuken":
+	if animatedSprite.animation != "shoryuuken_rolling":
 		return true
 	if end_state() and character.get_vertical_speed() >= 0:
+		return true
+	if end_state_2() and character.get_vertical_speed() >= 0:
 		return true
 	return false
 

@@ -104,7 +104,7 @@ anim_speed_curve = SubResource( 54 )
 z_index = 4
 collision_layer = 0
 script = ExtResource( 6 )
-max_health = 160.0
+max_health = 320.0
 
 [node name="BossAI" type="Node2D" parent="."]
 script = ExtResource( 9 )
@@ -119,7 +119,8 @@ shape = SubResource( 75 )
 material = ExtResource( 12 )
 z_index = 1
 frames = ExtResource( 17 )
-animation = "ult_prepare"
+animation = "idle"
+playing = true
 offset = Vector2( 0, 7 )
 
 [node name="area2D" type="Area2D" parent="."]

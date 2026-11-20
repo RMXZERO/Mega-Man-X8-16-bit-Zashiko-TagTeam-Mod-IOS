@@ -27,13 +27,13 @@ func _ready() -> void :
 
 func unblock_wall() -> void :
 
-	if (check_for_x_armors() and "X" in CharacterManager.team) or GameManager.is_collectible_in_savedata(portal_collectible):
+	if check_for_x_armors() or GameManager.is_collectible_in_savedata(portal_collectible) or GameManager.is_collectible_in_savedata("x_seen") or GameManager.is_collectible_in_savedata("axl_seen"):
 		
 		blocking_wall.disabled = true
 		if platform_enabled:
 			platform.disabled = false
 			platform.visible = true
-		if GameManager.is_collectible_in_savedata(portal_collectible):
+		if GameManager.is_collectible_in_savedata(portal_collectible) or GameManager.is_collectible_in_savedata("x_seen") or GameManager.is_collectible_in_savedata("axl_seen"):
 			activate_start_portal()
 
 

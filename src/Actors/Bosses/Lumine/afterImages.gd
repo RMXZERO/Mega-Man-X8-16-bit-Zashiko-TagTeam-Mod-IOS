@@ -10,7 +10,6 @@ export var final_color := Color(1,1,1,0)
 export var motion_amount := 0.0
 onready var original: AnimatedSprite = $".."
 
-
 func _ready() -> void:
 	if active:
 		active = true

@@ -26,6 +26,7 @@ func _check_for_wall():
 	wall_object = null
 
 func _Setup() -> void :
+	character.dashfall = false
 	wall_object = null
 	last_wall_y = 0.0
 	character.emit_signal("wallslide")
@@ -35,14 +36,14 @@ func _Setup() -> void :
 
 func _Update(_delta: float) -> void :
 	character.set_horizontal_speed(horizontal_speed * wallgrab_direction)
-	
+	var is_pressing_down = character.get_action_pressed("move_down")
 	if wall_object:
-		var current_wall_y = wall_object.global_position.y
-		var wall_y_movement = current_wall_y - last_wall_y
-
-		if wall_y_movement != 0:
-			character.global_position.y += wall_y_movement
-		last_wall_y = current_wall_y
+		if not character.is_shooting and is_pressing_down:
+			var current_wall_y = wall_object.global_position.y
+			var wall_y_movement = current_wall_y - last_wall_y
+			if wall_y_movement != 0:
+				character.global_position.y += wall_y_movement
+			last_wall_y = current_wall_y
 	
 	if delay_has_expired():
 		if character.is_shooting:
@@ -51,7 +52,11 @@ func _Update(_delta: float) -> void :
 		else:
 			emit_particles(particles, true)
 			character.set_vertical_speed(jump_velocity)
-			
+		
+	var animatedSprite = character.get_node("animatedSprite")
+	if animatedSprite.animation == "saber_slide" and animatedSprite.frame >= 9:
+		animatedSprite.animation = "slide"
+		animatedSprite.frame = 4
 
 func _StartCondition() -> bool:
 	if not character.is_on_floor() and not block_timer > 0:

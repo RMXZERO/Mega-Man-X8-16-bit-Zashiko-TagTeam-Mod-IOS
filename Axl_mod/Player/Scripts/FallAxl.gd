@@ -4,7 +4,7 @@ class_name FallAxl
 export  var shot_pos_adjust: = Vector2(4, - 5)
 
 onready var dash_momentum = 210
-
+var fall_base_velocity: float = 90
 
 func get_shot_adust_position() -> Vector2:
 	return shot_pos_adjust
@@ -41,10 +41,14 @@ func _Update(_delta: float) -> void :
 
 
 func _Setup():
+	if character.dashfall:
+		horizontal_velocity = dash_momentum
+	else:
+		horizontal_velocity = fall_base_velocity
 	character.global_position.y += 1
 
 func _Interrupt() -> void :
-	character.dashfall = false
+	#character.dashfall = false
 	._Interrupt()
 
 func Initialize() -> void :

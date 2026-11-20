@@ -21,6 +21,7 @@ onready var boss_name_shadow: Label = $ui_anchor / shadow
 
 onready var tween: TweenController = TweenController.new(self)
 onready var music: AudioStreamPlayer = $music
+onready var music2: AudioStreamPlayer = $music2
 onready var shake: AnimationPlayer = $animationPlayer
 
 var ending: bool = false
@@ -73,7 +74,11 @@ func start() -> void :
 	tween.callback("third_beat", beats[3])
 	tween.callback("final_beat", beats[4])
 	tween.callback("end", beats[5])
-	music.play()
+	if Configurations.exists("SongRemix"):
+		if Configurations.get("SongRemix"):
+			music2.play()
+		else:
+			music.play()
 
 func zero_beat() -> void :
 	Log("initial beat")
@@ -129,6 +134,7 @@ func end() -> void :
 
 func fade_out_music() -> void :
 	tween.attribute("volume_db", - 80.0, 1.0, music)
+	tween.attribute("volume_db", - 80.0, 1.0, music2)
 
 func flash(horizontal: bool = true) -> void :
 	flash_bg.modulate = Color(70, 50, 30, 0.75)

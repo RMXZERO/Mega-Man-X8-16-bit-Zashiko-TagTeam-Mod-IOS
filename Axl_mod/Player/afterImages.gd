@@ -26,18 +26,33 @@ var final_color: Color = Color("#00000000")
 var upgraded: bool = false
 var current_motion: = 0
 var _rotator_script: Script = preload("res://System/misc/rotatordelete.gd")
-
+var emit = false
 
 func _ready() -> void :
 	call_deferred("set_shader_colors")
+	Event.listen("beamin", self, "can_emit")
+	Event.listen("x_appear", self, "can_emit")
+	Event.listen("gameplay_start", self, "can_emit")
+	Event.listen("character_switch", self, "can_emit")
+	Event.listen("character_switch_end", self, "can_emit")
+	Event.listen("ridearmor_activate", self, "false_emit")
+	Event.listen("ridearmor_deactivate", self, "can_emit")
+	active = false
 	if active:
 		afterimage_emit()
+
+func can_emit() -> void :
+	if character.is_current_player:
+		emit = true
+
+func false_emit() -> void :
+	emit = false
 
 func set_shader_colors():
 	var material = original.get_material()
 	if material is ShaderMaterial:
-		initial_color = material.get_shader_param("R_MainColor1")
-		final_color = material.get_shader_param("R_RedColor2")
+		initial_color = material.get_shader_param("R_AxlAfterimagesColor1")
+		final_color = material.get_shader_param("R_AxlAfterimagesColor2")
 
 func _process(_delta):
 	if upgraded:
@@ -85,7 +100,10 @@ func afterimage_emit() -> void :
 		Tools.timer(frequency, "afterimage_emit", self)
 
 func fade_and_delete(afterimage: AnimatedSprite) -> void :
-	afterimage.modulate = initial_color
+	if not emit:
+		afterimage.self_modulate = Color(1, 1, 1, 0)
+	else:
+		afterimage.modulate = initial_color
 	var tween: = afterimage.create_tween().set_parallel(true)
 	tween.tween_property(afterimage, "modulate", final_color, duration)
 	tween.tween_property(afterimage, "position", afterimage.position + get_motion(), duration)
@@ -105,6 +123,7 @@ func equate_settings(afterimage: AnimatedSprite) -> void :
 	afterimage.z_index = 1
 	afterimage.global_position = original.global_position
 	afterimage.rotation_degrees = original.rotation_degrees
+	afterimage.visible = character.visible
 
 func get_motion() -> Vector2:
 	current_motion += 1

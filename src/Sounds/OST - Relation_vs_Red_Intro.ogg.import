@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/OST - Relation_vs_Red_Intro.ogg-402cb2cf4d8c5518ca18e1e95abe28f1.oggstr"
+
+[deps]
+
+source_file="res://src/Sounds/OST - Relation_vs_Red_Intro.ogg"
+dest_files=[ "res://.import/OST - Relation_vs_Red_Intro.ogg-402cb2cf4d8c5518ca18e1e95abe28f1.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

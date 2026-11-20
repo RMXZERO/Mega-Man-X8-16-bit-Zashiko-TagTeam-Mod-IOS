@@ -71,8 +71,9 @@ func stop_land_particles():
 	land_particles.emitting = false
 	
 func _process(_delta: float) -> void:
-	if Configurations.get("ShowDebug"):
-		$label.text = str(get_ground_normal().x) + " " + str(snap_vector)
+	pass
+	#if Configurations.get("ShowDebug"):
+		#$label.text = str(get_ground_normal().x) + " " + str(snap_vector)
 
 func process_final_velocity() -> Vector2:
 	handle_slope_snap()

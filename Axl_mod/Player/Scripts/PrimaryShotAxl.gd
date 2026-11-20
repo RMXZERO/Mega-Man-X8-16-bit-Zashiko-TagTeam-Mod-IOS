@@ -25,6 +25,8 @@ func charged_shot_release(_charge_level):
 			return
 
 func _StartCondition() -> bool:
+	if character.is_executing("SaberCombo"):
+		return false
 	if name == "Shot" and Input.is_action_pressed("alt_fire"):
 		return false
 	var _animation = get_parent().get_animation()

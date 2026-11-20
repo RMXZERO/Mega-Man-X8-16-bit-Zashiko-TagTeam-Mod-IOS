@@ -48,6 +48,7 @@ var executing: = false
 
 func _ready() -> void :
 	Event.connect("noahspark_cutscene_start", self, "start")
+	Event.connect("noahspark_cutscene_start", self, "start")
 	Event.connect("dialog_concluded", self, "on_dialog_end")
 	Event.connect("kingcrab_crash", self, "explode_craft")
 	Event.emit_signal("disable_victory_ending")

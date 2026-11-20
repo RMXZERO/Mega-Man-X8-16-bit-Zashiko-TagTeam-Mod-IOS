@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/Sounds/55 - MMX - Electric Bolt.wav" type="AudioStream" id=1]
+[ext_resource path="res://src/Actors/Player/BossWeapons/SqueezeBomb/SqueezeBomb.tscn" type="PackedScene" id=2]
+[ext_resource path="res://X_mod/InfiniteX/Player/Projectiles/UX_SqueezeBomb.gd" type="Script" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 46.0109
+
+[node name="SqueezeBombCharged" instance=ExtResource( 2 )]
+scale = Vector2( 0.1, 0.1 )
+z_index = 6
+script = ExtResource( 3 )
+damage = 4.5
+damage_to_bosses = 1.5
+damage_to_weakness = 20.0
+time_off_screen = 2.0
+duration = 0.8
+move_speed = 0.0
+endanim_name = "expire_big"
+deflectable = false
+flash_duration = 0.15
+foward_start = 0.0
+
+[node name="animatedSprite" parent="." index="0"]
+animation = "idle_big"
+
+[node name="collisionShape2D" parent="." index="2"]
+z_index = 0
+shape = SubResource( 1 )
+
+[node name="Deflectable" parent="." index="4"]
+visible = false
+
+[node name="point" parent="." index="5"]
+pitch_scale = 1.0
+
+[node name="sound" parent="." index="6"]
+stream = ExtResource( 1 )
+pitch_scale = 0.75

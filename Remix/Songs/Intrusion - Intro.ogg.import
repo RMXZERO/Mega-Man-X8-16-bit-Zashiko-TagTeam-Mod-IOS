@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Intrusion - Intro.ogg-aa0a13059330b9444bd9743f8dda7cdd.oggstr"
+
+[deps]
+
+source_file="res://Remix/Songs/Intrusion - Intro.ogg"
+dest_files=[ "res://.import/Intrusion - Intro.ogg-aa0a13059330b9444bd9743f8dda7cdd.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -9,6 +9,16 @@ onready var explosion_particles: Particles2D = $explosionParticles
 onready var black: Sprite = $black
 onready var red: = $red_bg
 
+func _ready() -> void :
+	if CharacterManager.cheat_axl_activated:
+		damage = 128
+		damage_to_bosses = 10
+		damage_to_weakness = 128
+	else:
+		damage = 80
+		damage_to_bosses = 6
+		damage_to_weakness = 80
+
 func _DamageTarget(body) -> int:
 	target_list.append(body)
 	return 0

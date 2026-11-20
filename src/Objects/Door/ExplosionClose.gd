@@ -2,6 +2,7 @@ extends Area2D
 
 var fired_signal: = false
 onready var door: = $".."
+onready var main_door: = get_parent()
 
 signal player_enter
 
@@ -13,7 +14,6 @@ func activate(_d) -> void :
 	else:
 		pass
 		
-	
 
 
 func _on_area2D_body_entered(body: Node) -> void :

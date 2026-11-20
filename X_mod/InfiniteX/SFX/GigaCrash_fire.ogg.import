@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/GigaCrash_fire.ogg-82d44733e0277f4767572b2b4a8c3ec1.oggstr"
+
+[deps]
+
+source_file="res://X_mod/InfiniteX/SFX/GigaCrash_fire.ogg"
+dest_files=[ "res://.import/GigaCrash_fire.ogg-82d44733e0277f4767572b2b4a8c3ec1.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

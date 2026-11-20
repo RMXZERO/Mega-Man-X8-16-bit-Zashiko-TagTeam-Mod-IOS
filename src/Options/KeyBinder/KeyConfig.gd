@@ -46,14 +46,22 @@ func _ready() -> void :
 
 func set_visible_elements() -> void :
 	if get_parent().has_node("ArmorSetup"):
+		if Savefile.newgame_plus < 1:
+			if player_count > 3:
+				player_count = 1
+			elif player_count < 1:
+				player_count = 3
+			CharacterManager.player_count = player_count
 		player_count = CharacterManager.player_count
 		CharacterManager.assign_name_to_player_counter(player_count)
-		hide_special_holders()
-		show_special_holders()
 		update_character_menu()
 		$Menu.get_node("CharacterName").text = CharacterManager.player_character
 		if CharacterManager.player_character == "Zero" and CharacterManager.betazero_activated:
 			$Menu.get_node("CharacterName").text = "Zero (BETA)"
+		if CharacterManager.player_character == "Zero" and CharacterManager.awakened_zero_armor:
+			$Menu.get_node("CharacterName").text = "Zero (Awakened)"
+		if CharacterManager.player_character == "X" and CharacterManager.infinite_x_activated:
+			$Menu.get_node("CharacterName").text = "X (Infinite)"
 
 func switch_to_zero() -> void :
 	equip.play()
@@ -69,10 +77,16 @@ func change_next_character() -> void :
 
 func change_character(direction: int) -> void :
 	player_count += direction
-	if player_count > CharacterManager.max_player_count:
-		player_count = CharacterManager.min_player_count
-	elif player_count < CharacterManager.min_player_count:
-		player_count = CharacterManager.max_player_count
+	if Savefile.newgame_plus < 1:
+		if player_count > 3:
+			player_count = 1
+		elif player_count < 1:
+			player_count = 3
+	else:
+		if player_count > CharacterManager.max_player_count:
+			player_count = CharacterManager.min_player_count
+		elif player_count < CharacterManager.min_player_count:
+			player_count = CharacterManager.max_player_count
 	CharacterManager.player_count = player_count
 	pick.play()
 	set_visible_elements()
@@ -82,38 +96,88 @@ func hide_all_characters(texture_rect: TextureRect) -> void :
 	texture_rect.get_node("X").hide()
 	texture_rect.get_node("Axl").hide()
 	texture_rect.get_node("Zero").hide()
-
-func show_special_holders() -> void :
-	if has_hermes_armor():
-		$Menu.get_node("special_holder").show()
-	if has_icarus_armor():
-		$Menu.get_node("special_holder2").show()
-	if has_ultimate_armor():
-		$Menu.get_node("special_holder3").show()
-
-func hide_special_holders() -> void :
-	$Menu.get_node("special_holder").hide()
-	$Menu.get_node("special_holder2").hide()
-	$Menu.get_node("special_holder3").hide()
+	texture_rect.get_node("Alia").hide()
+	texture_rect.get_node("Layer").hide()
+	texture_rect.get_node("Pallette").hide()
+	$Menu/player_desperation/player_desperation.hide()
+	$Menu/player_desperation/weapon_get_zero.hide()
 
 func update_character_menu() -> void :
 	var _textureRect: TextureRect = $Menu.get_node("textureRect")
 	hide_all_characters(_textureRect)
 	match CharacterManager.player_character:
 		"Player":
-			hide_special_holders()
+			pass
 		"X":
 			_textureRect.get_node("X").show()
+			$Menu/textureRect/X/x_setting_holder.show()
+			if has_hermes_armor():
+				$Menu/textureRect/X/hermes_holder.show()
+			if has_icarus_armor():
+				$Menu/textureRect/X/icarus_holder.show()
+			if has_ultimate_armor():
+				$Menu/textureRect/X/ultimate_holder.show()
+			if "sigma_virus_fist" in GameManager.collectibles:
+				$Menu/textureRect/X/x_setting_holder/x_setting/ultimate_buster.show()
+			else:
+				$Menu/textureRect/X/x_setting_holder/x_setting/ultimate_buster.hide()
+			if CharacterManager.infinite_x_unlocked:
+				$Menu/textureRect/X/x_setting_holder/x_setting2/infinite_x_glow.show()
+			else:
+				$Menu/textureRect/X/x_setting_holder/x_setting2/infinite_x_glow.hide()
+			if "player_desperation" in GameManager.collectibles:
+				$Menu/player_desperation/player_desperation.show()
+				$Menu/player_desperation/player_desperation/icon.texture = preload("res://X_mod/UltimateX/HUD/player_desperation.png")
 		"Axl":
 			_textureRect.get_node("Axl").show()
-			hide_special_holders()
+			$Menu/textureRect/Axl/customaxl_holder.show()
+			if "floppa_axl_activated" in GameManager.collectibles or CharacterManager.floppa_axl_unlocked:
+				$Menu/textureRect/Axl/floppa_axl_holder.show()
+			if "track_bullet" in GameManager.collectibles or "share_axl_buff" in GameManager.collectibles or "axl_saber_combo" in GameManager.collectibles:
+				if not CharacterManager.floppa_axl_activated:
+					$Menu/textureRect/Axl/axl_setting_holder.show()
+				if "track_bullet" in GameManager.collectibles:
+					$Menu/textureRect/Axl/axl_setting_holder/axl_setting/track_bullet.show()
+				if "share_axl_buff" in GameManager.collectibles:
+					$Menu/textureRect/Axl/axl_setting_holder/axl_setting/share_buff.show()
+				if "axl_saber_combo" in GameManager.collectibles:
+					$Menu/textureRect/Axl/axl_setting_holder/axl_setting/axl_saber_combo.show()
+			if CharacterManager.floppa_axl_activated:
+				$Menu/textureRect/Axl/axl_setting_holder.hide()
+			if CharacterManager.floppa_axl_unlocked:
+				$Menu/textureRect/Axl/cheat_axl_holder.show()
+				$Menu/textureRect/Axl/cheat_axl_holder/cheat_axl/icon_bg_gold.show()
+				$Menu/textureRect/Axl/floppa_axl_holder/floppa_axl/icon_bg_gold.show()
+			if "player_desperation" in GameManager.collectibles:
+				$Menu/player_desperation/player_desperation.show()
+				$Menu/player_desperation/player_desperation/icon.texture = preload("res://Axl_mod/HUD/player_desperation.png")
 		"Zero":
 			_textureRect.get_node("Zero").show()
-			hide_special_holders()
+			$Menu/textureRect/Zero/customzero_holder.show()
+			if "extra_saber_combo" in GameManager.collectibles or CharacterManager.awakened_zero_unlocked:
+				$Menu/textureRect/Zero/zero_setting_holder.show()
+			if "extra_saber_combo" in GameManager.collectibles:
+				$Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_combo.show()
+			if CharacterManager.awakened_zero_unlocked:
+				$Menu/textureRect/Zero/zero_setting_holder/zero_setting/awakened_zero_limited.show()
+				$Menu/textureRect/Zero/awakenedzero_holder/awakened_zero/icon_bg_gold.show()
 			if CharacterManager.betazero_unlocked:
-				$Menu / textureRect / Zero / betazero_holder.show()
-			if CharacterManager.custom_zero_unlocked:
-				$Menu/textureRect/Zero/customzero_holder.show()
+				$Menu/textureRect/Zero/betazero_holder.show()
+			if CharacterManager.awakened_zero_unlocked or "awakened_zero_armor" in GameManager.collectibles:
+				$Menu/textureRect/Zero/awakenedzero_holder.show()
+			if "player_desperation" in GameManager.collectibles:
+				$Menu/player_desperation/player_desperation.show()
+				$Menu/player_desperation/player_desperation/icon.texture = preload("res://Zero_mod/HUD/player_desperation.png")
+			if Configurations.get("ShowDebug") or CharacterManager.weaponget_zero or "sigma_virus_fist" in GameManager.collectibles:
+				$Menu/player_desperation/weapon_get_zero.show()
+		"Alia":
+			_textureRect.get_node("Alia").show()
+		"Layer":
+			_textureRect.get_node("Layer").show()
+			$Menu/textureRect/Layer/customlayer_holder.show()
+		"Pallette":
+			_textureRect.get_node("Pallette").show()
+			$Menu/textureRect/Pallette/custompallette_holder.show()
 
 func has_icarus_armor() -> bool:
 	var part: int = 0

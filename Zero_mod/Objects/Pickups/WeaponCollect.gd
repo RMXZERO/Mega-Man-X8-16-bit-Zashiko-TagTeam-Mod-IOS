@@ -35,8 +35,17 @@ func set_sprites() -> void :
 		"v_hanger_zero":
 			weaponSprite.animation = "V-Hanger"
 			weaponSprite.rotation_degrees = 0
+		"z_breaker_zero":
+			weaponSprite.animation = "Z-Breaker"
+			weaponSprite.rotation_degrees = 45
+		"rogue_blade_zero":
+			weaponSprite.animation = "Rogue-Blade"
+			weaponSprite.rotation_degrees = 45
 		"sigma_blade_zero":
 			weaponSprite.animation = "Sigma-Blade"
+			weaponSprite.rotation_degrees = 45
+		"genmuzero_zero":
+			weaponSprite.animation = "z_default"
 			weaponSprite.rotation_degrees = 45
 
 func _ready() -> void :
@@ -47,11 +56,11 @@ func _ready() -> void :
 		collectible_name = weapon.collectible
 		set_sprites()
 		
-		
 	Event.listen("player_set", self, "call_deferred_already_got")
+	Event.listen("collected_zero_weapon", self, "call_deferred_already_got")
 
 func call_deferred_already_got() -> void :
-	if remove_if_collected:
+	if remove_if_collected and not executing:
 		call_deferred("handle_already_got")
 
 func handle_already_got() -> void :
@@ -84,6 +93,7 @@ func _on_area2D_body_entered(body: Node) -> void :
 			$audioStreamPlayer2D2.play()
 			executing = true
 			collisionShape.set_deferred("disabled",true)
+			Event.emit_signal("collected_zero_weapon")
 			achievement_check()
 
 func unlock_weapon(player) -> void :
@@ -106,6 +116,18 @@ func lock_weapon() -> void :
 					shot_node.update_list_of_weapons()
 
 func achievement_check() -> void :
-	
-	Savefile.save(Savefile.save_slot)
-	CharacterManager._save()
+	if "b_fan_zero" in GameManager.collectibles \
+	and "d_glaive_zero" in GameManager.collectibles \
+	and "k_knuckle_zero" in GameManager.collectibles \
+	and "t_breaker_zero" in GameManager.collectibles \
+	and "v_hanger_zero" in GameManager.collectibles \
+	and "z_breaker_zero" in GameManager.collectibles \
+	and "rogue_blade_zero" in GameManager.collectibles \
+	and "sigma_blade_zero" in GameManager.collectibles:
+		Achievements.unlock("COLLECTALLZEROWEAPON")
+		Savefile.save(Savefile.save_slot)
+		CharacterManager._save()
+
+
+
+

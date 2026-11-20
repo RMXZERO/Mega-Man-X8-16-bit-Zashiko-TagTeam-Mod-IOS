@@ -53,7 +53,6 @@ material = SubResource( 49 )
 z_index = 1
 frames = ExtResource( 23 )
 animation = "defense"
-frame = 14
 playing = true
 flip_h = true
 
@@ -84,7 +83,6 @@ bus = "SFX"
 [node name="EnemyShield" type="Node2D" parent="."]
 script = ExtResource( 10 )
 active = false
-invulnerability = true
 breakable = false
 
 [node name="hittable_area" type="Area2D" parent="EnemyShield"]

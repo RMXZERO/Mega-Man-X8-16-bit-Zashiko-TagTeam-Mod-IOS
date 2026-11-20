@@ -103,7 +103,7 @@ anim_speed_curve = SubResource( 62 )
 z_index = 5
 collision_layer = 0
 script = ExtResource( 9 )
-max_health = 160.0
+max_health = 320.0
 
 [node name="Space" type="Node" parent="."]
 script = ExtResource( 10 )
@@ -124,7 +124,6 @@ material = ExtResource( 11 )
 z_index = 1
 frames = ExtResource( 1 )
 animation = "idle"
-frame = 4
 playing = true
 flip_h = true
 

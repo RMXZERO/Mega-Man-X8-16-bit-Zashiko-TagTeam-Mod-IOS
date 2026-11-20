@@ -9,9 +9,10 @@ var has_loop: = false
 
 func _ready() -> void :
 	has_loop = loop != null
-	Event.connect("half_music_volume", self, "set_volume", [base_volume - 10])
+	Event.connect("half_music_volume", self, "set_volume", [base_volume])
 	Event.connect("normal_music_volume", self, "set_volume", [base_volume])
 	Event.connect("player_death", self, "fade_out", [6])
+	Event.connect("call_fade_out_battle", self, "fade_out", [6])
 	if has_loop:
 		loop.volume_db = base_volume
 

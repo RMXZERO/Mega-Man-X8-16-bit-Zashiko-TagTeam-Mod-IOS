@@ -64,6 +64,7 @@ signal full_hermes
 signal full_icarus
 signal full_ultimate
 signal mixed_set
+signal full_set
 
 signal noahspark_cutscene_start
 signal noahspark_cutscene_end
@@ -94,6 +95,7 @@ signal vile_door_closed
 signal vile_door_exploded
 signal vile_cutscene_start
 signal vile_defeated
+signal vileex_defeated
 
 signal play_stage_song
 signal play_stage_alt_song
@@ -176,6 +178,12 @@ signal end_teleport_to_secret2
 signal teleport_to_red
 signal end_teleport_to_red
 
+signal teleport_to_vileex
+signal end_teleport_to_vileex
+
+signal teleport_to_dj_sigma
+signal end_teleport_to_dj_sigma
+
 signal first_secret2_death
 signal cutman_throw
 signal cutman_received
@@ -227,6 +235,7 @@ signal copy_sigma_end_desperation
 signal vile_eject(devilbear)
 signal set_vile_respawn(value)
 signal vile_intro
+signal vileex_eject(devilbear)
 
 signal boss_death_screen_flash
 signal set_boss_bar(new_bar)
@@ -270,3 +279,20 @@ signal character_switch
 signal character_switch_end
 signal refresh_hud
 signal special_end
+
+signal touchcontrol
+signal unlimitedgenmu
+signal beamin
+signal beamout
+signal customzerocolor
+signal mu_barrier_break
+signal call_fade_out_intro
+signal call_fade_out_battle
+signal collected_zero_weapon
+signal set_object(object_name, new_position, new_scale_x)
+signal axl_special_ability(ability_name)
+signal show_life_steal_bar
+signal is_boss_2(character)
+signal boss_2_death(character)
+signal is_zashiko_ultimate_x
+

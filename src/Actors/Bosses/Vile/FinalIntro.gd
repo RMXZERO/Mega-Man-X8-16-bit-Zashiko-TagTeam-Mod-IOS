@@ -6,7 +6,7 @@ onready var tween := TweenController.new(self,false)
 onready var traverse: AudioStreamPlayer2D = $traverse
 
 func connect_start_events() -> void:
-	Event.listen("boss_door_open",self,"prepare_for_intro")
+	Event.listen("teleport_to_vileex",self,"prepare_for_intro")
 	Event.listen("vile_eject",self,"_on_vile_eject")
 	prepare_for_intro()
 	

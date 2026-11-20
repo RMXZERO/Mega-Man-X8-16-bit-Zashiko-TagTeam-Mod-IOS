@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Dynasty - Intro.ogg-6b2edbe01324dbb7f2849cd1d366c3d3.oggstr"
+
+[deps]
+
+source_file="res://Remix/Songs/Dynasty - Intro.ogg"
+dest_files=[ "res://.import/Dynasty - Intro.ogg-6b2edbe01324dbb7f2849cd1d366c3d3.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

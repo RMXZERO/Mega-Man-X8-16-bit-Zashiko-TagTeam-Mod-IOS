@@ -4,12 +4,12 @@ var engine_started: bool = false
 
 
 func _ready() -> void :
-	pass
+	Event.listen("stage_clear", self, "Force_Eject")
 
 func _OnPlayerAssumeControl() -> void :
 	Event.emit_signal("new_camera_focus", character)
 	Event.emit_signal("camera_ahead")
-	Event.listen("stage_clear", self, "Force_Eject")
+	#Event.listen("stage_clear", self, "Force_Eject")
 
 func _Setup():
 	engine_started = true

@@ -11,7 +11,6 @@ onready var tween: = TweenController.new(self, false)
 onready var weapon_stasis: Node2D = $"../../WeaponStasis"
 
 func fire_regular() -> void :
-
 	shot_number = - floor(number_of_shots / 2)
 	play(weapon.sound)
 	call_deferred("fire_spikes", speed, step, number_of_shots)
@@ -22,6 +21,7 @@ func fire_charged() -> void :
 	var pos = Vector2(character.global_position.x + shot_position.position.x * dir, shot_position.global_position.y)
 	var ss = instantiate_projectile(weapon.charged_shot)
 	ss.global_position = pos
+	set_shot_extra_damage(ss)
 	
 
 func fire_spikes(initial_speed: = 520, _step: = 140, times = 5):
@@ -39,6 +39,7 @@ func fire_spike_and_adjust2(_speed, _step):
 	shot.global_position = pos
 	shot.set_horizontal_speed(launch_speed.x)
 	shot.set_vertical_speed(launch_speed.y)
+	set_shot_extra_damage(shot)
 	if dir > 0:
 		shot.get_node("animatedSprite").rotate(launch_speed.y / 330)
 	else:

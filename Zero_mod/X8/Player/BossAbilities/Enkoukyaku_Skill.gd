@@ -1,6 +1,13 @@
 extends FallZero
 class_name SaberEnkoukyakuX8
 
+onready var enkoujinfire: PackedScene = preload("res://Zero_mod/X8/Sprites/zbuster/object/EnkoujinFire.tscn")
+var creator: Node2D
+var enkoujin_wave_created: bool = false
+onready var use_genmu: Node2D = $"../Special/Genmuzero"
+onready var dive: AudioStreamPlayer2D = $dive
+var last_position: Vector2
+
 export  var saber_hitbox: Resource = preload("res://Zero_mod/X8/Player/Hitboxes/Enkoukyaku_Hitbox.tscn")
 export  var fire_hitbox: Resource = preload("res://Zero_mod/Player/Hitboxes/Enkoujin_Hitbox.tscn")
 
@@ -23,6 +30,7 @@ var hitbox_extra_damage = 1
 var hitbox_extra_damage_boss = 1
 var hitbox_extra_damage_weakness = 1
 var hitbox_extra_break_guard_value = 1
+var hitbox_extra_scale = 1
 var deflectable: bool = true
 var deflectable_type: int = 0
 var only_deflect_weak: bool = false
@@ -53,8 +61,8 @@ func hit_enemy() -> void :
 	character.Rasetsusen_used = false
 	character.Hyouryuushou_used = false
 	character.add_invulnerability("Enkoukyaku")
-	if double_jump.current_air_jumps < double_jump.max_air_jumps:
-		double_jump.current_air_jumps += 1
+	if character.is_current_player:
+		create_wave()
 
 func reset_hitbox() -> void :
 	hitbox_upleft = Vector2(0, 0)
@@ -110,6 +118,7 @@ func spawn_hitbox(_hitbox_upleft: Vector2, _hitbox_downright: Vector2) -> void :
 	current_hitbox.deflectable = deflectable
 	current_hitbox.deflectable_type = deflectable_type
 	current_hitbox.only_deflect_weak = only_deflect_weak
+	current_hitbox.scale *= hitbox_extra_scale
 
 func spawn_fire(_hitbox_upleft: Vector2, _hitbox_downright: Vector2) -> void :
 	current_hitbox = fire_hitbox.instance()
@@ -206,29 +215,8 @@ func _StartCondition() -> bool:
 	if not character.get_action_pressed("move_down"):
 		return false
 	var _animation = get_parent().get_animation()
-	for _ani in character.saber_animations:
-		if _animation == "saber_dash":
-			return false
-		if _animation == "saber_jump":
-			return false
-		if _animation == "saber_jump_1":
-			return false
-		if _animation == "saber_jump_2":
-			return false
-		if _animation == "tenshouha":
-			return false
-		if _animation == "juuhazan":
-			return false
-		if _animation == "rasetsusen":
-			return false
-		if _animation == "raikousen":
-			return false
-		if _animation == "youdantotsu":
-			return false
-		if _animation == "hyouryuushou":
-			return false
-		if _animation == "hyouryuushou_air":
-			return false
+	if _animation in character.saber_animations:
+		return false
 	if not executing:
 		if not character.is_on_floor():
 			return true
@@ -251,6 +239,7 @@ func _EndCondition() -> bool:
 
 func _Setup() -> void :
 	landed = false
+	enkoujin_wave_created = false
 	emitted_effect = false
 	set_saber_animations()
 	character.set_horizontal_speed(0)
@@ -295,6 +284,45 @@ func _Update(delta: float) -> void :
 		force_movement( - horizontal_velocity * 0.75)
 		update_bonus_horizontal_only_conveyor()
 
+func create_wave() -> void :
+	if CharacterManager.awakened_zero_armor or character.get_action_pressed("select_special"):
+		last_position = character.global_position
+		if CharacterManager.awakened_zero_armor:
+			if not enkoujin_wave_created:
+				enkoujin_wave_created = true
+				dive.play()
+				create()
+				Tools.timer(0.2, "create", self)
+				Tools.timer(0.4, "create", self)
+				Event.emit_signal("screenshake", 1000)
+		else:
+			if not enkoujin_wave_created:
+				if CharacterManager.extra_saber_combo and use_genmu.has_ammo_expent(CharacterManager.buster_base_energy * 0.5):
+					enkoujin_wave_created = true
+					dive.play()
+					create()
+					Tools.timer(0.2, "create", self)
+					Tools.timer(0.4, "create", self)
+					Event.emit_signal("screenshake", 1000)
+					use_genmu.reduce_ammo(CharacterManager.buster_base_energy * 0.5)
+
+func create() -> void :
+	create_enkoujin_wave(last_position, 300, -1)
+	create_enkoujin_wave(last_position, -300, 1)
+
+func create_enkoujin_wave(ground_position, speed, direction) -> void :
+	var instance = enkoujinfire.instance()
+	ground_position.y += -14
+	instance.damage = 10
+	instance.damage_to_bosses = 5
+	instance.damage_to_weakness = 25
+	instance.scale.x = direction
+	instance.speed = speed
+	get_tree().current_scene.get_node("Objects").call_deferred("add_child", instance, true)
+	instance.set_global_position(ground_position)
+	instance.set_creator(creator)
+	instance.call_deferred("initialize", get_facing_direction())
+
 func change_animation_if_falling(_s) -> void :
 	pass
 
@@ -307,6 +335,8 @@ func _Interrupt() -> void :
 		effect = null
 	Event.disconnect("hit_shield", self, "hit_enemy")
 	character.remove_invulnerability("Enkoukyaku")
+	if character.is_on_floor():
+		create_wave()
 
 func BeforeEveryFrame(_delta: float) -> void :
 	pass

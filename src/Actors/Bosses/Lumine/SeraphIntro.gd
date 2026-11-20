@@ -15,25 +15,19 @@ onready var feather_explosion: Particles2D = $"../feather_explosion"
 onready var move_feathers: Particles2D = $"../animatedSprite/move_feathers"
 onready var space: Node = $"../Space"
 onready var flash_2: Sprite = $flash2
-onready var song_remix_intro: AudioStream = preload("res://Remix/Songs/Lumine Battle 2 - Intro.ogg")
-onready var song_remix_loop: AudioStream = preload("res://Remix/Songs/Lumine Battle 2 - Loop.ogg")
-onready var find_your_flame_intro: AudioStream = preload("res://System/BossMusic/findyourflame_intro.ogg")
-onready var find_your_flame_loop: AudioStream = preload("res://System/BossMusic/findyourflame_loop.ogg")
 
 var show_flash: bool = false
 
 
 func _ready() -> void :
-	if CharacterManager.game_mode > 1:
-		intro = find_your_flame_intro
-		loop = find_your_flame_loop
-		loop.loop = true
-
-	if Configurations.exists("SongRemix"):
-		if Configurations.get("SongRemix"):
-			intro = song_remix_intro
-			loop = song_remix_loop
-			loop.loop = true
+	var current_scene = get_tree().current_scene
+	var remix = current_scene.get_node_or_null("Remix")
+	if current_scene and remix:
+		if Configurations.exists("SongRemix"):
+			if Configurations.get("SongRemix"):
+				intro = remix._lumine2_intro
+				loop = remix._lumine2_loop
+				loop.loop = true
 
 func connect_start_events() -> void :
 	call_deferred("prepare_for_intro")
@@ -149,3 +143,9 @@ func flash() -> void :
 
 func screenshake(value: = 2.0) -> void :
 	.screenshake(value)
+
+func _Interrupt():
+	Event.emit_signal("boss_start", character)
+	GameManager.end_cutscene()
+	character.emit_signal("intro_concluded")
+	animatedSprite.modulate.a = 1.0

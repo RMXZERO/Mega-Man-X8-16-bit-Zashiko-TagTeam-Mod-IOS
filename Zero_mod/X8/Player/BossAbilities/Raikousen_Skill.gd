@@ -1,7 +1,16 @@
 extends Movement
 class_name SaberRaikousenX8
 
+onready var z_slash: PackedScene = preload("res://Zero_mod/X8/Sprites/zbuster/object/PlayerZSlash.tscn")
+onready var roguewave: PackedScene = preload("res://Zero_mod/X8/Sprites/rogueblade/object/roguewave.tscn")
+var creator: Node2D
+
+var angles = [0, 33, - 33, 90, 44, - 44, 25, - 25, 0, 90, 44, - 25, - 33]
+var create_slash: bool = false
+var h = 0
+
 export  var saber_hitbox: Resource = preload("res://Zero_mod/Player/Hitboxes/Raikousen_Hitbox.tscn")
+
 export  var upgraded: bool = false
 export  var damage: float = 4.0
 export  var damage_boss: float = 4.0
@@ -10,6 +19,9 @@ export  var damage_weakness: float = 24.0
 onready var animatedSprite: = character.get_node("animatedSprite")
 onready var shadow_animation: Resource = preload("res://Zero_mod/Sprites/BossAbilities/Raikousen_Shadow.tres")
 onready var _rotator_script: Script = preload("res://System/misc/rotatordelete.gd")
+onready var roguepunch_sound: AudioStreamPlayer = $roguepunch
+onready var dash_sound: AudioStreamPlayer = $dash
+onready var slash_sound: AudioStreamPlayer = $slash
 
 var hitbox_upleft_corner: Vector2 = Vector2( - 120, - 15)
 var hitbox_downright_corner: Vector2 = Vector2(100, 5)
@@ -29,6 +41,7 @@ var hitbox_extra_damage: float = 1.0
 var hitbox_extra_damage_boss: float = 1.0
 var hitbox_extra_damage_weakness: float = 1.0
 var hitbox_extra_break_guard_value: float = 1.0
+var hitbox_extra_scale: float = 1.0
 var deflectable: bool = false
 var deflectable_type: int = 0
 var only_deflect_weak: bool = false
@@ -77,12 +90,43 @@ func _on_animation_finished() -> void :
 func play_skill_sound() -> void :
 	if not sound_played:
 		if animatedSprite.frame >= sound_1_frame:
-			sfx_sound.play()
-			sound_played = true
+			if character.saber_node.current_weapon.name == "Rogue-Blade":
+				roguepunch_sound.play()
+				sound_played = true
+			elif character.saber_node.current_weapon.name == "Z-Breaker":
+				dash_sound.play()
+				sound_played = true
+			else:
+				sfx_sound.play()
+				sound_played = true
 	if not sound2_played:
 		if animatedSprite.frame >= sound_2_frame:
-			sfx2_sound.play()
-			sound2_played = true
+			if character.saber_node.current_weapon.name == "Rogue-Blade":
+				sfx2_sound.play()
+				sound2_played = true
+				if CharacterManager.awakened_zero_armor:
+					create_roguewave(global_position, 10)
+				elif CharacterManager.black_zero_armor and not CharacterManager.awakened_zero_armor:
+					create_roguewave(global_position, 6)
+				else:
+					create_roguewave(global_position, 5)
+			elif character.saber_node.current_weapon.name == "Z-Breaker":
+				slash_sound.play()
+				sound2_played = true
+			else:
+				sfx2_sound.play()
+				sound2_played = true
+
+func create_roguewave(ground_position, damage_value) -> void :
+	var instance = roguewave.instance()
+	ground_position.y += -17
+	instance.damage = damage_value
+	instance.damage_to_bosses = damage_value
+	instance.damage_to_weakness = damage_value
+	get_tree().current_scene.get_node("Objects").call_deferred("add_child", instance, true)
+	instance.set_global_position(ground_position)
+	instance.set_creator(creator)
+	instance.call_deferred("initialize", get_facing_direction())
 
 func reset_hitbox() -> void :
 	hitbox_upleft = Vector2(0, 0)
@@ -152,6 +196,7 @@ func spawn_hitbox(_hitbox_upleft: Vector2, _hitbox_downright: Vector2) -> void :
 	current_hitbox.deflectable = deflectable
 	current_hitbox.deflectable_type = deflectable_type
 	current_hitbox.only_deflect_weak = only_deflect_weak
+	current_hitbox.scale *= hitbox_extra_scale
 
 func hitbox_and_position() -> void :
 	if animatedSprite.animation == "raikousen":
@@ -216,28 +261,29 @@ func effect_only_emit(delta) -> void :
 	effect_position()
 	effect_spawn_timer += delta
 	if effect_spawn_timer >= effect_spawn_time:
-		sfx3_sound.play()
-		effect_spawn_timer = 0
-		var effect_instance = effect_scene.instance()
-		effect_instance.frames = load("res://Zero_mod/X8/Sprites/BossAbilities/ability_effects.tres")
-		effect_instance.animation = "raijinken_sparks"
-		effect_instance.global_position = effect_spawn_position
-		effect_instance.z_index = animatedSprite.z_index + 3
-		if get_facing_direction() > 0:
-			effect_instance.flip_h = false
-		else:
-			effect_instance.flip_h = true
-		effect_instance.rotation_degrees = randi() %90 - 90
-		effect_instance.modulate = Color(1, 1, 1, 0.65)
-		effect_instance.light_enabled = true
-		effect_instance.light_strength = 0.5
-		effect_instance.light_color = Color("#63C6EF")
-		effect_instance.light_size = Vector2(0.75, 0.75)
-		effect_instance.light_randomize = true
-		effect_instance.light_random_light = Vector2(0.9, 1.3)
-		effect_instance.light_random_width = Vector2(0.9, 1.3)
-		effect_instance.light_random_height = Vector2(0.9, 1.3)
-		get_tree().current_scene.add_child(effect_instance)
+		if character.saber_node.current_weapon.name == "K-Knuckle":
+			sfx3_sound.play()
+			effect_spawn_timer = 0
+			var effect_instance = effect_scene.instance()
+			effect_instance.frames = load("res://Zero_mod/X8/Sprites/Saber/BossAbilities/ability_effects.tres")
+			effect_instance.animation = "raijinken_sparks"
+			effect_instance.global_position = effect_spawn_position
+			effect_instance.z_index = animatedSprite.z_index + 3
+			if get_facing_direction() > 0:
+				effect_instance.flip_h = false
+			else:
+				effect_instance.flip_h = true
+			effect_instance.rotation_degrees = randi() %90 - 90
+			effect_instance.modulate = Color(1, 1, 1, 0.65)
+			effect_instance.light_enabled = true
+			effect_instance.light_strength = 0.5
+			effect_instance.light_color = Color("#63C6EF")
+			effect_instance.light_size = Vector2(0.75, 0.75)
+			effect_instance.light_randomize = true
+			effect_instance.light_random_light = Vector2(0.9, 1.3)
+			effect_instance.light_random_width = Vector2(0.9, 1.3)
+			effect_instance.light_random_height = Vector2(0.9, 1.3)
+			get_tree().current_scene.add_child(effect_instance)
 
 func effect_position() -> void :
 	var offsets_x = [ - 17, - 17, - 17, - 17, - 17, - 13, - 15, - 8, 0, 0, 15, 15, 15, 15, 15, 15, 15, 15]
@@ -295,6 +341,7 @@ func _EndCondition() -> bool:
 	return false
 
 func _Setup() -> void :
+	create_slash = false
 	effect_spawn_timer = 0.0
 	if character.saber_node.current_weapon.name == "Saber":
 		effect_emit("raikousen")
@@ -311,6 +358,16 @@ func _Setup() -> void :
 	elif character.saber_node.current_weapon.name == "T-Breaker":
 		effect_emit("raikousen_breaker")
 
+	elif character.saber_node.current_weapon.name == "V-Hanger":
+		effect_emit("raikousen_hanger")
+		character.can_eject = false
+		
+	elif character.saber_node.current_weapon.name == "Rogue-Blade":
+		effect_emit("raijinken_rogue")
+
+	elif character.saber_node.current_weapon.name == "Sigma-Blade":
+		effect_emit("raikousen_glaive")
+
 	horizontal_speed = start_speed
 	shadow_emitted = false
 	go_upwards = false
@@ -321,7 +378,12 @@ func _Setup() -> void :
 		facing_direction = 1
 	else:
 		facing_direction = - 1
-	if character.saber_node.current_weapon.name == "Saber":
+	if character.saber_node.current_weapon.name == "Saber" or \
+	character.saber_node.current_weapon.name == "Z-Breaker" or \
+	character.saber_node.current_weapon.name == "B-Fan" or \
+	character.saber_node.current_weapon.name == "T-Breaker" or \
+	character.saber_node.current_weapon.name == "V-Hanger" or \
+	character.saber_node.current_weapon.name == "Sigma-Blade":
 		if character.get_action_pressed("move_up"):
 			rotation_value = - rotation_deg * facing_direction
 			go_upwards = true
@@ -351,7 +413,8 @@ func damp_horizontal_speed(_delta: float) -> void :
 	horizontal_speed *= damping_factor
 
 func _Update(delta: float) -> void :
-	if character.saber_node.current_weapon.name == "K-Knuckle":
+	if character.saber_node.current_weapon.name == "K-Knuckle" or \
+	character.saber_node.current_weapon.name == "Rogue-Blade":
 		if animatedSprite.frame < 15:
 			effect_only_emit(delta)
 		if animatedSprite.frame >= 12 and animatedSprite.frame < 14:
@@ -361,6 +424,8 @@ func _Update(delta: float) -> void :
 		effect.global_position = global_position
 		effect.rotation_degrees = animatedSprite.rotation_degrees
 		if character.saber_node.current_weapon.name == "K-Knuckle":
+			effect.global_position = global_position - Vector2(0, 40)
+		if character.saber_node.current_weapon.name == "Rogue-Blade":
 			effect.global_position = global_position - Vector2(0, 40)
 	play_skill_sound()
 	shadow_emit()
@@ -373,6 +438,7 @@ func _Update(delta: float) -> void :
 				var floor_normal = character.get_floor_normal()
 				var angle_degrees = rad2deg(atan2(floor_normal.y, floor_normal.x))
 				rotation_value = angle_degrees + 90
+		player_desperation()
 		
 		var angle_rad = deg2rad(animatedSprite.rotation_degrees)
 		var _h_speed = horizontal_speed * cos(angle_rad)
@@ -394,11 +460,50 @@ func _Update(delta: float) -> void :
 		character.set_vertical_speed(0)
 	process_invulnerability()
 
+func player_desperation() -> void :
+	if character.get_actual_horizontal_speed() < 100 and character.get_actual_horizontal_speed() > -100:
+		return
+	if not CharacterManager.awakened_zero_armor:
+		return
+	if not animatedSprite.animation == "raikousen":
+		return
+	if character.saber_node.current_weapon.name == "Rogue-Blade" or character.saber_node.current_weapon.name == "K-Knuckle":
+		return
+	if not create_slash:
+		create_slash = true
+		Tools.timer_p(0.075, "create_desperation", self, angles[h])
+
+func create_desperation(degrees: float):
+	var slash = z_slash.instance()
+	get_tree().current_scene.get_node("Objects").call_deferred("add_child", slash, true)
+	slash.damage = damage * hitbox_extra_damage
+	slash.damage_to_bosses = damage_boss * hitbox_extra_damage_boss
+	slash.damage_to_weakness = damage_weakness * hitbox_extra_damage_weakness
+	slash.set_global_position(global_position)
+	slash.rotate_degrees(degrees)
+	slash.set_creator(creator)
+	slash.call_deferred("initialize", get_facing_direction())
+	create_desperation2(degrees)
+
+func create_desperation2(degrees: float):
+	var slash = z_slash.instance()
+	get_tree().current_scene.get_node("Objects").call_deferred("add_child", slash, true)
+	slash.set_global_position(global_position)
+	slash.rotate_degrees(degrees)
+	slash.set_creator(creator)
+	slash.hide()
+	
+	h += 1
+	if h > angles.size() - 1:
+		h = 0
+	create_slash = false
+
 func change_animation_if_falling(_s) -> void :
 	pass
 
 func _Interrupt() -> void :
 	._Interrupt()
+	character.can_eject = true
 	character.dashjumps_since_jump = 0
 	character.dashfall = false
 	character.remove_invulnerability(name)

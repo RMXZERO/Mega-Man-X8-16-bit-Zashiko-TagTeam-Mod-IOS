@@ -3,6 +3,11 @@ onready var wallhit: AudioStreamPlayer2D = $wallhit
 onready var land: AudioStreamPlayer2D = $land
 onready var jump: AudioStreamPlayer2D = $jump
 
+func _ready() -> void:
+	._ready()
+	if CharacterManager.nightshade_zero_armor:
+		call_deferred("prepare_for_intro")
+
 func prepare_for_intro() -> void:
 	animatedSprite.visible = true
 	set_starting_position()

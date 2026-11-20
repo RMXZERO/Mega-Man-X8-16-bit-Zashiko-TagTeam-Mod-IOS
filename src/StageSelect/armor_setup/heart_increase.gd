@@ -9,3 +9,4 @@ func on_press():
 	pick.play()
 	CharacterManager.set_player_equipped_hearts(heart_enabler.character, heart_enabler.num_equipped+increase_amt)
 	heart_enabler.refresh_equipped_hearts()
+

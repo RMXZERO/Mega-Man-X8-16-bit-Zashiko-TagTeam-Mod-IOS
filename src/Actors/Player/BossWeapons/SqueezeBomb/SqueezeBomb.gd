@@ -15,6 +15,7 @@ onready var animation: = AnimationController.new($animatedSprite)
 onready var tween: = TweenController.new(self, false)
 onready var point: AudioStreamPlayer2D = $point
 onready var sound: AudioStreamPlayer2D = $sound
+var play_sound: bool = true
 
 signal projectile_started
 
@@ -25,11 +26,11 @@ func _Setup() -> void :
 	emit_signal("projectile_started")
 	modulate = Color(10, 10, 10, 1)
 	tween.attribute("modulate", Color.white, flash_duration)
-	point.play()
-	sound.play()
 	global_position.x += foward_start * get_facing_direction()
 	tween.method("set_horizontal_speed", move_speed * get_facing_direction(), 0.0, duration - 0.5)
-	
+	if play_sound:
+		point.play()
+		sound.play()
 
 func _Update(delta: float) -> void :
 	if not animation.is_currently(endanim_name):
@@ -41,6 +42,10 @@ func _Update(delta: float) -> void :
 		end()
 		
 	elif attack_stage == 1 and timer > 1:
+		destroy()
+		
+func _OnScreenExit() -> void :
+	if not play_sound:
 		destroy()
 
 func end():

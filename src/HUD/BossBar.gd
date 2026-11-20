@@ -1,6 +1,7 @@
 extends NinePatchRect
 
 onready var bar: TextureProgress = $textureProgress
+onready var bar2: TextureProgress = $texturesteal
 onready var tween := TweenController.new(self,false)
 onready var tween_near := TweenController.new(self,false)
 
@@ -9,10 +10,15 @@ var fading_in := false
 
 func _ready() -> void:
 	Event.connect("set_boss_bar",self,"set_boss_bar")
+	Event.listen("show_life_steal_bar",self,"set_life_steal_bar")
 	visible = false
+	bar2.visible = false
 
 func set_boss_bar(new_bar : Texture):
 	texture = new_bar
+
+func set_life_steal_bar():
+	bar2.visible = not bar2.visible
 
 func blink():
 	tween.reset()
@@ -60,4 +66,4 @@ func _physics_process(_delta: float) -> void:
 func player_is_near_lifebar() -> bool:
 	var screencenter = GameManager.camera.get_camera_screen_center()
 	return GameManager.get_player_position().x > screencenter.x +199 - 36 and \
-		   GameManager.get_player_position().y < screencenter.y + 10
+		   GameManager.get_player_position().y < screencenter.y + 64

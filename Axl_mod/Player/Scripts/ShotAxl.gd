@@ -19,7 +19,6 @@ var current_weapon
 var shoot_timer: float = 0.0
 var _sprite_delay: float = 0
 
-
 func _ready() -> void :
 	if active:
 		update_list_of_weapons()
@@ -30,6 +29,8 @@ func _ready() -> void :
 		actions.append("default_action")
 
 func _StartCondition() -> bool:
+	if character.is_executing("SaberCombo"):
+		return false
 	if current_weapon:
 		return current_weapon.has_ammo()
 	return false
@@ -63,17 +64,30 @@ func got_hit() -> bool:
 	return false
 
 func change_gattling_sprites():
-	current_weapon._gattling_sprites += 1
-	if current_weapon._gattling_sprites > 4:
-		current_weapon._gattling_sprites = 1
-	if current_weapon._gattling_sprites == 1:
-		animatedSprite.frames = current_weapon._gattling_1
-	elif current_weapon._gattling_sprites == 2:
-		animatedSprite.frames = current_weapon._gattling_2
-	elif current_weapon._gattling_sprites == 3:
-		animatedSprite.frames = current_weapon._gattling_3
-	elif current_weapon._gattling_sprites == 4:
-		animatedSprite.frames = current_weapon._gattling_4
+	if CharacterManager.player_character == "Axl":
+		current_weapon._gattling_sprites += 1
+		if current_weapon._gattling_sprites > 4:
+			current_weapon._gattling_sprites = 1
+		if current_weapon._gattling_sprites == 1:
+			animatedSprite.frames = current_weapon._gattling_1
+		elif current_weapon._gattling_sprites == 2:
+			animatedSprite.frames = current_weapon._gattling_2
+		elif current_weapon._gattling_sprites == 3:
+			animatedSprite.frames = current_weapon._gattling_3
+		elif current_weapon._gattling_sprites == 4:
+			animatedSprite.frames = current_weapon._gattling_4
+	elif CharacterManager.player_character == "Pallette":
+		current_weapon._gattling_sprites += 1
+		if current_weapon._gattling_sprites > 4:
+			current_weapon._gattling_sprites = 1
+		if current_weapon._gattling_sprites == 1:
+			animatedSprite.frames = current_weapon._pallettegattling_1
+		elif current_weapon._gattling_sprites == 2:
+			animatedSprite.frames = current_weapon._pallettegattling_2
+		elif current_weapon._gattling_sprites == 3:
+			animatedSprite.frames = current_weapon._pallettegattling_3
+		elif current_weapon._gattling_sprites == 4:
+			animatedSprite.frames = current_weapon._pallettegattling_4
 
 func _physics_process(delta: float) -> void :
 	if current_weapon != null:
@@ -95,15 +109,15 @@ func _Update(_delta: float) -> void :
 		return
 	if action_pressed() and not is_initial_frame():
 		var shot_direction_node = character.get_node("ShotDirection")
-		shot_direction_node.update_sprite_direction()
+		shot_direction_node.update_sprite_direction() 
 		if next_bullet_ready:
 			if _StartCondition() and current_weapon.has_ammo():
 				current_weapon.fire(0)
-				current_weapon.sprite_timer = current_weapon.sprite_delay
-				current_weapon.shoot_timer = current_weapon.shoot_delay
+				current_weapon.sprite_timer = current_weapon.sprite_delay * current_weapon.extra_delay
+				current_weapon.shoot_timer = current_weapon.shoot_delay * current_weapon.extra_delay
 				next_bullet_ready = false
 				if current_weapon.name != "IceGattling":
-					if current_weapon._sprites_weapon_B:
+					if current_weapon._sprites_weapon_B != null:
 						animatedSprite.frames = current_weapon._sprites_weapon_B
 				else:
 					change_gattling_sprites()

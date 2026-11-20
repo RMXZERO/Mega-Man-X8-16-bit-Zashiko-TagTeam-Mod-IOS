@@ -7,10 +7,10 @@ func initialize():
 	if GameManager.player == null:
 		GameManager.set_player(axl)
 	call_deferred("emit_signal_weapon")
+	Tools.timer(0.1, "emit_signal_weapon", self)
 
 func emit_signal_weapon():
 	Event.emit_signal("select_weapon", weapon)
-	
 
 func delayed_start() -> void :
 	weapon.input_sequence.call_actions(self)

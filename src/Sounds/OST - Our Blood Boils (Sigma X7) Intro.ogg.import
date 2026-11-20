@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/OST - Our Blood Boils (Sigma X7) Intro.ogg-b43e500e9eb170457c6870613583390f.oggstr"
+
+[deps]
+
+source_file="res://src/Sounds/OST - Our Blood Boils (Sigma X7) Intro.ogg"
+dest_files=[ "res://.import/OST - Our Blood Boils (Sigma X7) Intro.ogg-b43e500e9eb170457c6870613583390f.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

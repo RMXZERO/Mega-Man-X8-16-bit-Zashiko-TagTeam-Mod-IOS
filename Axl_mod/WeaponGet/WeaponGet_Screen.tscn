@@ -1,8 +1,10 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Axl_mod/Player/Projectiles/BossWeapons/FlameBurner/FlameBurner.tres" type="Resource" id=1]
 [ext_resource path="res://Axl_mod/WeaponGet/Weaponget_new.png" type="Texture" id=2]
 [ext_resource path="res://src/Levels/IGTimer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Axl_mod/Player/Axl_Material_Shader.tres" type="Material" id=4]
+[ext_resource path="res://Remix/Songs/Weapon Get.ogg" type="AudioStream" id=5]
 [ext_resource path="res://Axl_mod/WeaponGet/WpnGetImage.gd" type="Script" id=17]
 [ext_resource path="res://src/Sounds/OST - Weapon Get.ogg" type="AudioStream" id=18]
 [ext_resource path="res://src/Effects/Materials/TextColorSwap.tres" type="Material" id=19]
@@ -39,6 +41,11 @@ stream = ExtResource( 18 )
 volume_db = -4.0
 bus = "Music"
 
+[node name="audioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 5 )
+bus = "Music"
+
 [node name="Armor" type="Node2D" parent="."]
 position = Vector2( 127, 114 )
 z_index = 42
@@ -47,6 +54,8 @@ weapons = [ ExtResource( 36 ), ExtResource( 39 ), ExtResource( 37 ), ExtResource
 text_palette = ExtResource( 21 )
 
 [node name="sprite" type="Sprite" parent="Armor"]
+material = ExtResource( 4 )
+position = Vector2( -25, 0 )
 z_index = 21
 texture = ExtResource( 2 )
 

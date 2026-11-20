@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Vile Battle - Loop.ogg-ae63d75116c40608831f1b618f27ddd4.oggstr"
+
+[deps]
+
+source_file="res://Remix/Songs/Vile Battle - Loop.ogg"
+dest_files=[ "res://.import/Vile Battle - Loop.ogg-ae63d75116c40608831f1b618f27ddd4.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

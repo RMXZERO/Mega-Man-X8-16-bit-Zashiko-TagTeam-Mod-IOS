@@ -16,6 +16,8 @@ onready var claw_retreat: AudioStreamPlayer2D = $claw_retreat
 signal slashed
 
 func _ready() -> void:
+	if CharacterManager.nightshade_zero_armor:
+		animatedSprite.modulate.a = 0.0
 	for b in bamboos:
 		for object in b.get_children():
 			if object is AnimatedSprite:
@@ -53,6 +55,7 @@ func _Update(_delta) -> void:
 			d.activate()
 		for b in bamboo_sprites:
 			b.visible = false
+		animatedSprite.modulate.a = 1.0
 		animatedSprite.modulate = Color(1,1,1,1)
 		turn_and_face_player()
 		play_animation_again("appear")

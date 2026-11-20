@@ -7,10 +7,18 @@ export  var damage_boss: float = 4
 export  var damage_weakness: float = 20
 export  var saber_hitbox: Resource = preload("res://Zero_mod/Player/Hitboxes/Juuhazan_Hitbox.tscn")
 
+onready var squeezebomb: PackedScene = preload("res://src/Actors/Player/BossWeapons/SqueezeBomb/SqueezeBombCharged.tscn")
+onready var zbuster: PackedScene = preload("res://Zero_mod/X8/Sprites/zbuster/object/zbuster.tscn")
+onready var use_genmu: Node2D = $"../Special/Genmuzero"
+var creator: Node2D
+
 onready var animatedSprite: = character.get_node("animatedSprite")
 onready var saber_sound: AudioStreamPlayer = $saber
 onready var ganzanha_sound: AudioStreamPlayer = $ganzanha
 onready var dairettsui_sound: AudioStreamPlayer = $dairettsui
+onready var hanger_sound: AudioStreamPlayer = $hanger
+onready var roguebreak_sound: AudioStreamPlayer = $roguebreak
+onready var zbuster_sound: AudioStreamPlayer = $zbuster
 
 var current_hitbox = null
 var hitbox_name: String = "Juuhazan"
@@ -27,6 +35,7 @@ var hitbox_extra_damage: float = 1
 var hitbox_extra_damage_boss: float = 1
 var hitbox_extra_damage_weakness: float = 1
 var hitbox_extra_break_guard_value: float = 1
+var hitbox_extra_scale: float = 1
 var deflectable: bool = false
 var deflectable_type: int = 0
 var only_deflect_weak: bool = false
@@ -112,6 +121,7 @@ func spawn_hitbox(_hitbox_upleft: Vector2, _hitbox_downright: Vector2) -> void :
 	current_hitbox.deflectable = deflectable
 	current_hitbox.deflectable_type = deflectable_type
 	current_hitbox.only_deflect_weak = only_deflect_weak
+	current_hitbox.scale *= hitbox_extra_scale
 
 func hitbox_and_position() -> void :
 	hitbox_damage = damage
@@ -174,6 +184,41 @@ func hitbox_and_position() -> void :
 			if animatedSprite.frame < 9:
 				Event.emit_signal("screenshake", 1.0)
 
+	elif character.saber_node.current_weapon.name == "V-Hanger":
+		if animatedSprite.frame >= effect_only_frame and animatedSprite.frame < 9:
+			hitbox_rehit_time = 0.0125
+			hitbox_upleft = Vector2(20, - 25)
+			hitbox_downright = Vector2(55, 15)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
+
+	elif character.saber_node.current_weapon.name == "Rogue-Blade":
+		if animatedSprite.frame >= 5 and animatedSprite.frame < 10:
+			if animatedSprite.frame >= 5 and animatedSprite.frame < 6:
+				hitbox_upleft = Vector2( - 65, - 65)
+				hitbox_downright = Vector2(7, 15)
+			if animatedSprite.frame >= 6 and animatedSprite.frame < 7:
+				hitbox_upleft = Vector2( - 55, - 85)
+				hitbox_downright = Vector2(67, - 20)
+			if animatedSprite.frame >= 7 and animatedSprite.frame < 10:
+				hitbox_upleft = Vector2( - 5, - 120)
+				hitbox_downright = Vector2(160, 45)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
+			if animatedSprite.frame < 10:
+				Event.emit_signal("screenshake", 1.0)
+
+	elif character.saber_node.current_weapon.name == "Sigma-Blade":
+		if animatedSprite.frame >= 5 and animatedSprite.frame < 10:
+			if animatedSprite.frame >= 5 and animatedSprite.frame < 6:
+				hitbox_upleft = Vector2( - 113, - 103)
+				hitbox_downright = Vector2( - 0, 15)
+			if animatedSprite.frame >= 6 and animatedSprite.frame < 7:
+				hitbox_upleft = Vector2( - 55, - 125)
+				hitbox_downright = Vector2(80, - 0)
+			if animatedSprite.frame >= 7 and animatedSprite.frame < 10:
+				hitbox_upleft = Vector2(65, - 79)
+				hitbox_downright = Vector2(135, 20)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
+
 	reset_hitbox()
 
 var effect: AnimatedSprite
@@ -201,7 +246,7 @@ func effect_only_emit(_delta: float, _animation: String) -> void :
 		effect_emitted = true
 		effect_position()
 		effect_instance = effect_scene.instance()
-		effect_instance.frames = load("res://Zero_mod/X8/Sprites/BossAbilities/ability_effects.tres")
+		effect_instance.frames = load("res://Zero_mod/X8/Sprites/Saber/BossAbilities/ability_effects.tres")
 		effect_instance.animation = _animation
 		effect_instance.global_position = effect_spawn_position
 		effect_instance.z_index = animatedSprite.z_index + 2
@@ -221,6 +266,12 @@ func effect_position() -> void :
 		var offset_x = 40
 		var offset_y = 12
 		effect_spawn_position = Vector2(global_position.x + offset_x * get_facing_direction(), global_position.y + offset_y)
+	if character.saber_node.current_weapon.name == "Rogue-Blade":
+		var offset_x = 50
+		var offset_y = -10
+		effect_spawn_position = Vector2(global_position.x + offset_x * get_facing_direction(), global_position.y + offset_y)
+
+
 
 func end_saber_state() -> bool:
 	return ending_saber_state
@@ -259,6 +310,12 @@ func _EndCondition() -> bool:
 	return false
 
 func _Setup() -> void :
+	animatedSprite.frame = 1
+	horizontal_speed = start_speed
+	update_bonus_horizontal_only_conveyor()
+	set_saber_animations()
+	ending_saber_state = false
+
 	if character.saber_node.current_weapon.name == "Saber":
 		saber_sound.play()
 		gravity = false
@@ -284,11 +341,59 @@ func _Setup() -> void :
 		gravity = true
 		dairettsui_sound.play()
 
-	animatedSprite.frame = 1
-	horizontal_speed = start_speed
-	update_bonus_horizontal_only_conveyor()
-	set_saber_animations()
-	ending_saber_state = false
+	elif character.saber_node.current_weapon.name == "V-Hanger":
+		effect_emitted = false
+		gravity = false
+		hanger_sound.play()
+
+	elif character.saber_node.current_weapon.name == "Z-Breaker":
+		animatedSprite.frame = 0
+		create_nightmare_buster()
+		Tools.timer(0.1, "create_nightmare_buster", self)
+		Tools.timer(0.2, "create_nightmare_buster", self)
+		Tools.timer(0.3, "create_nightmare_buster", self)
+		Tools.timer(0.4, "create_nightmare_buster", self)
+		Tools.timer(0.5, "create_nightmare_buster", self)
+		Tools.timer(0.6, "create_nightmare_buster", self)
+		Tools.timer(0.7, "create_nightmare_buster", self)
+		Tools.timer(0.8, "create_nightmare_buster", self)
+		Tools.timer(0.9, "reset_speed", self)
+
+	elif character.saber_node.current_weapon.name == "Rogue-Blade":
+		effect_emitted = false
+		gravity = false
+		roguebreak_sound.play()
+
+	elif character.saber_node.current_weapon.name == "Sigma-Blade":
+		saber_sound.play()
+		gravity = false
+		effect_emitted = false
+
+func create_nightmare_buster() -> void :
+	if not CharacterManager.player_character == "Zero":
+		return
+	if not animatedSprite.animation == "juuhazan":
+		return
+	animatedSprite.frame = 0
+	animatedSprite.speed_scale = 0
+	zbuster_sound.play()
+	create_zbuster(global_position, CharacterManager.z_buster_base_damage * 0.5)
+
+func reset_speed() -> void :
+	animatedSprite.speed_scale = 1
+
+func create_zbuster(ground_position, damage_value) -> void :
+	var instance = zbuster.instance()
+	ground_position.y += -9
+	instance.name = "SqueezeBombCharged_B"
+	instance.damage = damage_value * 2 * hitbox_extra_damage
+	instance.damage_to_bosses = damage_value * hitbox_extra_damage_boss
+	instance.damage_to_weakness = damage_value * 5 * hitbox_extra_damage_weakness
+	instance.nightmare = true
+	get_tree().current_scene.get_node("Objects").call_deferred("add_child", instance, true)
+	instance.set_global_position(ground_position)
+	instance.set_creator(creator)
+	instance.call_deferred("initialize", get_facing_direction())
 
 func reduce_speed() -> void :
 	horizontal_speed = 0
@@ -303,6 +408,8 @@ func _Update(delta: float) -> void :
 		effect_only_emit(delta, "ganzanha")
 	if character.saber_node.current_weapon.name == "T-Breaker":
 		effect_only_emit(delta, "dairettsui")
+	if character.saber_node.current_weapon.name == "Rogue-Blade":
+		effect_only_emit(delta, "rogue-break")
 	if is_instance_valid(effect_instance):
 		effect_position()
 		effect_instance.global_position = effect_spawn_position
@@ -317,11 +424,11 @@ func _Update(delta: float) -> void :
 		damp_horizontal_speed(delta)
 	else:
 		force_movement(0)
-	
-
+		
 	if gravity:
 		process_gravity(delta)
 	update_bonus_horizontal_only_conveyor()
+	
 
 func change_animation_if_falling(_s) -> void :
 	pass
@@ -337,3 +444,4 @@ func _Interrupt() -> void :
 	if is_instance_valid(effect):
 		effect.queue_free()
 		effect = null
+	animatedSprite.speed_scale = 1

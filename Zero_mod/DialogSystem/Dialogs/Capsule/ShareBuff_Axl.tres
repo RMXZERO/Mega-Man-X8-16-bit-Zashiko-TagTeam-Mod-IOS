@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://src/DialogSystem/Profiles/DialogueText.gd" type="Script" id=1]
+[ext_resource path="res://src/DialogSystem/Profiles/DrLight.tres" type="Resource" id=2]
+[ext_resource path="res://Axl_mod/DialogSystem/Profiles/Axl.tres" type="Resource" id=3]
+
+[resource]
+script = ExtResource( 1 )
+dialog = [ ExtResource( 3 ), "SHAREBUFF1_AXL", ExtResource( 2 ), "SHAREBUFF2_AXL", "SHAREBUFF3_AXL", "SHAREBUFF4_AXL", "SHAREBUFF5_AXL", ExtResource( 3 ), "SHAREBUFF6_AXL", ExtResource( 2 ), "SHAREBUFF7_AXL", "SHAREBUFF8_AXL", ExtResource( 3 ), "SHAREBUFF9_AXL", ExtResource( 2 ), "SHAREBUFF10_AXL", ExtResource( 3 ), "SHAREBUFF11_AXL", ExtResource( 2 ), "SHAREBUFF12_AXL", ExtResource( 3 ), "SHAREBUFF13_AXL" ]

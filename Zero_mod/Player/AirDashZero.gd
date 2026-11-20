@@ -16,14 +16,13 @@ func _ready() -> void :
 	character.listen("land", self, "reset_airdash_count")
 	character.listen("wallslide", self, "reset_airdash_count")
 	character.listen("walljump", self, "reset_airdash_count")
-	character.listen("dashjump", self, "reduce_airdash_count")
 	character.listen("firedash", self, "reduce_airdash_count")
 
 func _Setup() -> void :
 	._Setup()
 	character.set_vertical_speed(0)
-	reduce_air_jumps()
-	airdash_count -= 1
+	reduce_air_jumps(1)
+	reduce_airdash_count(1)
 	left_ground_timer = 0.0
 	initial_direction = character.get_facing_direction()
 	character.activate_low_walljump_raycasts()
@@ -39,6 +38,11 @@ func reset_airdash_count() -> void :
 	
 func reduce_airdash_count(amount: = 1) -> void :
 	airdash_count -= amount
+
+func set_max_air_dash(value: int):
+	max_airdashes = value
+	airdash_count = value
+	Log("setting max air dash:" + str(airdash_count))
 
 func should_dash() -> bool:
 	if not has_let_go_of_input:
@@ -86,7 +90,7 @@ func _StartCondition() -> bool:
 	var _animation = get_parent().get_animation()
 	if _animation in character.saber_animations:
 		return false
-	if airjump.current_air_jumps <= 0 and airdash_count <= 0:
+	if airdash_count <= 0:
 		return false
 	if should_dash():
 		if is_executing_WallJump():
@@ -114,7 +118,6 @@ func is_able_to_airjump() -> bool:
 func _Interrupt():
 	last_time_pressed = 0.0
 	initial_sound = true
-	character.dashjump_signal()
 	._Interrupt()
 
 func play_sound_on_initialize() -> void :

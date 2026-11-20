@@ -35,7 +35,7 @@ particles_anim_loop = false
 max_value = 3.0
 _data = [ Vector2( 0, 3 ), 0.0, -6.06097, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=43]
+[sub_resource type="CurveTexture" id=223]
 curve = SubResource( 42 )
 
 [sub_resource type="ParticlesMaterial" id=67]
@@ -48,7 +48,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 damping = 7.69
 anim_speed = 1.0
-anim_speed_curve = SubResource( 43 )
+anim_speed_curve = SubResource( 223 )
 
 [sub_resource type="AtlasTexture" id=68]
 atlas = ExtResource( 7 )
@@ -62,7 +62,7 @@ region = Rect2( 80, 0, 80, 80 )
 atlas = ExtResource( 7 )
 region = Rect2( 160, 0, 80, 80 )
 
-[sub_resource type="AtlasTexture" id=71]
+[sub_resource type="AtlasTexture" id=222]
 atlas = ExtResource( 7 )
 region = Rect2( 240, 0, 80, 80 )
 
@@ -92,7 +92,7 @@ region = Rect2( 320, 80, 80, 80 )
 
 [sub_resource type="SpriteFrames" id=79]
 animations = [ {
-"frames": [ SubResource( 68 ), SubResource( 78 ), SubResource( 83 ), SubResource( 71 ), SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ), SubResource( 76 ), SubResource( 77 ) ],
+"frames": [ SubResource( 68 ), SubResource( 78 ), SubResource( 83 ), SubResource( 222 ), SubResource( 72 ), SubResource( 73 ), SubResource( 74 ), SubResource( 75 ), SubResource( 76 ), SubResource( 77 ) ],
 "loop": false,
 "name": "default",
 "speed": 24.0

@@ -10,6 +10,5 @@ func set_ability():
 	if active:
 		character.Raikousen = true
 
-
-func should_unlock(collectible: String) -> bool:
-	return collectible == weapon.collectible
+func should_unlock(_collectible: String) -> bool:
+	return weapon.collectible in GameManager.collectibles

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://X_mod/UltimateX/Player/Projectiles/Ultimate_Shot.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://X_mod/UltimateX/Player/Projectiles/Ultimate_Shot.gd" type="Script" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://src/Effects/Materials/buster_aux_particles.tres" type="Material" id=5]
 [ext_resource path="res://src/Effects/Deflect/heavy_deflect.png" type="Texture" id=6]
 [ext_resource path="res://src/Effects/Big Hit.tscn" type="PackedScene" id=7]
-[ext_resource path="res://X_mod/UltimateX/Player/Projectiles/Ultimate_Continue.tscn" type="PackedScene" id=8]
 [ext_resource path="res://src/Levels/Primrose/rotation_disabler.gd" type="Script" id=9]
 [ext_resource path="res://src/Sounds/TRIPLE_SHOT.wav" type="AudioStream" id=10]
 [ext_resource path="res://X_mod/UltimateX/Player/Projectiles/Deflectable.gd" type="Script" id=11]
@@ -35,7 +34,6 @@ damage_to_weakness = 30.0
 horizontal_velocity = 500.0
 vertical_velocity = 500.0
 fire_sound = ExtResource( 10 )
-continue_shot = ExtResource( 8 )
 
 [node name="rayCast2D" type="RayCast2D" parent="."]
 enabled = true
@@ -51,8 +49,7 @@ shape = SubResource( 8 )
 position = Vector2( 8, 0 )
 z_index = 2
 frames = ExtResource( 1 )
-animation = "Tag"
-frame = 4
+animation = "Tag_X8_Loop"
 playing = true
 
 [node name="visibilityNotifier2D" type="VisibilityNotifier2D" parent="."]

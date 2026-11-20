@@ -62,6 +62,30 @@ var collectibles: Array = [
 	"black_zero_armor", 
 	"white_axl_armor", 
 	
+	"awakened_zero_armor", 
+	"floppa_axl_activated",
+	"extra_saber_combo",
+	"player_desperation",
+	"share_axl_buff",
+	"track_bullet",
+	"axl_saber_combo",
+	"axl_seen_x_boss",
+	"zero_seen_x_boss",
+#	"axl_first_time",
+#	"axl_second_time",
+	"desperation_nova_strike",
+	
+	"zero_seen", 
+	"zero_defeated", 
+	"x_seen", 
+	"x_defeated", 
+	"axl_seen", 
+	"axl_defeated", 
+	"vile_ex_seen", 
+	"vile_ex_defeated", 
+	"dj_sigma_seen",
+	"dj_sigma_defeated",
+	
 	"defeated_antonion_vile", 
 	"defeated_panda_vile", 
 	"vile3_defeated", 
@@ -74,6 +98,11 @@ var collectibles: Array = [
 	"d_glaive_zero", 
 	"k_knuckle_zero", 
 	"t_breaker_zero", 
+	
+	"z_breaker_zero", 
+	"rogue_blade_zero", 
+	"v_hanger_zero", 
+	"sigma_blade_zero", 
 ]
 var max_collectibles = collectibles.size()
 
@@ -133,11 +162,6 @@ func set_current_slot(slot: int) -> void :
 func load_all_slots() -> void :
 	for child in save_button_container.get_children():
 		child.free()
-	# 첫 슬롯 위쪽에 여백을 둬서 난이도 글씨(한글)가 스크롤 영역 위에서 잘리지 않게 함
-	var top_spacer: = Control.new()
-	top_spacer.rect_min_size = Vector2(0, 8)
-	top_spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	save_button_container.add_child(top_spacer)
 	for slot_index in range(Savefile.max_slots):
 		var btn = SlotButtonScene.instance()
 		save_button_container.add_child(btn)
@@ -169,6 +193,16 @@ func load_all_slots() -> void :
 			var secret_bosses = [
 				"zero_seen", 
 				"zero_defeated", 
+				"x_seen", 
+				"x_defeated", 
+				"axl_seen", 
+				"axl_defeated", 
+				"vile_ex_seen", 
+				"vile_ex_defeated", 
+				"dj_sigma_seen",
+				"dj_sigma_defeated",
+				"omega_seen",
+				"omega_defeated",
 			]
 			for boss in secret_bosses:
 				if boss in collectibles:
@@ -176,9 +210,78 @@ func load_all_slots() -> void :
 						btn.get_node("boss_icons").get_node("zero").visible = true
 					if boss == "zero_defeated":
 						btn.get_node("boss_icons").get_node("zero").get_node("animatedSprite").frame = 1
+					if boss == "x_seen":
+						btn.get_node("boss_icons").get_node("x").visible = true
+					if boss == "x_defeated":
+						btn.get_node("boss_icons").get_node("x").get_node("animatedSprite").frame = 1
+					if boss == "axl_seen":
+						btn.get_node("boss_icons").get_node("axl").visible = true
+					if boss == "axl_defeated":
+						btn.get_node("boss_icons").get_node("axl").get_node("animatedSprite").frame = 1
+					if boss == "vile_ex_seen":
+						btn.get_node("boss_icons").get_node("vile_ex").visible = true
+					if boss == "vile_ex_defeated":
+						btn.get_node("boss_icons").get_node("vile_ex").get_node("animatedSprite").frame = 1
+					if boss == "dj_sigma_seen":
+						btn.get_node("boss_icons").get_node("dj_sigma").visible = true
+					if boss == "dj_sigma_defeated":
+						btn.get_node("boss_icons").get_node("dj_sigma").get_node("animatedSprite").frame = 1
+					if boss == "omega_seen":
+						btn.get_node("boss_icons").get_node("omega_zero").visible = true
+						btn.get_node("boss_icons").get_node("omega_zero").get_node("animatedSprite").position.x = 6.19
+						btn.get_node("boss_icons").get_node("omega_zero").get_node("animatedSprite").position.y = 6.19
+						btn.get_node("boss_icons").get_node("omega_zero").get_node("animatedSprite").scale.x = 0.387
+						btn.get_node("boss_icons").get_node("omega_zero").get_node("animatedSprite").scale.y = 0.387
+					if boss == "omega_defeated":
+						btn.get_node("boss_icons").get_node("omega_zero").get_node("animatedSprite").frame = 1
+				
+			var zero_weapons = [
+				"b_fan_zero", 
+				"d_glaive_zero", 
+				"k_knuckle_zero", 
+				"t_breaker_zero", 
+				"z_breaker_zero", 
+				"rogue_blade_zero", 
+				"v_hanger_zero", 
+				"sigma_blade_zero", 
+			]
+			
+			var has_weapon: = 0
+			for zero_weapon in zero_weapons:
+				if zero_weapon in collectibles:
+					has_weapon += 1
+					btn.get_node("item_icons").get_node("zero_weapon").visible = true
+				if has_weapon == 1:
+					btn.get_node("item_icons").get_node("zero_weapon").get_node("animatedSprite").animation = "B-Fan"
+				if has_weapon == 2:
+					btn.get_node("item_icons").get_node("zero_weapon").get_node("animatedSprite").animation = "D-Glaive"
+				if has_weapon == 3:
+					btn.get_node("item_icons").get_node("zero_weapon").get_node("animatedSprite").animation = "K-Knuckle"
+				if has_weapon == 4:
+					btn.get_node("item_icons").get_node("zero_weapon").get_node("animatedSprite").animation = "T-Breaker"
+				if has_weapon == 5:
+					btn.get_node("item_icons").get_node("zero_weapon").get_node("animatedSprite").animation = "Z-Breaker"
+					btn.get_node("item_icons").get_node("zero_weapon").get_node("animatedSprite").position.x = 8
+					btn.get_node("item_icons").get_node("zero_weapon").get_node("animatedSprite").position.y = 4
+				if has_weapon == 6:
+					btn.get_node("item_icons").get_node("zero_weapon").get_node("animatedSprite").animation = "V-Hanger"
+					btn.get_node("item_icons").get_node("zero_weapon").get_node("animatedSprite").rotation_degrees = 0
+				if has_weapon == 7:
+					btn.get_node("item_icons").get_node("zero_weapon").get_node("animatedSprite").animation = "Rogue-Blade"
+					btn.get_node("item_icons").get_node("zero_weapon").get_node("animatedSprite").position.x = 8
+					btn.get_node("item_icons").get_node("zero_weapon").get_node("animatedSprite").position.y = 4
+					btn.get_node("item_icons").get_node("zero_weapon").get_node("animatedSprite").rotation_degrees = 45
+				if has_weapon == 8:
+					btn.get_node("item_icons").get_node("zero_weapon").get_node("animatedSprite").animation = "Sigma-Blade"
+					btn.get_node("item_icons").get_node("zero_weapon").get_node("animatedSprite").position.x = 8
+					btn.get_node("item_icons").get_node("zero_weapon").get_node("animatedSprite").position.y = 4
+					btn.get_node("item_icons").get_node("zero_weapon").get_node("animatedSprite").rotation_degrees = 45
+			btn.get_node("item_icons").get_node("zero_weapon").get_node("number").text = str(has_weapon)
+				
 			var items = [
 				"white_axl_armor", 
 				"black_zero_armor", 
+				"awakened_zero_armor", 
 				"ultima_head", 
 				"hermes_head", 
 				"hermes_body", 
@@ -200,6 +303,10 @@ func load_all_slots() -> void :
 				"life_up_rooster", 
 				"life_up_antonion", 
 				"life_up_mantis", 
+				"life_up_ex1", 
+				"life_up_ex2", 
+				"life_up_ex3", 
+				"life_up_ex4", 
 			]
 			var hermes_parts: = 0
 			var icarus_parts: = 0
@@ -211,6 +318,8 @@ func load_all_slots() -> void :
 						btn.get_node("item_icons").get_node("white_axl_armor").visible = true
 					if item == "black_zero_armor":
 						btn.get_node("item_icons").get_node("black_zero_armor").visible = true
+					if item == "awakened_zero_armor":
+						btn.get_node("item_icons").get_node("awakened_zero_armor").visible = true
 					if item == "ultima_head":
 						btn.get_node("item_icons").get_node("ultima_head").visible = true
 					if "hermes" in item:
@@ -262,7 +371,7 @@ func load_all_slots() -> void :
 			if meta.has("difficulty"):
 				var difficulty_text = ""
 				var total_completion = 0
-				if meta["difficulty"] == - 1:
+				if meta["difficulty"] == - 1 or meta["difficulty"] == 4294967295:
 					difficulty_text = "GAME_START_ROOKIE"
 					total_completion = calculate_completion(collectibles, variables, max_collectibles - 6)
 					btn.get_node("difficulty").idle_color = Color("#329632")
@@ -334,7 +443,6 @@ func load_all_slots() -> void :
 			focus = btn
 
 	var children: = save_button_container.get_children()
-	children.pop_front()
 	var total: = children.size()
 	for i in range(children.size()):
 		var btn = children[i]

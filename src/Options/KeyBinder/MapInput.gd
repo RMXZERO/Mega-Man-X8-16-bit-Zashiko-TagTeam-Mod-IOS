@@ -48,12 +48,12 @@ func _input(event: InputEvent) -> void :
 	if event is InputEventMouseMotion:
 		return
 	elif timer > 0.25:
-		if name == "key" and event is InputEventMouseButton and not event.is_pressed():
+		if name == "key" and event is InputEventKey and not event.is_pressed():
 			pick.play()
 			set_new_action_event(event)
-		elif name == "key" and event is InputEventKey and not event.is_pressed():
-			pick.play()
-			set_new_action_event(event)
+		#elif name == "key" and event is InputEventMouseButton and not event.is_pressed():
+			#pick.play()
+			#set_new_action_event(event)
 		elif name == "joypad" and event is InputEventJoypadButton and not event.is_pressed():
 			pick.play()
 			set_new_action_event(event)

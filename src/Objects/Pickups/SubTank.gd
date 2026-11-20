@@ -2,10 +2,10 @@ extends LifeUp
 
 
 func _ready() -> void :
-	if CharacterManager.game_mode == 1:
+	if CharacterManager.game_mode == 2:
 		if check_subtanks() >= 2:
 			queue_free()
-	if CharacterManager.game_mode > 1:
+	if CharacterManager.game_mode > 2:
 		queue_free()
 
 func _physics_process(delta: float) -> void :

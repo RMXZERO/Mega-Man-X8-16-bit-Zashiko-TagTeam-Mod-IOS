@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/dj_vrius.ogg-282400d16eb56920e7c49b0e8a930410.oggstr"
+
+[deps]
+
+source_file="res://Zero_mod/Boss_DJSigma/SFX/dj_vrius.ogg"
+dest_files=[ "res://.import/dj_vrius.ogg-282400d16eb56920e7c49b0e8a930410.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

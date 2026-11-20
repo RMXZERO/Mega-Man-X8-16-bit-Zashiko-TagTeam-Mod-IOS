@@ -31,6 +31,7 @@ const interval := 3.0
 var first_death := true
 signal screen_flash
 signal true_death
+var less_weapon: bool = false
 
 func true_end():
 	GlobalVariables.set("serenade_defeated", true)
@@ -40,6 +41,7 @@ func true_end():
 	explosions.emitting = true
 	final_explosion.play()
 	desperation.fade_out(3)
+	battle_song.fade_out(3)
 	Tools.timer(2,"set_weak_light",self)
 	golden_particles_2.emitting = false
 	emit_signal("true_death")
@@ -48,10 +50,20 @@ func _ready() -> void :
 	dialogue = CharacterManager._set_correct_dialogues("Secret2Defeated", dialogue)
 	get_parent().listen("zero_health", self, "start_death")
 	reset_shader()
+	character.connect("intro_concluded", self, "fast_death")
 	Event.listen("character_switch_end", self, "refresh_dialogue")
-	
+
 func refresh_dialogue() -> void :
 	dialogue = CharacterManager._set_correct_dialogues("Secret2Defeated", dialogue)
+
+func fast_death() -> void :
+	less_weapon = true
+	Tools.timer(44.0, "show_weapon", self)
+	character.disconnect("intro_concluded", self, "fast_death")
+
+func show_weapon() -> void :
+	if not executing:
+		less_weapon = false
 
 func start_death():
 	character.interrupt_all_moves()
@@ -73,7 +85,7 @@ func _Setup():
 	flash()
 	blink()
 	GameManager.pause(character.name + name)
-	if first_death:
+	if first_death and not less_weapon:
 		Tools.timer(0.5, "unpause", self, null, true)
 	else:
 		break_vfx.visible = true
@@ -83,14 +95,13 @@ func _Setup():
 func unpause():
 	GameManager.unpause(character.name + name)
 	stop_blink()
-	if first_death:
+	if first_death and not less_weapon:
 		first_death = false
 		character.set_horizontal_speed(60 * -get_player_direction_relative())
 		character.set_vertical_speed(-200)
 		next_attack_stage()
 	else:
 		true_end()
-
 
 func _Update(delta):
 	if attack_stage == 1:
@@ -175,6 +186,8 @@ func _Update(delta):
 	
 	elif attack_stage == 12 and timer > 2:
 		GameManager.end_boss_death_cutscene()
+		if less_weapon:
+			Achievements.unlock("DEFEATEDSERENADETOOFAST")
 		next_attack_stage()
 		#character.destroy()
 	#print(seen_dialog())

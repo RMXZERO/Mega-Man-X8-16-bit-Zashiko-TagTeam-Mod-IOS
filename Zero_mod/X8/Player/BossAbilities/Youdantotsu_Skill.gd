@@ -7,6 +7,10 @@ export  var damage_boss: float = 4
 export  var damage_weakness: float = 24
 export  var saber_hitbox: Resource = preload("res://Zero_mod/Player/Hitboxes/Youdantotsu_Hitbox.tscn")
 
+
+onready var blastlaunch: PackedScene = preload("res://src/Actors/Player/BossWeapons/BlastLauncher/BlastLaunchCharged.tscn")
+var creator: Node2D
+onready var zbuster_sound: AudioStreamPlayer = $zbuster
 onready var animatedSprite: = character.get_node("animatedSprite")
 onready var saber_sound: AudioStreamPlayer = $saber
 
@@ -27,6 +31,7 @@ var hitbox_extra_damage: float = 1
 var hitbox_extra_damage_boss: float = 1
 var hitbox_extra_damage_weakness: float = 1
 var hitbox_extra_break_guard_value: float = 1
+var hitbox_extra_scale: float = 1
 var deflectable: bool = false
 var deflectable_type: int = 0
 var only_deflect_weak: bool = false
@@ -113,6 +118,7 @@ func spawn_hitbox(_hitbox_upleft: Vector2, _hitbox_downright: Vector2) -> void :
 	current_hitbox.deflectable = deflectable
 	current_hitbox.deflectable_type = deflectable_type
 	current_hitbox.only_deflect_weak = only_deflect_weak
+	current_hitbox.scale *= hitbox_extra_scale
 
 func hitbox_and_position() -> void :
 	if animatedSprite.animation == "youdantotsu":
@@ -123,9 +129,14 @@ func hitbox_and_position() -> void :
 		
 		if character.saber_node.current_weapon.name == "Saber":
 			if animatedSprite.frame >= movement_frame and animatedSprite.frame < movement_frame + 7:
-				hitbox_upleft = hitbox_upleft_corner
-				hitbox_downright = hitbox_downright_corner
-				spawn_hitbox(hitbox_upleft, hitbox_downright)
+				if CharacterManager.awakened_zero_armor:
+					hitbox_upleft = hitbox_upleft_corner
+					hitbox_downright = hitbox_downright_corner
+					spawn_hitbox(hitbox_upleft, hitbox_downright)
+				else:
+					hitbox_upleft = Vector2(0, - 50)
+					hitbox_downright = Vector2(175, 45)
+					spawn_hitbox(hitbox_upleft, hitbox_downright)
 
 		elif character.saber_node.current_weapon.name == "B-Fan":
 			if animatedSprite.frame >= movement_frame and animatedSprite.frame < movement_frame + 7:
@@ -164,11 +175,30 @@ func hitbox_and_position() -> void :
 				hitbox_upleft = hitbox_upleft_corner
 				hitbox_downright = hitbox_downright_corner
 				spawn_hitbox(hitbox_upleft, hitbox_downright)
+
+		elif character.saber_node.current_weapon.name == "V-Hanger":
+			if animatedSprite.frame >= movement_frame and animatedSprite.frame < movement_frame + 7:
+				hitbox_upleft = hitbox_upleft_corner
+				hitbox_downright = hitbox_downright_corner
+				spawn_hitbox(hitbox_upleft, hitbox_downright)
+
+		elif character.saber_node.current_weapon.name == "Rogue-Blade":
+			if animatedSprite.frame >= movement_frame and animatedSprite.frame < movement_frame + 7:
+				hitbox_upleft = hitbox_upleft_corner
+				hitbox_downright = hitbox_downright_corner
+				spawn_hitbox(hitbox_upleft, hitbox_downright)
+
+		if character.saber_node.current_weapon.name == "Sigma-Blade":
+			if animatedSprite.frame >= movement_frame and animatedSprite.frame < movement_frame + 7:
+				hitbox_upleft = hitbox_upleft_corner
+				hitbox_downright = hitbox_downright_corner
+				spawn_hitbox(hitbox_upleft, hitbox_downright)
 			
 	reset_hitbox()
 
 var effect: AnimatedSprite
 var effect_transparency: float = 0.75
+onready var effect_material: Material = preload("res://Zero_mod/X8/Sprites/ZeroX8_Material_Shader.tres")
 func effect_emit(_animation) -> void :
 	effect = AnimatedSprite.new()
 	add_child(effect)
@@ -185,6 +215,13 @@ func effect_emit(_animation) -> void :
 	effect.flip_h = animatedSprite.flip_h
 	effect.flip_v = animatedSprite.flip_v
 	effect.rotation_degrees = animatedSprite.rotation_degrees
+	if CharacterManager.custom_zero_armor:
+		effect.material = effect_material
+		CharacterManager.set_zeroX8_colors(effect)
+		CharacterManager.set_saberX8_colors(animatedSprite)
+		effect.modulate = Color(1, 1, 1, 1)
+	else:
+		CharacterManager.set_saberX8_green(animatedSprite)
 
 func end_saber_state() -> bool:
 	return ending_saber_state
@@ -250,28 +287,45 @@ func _EndCondition() -> bool:
 
 func _Setup() -> void :
 	if character.saber_node.current_weapon.name == "Saber":
-		effect_emit("youdantotsu")
-
+		if CharacterManager.awakened_zero_armor:
+			effect_emit("youdantotsu_awaken")
+		else:
+			effect_emit("youdantotsu")
 	elif character.saber_node.current_weapon.name == "B-Fan":
 		effect_emit("youdantotsu_fan")
-
 	elif character.saber_node.current_weapon.name == "D-Glaive":
 		sound_counter = 0
 		effect_emit("renyoudan")
-
 	elif character.saber_node.current_weapon.name == "K-Knuckle":
 		effect_emit("youdantotsu_knuckle")
-
 	elif character.saber_node.current_weapon.name == "T-Breaker":
 		effect_emit("youdantotsu_breaker")
+	elif character.saber_node.current_weapon.name == "V-Hanger":
+		effect_emit("youdantotsu_hanger")
+	if character.saber_node.current_weapon.name == "Z-Breaker":
+		zbuster_sound.play()
+		create_blastlaunch(global_position)
+	elif character.saber_node.current_weapon.name == "Rogue-Blade":
+		effect_emit("youdantotsu_rogue")
+	elif character.saber_node.current_weapon.name == "Sigma-Blade":
+		effect_emit("youdantotsu_awaken")
 
 	horizontal_speed = start_speed
 	update_bonus_horizontal_only_conveyor()
 	set_saber_animations()
 	ending_saber_state = false
 
+func create_blastlaunch(ground_position) -> void :
+	var instance = blastlaunch.instance()
+	ground_position.y += -9
+	get_tree().current_scene.get_node("Objects").call_deferred("add_child", instance, true)
+	instance.set_global_position(ground_position)
+	instance.set_creator(creator)
+	instance.call_deferred("initialize", get_facing_direction())
+
 func reduce_speed() -> void :
-	horizontal_speed = 0
+	if not CharacterManager.awakened_zero_armor:
+		horizontal_speed = 0
 
 func damp_horizontal_speed(_delta: float) -> void :
 	var reference_delta = 1.0 / 120
@@ -289,8 +343,14 @@ func _Update(_delta: float) -> void :
 		horizontal_velocity = horizontal_speed
 		force_movement(horizontal_speed)
 		damp_horizontal_speed(_delta)
+		if CharacterManager.awakened_zero_armor:
+			character.alpha_alway_1 = true
+			character.add_invulnerability("Youdantotsu")
 	else:
 		force_movement(0)
+		if CharacterManager.awakened_zero_armor:
+			character.alpha_alway_1 = false
+			character.remove_invulnerability("Youdantotsu")
 	character.set_vertical_speed(0)
 	update_bonus_horizontal_only_conveyor()
 
@@ -299,6 +359,7 @@ func change_animation_if_falling(_s) -> void :
 
 func _Interrupt() -> void :
 	._Interrupt()
+	CharacterManager.set_saberX8_colors(animatedSprite)
 	if character.is_on_floor():
 		animatedSprite.animation = "recover"
 	else:
@@ -308,3 +369,5 @@ func _Interrupt() -> void :
 	if is_instance_valid(effect):
 		effect.queue_free()
 		effect = null
+	character.alpha_alway_1 = false
+	character.remove_invulnerability("Youdantotsu")

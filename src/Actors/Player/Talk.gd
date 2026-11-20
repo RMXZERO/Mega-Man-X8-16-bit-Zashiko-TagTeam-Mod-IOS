@@ -10,7 +10,14 @@ func _ready() -> void :
 		connect_talking()
 
 func connect_talking():
-		Event.listen("character_talking", self, "talk")
+	Event.listen("character_talking", self, "talk")
+	#if not Event.is_connected("character_talking", self, "talk"):
+	#	Event.connect("character_talking", self, "talk")
+
+func disconnect_talking():
+	pass
+	#if Event.is_connected("character_talking", self, "talk"):
+	#	Event.disconnect("character_talking", self, "talk")
 
 func talk(talking_character):
 	if animated_sprite.animation == "idle" or animated_sprite.animation == "talk":

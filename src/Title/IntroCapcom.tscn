@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/Sounds/FX - Capcom Logo.ogg" type="AudioStream" id=1]
 [ext_resource path="res://src/Title/title_bg.png" type="Texture" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://src/Options/pulse.gd" type="Script" id=10]
 [ext_resource path="res://src/Title/title_gradient_bg.png" type="Texture" id=11]
 [ext_resource path="res://src/Title/title_electronics_bg.png" type="Texture" id=12]
+[ext_resource path="res://System/Android/AndroidControls.gd" type="Script" id=13]
+[ext_resource path="res://System/Android/Sprites/android_nothing.png" type="Texture" id=14]
 
 [node name="CapcomLogo" type="Node2D"]
 pause_mode = 2
@@ -86,5 +88,116 @@ texture = ExtResource( 2 )
 [node name="menuButton" type="MenuButton" parent="."]
 margin_right = 398.0
 margin_bottom = 223.0
+
+[node name="AndroidControls" type="CanvasLayer" parent="."]
+
+[node name="left" type="TouchScreenButton" parent="AndroidControls"]
+modulate = Color( 1, 1, 1, 0.392157 )
+self_modulate = Color( 1, 1, 1, 0.392157 )
+position = Vector2( -64, 0 )
+scale = Vector2( 3.5, 7 )
+normal = ExtResource( 14 )
+passby_press = true
+action = "ui_left"
+visibility_mode = 1
+script = ExtResource( 13 )
+_action = "ui_left"
+
+[node name="left2" type="TouchScreenButton" parent="AndroidControls/left"]
+modulate = Color( 1, 1, 1, 0.392157 )
+self_modulate = Color( 1, 1, 1, 0.392157 )
+normal = ExtResource( 14 )
+passby_press = true
+action = "move_left"
+visibility_mode = 1
+script = ExtResource( 13 )
+_action = "move_left"
+
+[node name="right" type="TouchScreenButton" parent="AndroidControls"]
+modulate = Color( 1, 1, 1, 0.392157 )
+self_modulate = Color( 1, 1, 1, 0.392157 )
+position = Vector2( 350, -5.96046e-08 )
+scale = Vector2( 3.5, 7 )
+normal = ExtResource( 14 )
+passby_press = true
+action = "ui_right"
+visibility_mode = 1
+script = ExtResource( 13 )
+_action = "ui_right"
+
+[node name="right2" type="TouchScreenButton" parent="AndroidControls/right"]
+modulate = Color( 1, 1, 1, 0.392157 )
+self_modulate = Color( 1, 1, 1, 0.392157 )
+normal = ExtResource( 14 )
+passby_press = true
+action = "move_right"
+visibility_mode = 1
+script = ExtResource( 13 )
+_action = "move_right"
+
+[node name="up" type="TouchScreenButton" parent="AndroidControls"]
+modulate = Color( 1, 1, 1, 0.392157 )
+self_modulate = Color( 1, 1, 1, 0.392157 )
+position = Vector2( 48, 7.62939e-06 )
+scale = Vector2( 9.4375, 0.75 )
+normal = ExtResource( 14 )
+passby_press = true
+action = "ui_up"
+visibility_mode = 1
+script = ExtResource( 13 )
+_action = "ui_up"
+
+[node name="up2" type="TouchScreenButton" parent="AndroidControls/up"]
+modulate = Color( 1, 1, 1, 0.392157 )
+self_modulate = Color( 1, 1, 1, 0.392157 )
+normal = ExtResource( 14 )
+passby_press = true
+action = "move_up"
+visibility_mode = 1
+script = ExtResource( 13 )
+_action = "move_up"
+
+[node name="down" type="TouchScreenButton" parent="AndroidControls"]
+modulate = Color( 1, 1, 1, 0.392157 )
+self_modulate = Color( 1, 1, 1, 0.392157 )
+position = Vector2( 48, 200 )
+scale = Vector2( 9.4375, 0.75 )
+normal = ExtResource( 14 )
+passby_press = true
+action = "ui_down"
+visibility_mode = 1
+script = ExtResource( 13 )
+_action = "ui_down"
+
+[node name="down2" type="TouchScreenButton" parent="AndroidControls/down"]
+modulate = Color( 1, 1, 1, 0.392157 )
+self_modulate = Color( 1, 1, 1, 0.392157 )
+normal = ExtResource( 14 )
+passby_press = true
+action = "move_down"
+visibility_mode = 1
+script = ExtResource( 13 )
+_action = "move_down"
+
+[node name="Special" type="TouchScreenButton" parent="AndroidControls"]
+modulate = Color( 1, 1, 1, 0.588235 )
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( -112, 0 )
+scale = Vector2( 3.5, 7 )
+normal = ExtResource( 14 )
+action = "select_special"
+visibility_mode = 1
+script = ExtResource( 13 )
+_action = "select_special"
+
+[node name="Special2" type="TouchScreenButton" parent="AndroidControls/Special"]
+modulate = Color( 1, 1, 1, 0.588235 )
+self_modulate = Color( 1, 1, 1, 0.588235 )
+position = Vector2( 145.714, 5.96046e-08 )
+normal = ExtResource( 14 )
+action = "pause"
+visibility_mode = 1
+script = ExtResource( 13 )
+_action = "pause"
 
 [connection signal="button_down" from="menuButton" to="." method="_on_menuButton_button_down"]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/SigmaDemo - Intro.ogg-54ff93f2e8625e0a4b12941fc7000ba7.oggstr"
+
+[deps]
+
+source_file="res://Remix/Songs/SigmaDemo - Intro.ogg"
+dest_files=[ "res://.import/SigmaDemo - Intro.ogg-54ff93f2e8625e0a4b12941fc7000ba7.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

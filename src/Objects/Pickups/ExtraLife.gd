@@ -11,6 +11,9 @@ onready var zero_life: Resource = preload("res://Zero_mod/Objects/Pickups/Extra_
 onready var zero_life_material: Material = preload("res://Zero_mod/X8/Sprites/ZeroX8_Material_Shader.tres")
 onready var axl_life: Resource = preload("res://Axl_mod/Objects/Pickups/ExtraLife.tres")
 onready var axl_life_material: Material = preload("res://Axl_mod/Player/Axl_Material_Shader.tres")
+onready var alia_life: Resource = preload("res://src/Objects/Pickups/ExtraLifeAlia.tres")
+onready var layer_life: Resource = preload("res://Zero_mod/Objects/Pickups/Extra_Life_Layer.tres")
+onready var pallette_life: Resource = preload("res://Axl_mod/Objects/Pickups/ExtraLifePallette.tres")
 
 
 func set_player_sprite() -> void :
@@ -20,7 +23,7 @@ func set_player_sprite() -> void :
 		"X":
 			_animatedSprite.frames = x_life
 			_animatedSprite.material = x_life_material
-			if CharacterManager.ultimate_x_armor:
+			if CharacterManager.ultimate_x_armor and not CharacterManager.infinite_x_activated:
 				_animatedSprite.frames = x_ultimate_life
 		"Zero":
 			_animatedSprite.frames = zero_life
@@ -30,6 +33,17 @@ func set_player_sprite() -> void :
 			_animatedSprite.frames = axl_life
 			_animatedSprite.material = axl_life_material
 			CharacterManager.set_axl_colors(_animatedSprite)
+		"Alia":
+			_animatedSprite.frames = alia_life
+			_animatedSprite.material = x_life_material
+		"Layer":
+			_animatedSprite.frames = layer_life
+			_animatedSprite.material = zero_life_material
+			CharacterManager.set_layer_colors(_animatedSprite)
+		"Pallette":
+			_animatedSprite.frames = pallette_life
+			_animatedSprite.material = axl_life_material
+			CharacterManager.set_pallette_colors(_animatedSprite)
 
 func replace_with_health_item() -> void :
 	var parent = get_parent()

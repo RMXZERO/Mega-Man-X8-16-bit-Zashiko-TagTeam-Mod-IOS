@@ -33,19 +33,34 @@ const minimum_time_between_recharges: = 0.2
 func _ready() -> void :
 	character.listen("equipped_armor", self, "on_equip")
 	character.listen("zero_health", self, "on_zero_health")
+	character.listen("received_damage", self, "bigrecharge")
 	Event.listen("capsule_entered", self, "remove_buff")
 	Event.listen("hit_enemy", self, "recharge")
 	Event.listen("enemy_kill", self, "recharge")
-	Event.listen("special_end", self, "reset_ammo_to_zero")
-	
-func reset_ammo_to_zero() -> void:
-	current_ammo = 0
-	
+	current_ammo = max_ammo
+	CharacterManager.xdrive = false
+
 func recharge(_d = null):
-	if active and not buffed and current_ammo < max_ammo:
+	if CharacterManager.xdrive:
+		return
+	if is_instance_valid(GameManager.player):
+		if GameManager.player.ride:
+			return
+	if active and current_ammo < max_ammo:
 		if timer > last_time_hit + minimum_time_between_recharges:
 			last_time_hit = timer
 			current_ammo = clamp(current_ammo + 1.0, 0.0, max_ammo)
+
+func bigrecharge(_d = null):
+	if CharacterManager.xdrive:
+		return
+	if is_instance_valid(GameManager.player):
+		if GameManager.player.ride:
+			return
+	if active and current_ammo < max_ammo:
+		if timer > last_time_hit + minimum_time_between_recharges:
+			last_time_hit = timer
+			current_ammo = clamp(current_ammo + 10.0, 0.0, max_ammo)
 
 func _input(event: InputEvent) -> void :
 	if active and has_ammo() and character.has_control():
@@ -53,16 +68,12 @@ func _input(event: InputEvent) -> void :
 			fire()
 
 func on_equip():
-	
 	if character.is_full_armor() == "hermes":
 		active = true
-		current_ammo = max_ammo
 		Event.emit_signal("special_activated", self, character)
-		
 	else:
 		active = false
 		remove_buff()
-		
 		if parent.current_weapon == self:
 			parent.set_buster_as_weapon()
 	parent.update_list_of_weapons()
@@ -78,6 +89,8 @@ func can_shoot() -> bool:
 	return has_ammo() and not buffed
 
 func fire(_charge_level: = 0) -> void :
+	if not character.is_full_armor() == "hermes":
+		return
 	apply_buff()
 	Event.emit_signal("shot", self)
 	parent.set_buster_as_weapon()
@@ -94,6 +107,7 @@ func apply_buff() -> void :
 		buffed = true
 		emit_signal("activated")
 		Event.emit_signal("xdrive")
+		CharacterManager.xdrive = true
 
 func remove_buff() -> void :
 	character.remove_invulnerability("xdrive")
@@ -105,14 +119,20 @@ func remove_buff() -> void :
 	if character.is_executing_special:
 		character.is_executing_special = false
 		Event.emit_signal("special_end")
+		CharacterManager.xdrive = false
 
 func _physics_process(delta: float) -> void :
 	timer += delta
 	if buffed and character.has_control():
-		current_ammo = clamp(current_ammo - delta * 5, 0.0, max_ammo)
+		current_ammo = clamp(current_ammo - delta * 4, 0.0, max_ammo)
 		if current_ammo <= 0.0:
 			remove_buff()
-	
+	if is_instance_valid(GameManager.player):
+		if GameManager.player.ride:
+			remove_buff()
+		
+	if not character.is_full_armor() == "hermes":
+		remove_buff()
 		
 	if has_ammo():
 		cycle_colors()

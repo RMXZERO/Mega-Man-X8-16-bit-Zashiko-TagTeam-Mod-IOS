@@ -4,6 +4,8 @@ class_name KnuckleDashZeroX8
 var horizontal_speed: float = horizontal_velocity
 var damping: float = 0.95
 
+onready var hanger_sound: AudioStreamPlayer = $hanger
+
 var vulnerable: bool = false
 var start_speed: float = 400
 var movement_frame_start: int = 0
@@ -21,10 +23,16 @@ func hitbox_and_position() -> void :
 		hitbox_damage_weakness = damage_weakness
 		hitbox_break_guards = true
 		hitbox_rehit_time = 0.025
-		if animatedSprite.frame >= hitbox_frame_start and animatedSprite.frame < hitbox_frame_end:
-			hitbox_upleft = hitbox_upleft_corner
-			hitbox_downright = hitbox_downright_corner
-			spawn_hitbox(hitbox_upleft, hitbox_downright)
+		if character.saber_node.current_weapon.name == "K-Knuckle":
+			if animatedSprite.frame >= hitbox_frame_start and animatedSprite.frame < hitbox_frame_end:
+				hitbox_upleft = hitbox_upleft_corner
+				hitbox_downright = hitbox_downright_corner
+				spawn_hitbox(hitbox_upleft, hitbox_downright)
+		elif character.saber_node.current_weapon.name == "V-Hanger":
+			if animatedSprite.frame >= 1 and animatedSprite.frame < 3:
+				hitbox_upleft = Vector2(0, - 20)
+				hitbox_downright = Vector2(62, 10)
+				spawn_hitbox(hitbox_upleft, hitbox_downright)
 	reset_hitbox()
 
 func end_saber_state() -> bool:
@@ -40,14 +48,23 @@ func should_add_saber_combo() -> bool:
 	return false
 
 func play_skill_sound() -> void :
-	if not sound_played:
-		if animatedSprite.frame >= sound_frame:
-			saber_sound.play()
-			sound_played = true
+	if character.saber_node.current_weapon.name == "K-Knuckle":
+		if not sound_played:
+			if animatedSprite.frame >= sound_frame:
+				saber_sound.play()
+				sound_played = true
+	elif character.saber_node.current_weapon.name == "V-Hanger":
+		if not sound_played:
+			if animatedSprite.frame >= sound_frame:
+				hanger_sound.play()
+				sound_played = true
 
 func _StartCondition() -> bool:
 	var _animation = get_parent().get_animation()
 	if _animation in character.saber_animations:
+		return false
+	var saber_charge = character.get_node_or_null("Charge")
+	if saber_charge != null and saber_charge.get_charge_level() >= 1:
 		return false
 	if not executing:
 		if _animation == "dash":

@@ -3,6 +3,7 @@ class_name KnuckleComboZeroX8
 
 onready var saber2_sound: AudioStreamPlayer = $saber2
 onready var saber3_sound: AudioStreamPlayer = $saber3
+onready var hanger_sound: AudioStreamPlayer = $hanger
 
 var punches: int = 0
 
@@ -16,10 +17,16 @@ func hitbox_and_position() -> void :
 	hitbox_damage_weakness = damage_weakness
 	hitbox_break_guard_value = 1
 	hitbox_rehit_time = 0.15
-	if animatedSprite.frame >= 1 and animatedSprite.frame < 3:
-		hitbox_upleft = Vector2(0, - 20)
-		hitbox_downright = Vector2(38, 10)
-		spawn_hitbox(hitbox_upleft, hitbox_downright)
+	if character.saber_node.current_weapon.name == "K-Knuckle":
+		if animatedSprite.frame >= 1 and animatedSprite.frame < 3:
+			hitbox_upleft = Vector2(0, - 20)
+			hitbox_downright = Vector2(38, 10)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
+	elif character.saber_node.current_weapon.name == "V-Hanger":
+		if animatedSprite.frame >= 1 and animatedSprite.frame < 3:
+			hitbox_upleft = Vector2(0, - 20)
+			hitbox_downright = Vector2(62, 20)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
 
 	reset_hitbox()
 
@@ -41,19 +48,33 @@ func should_add_saber_combo() -> bool:
 	return false
 
 func set_saber_animations() -> void :
-	if character.is_on_floor():
-		if punches == 0:
-			animatedSprite.animation = "saber_1"
-			punches += 1
-			saber_sound.play()
-		elif punches == 1:
-			animatedSprite.animation = "saber_2"
-			saber2_sound.play()
-			punches = 0
+	if character.saber_node.current_weapon.name == "K-Knuckle":
+		if character.is_on_floor():
+			if punches == 0:
+				animatedSprite.animation = "saber_1"
+				punches += 1
+				saber_sound.play()
+			elif punches == 1:
+				animatedSprite.animation = "saber_2"
+				saber2_sound.play()
+				punches = 0
+	elif character.saber_node.current_weapon.name == "V-Hanger":
+		if character.is_on_floor():
+			if punches == 0:
+				animatedSprite.animation = "saber_1"
+				punches += 1
+				hanger_sound.play()
+			elif punches == 1:
+				animatedSprite.animation = "saber_2"
+				hanger_sound.play()
+				punches = 0
 
 func _StartCondition() -> bool:
 	var _animation = get_parent().get_animation()
 	if _animation in character.saber_animations:
+		return false
+	var saber_charge = character.get_node_or_null("Charge")
+	if saber_charge != null and saber_charge.get_charge_level() >= 1:
 		return false
 	if not executing:
 		if character.is_on_floor():

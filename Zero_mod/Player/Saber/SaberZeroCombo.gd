@@ -3,6 +3,16 @@ class_name SaberComboZero
 onready var saber2_sound: AudioStreamPlayer = $saber2
 onready var saber3_sound: AudioStreamPlayer = $saber3
 
+
+onready var zbuster_sound: AudioStreamPlayer = $zbuster
+onready var swordwave_sound: AudioStreamPlayer = $swordwave
+onready var shingetsurin_sound: AudioStreamPlayer = $shingetsurin
+onready var swordwave: PackedScene = preload("res://Zero_mod/X8/Sprites/zbuster/object/swordwave.tscn")
+onready var zbuster: PackedScene = preload("res://Zero_mod/X8/Sprites/zbuster/object/zbuster.tscn")
+onready var shingetsurin: PackedScene = preload("res://Zero_mod/X8/Sprites/zbuster/object/shingetsurin.tscn")
+var creator: Node2D
+var use_shingetsurin: bool = false
+
 var input_buffer = []
 var buffer_window_threshold = 3
 
@@ -49,6 +59,21 @@ func hitbox_and_position():
 			hitbox_upleft = Vector2( - 5, - 39)
 			hitbox_downright = Vector2(68, 21)
 			spawn_hitbox(hitbox_upleft, hitbox_downright)
+			
+	if animatedSprite.animation == "saber_shot":
+		hitbox_damage = 12
+		hitbox_damage_boss = 8
+		hitbox_damage_weakness = 24
+		hitbox_rehit_time = 0.2
+		hitbox_break_guards = true
+		if animatedSprite.frame >= 2 and animatedSprite.frame < 6:
+			hitbox_upleft = Vector2( - 25, - 34)
+			hitbox_downright = Vector2(18, - 15)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
+		if animatedSprite.frame >= 3 and animatedSprite.frame < 6:
+			hitbox_upleft = Vector2( - 5, - 39)
+			hitbox_downright = Vector2(68, 21)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
 	reset_hitbox()
 
 func end_saber_state():
@@ -58,6 +83,12 @@ func end_saber_state():
 		return animatedSprite.frame >= 10
 	if animatedSprite.animation == "saber_3":
 		return animatedSprite.frame >= 13
+	if animatedSprite.animation == "saber_shot_normal":
+		return animatedSprite.frame >= 13
+	if animatedSprite.animation == "saber_shot_normal2":
+		return animatedSprite.frame >= 13
+	if animatedSprite.animation == "saber_shot":
+		return animatedSprite.frame >= 13
 	return false
 
 func is_in_buffer_window() -> bool:
@@ -65,34 +96,103 @@ func is_in_buffer_window() -> bool:
 		return true
 	if animatedSprite.animation == "saber_2" and animatedSprite.frame >= 6 - buffer_window_threshold:
 		return true
+	if animatedSprite.animation == "saber_shot_normal" and animatedSprite.frame >= 11 - buffer_window_threshold:
+		return true
+	if animatedSprite.animation == "saber_shot_normal2" and animatedSprite.frame >= 11 - buffer_window_threshold:
+		return true
 	return false
 
 func should_add_saber_combo():
+	if animatedSprite.animation == "saber_shot_normal":
+		return animatedSprite.frame >= 11
+	if animatedSprite.animation == "saber_shot_normal2":
+		return animatedSprite.frame >= 11
 	if animatedSprite.animation == "saber_1":
 		return animatedSprite.frame >= 6
 	if animatedSprite.animation == "saber_2":
 		return animatedSprite.frame >= 6
 	if animatedSprite.animation == "saber_3":
 		return false
+	if animatedSprite.animation == "saber_shot":
+		return false
 	return false
 
 func set_saber_animations():
 	if character.is_on_floor():
 		if slashes == 0:
-			animatedSprite.animation = "saber_1"
-			saber_sound.play()
+			if not character.get_action_pressed("move_down"):
+				animatedSprite.animation = "saber_1"
+				saber_sound.play()
+			elif character.get_action_pressed("move_down"):
+				animatedSprite.animation = "saber_shot_normal"
+				if use_shingetsurin:
+					create_shingetsurin(global_position)
+					shingetsurin_sound.play()
+				else:
+					create_zbuster(global_position)
+					zbuster_sound.play()
 		if slashes == 1:
-			animatedSprite.animation = "saber_2"
-			saber2_sound.play()
+			if not character.get_action_pressed("move_down"):
+				animatedSprite.animation = "saber_2"
+				saber2_sound.play()
+			elif character.get_action_pressed("move_down"):
+				animatedSprite.animation = "saber_shot_normal2"
+				if use_shingetsurin:
+					create_shingetsurin(global_position)
+					shingetsurin_sound.play()
+				else:
+					create_zbuster(global_position)
+					zbuster_sound.play()
 		if slashes == 2:
-			animatedSprite.animation = "saber_3"
-			saber3_sound.play()
+			if not character.get_action_pressed("move_down"):
+				animatedSprite.animation = "saber_3"
+				saber3_sound.play()
+			elif character.get_action_pressed("move_down"):
+				animatedSprite.animation = "saber_shot"
+				swordwave_sound.play()
+				create_swordwave(global_position)
 				
 	slashes += 1
-	
+
+func create_zbuster(ground_position) -> void :
+	var instance = zbuster.instance()
+	ground_position.y += -9
+	instance.damage = CharacterManager.z_buster_base_damage * hitbox_extra_damage
+	instance.damage_to_bosses = CharacterManager.z_buster_base_damage * hitbox_extra_damage_boss
+	instance.damage_to_weakness = CharacterManager.z_buster_base_damage * hitbox_extra_damage_weakness
+	get_tree().current_scene.get_node("Objects").call_deferred("add_child", instance, true)
+	instance.set_global_position(ground_position)
+	instance.set_creator(creator)
+	instance.call_deferred("initialize", get_facing_direction())
+
+func create_swordwave(ground_position) -> void :
+	var instance = swordwave.instance()
+	ground_position.y += -9
+	instance.damage = CharacterManager.z_buster_base_damage * hitbox_extra_damage * 2
+	instance.damage_to_bosses = CharacterManager.z_buster_base_damage * hitbox_extra_damage_boss * 2
+	instance.damage_to_weakness = CharacterManager.z_buster_base_damage * hitbox_extra_damage_weakness * 2
+	get_tree().current_scene.get_node("Objects").call_deferred("add_child", instance, true)
+	instance.set_global_position(ground_position)
+	instance.set_creator(creator)
+	instance.call_deferred("initialize", get_facing_direction())
+
+func create_shingetsurin(ground_position) -> void :
+	var instance = shingetsurin.instance()
+	ground_position.y += -9
+	instance.damage = CharacterManager.z_buster_base_damage * hitbox_extra_damage * 2
+	instance.damage_to_bosses = CharacterManager.z_buster_base_damage * hitbox_extra_damage_boss * 2
+	instance.damage_to_weakness = CharacterManager.z_buster_base_damage * hitbox_extra_damage_weakness * 2
+	get_tree().current_scene.get_node("Objects").call_deferred("add_child", instance, true)
+	instance.set_global_position(ground_position)
+	instance.set_creator(creator)
+	instance.call_deferred("initialize", get_facing_direction())
+
 func _StartCondition() -> bool:
 	var _animation = get_parent().get_animation()
 	if _animation in character.saber_animations:
+		return false
+	var saber_charge = character.get_node_or_null("Charge")
+	if saber_charge != null and saber_charge.get_charge_level() >= 1:
 		return false
 	if not executing:
 		if character.is_on_floor():
@@ -105,7 +205,7 @@ func _ResetCondition() -> bool:
 func _EndCondition() -> bool:
 	var _animation = get_parent().get_animation()
 	if _animation in character.saber_animations:
-		if not _animation == "saber_1" and not _animation == "saber_2" and not _animation == "saber_3":
+		if not _animation == "saber_1" and not _animation == "saber_2" and not _animation == "saber_3" and not _animation == "saber_shot" and not _animation == "saber_shot_normal" and not _animation == "saber_shot_normal2":
 			return true
 		if end_saber_state():
 			return true

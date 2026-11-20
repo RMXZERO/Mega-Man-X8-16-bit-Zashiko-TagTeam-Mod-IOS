@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/GatewayEscape - Loop.ogg-07dcc2e911e79493ba479beef4c52a68.oggstr"
+
+[deps]
+
+source_file="res://Remix/Songs/GatewayEscape - Loop.ogg"
+dest_files=[ "res://.import/GatewayEscape - Loop.ogg-07dcc2e911e79493ba479beef4c52a68.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

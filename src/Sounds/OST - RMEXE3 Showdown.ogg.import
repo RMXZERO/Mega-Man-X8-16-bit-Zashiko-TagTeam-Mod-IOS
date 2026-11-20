@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/OST - RMEXE3 Showdown.ogg-2fb569c196331e4606b42b6b69b573f9.oggstr"
+
+[deps]
+
+source_file="res://src/Sounds/OST - RMEXE3 Showdown.ogg"
+dest_files=[ "res://.import/OST - RMEXE3 Showdown.ogg-2fb569c196331e4606b42b6b69b573f9.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

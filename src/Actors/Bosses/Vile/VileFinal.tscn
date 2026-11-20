@@ -4,14 +4,14 @@
 [ext_resource path="res://src/Actors/Bosses/Vile/FinalIntro.gd" type="Script" id=2]
 [ext_resource path="res://src/Actors/Bosses/BossStun.gd" type="Script" id=3]
 [ext_resource path="res://src/Actors/Modules/Enemy/DamageOnTouch.gd" type="Script" id=4]
-[ext_resource path="res://src/Effects/Textures/explosion.png" type="Texture" id=5]
+[ext_resource path="res://src/Effects/Materials/BossSmokeParticlesMedium.tres" type="Material" id=5]
 [ext_resource path="res://src/Effects/Textures/smoke.png" type="Texture" id=6]
 [ext_resource path="res://src/Actors/Bosses/Vile/VileAirCannonAngled.gd" type="Script" id=7]
 [ext_resource path="res://src/Actors/Bosses/Vile/vile.res" type="SpriteFrames" id=8]
 [ext_resource path="res://src/Actors/Bosses/BossAI.gd" type="Script" id=9]
 [ext_resource path="res://src/Actors/Modules/Enemy/BossDamage.gd" type="Script" id=10]
 [ext_resource path="res://src/Effects/Materials/x_dash_smoke.tres" type="Material" id=11]
-[ext_resource path="res://src/Effects/Materials/RemainsParticleSingleExplosion.tres" type="Material" id=12]
+[ext_resource path="res://src/Effects/Materials/BossExplosion.tres" type="Material" id=12]
 [ext_resource path="res://src/Actors/Bosses/Vile/VileMissileImproved.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/Actors/Bosses/Vile/FirePillar.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/Actors/Bosses/Vile/Flag.gd" type="Script" id=15]
@@ -21,19 +21,17 @@
 [ext_resource path="res://src/Actors/Bosses/GigaboltManowar/Space.gd" type="Script" id=19]
 [ext_resource path="res://src/Actors/Bosses/Vile/VileAirCannon.gd" type="Script" id=20]
 [ext_resource path="res://src/Actors/Bosses/Vile/VileAirDash.gd" type="Script" id=21]
-[ext_resource path="res://src/Actors/Bosses/Vile/VileDefeat.gd" type="Script" id=22]
+[ext_resource path="res://src/Actors/Bosses/Vile/VileExplosionDefeat.gd" type="Script" id=22]
 [ext_resource path="res://src/Actors/Bosses/Vile/RNGUpdate.gd" type="Script" id=23]
 [ext_resource path="res://src/Effects/Materials/default_material.tres" type="Material" id=24]
 [ext_resource path="res://src/Sounds/HIT_BOSS.wav" type="AudioStream" id=25]
 [ext_resource path="res://src/Sounds/Rooster - Lowkick.ogg" type="AudioStream" id=26]
-[ext_resource path="res://src/Sounds/56 - MMX - Enemy Death.wav" type="AudioStream" id=27]
+[ext_resource path="res://src/Actors/Enemies/Shared/LongBossDeath.tscn" type="PackedScene" id=27]
 [ext_resource path="res://src/Actors/Bosses/DarkMantis/dps_hud.gd" type="Script" id=28]
 [ext_resource path="res://src/DialogSystem/Dialogs/Stages/Vile_final_Dialogue.tres" type="Resource" id=29]
 [ext_resource path="res://src/Actors/Bosses/Vile/VileJump.gd" type="Script" id=31]
 [ext_resource path="res://src/Actors/Bosses/Vile/Idle.gd" type="Script" id=32]
-[ext_resource path="res://src/Sounds/Vile - Defeat.ogg" type="AudioStream" id=34]
 [ext_resource path="res://src/Sounds/Mantis - Dash2.ogg" type="AudioStream" id=36]
-[ext_resource path="res://src/Sounds/18 - MMX - X Fade Out.wav" type="AudioStream" id=37]
 [ext_resource path="res://src/Sounds/60 - MMX - Enemy Missile Fire.wav" type="AudioStream" id=39]
 
 [sub_resource type="RectangleShape2D" id=62]
@@ -54,18 +52,31 @@ particles_anim_loop = false
 [sub_resource type="RectangleShape2D" id=63]
 extents = Vector2( 8, 8 )
 
-[sub_resource type="CanvasItemMaterial" id=68]
-particles_animation = true
-particles_anim_h_frames = 4
-particles_anim_v_frames = 4
-particles_anim_loop = false
+[sub_resource type="Curve" id=91]
+max_value = 3.0
+_data = [ Vector2( 0, 3 ), 0.0, -6.06097, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=90]
+curve = SubResource( 91 )
+
+[sub_resource type="ParticlesMaterial" id=92]
+resource_local_to_scene = true
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 7.69
+anim_speed = 1.0
+anim_speed_curve = SubResource( 90 )
 
 [node name="Vile Final" type="KinematicBody2D" groups=["Bosses", "Enemies"]]
 z_index = 5
 collision_layer = 8
 collision_mask = 257
 script = ExtResource( 1 )
-max_health = 130.0
+max_health = 260.0
 
 [node name="Space" type="Node" parent="."]
 script = ExtResource( 19 )
@@ -90,7 +101,6 @@ position = Vector2( 0, -19 )
 z_index = 1
 frames = ExtResource( 8 )
 animation = "flight"
-frame = 1
 playing = true
 
 [node name="visibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
@@ -329,48 +339,26 @@ input_pickable = false
 position = Vector2( 1, 15 )
 shape = SubResource( 63 )
 
-[node name="BossDeath" type="Node2D" parent="."]
+[node name="BossDeath" parent="." instance=ExtResource( 27 )]
+position = Vector2( 0, -4 )
 script = ExtResource( 22 )
-debug_logs = true
-actions = [ "Event" ]
-animation = "defeat_fall"
-jump_velocity = 180.0
+death_animation = "defeat_fall"
+defeated_flag = "vile_palace_defeated"
+team_death_dialogue = null
+use_reploid_death = false
 
-[node name="explosion" type="AudioStreamPlayer2D" parent="BossDeath"]
-pause_mode = 2
-stream = ExtResource( 27 )
-volume_db = -0.553
-max_distance = 600.0
-attenuation = 0.951366
-bus = "SFX"
-
-[node name="sparks" type="AudioStreamPlayer2D" parent="BossDeath"]
-pause_mode = 2
-stream = ExtResource( 34 )
-volume_db = -2.229
-pitch_scale = 1.05
-max_distance = 600.0
-attenuation = 0.951366
-bus = "SFX"
-
-[node name="explosion_particles" type="Particles2D" parent="BossDeath"]
-pause_mode = 2
-material = SubResource( 68 )
-position = Vector2( 0, 0.5 )
-z_index = 10
-emitting = false
-amount = 1
-lifetime = 2.0
-one_shot = true
-local_coords = false
+[node name="Explosion Particles" parent="BossDeath" index="0"]
+amount = 24
 process_material = ExtResource( 12 )
-texture = ExtResource( 5 )
 
-[node name="beam_out" type="AudioStreamPlayer2D" parent="BossDeath"]
-stream = ExtResource( 37 )
-volume_db = -6.555
-max_distance = 600.0
-bus = "SFX"
+[node name="Smoke Particles" parent="BossDeath" index="1"]
+process_material = ExtResource( 5 )
+
+[node name="Remains" parent="BossDeath" index="4"]
+process_material = SubResource( 92 )
+
+[node name="transform" parent="BossDeath/reploid" index="0"]
+volume_db = -80.0
 
 [node name="Flag" type="Node" parent="."]
 script = ExtResource( 15 )
@@ -386,5 +374,7 @@ defeated = ExtResource( 16 )
 script = ExtResource( 23 )
 
 [connection signal="dps" from="Damage" to="Damage/dps" method="_on_Damage_dps"]
-[connection signal="ability_start" from="BossDeath" to="Flag" method="_on_BossDeath_ability_start"]
-[connection signal="ability_start" from="BossDeath" to="RNGUpdate" method="_on_BossDeath_ability_start"]
+[connection signal="executed" from="BossDeath" to="Flag" method="_on_BossDeath_ability_start" binds= [ "pass" ]]
+[connection signal="executed" from="BossDeath" to="RNGUpdate" method="_on_BossDeath_ability_start" binds= [ "pass" ]]
+
+[editable path="BossDeath"]

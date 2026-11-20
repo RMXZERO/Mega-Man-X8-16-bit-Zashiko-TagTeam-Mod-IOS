@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Fate to Fight.ogg-8ae9b0864a499a70dd26400f9b38c154.oggstr"
+
+[deps]
+
+source_file="res://Remix/Songs/Fate to Fight.ogg"
+dest_files=[ "res://.import/Fate to Fight.ogg-8ae9b0864a499a70dd26400f9b38c154.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -8,15 +8,21 @@ onready var remains_particles: Particles2D = $remains_particles
 var emitted_signal: = false
 
 func _on_area2D_body_entered(body: Node) -> void :
-	if "SqueezeBomb" in body.name and not emitted_signal:
-		emit_signal("opened")
-		emitted_signal = true
-		sprite.material.set_shader_param("Alpha_Blink", 1)
-		sprite.playing = false
-		explosion_particles.emitting = true
-		Tools.timer(1.0, "hide_and_emit_remains", self)
-	elif not emitted_signal:
-		body.deflect(self)
+	if not emitted_signal:
+		if "SqueezeBomb" in body.name:
+			open_door()
+		elif "Juuhazan" in body.name:
+			open_door()
+		else:
+			body.deflect(self)
+
+func open_door():
+	emit_signal("opened")
+	emitted_signal = true
+	sprite.material.set_shader_param("Alpha_Blink", 1)
+	sprite.playing = false
+	explosion_particles.emitting = true
+	Tools.timer(1.0, "hide_and_emit_remains", self)
 
 func hide_and_emit_remains():
 	explosion_particles.emitting = false

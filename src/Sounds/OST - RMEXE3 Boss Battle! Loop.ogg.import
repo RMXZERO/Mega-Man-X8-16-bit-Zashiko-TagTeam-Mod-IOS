@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/OST - RMEXE3 Boss Battle! Loop.ogg-16c7bff5588dc6501a1dc9aadf0282ca.oggstr"
+
+[deps]
+
+source_file="res://src/Sounds/OST - RMEXE3 Boss Battle! Loop.ogg"
+dest_files=[ "res://.import/OST - RMEXE3 Boss Battle! Loop.ogg-16c7bff5588dc6501a1dc9aadf0282ca.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

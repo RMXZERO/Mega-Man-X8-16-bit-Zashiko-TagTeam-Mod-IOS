@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Intrusion - Loop.ogg-f4eb5d816f16f8da14c6044597b2448d.oggstr"
+
+[deps]
+
+source_file="res://Remix/Songs/Intrusion - Loop.ogg"
+dest_files=[ "res://.import/Intrusion - Loop.ogg-f4eb5d816f16f8da14c6044597b2448d.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

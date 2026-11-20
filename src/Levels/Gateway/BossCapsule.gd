@@ -85,6 +85,33 @@ func _on_projectile_entered(body: Node) -> void :
 			if body.break_guards:
 				body.deflect(get_parent())
 				break_lock()
+		if "RideArmorPunch" in body.name:
+			body.deflect(get_parent())
+			break_lock()
+		if "NovaStrikeCharged" in body.name:
+			body.deflect(get_parent())
+			break_lock()
+		if "ShoryuukenCharged" in body.name:
+			body.deflect(get_parent())
+			break_lock()
+		if "GigaCrashCharged" in body.name:
+			body.deflect(get_parent())
+			break_lock()
+		if "GenmuzeroCharged" in body.name:
+			body.deflect(get_parent())
+			break_lock()
+		if "Genmuzerowave" in body.name:
+			body.deflect(get_parent())
+			break_lock()
+		if "Juuhazan_Charged" in body.name:
+			body.deflect(get_parent())
+			break_lock()
+		if "Shingetsurin" in body.name:
+			body.deflect(get_parent())
+			break_lock()
+		if "Player_Desperation" in body.name:
+			body.deflect(get_parent())
+			break_lock()
 
 func break_lock():
 	unlock()

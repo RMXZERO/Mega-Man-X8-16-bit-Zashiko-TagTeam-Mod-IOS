@@ -72,6 +72,7 @@ func unset_aura_buff() -> void :
 	player_special.activate()
 
 func start_time_stop():
+	Event.emit_signal("axl_special_ability", "spiramagnum")
 	Engine.time_scale = clamp(2.0 - gravity_factor, 0.25, 1.0)
 	character.time_stop_active = true
 	backup_original_values()
@@ -82,6 +83,7 @@ func start_time_stop():
 	character.maximum_fall_velocity *= clamp(2.0 - gravity_factor, 0.25, 1.0)
 
 func end_time_stop():
+	Event.emit_signal("axl_special_ability", "remove")
 	Engine.time_scale = 1.0
 	character.time_stop_active = false
 	restore_original_values()

@@ -39,5 +39,5 @@ func check(crush_casts) -> void :
 		if cast.is_colliding():
 			death_hits += 1
 	if death_hits == 2:
-		character.zero_health_team()
+		GameManager.player.zero_health_team()
 		set_physics_process(false)

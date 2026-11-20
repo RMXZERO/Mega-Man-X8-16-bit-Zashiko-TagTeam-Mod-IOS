@@ -1,4 +1,4 @@
-[gd_scene load_steps=141 format=2]
+[gd_scene load_steps=178 format=2]
 
 [ext_resource path="res://src/Actors/Player/x_sprites/x.res" type="SpriteFrames" id=1]
 [ext_resource path="res://Zero_mod/Player/PlayerZero.gd" type="Script" id=2]
@@ -31,8 +31,8 @@
 [ext_resource path="res://src/Effects/Textures/old_lemon_hit.png" type="Texture" id=29]
 [ext_resource path="res://src/Effects/Textures/smoke.png" type="Texture" id=30]
 [ext_resource path="res://src/Effects/Textures/dash.png" type="Texture" id=31]
-[ext_resource path="res://src/Effects/Textures/charge_1.png" type="Texture" id=32]
-[ext_resource path="res://src/Effects/Textures/charge_2.png" type="Texture" id=33]
+[ext_resource path="res://Zero_mod/X8/Sprites/effect/Materials/mat_chargeparticle_zero.tres" type="Material" id=32]
+[ext_resource path="res://Zero_mod/X8/Sprites/effect/Materials/mat_chargeparticle_zero2.tres" type="Material" id=33]
 [ext_resource path="res://src/Effects/Textures/airdash.png" type="Texture" id=34]
 [ext_resource path="res://SpriteEffect.gd" type="Script" id=35]
 [ext_resource path="res://src/Actors/Player/Modules/Forced.gd" type="Script" id=36]
@@ -42,7 +42,7 @@
 [ext_resource path="res://src/Effects/Player Death.tscn" type="PackedScene" id=40]
 [ext_resource path="res://src/Effects/Textures/blue_screen.png" type="Texture" id=41]
 [ext_resource path="res://src/Actors/Player/Modules/Ride.gd" type="Script" id=42]
-[ext_resource path="res://Zero_mod/Sprites/Zero_Material_Shader.tres" type="Material" id=43]
+[ext_resource path="res://Zero_mod/X8/Sprites/ZeroX8_Material_Shader.tres" type="Material" id=43]
 [ext_resource path="res://src/Actors/Player/Subtank.tscn" type="PackedScene" id=44]
 [ext_resource path="res://Zero_mod/Player/DoubleJumpZero.gd" type="Script" id=45]
 [ext_resource path="res://Zero_mod/Player/FallZero.gd" type="Script" id=46]
@@ -55,7 +55,7 @@
 [ext_resource path="res://Zero_mod/Player/BossAbilities/Tenshouha.gd" type="Script" id=53]
 [ext_resource path="res://Zero_mod/Player/BossAbilities/Tenshouha_Skill.gd" type="Script" id=54]
 [ext_resource path="res://src/Actors/Player/Modules/JumpDamage.tscn" type="PackedScene" id=55]
-[ext_resource path="res://src/Actors/Player/Modules/Intro.gd" type="Script" id=56]
+[ext_resource path="res://Zero_mod/X8/Sprites/zbuster/object/object.tres" type="SpriteFrames" id=56]
 [ext_resource path="res://src/Sounds/17 - MMX - X Fade In.wav" type="AudioStream" id=57]
 [ext_resource path="res://src/Sounds/MM - Equip.wav" type="AudioStream" id=58]
 [ext_resource path="res://src/Actors/Player/Modules/LifeSteal.tscn" type="PackedScene" id=59]
@@ -70,36 +70,36 @@
 [ext_resource path="res://src/Sounds/16 - MMX - X Upgrade Complete.wav" type="AudioStream" id=68]
 [ext_resource path="res://src/Objects/Pickups/Subtanks/subtank_Inferno.tres" type="Resource" id=69]
 [ext_resource path="res://src/Objects/Pickups/Subtanks/subtank_TroiaBase.tres" type="Resource" id=70]
-[ext_resource path="res://src/Actors/Player/BossWeapons/DriftDiamond/Drift Diamond.tres" type="Resource" id=71]
+[ext_resource path="res://Zero_mod/WeaponGet/Weapon/Rasetsusen.tres" type="Resource" id=71]
 [ext_resource path="res://src/Sounds/Yeti - Throw.ogg" type="AudioStream" id=72]
 [ext_resource path="res://Zero_mod/Player/BossAbilities/Juuhazan.gd" type="Script" id=73]
-[ext_resource path="res://src/Actors/Player/BossWeapons/DarkArrow/Dark Arrow.tres" type="Resource" id=74]
+[ext_resource path="res://Zero_mod/WeaponGet/Weapon/Youdantotsu.tres" type="Resource" id=74]
 [ext_resource path="res://src/Actors/Player/WeaponStasis.gd" type="Script" id=75]
 [ext_resource path="res://Zero_mod/Player/BossAbilities/Enkoujin.gd" type="Script" id=76]
-[ext_resource path="res://src/Actors/Player/BossWeapons/FireDash/Fire Dash.tres" type="Resource" id=77]
-[ext_resource path="res://src/Actors/Player/BossWeapons/ThunderDancer/Thunder Dancer.tres" type="Resource" id=78]
+[ext_resource path="res://Zero_mod/WeaponGet/Weapon/Raikousen.tres" type="Resource" id=77]
+[ext_resource path="res://Zero_mod/WeaponGet/Weapon/Hyouryuushou.tres" type="Resource" id=78]
 [ext_resource path="res://Zero_mod/Player/BossAbilities/Raikousen.gd" type="Script" id=79]
 [ext_resource path="res://src/Effects/Materials/x_dash_smoke.tres" type="Material" id=80]
 [ext_resource path="res://src/Effects/Materials/x_walljump_particle.tres" type="Material" id=81]
 [ext_resource path="res://src/Effects/Materials/x_supercharged_particle.tres" type="Material" id=82]
 [ext_resource path="res://src/Effects/Materials/x_wallslide_smoke.tres" type="Material" id=83]
-[ext_resource path="res://src/Effects/Materials/x_charging_particle.tres" type="Material" id=84]
-[ext_resource path="res://src/Effects/Materials/x_charged_particle.tres" type="Material" id=85]
+[ext_resource path="res://Zero_mod/X8/Sprites/effect/charge_effect_1.png" type="Texture" id=84]
+[ext_resource path="res://Zero_mod/X8/Sprites/effect/charge_effect_4.png" type="Texture" id=85]
 [ext_resource path="res://src/Effects/Materials/x_dash_invinc_particles.tres" type="Material" id=86]
 [ext_resource path="res://src/Actors/Player/X/CrushCheck.gd" type="Script" id=87]
-[ext_resource path="res://src/Actors/Player/BossWeapons/BlastLauncher/Blast Launcher.tres" type="Resource" id=88]
-[ext_resource path="res://src/Actors/Player/BossWeapons/CrystalBouncer/Crystal Bouncer.tres" type="Resource" id=89]
-[ext_resource path="res://src/Actors/Player/BossWeapons/OpticShield/Optic Shield.tres" type="Resource" id=90]
+[ext_resource path="res://Zero_mod/WeaponGet/Weapon/Rekkyoudan.tres" type="Resource" id=88]
+[ext_resource path="res://Zero_mod/WeaponGet/Weapon/Enkoujin.tres" type="Resource" id=89]
+[ext_resource path="res://Zero_mod/WeaponGet/Weapon/Tenshouha.tres" type="Resource" id=90]
 [ext_resource path="res://Zero_mod/Player/BossAbilities/Enkoujin_Skill.gd" type="Script" id=91]
 [ext_resource path="res://Zero_mod/Player/BossAbilities/Raikousen_Skill.gd" type="Script" id=92]
-[ext_resource path="res://Zero_mod/Sprites/BossAbilities/Juuhazan_effect.tres" type="SpriteFrames" id=93]
+[ext_resource path="res://Zero_mod/X8/Sprites/Saber/BossAbilities/ability_effects.tres" type="SpriteFrames" id=93]
 [ext_resource path="res://Zero_mod/Player/BossAbilities/Hyouryuushou_Skill.gd" type="Script" id=94]
 [ext_resource path="res://Zero_mod/Player/BossAbilities/Juuhazan_Skill.gd" type="Script" id=95]
 [ext_resource path="res://src/Sounds/Mantis - Dash.ogg" type="AudioStream" id=96]
 [ext_resource path="res://src/Levels/Primrose/rotation_disabler.gd" type="Script" id=97]
 [ext_resource path="res://src/Actors/rotation_particle_disabler.gd" type="Script" id=98]
-[ext_resource path="res://src/Actors/Player/BossWeapons/SqueezeBomb/Squeeze Bomb.tres" type="Resource" id=99]
-[ext_resource path="res://src/Effects/Materials/mat_chargeparticle.tres" type="Material" id=100]
+[ext_resource path="res://Zero_mod/WeaponGet/Weapon/Juuhazan.tres" type="Resource" id=99]
+[ext_resource path="res://Zero_mod/X8/Sprites/effect/charge_effect_2.png" type="Texture" id=100]
 [ext_resource path="res://Zero_mod/SFX/raikousen.ogg" type="AudioStream" id=101]
 [ext_resource path="res://Zero_mod/SFX/rasetsusen.ogg" type="AudioStream" id=102]
 [ext_resource path="res://Zero_mod/SFX/saber_3.ogg" type="AudioStream" id=103]
@@ -121,7 +121,7 @@
 [ext_resource path="res://Zero_mod/Player/Weapons/D-Glaive.tres" type="Resource" id=119]
 [ext_resource path="res://Zero_mod/Player/Weapons/K-Knuckle.tres" type="Resource" id=120]
 [ext_resource path="res://Zero_mod/Player/Weapons/Sigma-Blade.tres" type="Resource" id=121]
-[ext_resource path="res://Zero_mod/Player/Weapons/V-Hanger.tres" type="Resource" id=122]
+[ext_resource path="res://Zero_mod/Player/Weapons/Z-Breaker.tres" type="Resource" id=122]
 [ext_resource path="res://Zero_mod/Player/Weapons/T-Breaker.tres" type="Resource" id=123]
 [ext_resource path="res://Zero_mod/Player/Weapons/Z-Saber.tres" type="Resource" id=124]
 [ext_resource path="res://src/Effects/Textures/snow_sparkle.png" type="Texture" id=125]
@@ -129,6 +129,43 @@
 [ext_resource path="res://TagTeam_Mod/CharacterSwitchWarpOut.gd" type="Script" id=127]
 [ext_resource path="res://TagTeam_Mod/CharacterSwitchWarpIn.gd" type="Script" id=128]
 [ext_resource path="res://TagTeam_Mod/CharSwitchRevive.gd" type="Script" id=129]
+[ext_resource path="res://Zero_mod/Player/Weapons/Rogue-Blade.tres" type="Resource" id=130]
+[ext_resource path="res://Zero_mod/Player/Weapons/V-Hanger.tres" type="Resource" id=131]
+[ext_resource path="res://Zero_mod/SFX/swordwave.ogg" type="AudioStream" id=132]
+[ext_resource path="res://Zero_mod/SFX/zbuster.ogg" type="AudioStream" id=133]
+[ext_resource path="res://Zero_mod/X8/Player/BossAbilities/Ryuenjin_Skill.gd" type="Script" id=134]
+[ext_resource path="res://Zero_mod/Player/IntroZero.gd" type="Script" id=135]
+[ext_resource path="res://Zero_mod/SFX/awakened_loop.ogg" type="AudioStream" id=136]
+[ext_resource path="res://Zero_mod/SFX/boom.ogg" type="AudioStream" id=137]
+[ext_resource path="res://Zero_mod/SFX/awaken_end.ogg" type="AudioStream" id=138]
+[ext_resource path="res://Zero_mod/SFX/asobiwaowarida.ogg" type="AudioStream" id=139]
+[ext_resource path="res://Zero_mod/X8/Player/Genmuzero/awakenaura.gd" type="Script" id=140]
+[ext_resource path="res://src/Sounds/Lumine - Pick.wav" type="AudioStream" id=141]
+[ext_resource path="res://src/Actors/Player/BossWeapons/GigaCrash/CrashIllusion.tscn" type="PackedScene" id=142]
+[ext_resource path="res://Zero_mod/X8/Player/Genmuzero/Genmuzero.tres" type="Resource" id=143]
+[ext_resource path="res://src/Effects/ShieldBreak/shieldbreak.res" type="SpriteFrames" id=144]
+[ext_resource path="res://Zero_mod/X8/Player/Genmuzero/SpecialFireZero.gd" type="Script" id=145]
+[ext_resource path="res://Zero_mod/X8/Player/Genmuzero/Genmuzero.gd" type="Script" id=146]
+[ext_resource path="res://Zero_mod/X8/Player/Genmuzero/Genmuzero_Skill.gd" type="Script" id=147]
+[ext_resource path="res://Zero_mod/X8/Player/Genmuzero/genmuzero.ogg" type="AudioStream" id=148]
+[ext_resource path="res://Zero_mod/SFX/RekohouhaGround.ogg" type="AudioStream" id=149]
+[ext_resource path="res://Zero_mod/SFX/RekohouhaShot.ogg" type="AudioStream" id=150]
+[ext_resource path="res://Zero_mod/X8/Player/BossAbilities/Rekuhouha_Skill.gd" type="Script" id=151]
+[ext_resource path="res://Zero_mod/SFX/shingetsurinshort.ogg" type="AudioStream" id=152]
+[ext_resource path="res://Zero_mod/X8/Player/BossAbilities/Enkoujin_Extra_Skill.gd" type="Script" id=153]
+[ext_resource path="res://src/Actors/NewStateMachine/audioplayer.gd" type="Script" id=154]
+[ext_resource path="res://src/Sounds/Yeti - Stomp.ogg" type="AudioStream" id=155]
+[ext_resource path="res://Zero_mod/X8/Player/Genmuzero/genmu_ready.ogg" type="AudioStream" id=156]
+[ext_resource path="res://Zero_mod/SFX/checkmate.ogg" type="AudioStream" id=157]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossSpecials/Other Character/Buff_Other_Special.tscn" type="PackedScene" id=158]
+[ext_resource path="res://Zero_mod/X8/Player/Genmuzero/Desperation.gd" type="Script" id=159]
+[ext_resource path="res://Zero_mod/X8/Sprites/effect/charge_effect_3.png" type="Texture" id=160]
+[ext_resource path="res://Zero_mod/Player/Saber/ChargeZero.gd" type="Script" id=161]
+[ext_resource path="res://Zero_mod/Player/Saber/SaberZero_Charge.gd" type="Script" id=162]
+[ext_resource path="res://Zero_mod/SFX/OZ/charge5.ogg" type="AudioStream" id=163]
+[ext_resource path="res://Zero_mod/SFX/OZ/charge6.ogg" type="AudioStream" id=164]
+[ext_resource path="res://Zero_mod/SFX/charge_saber.ogg" type="AudioStream" id=165]
+[ext_resource path="res://Zero_mod/SFX/OZ/omega_intro.ogg" type="AudioStream" id=166]
 
 [sub_resource type="RectangleShape2D" id=32]
 extents = Vector2( 6.995, 7 )
@@ -337,48 +374,94 @@ texture = ExtResource( 29 )
 [node name="ChargingParticle" type="Particles2D" parent="animatedSprite"]
 pause_mode = 2
 visible = false
-material = ExtResource( 100 )
-position = Vector2( 0, 3.99 )
-z_index = 4
-amount = 1
-lifetime = 0.3
-process_material = ExtResource( 84 )
-texture = ExtResource( 32 )
-
-[node name="ChargedParticle" type="Particles2D" parent="animatedSprite"]
-pause_mode = 2
-visible = false
-material = ExtResource( 100 )
-position = Vector2( 0, 3.99 )
-z_index = 4
-amount = 1
-lifetime = 0.3
-process_material = ExtResource( 85 )
-texture = ExtResource( 33 )
-
-[node name="SuperChargeParticle" type="Particles2D" parent="animatedSprite"]
-pause_mode = 2
-visible = false
-material = ExtResource( 100 )
-position = Vector2( 0, 3.99 )
+material = ExtResource( 32 )
+position = Vector2( -4, 0 )
 z_index = 4
 amount = 1
 lifetime = 0.3
 process_material = ExtResource( 82 )
-texture = ExtResource( 33 )
+texture = ExtResource( 84 )
+
+[node name="ChargingParticle" type="Particles2D" parent="animatedSprite/ChargingParticle"]
+pause_mode = 2
+material = ExtResource( 33 )
+z_index = 4
+amount = 1
+lifetime = 0.5
+process_material = ExtResource( 82 )
+texture = ExtResource( 100 )
+
+[node name="ChargedParticle" type="Particles2D" parent="animatedSprite"]
+pause_mode = 2
+visible = false
+material = ExtResource( 32 )
+position = Vector2( -4, 0 )
+z_index = 4
+amount = 1
+lifetime = 0.3
+process_material = ExtResource( 82 )
+texture = ExtResource( 84 )
+
+[node name="ChargingParticle" type="Particles2D" parent="animatedSprite/ChargedParticle"]
+pause_mode = 2
+material = ExtResource( 33 )
+z_index = 4
+amount = 1
+lifetime = 0.5
+process_material = ExtResource( 82 )
+texture = ExtResource( 100 )
+
+[node name="SuperChargeParticle" type="Particles2D" parent="animatedSprite"]
+pause_mode = 2
+visible = false
+material = ExtResource( 32 )
+position = Vector2( -4, 0 )
+z_index = 4
+amount = 1
+lifetime = 0.3
+process_material = ExtResource( 82 )
+texture = ExtResource( 160 )
+
+[node name="SuperChargeParticle" type="Particles2D" parent="animatedSprite/SuperChargeParticle"]
+pause_mode = 2
+material = ExtResource( 33 )
+z_index = 4
+amount = 1
+lifetime = 0.5
+process_material = ExtResource( 82 )
+texture = ExtResource( 85 )
 
 [node name="Talk" type="Node" parent="animatedSprite"]
 script = ExtResource( 107 )
+character = "Zero"
 _animatedSprite = NodePath("..")
 
 [node name="afterImages" type="Node" parent="animatedSprite"]
 script = ExtResource( 48 )
 
 [node name="animatedSprite" type="AnimatedSprite" parent="animatedSprite"]
-visible = false
 frames = ExtResource( 93 )
-frame = 16
+animation = "dairettsui"
 playing = true
+
+[node name="awakenaura" type="AnimatedSprite" parent="animatedSprite"]
+visible = false
+material = ExtResource( 43 )
+position = Vector2( -2, -14 )
+scale = Vector2( 1.1, 1.1 )
+z_index = -4
+frames = ExtResource( 56 )
+animation = "awakenaura"
+playing = true
+
+[node name="genmu_effect" type="AnimatedSprite" parent="animatedSprite/awakenaura"]
+visible = false
+material = ExtResource( 43 )
+position = Vector2( -10.9091, -3.63636 )
+frames = ExtResource( 56 )
+animation = "genmu_effect"
+playing = true
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = ExtResource( 26 )
@@ -494,7 +577,7 @@ active = false
 
 [node name="Intro" type="Node2D" parent="."]
 pause_mode = 2
-script = ExtResource( 56 )
+script = ExtResource( 135 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -507,6 +590,7 @@ global_event = true
 force_start = true
 
 [node name="audioStreamPlayer" type="AudioStreamPlayer2D" parent="Intro"]
+stream = ExtResource( 136 )
 volume_db = -14.0
 max_distance = 600.0
 bus = "SFX"
@@ -517,6 +601,51 @@ volume_db = -9.0
 pitch_scale = 1.19
 max_distance = 600.0
 bus = "SFX"
+
+[node name="asobiwaowarida" type="AudioStreamPlayer2D" parent="Intro"]
+stream = ExtResource( 139 )
+volume_db = -5.0
+max_distance = 600.0
+bus = "SFX"
+
+[node name="awaken_end" type="AudioStreamPlayer2D" parent="Intro"]
+stream = ExtResource( 138 )
+max_distance = 600.0
+bus = "SFX"
+
+[node name="awaken_loop" type="AudioStreamPlayer2D" parent="Intro"]
+stream = ExtResource( 136 )
+max_distance = 600.0
+bus = "SFX"
+
+[node name="boom" type="AudioStreamPlayer2D" parent="Intro"]
+stream = ExtResource( 137 )
+max_distance = 600.0
+bus = "SFX"
+
+[node name="messiah" type="AudioStreamPlayer2D" parent="Intro"]
+stream = ExtResource( 166 )
+max_distance = 600.0
+bus = "SFX"
+
+[node name="awakeneffect" type="AnimatedSprite" parent="Intro"]
+pause_mode = 1
+visible = false
+material = ExtResource( 43 )
+position = Vector2( -9, -13 )
+z_index = 1
+frames = ExtResource( 56 )
+animation = "awakeneffect"
+playing = true
+
+[node name="awakeneffectex" type="AnimatedSprite" parent="Intro"]
+pause_mode = 1
+visible = false
+material = ExtResource( 43 )
+position = Vector2( -9, -13 )
+frames = ExtResource( 56 )
+animation = "awakeneffectex"
+playing = true
 
 [node name="Death" type="Node2D" parent="."]
 pause_mode = 2
@@ -563,7 +692,6 @@ script = ExtResource( 47 )
 debug_logs = false
 first_decay = 1.5
 lifesteal_decay = 1.0
-minimum_time_between_heals = 0.33
 
 [node name="Damage" type="Node2D" parent="."]
 script = ExtResource( 15 )
@@ -584,7 +712,6 @@ position = Vector2( 0, -8 )
 z_index = 5
 frames = SubResource( 44 )
 animation = "sparks"
-frame = 15
 playing = true
 
 [node name="back" type="AnimatedSprite" parent="Damage"]
@@ -592,7 +719,6 @@ visible = false
 position = Vector2( 0, -8 )
 frames = SubResource( 44 )
 animation = "back"
-frame = 6
 playing = true
 
 [node name="Shot" type="Node2D" parent="."]
@@ -624,7 +750,15 @@ weapon = ExtResource( 123 )
 
 [node name="V-Hanger" type="Node2D" parent="Shot"]
 script = ExtResource( 116 )
+weapon = ExtResource( 131 )
+
+[node name="Z-Buster" type="Node2D" parent="Shot"]
+script = ExtResource( 116 )
 weapon = ExtResource( 122 )
+
+[node name="Rogue-Blade" type="Node2D" parent="Shot"]
+script = ExtResource( 116 )
+weapon = ExtResource( 130 )
 
 [node name="Sigma-Blade" type="Node2D" parent="Shot"]
 script = ExtResource( 116 )
@@ -640,30 +774,30 @@ weapon = ExtResource( 99 )
 
 [node name="Rasetsusen" type="Node" parent="Shot"]
 script = ExtResource( 50 )
-weapon = ExtResource( 74 )
+weapon = ExtResource( 71 )
 
 [node name="Raikousen" type="Node" parent="Shot"]
 script = ExtResource( 79 )
-weapon = ExtResource( 78 )
+weapon = ExtResource( 77 )
 
 [node name="Youdantotsu" type="Node" parent="Shot"]
 script = ExtResource( 66 )
-weapon = ExtResource( 88 )
+weapon = ExtResource( 74 )
 
 [node name="Rekkyoudan" type="Node" parent="Shot"]
 script = ExtResource( 49 )
-weapon = ExtResource( 89 )
+weapon = ExtResource( 88 )
 
 [node name="Hyouryuushou" type="Node" parent="Shot"]
 script = ExtResource( 12 )
 __meta__ = {
 "_editor_description_": ""
 }
-weapon = ExtResource( 71 )
+weapon = ExtResource( 78 )
 
 [node name="Enkoujin" type="Node" parent="Shot"]
 script = ExtResource( 76 )
-weapon = ExtResource( 77 )
+weapon = ExtResource( 89 )
 
 [node name="audioStreamPlayer" type="AudioStreamPlayer" parent="Shot"]
 pause_mode = 2
@@ -692,9 +826,152 @@ volume_db = -8.0
 pitch_scale = 0.94
 bus = "SFX"
 
+[node name="Special" type="Node2D" parent="."]
+script = ExtResource( 145 )
+__meta__ = {
+"_editor_description_": ""
+}
+conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "Dash", "AirDash", "Dodge", "Shot", "AltFire" ]
+actions = [ "Event" ]
+
+[node name="Genmuzero" type="Node2D" parent="Special"]
+script = ExtResource( 146 )
+__meta__ = {
+"_editor_description_": ""
+}
+shots = [ ExtResource( 142 ) ]
+max_shots_alive = 1
+max_charged_shots_alive = 1
+max_ammo = 60.0
+ammo_per_shot = 60.0
+weapon = ExtResource( 143 )
+
+[node name="break_vfx" type="AnimatedSprite" parent="Special/Genmuzero"]
+visible = false
+z_index = 25
+frames = ExtResource( 144 )
+playing = true
+
+[node name="Genmuzero" type="Node2D" parent="."]
+script = ExtResource( 147 )
+conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "Forced", "Enkoujin" ]
+actions = [ "select_special" ]
+animation = "genmuzero"
+horizontal_velocity = 0.0
+jump_velocity = 0.0
+
+[node name="genmu_ready" type="AudioStreamPlayer" parent="Genmuzero"]
+pause_mode = 1
+stream = ExtResource( 156 )
+volume_db = -12.0
+bus = "SFX"
+
+[node name="genmu_wave" type="AudioStreamPlayer" parent="Genmuzero"]
+pause_mode = 1
+stream = ExtResource( 148 )
+volume_db = -12.0
+bus = "SFX"
+
+[node name="check_mate" type="AudioStreamPlayer" parent="Genmuzero"]
+pause_mode = 1
+stream = ExtResource( 157 )
+volume_db = -5.0
+bus = "SFX"
+
+[node name="Desperation" type="Node2D" parent="."]
+script = ExtResource( 159 )
+active = false
+conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "Forced", "Enkoujin", "Enkoukyaku" ]
+actions = [ "select_special" ]
+horizontal_velocity = 0.0
+jump_velocity = 0.0
+
+[node name="victory" type="AudioStreamPlayer2D" parent="Desperation"]
+pause_mode = 2
+stream = ExtResource( 68 )
+volume_db = -80.0
+max_distance = 600.0
+bus = "SFX"
+
+[node name="awakenaura" type="Node2D" parent="."]
+script = ExtResource( 140 )
+
+[node name="deflect" type="AudioStreamPlayer2D" parent="awakenaura"]
+stream = ExtResource( 141 )
+volume_db = -80.0
+max_distance = 1200.0
+attenuation = 1e-05
+bus = "SFX"
+
+[node name="ridenawakenaura" type="AnimatedSprite" parent="awakenaura"]
+pause_mode = 1
+visible = false
+material = ExtResource( 43 )
+position = Vector2( -2, -14 )
+scale = Vector2( 1.1, 1.1 )
+z_index = -2
+frames = ExtResource( 56 )
+animation = "awakenaura"
+playing = true
+
+[node name="Charge" type="Node2D" parent="."]
+script = ExtResource( 161 )
+conflicting_moves = [ "Death", "WeaponStasis", "Nothing" ]
+actions = [ "fire" ]
+sound = ExtResource( 164 )
+super_charged_sound = ExtResource( 163 )
+color = Color( 1, 0.392157, 0.392157, 1 )
+super_color = Color( 1, 0, 0, 1 )
+minimum_charge_time = 1.0
+level_3_charge = 3.0
+level_4_charge = 4.0
+
+[node name="audioStreamPlayer" type="AudioStreamPlayer" parent="Charge"]
+pause_mode = 2
+volume_db = -4.0
+bus = "SFX"
+
+[node name="audioStreamPlayer2" type="AudioStreamPlayer" parent="Charge"]
+pause_mode = 2
+volume_db = 4.0
+bus = "SFX"
+
+[node name="SaberCharge" type="Node2D" parent="."]
+script = ExtResource( 162 )
+conflicting_moves = [ "WallSlide", "SaberWall", "AirDash" ]
+actions = [ "Event" ]
+animation = "charge_saber_jump"
+
+[node name="saber" type="AudioStreamPlayer" parent="SaberCharge"]
+pause_mode = 1
+stream = ExtResource( 103 )
+volume_db = -8.0
+bus = "SFX"
+
+[node name="dive" type="AudioStreamPlayer" parent="SaberCharge"]
+pause_mode = 1
+stream = ExtResource( 165 )
+volume_db = -8.0
+pitch_scale = 1.1
+bus = "SFX"
+
+[node name="land" type="AudioStreamPlayer" parent="SaberCharge"]
+pause_mode = 1
+stream = ExtResource( 155 )
+volume_db = -8.0
+pitch_scale = 1.1
+bus = "SFX"
+
+[node name="break" type="AudioStreamPlayer" parent="SaberCharge"]
+pause_mode = 1
+stream = ExtResource( 149 )
+volume_db = -8.0
+pitch_scale = 1.1
+bus = "SFX"
+
 [node name="SaberCombo" type="Node2D" parent="."]
 script = ExtResource( 22 )
-conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "Dash", "SaberJump", "SaberDash" ]
+conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "Dash", "SaberJump", "SaberDash", "SaberCharge" ]
 actions = [ "fire" ]
 animation = "saber_1"
 
@@ -719,9 +996,27 @@ volume_db = -8.0
 pitch_scale = 0.94
 bus = "SFX"
 
+[node name="zbuster" type="AudioStreamPlayer" parent="SaberCombo"]
+pause_mode = 1
+stream = ExtResource( 133 )
+volume_db = -8.0
+bus = "SFX"
+
+[node name="swordwave" type="AudioStreamPlayer" parent="SaberCombo"]
+pause_mode = 1
+stream = ExtResource( 132 )
+volume_db = -8.0
+bus = "SFX"
+
+[node name="shingetsurin" type="AudioStreamPlayer" parent="SaberCombo"]
+pause_mode = 1
+stream = ExtResource( 152 )
+volume_db = -8.0
+bus = "SFX"
+
 [node name="SaberDash" type="Node2D" parent="."]
 script = ExtResource( 25 )
-conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "SaberJump", "Shot" ]
+conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "SaberJump", "Shot", "SaberCharge" ]
 actions = [ "fire" ]
 animation = "saber_dash"
 horizontal_velocity = 250.0
@@ -735,7 +1030,7 @@ bus = "SFX"
 
 [node name="SaberJump" type="Node2D" parent="."]
 script = ExtResource( 10 )
-conflicting_moves = [ "WallSlide", "SaberWall", "AirDash" ]
+conflicting_moves = [ "WallSlide", "SaberWall", "AirDash", "SaberCharge" ]
 actions = [ "fire" ]
 animation = "saber_jump"
 
@@ -746,9 +1041,15 @@ volume_db = -8.0
 pitch_scale = 0.94
 bus = "SFX"
 
+[node name="swordwave" type="AudioStreamPlayer" parent="SaberJump"]
+pause_mode = 1
+stream = ExtResource( 132 )
+volume_db = -8.0
+bus = "SFX"
+
 [node name="SaberWall" type="Node2D" parent="."]
 script = ExtResource( 21 )
-conflicting_moves = [ "WallJump", "DashWallJump", "Walk", "SaberJump" ]
+conflicting_moves = [ "WallJump", "DashWallJump", "Walk", "SaberJump", "SaberCharge" ]
 actions = [ "fire" ]
 animation = "saber_slide"
 horizontal_velocity = 0.0
@@ -780,6 +1081,41 @@ position = Vector2( 0, -3 )
 enabled = true
 cast_to = Vector2( 0, 220 )
 
+[node name="crash_beam" type="AnimatedSprite" parent="Tenshouha"]
+visible = false
+modulate = Color( 1, 0, 0, 0.392157 )
+material = ExtResource( 43 )
+position = Vector2( -32, 0 )
+scale = Vector2( 0.5, 28 )
+z_index = 5
+frames = ExtResource( 56 )
+animation = "omega_crash_beam_loop"
+playing = true
+flip_h = true
+
+[node name="crash_beam2" type="AnimatedSprite" parent="Tenshouha"]
+visible = false
+modulate = Color( 1, 0, 0, 0.392157 )
+material = ExtResource( 43 )
+scale = Vector2( 0.5, 28 )
+z_index = 5
+frames = ExtResource( 56 )
+animation = "omega_crash_beam_loop"
+playing = true
+flip_h = true
+
+[node name="crash_beam3" type="AnimatedSprite" parent="Tenshouha"]
+visible = false
+modulate = Color( 1, 0, 0, 0.392157 )
+material = ExtResource( 43 )
+position = Vector2( 32, 0 )
+scale = Vector2( 0.5, 28 )
+z_index = 5
+frames = ExtResource( 56 )
+animation = "omega_crash_beam_loop"
+playing = true
+flip_h = true
+
 [node name="Juuhazan" type="Node2D" parent="."]
 script = ExtResource( 95 )
 conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "Dash", "SaberJump", "SaberDash" ]
@@ -791,6 +1127,12 @@ pause_mode = 1
 stream = ExtResource( 111 )
 volume_db = -8.0
 pitch_scale = 0.94
+bus = "SFX"
+
+[node name="zbuster" type="AudioStreamPlayer" parent="Juuhazan"]
+pause_mode = 1
+stream = ExtResource( 133 )
+volume_db = -8.0
 bus = "SFX"
 
 [node name="Rasetsusen" type="Node2D" parent="."]
@@ -880,6 +1222,73 @@ volume_db = -8.0
 pitch_scale = 0.94
 bus = "SFX"
 
+[node name="dive" type="AudioStreamPlayer2D" parent="Enkoujin"]
+stream = ExtResource( 155 )
+pitch_scale = 1.1
+max_distance = 600.0
+bus = "SFX"
+script = ExtResource( 154 )
+
+[node name="Rekuhouha" type="Node2D" parent="."]
+script = ExtResource( 151 )
+conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride" ]
+actions = [ "select_special" ]
+animation = "rekuhouha"
+
+[node name="sfx" type="AudioStreamPlayer" parent="Rekuhouha"]
+pause_mode = 1
+stream = ExtResource( 115 )
+volume_db = -8.0
+pitch_scale = 0.94
+bus = "SFX"
+
+[node name="ground_check" type="RayCast2D" parent="Rekuhouha"]
+position = Vector2( 0, -3 )
+enabled = true
+cast_to = Vector2( 0, 220 )
+
+[node name="RekohouhaShot" type="AudioStreamPlayer" parent="Rekuhouha"]
+pause_mode = 1
+stream = ExtResource( 150 )
+volume_db = -8.0
+bus = "SFX"
+
+[node name="RekohouhaGround" type="AudioStreamPlayer" parent="Rekuhouha"]
+pause_mode = 1
+stream = ExtResource( 149 )
+volume_db = -8.0
+pitch_scale = 0.94
+bus = "SFX"
+
+[node name="Ryuenjin" type="Node2D" parent="."]
+script = ExtResource( 134 )
+conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "SaberJump", "WallSlide", "Shot" ]
+actions = [ "fire" ]
+animation = "ryuenjin"
+horizontal_velocity = 100.0
+jump_velocity = 400.0
+
+[node name="saber" type="AudioStreamPlayer" parent="Ryuenjin"]
+pause_mode = 1
+stream = ExtResource( 103 )
+volume_db = -8.0
+pitch_scale = 0.95
+bus = "SFX"
+
+[node name="Enkoujin_Extra" type="Node2D" parent="."]
+script = ExtResource( 153 )
+conflicting_moves = [ "WallSlide", "SaberWall", "AirDash" ]
+actions = [ "fire" ]
+animation = "saber_shot_fast1"
+horizontal_velocity = 100.0
+
+[node name="saber" type="AudioStreamPlayer" parent="Enkoujin_Extra"]
+pause_mode = 1
+stream = ExtResource( 103 )
+volume_db = -8.0
+pitch_scale = 0.95
+bus = "SFX"
+
 [node name="DashWallJump" type="Node2D" parent="."]
 script = ExtResource( 20 )
 conflicting_moves = [ "DashWallJump", "WallJump", "AirDash", "SaberWall" ]
@@ -916,7 +1325,7 @@ bus = "SFX"
 
 [node name="WallSlide" type="Node2D" parent="."]
 script = ExtResource( 11 )
-conflicting_moves = [ "WallJump", "DashWallJump", "Walk" ]
+conflicting_moves = [ "WallJump", "DashWallJump", "Walk", "Genmuzero" ]
 actions = [ "move_right", "move_left" ]
 animation = "slide"
 sound = ExtResource( 13 )
@@ -952,24 +1361,6 @@ shot_pos_adjust = Vector2( 0, 0 )
 pause_mode = 2
 bus = "SFX"
 
-[node name="AirJump" type="Node2D" parent="."]
-script = ExtResource( 45 )
-__meta__ = {
-"_editor_description_": ""
-}
-conflicting_moves = [ "WallSlide", "AirDash" ]
-actions = [ "jump" ]
-animation = "double_jump"
-sound = ExtResource( 3 )
-jump_velocity = 190.0
-shot_pos_adjust = Vector2( 4, 0 )
-leeway_time = 0.0
-fullspeed_proportion = 0.3
-
-[node name="audioStreamPlayer" type="AudioStreamPlayer" parent="AirJump"]
-pause_mode = 2
-bus = "SFX"
-
 [node name="Dash" type="Node2D" parent="."]
 script = ExtResource( 5 )
 conflicting_moves = [ "Jump", "DashJump", "WallJump", "WallSlide", "AirDash" ]
@@ -1001,13 +1392,12 @@ undo_on_rotation_end = false
 
 [node name="duringImage" type="AnimatedSprite" parent="Dash"]
 visible = false
-modulate = Color( 0, 0.65098, 0.776471, 0.552941 )
+modulate = Color( 0.776471, 0, 0, 0.552941 )
 material = ExtResource( 63 )
-position = Vector2( 0, -4 )
+position = Vector2( 0, -6 )
 z_index = 4
 frames = ExtResource( 1 )
 animation = "dash"
-frame = 15
 playing = true
 
 [node name="particles2D" type="Particles2D" parent="Dash"]
@@ -1059,13 +1449,12 @@ undo_on_rotation_end = false
 
 [node name="duringImage" type="AnimatedSprite" parent="AirDash"]
 visible = false
-modulate = Color( 0, 0.65098, 0.776471, 0.552941 )
+modulate = Color( 0.776471, 0, 0, 0.552941 )
 material = ExtResource( 63 )
-position = Vector2( 0, -4 )
+position = Vector2( 0, -6 )
 z_index = 4
 frames = ExtResource( 1 )
 animation = "dash"
-frame = 15
 playing = true
 
 [node name="particles2D" type="Particles2D" parent="AirDash"]
@@ -1091,6 +1480,24 @@ margin_top = -32.0
 margin_right = 32.0
 margin_bottom = -18.0
 text = "3w"
+
+[node name="AirJump" type="Node2D" parent="."]
+script = ExtResource( 45 )
+__meta__ = {
+"_editor_description_": ""
+}
+conflicting_moves = [ "WallSlide", "AirDash" ]
+actions = [ "jump" ]
+animation = "double_jump"
+sound = ExtResource( 3 )
+jump_velocity = 190.0
+shot_pos_adjust = Vector2( 4, 0 )
+leeway_time = 0.0
+fullspeed_proportion = 0.3
+
+[node name="audioStreamPlayer" type="AudioStreamPlayer" parent="AirJump"]
+pause_mode = 2
+bus = "SFX"
 
 [node name="Walk" type="Node2D" parent="."]
 script = ExtResource( 7 )
@@ -1122,7 +1529,7 @@ beam_speed = 640.0
 
 [node name="audioStreamPlayer" type="AudioStreamPlayer2D" parent="Finish"]
 stream = ExtResource( 68 )
-volume_db = -8.0
+volume_db = -80.0
 max_distance = 600.0
 bus = "SFX"
 
@@ -1174,6 +1581,13 @@ bus = "SFX"
 
 [node name="CharSwitchRevive" type="Node" parent="."]
 script = ExtResource( 129 )
+
+[node name="Axl_Buff_Other_Character" parent="." instance=ExtResource( 158 )]
+player_zero = true
+player_zero_beta = true
+initial_color = Color( 1, 1, 1, 1 )
+final_color = Color( 1, 1, 1, 1 )
+zero_material_color = true
 
 [connection signal="at_max_hp" from="." to="Damage" method="set_death_protection"]
 [connection signal="zero_health" from="." to="animatedSprite/afterImages" method="deactivate"]

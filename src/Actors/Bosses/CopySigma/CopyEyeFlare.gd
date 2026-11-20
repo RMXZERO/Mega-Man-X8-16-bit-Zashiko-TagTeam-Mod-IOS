@@ -1,4 +1,6 @@
 extends AttackAbility
+
+export var unuse_copy_dash: bool = true
 onready var stun: Node2D = $"../BossStun"
 onready var eye: Node2D = $"../animatedSprite/Eye"
 onready var eye2: Node2D = $"../animatedSprite/Eye2"
@@ -16,7 +18,8 @@ func _Setup():
 	set_game_modes()
 	character.emit_signal("damage_reduction", desperation_damage_reduction)
 	turn_and_face_player()
-	copy_dash.deactivate()
+	if unuse_copy_dash:
+		copy_dash.deactivate()
 	stun.deactivate()
 
 func _Update(_delta: float) -> void :

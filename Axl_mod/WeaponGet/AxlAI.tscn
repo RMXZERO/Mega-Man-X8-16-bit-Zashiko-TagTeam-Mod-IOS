@@ -3,9 +3,9 @@
 [ext_resource path="res://src/Actors/Player/x_sprites/x.res" type="SpriteFrames" id=1]
 [ext_resource path="res://Axl_mod/WeaponGet/AxlAI.gd" type="Script" id=2]
 [ext_resource path="res://src/Sounds/JUMP.wav" type="AudioStream" id=3]
-[ext_resource path="res://Axl_mod/WeaponGet/AIJump.gd" type="Script" id=4]
-[ext_resource path="res://Axl_mod/WeaponGet/AIDash.gd" type="Script" id=5]
-[ext_resource path="res://Axl_mod/WeaponGet/AIAirDash.gd" type="Script" id=6]
+[ext_resource path="res://Axl_mod/WeaponGet/AIScript/AIJump.gd" type="Script" id=4]
+[ext_resource path="res://Axl_mod/WeaponGet/AIScript/AIDash.gd" type="Script" id=5]
+[ext_resource path="res://Axl_mod/WeaponGet/AIScript/AIAirDash.gd" type="Script" id=6]
 [ext_resource path="res://src/Levels/skip_intro.gd" type="Script" id=7]
 [ext_resource path="res://Axl_mod/Player/Scripts/WeaponChangerAxl.gd" type="Script" id=8]
 [ext_resource path="res://Axl_mod/Player/Scripts/WalljumpAxl.gd" type="Script" id=9]
@@ -20,9 +20,9 @@
 [ext_resource path="res://src/Actors/Player/Modules/Fall.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Axl_mod/Player/Scripts/FallAxl.gd" type="Script" id=19]
 [ext_resource path="res://Axl_mod/Player/Scripts/DashWallJumpAxl.gd" type="Script" id=20]
-[ext_resource path="res://Axl_mod/Player/Projectiles/BulletAxl.tscn" type="PackedScene" id=21]
-[ext_resource path="res://Axl_mod/WeaponGet/AIShot.gd" type="Script" id=22]
-[ext_resource path="res://Axl_mod/WeaponGet/AIShotDirection.gd" type="Script" id=23]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BulletAxlTrack.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Axl_mod/WeaponGet/AIScript/AIShot.gd" type="Script" id=22]
+[ext_resource path="res://Axl_mod/WeaponGet/AIScript/AIShotDirection.gd" type="Script" id=23]
 [ext_resource path="res://Axl_mod/Player/Scripts/AltFireAxl.gd" type="Script" id=24]
 [ext_resource path="res://Axl_mod/Player/Projectiles/BossWeapons/BlastLauncher/BlastLauncher.tres" type="Resource" id=25]
 [ext_resource path="res://src/Actors/Player/x_collision_box.tres" type="Shape2D" id=26]
@@ -46,7 +46,7 @@
 [ext_resource path="res://Axl_mod/Player/Scripts/HoverAxl.gd" type="Script" id=45]
 [ext_resource path="res://Axl_mod/Player/Scripts/offset_manager.gd" type="Script" id=46]
 [ext_resource path="res://Axl_mod/Player/Axl_Material_Shader.tres" type="Material" id=47]
-[ext_resource path="res://Axl_mod/WeaponGet/AIWalk.gd" type="Script" id=48]
+[ext_resource path="res://Axl_mod/WeaponGet/AIScript/AIWalk.gd" type="Script" id=48]
 [ext_resource path="res://Axl_mod/Player/Normal Pistol.tscn" type="PackedScene" id=49]
 [ext_resource path="res://Axl_mod/Player/Scripts/SubtankManagerAxl.gd" type="Script" id=50]
 [ext_resource path="res://Axl_mod/Player/Effects/hover_effect.tres" type="SpriteFrames" id=51]
@@ -261,7 +261,6 @@ position = Vector2( 0, -4 )
 z_index = 5
 frames = ExtResource( 120 )
 animation = "idle"
-frame = 8
 playing = true
 
 [node name="visibilityNotifier2D" type="VisibilityNotifier2D" parent="animatedSprite"]
@@ -559,7 +558,6 @@ position = Vector2( 0, -8 )
 z_index = 5
 frames = SubResource( 44 )
 animation = "sparks"
-frame = 15
 playing = true
 
 [node name="back" type="AnimatedSprite" parent="Damage"]
@@ -567,7 +565,6 @@ visible = false
 position = Vector2( 0, -8 )
 frames = SubResource( 44 )
 animation = "back"
-frame = 6
 playing = true
 
 [node name="Shot" type="Node2D" parent="."]
@@ -584,13 +581,9 @@ shots = [ ExtResource( 21 ) ]
 max_charged_shots_alive = 16
 max_ammo = 0.0
 shoot_delay = 0.1
+sprite_delay = 4.0
 bullet_speed = 450.0
-MainColor1 = Color( 0.317647, 0.407843, 0.54902, 1 )
-MainColor2 = Color( 0.25098, 0.286275, 0.392157, 1 )
-MainColor3 = Color( 0.176471, 0.2, 0.266667, 1 )
-MainColor4 = Color( 0.690196, 0.690196, 0.690196, 1 )
-MainColor5 = Color( 0.501961, 0.470588, 0.501961, 1 )
-MainColor6 = Color( 0.376471, 0.34902, 0.376471, 1 )
+projectile_damage_to_weakness = 3.0
 _sprites_weapon = ExtResource( 120 )
 _sprites_weapon_B = ExtResource( 92 )
 
@@ -600,12 +593,9 @@ active = false
 shots = [ ExtResource( 74 ) ]
 shoot_delay = 0.05
 bullet_speed = 250.0
-MainColor1 = Color( 0.317647, 0.407843, 0.54902, 1 )
-MainColor2 = Color( 0.25098, 0.286275, 0.392157, 1 )
-MainColor3 = Color( 0.176471, 0.2, 0.266667, 1 )
-MainColor4 = Color( 0.690196, 0.690196, 0.690196, 1 )
-MainColor5 = Color( 0.501961, 0.470588, 0.501961, 1 )
-MainColor6 = Color( 0.376471, 0.34902, 0.376471, 1 )
+projectile_damage = 0.5
+projectile_damage_to_bosses = 1.5
+projectile_damage_to_weakness = 15.0
 weapon = ExtResource( 111 )
 _sprites_weapon = ExtResource( 12 )
 _sprites_weapon_B = ExtResource( 12 )
@@ -618,12 +608,9 @@ max_shots_alive = 1
 max_charged_shots_alive = 1
 shoot_delay = 0.3
 bullet_speed = 350.0
-MainColor1 = Color( 0.317647, 0.407843, 0.54902, 1 )
-MainColor2 = Color( 0.25098, 0.286275, 0.392157, 1 )
-MainColor3 = Color( 0.176471, 0.2, 0.266667, 1 )
-MainColor4 = Color( 0.690196, 0.690196, 0.690196, 1 )
-MainColor5 = Color( 0.501961, 0.470588, 0.501961, 1 )
-MainColor6 = Color( 0.376471, 0.34902, 0.376471, 1 )
+projectile_damage = 7.5
+projectile_damage_to_bosses = 8.0
+projectile_damage_to_weakness = 15.0
 weapon = ExtResource( 112 )
 _sprites_weapon = ExtResource( 71 )
 _sprites_weapon_B = ExtResource( 79 )
@@ -632,13 +619,11 @@ _sprites_weapon_B = ExtResource( 79 )
 script = ExtResource( 103 )
 active = false
 shots = [ ExtResource( 94 ) ]
-shoot_delay = 0.3
-MainColor1 = Color( 0.317647, 0.407843, 0.54902, 1 )
-MainColor2 = Color( 0.25098, 0.286275, 0.392157, 1 )
-MainColor3 = Color( 0.176471, 0.2, 0.266667, 1 )
-MainColor4 = Color( 0.690196, 0.690196, 0.690196, 1 )
-MainColor5 = Color( 0.501961, 0.470588, 0.501961, 1 )
-MainColor6 = Color( 0.376471, 0.34902, 0.376471, 1 )
+shoot_delay = 0.25
+bullet_speed = 350.0
+projectile_damage = 2.0
+projectile_damage_to_bosses = 1.5
+projectile_damage_to_weakness = 12.5
 weapon = ExtResource( 93 )
 _sprites_weapon = ExtResource( 99 )
 _sprites_weapon_B = ExtResource( 99 )
@@ -649,12 +634,8 @@ active = false
 shots = [ ExtResource( 76 ) ]
 shoot_delay = 0.32
 bullet_speed = 50.0
-MainColor1 = Color( 0.317647, 0.407843, 0.54902, 1 )
-MainColor2 = Color( 0.25098, 0.286275, 0.392157, 1 )
-MainColor3 = Color( 0.176471, 0.2, 0.266667, 1 )
-MainColor4 = Color( 0.690196, 0.690196, 0.690196, 1 )
-MainColor5 = Color( 0.501961, 0.470588, 0.501961, 1 )
-MainColor6 = Color( 0.376471, 0.34902, 0.376471, 1 )
+projectile_damage = 2.5
+projectile_damage_to_weakness = 15.0
 weapon = ExtResource( 73 )
 _sprites_weapon = ExtResource( 118 )
 _sprites_weapon_B = ExtResource( 118 )
@@ -665,12 +646,11 @@ active = false
 shots = [ ExtResource( 88 ) ]
 max_shots_alive = 3
 max_charged_shots_alive = 3
-MainColor1 = Color( 0.317647, 0.407843, 0.54902, 1 )
-MainColor2 = Color( 0.25098, 0.286275, 0.392157, 1 )
-MainColor3 = Color( 0.176471, 0.2, 0.266667, 1 )
-MainColor4 = Color( 0.690196, 0.690196, 0.690196, 1 )
-MainColor5 = Color( 0.501961, 0.470588, 0.501961, 1 )
-MainColor6 = Color( 0.376471, 0.34902, 0.376471, 1 )
+shoot_delay = 0.4
+sprite_delay = 7.5
+projectile_damage = 4.0
+projectile_damage_to_bosses = 2.5
+projectile_damage_to_weakness = 15.0
 weapon = ExtResource( 25 )
 _sprites_weapon = ExtResource( 119 )
 _sprites_weapon_B = ExtResource( 90 )
@@ -679,16 +659,12 @@ _sprites_weapon_B = ExtResource( 90 )
 script = ExtResource( 103 )
 active = false
 shots = [ ExtResource( 61 ) ]
-max_shots_alive = 3
-max_charged_shots_alive = 3
+max_shots_alive = 8
+max_charged_shots_alive = 8
 shoot_delay = 0.2
 bullet_speed = 420.0
-MainColor1 = Color( 0.317647, 0.407843, 0.54902, 1 )
-MainColor2 = Color( 0.25098, 0.286275, 0.392157, 1 )
-MainColor3 = Color( 0.176471, 0.2, 0.266667, 1 )
-MainColor4 = Color( 0.690196, 0.690196, 0.690196, 1 )
-MainColor5 = Color( 0.501961, 0.470588, 0.501961, 1 )
-MainColor6 = Color( 0.376471, 0.34902, 0.376471, 1 )
+projectile_damage = 2.0
+projectile_damage_to_weakness = 15.0
 weapon = ExtResource( 27 )
 _sprites_weapon = ExtResource( 116 )
 _sprites_weapon_B = ExtResource( 117 )
@@ -699,12 +675,8 @@ active = false
 shots = [ ExtResource( 78 ) ]
 shoot_delay = 0.05
 bullet_speed = 400.0
-MainColor1 = Color( 0.317647, 0.407843, 0.54902, 1 )
-MainColor2 = Color( 0.25098, 0.286275, 0.392157, 1 )
-MainColor3 = Color( 0.176471, 0.2, 0.266667, 1 )
-MainColor4 = Color( 0.690196, 0.690196, 0.690196, 1 )
-MainColor5 = Color( 0.501961, 0.470588, 0.501961, 1 )
-MainColor6 = Color( 0.376471, 0.34902, 0.376471, 1 )
+projectile_damage = 0.25
+projectile_damage_to_weakness = 15.0
 weapon = ExtResource( 77 )
 _sprites_weapon = ExtResource( 114 )
 _sprites_weapon_B = ExtResource( 115 )
@@ -715,12 +687,8 @@ active = false
 shots = [ ExtResource( 89 ) ]
 shoot_delay = 0.05
 bullet_speed = 200.0
-MainColor1 = Color( 0.317647, 0.407843, 0.54902, 1 )
-MainColor2 = Color( 0.25098, 0.286275, 0.392157, 1 )
-MainColor3 = Color( 0.176471, 0.2, 0.266667, 1 )
-MainColor4 = Color( 0.690196, 0.690196, 0.690196, 1 )
-MainColor5 = Color( 0.501961, 0.470588, 0.501961, 1 )
-MainColor6 = Color( 0.376471, 0.34902, 0.376471, 1 )
+projectile_damage = 1.5
+projectile_damage_to_weakness = 15.0
 weapon = ExtResource( 60 )
 _sprites_weapon = ExtResource( 56 )
 _sprites_weapon_B = ExtResource( 56 )
@@ -761,15 +729,15 @@ shots = [ ExtResource( 57 ) ]
 max_shots_alive = 1
 max_charged_shots_alive = 1
 max_ammo = 0.0
-shoot_delay = 1.0
+shoot_delay = 0.3
 sprite_delay = 5.0
 bullet_speed = 300.0
-MainColor1 = Color( 0, 0, 0, 1 )
-MainColor2 = Color( 0, 0, 0, 1 )
-MainColor3 = Color( 0, 0, 0, 1 )
-MainColor4 = Color( 0, 0, 0, 1 )
-MainColor5 = Color( 0, 0, 0, 1 )
-MainColor6 = Color( 0, 0, 0, 1 )
+projectile_damage = 1.0
+projectile_damage_to_bosses = 1.0
+projectile_damage_to_weakness = 1.0
+extra_damage = 1.0
+extra_delay = 1.0
+extra_speed = 1.0
 weapon = null
 _sprites_weapon = ExtResource( 120 )
 _sprites_weapon_B = ExtResource( 92 )
@@ -778,14 +746,13 @@ _sprites_weapon_B = ExtResource( 92 )
 script = ExtResource( 103 )
 active = false
 shots = [ ExtResource( 74 ) ]
-shoot_delay = 0.05
-bullet_speed = 250.0
-MainColor1 = Color( 0.317647, 0.407843, 0.54902, 1 )
-MainColor2 = Color( 0.25098, 0.286275, 0.392157, 1 )
-MainColor3 = Color( 0.176471, 0.2, 0.266667, 1 )
-MainColor4 = Color( 0.690196, 0.690196, 0.690196, 1 )
-MainColor5 = Color( 0.501961, 0.470588, 0.501961, 1 )
-MainColor6 = Color( 0.376471, 0.34902, 0.376471, 1 )
+max_shots_alive = 9
+ammo_per_shot = 1.0
+shoot_delay = 0.25
+bullet_speed = 400.0
+projectile_damage = 5.0
+projectile_damage_to_bosses = 5.0
+projectile_damage_to_weakness = 25.0
 weapon = ExtResource( 111 )
 _sprites_weapon = ExtResource( 12 )
 _sprites_weapon_B = ExtResource( 12 )
@@ -796,14 +763,12 @@ active = false
 shots = [ ExtResource( 113 ) ]
 max_shots_alive = 1
 max_charged_shots_alive = 1
+ammo_per_shot = 4.0
 shoot_delay = 0.3
 bullet_speed = 350.0
-MainColor1 = Color( 0.317647, 0.407843, 0.54902, 1 )
-MainColor2 = Color( 0.25098, 0.286275, 0.392157, 1 )
-MainColor3 = Color( 0.176471, 0.2, 0.266667, 1 )
-MainColor4 = Color( 0.690196, 0.690196, 0.690196, 1 )
-MainColor5 = Color( 0.501961, 0.470588, 0.501961, 1 )
-MainColor6 = Color( 0.376471, 0.34902, 0.376471, 1 )
+projectile_damage = 20.0
+projectile_damage_to_bosses = 20.0
+projectile_damage_to_weakness = 32.0
 weapon = ExtResource( 112 )
 _sprites_weapon = ExtResource( 71 )
 _sprites_weapon_B = ExtResource( 79 )
@@ -812,13 +777,13 @@ _sprites_weapon_B = ExtResource( 79 )
 script = ExtResource( 103 )
 active = false
 shots = [ ExtResource( 94 ) ]
-shoot_delay = 0.3
-MainColor1 = Color( 0.317647, 0.407843, 0.54902, 1 )
-MainColor2 = Color( 0.25098, 0.286275, 0.392157, 1 )
-MainColor3 = Color( 0.176471, 0.2, 0.266667, 1 )
-MainColor4 = Color( 0.690196, 0.690196, 0.690196, 1 )
-MainColor5 = Color( 0.501961, 0.470588, 0.501961, 1 )
-MainColor6 = Color( 0.376471, 0.34902, 0.376471, 1 )
+max_shots_alive = 5
+ammo_per_shot = 1.0
+shoot_delay = 0.25
+bullet_speed = 350.0
+projectile_damage = 5.0
+projectile_damage_to_bosses = 5.0
+projectile_damage_to_weakness = 25.0
 weapon = ExtResource( 93 )
 _sprites_weapon = ExtResource( 99 )
 _sprites_weapon_B = ExtResource( 99 )
@@ -827,14 +792,12 @@ _sprites_weapon_B = ExtResource( 99 )
 script = ExtResource( 103 )
 active = false
 shots = [ ExtResource( 76 ) ]
+ammo_per_shot = 1.0
 shoot_delay = 0.32
 bullet_speed = 50.0
-MainColor1 = Color( 0.317647, 0.407843, 0.54902, 1 )
-MainColor2 = Color( 0.25098, 0.286275, 0.392157, 1 )
-MainColor3 = Color( 0.176471, 0.2, 0.266667, 1 )
-MainColor4 = Color( 0.690196, 0.690196, 0.690196, 1 )
-MainColor5 = Color( 0.501961, 0.470588, 0.501961, 1 )
-MainColor6 = Color( 0.376471, 0.34902, 0.376471, 1 )
+projectile_damage = 7.5
+projectile_damage_to_bosses = 5.0
+projectile_damage_to_weakness = 25.0
 weapon = ExtResource( 73 )
 _sprites_weapon = ExtResource( 118 )
 _sprites_weapon_B = ExtResource( 118 )
@@ -843,14 +806,14 @@ _sprites_weapon_B = ExtResource( 118 )
 script = ExtResource( 103 )
 active = false
 shots = [ ExtResource( 88 ) ]
-max_shots_alive = 3
-max_charged_shots_alive = 3
-MainColor1 = Color( 0.317647, 0.407843, 0.54902, 1 )
-MainColor2 = Color( 0.25098, 0.286275, 0.392157, 1 )
-MainColor3 = Color( 0.176471, 0.2, 0.266667, 1 )
-MainColor4 = Color( 0.690196, 0.690196, 0.690196, 1 )
-MainColor5 = Color( 0.501961, 0.470588, 0.501961, 1 )
-MainColor6 = Color( 0.376471, 0.34902, 0.376471, 1 )
+max_shots_alive = 9
+max_charged_shots_alive = 9
+ammo_per_shot = 2.0
+shoot_delay = 0.5
+bullet_speed = 540.0
+projectile_damage = 8.0
+projectile_damage_to_bosses = 5.0
+projectile_damage_to_weakness = 25.0
 weapon = ExtResource( 25 )
 _sprites_weapon = ExtResource( 119 )
 _sprites_weapon_B = ExtResource( 90 )
@@ -861,14 +824,12 @@ active = false
 shots = [ ExtResource( 61 ) ]
 max_shots_alive = 3
 max_charged_shots_alive = 3
+ammo_per_shot = 1.0
 shoot_delay = 0.2
-bullet_speed = 420.0
-MainColor1 = Color( 0.317647, 0.407843, 0.54902, 1 )
-MainColor2 = Color( 0.25098, 0.286275, 0.392157, 1 )
-MainColor3 = Color( 0.176471, 0.2, 0.266667, 1 )
-MainColor4 = Color( 0.690196, 0.690196, 0.690196, 1 )
-MainColor5 = Color( 0.501961, 0.470588, 0.501961, 1 )
-MainColor6 = Color( 0.376471, 0.34902, 0.376471, 1 )
+bullet_speed = 170.0
+projectile_damage = 5.0
+projectile_damage_to_bosses = 5.0
+projectile_damage_to_weakness = 25.0
 weapon = ExtResource( 27 )
 _sprites_weapon = ExtResource( 116 )
 _sprites_weapon_B = ExtResource( 117 )
@@ -877,15 +838,13 @@ _sprites_weapon_B = ExtResource( 117 )
 script = ExtResource( 103 )
 active = false
 shots = [ ExtResource( 78 ) ]
-shoot_delay = 0.05
+ammo_per_shot = 1.0
+shoot_delay = 0.5
 sprite_delay = 2.0
 bullet_speed = 400.0
-MainColor1 = Color( 0.317647, 0.407843, 0.54902, 1 )
-MainColor2 = Color( 0.25098, 0.286275, 0.392157, 1 )
-MainColor3 = Color( 0.176471, 0.2, 0.266667, 1 )
-MainColor4 = Color( 0.690196, 0.690196, 0.690196, 1 )
-MainColor5 = Color( 0.501961, 0.470588, 0.501961, 1 )
-MainColor6 = Color( 0.376471, 0.34902, 0.376471, 1 )
+projectile_damage = 5.0
+projectile_damage_to_bosses = 5.0
+projectile_damage_to_weakness = 25.0
 weapon = ExtResource( 77 )
 _sprites_weapon = ExtResource( 114 )
 _sprites_weapon_B = ExtResource( 115 )
@@ -894,14 +853,14 @@ _sprites_weapon_B = ExtResource( 115 )
 script = ExtResource( 103 )
 active = false
 shots = [ ExtResource( 89 ) ]
-shoot_delay = 0.05
+max_shots_alive = 1
+max_charged_shots_alive = 1
+ammo_per_shot = 2.0
+shoot_delay = 0.3
 bullet_speed = 200.0
-MainColor1 = Color( 0.317647, 0.407843, 0.54902, 1 )
-MainColor2 = Color( 0.25098, 0.286275, 0.392157, 1 )
-MainColor3 = Color( 0.176471, 0.2, 0.266667, 1 )
-MainColor4 = Color( 0.690196, 0.690196, 0.690196, 1 )
-MainColor5 = Color( 0.501961, 0.470588, 0.501961, 1 )
-MainColor6 = Color( 0.376471, 0.34902, 0.376471, 1 )
+projectile_damage = 12.0
+projectile_damage_to_bosses = 12.0
+projectile_damage_to_weakness = 25.0
 weapon = ExtResource( 60 )
 _sprites_weapon = ExtResource( 56 )
 _sprites_weapon_B = ExtResource( 56 )
@@ -936,19 +895,12 @@ max_ammo = 60.0
 ammo_per_shot = 60.0
 sprite_delay = 100.0
 bullet_speed = 0.0
-MainColor1 = Color( 0.317647, 0.407843, 0.54902, 1 )
-MainColor2 = Color( 0.25098, 0.286275, 0.392157, 1 )
-MainColor3 = Color( 0.176471, 0.2, 0.266667, 1 )
-MainColor4 = Color( 0.690196, 0.690196, 0.690196, 1 )
-MainColor5 = Color( 0.501961, 0.470588, 0.501961, 1 )
-MainColor6 = Color( 0.376471, 0.34902, 0.376471, 1 )
 weapon = ExtResource( 102 )
 
 [node name="break_vfx" type="AnimatedSprite" parent="Special/GigaCrash"]
 position = Vector2( -1, 3 )
 z_index = 25
 frames = ExtResource( 101 )
-frame = 9
 playing = true
 
 [node name="DashWallJump" type="Node2D" parent="."]
@@ -1023,7 +975,6 @@ position = Vector2( 0, -4 )
 z_index = 4
 frames = ExtResource( 1 )
 animation = "dash"
-frame = 15
 playing = true
 
 [node name="particles2D" type="Particles2D" parent="AirDash"]
@@ -1144,7 +1095,6 @@ position = Vector2( 0, -4 )
 z_index = 4
 frames = ExtResource( 1 )
 animation = "dash"
-frame = 15
 playing = true
 
 [node name="particles2D" type="Particles2D" parent="Dash"]
@@ -1199,7 +1149,6 @@ position = Vector2( 0, -4 )
 z_index = 4
 frames = ExtResource( 1 )
 animation = "dash"
-frame = 15
 playing = true
 
 [node name="particles2D" type="Particles2D" parent="Dodge"]

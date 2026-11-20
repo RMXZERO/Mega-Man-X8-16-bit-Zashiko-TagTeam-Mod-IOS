@@ -2,7 +2,7 @@ extends EventAbility
 
 export  var first_decay: float = 1.25
 export  var lifesteal_decay: float = 0.5
-export  var minimum_time_between_heals: float = 0.2
+export  var minimum_time_between_heals: float = 0.1
 
 onready var damage_module = get_parent().get_node("Damage")
 onready var heal_sound = get_node("heal_sound")
@@ -85,8 +85,16 @@ func heal(amount: = 1):
 	Log("Healed " + str(amount) + ". Heal up to: " + str(healable_amount))
 
 func heal_all_at_once():
+	if not active:
+		return
 	if executing:
-		heal(healable_amount)
+		if character.name == "X":
+			heal(healable_amount)
+			adjust_healable_amount(character.max_health - character.current_health)
+	else:
+		if character.name == "X":
+			adjust_healable_amount(character.max_health - character.current_health)
+			execute()
 
 func _EndCondition() -> bool:
 	return healable_amount <= 0 or not character.has_health()
@@ -104,7 +112,7 @@ func adjust_healable_amount(adjust: int):
 func remove_healable_amount(adjust: int):
 	if executing:
 		healable_amount -= adjust
-		healable_amount = clamp(healable_amount, 0, 16)
+		healable_amount = clamp(healable_amount, 0, 128)
 		Event.emit_signal("healable_amount", healable_amount, character)
 		Log("Healed through other means. Removed: " + str(adjust))
 		Log("Healable Amount: " + str(healable_amount))

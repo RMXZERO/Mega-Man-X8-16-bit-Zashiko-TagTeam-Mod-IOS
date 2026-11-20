@@ -8,15 +8,16 @@ onready var sprite: AnimatedSprite = $"../animatedSprite"
 onready var tween: TweenController = TweenController.new(self, false)
 onready var space: Node = $"../Space"
 onready var rotating_crystals: Node2D = $"../RotatingCrystals"
-onready var song_remix_loop: AudioStream = preload("res://Remix/Songs/Lumine Battle 1 - Loop.ogg")
 
-
-func _ready() -> void :
-	if Configurations.exists("SongRemix"):
-		if Configurations.get("SongRemix"):
-			song_intro = load("")
-			song_loop = song_remix_loop
-			song_loop.loop = true
+func _ready():
+	var current_scene = get_tree().current_scene
+	var remix = current_scene.get_node_or_null("Remix")
+	if current_scene and remix:
+		if Configurations.exists("SongRemix"):
+			if Configurations.get("SongRemix"):
+				song_intro = remix.no_sound
+				song_loop = remix._lumine1_loop
+				song_loop.loop = true
 
 func connect_start_events() -> void :
 	call_deferred("prepare_for_intro")
@@ -44,6 +45,7 @@ func _Update(delta):
 		
 	elif attack_stage == 3 and timer > 1:
 		play_animation("open")
+		space.define_arena()
 		start_dialog_or_go_to_attack_stage(5)
 		
 	elif attack_stage == 4:

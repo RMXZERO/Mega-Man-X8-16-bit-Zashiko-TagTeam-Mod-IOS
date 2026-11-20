@@ -28,6 +28,7 @@ var hitbox_extra_damage = 1
 var hitbox_extra_damage_boss = 1
 var hitbox_extra_damage_weakness = 1
 var hitbox_extra_break_guard_value = 1
+var hitbox_extra_scale = 1
 var deflectable: bool = false
 var deflectable_type: int = 0
 var only_deflect_weak: bool = false
@@ -105,6 +106,7 @@ func spawn_hitbox(_hitbox_upleft: Vector2, _hitbox_downright: Vector2):
 	current_hitbox.deflectable = deflectable
 	current_hitbox.deflectable_type = deflectable_type
 	current_hitbox.only_deflect_weak = only_deflect_weak
+	current_hitbox.scale *= hitbox_extra_scale
 
 func hitbox_and_position():
 	pass

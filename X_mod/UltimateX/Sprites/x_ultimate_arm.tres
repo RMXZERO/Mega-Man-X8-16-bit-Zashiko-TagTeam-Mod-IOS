@@ -1,72 +1,74 @@
-[gd_resource type="SpriteFrames" load_steps=406 format=2]
+[gd_resource type="SpriteFrames" load_steps=414 format=2]
 
 [ext_resource path="res://X_mod/UltimateX/Sprites/x_ultimate.png" type="Texture" id=1]
 [ext_resource path="res://X_mod/UltimateX/Sprites/nova_strike.png" type="Texture" id=2]
 [ext_resource path="res://X_mod/UltimateX/Sprites/x_ultimate_shot.png" type="Texture" id=3]
+[ext_resource path="res://X_mod/UltimateX/Sprites/shoryuuken.png" type="Texture" id=4]
+[ext_resource path="res://X_mod/UltimateX/Sprites/armor_blink.png" type="Texture" id=5]
 
-[sub_resource type="AtlasTexture" id=335]
-atlas = ExtResource( 3 )
-region = Rect2( 128, 112, 64, 56 )
+[sub_resource type="AtlasTexture" id=702]
+atlas = ExtResource( 5 )
+region = Rect2( 448, 0, 64, 56 )
 
-[sub_resource type="AtlasTexture" id=336]
-atlas = ExtResource( 3 )
-region = Rect2( 128, 112, 64, 56 )
+[sub_resource type="AtlasTexture" id=703]
+atlas = ExtResource( 5 )
+region = Rect2( 512, 0, 64, 56 )
 
-[sub_resource type="AtlasTexture" id=337]
-atlas = ExtResource( 3 )
-region = Rect2( 128, 112, 64, 56 )
+[sub_resource type="AtlasTexture" id=704]
+atlas = ExtResource( 5 )
+region = Rect2( 576, 0, 64, 56 )
 
-[sub_resource type="AtlasTexture" id=338]
-atlas = ExtResource( 3 )
-region = Rect2( 128, 112, 64, 56 )
+[sub_resource type="AtlasTexture" id=705]
+atlas = ExtResource( 5 )
+region = Rect2( 640, 0, 64, 56 )
 
-[sub_resource type="AtlasTexture" id=339]
-atlas = ExtResource( 3 )
-region = Rect2( 128, 112, 64, 56 )
+[sub_resource type="AtlasTexture" id=706]
+atlas = ExtResource( 5 )
+region = Rect2( 704, 0, 64, 56 )
 
-[sub_resource type="AtlasTexture" id=340]
-atlas = ExtResource( 3 )
-region = Rect2( 128, 112, 64, 56 )
+[sub_resource type="AtlasTexture" id=707]
+atlas = ExtResource( 5 )
+region = Rect2( 768, 0, 64, 56 )
 
-[sub_resource type="AtlasTexture" id=341]
-atlas = ExtResource( 3 )
-region = Rect2( 128, 112, 64, 56 )
+[sub_resource type="AtlasTexture" id=708]
+atlas = ExtResource( 5 )
+region = Rect2( 832, 0, 64, 56 )
 
-[sub_resource type="AtlasTexture" id=342]
-atlas = ExtResource( 3 )
-region = Rect2( 128, 112, 64, 56 )
+[sub_resource type="AtlasTexture" id=709]
+atlas = ExtResource( 5 )
+region = Rect2( 896, 0, 64, 56 )
 
-[sub_resource type="AtlasTexture" id=343]
-atlas = ExtResource( 3 )
-region = Rect2( 128, 112, 64, 56 )
+[sub_resource type="AtlasTexture" id=710]
+atlas = ExtResource( 5 )
+region = Rect2( 960, 0, 64, 56 )
 
-[sub_resource type="AtlasTexture" id=344]
-atlas = ExtResource( 3 )
-region = Rect2( 128, 112, 64, 56 )
+[sub_resource type="AtlasTexture" id=711]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 64, 56 )
 
-[sub_resource type="AtlasTexture" id=345]
-atlas = ExtResource( 3 )
-region = Rect2( 128, 112, 64, 56 )
+[sub_resource type="AtlasTexture" id=712]
+atlas = ExtResource( 5 )
+region = Rect2( 64, 0, 64, 56 )
 
-[sub_resource type="AtlasTexture" id=346]
-atlas = ExtResource( 3 )
-region = Rect2( 128, 112, 64, 56 )
+[sub_resource type="AtlasTexture" id=713]
+atlas = ExtResource( 5 )
+region = Rect2( 128, 0, 64, 56 )
 
-[sub_resource type="AtlasTexture" id=347]
-atlas = ExtResource( 3 )
-region = Rect2( 128, 112, 64, 56 )
+[sub_resource type="AtlasTexture" id=714]
+atlas = ExtResource( 5 )
+region = Rect2( 192, 0, 64, 56 )
 
-[sub_resource type="AtlasTexture" id=348]
-atlas = ExtResource( 3 )
-region = Rect2( 128, 112, 64, 56 )
+[sub_resource type="AtlasTexture" id=715]
+atlas = ExtResource( 5 )
+region = Rect2( 256, 0, 64, 56 )
 
-[sub_resource type="AtlasTexture" id=349]
-atlas = ExtResource( 3 )
-region = Rect2( 128, 112, 64, 56 )
+[sub_resource type="AtlasTexture" id=716]
+atlas = ExtResource( 5 )
+region = Rect2( 320, 0, 64, 56 )
 
-[sub_resource type="AtlasTexture" id=350]
-atlas = ExtResource( 3 )
-region = Rect2( 128, 112, 64, 56 )
+[sub_resource type="AtlasTexture" id=717]
+atlas = ExtResource( 5 )
+region = Rect2( 384, 0, 64, 56 )
 
 [sub_resource type="AtlasTexture" id=351]
 atlas = ExtResource( 3 )
@@ -1040,6 +1042,30 @@ region = Rect2( 576, 280, 64, 56 )
 atlas = ExtResource( 1 )
 region = Rect2( 128, 560, 64, 56 )
 
+[sub_resource type="AtlasTexture" id=696]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 64, 56 )
+
+[sub_resource type="AtlasTexture" id=697]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 0, 64, 56 )
+
+[sub_resource type="AtlasTexture" id=698]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 0, 64, 56 )
+
+[sub_resource type="AtlasTexture" id=699]
+atlas = ExtResource( 4 )
+region = Rect2( 192, 0, 64, 56 )
+
+[sub_resource type="AtlasTexture" id=700]
+atlas = ExtResource( 4 )
+region = Rect2( 256, 0, 64, 56 )
+
+[sub_resource type="AtlasTexture" id=701]
+atlas = ExtResource( 4 )
+region = Rect2( 320, 0, 64, 56 )
+
 [sub_resource type="AtlasTexture" id=573]
 atlas = ExtResource( 3 )
 region = Rect2( 512, 280, 64, 56 )
@@ -1615,12 +1641,12 @@ region = Rect2( 576, 616, 64, 56 )
 [resource]
 resource_name = "pointing_cannon"
 animations = [ {
-"frames": [ SubResource( 335 ), SubResource( 336 ), SubResource( 337 ), SubResource( 338 ), SubResource( 339 ), SubResource( 340 ), SubResource( 341 ), SubResource( 342 ), SubResource( 343 ) ],
+"frames": [ SubResource( 702 ), SubResource( 703 ), SubResource( 704 ), SubResource( 705 ), SubResource( 706 ), SubResource( 707 ), SubResource( 708 ), SubResource( 709 ), SubResource( 710 ) ],
 "loop": false,
 "name": "armor_blink",
 "speed": 23.0
 }, {
-"frames": [ SubResource( 344 ), SubResource( 345 ), SubResource( 346 ), SubResource( 347 ), SubResource( 348 ), SubResource( 349 ), SubResource( 350 ) ],
+"frames": [ SubResource( 711 ), SubResource( 712 ), SubResource( 713 ), SubResource( 714 ), SubResource( 715 ), SubResource( 716 ), SubResource( 717 ) ],
 "loop": false,
 "name": "armor_receive",
 "speed": 23.0
@@ -1720,7 +1746,7 @@ animations = [ {
 "name": "jump",
 "speed": 24.0
 }, {
-"frames": [ SubResource( 286 ), SubResource( 287 ), SubResource( 287 ), SubResource( 288 ), SubResource( 288 ), SubResource( 288 ), SubResource( 288 ), SubResource( 288 ), SubResource( 289 ), SubResource( 290 ), SubResource( 295 ), SubResource( 291 ), SubResource( 292 ), SubResource( 295 ), SubResource( 293 ), SubResource( 294 ), SubResource( 295 ), SubResource( 292 ), SubResource( 295 ), SubResource( 291 ), SubResource( 290 ), SubResource( 290 ) ],
+"frames": [ SubResource( 286 ), SubResource( 287 ), SubResource( 287 ), SubResource( 288 ), SubResource( 288 ), SubResource( 288 ), SubResource( 288 ), SubResource( 288 ), SubResource( 289 ), SubResource( 290 ), SubResource( 295 ), SubResource( 291 ), SubResource( 292 ), SubResource( 295 ), SubResource( 293 ), SubResource( 294 ), SubResource( 295 ), SubResource( 292 ), SubResource( 295 ), SubResource( 291 ), SubResource( 290 ), SubResource( 290 ), SubResource( 291 ) ],
 "loop": false,
 "name": "nova_strike",
 "speed": 30.0
@@ -1738,6 +1764,11 @@ animations = [ {
 "frames": [ SubResource( 308 ), SubResource( 308 ), SubResource( 308 ), SubResource( 308 ) ],
 "loop": false,
 "name": "ride",
+"speed": 23.0
+}, {
+"frames": [ SubResource( 696 ), SubResource( 696 ), SubResource( 696 ), SubResource( 697 ), SubResource( 698 ), SubResource( 699 ), SubResource( 700 ), SubResource( 701 ), SubResource( 698 ), SubResource( 699 ), SubResource( 699 ) ],
+"loop": false,
+"name": "shoryuuken_rolling",
 "speed": 23.0
 }, {
 "frames": [ SubResource( 573 ), SubResource( 574 ), SubResource( 575 ), SubResource( 576 ), SubResource( 577 ), SubResource( 578 ), SubResource( 579 ) ],

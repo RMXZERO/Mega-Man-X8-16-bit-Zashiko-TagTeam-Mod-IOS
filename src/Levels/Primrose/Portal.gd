@@ -23,8 +23,9 @@ func _on_area2D_body_entered(_body: Node) -> void :
 		elif _body.get_parent().is_in_group("Player"):
 			if _body.get_parent() == GameManager.inactive_player:
 				return
-		emit_signal("teleport_start")
-		teleport()
+		if not GameManager.player.ride:
+			emit_signal("teleport_start")
+			teleport()
 
 func teleport() -> void :
 	teleport_sfx.play()

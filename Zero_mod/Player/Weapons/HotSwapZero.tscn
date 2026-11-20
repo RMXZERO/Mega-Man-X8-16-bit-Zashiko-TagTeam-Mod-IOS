@@ -1,16 +1,17 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://src/Options/Hotswap/faded_weapon_00.png" type="Texture" id=1]
 [ext_resource path="res://Zero_mod/Player/Weapons/B-Fan.tres" type="Resource" id=2]
 [ext_resource path="res://Zero_mod/Player/Weapons/HotSwapZero.gd" type="Script" id=3]
 [ext_resource path="res://Zero_mod/Player/Weapons/K-Knuckle.tres" type="Resource" id=4]
 [ext_resource path="res://src/Options/analog_cursor.png" type="Texture" id=5]
-[ext_resource path="res://src/Options/HotSwapWeapon.gd" type="Script" id=6]
+[ext_resource path="res://Zero_mod/Player/Weapons/HotSwapWeaponZero.gd" type="Script" id=6]
 [ext_resource path="res://Zero_mod/Player/Weapons/D-Glaive.tres" type="Resource" id=7]
 [ext_resource path="res://Zero_mod/Player/Weapons/Sigma-Blade.tres" type="Resource" id=8]
-[ext_resource path="res://Zero_mod/Player/Weapons/V-Hanger.tres" type="Resource" id=9]
+[ext_resource path="res://Zero_mod/Player/Weapons/Z-Breaker.tres" type="Resource" id=9]
+[ext_resource path="res://Zero_mod/Player/Weapons/V-Hanger.tres" type="Resource" id=10]
 [ext_resource path="res://Zero_mod/Player/Weapons/T-Breaker.tres" type="Resource" id=11]
-[ext_resource path="res://Zero_mod/Player/Weapons/Z-Saber.tres" type="Resource" id=12]
+[ext_resource path="res://Zero_mod/Player/Weapons/Rogue-Blade.tres" type="Resource" id=12]
 [ext_resource path="res://src/Options/select_hotswap.png" type="Texture" id=13]
 [ext_resource path="res://src/Sounds/FX - Menu Switch.ogg" type="AudioStream" id=14]
 
@@ -77,28 +78,33 @@ z_index = 100
 script = ExtResource( 3 )
 
 [node name="cursor" type="Sprite" parent="."]
+visible = false
 modulate = Color( 1, 1, 1, 0.439216 )
 z_index = 10
 texture = ExtResource( 5 )
 
 [node name="cursor_area" type="Area2D" parent="cursor"]
+scale = Vector2( 5, 5 )
 collision_layer = 0
 collision_mask = 2147483648
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="cursor/cursor_area"]
 shape = SubResource( 2 )
 
-[node name="Z-Saber" type="Sprite" parent="."]
+[node name="Z-Breaker" type="Sprite" parent="."]
 position = Vector2( -40, -40 )
 texture = ExtResource( 1 )
 script = ExtResource( 6 )
-weapon = ExtResource( 12 )
+weapon = ExtResource( 9 )
 
-[node name="weapon_area" type="Area2D" parent="Z-Saber"]
+[node name="weapon_area" type="Area2D" parent="Z-Breaker"]
+visible = false
+position = Vector2( -360, -360 )
+scale = Vector2( 10, 10 )
 collision_layer = 2147483648
 collision_mask = 0
 
-[node name="collisionShape2D" type="CollisionShape2D" parent="Z-Saber/weapon_area"]
+[node name="collisionShape2D" type="CollisionShape2D" parent="Z-Breaker/weapon_area"]
 position = Vector2( 5, 5 )
 shape = SubResource( 1 )
 
@@ -109,7 +115,9 @@ script = ExtResource( 6 )
 weapon = ExtResource( 2 )
 
 [node name="weapon_area" type="Area2D" parent="B-Fan"]
-position = Vector2( 0, -14 )
+visible = false
+position = Vector2( 0, -374 )
+scale = Vector2( 10, 10 )
 collision_layer = 2147483648
 collision_mask = 0
 
@@ -123,6 +131,9 @@ script = ExtResource( 6 )
 weapon = ExtResource( 7 )
 
 [node name="weapon_area" type="Area2D" parent="D-Glaive"]
+visible = false
+position = Vector2( 360, -360 )
+scale = Vector2( 10, 10 )
 collision_layer = 2147483648
 collision_mask = 0
 
@@ -137,7 +148,9 @@ script = ExtResource( 6 )
 weapon = ExtResource( 11 )
 
 [node name="weapon_area" type="Area2D" parent="T-Breaker"]
-position = Vector2( -14, 0 )
+visible = false
+position = Vector2( -374, 0 )
+scale = Vector2( 10, 10 )
 collision_layer = 2147483648
 collision_mask = 0
 
@@ -151,7 +164,9 @@ script = ExtResource( 6 )
 weapon = ExtResource( 4 )
 
 [node name="weapon_area" type="Area2D" parent="K-Knuckle"]
-position = Vector2( 14, 0 )
+visible = false
+position = Vector2( 374, 0 )
+scale = Vector2( 10, 10 )
 collision_layer = 2147483648
 collision_mask = 0
 
@@ -162,9 +177,12 @@ shape = SubResource( 1 )
 position = Vector2( -40, 40 )
 texture = ExtResource( 1 )
 script = ExtResource( 6 )
-weapon = ExtResource( 9 )
+weapon = ExtResource( 10 )
 
 [node name="weapon_area" type="Area2D" parent="V-Hanger"]
+visible = false
+position = Vector2( -360, 360 )
+scale = Vector2( 10, 10 )
 collision_layer = 2147483648
 collision_mask = 0
 
@@ -172,18 +190,20 @@ collision_mask = 0
 position = Vector2( 5, -5 )
 shape = SubResource( 1 )
 
-[node name="sprite7" type="Sprite" parent="."]
+[node name="Rogue-Blade" type="Sprite" parent="."]
 position = Vector2( 0, 40 )
 texture = ExtResource( 1 )
 script = ExtResource( 6 )
 weapon = ExtResource( 12 )
 
-[node name="weapon_area" type="Area2D" parent="sprite7"]
-position = Vector2( 0, 14 )
+[node name="weapon_area" type="Area2D" parent="Rogue-Blade"]
+visible = false
+position = Vector2( 0, 374 )
+scale = Vector2( 10, 10 )
 collision_layer = 2147483648
 collision_mask = 0
 
-[node name="collisionShape2D" type="CollisionShape2D" parent="sprite7/weapon_area"]
+[node name="collisionShape2D" type="CollisionShape2D" parent="Rogue-Blade/weapon_area"]
 shape = SubResource( 1 )
 
 [node name="Sigma-Blade" type="Sprite" parent="."]
@@ -193,6 +213,9 @@ script = ExtResource( 6 )
 weapon = ExtResource( 8 )
 
 [node name="weapon_area" type="Area2D" parent="Sigma-Blade"]
+visible = false
+position = Vector2( 360, 360 )
+scale = Vector2( 10, 10 )
 collision_layer = 2147483648
 collision_mask = 0
 
@@ -203,7 +226,6 @@ shape = SubResource( 1 )
 [node name="select" type="AnimatedSprite" parent="."]
 visible = false
 frames = SubResource( 14 )
-frame = 10
 playing = true
 
 [node name="choice" type="AudioStreamPlayer2D" parent="."]

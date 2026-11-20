@@ -11,7 +11,7 @@ const dash_duration: = 0.12
 const ability_duration: = 1.0
 
 export  var fire_action: = "fire"
-
+var shot_time: = 0
 onready var light: Light2D = get_node_or_null("../../light")
 onready var weapon_stasis: Node2D = $"../../WeaponStasis"
 onready var _s = weapon_stasis.connect("interrupted", self, "stasis_interrupt")
@@ -28,15 +28,55 @@ func _ready() -> void :
 	call_deferred("setup_light")
 
 func fire(charge_level) -> void :
-	if charges_left > 0:
-		dash_forward()
+	if CharacterManager.ultimate_buster and not CharacterManager.weaponget:
+		if arm_cannon.upgraded:
+			if has_ammo() and not buster.has_infinite_charged_ammo():#Hermes
+				if shot_time <= 3:
+					reduce_ultimate_ammo()
+					dash_forward()
+					charged_timer.start()
+					shot_time += 1
+					if shot_time >= 3:
+						arm_cannon.actions[0] = "shoryuuken"
+						Tools.timer(charge_max.level_4_charge * (1 - charge_max.charge_time_reduction), "reset_cooldown", self)
+					else:
+						arm_cannon.actions[0] = "fire"
+			elif buster.has_infinite_charged_ammo():#Icarus
+				if shot_time <= 3:
+					reduce_ultimate_ammo()
+					dash_forward()
+					charged_timer.start()
+					shot_time += 1
+					if shot_time >= 3:
+						arm_cannon.actions[0] = "shoryuuken"
+						Tools.timer(charge_max.level_4_charge * (1 - charge_max.charge_time_reduction), "reset_cooldown", self)
+					else:
+						arm_cannon.actions[0] = "fire"
+			else:#Hermes no ammo
+				fire_regular()
+				arm_cannon.actions[0] = "fire"
+		else:#Normal
+			fire_regular()
+			arm_cannon.actions[0] = "fire"
 	else:
-		.fire(charge_level)
+		if charges_left > 0:
+			dash_forward()
+		else:
+			.fire(charge_level)
+
+func reset_cooldown() -> void :
+	shot_time = 0
+	arm_cannon.actions[0] = "fire"
+
+func reduce_ultimate_ammo() -> void :
+	if not buster.has_infinite_charged_ammo():
+		reduce_ammo(weapon.charged_ammo_cost/3)
 
 func fire_regular() -> void :
 	.fire_regular()
 	light_for_pitchblack()
 	dim_light_for_pitchblack()
+	reduce_regular_ammo()
 
 func fire_charged() -> void :
 	charges_left = 3
@@ -65,6 +105,7 @@ func dash_forward() -> void :
 	character.add_invulnerability(name)
 	var shot = instantiate_projectile(weapon.charged_shot)
 	set_position_as_character_position(shot)
+	set_shot_extra_damage(shot)
 	shot.scale.x = character.get_facing_direction()
 	if dir != 0:
 		shot.scale.x = dir
@@ -83,6 +124,7 @@ func _physics_process(delta: float) -> void :
 
 func charge_expire() -> void :
 	charges_left = 0
+	shot_time = 0
 
 func interrupt() -> void :
 	if weapon_stasis.executing:

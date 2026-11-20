@@ -14,11 +14,16 @@ onready var parent = get_parent()
 onready var letter_sound: AudioStreamPlayer = $audioStreamPlayer
 onready var portrait_1: AnimatedSprite = $Portrait1
 onready var portrait_2: AnimatedSprite = $Portrait2
+onready var icarus_head_portrait: AnimatedSprite = $Portrait1/icarus_head
+onready var hermes_head_portrait: AnimatedSprite = $Portrait1/hermes_head
+onready var icarus_body_portrait: AnimatedSprite = $Portrait1/icarus_body
+onready var hermes_body_portrait: AnimatedSprite = $Portrait1/hermes_body
+onready var ultimate_portrait: AnimatedSprite = $Portrait1/ultimate
 onready var bg: Sprite = $BG
 onready var next_dialogue: AnimatedSprite = $next_dialogue
 onready var portrait_side: Label = $portrait_side
 onready var axl_material: Material = preload("res://Axl_mod/Player/Axl_Material_Shader.tres")
-onready var zero_material: Material = preload("res://Zero_mod/Sprites/Zero_Material_Shader.tres")
+onready var zero_material: Material = preload("res://Zero_mod/X8/Sprites/ZeroX8_Material_Shader.tres")
 
 var dialog_step: int = 0
 var total_steps: int = 0
@@ -32,21 +37,51 @@ var character: String = "Default"
 
 signal dialog_concluded
 
+func set_x_palette() -> void :
+	show_ultimate_x_portrait()
+	var armor_parts = [icarus_head_portrait, hermes_head_portrait, icarus_body_portrait, hermes_body_portrait]
+	if parent:
+		if not parent.name == "FinalCutscene" and not parent.name == "Elevator_Cutscene":
+			for part in armor_parts:
+				if is_instance_valid(GameManager.player):
+					if part.name in GameManager.player.current_armor:
+						part.unhide()
+					else:
+						part.hide()
+	if parent:
+		if parent.name == "FinalCutscene":
+			hide_x_armor_portrait()
+			show_ultimate_x_portrait()
+		if parent.name == "Elevator_Cutscene":
+			hide_x_armor_portrait()
+
+func show_ultimate_x_portrait() -> void :
+	if CharacterManager.ultimate_x_armor and CharacterManager.player_character == "X" and not CharacterManager.hide_x_armor and not CharacterManager.infinite_x_activated:
+		ultimate_portrait.show()
+
+func hide_x_armor_portrait() -> void :
+	icarus_head_portrait.hide()
+	hermes_head_portrait.hide()
+	icarus_body_portrait.hide()
+	hermes_body_portrait.hide()
+	ultimate_portrait.hide()
 
 func set_axl_palette() -> void :
 	portrait_1.material = axl_material
 	CharacterManager.set_axl_colors(portrait_1)
 	if parent:
 		if parent.name == "FinalCutscene":
-			reset_palettes()
+			CharacterManager.set_axl_normal_colors(portrait_1)
 	
 func set_zero_palette() -> void :
 	portrait_1.material = zero_material
-	CharacterManager.set_zero_colors(portrait_1)
+	CharacterManager.set_zeroX8_colors(portrait_1)
 	if parent:
 		if parent.name == "FinalCutscene":
-			reset_palettes()
-	
+			CharacterManager.set_zeroX8_normal_colors(portrait_1)
+		if parent.name == "Elevator_Cutscene":
+			CharacterManager.set_zeroX8_normal_colors(portrait_1)
+
 func reset_palettes() -> void :
 	portrait_1.material = null
 
@@ -124,10 +159,17 @@ func setup_character(step) -> void :
 	portrait_1.frames = step.portrait_animations
 	material.set_shader_param("palette", step.text_palette)
 	letter_sound.pitch_scale = step.audio_pitch
+	hide_x_armor_portrait()
 	if step.name == "MegaMan X":
 		portrait_1.position.x = portrait_position_1
 		portrait_side.margin_left = 36
 		portrait_side.margin_right = 176
+		set_x_palette()
+	elif step.name == "X":
+		portrait_1.position.x = portrait_position_1
+		portrait_side.margin_left = 36
+		portrait_side.margin_right = 176
+		set_x_palette()
 	elif step.name == "Zero":
 		portrait_1.position.x = portrait_position_1
 		portrait_side.margin_left = 36
@@ -150,6 +192,13 @@ func get_current_step():
 	return dialog_tree.dialog[dialog_step]
 
 func _physics_process(delta: float) -> void :
+	if state != "stopped":
+		if CharacterManager.player_character == "Alia":
+			force_end()
+		if CharacterManager.player_character == "Layer":
+			force_end()
+		if CharacterManager.player_character == "Pallette":
+			force_end()
 	if state != "stopped":
 		if player_forced_end_of_dialog():
 			force_end()

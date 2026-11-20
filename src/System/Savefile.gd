@@ -103,7 +103,7 @@ func write_to_file(slot: int = 0) -> void :
 func load_save(slot: int = 0) -> void :
 	
 	CharacterManager.team = []
-	CharacterManager.equipped_hearts = {"X": 0, "Zero": 0, "Axl": 0}
+	CharacterManager.equipped_hearts = {"X": 0, "Zero": 0, "Axl": 0, "Alia": 0, "Layer": 0, "Pallette": 0}
 	CharacterManager.game_mode_set = false
 	CharacterManager.game_mode = 0
 	newgame_plus = 0
@@ -201,6 +201,8 @@ func apply_data(_slot: int = 0) -> void :
 		if game_data.has("meta"):
 			if game_data["meta"].has("difficulty"):
 				CharacterManager.game_mode = int(game_data["meta"].get("difficulty", 0))
+				if CharacterManager.game_mode == 4294967295:
+					CharacterManager.game_mode = -1
 			if game_data["meta"].has("game_mode_set"):
 				CharacterManager.game_mode_set = bool(game_data["meta"].get("game_mode_set", false))
 			if game_data["meta"].has("newgame_plus"):
@@ -234,7 +236,7 @@ func clear_save(slot: int = 0) -> void :
 	CharacterManager.game_mode_set = false
 	CharacterManager.game_mode = 0
 	CharacterManager.team = []
-	CharacterManager.equipped_hearts = {"X": 0, "Zero": 0, "Axl": 0}
+	CharacterManager.equipped_hearts = {"X": 0, "Zero": 0, "Axl": 0, "Alia": 0, "Layer": 0, "Pallette": 0}
 	newgame_plus = 0
 	IGT.reset()
 	GameManager.collectibles = []

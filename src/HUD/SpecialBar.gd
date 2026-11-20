@@ -5,20 +5,25 @@ onready var icarus_fill: TextureProgress = $icarus_fill
 onready var ultimate_fill: TextureProgress = $ultimate_fill
 onready var axl_fill: TextureProgress = $axl_fill
 onready var axl_fill_texture: Texture = preload("res://Axl_mod/HUD/special_bar_fill.png")
+onready var zero_fill: TextureProgress = $zero_fill
+onready var zero_fill_texture: Texture = preload("res://Zero_mod/HUD/special_bar_fill.png")
+onready var pallette_fill_texture: Texture = preload("res://Axl_mod/Player/Scripts/Pallette Special/special_bar_fill.png")
 onready var empty_bar: Texture = preload("res://src/Effects/Textures/special_bar.png")
 onready var tween: TweenController = TweenController.new(self, false)
 onready var h_blink: TextureProgress = $hermes_fill / blink
 onready var i_blink: TextureProgress = $icarus_fill / blink
 onready var u_blink: TextureProgress = $ultimate_fill / blink
+onready var z_blink: TextureProgress = $zero_fill / blink
 
 var hermes_weapon
 var icarus_weapon
 var ultimate_weapon
-
+var genmu_weapon
 
 func _ready() -> void :
-	visible = false
+	visible = true
 	hide()
+	check()
 	Event.connect("collected", self, "hide_or_show")
 	Event.connect("special_activated", self, "activate")
 	Event.connect("special_deactivated", self, "deactivate")
@@ -33,6 +38,7 @@ func activate(weapon, character) -> void :
 		hermes_fill.visible = true
 		icarus_fill.visible = false
 		ultimate_fill.visible = false
+		zero_fill.visible = false
 		hermes_weapon = weapon
 	elif weapon.name == "GigaCrash":
 		visible = true
@@ -40,20 +46,45 @@ func activate(weapon, character) -> void :
 		hermes_fill.visible = false
 		icarus_fill.visible = true
 		ultimate_fill.visible = false
+		zero_fill.visible = false
 		icarus_weapon = weapon
 	elif weapon.name == "NovaStrike":
 		visible = true
 		set_process(true)
+		if get_current_set() == "ultimate":
+			icarus_fill.visible = false
+			hermes_fill.visible = false
+			ultimate_fill.visible = true
+			zero_fill.visible = false
+		elif get_current_set() == "infinite":
+			hermes_fill.visible = true
+			icarus_fill.visible = false
+			ultimate_fill.visible = false
+			zero_fill.visible = false
+		ultimate_weapon = weapon
+	elif weapon.name == "Genmuzero":
+		visible = true
+		set_process(true)
 		icarus_fill.visible = false
 		hermes_fill.visible = false
-		ultimate_fill.visible = true
-		ultimate_weapon = weapon
+		ultimate_fill.visible = false
+		zero_fill.visible = true
+		genmu_weapon = weapon
+	elif weapon.name == "RideArmor":
+		visible = true
+		set_process(true)
+		hermes_fill.visible = true
+		icarus_fill.visible = false
+		ultimate_fill.visible = false
+		zero_fill.visible = false
+		hermes_weapon = weapon
 	else:
 		visible = false
 		set_process(false)
 		icarus_fill.visible = false
 		hermes_fill.visible = false
 		ultimate_fill.visible = false
+		zero_fill.visible = false
 	
 	if not character.is_current_player:
 		hide()
@@ -69,7 +100,7 @@ func deactivate(_weapon, _character) -> void :
 	i_blink.visible = false
 	ultimate_fill.visible = false
 	u_blink.visible = false
-	
+
 func _process(delta: float) -> void :
 	process_blink(delta)
 	if hermes_weapon and hermes_weapon.active:
@@ -90,12 +121,19 @@ func _process(delta: float) -> void :
 			
 	if ultimate_weapon and ultimate_weapon.active:
 		var value = get_bar_value(ultimate_weapon)
-		ultimate_fill.value = value
-		if value >= 43:
-			u_blink.visible = true
+		if get_current_set() == "infinite":
+			hermes_fill.value = value
+			if value >= 43:
+				h_blink.visible = true
+			else:
+				h_blink.visible = false
 		else:
-			u_blink.visible = false
-			
+			ultimate_fill.value = value
+			if value >= 43:
+				u_blink.visible = true
+			else:
+				u_blink.visible = false
+
 	if icarus_weapon:
 		if get_current_set() == "axl":
 			icarus_fill.texture_progress = axl_fill_texture
@@ -115,6 +153,38 @@ func _process(delta: float) -> void :
 			else:
 				i_blink.visible = false
 
+	if genmu_weapon:
+		if get_current_set() == "zero":
+			zero_fill.texture_progress = zero_fill_texture
+			#zero_fill.material = load("res://Zero_mod/X8/Sprites/ZeroX8_Material_Shader.tres")
+			#CharacterManager.set_zeroX8_colors(zero_fill)
+			var blink_value = 43
+			if is_instance_valid(GameManager.player):
+				var _weapon = GameManager.player.get_node("Special").current_weapon
+				if _weapon:
+					blink_value = (_weapon.ammo_per_shot / genmu_weapon.max_ammo) * 43
+			var fill_value = get_bar_value(genmu_weapon)
+			zero_fill.value = fill_value
+			if fill_value >= blink_value:
+				z_blink.visible = true
+			else:
+				z_blink.visible = false
+
+	if hermes_weapon:
+		if get_current_set() == "pallette":
+			hermes_fill.texture_progress = pallette_fill_texture
+			var blink_value = 43
+			if is_instance_valid(GameManager.player):
+				var _weapon = GameManager.player.get_node("Special").current_weapon
+				if _weapon:
+					blink_value = (_weapon.ammo_per_shot / hermes_weapon.max_ammo / 2) * 43
+			var fill_value = get_bar_value(hermes_weapon)
+			hermes_fill.value = fill_value
+			if fill_value >= blink_value:
+				h_blink.visible = true
+			else:
+				h_blink.visible = false
+
 var blink_timer: float = 0.0
 func process_blink(delta: float) -> void :
 	blink_timer += delta * 30
@@ -124,6 +194,8 @@ func process_blink(delta: float) -> void :
 		i_blink.modulate.a = sin(blink_timer)
 	elif u_blink.visible:
 		u_blink.modulate.a = sin(blink_timer)
+	elif z_blink.visible:
+		z_blink.modulate.a = sin(blink_timer)
 
 func get_bar_value(current_weapon) -> float:
 	return inverse_lerp(0.0, current_weapon.max_ammo, current_weapon.current_ammo) * 43
@@ -134,6 +206,7 @@ func hide() -> void :
 	h_blink.visible = false
 	i_blink.visible = false
 	u_blink.visible = false
+	z_blink.visible = false
 
 func unhide() -> void :
 	if get_current_set() == "hermes":
@@ -142,32 +215,70 @@ func unhide() -> void :
 		hermes_fill.visible = true
 		icarus_fill.visible = false
 		ultimate_fill.visible = false
+		zero_fill.visible = false
 		i_blink.visible = false
 		u_blink.visible = false
+		z_blink.visible = false
 	elif get_current_set() == "icarus":
 		visible = true
 		set_process(true)
 		hermes_fill.visible = false
 		icarus_fill.visible = true
 		ultimate_fill.visible = false
+		zero_fill.visible = false
 		h_blink.visible = false
 		u_blink.visible = false
+		z_blink.visible = false
 	elif get_current_set() == "ultimate":
 		visible = true
 		set_process(true)
 		hermes_fill.visible = false
 		icarus_fill.visible = false
 		ultimate_fill.visible = true
+		zero_fill.visible = false
 		i_blink.visible = false
 		h_blink.visible = false
+		z_blink.visible = false
+	elif get_current_set() == "infinite":
+		visible = true
+		set_process(true)
+		hermes_fill.visible = true
+		icarus_fill.visible = false
+		ultimate_fill.visible = false
+		zero_fill.visible = false
+		i_blink.visible = false
+		u_blink.visible = false
+		z_blink.visible = false
 	elif get_current_set() == "axl":
 		visible = true
 		set_process(true)
 		hermes_fill.visible = false
 		icarus_fill.visible = true
 		ultimate_fill.visible = false
+		zero_fill.visible = false
 		h_blink.visible = false
 		u_blink.visible = false
+		z_blink.visible = false
+	elif get_current_set() == "zero":
+		visible = true
+		set_process(true)
+		hermes_fill.visible = false
+		icarus_fill.visible = false
+		ultimate_fill.visible = false
+		zero_fill.visible = true
+		h_blink.visible = false
+		i_blink.visible = false
+		u_blink.visible = false
+	elif get_current_set() == "pallette":
+		visible = true
+		set_process(true)
+		hermes_fill.visible = true
+		icarus_fill.visible = false
+		ultimate_fill.visible = false
+		zero_fill.visible = false
+		h_blink.visible = false
+		u_blink.visible = false
+		z_blink.visible = false
 	else:
 		visible = false
 		
@@ -191,7 +302,7 @@ func get_current_set() -> String:
 
 func _on_WeaponBar_displayed(weapon, char_name) -> void :
 	if char_name == get_team_member().name:
-		if weapon.name == "XDrive" or weapon.name == "GigaCrash" or weapon.name == "NovaStrike":
+		if weapon.name == "XDrive" or weapon.name == "GigaCrash" or weapon.name == "NovaStrike" or weapon.name == "Genmuzero" or weapon.name == "RideArmor":
 			hide()
 		else:
 			unhide()
@@ -203,7 +314,7 @@ func hide_or_show(_d) -> void :
 
 func check() -> void :
 	yield(get_tree(), "idle_frame")
-	if get_current_set() == "hermes" or get_current_set() == "icarus" or get_current_set() == "ultimate" or get_current_set() == "axl":
+	if get_current_set() == "hermes" or get_current_set() == "icarus" or get_current_set() == "ultimate" or get_current_set() == "infinite" or get_current_set() == "axl" or get_current_set() == "zero" or get_current_set() == "pallette":
 		call_deferred("unhide")
 	else:
 		call_deferred("hide")

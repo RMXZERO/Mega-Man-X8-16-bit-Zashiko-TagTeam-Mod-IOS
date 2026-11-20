@@ -7,12 +7,10 @@ onready var choice: AudioStreamPlayer = $choice
 onready var key_config: CanvasLayer = $KeyConfig
 onready var options_menu: CanvasLayer = $OptionsMenu
 onready var achievements: CanvasLayer = $AchievementsScreen
-onready var ultimate_life_texture: Texture = preload("res://X_mod/UltimateX/HUD/life.png")
-onready var ultimte_icon_texture: Texture = preload("res://X_mod/UltimateX/HUD/ultimate_x.png")
-onready var ultimte_icon_material: Material = preload("res://X_mod/UltimateX/Sprites/x_ultimate_material.tres")
 onready var game_mode_label: Label = $pause / game_mode
 onready var zero_beta_icon: Texture = preload("res://Zero_mod/HUD/Zero_base.png")
-onready var zero_beta_material: ShaderMaterial = preload("res://Zero_mod/Sprites/Zero_Material_Shader.tres")
+onready var zero_beta_material: ShaderMaterial = preload("res://Zero_mod/X8/Sprites/ZeroX8_Material_Shader.tres")
+onready var androidcontrols: CanvasLayer = $AndroidControls
 
 var paused: bool = false
 var subtanks: Array
@@ -30,6 +28,7 @@ signal unlock_buttons
 func _ready() -> void :
 	Event.listen("refresh_hud", self, "character_menu_visibility")
 	call_deferred("character_menu_visibility")
+	androidcontrols_out()
 	if not is_debugging():
 		pause.visible = false
 		bg.visible = false
@@ -67,14 +66,18 @@ func character_menu_visibility() -> void :
 	var _lives_HUD = _pause_HUD.get_node("Lives")
 	var _armors_HUD = _pause_HUD.get_node("Armor Group")
 	var _zero_abilities = _pause_HUD.get_node("AbilitiesZero")
+	var _zero_extra = _pause_HUD.get_node("ExtraZero")
 	var _zero_armor = _pause_HUD.get_node("BlackZeroArmor")
-	
+	var _layer_abilities = _pause_HUD.get_node("AbilitiesLayer")
+
 	reset_lives_visibility(_lives_HUD)
 	reset_weapons_visibility(_pause_HUD)
 	_armors_HUD.hide()
 	_zero_abilities.hide()
+	_zero_extra.hide()
 	_zero_armor.hide()
-	
+	_layer_abilities.hide()
+
 	match CharacterManager.player_character:
 		"Player":
 			pass
@@ -82,10 +85,6 @@ func character_menu_visibility() -> void :
 			set_visibility(_lives_HUD, "X_icon", true)
 			set_visibility(_lives_HUD, "lives_icon", true)
 			set_visibility(_pause_HUD, "Weapons", true)
-			if CharacterManager.ultimate_x_armor:
-				_lives_HUD.get_node("lives_icon").texture = ultimate_life_texture
-				_lives_HUD.get_node("X_icon").texture = ultimte_icon_texture
-				_lives_HUD.get_node("X_icon").material = ultimte_icon_material
 			_armors_HUD.show()
 		"Axl":
 			set_visibility(_lives_HUD, "Axl_icon", true)
@@ -99,10 +98,28 @@ func character_menu_visibility() -> void :
 			_zero_abilities.show()
 			if "black_zero_armor" in GameManager.collectibles:
 				_zero_armor.show()
+			if CharacterManager.extra_saber_combo:
+				_zero_extra.show()
 			update_zero_icons(_lives_HUD)
+		"Alia":
+			set_visibility(_lives_HUD, "Alia_icon", true)
+			set_visibility(_lives_HUD, "Alia_lives_icon", true)
+			set_visibility(_pause_HUD, "WeaponsAlia", true)
+			update_alia_icons(_lives_HUD)
+		"Layer":
+			set_visibility(_lives_HUD, "Layer_icon", true)
+			set_visibility(_lives_HUD, "Layer_lives_icon", true)
+			set_visibility(_pause_HUD, "WeaponsLayer", true)
+			_layer_abilities.show()
+			update_layer_icons(_lives_HUD)
+		"Pallette":
+			set_visibility(_lives_HUD, "Pallette_icon", true)
+			set_visibility(_lives_HUD, "Pallette_lives_icon", true)
+			set_visibility(_pause_HUD, "WeaponsPallette", true)
+			update_pallette_icons(_lives_HUD)
 
 func reset_lives_visibility(_lives_HUD: Node) -> void :
-	var icons = ["X_icon", "Axl_icon", "Zero_icon", "lives_icon", "Axl_lives_icon", "Zero_lives_icon"]
+	var icons = ["X_icon", "Axl_icon", "Zero_icon", "Alia_icon", "Layer_icon", "Pallette_icon", "lives_icon", "Axl_lives_icon", "Zero_lives_icon", "Alia_lives_icon", "Layer_lives_icon", "Pallette_lives_icon"]
 	for icon in icons:
 		set_visibility(_lives_HUD, icon, false)
 
@@ -110,6 +127,9 @@ func reset_weapons_visibility(_pause_HUD: Node) -> void :
 	set_visibility(_pause_HUD, "Weapons", false)
 	set_visibility(_pause_HUD, "WeaponsAxl", false)
 	set_visibility(_pause_HUD, "WeaponsZero", false)
+	set_visibility(_pause_HUD, "WeaponsAlia", false)
+	set_visibility(_pause_HUD, "WeaponsLayer", false)
+	set_visibility(_pause_HUD, "WeaponsPallette", false)
 
 func set_visibility(node: Node, child_name: String, visible: bool) -> void :
 	node.get_node(child_name).visible = visible
@@ -125,6 +145,23 @@ func update_zero_icons(_lives_HUD: Node) -> void :
 	for icon in zero_icons:
 		var _zero_icon = _lives_HUD.get_node(icon)
 		CharacterManager.set_zeroX8_colors(_zero_icon)
+
+func update_alia_icons(_lives_HUD: Node) -> void :
+	var alia_icons = ["Alia_icon", "Alia_lives_icon"]
+	for icon in alia_icons:
+		var _alia_icon = _lives_HUD.get_node(icon)
+
+func update_layer_icons(_lives_HUD: Node) -> void :
+	var layer_icons = ["Layer_icon", "Layer_lives_icon"]
+	for icon in layer_icons:
+		var _layer_icon = _lives_HUD.get_node(icon)
+		CharacterManager.set_layer_colors(_layer_icon)
+
+func update_pallette_icons(_lives_HUD: Node) -> void :
+	var pallette_icons = ["Pallette_icon", "Pallette_lives_icon"]
+	for icon in pallette_icons:
+		var _pallette_icon = _lives_HUD.get_node(icon)
+		CharacterManager.set_pallette_colors(_pallette_icon)
 
 func on_lumine_desperation() -> void :
 	endgame = true
@@ -195,6 +232,7 @@ func Pause() -> void :
 	yield(fader, "finished")
 	emit_signal("unlock_buttons")
 	call_deferred("emit_signal", "pause_started")
+	androidcontrols_in()
 
 func Unpause() -> void :
 	emit_signal("pause_ending")
@@ -207,6 +245,17 @@ func Unpause() -> void :
 	Event.emit_signal("pause_menu_closed")
 	GameManager.unpause("PauseMenu")
 	emit_signal("pause_ended")
+	androidcontrols_out()
+
+func androidcontrols_in() -> void :
+	if androidcontrols != null:
+		if androidcontrols.get_node_or_null("Pause") != null:
+			androidcontrols.get_node("Pause").position.y = 0
+
+func androidcontrols_out() -> void :
+	if androidcontrols != null:
+		if androidcontrols.get_node_or_null("Pause") != null:
+			androidcontrols.get_node("Pause").position.y = -50
 
 func play_choice_sound() -> void :
 	choice.play()

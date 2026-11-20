@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://src/DialogSystem/Profiles/DialogueText.gd" type="Script" id=1]
+[ext_resource path="res://src/DialogSystem/Profiles/DrLight.tres" type="Resource" id=2]
+[ext_resource path="res://Axl_mod/DialogSystem/Profiles/Axl.tres" type="Resource" id=3]
+
+[resource]
+script = ExtResource( 1 )
+dialog = [ ExtResource( 3 ), "TRACKBULLET1_AXL", ExtResource( 2 ), "TRACKBULLET2_AXL", ExtResource( 3 ), "TRACKBULLET3_AXL", ExtResource( 2 ), "TRACKBULLET4_AXL", "TRACKBULLET5_AXL", ExtResource( 3 ), "TRACKBULLET6_AXL", ExtResource( 2 ), "TRACKBULLET7_AXL", ExtResource( 3 ), "TRACKBULLET8_AXL", ExtResource( 2 ), "TRACKBULLET9_AXL", ExtResource( 3 ), "TRACKBULLET10_AXL", ExtResource( 2 ), "TRACKBULLET11_AXL", ExtResource( 3 ), "TRACKBULLET12_AXL" ]

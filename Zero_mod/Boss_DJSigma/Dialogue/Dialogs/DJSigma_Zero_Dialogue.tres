@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://src/DialogSystem/Profiles/DialogueText.gd" type="Script" id=1]
+[ext_resource path="res://Zero_mod/DialogSystem/Profiles/Zero.tres" type="Resource" id=2]
+[ext_resource path="res://Zero_mod/Boss_DJSigma/Dialogue/Profiles/DJSigma.tres" type="Resource" id=3]
+
+[resource]
+script = ExtResource( 1 )
+dialog = [ ExtResource( 3 ), "DJSIGMA1_ZERO", "DJSIGMA2_ZERO", "DJSIGMA3_ZERO", ExtResource( 2 ), "DJSIGMA4_ZERO", "DJSIGMA5_ZERO", ExtResource( 3 ), "DJSIGMA6_ZERO", "DJSIGMA7_ZERO", ExtResource( 2 ), "DJSIGMA8_ZERO", ExtResource( 3 ), "DJSIGMA9_ZERO", ExtResource( 2 ), "DJSIGMA10_ZERO", ExtResource( 3 ), "DJSIGMA11_ZERO", "DJSIGMA12_ZERO", ExtResource( 2 ), "DJSIGMA13_ZERO", "DJSIGMA14_ZERO" ]

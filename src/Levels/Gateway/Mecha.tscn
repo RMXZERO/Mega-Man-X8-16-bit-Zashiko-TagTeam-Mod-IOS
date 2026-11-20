@@ -32,7 +32,6 @@ shape = SubResource( 3 )
 [node name="animatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 3 )
 animation = "idle"
-frame = 8
 playing = true
 flip_h = true
 
@@ -136,3 +135,6 @@ mode = 1
 [node name="collisionPolygon2D" type="CollisionPolygon2D" parent="rigidBody2D"]
 z_index = 1
 polygon = PoolVector2Array( -38, 99, 29, 99, 2, 71, 0, -96, -38, -96 )
+
+[connection signal="area_entered" from="DamageOnTouch/area2D" to="." method="destroy_ridearmor"]
+[connection signal="body_entered" from="DamageOnTouch/area2D" to="." method="destroy_ridearmor"]

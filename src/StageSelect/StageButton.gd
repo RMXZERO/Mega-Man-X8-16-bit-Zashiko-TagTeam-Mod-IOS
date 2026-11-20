@@ -30,6 +30,8 @@ func _on_focus_entered() -> void :
 	emit_signal("stage_selected", stage_info)
 
 func on_press() -> void :
+	CharacterManager.fight_boss_2 = false
+	CharacterManager.update_game_mode()
 	CharacterManager.NO_MOVEMENT_CHALLENGE = false
 	CharacterManager.teleport_to_boss = false
 	get_node(menu_path).picked_stage(stage_info)

@@ -10,7 +10,13 @@ var dialogue: Resource
 onready var start_area = get_node("area2D")
 onready var sprite = get_node("animatedSprite")
 onready var particles = $particles2D
-onready var glass: CollisionShape2D = $glass / collisionShape2D
+onready var glass: CollisionShape2D = $glass/collisionShape2D
+onready var enter_capsule: CollisionShape2D = $area2D2/collisionShape2D
+onready var down_land: CollisionShape2D = $staticBody2D/collisionShape2D
+onready var up_land: CollisionShape2D = $staticBody2D2/collisionShape2D
+onready var finish_land: CollisionShape2D = $staticBody2D3/collisionShape2D
+onready var ride_blocker_close: CollisionShape2D = $rideblocker/closecollisionShape2D
+onready var ride_blocker_open: CollisionShape2D = $rideblocker/opencollisionShape2D
 
 var player
 var charge_state: = 0
@@ -30,6 +36,7 @@ func _ready() -> void :
 	timer2 = 0.0
 	charge_state = 0
 	finished = false
+	call_deferred("set_dialogue")
 	#call_deferred("handle_player_not_x")
 	
 func set_dialogue() -> void :
@@ -41,7 +48,7 @@ func set_dialogue() -> void :
 func handle_player_not_x() -> void :
 	if not "X" in CharacterManager.team:
 		finished = true
-		call_deferred("disable_glass_collider")
+		call_deferred("close_capsule_collider")
 		sprite.play("finished")
 		if debug_logs:
 			print_debug("Player is not X")
@@ -52,13 +59,22 @@ func call_deferred_got_armor() -> void :
 func handle_already_got_armor() -> void :
 	if armor_part in GameManager.collectibles:
 		finished = true
-		call_deferred("disable_glass_collider")
+		call_deferred("close_capsule_collider")
 		sprite.play("finished")
 		if debug_logs:
 			print_debug("Capsule: Player already has " + armor_part)
 
 func _on_area2D_body_entered(body: Node) -> void :
 	call_deferred("check_start", body)
+
+func _on_area2D_body_exited(body):
+	if finished:
+		if body.is_in_group("Player"):
+			player = body.get_parent()
+			if sprite.animation == "lightning" and player == GameManager.player:
+				if armor_part in GameManager.collectibles:
+					sprite.play("close")
+					call_deferred("close_capsule_collider")
 
 func check_start(body: Node) -> void :
 	if not finished:
@@ -70,15 +86,31 @@ func check_start(body: Node) -> void :
 				sprite.play("open")
 				$open.play()
 				Event.emit_signal("capsule_open")
+				GameManager.dialog_box.emit_capsule_signal = true
 				GameManager.stop_character_inputs()
 				GameManager.start_capsule_dialog(dialogue)
 				call_deferred("disable_glass_collider")
 
+func close_capsule_collider() -> void :
+	glass.disabled = true
+	up_land.disabled = true
+	down_land.disabled = true
+	finish_land.disabled = false
+	enter_capsule.disabled = true
+	ride_blocker_open.disabled = true
+	ride_blocker_close.disabled = false
+
 func disable_glass_collider() -> void :
 	glass.disabled = true
+	up_land.disabled = false
+	down_land.disabled = false
+	finish_land.disabled = true
+	enter_capsule.disabled = false
+	ride_blocker_open.disabled = false
+	ride_blocker_close.disabled = true
 
 func can_interact() -> bool:
-	return not GameManager.player.is_executing("Ride") and not GameManager.player.is_executing("WeaponStasis")
+	return not GameManager.player.is_executing("Ride") and not GameManager.player.is_executing("WeaponStasis") and GameManager.player.has_control()
 
 func _on_area2D2_body_entered(_body: Node) -> void :
 	if not finished:
@@ -88,7 +120,7 @@ func _on_area2D2_body_entered(_body: Node) -> void :
 			GameManager.player.play_animation_once("recover")
 			GameManager.player.deactivate()
 			GameManager.player.global_position.x = global_position.x
-			GameManager.player.global_position.y = global_position.y - 31
+			GameManager.player.global_position.y = global_position.y - 27
 			sprite.play("slow_charge")
 			color = Color(0, 0, 1, 0)
 			enable_charge_shader()
@@ -100,7 +132,8 @@ func _process(delta: float) -> void :
 	if not finished:
 		if charge_state >= 1:
 			timer += delta
-			GameManager.player.animatedSprite.material.set_shader_param("Color", color)
+			if timer > 0.05 or charge_state > 1:
+				GameManager.player.animatedSprite.material.set_shader_param("Color", color)
 		
 		if charge_state >= 1 and charge_state < 3:
 			particles.speed_scale += delta * 2

@@ -18,7 +18,7 @@ var unlocked: bool = true
 func _ready() -> void :
 	if active:
 		Event.connect("alarm", self, "_on_block_event")
-		Event.connect("pitch_black_energized", self, "_on_block_event")
+		#Event.connect("pitch_black_energized", self, "_on_block_event")
 		call_deferred("block_wall")
 
 func block_wall() -> void :
@@ -33,9 +33,9 @@ func block_wall() -> void :
 					if CharacterManager.get(permanent_unlock) == true:
 						unlocked = false
 	
-	if character_name != "":
-		if not character_name in CharacterManager.team:
-			unlocked = false
+	#if character_name != "":
+	#	if not character_name in CharacterManager.team:
+	#		unlocked = false
 	
 	if need_all_weapons and not got_all_boss_weapons():
 		unlocked = false

@@ -21,11 +21,13 @@ func _Setup() -> void :
 	Log("Weapon took Control")
 	character.set_horizontal_speed(0)
 	character.set_vertical_speed(0)
+	character.can_eject = false
 
 func _Update(_delta: float) -> void :
 	pass
 
 func _Interrupt():
+	character.can_eject = true
 	character.set_horizontal_speed(0)
 	character.set_vertical_speed(0)
 	emit_signal("interrupted")

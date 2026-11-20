@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/PitchBlack - Intro.ogg-41f92fc4d39433d5e7ecc09a807c6557.oggstr"
+
+[deps]
+
+source_file="res://Remix/Songs/PitchBlack - Intro.ogg"
+dest_files=[ "res://.import/PitchBlack - Intro.ogg-41f92fc4d39433d5e7ecc09a807c6557.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

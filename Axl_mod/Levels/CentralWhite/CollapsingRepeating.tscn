@@ -578,7 +578,6 @@ polygon = PoolVector2Array( 55.5, 158, -8, 157, -8, 8, 24, -2, 56, -2 )
 [node name="splash2" type="AnimatedSprite" parent="Pool/Ice"]
 position = Vector2( 64, 21 )
 frames = ExtResource( 10 )
-frame = 23
 playing = true
 flip_h = true
 

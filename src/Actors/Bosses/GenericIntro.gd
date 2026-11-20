@@ -9,6 +9,9 @@ export  var defeated_var: String = "_none"
 var dialog_concluded: = false
 var collectible: = "_undefined"
 
+var demo_music: AudioStreamPlayer = AudioStreamPlayer.new()
+onready var _boss_demo: AudioStream = preload("res://src/Sounds/OST - Boss Demo.ogg")
+onready var _boss_demo_demake: AudioStream = preload("res://Remix/Songs/Boss Demo.ogg")
 
 func _ready() -> void :
 	setup_collectible_name()
@@ -19,6 +22,40 @@ func _ready() -> void :
 		call_deferred("prepare_for_intro")
 		call_deferred("execute_intro")
 	character.listen("death", self, "deactivate")
+
+func play_demo_music() -> void :
+	var current_scene = get_tree().current_scene
+	if current_scene and current_scene.name == "SigmaPalace":
+		var dj_sigma = current_scene.get_node_or_null("DJSigmaStarter")
+		if dj_sigma and dj_sigma.activated:
+			print("do not play because dj sigma start")
+			return
+			
+	if CharacterManager.player_character == "Alia" or CharacterManager.player_character == "Layer" or CharacterManager.player_character == "Pallette":
+		return
+		
+	var boss_demo_name = ["Yeti", "Panda", "Rooster", "Mantis", "Trilobyte", "Manowar", "Antonion", "Sunflower", "CopySigma", "Vile", "Vile Final", "DevilBear"]
+	
+	if character.name in boss_demo_name:
+		if demo_music and demo_music is AudioStreamPlayer:
+			demo_music.set_name("Demo_music")
+			demo_music.volume_db = -6
+			if GameManager.music_player:
+				demo_music.volume_db = GameManager.music_player.volume
+			add_child(demo_music)
+			if Configurations.exists("SongRemix"):
+				if Configurations.get("SongRemix"):
+					demo_music.stream = _boss_demo_demake
+				else:
+					demo_music.stream = _boss_demo
+				demo_music.pause_mode = PAUSE_MODE_PROCESS
+				demo_music.stream.loop = true
+				demo_music.play()
+
+func stop_demo_music() -> void :
+	if demo_music and demo_music is AudioStreamPlayer:
+		demo_music.stop()
+		GameManager.dialog_box.disconnect("dialog_concluded", self, "on_concluded_dialog")
 
 func setup_collectible_name() -> void :
 	var bossdeath = character.get_node_or_null("BossDeath")
@@ -35,6 +72,7 @@ func connect_dialogue() -> void :
 	GameManager.dialog_box.connect("dialog_concluded", self, "on_concluded_dialog")
 
 func on_concluded_dialog() -> void :
+	stop_demo_music()
 	dialog_concluded = true
 
 func prepare_for_intro() -> void :
@@ -72,6 +110,7 @@ func start_dialog_or_go_to_attack_stage(skip_dialog_stage: = 0) -> void :
 		connect_dialogue()
 	if not seen_dialog():
 		GameManager.start_dialog(dialogue)
+		play_demo_music()
 		next_attack_stage()
 	elif seen_dialog():
 		go_to_attack_stage(skip_dialog_stage)

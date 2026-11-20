@@ -6,6 +6,7 @@ onready var land_sound = ""
 var dashjump_speed = 260
 var upgraded: bool = false
 var fall_base_velocity: float = 90
+onready var fallanimatedSprite = get_parent().get_node("animatedSprite")
 
 func get_shot_adust_position() -> Vector2:
 	return shot_pos_adjust
@@ -41,6 +42,9 @@ func _Update(_delta: float) -> void :
 		set_movement_and_direction(dashjump_speed, _delta)
 	else:
 		set_movement_and_direction(horizontal_velocity, _delta)
+	if fallanimatedSprite.animation == "fall":
+		if fallanimatedSprite.frame >= 15:
+			fallanimatedSprite.frame = 3
 	
 func _Setup():
 	if character.dashjumps_since_jump > 0:

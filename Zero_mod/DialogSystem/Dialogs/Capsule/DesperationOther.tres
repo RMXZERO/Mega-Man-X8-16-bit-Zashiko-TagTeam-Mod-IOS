@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://src/DialogSystem/Profiles/DialogueText.gd" type="Script" id=1]
+[ext_resource path="res://src/DialogSystem/Profiles/DrLight.tres" type="Resource" id=2]
+
+[resource]
+script = ExtResource( 1 )
+dialog = [ ExtResource( 2 ), "PLAYER_DESPERATION_UNLOCK1_OTHER", "PLAYER_DESPERATION_UNLOCK2_OTHER", "PLAYER_DESPERATION_UNLOCK3_OTHER", "PLAYER_DESPERATION_UNLOCK4_OTHER" ]

@@ -17,7 +17,8 @@ func connect_combo(_previous_combo):
 	_previous_combo.connect("damage_target",self,"_on_previous_combo_damage_target")
 
 func set_character() -> void:
-	character = get_node(owner_character)
+	if owner_character:
+		character = get_node(owner_character)
 
 func activate():
 	.activate()
@@ -56,6 +57,9 @@ func deal_damage(target) -> void:
 		target.damage(get_damage(), get_parent())
 		
 	hit_through_invulnerability = false
+
+func apply_direct_damage(target) -> void :
+	deal_damage(target)
 
 func get_damage() -> float:
 	return damage_in_combo if hit_through_invulnerability else damage

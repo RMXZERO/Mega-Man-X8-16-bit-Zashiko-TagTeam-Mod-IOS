@@ -1,81 +1,208 @@
-[gd_resource type="VisualShader" load_steps=89 format=2]
+[gd_resource type="VisualShader" load_steps=131 format=2]
 
 [sub_resource type="VisualShaderNodeScalarOp" id=105]
 default_input_values = [ 0, 0.0, 1, 2.0 ]
 operator = 3
 
 [sub_resource type="VisualShaderNodeColorUniform" id=107]
-uniform_name = "HairColor1"
+uniform_name = "AxlHairColor1"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=108]
-uniform_name = "HairColor2"
+uniform_name = "AxlHairColor2"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=109]
-uniform_name = "HairColor3"
+uniform_name = "AxlHairColor3"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=110]
-uniform_name = "YellowColor1"
+uniform_name = "AxlYellowColor1"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=111]
-uniform_name = "YellowColor2"
+uniform_name = "AxlYellowColor2"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=112]
-uniform_name = "RedColor1"
+uniform_name = "AxlRedColor1"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=113]
-uniform_name = "RedColor2"
+uniform_name = "AxlRedColor2"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=114]
-uniform_name = "R_HairColor1"
+uniform_name = "R_AxlHairColor1"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=115]
-uniform_name = "R_HairColor2"
+uniform_name = "R_AxlHairColor2"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=116]
-uniform_name = "R_HairColor3"
+uniform_name = "R_AxlHairColor3"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=117]
-uniform_name = "R_YellowColor1"
+uniform_name = "R_AxlYellowColor1"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=118]
-uniform_name = "R_YellowColor2"
+uniform_name = "R_AxlYellowColor2"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=119]
-uniform_name = "R_RedColor1"
+uniform_name = "R_AxlRedColor1"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=120]
-uniform_name = "R_RedColor2"
+uniform_name = "R_AxlRedColor2"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=121]
-uniform_name = "FlameColor1"
+uniform_name = "AxlFlameColor1"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=122]
-uniform_name = "FlameColor2"
+uniform_name = "AxlFlameColor2"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=123]
-uniform_name = "FlameColor3"
+uniform_name = "AxlFlameColor3"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=124]
-uniform_name = "R_FlameColor1"
+uniform_name = "R_AxlFlameColor1"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=125]
-uniform_name = "R_FlameColor2"
+uniform_name = "R_AxlFlameColor2"
 
 [sub_resource type="VisualShaderNodeScalarFunc" id=37]
 function = 12
 
 [sub_resource type="VisualShaderNodeColorUniform" id=126]
-uniform_name = "R_FlameColor3"
+uniform_name = "R_AxlFlameColor3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=133]
+uniform_name = "R_AxlGleyColor2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=134]
+uniform_name = "AxlGleyColor2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=135]
+uniform_name = "AxlSkinColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=136]
+uniform_name = "AxlSkinColor2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=137]
+uniform_name = "AxlSkinColor3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=138]
+uniform_name = "R_AxlSkinColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=139]
+uniform_name = "R_AxlSkinColor2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=140]
+uniform_name = "R_AxlSkinColor3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=141]
+uniform_name = "AxlAfterimagesColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=142]
+uniform_name = "AxlAfterimagesColor2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=143]
+uniform_name = "R_AxlAfterimagesColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=144]
+uniform_name = "R_AxlAfterimagesColor2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=145]
+uniform_name = "AxlGleyColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=146]
+uniform_name = "R_AxlGleyColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=147]
+uniform_name = "AxlSaberColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=148]
+uniform_name = "AxlSaberColor2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=149]
+uniform_name = "AxlSaberColor3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=150]
+uniform_name = "AxlSaberColor4"
 
 [sub_resource type="VisualShaderNodeScalarOp" id=127]
 operator = 2
 
+[sub_resource type="VisualShaderNodeColorUniform" id=151]
+uniform_name = "AxlSaberColor5"
+
+[sub_resource type="VisualShaderNodeVectorOp" id=152]
+operator = 2
+
+[sub_resource type="VisualShaderNodeVectorOp" id=153]
+operator = 2
+
+[sub_resource type="VisualShaderNodeVectorOp" id=154]
+operator = 2
+
+[sub_resource type="VisualShaderNodeVectorOp" id=155]
+operator = 2
+
+[sub_resource type="VisualShaderNodeVectorOp" id=156]
+operator = 2
+
+[sub_resource type="VisualShaderNodeColorUniform" id=157]
+uniform_name = "R_AxlSaberColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=158]
+uniform_name = "R_AxlSaberColor2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=159]
+uniform_name = "R_AxlSaberColor3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=160]
+uniform_name = "R_AxlSaberColor4"
+
 [sub_resource type="VisualShaderNodeScalarFunc" id=128]
 function = 29
+
+[sub_resource type="VisualShaderNodeColorUniform" id=161]
+uniform_name = "R_AxlSaberColor5"
+
+[sub_resource type="VisualShaderNodeIf" id=162]
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=163]
+uniform_name = "Glow"
+
+[sub_resource type="VisualShaderNodeScalarOp" id=164]
+default_input_values = [ 0, 0.0, 1, 0.8 ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeScalarOp" id=165]
+operator = 2
+
+[sub_resource type="VisualShaderNodeScalarConstant" id=166]
+constant = 5.0
+
+[sub_resource type="VisualShaderNodeScalarOp" id=167]
+default_input_values = [ 0, 0.0, 1, 1.8 ]
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=168]
+function = 1
+
+[sub_resource type="VisualShaderNodeScalarOp" id=169]
+default_input_values = [ 0, 0.0, 1, 60.0 ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeInput" id=170]
+input_name = "time"
 
 [sub_resource type="VisualShaderNodeScalarOp" id=129]
 default_input_values = [ 0, 0.0, 1, 0.3 ]
 operator = 1
+
+[sub_resource type="VisualShaderNodeColorUniform" id=171]
+uniform_name = "AxlGleyColor3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=172]
+uniform_name = "R_AxlGleyColor3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=173]
+uniform_name = "AxlOutlineColor"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=174]
+uniform_name = "R_AxlOutlineColor"
 
 [sub_resource type="VisualShaderNodeScalarUniform" id=130]
 uniform_name = "Charge"
@@ -132,7 +259,7 @@ operator = 7
 constant = 0.5
 
 [sub_resource type="VisualShaderNodeExpression" id=67]
-size = Vector2( 1033.06, 1882.97 )
+size = Vector2( 1036.94, 2575.61 )
 expression = "vec3 current_color = texture(TEXTURE, UV).rgb;
 
 if (replace (current_color, crystal_color_1, crystal_replace_1, final_color, tolerance)){}
@@ -160,49 +287,68 @@ else if (replace (current_color, flame_color_1, replace_flame_color_1, final_col
 else if (replace (current_color, flame_color_2, replace_flame_color_2, final_color, tolerance)){}
 else if (replace (current_color, flame_color_3, replace_flame_color_3, final_color, tolerance)){}
 
+else if (replace (current_color, gley_color_1, gley_replace_1, final_color, tolerance)){}
+else if (replace (current_color, gley_color_2, gley_replace_2, final_color, tolerance)){}
+else if (replace (current_color, gley_color_3, gley_replace_3, final_color, tolerance)){}
+
+else if (replace (current_color, outline_color, replace_outline_color, final_color, tolerance)){}
+
+else if (replace (current_color, skin_color_1, skin_color_replace1, final_color, tolerance)){}
+else if (replace (current_color, skin_color_2, skin_color_replace2, final_color, tolerance)){}
+else if (replace (current_color, skin_color_3, skin_color_replace3, final_color, tolerance)){}
+
+else if (replace (current_color, afterimages_color1, afterimages_color_replace1, final_color, tolerance)){}
+else if (replace (current_color, afterimages_color2, afterimages_color_replace2, final_color, tolerance)){}
+
+else if (replace (current_color, saber_color_1, saber_color_replace1, final_color, tolerance)){}
+else if (replace (current_color, saber_color_2, saber_color_replace2, final_color, tolerance)){}
+else if (replace (current_color, saber_color_3, saber_color_replace3, final_color, tolerance)){}
+else if (replace (current_color, saber_color_4, saber_color_replace4, final_color, tolerance)){}
+else if (replace (current_color, saber_color_5, saber_color_replace5, final_color, tolerance)){}
+
 else {final_color = current_color}"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=68]
-uniform_name = "MainColor1"
+uniform_name = "AxlMainColor1"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=69]
-uniform_name = "MainColor2"
+uniform_name = "AxlMainColor2"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=70]
-uniform_name = "MainColor3"
+uniform_name = "AxlMainColor3"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=71]
-uniform_name = "MainColor4"
+uniform_name = "AxlMainColor4"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=72]
-uniform_name = "MainColor5"
+uniform_name = "AxlMainColor5"
 
 [sub_resource type="VisualShaderNodeInput" id=131]
 input_name = "time"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=73]
-uniform_name = "MainColor6"
+uniform_name = "AxlMainColor6"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=74]
-uniform_name = "R_MainColor1"
+uniform_name = "R_AxlMainColor1"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=75]
-uniform_name = "R_MainColor2"
+uniform_name = "R_AxlMainColor2"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=76]
-uniform_name = "R_MainColor3"
+uniform_name = "R_AxlMainColor3"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=77]
-uniform_name = "R_MainColor4"
+uniform_name = "R_AxlMainColor4"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=78]
-uniform_name = "R_MainColor5"
+uniform_name = "R_AxlMainColor5"
 
 [sub_resource type="VisualShaderNodeScalarFunc" id=33]
 function = 1
 
 [sub_resource type="VisualShaderNodeColorUniform" id=79]
-uniform_name = "R_MainColor6"
+uniform_name = "R_AxlMainColor6"
 
 [sub_resource type="VisualShaderNodeGlobalExpression" id=80]
 size = Vector2( 1036.64, 317.838 )
@@ -222,22 +368,22 @@ expression = "bool replace (vec3 color, vec3 main_color, vec3 replace_color, out
 uniform_name = "tolerance"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=82]
-uniform_name = "CrystalColor3"
+uniform_name = "AxlCrystalColor3"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=83]
-uniform_name = "R_CrystalColor1"
+uniform_name = "R_AxlCrystalColor1"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=84]
-uniform_name = "R_CrystalColor2"
+uniform_name = "R_AxlCrystalColor2"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=85]
-uniform_name = "R_CrystalColor3"
+uniform_name = "R_AxlCrystalColor3"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=86]
-uniform_name = "CrystalColor1"
+uniform_name = "AxlCrystalColor1"
 
 [sub_resource type="VisualShaderNodeColorUniform" id=87]
-uniform_name = "CrystalColor2"
+uniform_name = "AxlCrystalColor2"
 
 [sub_resource type="VisualShaderNodeInput" id=88]
 input_name = "time"
@@ -312,46 +458,75 @@ code = "shader_type canvas_item;
 uniform float Flash;
 uniform float Charge;
 uniform vec4 Color : hint_color;
-uniform vec4 MainColor1 : hint_color;
-uniform vec4 MainColor2 : hint_color;
-uniform vec4 MainColor3 : hint_color;
-uniform vec4 MainColor4 : hint_color;
-uniform vec4 MainColor5 : hint_color;
-uniform vec4 MainColor6 : hint_color;
-uniform vec4 R_MainColor1 : hint_color;
-uniform vec4 R_MainColor2 : hint_color;
-uniform vec4 R_MainColor3 : hint_color;
-uniform vec4 R_MainColor4 : hint_color;
-uniform vec4 R_MainColor5 : hint_color;
-uniform vec4 R_MainColor6 : hint_color;
-uniform vec4 CrystalColor1 : hint_color;
-uniform vec4 CrystalColor2 : hint_color;
-uniform vec4 CrystalColor3 : hint_color;
-uniform vec4 R_CrystalColor1 : hint_color;
+uniform vec4 AxlMainColor1 : hint_color;
+uniform vec4 AxlMainColor2 : hint_color;
+uniform vec4 AxlMainColor3 : hint_color;
+uniform vec4 AxlMainColor4 : hint_color;
+uniform vec4 AxlMainColor5 : hint_color;
+uniform vec4 AxlMainColor6 : hint_color;
+uniform vec4 R_AxlMainColor1 : hint_color;
+uniform vec4 R_AxlMainColor2 : hint_color;
+uniform vec4 R_AxlMainColor3 : hint_color;
+uniform vec4 R_AxlMainColor4 : hint_color;
+uniform vec4 R_AxlMainColor5 : hint_color;
+uniform vec4 R_AxlMainColor6 : hint_color;
+uniform vec4 AxlCrystalColor1 : hint_color;
+uniform vec4 AxlCrystalColor2 : hint_color;
+uniform vec4 AxlCrystalColor3 : hint_color;
+uniform vec4 R_AxlCrystalColor1 : hint_color;
 uniform float Alert;
-uniform vec4 R_CrystalColor2 : hint_color;
-uniform vec4 R_CrystalColor3 : hint_color;
+uniform vec4 R_AxlCrystalColor2 : hint_color;
+uniform vec4 R_AxlCrystalColor3 : hint_color;
 uniform float tolerance;
-uniform vec4 HairColor1 : hint_color;
-uniform vec4 HairColor2 : hint_color;
-uniform vec4 HairColor3 : hint_color;
-uniform vec4 YellowColor1 : hint_color;
-uniform vec4 YellowColor2 : hint_color;
-uniform vec4 RedColor1 : hint_color;
-uniform vec4 RedColor2 : hint_color;
-uniform vec4 R_HairColor1 : hint_color;
-uniform vec4 R_HairColor2 : hint_color;
-uniform vec4 R_HairColor3 : hint_color;
-uniform vec4 R_YellowColor1 : hint_color;
-uniform vec4 R_YellowColor2 : hint_color;
-uniform vec4 R_RedColor1 : hint_color;
-uniform vec4 R_RedColor2 : hint_color;
-uniform vec4 FlameColor1 : hint_color;
-uniform vec4 FlameColor2 : hint_color;
-uniform vec4 FlameColor3 : hint_color;
-uniform vec4 R_FlameColor1 : hint_color;
-uniform vec4 R_FlameColor2 : hint_color;
-uniform vec4 R_FlameColor3 : hint_color;
+uniform vec4 AxlHairColor1 : hint_color;
+uniform vec4 AxlHairColor2 : hint_color;
+uniform vec4 AxlHairColor3 : hint_color;
+uniform vec4 AxlYellowColor1 : hint_color;
+uniform vec4 AxlYellowColor2 : hint_color;
+uniform vec4 AxlRedColor1 : hint_color;
+uniform vec4 AxlRedColor2 : hint_color;
+uniform vec4 R_AxlHairColor1 : hint_color;
+uniform vec4 R_AxlHairColor2 : hint_color;
+uniform vec4 R_AxlHairColor3 : hint_color;
+uniform vec4 R_AxlYellowColor1 : hint_color;
+uniform vec4 R_AxlYellowColor2 : hint_color;
+uniform vec4 R_AxlRedColor1 : hint_color;
+uniform vec4 R_AxlRedColor2 : hint_color;
+uniform vec4 AxlFlameColor1 : hint_color;
+uniform vec4 AxlFlameColor2 : hint_color;
+uniform vec4 AxlFlameColor3 : hint_color;
+uniform vec4 R_AxlFlameColor1 : hint_color;
+uniform vec4 R_AxlFlameColor2 : hint_color;
+uniform vec4 R_AxlFlameColor3 : hint_color;
+uniform vec4 AxlSkinColor1 : hint_color;
+uniform vec4 AxlSkinColor2 : hint_color;
+uniform vec4 AxlSkinColor3 : hint_color;
+uniform vec4 R_AxlSkinColor1 : hint_color;
+uniform vec4 R_AxlSkinColor2 : hint_color;
+uniform vec4 R_AxlSkinColor3 : hint_color;
+uniform vec4 AxlAfterimagesColor1 : hint_color;
+uniform vec4 AxlAfterimagesColor2 : hint_color;
+uniform vec4 R_AxlAfterimagesColor1 : hint_color;
+uniform vec4 R_AxlAfterimagesColor2 : hint_color;
+uniform vec4 AxlSaberColor1 : hint_color;
+uniform vec4 AxlSaberColor2 : hint_color;
+uniform vec4 AxlSaberColor3 : hint_color;
+uniform vec4 AxlSaberColor4 : hint_color;
+uniform vec4 AxlSaberColor5 : hint_color;
+uniform vec4 R_AxlSaberColor1 : hint_color;
+uniform float Glow;
+uniform vec4 R_AxlSaberColor2 : hint_color;
+uniform vec4 R_AxlSaberColor3 : hint_color;
+uniform vec4 R_AxlSaberColor4 : hint_color;
+uniform vec4 R_AxlSaberColor5 : hint_color;
+uniform vec4 AxlGleyColor1 : hint_color;
+uniform vec4 AxlGleyColor2 : hint_color;
+uniform vec4 AxlGleyColor3 : hint_color;
+uniform vec4 R_AxlGleyColor1 : hint_color;
+uniform vec4 R_AxlGleyColor2 : hint_color;
+uniform vec4 R_AxlGleyColor3 : hint_color;
+uniform vec4 AxlOutlineColor : hint_color;
+uniform vec4 R_AxlOutlineColor : hint_color;
 uniform float Alpha;
 
 
@@ -408,68 +583,68 @@ void fragment() {
 	float n_out39p1 = Color.a;
 
 // ColorUniform:55
-	vec3 n_out55p0 = MainColor1.rgb;
-	float n_out55p1 = MainColor1.a;
+	vec3 n_out55p0 = AxlMainColor1.rgb;
+	float n_out55p1 = AxlMainColor1.a;
 
 // ColorUniform:56
-	vec3 n_out56p0 = MainColor2.rgb;
-	float n_out56p1 = MainColor2.a;
+	vec3 n_out56p0 = AxlMainColor2.rgb;
+	float n_out56p1 = AxlMainColor2.a;
 
 // ColorUniform:57
-	vec3 n_out57p0 = MainColor3.rgb;
-	float n_out57p1 = MainColor3.a;
+	vec3 n_out57p0 = AxlMainColor3.rgb;
+	float n_out57p1 = AxlMainColor3.a;
 
 // ColorUniform:58
-	vec3 n_out58p0 = MainColor4.rgb;
-	float n_out58p1 = MainColor4.a;
+	vec3 n_out58p0 = AxlMainColor4.rgb;
+	float n_out58p1 = AxlMainColor4.a;
 
 // ColorUniform:59
-	vec3 n_out59p0 = MainColor5.rgb;
-	float n_out59p1 = MainColor5.a;
+	vec3 n_out59p0 = AxlMainColor5.rgb;
+	float n_out59p1 = AxlMainColor5.a;
 
 // ColorUniform:60
-	vec3 n_out60p0 = MainColor6.rgb;
-	float n_out60p1 = MainColor6.a;
+	vec3 n_out60p0 = AxlMainColor6.rgb;
+	float n_out60p1 = AxlMainColor6.a;
 
 // ColorUniform:65
-	vec3 n_out65p0 = R_MainColor1.rgb;
-	float n_out65p1 = R_MainColor1.a;
+	vec3 n_out65p0 = R_AxlMainColor1.rgb;
+	float n_out65p1 = R_AxlMainColor1.a;
 
 // ColorUniform:66
-	vec3 n_out66p0 = R_MainColor2.rgb;
-	float n_out66p1 = R_MainColor2.a;
+	vec3 n_out66p0 = R_AxlMainColor2.rgb;
+	float n_out66p1 = R_AxlMainColor2.a;
 
 // ColorUniform:67
-	vec3 n_out67p0 = R_MainColor3.rgb;
-	float n_out67p1 = R_MainColor3.a;
+	vec3 n_out67p0 = R_AxlMainColor3.rgb;
+	float n_out67p1 = R_AxlMainColor3.a;
 
 // ColorUniform:68
-	vec3 n_out68p0 = R_MainColor4.rgb;
-	float n_out68p1 = R_MainColor4.a;
+	vec3 n_out68p0 = R_AxlMainColor4.rgb;
+	float n_out68p1 = R_AxlMainColor4.a;
 
 // ColorUniform:69
-	vec3 n_out69p0 = R_MainColor5.rgb;
-	float n_out69p1 = R_MainColor5.a;
+	vec3 n_out69p0 = R_AxlMainColor5.rgb;
+	float n_out69p1 = R_AxlMainColor5.a;
 
 // ColorUniform:70
-	vec3 n_out70p0 = R_MainColor6.rgb;
-	float n_out70p1 = R_MainColor6.a;
+	vec3 n_out70p0 = R_AxlMainColor6.rgb;
+	float n_out70p1 = R_AxlMainColor6.a;
 
 // ColorUniform:77
-	vec3 n_out77p0 = CrystalColor1.rgb;
-	float n_out77p1 = CrystalColor1.a;
+	vec3 n_out77p0 = AxlCrystalColor1.rgb;
+	float n_out77p1 = AxlCrystalColor1.a;
 
 // ColorUniform:78
-	vec3 n_out78p0 = CrystalColor2.rgb;
-	float n_out78p1 = CrystalColor2.a;
+	vec3 n_out78p0 = AxlCrystalColor2.rgb;
+	float n_out78p1 = AxlCrystalColor2.a;
 
 // ColorUniform:73
-	vec3 n_out73p0 = CrystalColor3.rgb;
-	float n_out73p1 = CrystalColor3.a;
+	vec3 n_out73p0 = AxlCrystalColor3.rgb;
+	float n_out73p1 = AxlCrystalColor3.a;
 
 // ColorUniform:74
-	vec3 n_out74p0 = R_CrystalColor1.rgb;
-	float n_out74p1 = R_CrystalColor1.a;
+	vec3 n_out74p0 = R_AxlCrystalColor1.rgb;
+	float n_out74p1 = R_AxlCrystalColor1.a;
 
 // ScalarUniform:85
 	float n_out85p0 = Alert;
@@ -519,15 +694,15 @@ void fragment() {
 	vec3 n_out87p0 = n_out74p0 * n_out91p0;
 
 // ColorUniform:75
-	vec3 n_out75p0 = R_CrystalColor2.rgb;
-	float n_out75p1 = R_CrystalColor2.a;
+	vec3 n_out75p0 = R_AxlCrystalColor2.rgb;
+	float n_out75p1 = R_AxlCrystalColor2.a;
 
 // VectorOp:88
 	vec3 n_out88p0 = n_out75p0 * n_out91p0;
 
 // ColorUniform:76
-	vec3 n_out76p0 = R_CrystalColor3.rgb;
-	float n_out76p1 = R_CrystalColor3.a;
+	vec3 n_out76p0 = R_AxlCrystalColor3.rgb;
+	float n_out76p1 = R_AxlCrystalColor3.a;
 
 // VectorOp:89
 	vec3 n_out89p0 = n_out76p0 * n_out91p0;
@@ -536,84 +711,255 @@ void fragment() {
 	float n_out72p0 = tolerance;
 
 // ColorUniform:101
-	vec3 n_out101p0 = HairColor1.rgb;
-	float n_out101p1 = HairColor1.a;
+	vec3 n_out101p0 = AxlHairColor1.rgb;
+	float n_out101p1 = AxlHairColor1.a;
 
 // ColorUniform:102
-	vec3 n_out102p0 = HairColor2.rgb;
-	float n_out102p1 = HairColor2.a;
+	vec3 n_out102p0 = AxlHairColor2.rgb;
+	float n_out102p1 = AxlHairColor2.a;
 
 // ColorUniform:103
-	vec3 n_out103p0 = HairColor3.rgb;
-	float n_out103p1 = HairColor3.a;
+	vec3 n_out103p0 = AxlHairColor3.rgb;
+	float n_out103p1 = AxlHairColor3.a;
 
 // ColorUniform:104
-	vec3 n_out104p0 = YellowColor1.rgb;
-	float n_out104p1 = YellowColor1.a;
+	vec3 n_out104p0 = AxlYellowColor1.rgb;
+	float n_out104p1 = AxlYellowColor1.a;
 
 // ColorUniform:105
-	vec3 n_out105p0 = YellowColor2.rgb;
-	float n_out105p1 = YellowColor2.a;
+	vec3 n_out105p0 = AxlYellowColor2.rgb;
+	float n_out105p1 = AxlYellowColor2.a;
 
 // ColorUniform:106
-	vec3 n_out106p0 = RedColor1.rgb;
-	float n_out106p1 = RedColor1.a;
+	vec3 n_out106p0 = AxlRedColor1.rgb;
+	float n_out106p1 = AxlRedColor1.a;
 
 // ColorUniform:107
-	vec3 n_out107p0 = RedColor2.rgb;
-	float n_out107p1 = RedColor2.a;
+	vec3 n_out107p0 = AxlRedColor2.rgb;
+	float n_out107p1 = AxlRedColor2.a;
 
 // ColorUniform:108
-	vec3 n_out108p0 = R_HairColor1.rgb;
-	float n_out108p1 = R_HairColor1.a;
+	vec3 n_out108p0 = R_AxlHairColor1.rgb;
+	float n_out108p1 = R_AxlHairColor1.a;
 
 // ColorUniform:109
-	vec3 n_out109p0 = R_HairColor2.rgb;
-	float n_out109p1 = R_HairColor2.a;
+	vec3 n_out109p0 = R_AxlHairColor2.rgb;
+	float n_out109p1 = R_AxlHairColor2.a;
 
 // ColorUniform:110
-	vec3 n_out110p0 = R_HairColor3.rgb;
-	float n_out110p1 = R_HairColor3.a;
+	vec3 n_out110p0 = R_AxlHairColor3.rgb;
+	float n_out110p1 = R_AxlHairColor3.a;
 
 // ColorUniform:111
-	vec3 n_out111p0 = R_YellowColor1.rgb;
-	float n_out111p1 = R_YellowColor1.a;
+	vec3 n_out111p0 = R_AxlYellowColor1.rgb;
+	float n_out111p1 = R_AxlYellowColor1.a;
 
 // ColorUniform:112
-	vec3 n_out112p0 = R_YellowColor2.rgb;
-	float n_out112p1 = R_YellowColor2.a;
+	vec3 n_out112p0 = R_AxlYellowColor2.rgb;
+	float n_out112p1 = R_AxlYellowColor2.a;
 
 // ColorUniform:113
-	vec3 n_out113p0 = R_RedColor1.rgb;
-	float n_out113p1 = R_RedColor1.a;
+	vec3 n_out113p0 = R_AxlRedColor1.rgb;
+	float n_out113p1 = R_AxlRedColor1.a;
 
 // ColorUniform:114
-	vec3 n_out114p0 = R_RedColor2.rgb;
-	float n_out114p1 = R_RedColor2.a;
+	vec3 n_out114p0 = R_AxlRedColor2.rgb;
+	float n_out114p1 = R_AxlRedColor2.a;
 
 // ColorUniform:115
-	vec3 n_out115p0 = FlameColor1.rgb;
-	float n_out115p1 = FlameColor1.a;
+	vec3 n_out115p0 = AxlFlameColor1.rgb;
+	float n_out115p1 = AxlFlameColor1.a;
 
 // ColorUniform:116
-	vec3 n_out116p0 = FlameColor2.rgb;
-	float n_out116p1 = FlameColor2.a;
+	vec3 n_out116p0 = AxlFlameColor2.rgb;
+	float n_out116p1 = AxlFlameColor2.a;
 
 // ColorUniform:117
-	vec3 n_out117p0 = FlameColor3.rgb;
-	float n_out117p1 = FlameColor3.a;
+	vec3 n_out117p0 = AxlFlameColor3.rgb;
+	float n_out117p1 = AxlFlameColor3.a;
 
 // ColorUniform:118
-	vec3 n_out118p0 = R_FlameColor1.rgb;
-	float n_out118p1 = R_FlameColor1.a;
+	vec3 n_out118p0 = R_AxlFlameColor1.rgb;
+	float n_out118p1 = R_AxlFlameColor1.a;
 
 // ColorUniform:119
-	vec3 n_out119p0 = R_FlameColor2.rgb;
-	float n_out119p1 = R_FlameColor2.a;
+	vec3 n_out119p0 = R_AxlFlameColor2.rgb;
+	float n_out119p1 = R_AxlFlameColor2.a;
 
 // ColorUniform:120
-	vec3 n_out120p0 = R_FlameColor3.rgb;
-	float n_out120p1 = R_FlameColor3.a;
+	vec3 n_out120p0 = R_AxlFlameColor3.rgb;
+	float n_out120p1 = R_AxlFlameColor3.a;
+
+// ColorUniform:124
+	vec3 n_out124p0 = AxlSkinColor1.rgb;
+	float n_out124p1 = AxlSkinColor1.a;
+
+// ColorUniform:125
+	vec3 n_out125p0 = AxlSkinColor2.rgb;
+	float n_out125p1 = AxlSkinColor2.a;
+
+// ColorUniform:126
+	vec3 n_out126p0 = AxlSkinColor3.rgb;
+	float n_out126p1 = AxlSkinColor3.a;
+
+// ColorUniform:127
+	vec3 n_out127p0 = R_AxlSkinColor1.rgb;
+	float n_out127p1 = R_AxlSkinColor1.a;
+
+// ColorUniform:128
+	vec3 n_out128p0 = R_AxlSkinColor2.rgb;
+	float n_out128p1 = R_AxlSkinColor2.a;
+
+// ColorUniform:129
+	vec3 n_out129p0 = R_AxlSkinColor3.rgb;
+	float n_out129p1 = R_AxlSkinColor3.a;
+
+// ColorUniform:130
+	vec3 n_out130p0 = AxlAfterimagesColor1.rgb;
+	float n_out130p1 = AxlAfterimagesColor1.a;
+
+// ColorUniform:131
+	vec3 n_out131p0 = AxlAfterimagesColor2.rgb;
+	float n_out131p1 = AxlAfterimagesColor2.a;
+
+// ColorUniform:132
+	vec3 n_out132p0 = R_AxlAfterimagesColor1.rgb;
+	float n_out132p1 = R_AxlAfterimagesColor1.a;
+
+// ColorUniform:133
+	vec3 n_out133p0 = R_AxlAfterimagesColor2.rgb;
+	float n_out133p1 = R_AxlAfterimagesColor2.a;
+
+// ColorUniform:136
+	vec3 n_out136p0 = AxlSaberColor1.rgb;
+	float n_out136p1 = AxlSaberColor1.a;
+
+// ColorUniform:137
+	vec3 n_out137p0 = AxlSaberColor2.rgb;
+	float n_out137p1 = AxlSaberColor2.a;
+
+// ColorUniform:138
+	vec3 n_out138p0 = AxlSaberColor3.rgb;
+	float n_out138p1 = AxlSaberColor3.a;
+
+// ColorUniform:139
+	vec3 n_out139p0 = AxlSaberColor4.rgb;
+	float n_out139p1 = AxlSaberColor4.a;
+
+// ColorUniform:140
+	vec3 n_out140p0 = AxlSaberColor5.rgb;
+	float n_out140p1 = AxlSaberColor5.a;
+
+// ColorUniform:146
+	vec3 n_out146p0 = R_AxlSaberColor1.rgb;
+	float n_out146p1 = R_AxlSaberColor1.a;
+
+// ScalarUniform:152
+	float n_out152p0 = Glow;
+
+// Scalar:155
+	float n_out155p0 = 5.000000;
+
+// Input:159
+	float n_out159p0 = TIME;
+
+// ScalarOp:158
+	float n_in158p1 = 60.00000;
+	float n_out158p0 = n_out159p0 * n_in158p1;
+
+// ScalarFunc:157
+	float n_out157p0 = cos(n_out158p0);
+
+// ScalarOp:156
+	float n_in156p1 = 1.80000;
+	float n_out156p0 = n_out157p0 + n_in156p1;
+
+// ScalarOp:153
+	float n_in153p1 = 0.80000;
+	float n_out153p0 = n_out152p0 * n_in153p1;
+
+// ScalarOp:154
+	float n_out154p0 = n_out156p0 * n_out153p0;
+
+// If:151
+	float n_in151p1 = 0.00000;
+	float n_in151p2 = 0.00001;
+	vec3 n_out151p0;
+	if(abs(n_out152p0 - n_in151p1) < n_in151p2)
+	{
+		n_out151p0 = vec3(n_out155p0);
+	}
+	else if(n_out152p0 < n_in151p1)
+	{
+		n_out151p0 = vec3(n_out155p0);
+	}
+	else
+	{
+		n_out151p0 = vec3(n_out154p0);
+	}
+
+// VectorOp:141
+	vec3 n_out141p0 = n_out146p0 * n_out151p0;
+
+// ColorUniform:147
+	vec3 n_out147p0 = R_AxlSaberColor2.rgb;
+	float n_out147p1 = R_AxlSaberColor2.a;
+
+// VectorOp:142
+	vec3 n_out142p0 = n_out147p0 * n_out151p0;
+
+// ColorUniform:148
+	vec3 n_out148p0 = R_AxlSaberColor3.rgb;
+	float n_out148p1 = R_AxlSaberColor3.a;
+
+// VectorOp:143
+	vec3 n_out143p0 = n_out148p0 * n_out151p0;
+
+// ColorUniform:149
+	vec3 n_out149p0 = R_AxlSaberColor4.rgb;
+	float n_out149p1 = R_AxlSaberColor4.a;
+
+// VectorOp:144
+	vec3 n_out144p0 = n_out149p0 * n_out151p0;
+
+// ColorUniform:150
+	vec3 n_out150p0 = R_AxlSaberColor5.rgb;
+	float n_out150p1 = R_AxlSaberColor5.a;
+
+// VectorOp:145
+	vec3 n_out145p0 = n_out150p0 * n_out151p0;
+
+// ColorUniform:134
+	vec3 n_out134p0 = AxlGleyColor1.rgb;
+	float n_out134p1 = AxlGleyColor1.a;
+
+// ColorUniform:123
+	vec3 n_out123p0 = AxlGleyColor2.rgb;
+	float n_out123p1 = AxlGleyColor2.a;
+
+// ColorUniform:160
+	vec3 n_out160p0 = AxlGleyColor3.rgb;
+	float n_out160p1 = AxlGleyColor3.a;
+
+// ColorUniform:135
+	vec3 n_out135p0 = R_AxlGleyColor1.rgb;
+	float n_out135p1 = R_AxlGleyColor1.a;
+
+// ColorUniform:122
+	vec3 n_out122p0 = R_AxlGleyColor2.rgb;
+	float n_out122p1 = R_AxlGleyColor2.a;
+
+// ColorUniform:161
+	vec3 n_out161p0 = R_AxlGleyColor3.rgb;
+	float n_out161p1 = R_AxlGleyColor3.a;
+
+// ColorUniform:162
+	vec3 n_out162p0 = AxlOutlineColor.rgb;
+	float n_out162p1 = AxlOutlineColor.a;
+
+// ColorUniform:163
+	vec3 n_out163p0 = R_AxlOutlineColor.rgb;
+	float n_out163p1 = R_AxlOutlineColor.a;
 
 // Expression:54
 	vec3 n_out54p0;
@@ -647,6 +993,25 @@ void fragment() {
 		else if (replace (current_color, n_out115p0, n_out118p0, n_out54p0, n_out72p0)){}
 		else if (replace (current_color, n_out116p0, n_out119p0, n_out54p0, n_out72p0)){}
 		else if (replace (current_color, n_out117p0, n_out120p0, n_out54p0, n_out72p0)){}
+		
+		else if (replace (current_color, n_out134p0, n_out135p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out123p0, n_out122p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out160p0, n_out161p0, n_out54p0, n_out72p0)){}
+		
+		else if (replace (current_color, n_out162p0, n_out163p0, n_out54p0, n_out72p0)){}
+		
+		else if (replace (current_color, n_out124p0, n_out127p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out125p0, n_out128p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out126p0, n_out129p0, n_out54p0, n_out72p0)){}
+		
+		else if (replace (current_color, n_out130p0, n_out132p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out131p0, n_out133p0, n_out54p0, n_out72p0)){}
+		
+		else if (replace (current_color, n_out136p0, n_out141p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out137p0, n_out142p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out138p0, n_out143p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out139p0, n_out144p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out140p0, n_out145p0, n_out54p0, n_out72p0)){}
 		
 		else {n_out54p0 = current_color}
 	}
@@ -807,7 +1172,7 @@ void light() {
 
 }
 "
-graph_offset = Vector2( -640.602, -148.111 )
+graph_offset = Vector2( -3247.94, 526.192 )
 mode = 1
 flags/light_only = false
 nodes/vertex/2/node = SubResource( 20 )
@@ -870,9 +1235,9 @@ nodes/fragment/51/position = Vector2( 1080, 1480 )
 nodes/fragment/52/node = SubResource( 65 )
 nodes/fragment/52/position = Vector2( 860, 1600 )
 nodes/fragment/54/node = SubResource( 67 )
-nodes/fragment/54/position = Vector2( -1400, 380 )
-nodes/fragment/54/size = Vector2( 1033.06, 1882.97 )
-nodes/fragment/54/input_ports = "0,1,main_color_1;1,1,main_color_2;2,1,main_color_3;3,1,main_color_4;4,1,main_color_5;5,1,main_color_6;6,1,replace_color_1;7,1,replace_color_2;8,1,replace_color_3;9,1,replace_color_4;10,1,replace_color_5;11,1,replace_color_6;12,1,crystal_color_1;13,1,crystal_color_2;14,1,crystal_color_3;15,1,crystal_replace_1;16,1,crystal_replace_2;17,1,crystal_replace_3;18,0,tolerance;19,1,hair_color_1;20,1,hair_color_2;21,1,hair_color_3;22,1,yellow_color_1;23,1,yellow_color_2;24,1,red_color_1;25,1,red_color_2;26,1,replace_hair_color_1;27,1,replace_hair_color_2;28,1,replace_hair_color_3;29,1,replace_yellow_color_1;30,1,replace_yellow_color_2;31,1,replace_red_color_1;32,1,replace_red_color_2;33,1,flame_color_1;34,1,flame_color_2;35,1,flame_color_3;36,1,replace_flame_color_1;37,1,replace_flame_color_2;38,1,replace_flame_color_3;"
+nodes/fragment/54/position = Vector2( -1440, 440 )
+nodes/fragment/54/size = Vector2( 1036.94, 2575.61 )
+nodes/fragment/54/input_ports = "0,1,main_color_1;1,1,main_color_2;2,1,main_color_3;3,1,main_color_4;4,1,main_color_5;5,1,main_color_6;6,1,replace_color_1;7,1,replace_color_2;8,1,replace_color_3;9,1,replace_color_4;10,1,replace_color_5;11,1,replace_color_6;12,1,crystal_color_1;13,1,crystal_color_2;14,1,crystal_color_3;15,1,crystal_replace_1;16,1,crystal_replace_2;17,1,crystal_replace_3;18,0,tolerance;19,1,hair_color_1;20,1,hair_color_2;21,1,hair_color_3;22,1,yellow_color_1;23,1,yellow_color_2;24,1,red_color_1;25,1,red_color_2;26,1,replace_hair_color_1;27,1,replace_hair_color_2;28,1,replace_hair_color_3;29,1,replace_yellow_color_1;30,1,replace_yellow_color_2;31,1,replace_red_color_1;32,1,replace_red_color_2;33,1,flame_color_1;34,1,flame_color_2;35,1,flame_color_3;36,1,replace_flame_color_1;37,1,replace_flame_color_2;38,1,replace_flame_color_3;39,1,skin_color_1;40,1,skin_color_2;41,1,skin_color_3;42,1,skin_color_replace1;43,1,skin_color_replace2;44,1,skin_color_replace3;45,1,afterimages_color1;46,1,afterimages_color2;47,1,afterimages_color_replace1;48,1,afterimages_color_replace2;49,1,saber_color_1;50,1,saber_color_2;51,1,saber_color_3;52,1,saber_color_4;53,1,saber_color_5;54,1,saber_color_replace1;55,1,saber_color_replace2;56,1,saber_color_replace3;57,1,saber_color_replace4;58,1,saber_color_replace5;59,1,gley_color_1;60,1,gley_color_2;61,1,gley_color_3;62,1,gley_replace_1;63,1,gley_replace_2;64,1,gley_replace_3;65,1,outline_color;66,1,replace_outline_color;"
 nodes/fragment/54/output_ports = "0,1,final_color;1,1,crystal_colors;"
 nodes/fragment/54/expression = "vec3 current_color = texture(TEXTURE, UV).rgb;
 
@@ -901,33 +1266,52 @@ else if (replace (current_color, flame_color_1, replace_flame_color_1, final_col
 else if (replace (current_color, flame_color_2, replace_flame_color_2, final_color, tolerance)){}
 else if (replace (current_color, flame_color_3, replace_flame_color_3, final_color, tolerance)){}
 
+else if (replace (current_color, gley_color_1, gley_replace_1, final_color, tolerance)){}
+else if (replace (current_color, gley_color_2, gley_replace_2, final_color, tolerance)){}
+else if (replace (current_color, gley_color_3, gley_replace_3, final_color, tolerance)){}
+
+else if (replace (current_color, outline_color, replace_outline_color, final_color, tolerance)){}
+
+else if (replace (current_color, skin_color_1, skin_color_replace1, final_color, tolerance)){}
+else if (replace (current_color, skin_color_2, skin_color_replace2, final_color, tolerance)){}
+else if (replace (current_color, skin_color_3, skin_color_replace3, final_color, tolerance)){}
+
+else if (replace (current_color, afterimages_color1, afterimages_color_replace1, final_color, tolerance)){}
+else if (replace (current_color, afterimages_color2, afterimages_color_replace2, final_color, tolerance)){}
+
+else if (replace (current_color, saber_color_1, saber_color_replace1, final_color, tolerance)){}
+else if (replace (current_color, saber_color_2, saber_color_replace2, final_color, tolerance)){}
+else if (replace (current_color, saber_color_3, saber_color_replace3, final_color, tolerance)){}
+else if (replace (current_color, saber_color_4, saber_color_replace4, final_color, tolerance)){}
+else if (replace (current_color, saber_color_5, saber_color_replace5, final_color, tolerance)){}
+
 else {final_color = current_color}"
 nodes/fragment/55/node = SubResource( 68 )
-nodes/fragment/55/position = Vector2( -1920, 220 )
+nodes/fragment/55/position = Vector2( -1920, 940 )
 nodes/fragment/56/node = SubResource( 69 )
-nodes/fragment/56/position = Vector2( -1920, 320 )
+nodes/fragment/56/position = Vector2( -1920, 1040 )
 nodes/fragment/57/node = SubResource( 70 )
-nodes/fragment/57/position = Vector2( -1920, 420 )
+nodes/fragment/57/position = Vector2( -1920, 1140 )
 nodes/fragment/58/node = SubResource( 71 )
-nodes/fragment/58/position = Vector2( -1920, 520 )
+nodes/fragment/58/position = Vector2( -1920, 1240 )
 nodes/fragment/59/node = SubResource( 72 )
-nodes/fragment/59/position = Vector2( -1920, 620 )
+nodes/fragment/59/position = Vector2( -1920, 1340 )
 nodes/fragment/60/node = SubResource( 73 )
-nodes/fragment/60/position = Vector2( -1920, 720 )
+nodes/fragment/60/position = Vector2( -1920, 1440 )
 nodes/fragment/65/node = SubResource( 74 )
-nodes/fragment/65/position = Vector2( -1920, 860 )
+nodes/fragment/65/position = Vector2( -2400, 940 )
 nodes/fragment/66/node = SubResource( 75 )
-nodes/fragment/66/position = Vector2( -1920, 960 )
+nodes/fragment/66/position = Vector2( -2400, 1040 )
 nodes/fragment/67/node = SubResource( 76 )
-nodes/fragment/67/position = Vector2( -1920, 1060 )
+nodes/fragment/67/position = Vector2( -2400, 1140 )
 nodes/fragment/68/node = SubResource( 77 )
-nodes/fragment/68/position = Vector2( -1920, 1160 )
+nodes/fragment/68/position = Vector2( -2400, 1240 )
 nodes/fragment/69/node = SubResource( 78 )
-nodes/fragment/69/position = Vector2( -1920, 1260 )
+nodes/fragment/69/position = Vector2( -2400, 1340 )
 nodes/fragment/70/node = SubResource( 79 )
-nodes/fragment/70/position = Vector2( -1920, 1360 )
+nodes/fragment/70/position = Vector2( -2400, 1440 )
 nodes/fragment/71/node = SubResource( 80 )
-nodes/fragment/71/position = Vector2( -1260, 2260 )
+nodes/fragment/71/position = Vector2( -1440, 3020 )
 nodes/fragment/71/size = Vector2( 1036.64, 317.838 )
 nodes/fragment/71/input_ports = ""
 nodes/fragment/71/output_ports = ""
@@ -943,43 +1327,43 @@ nodes/fragment/71/expression = "bool replace (vec3 color, vec3 main_color, vec3 
 	return false;
 }"
 nodes/fragment/72/node = SubResource( 81 )
-nodes/fragment/72/position = Vector2( -1740, 2240 )
+nodes/fragment/72/position = Vector2( -1780, 2840 )
 nodes/fragment/73/node = SubResource( 82 )
-nodes/fragment/73/position = Vector2( -1920, 1700 )
+nodes/fragment/73/position = Vector2( -1920, 1800 )
 nodes/fragment/74/node = SubResource( 83 )
-nodes/fragment/74/position = Vector2( -2040, 1840 )
+nodes/fragment/74/position = Vector2( -2400, 1560 )
 nodes/fragment/75/node = SubResource( 84 )
-nodes/fragment/75/position = Vector2( -2040, 1960 )
+nodes/fragment/75/position = Vector2( -2400, 1680 )
 nodes/fragment/76/node = SubResource( 85 )
-nodes/fragment/76/position = Vector2( -2040, 2080 )
+nodes/fragment/76/position = Vector2( -2400, 1800 )
 nodes/fragment/77/node = SubResource( 86 )
-nodes/fragment/77/position = Vector2( -1920, 1500 )
+nodes/fragment/77/position = Vector2( -1920, 1560 )
 nodes/fragment/78/node = SubResource( 87 )
-nodes/fragment/78/position = Vector2( -1920, 1600 )
+nodes/fragment/78/position = Vector2( -1920, 1680 )
 nodes/fragment/79/node = SubResource( 88 )
-nodes/fragment/79/position = Vector2( -2960, 2380 )
+nodes/fragment/79/position = Vector2( -3000, 2980 )
 nodes/fragment/80/node = SubResource( 89 )
-nodes/fragment/80/position = Vector2( -2640, 2380 )
+nodes/fragment/80/position = Vector2( -2680, 2980 )
 nodes/fragment/81/node = SubResource( 90 )
-nodes/fragment/81/position = Vector2( -2800, 2360 )
+nodes/fragment/81/position = Vector2( -2840, 2960 )
 nodes/fragment/85/node = SubResource( 92 )
-nodes/fragment/85/position = Vector2( -2720, 2180 )
+nodes/fragment/85/position = Vector2( -2760, 2780 )
 nodes/fragment/86/node = SubResource( 93 )
-nodes/fragment/86/position = Vector2( -2140, 2300 )
+nodes/fragment/86/position = Vector2( -2180, 2900 )
 nodes/fragment/87/node = SubResource( 94 )
-nodes/fragment/87/position = Vector2( -1660, 1860 )
+nodes/fragment/87/position = Vector2( -2100, 1580 )
 nodes/fragment/88/node = SubResource( 95 )
-nodes/fragment/88/position = Vector2( -1660, 1980 )
+nodes/fragment/88/position = Vector2( -2100, 1700 )
 nodes/fragment/89/node = SubResource( 96 )
-nodes/fragment/89/position = Vector2( -1660, 2100 )
+nodes/fragment/89/position = Vector2( -2100, 1820 )
 nodes/fragment/90/node = SubResource( 97 )
-nodes/fragment/90/position = Vector2( -2380, 2260 )
+nodes/fragment/90/position = Vector2( -2420, 2860 )
 nodes/fragment/91/node = SubResource( 98 )
-nodes/fragment/91/position = Vector2( -1940, 2220 )
+nodes/fragment/91/position = Vector2( -1980, 2820 )
 nodes/fragment/92/node = SubResource( 99 )
-nodes/fragment/92/position = Vector2( -2160, 2420 )
+nodes/fragment/92/position = Vector2( -2200, 3020 )
 nodes/fragment/93/node = SubResource( 100 )
-nodes/fragment/93/position = Vector2( -2380, 2380 )
+nodes/fragment/93/position = Vector2( -2420, 2980 )
 nodes/fragment/95/node = SubResource( 101 )
 nodes/fragment/95/position = Vector2( 1060, 740 )
 nodes/fragment/96/node = SubResource( 102 )
@@ -993,43 +1377,127 @@ nodes/fragment/99/position = Vector2( 360, 1520 )
 nodes/fragment/100/node = SubResource( 105 )
 nodes/fragment/100/position = Vector2( 520, 1520 )
 nodes/fragment/101/node = SubResource( 107 )
-nodes/fragment/101/position = Vector2( -2400, 200 )
+nodes/fragment/101/position = Vector2( -1920, 220 )
 nodes/fragment/102/node = SubResource( 108 )
-nodes/fragment/102/position = Vector2( -2400, 300 )
+nodes/fragment/102/position = Vector2( -1920, 320 )
 nodes/fragment/103/node = SubResource( 109 )
-nodes/fragment/103/position = Vector2( -2400, 400 )
+nodes/fragment/103/position = Vector2( -1920, 420 )
 nodes/fragment/104/node = SubResource( 110 )
-nodes/fragment/104/position = Vector2( -2400, 500 )
+nodes/fragment/104/position = Vector2( -1920, 520 )
 nodes/fragment/105/node = SubResource( 111 )
-nodes/fragment/105/position = Vector2( -2400, 600 )
+nodes/fragment/105/position = Vector2( -1920, 620 )
 nodes/fragment/106/node = SubResource( 112 )
-nodes/fragment/106/position = Vector2( -2400, 700 )
+nodes/fragment/106/position = Vector2( -1920, 720 )
 nodes/fragment/107/node = SubResource( 113 )
-nodes/fragment/107/position = Vector2( -2400, 800 )
+nodes/fragment/107/position = Vector2( -1920, 820 )
 nodes/fragment/108/node = SubResource( 114 )
-nodes/fragment/108/position = Vector2( -2400, 940 )
+nodes/fragment/108/position = Vector2( -2400, 220 )
 nodes/fragment/109/node = SubResource( 115 )
-nodes/fragment/109/position = Vector2( -2400, 1040 )
+nodes/fragment/109/position = Vector2( -2400, 320 )
 nodes/fragment/110/node = SubResource( 116 )
-nodes/fragment/110/position = Vector2( -2400, 1140 )
+nodes/fragment/110/position = Vector2( -2400, 420 )
 nodes/fragment/111/node = SubResource( 117 )
-nodes/fragment/111/position = Vector2( -2400, 1240 )
+nodes/fragment/111/position = Vector2( -2400, 520 )
 nodes/fragment/112/node = SubResource( 118 )
-nodes/fragment/112/position = Vector2( -2400, 1340 )
+nodes/fragment/112/position = Vector2( -2400, 620 )
 nodes/fragment/113/node = SubResource( 119 )
-nodes/fragment/113/position = Vector2( -2400, 1440 )
+nodes/fragment/113/position = Vector2( -2400, 720 )
 nodes/fragment/114/node = SubResource( 120 )
-nodes/fragment/114/position = Vector2( -2400, 1540 )
+nodes/fragment/114/position = Vector2( -2400, 820 )
 nodes/fragment/115/node = SubResource( 121 )
-nodes/fragment/115/position = Vector2( -1460, 100 )
+nodes/fragment/115/position = Vector2( -1920, -140 )
 nodes/fragment/116/node = SubResource( 122 )
-nodes/fragment/116/position = Vector2( -1200, 100 )
+nodes/fragment/116/position = Vector2( -1920, -20 )
 nodes/fragment/117/node = SubResource( 123 )
-nodes/fragment/117/position = Vector2( -940, 100 )
+nodes/fragment/117/position = Vector2( -1920, 100 )
 nodes/fragment/118/node = SubResource( 124 )
-nodes/fragment/118/position = Vector2( -1460, 220 )
+nodes/fragment/118/position = Vector2( -2400, -140 )
 nodes/fragment/119/node = SubResource( 125 )
-nodes/fragment/119/position = Vector2( -1200, 220 )
+nodes/fragment/119/position = Vector2( -2400, -20 )
 nodes/fragment/120/node = SubResource( 126 )
-nodes/fragment/120/position = Vector2( -940, 220 )
-nodes/fragment/connections = PoolIntArray( 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 101, 0, 54, 19, 102, 0, 54, 20, 103, 0, 54, 21, 104, 0, 54, 22, 105, 0, 54, 23, 106, 0, 54, 24, 107, 0, 54, 25, 108, 0, 54, 26, 109, 0, 54, 27, 110, 0, 54, 28, 111, 0, 54, 29, 112, 0, 54, 30, 113, 0, 54, 31, 114, 0, 54, 32, 115, 0, 54, 33, 116, 0, 54, 34, 117, 0, 54, 35, 118, 0, 54, 36, 119, 0, 54, 37, 120, 0, 54, 38, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 101, 0, 54, 19, 102, 0, 54, 20, 103, 0, 54, 21, 104, 0, 54, 22, 105, 0, 54, 23, 106, 0, 54, 24, 107, 0, 54, 25, 108, 0, 54, 26, 109, 0, 54, 27, 110, 0, 54, 28, 111, 0, 54, 29, 112, 0, 54, 30, 113, 0, 54, 31, 114, 0, 54, 32, 115, 0, 54, 33, 116, 0, 54, 34, 117, 0, 54, 35, 118, 0, 54, 36, 119, 0, 54, 37, 120, 0, 54, 38, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 101, 0, 54, 19, 102, 0, 54, 20, 103, 0, 54, 21, 104, 0, 54, 22, 105, 0, 54, 23, 106, 0, 54, 24, 107, 0, 54, 25, 108, 0, 54, 26, 109, 0, 54, 27, 110, 0, 54, 28, 111, 0, 54, 29, 112, 0, 54, 30, 113, 0, 54, 31, 114, 0, 54, 32, 115, 0, 54, 33, 116, 0, 54, 34, 117, 0, 54, 35, 118, 0, 54, 36, 119, 0, 54, 37, 120, 0, 54, 38, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 101, 0, 54, 19, 102, 0, 54, 20, 103, 0, 54, 21, 104, 0, 54, 22, 105, 0, 54, 23, 106, 0, 54, 24, 107, 0, 54, 25, 108, 0, 54, 26, 109, 0, 54, 27, 110, 0, 54, 28, 111, 0, 54, 29, 112, 0, 54, 30, 113, 0, 54, 31, 114, 0, 54, 32, 115, 0, 54, 33, 116, 0, 54, 34, 117, 0, 54, 35, 118, 0, 54, 36, 119, 0, 54, 37, 120, 0, 54, 38, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 101, 0, 54, 19, 102, 0, 54, 20, 103, 0, 54, 21, 104, 0, 54, 22, 105, 0, 54, 23, 106, 0, 54, 24, 107, 0, 54, 25, 108, 0, 54, 26, 109, 0, 54, 27, 110, 0, 54, 28, 111, 0, 54, 29, 112, 0, 54, 30, 113, 0, 54, 31, 114, 0, 54, 32, 115, 0, 54, 33, 116, 0, 54, 34, 117, 0, 54, 35, 118, 0, 54, 36, 119, 0, 54, 37, 120, 0, 54, 38, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 101, 0, 54, 19, 102, 0, 54, 20, 103, 0, 54, 21, 104, 0, 54, 22, 105, 0, 54, 23, 106, 0, 54, 24, 107, 0, 54, 25, 108, 0, 54, 26, 109, 0, 54, 27, 110, 0, 54, 28, 111, 0, 54, 29, 112, 0, 54, 30, 113, 0, 54, 31, 114, 0, 54, 32, 115, 0, 54, 33, 116, 0, 54, 34, 117, 0, 54, 35, 118, 0, 54, 36, 119, 0, 54, 37, 120, 0, 54, 38, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 101, 0, 54, 19, 102, 0, 54, 20, 103, 0, 54, 21, 104, 0, 54, 22, 105, 0, 54, 23, 106, 0, 54, 24, 107, 0, 54, 25, 108, 0, 54, 26, 109, 0, 54, 27, 110, 0, 54, 28, 111, 0, 54, 29, 112, 0, 54, 30, 113, 0, 54, 31, 114, 0, 54, 32, 115, 0, 54, 33, 116, 0, 54, 34, 117, 0, 54, 35, 118, 0, 54, 36, 119, 0, 54, 37, 120, 0, 54, 38, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 101, 0, 54, 19, 102, 0, 54, 20, 103, 0, 54, 21, 104, 0, 54, 22, 105, 0, 54, 23, 106, 0, 54, 24, 107, 0, 54, 25, 108, 0, 54, 26, 109, 0, 54, 27, 110, 0, 54, 28, 111, 0, 54, 29, 112, 0, 54, 30, 113, 0, 54, 31, 114, 0, 54, 32, 115, 0, 54, 33, 116, 0, 54, 34, 117, 0, 54, 35, 118, 0, 54, 36, 119, 0, 54, 37, 120, 0, 54, 38 )
+nodes/fragment/120/position = Vector2( -2400, 100 )
+nodes/fragment/122/node = SubResource( 133 )
+nodes/fragment/122/position = Vector2( -3340, 1920 )
+nodes/fragment/123/node = SubResource( 134 )
+nodes/fragment/123/position = Vector2( -2860, 1920 )
+nodes/fragment/124/node = SubResource( 135 )
+nodes/fragment/124/position = Vector2( -1920, 2160 )
+nodes/fragment/125/node = SubResource( 136 )
+nodes/fragment/125/position = Vector2( -1920, 2280 )
+nodes/fragment/126/node = SubResource( 137 )
+nodes/fragment/126/position = Vector2( -1920, 2400 )
+nodes/fragment/127/node = SubResource( 138 )
+nodes/fragment/127/position = Vector2( -2400, 2160 )
+nodes/fragment/128/node = SubResource( 139 )
+nodes/fragment/128/position = Vector2( -2400, 2280 )
+nodes/fragment/129/node = SubResource( 140 )
+nodes/fragment/129/position = Vector2( -2400, 2400 )
+nodes/fragment/130/node = SubResource( 141 )
+nodes/fragment/130/position = Vector2( -1920, 2520 )
+nodes/fragment/131/node = SubResource( 142 )
+nodes/fragment/131/position = Vector2( -1920, 2640 )
+nodes/fragment/132/node = SubResource( 143 )
+nodes/fragment/132/position = Vector2( -2400, 2520 )
+nodes/fragment/133/node = SubResource( 144 )
+nodes/fragment/133/position = Vector2( -2400, 2640 )
+nodes/fragment/134/node = SubResource( 145 )
+nodes/fragment/134/position = Vector2( -2860, 1800 )
+nodes/fragment/135/node = SubResource( 146 )
+nodes/fragment/135/position = Vector2( -3340, 1800 )
+nodes/fragment/136/node = SubResource( 147 )
+nodes/fragment/136/position = Vector2( -300, 2300 )
+nodes/fragment/137/node = SubResource( 148 )
+nodes/fragment/137/position = Vector2( -300, 2420 )
+nodes/fragment/138/node = SubResource( 149 )
+nodes/fragment/138/position = Vector2( -300, 2540 )
+nodes/fragment/139/node = SubResource( 150 )
+nodes/fragment/139/position = Vector2( -300, 2660 )
+nodes/fragment/140/node = SubResource( 151 )
+nodes/fragment/140/position = Vector2( -300, 2780 )
+nodes/fragment/141/node = SubResource( 152 )
+nodes/fragment/141/position = Vector2( 400, 2300 )
+nodes/fragment/142/node = SubResource( 153 )
+nodes/fragment/142/position = Vector2( 400, 2420 )
+nodes/fragment/143/node = SubResource( 154 )
+nodes/fragment/143/position = Vector2( 400, 2540 )
+nodes/fragment/144/node = SubResource( 155 )
+nodes/fragment/144/position = Vector2( 400, 2660 )
+nodes/fragment/145/node = SubResource( 156 )
+nodes/fragment/145/position = Vector2( 400, 2780 )
+nodes/fragment/146/node = SubResource( 157 )
+nodes/fragment/146/position = Vector2( 80, 2300 )
+nodes/fragment/147/node = SubResource( 158 )
+nodes/fragment/147/position = Vector2( 80, 2420 )
+nodes/fragment/148/node = SubResource( 159 )
+nodes/fragment/148/position = Vector2( 80, 2540 )
+nodes/fragment/149/node = SubResource( 160 )
+nodes/fragment/149/position = Vector2( 80, 2660 )
+nodes/fragment/150/node = SubResource( 161 )
+nodes/fragment/150/position = Vector2( 80, 2780 )
+nodes/fragment/151/node = SubResource( 162 )
+nodes/fragment/151/position = Vector2( 720, 2000 )
+nodes/fragment/152/node = SubResource( 163 )
+nodes/fragment/152/position = Vector2( -20, 2000 )
+nodes/fragment/153/node = SubResource( 164 )
+nodes/fragment/153/position = Vector2( 280, 2000 )
+nodes/fragment/154/node = SubResource( 165 )
+nodes/fragment/154/position = Vector2( 460, 2000 )
+nodes/fragment/155/node = SubResource( 166 )
+nodes/fragment/155/position = Vector2( 460, 2140 )
+nodes/fragment/156/node = SubResource( 167 )
+nodes/fragment/156/position = Vector2( 260, 2140 )
+nodes/fragment/157/node = SubResource( 168 )
+nodes/fragment/157/position = Vector2( 60, 2140 )
+nodes/fragment/158/node = SubResource( 169 )
+nodes/fragment/158/position = Vector2( -120, 2140 )
+nodes/fragment/159/node = SubResource( 170 )
+nodes/fragment/159/position = Vector2( -300, 2140 )
+nodes/fragment/160/node = SubResource( 171 )
+nodes/fragment/160/position = Vector2( -2860, 2040 )
+nodes/fragment/161/node = SubResource( 172 )
+nodes/fragment/161/position = Vector2( -3340, 2040 )
+nodes/fragment/162/node = SubResource( 173 )
+nodes/fragment/162/position = Vector2( -2860, 2220 )
+nodes/fragment/163/node = SubResource( 174 )
+nodes/fragment/163/position = Vector2( -3340, 2220 )
+nodes/fragment/connections = PoolIntArray( 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 101, 0, 54, 19, 102, 0, 54, 20, 103, 0, 54, 21, 104, 0, 54, 22, 105, 0, 54, 23, 106, 0, 54, 24, 107, 0, 54, 25, 108, 0, 54, 26, 109, 0, 54, 27, 110, 0, 54, 28, 111, 0, 54, 29, 112, 0, 54, 30, 113, 0, 54, 31, 114, 0, 54, 32, 115, 0, 54, 33, 116, 0, 54, 34, 117, 0, 54, 35, 118, 0, 54, 36, 119, 0, 54, 37, 120, 0, 54, 38, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 101, 0, 54, 19, 102, 0, 54, 20, 103, 0, 54, 21, 104, 0, 54, 22, 105, 0, 54, 23, 106, 0, 54, 24, 107, 0, 54, 25, 108, 0, 54, 26, 109, 0, 54, 27, 110, 0, 54, 28, 111, 0, 54, 29, 112, 0, 54, 30, 113, 0, 54, 31, 114, 0, 54, 32, 115, 0, 54, 33, 116, 0, 54, 34, 117, 0, 54, 35, 118, 0, 54, 36, 119, 0, 54, 37, 120, 0, 54, 38, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 101, 0, 54, 19, 102, 0, 54, 20, 103, 0, 54, 21, 104, 0, 54, 22, 105, 0, 54, 23, 106, 0, 54, 24, 107, 0, 54, 25, 108, 0, 54, 26, 109, 0, 54, 27, 110, 0, 54, 28, 111, 0, 54, 29, 112, 0, 54, 30, 113, 0, 54, 31, 114, 0, 54, 32, 115, 0, 54, 33, 116, 0, 54, 34, 117, 0, 54, 35, 118, 0, 54, 36, 119, 0, 54, 37, 120, 0, 54, 38, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 101, 0, 54, 19, 102, 0, 54, 20, 103, 0, 54, 21, 104, 0, 54, 22, 105, 0, 54, 23, 106, 0, 54, 24, 107, 0, 54, 25, 108, 0, 54, 26, 109, 0, 54, 27, 110, 0, 54, 28, 111, 0, 54, 29, 112, 0, 54, 30, 113, 0, 54, 31, 114, 0, 54, 32, 115, 0, 54, 33, 116, 0, 54, 34, 117, 0, 54, 35, 118, 0, 54, 36, 119, 0, 54, 37, 120, 0, 54, 38, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 101, 0, 54, 19, 102, 0, 54, 20, 103, 0, 54, 21, 104, 0, 54, 22, 105, 0, 54, 23, 106, 0, 54, 24, 107, 0, 54, 25, 108, 0, 54, 26, 109, 0, 54, 27, 110, 0, 54, 28, 111, 0, 54, 29, 112, 0, 54, 30, 113, 0, 54, 31, 114, 0, 54, 32, 115, 0, 54, 33, 116, 0, 54, 34, 117, 0, 54, 35, 118, 0, 54, 36, 119, 0, 54, 37, 120, 0, 54, 38, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 101, 0, 54, 19, 102, 0, 54, 20, 103, 0, 54, 21, 104, 0, 54, 22, 105, 0, 54, 23, 106, 0, 54, 24, 107, 0, 54, 25, 108, 0, 54, 26, 109, 0, 54, 27, 110, 0, 54, 28, 111, 0, 54, 29, 112, 0, 54, 30, 113, 0, 54, 31, 114, 0, 54, 32, 115, 0, 54, 33, 116, 0, 54, 34, 117, 0, 54, 35, 118, 0, 54, 36, 119, 0, 54, 37, 120, 0, 54, 38, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 101, 0, 54, 19, 102, 0, 54, 20, 103, 0, 54, 21, 104, 0, 54, 22, 105, 0, 54, 23, 106, 0, 54, 24, 107, 0, 54, 25, 108, 0, 54, 26, 109, 0, 54, 27, 110, 0, 54, 28, 111, 0, 54, 29, 112, 0, 54, 30, 113, 0, 54, 31, 114, 0, 54, 32, 115, 0, 54, 33, 116, 0, 54, 34, 117, 0, 54, 35, 118, 0, 54, 36, 119, 0, 54, 37, 120, 0, 54, 38, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 14, 0, 37, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 95, 0, 96, 0, 95, 0, 96, 4, 37, 0, 96, 5, 96, 0, 0, 0, 95, 0, 97, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 101, 0, 54, 19, 102, 0, 54, 20, 103, 0, 54, 21, 104, 0, 54, 22, 105, 0, 54, 23, 106, 0, 54, 24, 107, 0, 54, 25, 108, 0, 54, 26, 109, 0, 54, 27, 110, 0, 54, 28, 111, 0, 54, 29, 112, 0, 54, 30, 113, 0, 54, 31, 114, 0, 54, 32, 115, 0, 54, 33, 116, 0, 54, 34, 117, 0, 54, 35, 118, 0, 54, 36, 119, 0, 54, 37, 120, 0, 54, 38, 146, 0, 141, 0, 147, 0, 142, 0, 148, 0, 143, 0, 149, 0, 144, 0, 150, 0, 145, 0, 151, 0, 141, 1, 151, 0, 142, 1, 151, 0, 143, 1, 151, 0, 144, 1, 151, 0, 145, 1, 152, 0, 151, 0, 152, 0, 153, 0, 153, 0, 154, 1, 154, 0, 151, 4, 155, 0, 151, 5, 155, 0, 151, 3, 156, 0, 154, 0, 157, 0, 156, 0, 158, 0, 157, 0, 159, 0, 158, 0, 124, 0, 54, 39, 125, 0, 54, 40, 126, 0, 54, 41, 127, 0, 54, 42, 128, 0, 54, 43, 129, 0, 54, 44, 130, 0, 54, 45, 131, 0, 54, 46, 132, 0, 54, 47, 133, 0, 54, 48, 136, 0, 54, 49, 137, 0, 54, 50, 138, 0, 54, 51, 139, 0, 54, 52, 140, 0, 54, 53, 141, 0, 54, 54, 142, 0, 54, 55, 143, 0, 54, 56, 144, 0, 54, 57, 145, 0, 54, 58, 134, 0, 54, 59, 123, 0, 54, 60, 135, 0, 54, 62, 122, 0, 54, 63, 160, 0, 54, 61, 161, 0, 54, 64, 162, 0, 54, 65, 163, 0, 54, 66 )

@@ -5,6 +5,7 @@ export  var dash_duration: = 0.55
 export  var upgraded: = false
 export  var invulnerability_duration: = 0.0
 export  var leeway: = 0.1
+onready var animatedSprite = get_parent().get_node("animatedSprite")
 onready var particles = character.get_node("animatedSprite").get_node("Dash Smoke Particles")
 onready var dash_particle = get_node("dash_particle")
 var ghost_particle
@@ -65,6 +66,9 @@ func _Update(_delta: float) -> void :
 		change_animation_if_falling("fall")
 		set_movement_and_direction(horizontal_velocity)
 		process_gravity(_delta)
+	if animatedSprite.animation == "dash":
+		if animatedSprite.frame >= 14:
+			animatedSprite.frame = 2
 
 func increase_left_ground_timer(_delta: float) -> void :
 	if left_ground_timer > 0.0:
@@ -83,7 +87,7 @@ func synchronize_sprite_effect():
 		sprite_effect.frame = character.animatedSprite.frame
 		sprite_effect.set_scale(Vector2(character.get_facing_direction(), 1))
 		ghost_particle.set_scale(Vector2(character.get_facing_direction(), 1))
-	
+
 func change_animation_if_falling(_s) -> void :
 	EndAbility()
 	character.start_dashfall()
@@ -116,6 +120,8 @@ func should_dash() -> bool:
 func _StartCondition() -> bool:
 	var _animation = get_parent().get_animation()
 	if _animation in character.saber_animations:
+		if _animation == "saber_6":
+			return true
 		return false
 	if facing_a_wall():
 		return false

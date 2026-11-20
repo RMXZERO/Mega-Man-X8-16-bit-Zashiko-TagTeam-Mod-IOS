@@ -15,7 +15,6 @@ script = ExtResource( 1 )
 scale = Vector2( 40, 1 )
 frames = ExtResource( 3 )
 animation = "ready"
-frame = 9
 playing = true
 
 [node name="SlashHitbox" type="Node2D" parent="."]

@@ -47,7 +47,6 @@ animation = "intro"
 modulate = Color( 1, 0.752941, 0.752941, 1 )
 position = Vector2( 0, -6 )
 frames = SubResource( 5 )
-frame = 3
 playing = true
 
 [node name="sound" type="AudioStreamPlayer2D" parent="."]

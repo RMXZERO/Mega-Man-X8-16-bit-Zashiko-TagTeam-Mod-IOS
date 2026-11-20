@@ -3,7 +3,7 @@ extends GenericProjectile
 export var blast_area : PackedScene
 var descending := false
 
-func _Update(delta) -> void:
+func _Update(_delta) -> void:
 	rotate_towards_direction()
 	if is_on_floor() or is_on_wall() or is_on_ceiling():
 		explode()

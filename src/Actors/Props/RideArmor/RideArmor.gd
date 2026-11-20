@@ -29,9 +29,10 @@ func _ready() -> void :
 	call_deferred("emit_signal", "spawned")
 	if Configurations.exists("SongRemix"):
 		if Configurations.get("SongRemix"):
-			song_intro = song_remix_intro
-			song_loop = song_remix_loop
-			song_loop.loop = true
+			if song_intro != null and song_loop != null:
+				song_intro = song_remix_intro
+				song_loop = song_remix_loop
+				song_loop.loop = true
 
 func end_stage() -> void :
 	stop_listening_to_inputs()
@@ -142,13 +143,15 @@ func end_all_abilities() -> void :
 
 func should_play_song() -> bool:
 	if song_loop and GameManager.music_player:
-		return not GameManager.music_player.is_playing_boss_song() and not GameManager.music_player.is_playing_miniboss_song()
+		return not GameManager.music_player.is_playing_boss_song() and not GameManager.music_player.is_playing_miniboss_song() and not GameManager.music_player.is_playing_angry_boss_song()
 	return false
 
 func play_ridearmor_song() -> void :
 	song_timer = 0
-	if should_play_song():
-		GameManager.music_player.play_song(song_loop, song_intro)
+	var current_scene = get_tree().current_scene
+	if current_scene and current_scene.name == "BoosterForest":
+		if should_play_song():
+			GameManager.music_player.play_song(song_loop, song_intro)
 
 func play_stage_song() -> void :
 	if should_play_song():

@@ -1,6 +1,8 @@
 extends DamageOnTouch
 class_name ProjectileDOT
 
+export var hit_through_invulnerability: bool = false
+
 func should_deal_damage() -> bool:
 	return target_list.size() > 0 and active
 
@@ -20,9 +22,15 @@ func _on_area2D_body_exited(_body: Node) -> void:
 func deal_damage_to_targets_in_list():
 	if target_list.size() > 0 and can_hit:
 		for target in target_list:
-			if is_instance_valid(target) and not target.is_invulnerable():
-				Log("Dealing " + str(damage) + " damage to: " + target.name)
-				get_parent().hit(target)
+			if is_instance_valid(target):
+				if hit_through_invulnerability:
+					hit_through_invulnerability = false
+					Log("Dealing " + str(damage) + " damage to: " + target.name)
+					GameManager.player.invulnerability = 0.0
+					get_parent().hit(target)
+				elif not target.is_invulnerable():
+					Log("Dealing " + str(damage) + " damage to: " + target.name)
+					get_parent().hit(target)
 
 func play_shader():
 	#nao sei pq isso esta aqui, deletar depois e ver o que acontece

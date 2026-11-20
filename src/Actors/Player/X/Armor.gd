@@ -33,6 +33,7 @@ onready var legs_armor = playerSprite.get_node("legs_armor")
 onready var ultimate_armor = playerSprite.get_node("ultimate_armor")
 onready var ultimate_armor_canon = playerSprite.get_node("ultimate_canon")
 onready var armor = [head_armor, body_armor, arms_armor, cann_armor, legs_armor]
+onready var armor_ultimate = [ultimate_armor, ultimate_armor_canon]
 
 func _ready() -> void :
 	Event.listen("collected", self, "collected")
@@ -93,15 +94,22 @@ func change_colors(part, new_colors):
 	part.material.set_shader_param("R_MainColor6", new_colors[2])
 
 func _process(_delta: float) -> void :
-	if CharacterManager.ultimate_x_armor:
+	if CharacterManager.ultimate_x_armor and not CharacterManager.hide_x_armor:
+		playerSprite.self_modulate = Color(1, 1, 1, 0)
 		handle_ultimate_visibleness()
+		synchronize_shaders()
 		synchronize_ultimate_animations(character.get_animation())
 	else:
+		playerSprite.self_modulate = Color(1, 1, 1, 1)
+		ultimate_armor.visible = false
+		ultimate_armor_canon.visible = false
 		handle_armor_visibleness()
 		synchronize_shaders()
 		synchronize_part_animations(character.get_animation())
 
 func handle_ultimate_visibleness() -> void :
+	for part in armor:
+		part.visible = false
 	ultimate_armor.visible = true
 	swap_ultimate_arms_and_cannon()
 	
@@ -131,8 +139,11 @@ func synchronize_ultimate_animations(character_animation: String) -> void :
 	
 func play_animation_on_ultimate(part, anim_to_play):
 	if get_animation(part) != anim_to_play:
-		if anim_to_play != "empty":
+		#if anim_to_play != "empty":
+		if part.frames.has_animation(anim_to_play):
 			part.play(anim_to_play)
+		else:
+			part.play("empty")
 	if playerSprite.frame != part.frame:
 		part.frame = playerSprite.frame
 
@@ -161,6 +172,11 @@ func synchronize_shaders() -> void :
 		part.material.set_shader_param("Charge", _charge)
 		part.material.set_shader_param("Alpha", _alpha)
 		part.material.set_shader_param("Flash", _flash)
+	for ultima in armor_ultimate:
+		ultima.material.set_shader_param("Color", _chargecolor)
+		ultima.material.set_shader_param("Charge", _charge)
+		ultima.material.set_shader_param("Alpha", _alpha)
+		ultima.material.set_shader_param("Flash", _flash)
 
 func synchronize_part_animations(character_animation: String) -> void :
 	var anim_to_play
@@ -177,8 +193,11 @@ func synchronize_part_animations(character_animation: String) -> void :
 
 func play_animation_on_part(part, anim_to_play):
 	if get_animation(part) != anim_to_play:
-		if anim_to_play != "empty":
+		#if anim_to_play != "empty":
+		if part.frames.has_animation(anim_to_play):
 			part.play(anim_to_play)
+		else:
+			part.play("empty")
 	if playerSprite.frame != part.frame:
 		part.frame = playerSprite.frame
 
@@ -199,10 +218,27 @@ func is_shooting() -> bool:
 	return playerSprite.frames.resource_name == "pointing_cannon"
 
 func handle_armor_visibleness():
-	head_armor.visible = show_head
-	body_armor.visible = show_body
-	legs_armor.visible = show_legs
-	swap_arms_and_cannon()
+	if GameManager.is_player_in_scene():
+		if "icarus_head" in character.current_armor or "hermes_head" in character.current_armor:
+			head_armor.visible = true
+		else:
+			head_armor.visible = false
+
+		if "icarus_body" in character.current_armor or "hermes_body" in character.current_armor:
+			body_armor.visible = true
+		else:
+			body_armor.visible = false
+
+		if "icarus_legs" in character.current_armor or "hermes_legs" in character.current_armor:
+			legs_armor.visible = true
+		else:
+			legs_armor.visible = false
+
+		if "icarus_arms" in character.current_armor or "hermes_arms" in character.current_armor:
+			swap_arms_and_cannon()
+		else:
+			arms_armor.visible = false
+			cann_armor.visible = false
 
 func swap_arms_and_cannon():
 	if is_shooting() and show_arms:

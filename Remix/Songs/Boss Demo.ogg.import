@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Boss Demo.ogg-ca2e1469ce5a33feac6474d2e147cae0.oggstr"
+
+[deps]
+
+source_file="res://Remix/Songs/Boss Demo.ogg"
+dest_files=[ "res://.import/Boss Demo.ogg-ca2e1469ce5a33feac6474d2e147cae0.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

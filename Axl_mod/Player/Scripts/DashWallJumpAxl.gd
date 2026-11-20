@@ -38,6 +38,13 @@ func change_animation_if_falling(_s) -> void :
 				EndAbility()
 				character.start_dashfall()
 
+func set_movement_and_direction(_horizontal_speed: float, _delta: = 0.016) -> void :
+	if delay_has_expired():
+		if delay_and_move_away_duration_have_expired():
+			.set_movement_and_direction(horizontal_velocity)
+		else:
+			move_away_from_wall(_delta)
+
 func move_away_from_wall(_delta: float):
 	character.set_horizontal_speed(horizontal_velocity * - character.get_facing_direction())
 

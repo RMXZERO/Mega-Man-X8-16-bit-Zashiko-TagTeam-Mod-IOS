@@ -29,7 +29,7 @@ func add_projectile_to_scene(charge_level: int) -> void :
 		vertical_dir = 1
 		
 	character.get_node("offset manager").get_offset()
-	shot_direction_node.projectile_speed_control(_shot, bullet_speed, horizontal_dir, vertical_dir)
+	shot_direction_node.projectile_speed_control(_shot, bullet_speed * extra_speed, horizontal_dir, vertical_dir)
 	bullet_count += 1
 	if bullet_count >= 8:
 		_shot.blue_bullet = true
@@ -37,9 +37,9 @@ func add_projectile_to_scene(charge_level: int) -> void :
 	get_tree().current_scene.add_child(_shot, true)
 	position_shot(_shot)
 	connect_shot_event(_shot)
-	_shot.damage = projectile_damage
-	_shot.damage_to_bosses = projectile_damage_to_bosses
-	_shot.damage_to_weakness = projectile_damage_to_weakness
+	_shot.damage = projectile_damage * extra_damage
+	_shot.damage_to_bosses = projectile_damage_to_bosses * extra_damage
+	_shot.damage_to_weakness = projectile_damage_to_weakness * extra_damage
 	Event.emit_signal("shot_lemon", self, _shot)
 
 func on_lemon_shot_created(emitter, shot) -> void :

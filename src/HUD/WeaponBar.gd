@@ -28,6 +28,8 @@ func display(current_weapon) -> void :
 	emit_signal("displayed", current_weapon, char_name)
 
 func is_exception(current_weapon) -> bool:
+	if current_weapon == null:
+		return true
 	if "Buster" in current_weapon.name:
 		return true
 	if "Pistol" in current_weapon.name:
@@ -48,6 +50,7 @@ func get_bar_value() -> float:
 func _ready() -> void :
 	Event.listen("changed_weapon", self, "display")
 	hide()
+	#if not CharacterManager.weaponget:
 	if x_bar.team_member_index > 0 and CharacterManager.team.size() > 1:
 		char_name = CharacterManager.team[x_bar.team_member_index]
 	else:

@@ -51,14 +51,12 @@ break_guard_damage = 0.0
 z_index = 6
 frames = ExtResource( 8 )
 animation = "Tag"
-frame = 2
 playing = true
 
 [node name="freeze_effect" type="AnimatedSprite" parent="."]
 visible = false
 z_index = 6
 frames = ExtResource( 7 )
-frame = 1
 playing = true
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="."]

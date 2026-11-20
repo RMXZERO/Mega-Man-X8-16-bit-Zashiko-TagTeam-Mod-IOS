@@ -2,6 +2,7 @@ extends AttackAbility
 
 export var death_walls : PackedScene
 export var music : AudioStream
+export var music_demake : AudioStream
 onready var space: Node = $"../Space"
 onready var tween := TweenController.new(self,false)
 var walls : Array
@@ -17,6 +18,13 @@ func _Setup():
 	set_armor()
 	#tween.method("set_armor",.75,1.0,20.0)
 
+func ParadiseLost_music() -> void:
+	if Configurations.exists("SongRemix"):
+		if Configurations.get("SongRemix"):
+			GameManager.music_player.play_song_wo_fadein(music_demake)
+		else:
+			GameManager.music_player.play_song_wo_fadein(music)
+
 func _Update(_delta) -> void:
 	reduce_teleport_time(_delta)
 	if attack_stage == 1:
@@ -29,7 +37,7 @@ func _Update(_delta) -> void:
 		play_animation("scream_start")
 		flap.play_rp()
 		screenshake()
-		GameManager.music_player.play_song_wo_fadein(music)
+		ParadiseLost_music()
 		create_wall(1)
 		create_wall(-1)
 		next_attack_stage()

@@ -2,6 +2,8 @@ extends WeaponAxl
 
 export  var boss_animation: String = ""
 export  var animation_time: float = 2.0
+export  var _sprites_weapon: SpriteFrames
+export  var _sprites_weapon_B: SpriteFrames
 
 onready var parent: = get_parent()
 onready var giga_crash: = parent.get_node("GigaCrash")
@@ -16,6 +18,15 @@ func has_ammo() -> bool:
 	return current_ammo >= ammo_per_shot
 
 func fire(_charge_level: = 0) -> void :
+	if character.get_node("Desperation").active:
+		if character.get_action_pressed("move_up") and character.is_on_floor():
+			character.get_node("Desperation").ExecuteOnce()
+		else:
+			start_giga()
+	else:
+		start_giga()
+
+func start_giga() -> void :
 	add_projectile_to_scene()
 	giga_crash.reduce_ammo(ammo_per_shot)
 	Event.emit_signal("shot", self)
@@ -23,6 +34,7 @@ func fire(_charge_level: = 0) -> void :
 	animatedSprite.modulate = Color(1, 1, 1, 0.01)
 	character.add_invulnerability("BossSpecial")
 	parent.is_executing_special = true
+	character.is_executing_special = true
 
 func add_projectile_to_scene(charge_level: int = 0):
 	var shot_direction_node = character.get_node("ShotDirection")
@@ -56,3 +68,4 @@ func on_special_end(_shot):
 	weapon_stasis.EndAbility()
 	animatedSprite.modulate = Color.white
 	parent.is_executing_special = false
+	character.is_executing_special = false

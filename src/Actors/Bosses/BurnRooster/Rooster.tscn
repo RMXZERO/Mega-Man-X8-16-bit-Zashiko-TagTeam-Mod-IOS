@@ -110,7 +110,7 @@ blend_mode = 1
 z_index = 5
 collision_layer = 0
 script = ExtResource( 10 )
-max_health = 160.0
+max_health = 320.0
 
 [node name="BossAI" type="Node2D" parent="."]
 script = ExtResource( 2 )
@@ -127,7 +127,6 @@ material = ExtResource( 14 )
 z_index = 1
 frames = ExtResource( 17 )
 animation = "appear_loop"
-frame = 7
 playing = true
 flip_h = true
 

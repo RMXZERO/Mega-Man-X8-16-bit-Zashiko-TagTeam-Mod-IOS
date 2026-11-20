@@ -10,14 +10,24 @@ func _ready() -> void :
 	player_final_position.x -= 100
 	Event.connect("boss_death_screen_flash", self, "on_screen_flash")
 	Event.connect("lumine_death", self, "on_lumine_death")
+	Event.connect("boss_start",self,"on_boss_start")
 
 var moved_player_after_sigma: = false
+var executing_sigma: bool = false
+
+func on_boss_start(boss) -> void:
+	if "Sigma" in boss.name and not executing_sigma:
+		executing_sigma = true
+		Event.disconnect("boss_start",self,"on_boss_start")
+	if "DJSigma" in boss.name:
+		executing_sigma = false
+		Event.disconnect("boss_start",self,"on_boss_start")
 
 func on_lumine_death():
 	Tools.timer(4, "move_player", self)
 		
 func on_screen_flash():
-	if not moved_player_after_sigma:
+	if not moved_player_after_sigma and executing_sigma:
 		moved_player_after_sigma = true
 		move_player()
 

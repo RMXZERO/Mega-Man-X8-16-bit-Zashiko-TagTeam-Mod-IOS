@@ -76,7 +76,6 @@ damage = 12.0
 [node name="animatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -18 )
 frames = SubResource( 24 )
-frame = 3
 playing = true
 
 [node name="firepillarSprite" type="AnimatedSprite" parent="."]
@@ -84,7 +83,6 @@ visible = false
 position = Vector2( 0, -72 )
 frames = ExtResource( 11 )
 animation = "loop"
-frame = 29
 playing = true
 offset = Vector2( 0, -15 )
 flip_h = true

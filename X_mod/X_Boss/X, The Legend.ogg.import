@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/X, The Legend.ogg-22d931b4bd0c5270a37417eaa489e282.oggstr"
+
+[deps]
+
+source_file="res://X_mod/X_Boss/X, The Legend.ogg"
+dest_files=[ "res://.import/X, The Legend.ogg-22d931b4bd0c5270a37417eaa489e282.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

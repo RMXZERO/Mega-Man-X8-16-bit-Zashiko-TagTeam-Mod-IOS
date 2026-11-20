@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/dj_block_hit.ogg-3699a446a5384be6ebda5cc36a919e0d.oggstr"
+
+[deps]
+
+source_file="res://Zero_mod/Boss_DJSigma/SFX/dj_block_hit.ogg"
+dest_files=[ "res://.import/dj_block_hit.ogg-3699a446a5384be6ebda5cc36a919e0d.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

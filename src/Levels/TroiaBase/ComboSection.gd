@@ -1,10 +1,10 @@
 extends Node2D
 
 const rankings: Dictionary = {"e": 0, "d": 1, "c": 2, "b": 3, "a": 4, "s": 5}
-const intro: AudioStream = preload("res://src/Sounds/OST - TroiaBase 2 - Intro.ogg")
-const loop: AudioStream = preload("res://src/Sounds/OST - TroiaBase 2 - Loop.ogg")
-const intro_16bit: AudioStream = preload("res://Remix/Songs/Troia Base 2 - Intro.ogg")
-const loop_16bit: AudioStream = preload("res://Remix/Songs/Troia Base 2 - Loop.ogg")
+onready var intro: AudioStream = preload("res://src/Sounds/OST - TroiaBase 2 - Intro.ogg")
+onready var loop: AudioStream = preload("res://src/Sounds/OST - TroiaBase 2 - Loop.ogg")
+onready var intro_16bit: AudioStream = preload("res://Remix/Songs/Troia Base 2 - Intro.ogg")
+onready var loop_16bit: AudioStream = preload("res://Remix/Songs/Troia Base 2 - Loop.ogg")
 
 export  var debug_logs: bool = false
 export  var s_time_limit: float = 40.0
@@ -41,7 +41,7 @@ signal disabled
 
 
 func set_values_for_axl() -> void :
-	if CharacterManager.player_character == "Axl":
+	if CharacterManager.player_character == "Axl" or CharacterManager.player_character == "Pallette":
 		s_time_limit = 40
 		s_ranking = 100.0
 		a_ranking = 70.0
@@ -64,24 +64,34 @@ func set_values_for_zero() -> void :
 	d_ranking = 10.0
 
 func set_correct_paths() -> void :
-	
 	player = get_player_combo_section()
 	
 	visual = get_player_combo_label_section()
+	
 	visual_ranking = get_node_or_null("../../StateCamera/VisualRanking")
 	if "Axl" in CharacterManager.team and CharacterManager.team.size() == 1:
 		call_deferred("set_values_for_axl")
+	if "Pallette" in CharacterManager.team and CharacterManager.team.size() == 1:
+		call_deferred("set_values_for_axl")
 	if "Zero" in CharacterManager.team and self.name == "Section3":
+		set_values_for_zero()
+	if "Layer" in CharacterManager.team and self.name == "Section3":
 		set_values_for_zero()
 
 func get_player_combo_section():
 	match CharacterManager.player_character:
 		"X":
 			return get_node_or_null("../../X")
+		"Alia":
+			return get_node_or_null("../../Alia")
 		"Axl":
 			return get_node_or_null("../../Axl")
+		"Pallette":
+			return get_node_or_null("../../Pallette")
 		"Zero":
 			return get_node_or_null("../../Zero")
+		"Layer":
+			return get_node_or_null("../../Layer")
 		_:
 			return get_node_or_null("../../X")
 	
@@ -89,10 +99,16 @@ func get_player_combo_label_section():
 	match CharacterManager.player_character:
 		"X":
 			return get_node_or_null("../../X/combo_label")
+		"Alia":
+			return get_node_or_null("../../Alia/combo_label")
 		"Axl":
 			return get_node_or_null("../../Axl/combo_label")
+		"Pallette":
+			return get_node_or_null("../../Pallette/combo_label")
 		"Zero":
 			return get_node_or_null("../../Zero/combo_label")
+		"Layer":
+			return get_node_or_null("../../Layer/combo_label")
 		_:
 			return get_node_or_null("../../X/combo_label")
 
@@ -132,7 +148,8 @@ func _physics_process(delta: float) -> void :
 	decay = clamp(decay + delta / decay_divider, 0.0, 10.0)
 	reduce_combo_value(delta * decay)
 	get_percentage_fill_and_emit_signal()
-	visual.text = str(enemies_left_to_kill) + " - " + str(current_combo) + "\n" + str(timer)
+	if visual:
+		visual.text = str(enemies_left_to_kill) + " - " + str(current_combo) + "\n" + str(timer)
 
 func prepare() -> void :
 	activate_all_enemies()
@@ -144,8 +161,10 @@ func activate() -> void :
 	emit_signal("started")
 	if Configurations.exists("SongRemix"):
 		if Configurations.get("SongRemix"):
+			loop_16bit.loop = true
 			GameManager.music_player.play_song(loop_16bit, intro_16bit)
 		else:
+			loop.loop = true
 			GameManager.music_player.play_song(loop, intro)
 	visual_ranking.call_deferred("set_kills_left", enemies_left_to_kill)
 

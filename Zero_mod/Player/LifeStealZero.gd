@@ -1,26 +1,29 @@
 extends EventAbility
 
-export  var first_decay: = 1.25
-export  var lifesteal_decay: = 0.5
-export  var minimum_time_between_heals: = 0.2
-var first_decayed: = false
-var last_time_hit: = 0.0
-var last_time_decay: = 0.0
-var healable_amount: = 0
+export  var first_decay: float = 1.25
+export  var lifesteal_decay: float = 0.5
+export  var minimum_time_between_heals: float = 0.1
+
 onready var damage_module = get_parent().get_node("Damage")
 onready var heal_sound = get_node("heal_sound")
+
+var first_decayed: bool = false
+var last_time_hit: float = 0.0
+var last_time_decay: float = 0.0
+var healable_amount: int = 0
+var decay_value: float = - 1.0
+var should_decay: bool = true
+
 
 func _ready() -> void :
 	Event.listen("hit_enemy", self, "on_hit_enemy")
 	Event.listen("charge_hit_enemy", self, "on_big_hit_enemy")
 	Event.listen("enemy_kill", self, "on_kill_enemy")
 	Event.connect("subtank_health_restore", self, "remove_healable_amount", [1])
-	Event.connect("xdrive", self, "heal_all_at_once")
 	character.listen("collected_health", self, "remove_healable_amount")
 
 func play_sound_on_initialize():
-	pass
-	
+	play_sound(sound, false)
 
 func set_up_character_event_connection():
 	call_deferred("setup_deferred")
@@ -55,10 +58,11 @@ func _Update(_delta):
 	elif timer > last_time_decay + lifesteal_decay:
 		decay()
 
-func decay(decay_amount = - 1):
-	adjust_healable_amount(decay_amount)
-	last_time_decay = timer
-	Log("Decay. Heal up to: " + str(healable_amount))
+func decay(decay_amount = decay_value):
+	if should_decay:
+		adjust_healable_amount(decay_amount)
+		last_time_decay = timer
+		Log("Decay. Heal up to: " + str(healable_amount))
 
 func _Setup():
 	last_time_hit = 0.0
@@ -67,17 +71,20 @@ func _Setup():
 	Log("Can heal up to: " + str(healable_amount))
 
 func heal(amount: = 1):
-	amount = clamp(amount, 0, healable_amount)
+	if not should_decay:
+		var missing_health: = character.max_health - character.current_health
+		amount = clamp(amount, 0, missing_health)
+	else:
+		amount = clamp(amount, 0, healable_amount)
+		remove_healable_amount(amount)
 	character.current_health += amount
-	remove_healable_amount(amount)
 	heal_sound.play()
 	character.flash()
 	last_time_hit = timer
 	Log("Healed " + str(amount) + ". Heal up to: " + str(healable_amount))
 
 func heal_all_at_once():
-	if executing:
-		heal(healable_amount)
+	pass
 
 func _EndCondition() -> bool:
 	return healable_amount <= 0 or not character.has_health()
@@ -90,14 +97,12 @@ func clamp_healable_amount_to_missing_health() -> void :
 
 func adjust_healable_amount(adjust: int):
 	healable_amount += adjust
-	
 	Event.emit_signal("healable_amount", healable_amount, character)
-	
+
 func remove_healable_amount(adjust: int):
 	if executing:
 		healable_amount -= adjust
-
-		healable_amount = clamp(healable_amount, 0, 16)
+		healable_amount = clamp(healable_amount, 0, 128)
 		Event.emit_signal("healable_amount", healable_amount, character)
 		Log("Healed through other means. Removed: " + str(adjust))
 		Log("Healable Amount: " + str(healable_amount))
@@ -105,10 +110,11 @@ func remove_healable_amount(adjust: int):
 func on_hit_enemy():
 	if timer > last_time_hit + minimum_time_between_heals:
 		heal()
-			
+
 func on_big_hit_enemy():
 	if executing:
 		pass
 
 func on_kill_enemy(_param):
 	on_hit_enemy()
+

@@ -1,6 +1,6 @@
 extends Node2D
 
-var listened_events: = ["fire", "jump", "dash", "move_right", "move_left", "move_up", "move_down"]
+var listened_events: = ["fire", "alt_fire", "jump", "dash", "move_right", "move_left", "move_up", "move_down"]
 var timer: = 0.0
 var sequence: Resource
 

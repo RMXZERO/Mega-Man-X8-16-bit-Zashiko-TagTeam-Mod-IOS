@@ -21,6 +21,10 @@ func initialize_achievements():
 	
 
 func unlock(achievement_id: String):
+	if Configurations.get("ShowDebug"):
+		return
+	if GameManager.used_cheats:
+		return
 	var found: bool = false
 	for achievement in list:
 		if achievement.get_id() == achievement_id:

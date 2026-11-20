@@ -1,4 +1,5 @@
 extends DashJumpZero
+class_name DoubleJumpZero
 
 onready var airdash: = character.get_node("AirDash")
 var max_air_jumps: int = 1
@@ -13,14 +14,13 @@ func _ready() -> void :
 		character.listen("ride", self, "reset_jump_count")
 		character.listen("wallslide", self, "reset_jump_count")
 		character.listen("walljump", self, "reset_jump_count")
-		character.listen("airdash", self, "reduce_air_jumps")
 		character.listen("firedash", self, "reduce_air_jumps")
 
 func _Setup() -> void :
 	interrupt_if_needed()
 	reduce_air_jumps(1)
 	reduce_airdash_count(1)
-	if character.get_action_pressed("dash"):
+	if character.get_action_pressed(dash_action):
 		horizontal_velocity = dashjump_speed
 		character.dashjump_signal()
 	else:
@@ -35,7 +35,7 @@ func reduce_air_jumps(amount: = 1):
 	current_air_jumps -= amount
 	
 func reduce_airdash_count(amount: = 1) -> void :
-	airdash.airdash_count -= amount
+	airdash.reduce_airdash_count(amount)
 	
 func emit_dashjump() -> void :
 	pass
@@ -49,7 +49,7 @@ func _StartCondition() -> bool:
 	var _animation = get_parent().get_animation()
 	if _animation in character.saber_animations:
 		return false
-	if current_air_jumps <= 0 and airdash.airdash_count <= 0:
+	if current_air_jumps <= 0:
 		return false
 	if character.ride_eject_delay > 0:
 		return false

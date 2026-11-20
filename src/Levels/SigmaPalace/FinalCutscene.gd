@@ -28,6 +28,12 @@ onready var musicplayer: AudioStreamPlayer = $"Music Player"
 onready var shockwave: Sprite = $Lumine / shockwave
 onready var burnt_floor: Sprite = $Lumine / burnt_floor
 onready var shot2: AudioStreamPlayer2D = $X / shot
+onready var x_sprites: Resource = preload("res://src/Actors/Player/x_sprites/x.res")
+onready var x_sprites_arm: Resource = preload("res://src/Actors/Player/x_sprites/x_leftarm.res")
+onready var x_x8_sprites: Resource = preload("res://X_mod/X8/Sprites/X_X8.tres")
+onready var x_x8_sprites_arm: Resource = preload("res://X_mod/X8/Sprites/X_X8_leftarm.tres")
+onready var x_ultimate_sprites: Resource = preload("res://X_mod/UltimateX/Sprites/x_ultimate.tres")
+onready var x_ultimate_sprites_arm: Resource = preload("res://X_mod/UltimateX/Sprites/x_ultimate_arm.tres")
 
 onready var ascend_value = 2
 var beamed_out: bool = false
@@ -53,11 +59,34 @@ var tenctacle_spawned: bool = false
 var tentacle_scale = 0
 var tentacle_scale_max = 0.7
 var tentacle_alpha = 0.3
+var ultimate_x: bool = false
 
 func show_tentacle():
 	lumine.animation = "final"
 
+func x_credits():
+	if CharacterManager.player_character == "X" and CharacterManager.ultimate_x_armor and not CharacterManager.hide_x_armor and not CharacterManager.infinite_x_activated:
+		ultimate_x = true
+	if CharacterManager.use_old_sprite:
+		x.frames = x_sprites
+	else:
+		x.frames = x_x8_sprites
+	if ultimate_x:
+		x.frames = x_ultimate_sprites
+		x.play("idle")
+		axl.play("idle")
+		zero.play("idle")
+
+func axl_credits():
+	CharacterManager.set_axl_normal_colors(axl)
+
+func zero_credits():
+	CharacterManager.set_zeroX8_normal_colors(zero)
+
 func _ready() -> void :
+	x_credits()
+	axl_credits()
+	zero_credits()
 	screencover.visible = true
 	tween.attribute("volume_db", - 35, 2, firenoise)
 	Tools.timer(2, "fade_in", self)
@@ -65,8 +94,8 @@ func _ready() -> void :
 	Event.connect("character_talking", self, "on_talk")
 	if Configurations.exists("SongRemix"):
 		if Configurations.get("SongRemix"):
-			song_intro = load("res://Remix/Songs/Lumine Ending - Loop.ogg")
-			song_loop = load("res://Remix/Songs/Lumine Ending - Loop.ogg")
+			song_intro = load("res://Remix/Songs/Sorrow.ogg")
+			song_loop = load("res://Remix/Songs/Sorrow.ogg")
 			song_loop.loop = true
 
 func on_talk(character_name: String):
@@ -278,8 +307,8 @@ func cutscene_phase_2():
 		"sprite": zero, 
 		"animation": "recover", 
 		"x": zero.position.x, 
-		"y": zero.position.y, 
-		"duration": 0.5
+		"y": 188, 
+		"duration": 0.0
 	}
 	move_to_position(params)
 
@@ -287,7 +316,12 @@ func cutscene_phase_2():
 
 
 func start_charge() -> void :
-	x.frames = load("res://src/Actors/Player/x_sprites/x_leftarm.res")
+	if CharacterManager.use_old_sprite:
+		x.frames = x_sprites_arm
+	else:
+		x.frames = x_x8_sprites_arm
+	if ultimate_x:
+		x.frames = x_ultimate_sprites_arm
 	x.play("crouch")
 	x.material.set_shader_param("Color", charge_color1)
 	x.material.set_shader_param("Charge", 1.0)
@@ -310,7 +344,12 @@ func fire() -> void :
 	Tools.timer(1.0, "end_fire", self)
 func end_fire() -> void :
 	x.play("crouch")
-	x.frames = load("res://src/Actors/Player/x_sprites/x.res")
+	if CharacterManager.use_old_sprite:
+		x.frames = x_sprites
+	else:
+		x.frames = x_x8_sprites
+	if ultimate_x:
+		x.frames = x_ultimate_sprites
 	zero.flip_h = true
 func _on_area2D_body_entered(_body: Node) -> void :
 	quick_pause()
@@ -352,7 +391,12 @@ func emit_shockwave():
 	
 func after_explosion():
 	x.play("crouch")
-	x.frames = load("res://src/Actors/Player/x_sprites/x.res")
+	if CharacterManager.use_old_sprite:
+		x.frames = x_sprites
+	else:
+		x.frames = x_x8_sprites
+	if ultimate_x:
+		x.frames = x_ultimate_sprites
 	Tools.timer(0.5, "start_second_dialog", self)
 func start_second_dialog():
 	second_dialog = true

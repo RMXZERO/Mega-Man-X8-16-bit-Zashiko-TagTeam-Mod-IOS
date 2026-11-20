@@ -34,9 +34,9 @@ z_as_relative = false
 collision_layer = 4
 collision_mask = 0
 script = ExtResource( 5 )
-damage = 55.0
-damage_to_bosses = 55.0
-damage_to_weakness = 55.0
+damage = 80.0
+damage_to_bosses = 6.0
+damage_to_weakness = 80.0
 break_guards = true
 duration = 0.85
 
@@ -44,7 +44,6 @@ duration = 0.85
 visible = false
 frames = ExtResource( 4 )
 animation = "intro"
-frame = 7
 playing = true
 flip_h = true
 
@@ -98,5 +97,4 @@ texture = ExtResource( 7 )
 z_index = 10
 frames = ExtResource( 3 )
 animation = " tag"
-frame = 13
 playing = true

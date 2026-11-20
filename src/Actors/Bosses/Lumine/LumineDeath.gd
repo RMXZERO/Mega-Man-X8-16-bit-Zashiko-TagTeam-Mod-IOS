@@ -43,6 +43,7 @@ func _Setup():
 	Event.emit_signal("enemy_kill","SeraphLumine")
 	Event.emit_signal("end_cutscene_start")
 	Event.emit_signal("beat_seraph_lumine")
+	Event.emit_signal("call_fade_out_battle")
 	GameManager.pause(character.name + name)
 	GameManager.start_end_cutscene()
 	Tools.timer(1.25,"unpause",self,null,true)
@@ -56,8 +57,12 @@ func _Setup():
 		CharacterManager.beaten_insanity = true
 	if CharacterManager.game_mode >= 3:
 		CharacterManager.beaten_ninjagaiden = true
-		if CharacterManager.player_character == "Zero":
-			CharacterManager.custom_zero_unlocked = true
+		#if CharacterManager.player_character == "Zero":
+		#	Achievements.unlock("COLLECTAWAKENEDZEROUP")
+		#	CharacterManager.awakened_zero_unlocked = true
+	if CharacterManager.player_character == "X":
+		if CharacterManager.ultimate_x_armor and not CharacterManager.hide_x_armor and not CharacterManager.infinite_x_activated:
+			Achievements.unlock("ISTOEASY")
 	CharacterManager._save()
 
 func unpause() -> void :

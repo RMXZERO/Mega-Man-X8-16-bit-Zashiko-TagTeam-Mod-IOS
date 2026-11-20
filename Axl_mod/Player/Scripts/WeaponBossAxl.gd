@@ -10,12 +10,16 @@ onready var _gattling_2: Resource = preload("res://Axl_mod/Player/Sprites/ice_ga
 onready var _gattling_3: Resource = preload("res://Axl_mod/Player/Sprites/ice_gattling/ice_gattling_3.tres")
 onready var _gattling_4: Resource = preload("res://Axl_mod/Player/Sprites/ice_gattling/ice_gattling_4.tres")
 
+onready var _pallettegattling_1: Resource = preload("res://Axl_mod/Player/PalletteSprites/ice_gattling/ice_gattling_1.tres")
+onready var _pallettegattling_2: Resource = preload("res://Axl_mod/Player/PalletteSprites/ice_gattling/ice_gattling_2.tres")
+onready var _pallettegattling_3: Resource = preload("res://Axl_mod/Player/PalletteSprites/ice_gattling/ice_gattling_3.tres")
+onready var _pallettegattling_4: Resource = preload("res://Axl_mod/Player/PalletteSprites/ice_gattling/ice_gattling_4.tres")
+
 var _gattling_sprites: int = 1
 
 
 func _ready() -> void :
 	._ready()
-	
 
 func on_lemon_shot_created(emitter, _shot):
 	if emitter != self:
@@ -36,3 +40,5 @@ func connect_charged_shot_event(_shot):
 	
 func should_unlock(collectible: String) -> bool:
 	return collectible == weapon.collectible
+
+

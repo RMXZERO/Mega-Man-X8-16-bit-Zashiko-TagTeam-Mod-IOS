@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=7 format=2]
+
+[ext_resource path="res://src/DialogSystem/Profiles/DialogueText.gd" type="Script" id=1]
+[ext_resource path="res://src/DialogSystem/Profiles/X.tres" type="Resource" id=2]
+[ext_resource path="res://Axl_mod/Axl_Boss/Dialogue/Profiles/Axl_Boss_No_Damage.tres" type="Resource" id=3]
+[ext_resource path="res://Axl_mod/Axl_Boss/Dialogue/Profiles/Axl_Boss_No_Damage_Serious.tres" type="Resource" id=4]
+[ext_resource path="res://Zero_mod/DialogSystem/Profiles/Zero.tres" type="Resource" id=5]
+[ext_resource path="res://src/DialogSystem/Profiles/Alia.tres" type="Resource" id=6]
+
+[resource]
+script = ExtResource( 1 )
+dialog = [ ExtResource( 3 ), "AXLSECRET1_X", ExtResource( 2 ), "AXLSECRET2_X", "AXLSECRET3_X", ExtResource( 3 ), "AXLSECRET4_X", "AXLSECRET5_X", ExtResource( 2 ), "AXLSECRET6_X", ExtResource( 4 ), "AXLSECRET7_X", "AXLSECRET8_X", "AXLSECRET9_X", ExtResource( 2 ), "AXLSECRET10_X", ExtResource( 4 ), "AXLSECRET11_X", "AXLSECRET12_X", "AXLSECRET13_X", ExtResource( 5 ), "AXLSECRET14_X", ExtResource( 6 ), "AXLSECRET15_X", ExtResource( 4 ), "AXLSECRET16_X", "AXLSECRET17_X" ]

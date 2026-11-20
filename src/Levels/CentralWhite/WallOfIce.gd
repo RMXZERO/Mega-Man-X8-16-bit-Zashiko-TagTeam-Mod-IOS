@@ -1,7 +1,7 @@
 extends Node2D
 
 export  var minimum_speed_for_explosion: = 320.0
-var weapons: = ["OpticShieldCharged", "FireDashCharged", "CrystalBouncerCharged"]
+var weapons: = ["OpticShieldCharged", "FireDashCharged", "CrystalBouncerCharged", "Genmuzerowave"]
 var exploded: = false
 
 var current_bikes: Array

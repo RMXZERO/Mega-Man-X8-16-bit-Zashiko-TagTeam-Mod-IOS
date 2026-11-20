@@ -41,6 +41,7 @@ func fire_regular() -> void :
 	charged = false
 	setup()
 	shot = instantiate_projectile(weapon.regular_shot)
+	set_shot_extra_damage(shot)
 
 func fire_charged() -> void :
 	play(weapon.charged_sound)
@@ -49,6 +50,7 @@ func fire_charged() -> void :
 	setup()
 	character.add_invulnerability(name)
 	shot = instantiate_projectile(weapon.charged_shot)
+	set_shot_extra_damage(shot)
 
 func setup() -> void :
 	executing = true
@@ -141,7 +143,6 @@ func end() -> void :
 	character.start_dashfall()
 	Tools.timer_p(0.25, "remove_invulnerability", character, name)
 	executing = false
-
 
 func _recoil() -> void :
 	weapon_stasis.play_animation_once("damage_resist")

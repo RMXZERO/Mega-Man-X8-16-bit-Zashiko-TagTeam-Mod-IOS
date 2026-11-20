@@ -6,6 +6,11 @@ export  var damage_boss: float = 4
 export  var damage_weakness: float = 24
 export  var saber_hitbox: Resource = preload("res://Zero_mod/Player/Hitboxes/Hyouryuushou_Hitbox.tscn")
 
+onready var driftdiamondbuster: PackedScene = preload("res://src/Actors/Player/BossWeapons/DriftDiamond/DriftDiamondCharged.tscn")
+onready var driftdiamond: PackedScene = preload("res://src/Actors/Player/BossWeapons/DriftDiamond/DriftDiamond.tscn")
+var creator: Node2D
+onready var use_genmu: Node2D = $"../Special/Genmuzero"
+
 onready var animatedSprite: = character.get_node("animatedSprite")
 onready var saber_sound: AudioStreamPlayer = $saber
 onready var particles: = $particles2D
@@ -24,6 +29,7 @@ var hitbox_extra_damage: float = 1
 var hitbox_extra_damage_boss: float = 1
 var hitbox_extra_damage_weakness: float = 1
 var hitbox_extra_break_guard_value: float = 1
+var hitbox_extra_scale: float = 1
 var deflectable: bool = false
 var deflectable_type: int = 0
 var only_deflect_weak: bool = false
@@ -102,6 +108,7 @@ func spawn_hitbox(_hitbox_upleft: Vector2, _hitbox_downright: Vector2):
 	current_hitbox.deflectable = deflectable
 	current_hitbox.deflectable_type = deflectable_type
 	current_hitbox.only_deflect_weak = only_deflect_weak
+	current_hitbox.scale *= hitbox_extra_scale
 
 func hitbox_and_position() -> void :
 	hitbox_damage = damage
@@ -141,6 +148,19 @@ func hitbox_and_position() -> void :
 			hitbox_rehit_time = 0.0375
 			hitbox_upleft = Vector2( - 70, - 65)
 			hitbox_downright = Vector2(75, - 20)
+
+		elif character.saber_node.current_weapon.name == "V-Hanger":
+			hitbox_upleft = Vector2( - 20, - 40)
+			hitbox_downright = Vector2(20, 20)
+
+		elif character.saber_node.current_weapon.name == "Rogue-Blade":
+				hitbox_upleft = Vector2(-75, - 58)
+				hitbox_downright = Vector2(75, 18)
+
+		elif character.saber_node.current_weapon.name == "Sigma-Blade":
+			hitbox_rehit_time = 0.0375
+			hitbox_upleft = Vector2( - 100, - 70)
+			hitbox_downright = Vector2(105, 0)
 
 		else:
 			if animatedSprite.frame >= 4 and animatedSprite.frame < 5 or animatedSprite.frame >= 8 and animatedSprite.frame < 11:
@@ -218,6 +238,20 @@ func ice_emitting_position() -> void :
 		elif animatedSprite.frame >= 9 and animatedSprite.frame < 11:
 			particles.position = Vector2(15 * get_facing_direction(), - 24)
 
+	elif character.saber_node.current_weapon.name == "V-Hanger":
+		if animatedSprite.frame >= 4 and animatedSprite.frame < 5:
+			particles.position = Vector2(15 * get_facing_direction(), - 24)
+		elif animatedSprite.frame >= 5 and animatedSprite.frame < 6:
+			particles.position = Vector2(6 * get_facing_direction(), - 29)
+		elif animatedSprite.frame >= 6 and animatedSprite.frame < 7:
+			particles.position = Vector2( - 9 * get_facing_direction(), - 29)
+		elif animatedSprite.frame >= 7 and animatedSprite.frame < 8:
+			particles.position = Vector2( - 15 * get_facing_direction(), - 24)
+		elif animatedSprite.frame >= 8 and animatedSprite.frame < 9:
+			particles.position = Vector2(6 * get_facing_direction(), - 29)
+		elif animatedSprite.frame >= 9 and animatedSprite.frame < 11:
+			particles.position = Vector2(15 * get_facing_direction(), - 24)
+
 	elif character.saber_node.current_weapon.name == "T-Breaker":
 		if animatedSprite.frame >= 4 and animatedSprite.frame < 5:
 			particles.position = Vector2(45 * get_facing_direction(), - 24)
@@ -232,6 +266,34 @@ func ice_emitting_position() -> void :
 		elif animatedSprite.frame >= 9 and animatedSprite.frame < 11:
 			particles.position = Vector2(45 * get_facing_direction(), - 24)
 
+	elif character.saber_node.current_weapon.name == "Rogue-Blade":
+		if animatedSprite.frame >= 4 and animatedSprite.frame < 5:
+			particles.position = Vector2(85 * get_facing_direction(), - 24)
+		elif animatedSprite.frame >= 5 and animatedSprite.frame < 6:
+			particles.position = Vector2(46 * get_facing_direction(), - 29)
+		elif animatedSprite.frame >= 6 and animatedSprite.frame < 7:
+			particles.position = Vector2( - 36 * get_facing_direction(), - 29)
+		elif animatedSprite.frame >= 7 and animatedSprite.frame < 8:
+			particles.position = Vector2( - 85 * get_facing_direction(), - 24)
+		elif animatedSprite.frame >= 8 and animatedSprite.frame < 9:
+			particles.position = Vector2(36 * get_facing_direction(), - 29)
+		elif animatedSprite.frame >= 9 and animatedSprite.frame < 11:
+			particles.position = Vector2(85 * get_facing_direction(), - 24)
+
+	elif character.saber_node.current_weapon.name == "Sigma-Blade":
+		if animatedSprite.frame >= 4 and animatedSprite.frame < 5:
+			particles.position = Vector2(85 * get_facing_direction(), - 24)
+		elif animatedSprite.frame >= 5 and animatedSprite.frame < 6:
+			particles.position = Vector2(46 * get_facing_direction(), - 29)
+		elif animatedSprite.frame >= 6 and animatedSprite.frame < 7:
+			particles.position = Vector2( - 36 * get_facing_direction(), - 29)
+		elif animatedSprite.frame >= 7 and animatedSprite.frame < 8:
+			particles.position = Vector2( - 85 * get_facing_direction(), - 24)
+		elif animatedSprite.frame >= 8 and animatedSprite.frame < 9:
+			particles.position = Vector2(36 * get_facing_direction(), - 29)
+		elif animatedSprite.frame >= 9 and animatedSprite.frame < 11:
+			particles.position = Vector2(85 * get_facing_direction(), - 24)
+
 func jump_frame() -> void :
 	if not jumped:
 		if animatedSprite.frame >= loop_start_frame:
@@ -239,6 +301,42 @@ func jump_frame() -> void :
 			particles.z_index = animatedSprite.z_index + 1
 			character.set_vertical_speed( - jump_velocity)
 			jumped = true
+			if CharacterManager.awakened_zero_armor or character.get_action_pressed("select_special"):
+				if CharacterManager.awakened_zero_armor:
+					create()
+				else:
+					if CharacterManager.extra_saber_combo and use_genmu.has_ammo_expent(CharacterManager.buster_base_energy * 0.25):
+						create()
+						use_genmu.reduce_ammo(CharacterManager.buster_base_energy * 0.25)
+
+func create() -> void :
+	create_driftdiamond(global_position, 520 , 2 , 0.8)
+	create_driftdiamond(global_position, 520 , 1.75 , 0.7)
+	create_driftdiamond(global_position, 520 , 1.5 , 0.6)
+	create_driftdiamond(global_position, 520 , 1.25 , 0.5)
+	create_driftdiamond(global_position, 520 , 1 , 0.4)
+	create_driftdiamond(global_position, 520 , 0.75 , 0.3)
+	create_driftdiamond(global_position, 520 , 0.5 , 0.2)
+	create_driftdiamond(global_position, 520 , 0.25 , 0.1)
+
+	create_driftdiamond(global_position, 520 , 0 , 0)
+
+	create_driftdiamond(global_position, 520 , - 0.25 , 0.1)
+	create_driftdiamond(global_position, 520 , - 0.5 , 0.2)
+	create_driftdiamond(global_position, 520 , - 0.75 , 0.3)
+	create_driftdiamond(global_position, 520 , - 1 , 0.4)
+
+func create_driftdiamond(ground_position, speed: float, rotation_degress, rotation_speed) -> void :
+	var facing_direction = get_facing_direction()
+	var instance = driftdiamond.instance()
+	ground_position.y += -9
+	instance.rotation = rotation_degress * facing_direction
+	instance.set_horizontal_speed(speed * facing_direction - facing_direction * speed * rotation_speed)
+	instance.set_vertical_speed(rotation_degress * speed)
+	get_tree().current_scene.get_node("Objects").call_deferred("add_child", instance, true)
+	instance.set_global_position(ground_position)
+	instance.set_creator(creator)
+	instance.call_deferred("initialize", get_facing_direction())
 
 func loop_animation() -> void :
 	if jumped:
@@ -303,6 +401,19 @@ func _Setup() -> void :
 	character.Hyouryuushou_used = true
 	character.dashjumps_since_jump = 0
 	ending_saber_state = false
+
+	if character.saber_node.current_weapon.name == "Z-Breaker":
+		character.Hyouryuushou_used = false
+		create_driftdiamondbuster(global_position)
+
+func create_driftdiamondbuster(ground_position) -> void :
+	var instance = driftdiamondbuster.instance()
+	ground_position.y += -9
+	get_tree().current_scene.get_node("Objects").call_deferred("add_child", instance, true)
+	instance.set_global_position(ground_position)
+	instance.set_creator(creator)
+	instance.call_deferred("initialize", get_facing_direction())
+
 
 func _Update(delta: float) -> void :
 	if jumped:

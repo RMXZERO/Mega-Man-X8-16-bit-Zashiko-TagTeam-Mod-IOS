@@ -1,8 +1,8 @@
 [gd_resource type="SpriteFrames" load_steps=69 format=2]
 
 [ext_resource path="res://Zero_mod/Sprites/BossAbilities/Juuhazan_effect.png" type="Texture" id=1]
-[ext_resource path="res://Zero_mod/X8/Sprites/BossAbilities/raikousen_effect.png" type="Texture" id=2]
-[ext_resource path="res://Zero_mod/X8/Sprites/BossAbilities/youdantotsu_effect.png" type="Texture" id=3]
+[ext_resource path="res://Zero_mod/X8/Sprites/Saber/BossAbilities/raikousen_effect.png" type="Texture" id=2]
+[ext_resource path="res://Zero_mod/X8/Sprites/Saber/BossAbilities/youdantotsu_effect.png" type="Texture" id=3]
 [ext_resource path="res://Zero_mod/X8/Sprites/kknuckle/BossAbilities/youdantotsu_effect.png" type="Texture" id=4]
 [ext_resource path="res://Zero_mod/X8/Sprites/kknuckle/BossAbilities/enkoukyaku_effect.png" type="Texture" id=5]
 [ext_resource path="res://Zero_mod/X8/Sprites/kknuckle/BossAbilities/raikousen_effect.png" type="Texture" id=6]

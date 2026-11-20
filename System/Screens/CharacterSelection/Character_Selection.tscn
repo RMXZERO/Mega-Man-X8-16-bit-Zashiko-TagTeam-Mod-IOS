@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=2]
+[gd_scene load_steps=121 format=2]
 
 [ext_resource path="res://src/Options/CoverScreen.gd" type="Script" id=1]
 [ext_resource path="res://System/SFX/option_b_select.ogg" type="AudioStream" id=2]
@@ -41,8 +41,424 @@
 [ext_resource path="res://System/SFX/window_close.ogg" type="AudioStream" id=39]
 [ext_resource path="res://src/Title/title_bg.png" type="Texture" id=40]
 [ext_resource path="res://System/SFX/error.ogg" type="AudioStream" id=41]
+[ext_resource path="res://System/Android/AndroidControls.gd" type="Script" id=42]
+[ext_resource path="res://System/Android/Sprites/android_back.png" type="Texture" id=43]
+[ext_resource path="res://System/Screens/CharacterSelection/Wireframe_Alia.png" type="Texture" id=44]
+[ext_resource path="res://System/Screens/CharacterSelection/Alia.png" type="Texture" id=45]
+[ext_resource path="res://System/Screens/CharacterSelection/face_Alia.png" type="Texture" id=46]
+[ext_resource path="res://System/Android/Sprites/android_nothing.png" type="Texture" id=47]
+[ext_resource path="res://System/Screens/CharacterSelection/face_Layer.png" type="Texture" id=48]
+[ext_resource path="res://System/Screens/CharacterSelection/Pallette.png" type="Texture" id=49]
+[ext_resource path="res://System/Screens/CharacterSelection/face_Pallette.png" type="Texture" id=50]
+[ext_resource path="res://System/Screens/CharacterSelection/Layer.png" type="Texture" id=51]
+[ext_resource path="res://System/Screens/CharacterSelection/Wireframe_Pallette.png" type="Texture" id=53]
+[ext_resource path="res://System/Screens/CharacterSelection/Wireframe_Layer.png" type="Texture" id=54]
+[ext_resource path="res://Axl_mod/HUD/floppa_axl.png" type="Texture" id=55]
+[ext_resource path="res://Zero_mod/HUD/custom_zero.png" type="Texture" id=56]
+[ext_resource path="res://Axl_mod/HUD/custom_axl.png" type="Texture" id=57]
+[ext_resource path="res://Axl_mod/HUD/axl_share_buff.png" type="Texture" id=58]
+[ext_resource path="res://X_mod/UltimateX/HUD/player_desperation.png" type="Texture" id=59]
+[ext_resource path="res://Zero_mod/HUD/weapon_get_zero.png" type="Texture" id=60]
+[ext_resource path="res://X_mod/X8/HUD/old_sprite.png" type="Texture" id=61]
+[ext_resource path="res://Axl_mod/HUD/axl_saber_combo.png" type="Texture" id=62]
+[ext_resource path="res://X_mod/X8/HUD/hide_armor.png" type="Texture" id=63]
+[ext_resource path="res://X_mod/UltimateX/HUD/x_glow.png" type="Texture" id=64]
+[ext_resource path="res://Axl_mod/HUD/floppa_axl_auto_lock.png" type="Texture" id=65]
+[ext_resource path="res://Axl_mod/HUD/floppa_axl_auto_hover.png" type="Texture" id=66]
+[ext_resource path="res://Axl_mod/HUD/floppa_axl_auto_cling_wall.png" type="Texture" id=67]
+[ext_resource path="res://Axl_mod/HUD/track_bullet.png" type="Texture" id=68]
+[ext_resource path="res://Zero_mod/HUD/zero_awakened_unlimited.png" type="Texture" id=69]
+[ext_resource path="res://X_mod/UltimateX/HUD/x_auto_charge.png" type="Texture" id=70]
+[ext_resource path="res://X_mod/UltimateX/HUD/x_ultimate_buster.png" type="Texture" id=71]
+[ext_resource path="res://src/Options/selectable_background.png" type="Texture" id=72]
+[ext_resource path="res://Zero_mod/HUD/zero_extra_color.png" type="Texture" id=73]
+[ext_resource path="res://Zero_mod/HUD/zero_extra_combo.png" type="Texture" id=74]
+[ext_resource path="res://X_mod/UltimateX/HUD/x_rapid_fire.png" type="Texture" id=75]
+[ext_resource path="res://System/Screens/CharacterSelection/start_setting.gd" type="Script" id=78]
+[ext_resource path="res://Zero_mod/HUD/beta_zero.png" type="Texture" id=79]
 
 [sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="Shader" id=167]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=146]
+shader = SubResource( 167 )
+shader_param/grayscale = true
+
+[sub_resource type="CircleShape2D" id=147]
+radius = 7.0
+
+[sub_resource type="Shader" id=168]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=148]
+shader = SubResource( 168 )
+shader_param/grayscale = true
+
+[sub_resource type="Shader" id=169]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=149]
+shader = SubResource( 169 )
+shader_param/grayscale = true
+
+[sub_resource type="Shader" id=170]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=150]
+shader = SubResource( 170 )
+shader_param/grayscale = true
+
+[sub_resource type="Shader" id=187]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=188]
+shader = SubResource( 187 )
+shader_param/grayscale = true
+
+[sub_resource type="Shader" id=171]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=151]
+shader = SubResource( 171 )
+shader_param/grayscale = true
+
+[sub_resource type="Shader" id=172]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=152]
+shader = SubResource( 172 )
+shader_param/grayscale = true
+
+[sub_resource type="Shader" id=173]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=153]
+shader = SubResource( 173 )
+shader_param/grayscale = true
+
+[sub_resource type="Shader" id=174]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=154]
+shader = SubResource( 174 )
+shader_param/grayscale = true
+
+[sub_resource type="Shader" id=175]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=155]
+shader = SubResource( 175 )
+shader_param/grayscale = true
+
+[sub_resource type="Shader" id=176]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=156]
+shader = SubResource( 176 )
+shader_param/grayscale = true
+
+[sub_resource type="Shader" id=186]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=166]
+shader = SubResource( 186 )
+shader_param/grayscale = true
+
+[sub_resource type="Shader" id=177]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=157]
+shader = SubResource( 177 )
+shader_param/grayscale = true
+
+[sub_resource type="Shader" id=178]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=158]
+shader = SubResource( 178 )
+shader_param/grayscale = true
+
+[sub_resource type="Shader" id=179]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=159]
+shader = SubResource( 179 )
+shader_param/grayscale = true
+
+[sub_resource type="Shader" id=180]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=160]
+shader = SubResource( 180 )
+shader_param/grayscale = true
+
+[sub_resource type="Shader" id=181]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=161]
+shader = SubResource( 181 )
+shader_param/grayscale = true
+
+[sub_resource type="Shader" id=182]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=162]
+shader = SubResource( 182 )
+shader_param/grayscale = true
+
+[sub_resource type="Shader" id=183]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=163]
+shader = SubResource( 183 )
+shader_param/grayscale = true
+
+[sub_resource type="Shader" id=184]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=164]
+shader = SubResource( 184 )
+shader_param/grayscale = true
+
+[sub_resource type="Shader" id=185]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=165]
+shader = SubResource( 185 )
+shader_param/grayscale = true
 
 [node name="Character_Selection" type="CanvasLayer"]
 pause_mode = 2
@@ -105,6 +521,13 @@ margin_bottom = 40.0
 margin_right = 398.0
 margin_bottom = 224.0
 texture = ExtResource( 3 )
+
+[node name="back_button" type="TextureRect" parent="Menu/bg"]
+margin_left = 385.0
+margin_top = 1.0
+margin_right = 394.0
+margin_bottom = 10.0
+texture = ExtResource( 43 )
 
 [node name="wireframe_bg" type="TextureRect" parent="Menu"]
 margin_left = 127.0
@@ -170,6 +593,26 @@ margin_right = 120.0
 margin_bottom = 48.0
 texture = ExtResource( 33 )
 
+[node name="Alia" type="TextureRect" parent="Menu/characters/panel/char_container"]
+pause_mode = 2
+margin_left = 120.0
+margin_right = 160.0
+margin_bottom = 48.0
+texture = ExtResource( 45 )
+
+[node name="Layer" type="TextureRect" parent="Menu/characters/panel/char_container"]
+material = ExtResource( 10 )
+margin_left = 160.0
+margin_right = 200.0
+margin_bottom = 48.0
+texture = ExtResource( 51 )
+
+[node name="Pallette" type="TextureRect" parent="Menu/characters/panel/char_container"]
+margin_left = 200.0
+margin_right = 240.0
+margin_bottom = 48.0
+texture = ExtResource( 49 )
+
 [node name="char_hider" type="TextureRect" parent="Menu/characters"]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -212,6 +655,30 @@ margin_right = 116.0
 margin_bottom = 186.0
 texture = ExtResource( 35 )
 
+[node name="wireframe_Alia" type="TextureRect" parent="Menu/characters/Wireframes"]
+visible = false
+margin_left = 4.0
+margin_top = -11.0
+margin_right = 116.0
+margin_bottom = 186.0
+texture = ExtResource( 44 )
+
+[node name="wireframe_Layer" type="TextureRect" parent="Menu/characters/Wireframes"]
+visible = false
+margin_left = 4.0
+margin_top = -11.0
+margin_right = 116.0
+margin_bottom = 186.0
+texture = ExtResource( 54 )
+
+[node name="wireframe_Pallette" type="TextureRect" parent="Menu/characters/Wireframes"]
+visible = false
+margin_left = 4.0
+margin_top = -11.0
+margin_right = 116.0
+margin_bottom = 186.0
+texture = ExtResource( 53 )
+
 [node name="Menu_Frame" type="TextureRect" parent="Menu"]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -239,7 +706,6 @@ margin_bottom = -62.0
 texture = ExtResource( 17 )
 
 [node name="face_X" type="TextureRect" parent="Menu/Menu_Frame/Left/char_face_frame"]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -251,6 +717,7 @@ margin_bottom = 19.0
 texture = ExtResource( 31 )
 
 [node name="face_Zero" type="TextureRect" parent="Menu/Menu_Frame/Left/char_face_frame"]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -272,6 +739,42 @@ margin_top = -13.0
 margin_right = 47.5
 margin_bottom = 19.0
 texture = ExtResource( 30 )
+
+[node name="face_Alia" type="TextureRect" parent="Menu/Menu_Frame/Left/char_face_frame"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -47.5
+margin_top = -13.0
+margin_right = 47.5
+margin_bottom = 19.0
+texture = ExtResource( 46 )
+
+[node name="face_Layer" type="TextureRect" parent="Menu/Menu_Frame/Left/char_face_frame"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -47.5
+margin_top = -13.0
+margin_right = 47.5
+margin_bottom = 19.0
+texture = ExtResource( 48 )
+
+[node name="face_Pallette" type="TextureRect" parent="Menu/Menu_Frame/Left/char_face_frame"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -47.5
+margin_top = -13.0
+margin_right = 47.5
+margin_bottom = 19.0
+texture = ExtResource( 50 )
 
 [node name="Description_Left" type="RichTextLabel" parent="Menu/Menu_Frame/Left"]
 margin_left = 11.0
@@ -451,8 +954,354 @@ script = ExtResource( 14 )
 menu_path = NodePath("../..")
 direction = "left"
 
+[node name="start_option" type="TextureRect" parent="Menu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 379.0
+margin_top = -2.0
+margin_right = 379.0
+margin_bottom = -2.0
+
+[node name="X" type="Control" parent="Menu/start_option"]
+margin_left = 14.0
+margin_right = 14.0
+
+[node name="auto_charge" type="Area2D" parent="Menu/start_option/X"]
+position = Vector2( -7, 8 )
+script = ExtResource( 78 )
+_action = "auto_charge"
+
+[node name="bacrground" type="Sprite" parent="Menu/start_option/X/auto_charge"]
+texture = ExtResource( 72 )
+
+[node name="outline" type="Sprite" parent="Menu/start_option/X/auto_charge"]
+material = SubResource( 146 )
+texture = ExtResource( 70 )
+
+[node name="Deadzone" type="CollisionShape2D" parent="Menu/start_option/X/auto_charge"]
+shape = SubResource( 147 )
+
+[node name="rapid_fire" type="Area2D" parent="Menu/start_option/X"]
+position = Vector2( -7, 22 )
+script = ExtResource( 78 )
+_action = "rapid_fire"
+
+[node name="bacrground" type="Sprite" parent="Menu/start_option/X/rapid_fire"]
+texture = ExtResource( 72 )
+
+[node name="outline" type="Sprite" parent="Menu/start_option/X/rapid_fire"]
+material = SubResource( 148 )
+texture = ExtResource( 75 )
+
+[node name="Deadzone" type="CollisionShape2D" parent="Menu/start_option/X/rapid_fire"]
+shape = SubResource( 147 )
+
+[node name="hide_x_armor" type="Area2D" parent="Menu/start_option/X"]
+position = Vector2( -7, 36 )
+script = ExtResource( 78 )
+_action = "hide_x_armor"
+
+[node name="bacrground" type="Sprite" parent="Menu/start_option/X/hide_x_armor"]
+texture = ExtResource( 72 )
+
+[node name="outline" type="Sprite" parent="Menu/start_option/X/hide_x_armor"]
+material = SubResource( 149 )
+texture = ExtResource( 63 )
+
+[node name="Deadzone" type="CollisionShape2D" parent="Menu/start_option/X/hide_x_armor"]
+shape = SubResource( 147 )
+
+[node name="use_old_sprite" type="Area2D" parent="Menu/start_option/X"]
+position = Vector2( -7, 50 )
+script = ExtResource( 78 )
+_action = "use_old_sprite"
+
+[node name="bacrground" type="Sprite" parent="Menu/start_option/X/use_old_sprite"]
+texture = ExtResource( 72 )
+
+[node name="outline" type="Sprite" parent="Menu/start_option/X/use_old_sprite"]
+material = SubResource( 150 )
+texture = ExtResource( 61 )
+
+[node name="Deadzone" type="CollisionShape2D" parent="Menu/start_option/X/use_old_sprite"]
+shape = SubResource( 147 )
+
+[node name="infinite_glow" type="Area2D" parent="Menu/start_option/X"]
+position = Vector2( -7, 64 )
+script = ExtResource( 78 )
+_action = "infinite_glow"
+
+[node name="bacrground" type="Sprite" parent="Menu/start_option/X/infinite_glow"]
+texture = ExtResource( 72 )
+
+[node name="outline" type="Sprite" parent="Menu/start_option/X/infinite_glow"]
+material = SubResource( 188 )
+texture = ExtResource( 64 )
+
+[node name="Deadzone" type="CollisionShape2D" parent="Menu/start_option/X/infinite_glow"]
+shape = SubResource( 147 )
+
+[node name="ultimate_buster" type="Area2D" parent="Menu/start_option/X"]
+position = Vector2( -7, 78 )
+script = ExtResource( 78 )
+_action = "ultimate_buster"
+
+[node name="bacrground" type="Sprite" parent="Menu/start_option/X/ultimate_buster"]
+texture = ExtResource( 72 )
+
+[node name="outline" type="Sprite" parent="Menu/start_option/X/ultimate_buster"]
+material = SubResource( 151 )
+texture = ExtResource( 71 )
+
+[node name="Deadzone" type="CollisionShape2D" parent="Menu/start_option/X/ultimate_buster"]
+shape = SubResource( 147 )
+
+[node name="Zero" type="Control" parent="Menu/start_option"]
+margin_left = 28.0
+margin_right = 28.0
+
+[node name="custom_zero" type="Area2D" parent="Menu/start_option/Zero"]
+position = Vector2( -7, 8 )
+script = ExtResource( 78 )
+_action = "custom_zero"
+
+[node name="bacrground" type="Sprite" parent="Menu/start_option/Zero/custom_zero"]
+texture = ExtResource( 72 )
+
+[node name="outline" type="Sprite" parent="Menu/start_option/Zero/custom_zero"]
+material = SubResource( 152 )
+position = Vector2( 2.73436e-06, 3.94881e-07 )
+scale = Vector2( 0.416667, 0.416667 )
+texture = ExtResource( 56 )
+
+[node name="Deadzone" type="CollisionShape2D" parent="Menu/start_option/Zero/custom_zero"]
+shape = SubResource( 147 )
+
+[node name="beta_zero" type="Area2D" parent="Menu/start_option/Zero"]
+position = Vector2( -7, 22 )
+script = ExtResource( 78 )
+_action = "beta_zero"
+
+[node name="bacrground" type="Sprite" parent="Menu/start_option/Zero/beta_zero"]
+texture = ExtResource( 72 )
+
+[node name="outline" type="Sprite" parent="Menu/start_option/Zero/beta_zero"]
+material = SubResource( 153 )
+position = Vector2( 2.73436e-06, 3.94881e-07 )
+scale = Vector2( 0.416667, 0.416667 )
+texture = ExtResource( 79 )
+
+[node name="Deadzone" type="CollisionShape2D" parent="Menu/start_option/Zero/beta_zero"]
+shape = SubResource( 147 )
+
+[node name="extra_saber_combo" type="Area2D" parent="Menu/start_option/Zero"]
+position = Vector2( -7, 36 )
+script = ExtResource( 78 )
+_action = "extra_combo"
+
+[node name="bacrground" type="Sprite" parent="Menu/start_option/Zero/extra_saber_combo"]
+texture = ExtResource( 72 )
+
+[node name="outline" type="Sprite" parent="Menu/start_option/Zero/extra_saber_combo"]
+material = SubResource( 154 )
+texture = ExtResource( 74 )
+
+[node name="Deadzone" type="CollisionShape2D" parent="Menu/start_option/Zero/extra_saber_combo"]
+shape = SubResource( 147 )
+
+[node name="awakened_zero_limited" type="Area2D" parent="Menu/start_option/Zero"]
+position = Vector2( -7, 50 )
+script = ExtResource( 78 )
+_action = "power_max"
+
+[node name="bacrground" type="Sprite" parent="Menu/start_option/Zero/awakened_zero_limited"]
+texture = ExtResource( 72 )
+
+[node name="outline" type="Sprite" parent="Menu/start_option/Zero/awakened_zero_limited"]
+material = SubResource( 155 )
+texture = ExtResource( 69 )
+
+[node name="Deadzone" type="CollisionShape2D" parent="Menu/start_option/Zero/awakened_zero_limited"]
+shape = SubResource( 147 )
+
+[node name="extra_saber_color" type="Area2D" parent="Menu/start_option/Zero"]
+position = Vector2( -7, 64 )
+script = ExtResource( 78 )
+_action = "extra_color"
+
+[node name="bacrground" type="Sprite" parent="Menu/start_option/Zero/extra_saber_color"]
+texture = ExtResource( 72 )
+
+[node name="outline" type="Sprite" parent="Menu/start_option/Zero/extra_saber_color"]
+material = SubResource( 156 )
+texture = ExtResource( 73 )
+
+[node name="Deadzone" type="CollisionShape2D" parent="Menu/start_option/Zero/extra_saber_color"]
+shape = SubResource( 147 )
+
+[node name="weapon_get_zero" type="Area2D" parent="Menu/start_option/Zero"]
+position = Vector2( -7, 78 )
+script = ExtResource( 78 )
+_action = "weapon_get_zero"
+
+[node name="bacrground" type="Sprite" parent="Menu/start_option/Zero/weapon_get_zero"]
+texture = ExtResource( 72 )
+
+[node name="outline" type="Sprite" parent="Menu/start_option/Zero/weapon_get_zero"]
+material = SubResource( 166 )
+texture = ExtResource( 60 )
+
+[node name="Deadzone" type="CollisionShape2D" parent="Menu/start_option/Zero/weapon_get_zero"]
+shape = SubResource( 147 )
+
+[node name="Axl" type="Control" parent="Menu/start_option"]
+margin_left = 42.0
+margin_right = 42.0
+
+[node name="custom_axl" type="Area2D" parent="Menu/start_option/Axl"]
+position = Vector2( -7, 8 )
+script = ExtResource( 78 )
+_action = "custom_axl"
+
+[node name="bacrground" type="Sprite" parent="Menu/start_option/Axl/custom_axl"]
+texture = ExtResource( 72 )
+
+[node name="outline" type="Sprite" parent="Menu/start_option/Axl/custom_axl"]
+material = SubResource( 157 )
+scale = Vector2( 0.417, 0.417 )
+texture = ExtResource( 57 )
+
+[node name="Deadzone" type="CollisionShape2D" parent="Menu/start_option/Axl/custom_axl"]
+shape = SubResource( 147 )
+
+[node name="track_bullet" type="Area2D" parent="Menu/start_option/Axl"]
+position = Vector2( -7, 22 )
+script = ExtResource( 78 )
+_action = "track_bullet"
+
+[node name="bacrground" type="Sprite" parent="Menu/start_option/Axl/track_bullet"]
+texture = ExtResource( 72 )
+
+[node name="outline" type="Sprite" parent="Menu/start_option/Axl/track_bullet"]
+material = SubResource( 158 )
+texture = ExtResource( 68 )
+
+[node name="Deadzone" type="CollisionShape2D" parent="Menu/start_option/Axl/track_bullet"]
+shape = SubResource( 147 )
+
+[node name="share_buff" type="Area2D" parent="Menu/start_option/Axl"]
+position = Vector2( -7, 36 )
+script = ExtResource( 78 )
+_action = "share_buff"
+
+[node name="bacrground" type="Sprite" parent="Menu/start_option/Axl/share_buff"]
+texture = ExtResource( 72 )
+
+[node name="outline" type="Sprite" parent="Menu/start_option/Axl/share_buff"]
+material = SubResource( 159 )
+texture = ExtResource( 58 )
+
+[node name="Deadzone" type="CollisionShape2D" parent="Menu/start_option/Axl/share_buff"]
+shape = SubResource( 147 )
+
+[node name="axl_saber_combo" type="Area2D" parent="Menu/start_option/Axl"]
+position = Vector2( -7, 50 )
+script = ExtResource( 78 )
+_action = "axl_saber_combo"
+
+[node name="bacrground" type="Sprite" parent="Menu/start_option/Axl/axl_saber_combo"]
+texture = ExtResource( 72 )
+
+[node name="outline" type="Sprite" parent="Menu/start_option/Axl/axl_saber_combo"]
+material = SubResource( 160 )
+texture = ExtResource( 62 )
+
+[node name="Deadzone" type="CollisionShape2D" parent="Menu/start_option/Axl/axl_saber_combo"]
+shape = SubResource( 147 )
+
+[node name="floppa_axl" type="Area2D" parent="Menu/start_option/Axl"]
+position = Vector2( -7, 64 )
+script = ExtResource( 78 )
+_action = "floppa_axl"
+
+[node name="bacrground" type="Sprite" parent="Menu/start_option/Axl/floppa_axl"]
+texture = ExtResource( 72 )
+
+[node name="outline" type="Sprite" parent="Menu/start_option/Axl/floppa_axl"]
+material = SubResource( 161 )
+scale = Vector2( 0.417, 0.417 )
+texture = ExtResource( 55 )
+
+[node name="Deadzone" type="CollisionShape2D" parent="Menu/start_option/Axl/floppa_axl"]
+shape = SubResource( 147 )
+
+[node name="auto_hover" type="Area2D" parent="Menu/start_option/Axl"]
+position = Vector2( -7, 78 )
+script = ExtResource( 78 )
+_action = "auto_hover"
+
+[node name="bacrground" type="Sprite" parent="Menu/start_option/Axl/auto_hover"]
+texture = ExtResource( 72 )
+
+[node name="outline" type="Sprite" parent="Menu/start_option/Axl/auto_hover"]
+material = SubResource( 162 )
+texture = ExtResource( 66 )
+
+[node name="Deadzone" type="CollisionShape2D" parent="Menu/start_option/Axl/auto_hover"]
+shape = SubResource( 147 )
+
+[node name="auto_cling_wall" type="Area2D" parent="Menu/start_option/Axl"]
+position = Vector2( -7, 92 )
+script = ExtResource( 78 )
+_action = "auto_cling_wall"
+
+[node name="bacrground" type="Sprite" parent="Menu/start_option/Axl/auto_cling_wall"]
+texture = ExtResource( 72 )
+
+[node name="outline" type="Sprite" parent="Menu/start_option/Axl/auto_cling_wall"]
+material = SubResource( 163 )
+texture = ExtResource( 67 )
+
+[node name="Deadzone" type="CollisionShape2D" parent="Menu/start_option/Axl/auto_cling_wall"]
+shape = SubResource( 147 )
+
+[node name="auto_lock" type="Area2D" parent="Menu/start_option/Axl"]
+position = Vector2( -7, 106 )
+script = ExtResource( 78 )
+_action = "auto_lock"
+
+[node name="bacrground" type="Sprite" parent="Menu/start_option/Axl/auto_lock"]
+texture = ExtResource( 72 )
+
+[node name="outline" type="Sprite" parent="Menu/start_option/Axl/auto_lock"]
+material = SubResource( 164 )
+texture = ExtResource( 65 )
+
+[node name="Deadzone" type="CollisionShape2D" parent="Menu/start_option/Axl/auto_lock"]
+shape = SubResource( 147 )
+
+[node name="Other" type="Control" parent="Menu/start_option"]
+
+[node name="player_desperation" type="Area2D" parent="Menu/start_option/Other"]
+position = Vector2( -7, 170 )
+script = ExtResource( 78 )
+_action = "player_desperation"
+
+[node name="bacrground" type="Sprite" parent="Menu/start_option/Other/player_desperation"]
+texture = ExtResource( 72 )
+
+[node name="outline" type="Sprite" parent="Menu/start_option/Other/player_desperation"]
+material = SubResource( 165 )
+texture = ExtResource( 59 )
+
+[node name="Deadzone" type="CollisionShape2D" parent="Menu/start_option/Other/player_desperation"]
+shape = SubResource( 147 )
+
 [node name="Fader" type="ColorRect" parent="."]
 pause_mode = 2
+visible = false
 margin_right = 398.0
 margin_bottom = 224.0
 mouse_filter = 2
@@ -460,6 +1309,71 @@ color = Color( 0, 0, 0, 1 )
 script = ExtResource( 1 )
 menu = NodePath("../Menu")
 background = NodePath("../Menu/bg")
+
+[node name="AndroidControls" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="left" type="TouchScreenButton" parent="AndroidControls"]
+modulate = Color( 1, 1, 1, 0.392157 )
+self_modulate = Color( 1, 1, 1, 0.392157 )
+position = Vector2( 267, 9 )
+scale = Vector2( 0.84375, 1.5625 )
+normal = ExtResource( 47 )
+passby_press = true
+visibility_mode = 1
+script = ExtResource( 42 )
+
+[node name="right" type="TouchScreenButton" parent="AndroidControls"]
+modulate = Color( 1, 1, 1, 0.392157 )
+self_modulate = Color( 1, 1, 1, 0.392157 )
+position = Vector2( 351, 9 )
+scale = Vector2( 0.812501, 1.59375 )
+normal = ExtResource( 47 )
+passby_press = true
+visibility_mode = 1
+script = ExtResource( 42 )
+
+[node name="up" type="TouchScreenButton" parent="AndroidControls"]
+modulate = Color( 1, 1, 1, 0.392157 )
+self_modulate = Color( 1, 1, 1, 0.392157 )
+position = Vector2( 294, 0 )
+scale = Vector2( 1.78125, 0.4375 )
+normal = ExtResource( 47 )
+passby_press = true
+visibility_mode = 1
+script = ExtResource( 42 )
+
+[node name="down" type="TouchScreenButton" parent="AndroidControls"]
+modulate = Color( 1, 1, 1, 0.392157 )
+self_modulate = Color( 1, 1, 1, 0.392157 )
+position = Vector2( 294, 55 )
+scale = Vector2( 1.78125, 0.375 )
+normal = ExtResource( 47 )
+passby_press = true
+visibility_mode = 1
+script = ExtResource( 42 )
+
+[node name="yes" type="TouchScreenButton" parent="AndroidControls"]
+modulate = Color( 1, 1, 1, 0.392157 )
+self_modulate = Color( 1, 1, 1, 0.392157 )
+position = Vector2( 294, 14 )
+scale = Vector2( 1.78125, 1.28125 )
+normal = ExtResource( 47 )
+passby_press = true
+action = "ui_accept"
+visibility_mode = 1
+script = ExtResource( 42 )
+_action = "ui_accept"
+
+[node name="no" type="TouchScreenButton" parent="AndroidControls"]
+position = Vector2( 380, -4 )
+scale = Vector2( 0.71875, 0.71875 )
+normal = ExtResource( 47 )
+passby_press = true
+action = "ui_cancel"
+visibility_mode = 1
+script = ExtResource( 42 )
+_action = "ui_cancel"
 
 [connection signal="focus_entered" from="Menu/Menu_Frame/GameStart" to="Menu/Menu_Frame/GameStart" method="_on_focus_entered"]
 [connection signal="focus_exited" from="Menu/Menu_Frame/GameStart" to="Menu/Menu_Frame/GameStart" method="_on_focus_exited"]
@@ -476,3 +1390,7 @@ background = NodePath("../Menu/bg")
 [connection signal="mouse_entered" from="Menu/prev_player" to="Menu/prev_player" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Menu/prev_player" to="Menu/prev_player" method="_on_mouse_exited"]
 [connection signal="pressed" from="Menu/prev_player" to="Menu/prev_player" method="_on_pressed"]
+[connection signal="pressed" from="AndroidControls/left" to="Menu/characters/panel/char_container" method="switch_characters" binds= [ "left" ]]
+[connection signal="pressed" from="AndroidControls/right" to="Menu/characters/panel/char_container" method="switch_characters" binds= [ "right" ]]
+[connection signal="pressed" from="AndroidControls/up" to="Menu/characters/panel/char_container" method="switch_armor" binds= [ -1 ]]
+[connection signal="pressed" from="AndroidControls/down" to="Menu/characters/panel/char_container" method="switch_armor" binds= [ 1 ]]

@@ -28,7 +28,6 @@ explosion = ExtResource( 3 )
 [node name="animatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "missile"
-frame = 1
 playing = true
 offset = Vector2( -5, 0 )
 
@@ -59,10 +58,8 @@ position = Vector2( 0, -16 )
 shape = SubResource( 3 )
 
 [node name="visibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-visible = false
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, 0.5 )
 scale = Vector2( 2, 1 )
 shape = SubResource( 1 )

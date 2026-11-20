@@ -28,23 +28,32 @@ func _input(event: InputEvent) -> void :
 func _ready() -> void :
 	character.listen("equipped_armor", self, "on_equip")
 	character.listen("zero_health", self, "on_zero_health")
+	character.listen("received_damage", self, "bigrecharge")
 	Event.listen("hit_enemy", self, "recharge")
 	Event.listen("enemy_kill", self, "recharge")
-	Event.listen("special_end", self, "reset_ammo_to_zero")
-	
-func reset_ammo_to_zero() -> void:
-	current_ammo = 0
+	current_ammo = max_ammo
 
 func recharge(_d = null):
+	if is_instance_valid(GameManager.player):
+		if GameManager.player.ride:
+			return
 	if active and current_ammo < max_ammo:
 		if timer > last_time_hit + minimum_time_between_recharges:
 			last_time_hit = timer
 			current_ammo = clamp(current_ammo + 1.0, 0.0, max_ammo)
 
+func bigrecharge(_d = null):
+	if is_instance_valid(GameManager.player):
+		if GameManager.player.ride:
+			return
+	if active and current_ammo < max_ammo:
+		if timer > last_time_hit + minimum_time_between_recharges:
+			last_time_hit = timer
+			current_ammo = clamp(current_ammo + 10.0, 0.0, max_ammo)
+
 func on_equip():
 	if character.is_full_armor() == "icarus":
 		active = true
-		current_ammo = max_ammo
 		Event.emit_signal("special_activated", self, character)
 	else:
 		active = false
@@ -56,6 +65,8 @@ func has_ammo() -> bool:
 	return current_ammo >= max_ammo
 
 func fire(_charge_level: = 0) -> void :
+	if not character.is_full_armor() == "icarus":
+		return
 	.fire(0)
 	weapon_stasis.ExecuteOnce()
 	jump_damage.effect.visible = false
@@ -107,3 +118,4 @@ func cycle_colors() -> void :
 		tween.set_parallel().tween_property(self, "MainColor3", weapon.MainColor3, color_cycle_duration * 2)
 		tween.chain().tween_property(self, "MainColor2", OriginalMainColor2, color_cycle_duration)
 		tween.set_parallel().tween_property(self, "MainColor3", OriginalMainColor3, color_cycle_duration * 2)
+

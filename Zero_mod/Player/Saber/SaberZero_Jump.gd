@@ -36,6 +36,23 @@ var vertical_last = 0
 var input_buffer = []
 var buffer_window_threshold = 2
 
+var hitbox_extra_scale = 1
+
+onready var swordwave: PackedScene = preload("res://Zero_mod/X8/Sprites/zbuster/object/swordwave.tscn")
+onready var use_genmu: Node2D = $"../Special/Genmuzero"
+var creator: Node2D
+onready var swordwave_sound: AudioStreamPlayer = $swordwave
+var shot_time = 0
+var last_direction: = 1
+var can_use: bool = false
+var first_time_use: bool = true
+
+func _ready() -> void :
+	character.listen("land", self, "reset_can_use")
+	character.listen("wallslide", self, "reset_can_use")
+	character.listen("walljump", self, "reset_can_use")
+	can_use = true
+
 func reset_hitbox():
 	hitbox_upleft = Vector2(0, 0)
 	hitbox_downright = Vector2(0, 0)
@@ -64,6 +81,7 @@ func spawn_hitbox(_hitbox_upleft: Vector2, _hitbox_downright: Vector2):
 	current_hitbox.break_guards = hitbox_break_guards
 	current_hitbox.saber_rehit = hitbox_rehit_time
 	current_hitbox.upgraded = hitbox_upgraded
+	current_hitbox.scale *= hitbox_extra_scale
 	
 	current_hitbox.deflectable = deflectable
 
@@ -83,11 +101,60 @@ func hitbox_and_position():
 			hitbox_downright = Vector2(60, 20)
 			spawn_hitbox(hitbox_upleft, hitbox_downright)
 			
+	if animatedSprite.animation == "saber_ensuizan":
+		if animatedSprite.frame >= 1 and animatedSprite.frame < 2:
+			hitbox_upleft = Vector2( - 4, - 51)
+			hitbox_downright = Vector2(42, -3)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
+		if animatedSprite.frame >= 2 and animatedSprite.frame < 3:
+			hitbox_upleft = Vector2( 9, - 47)
+			hitbox_downright = Vector2(48, 12)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
+		if animatedSprite.frame >= 3 and animatedSprite.frame < 4:
+			hitbox_upleft = Vector2( - 6, - 27)
+			hitbox_downright = Vector2(46, 31)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
+		if animatedSprite.frame >= 4 and animatedSprite.frame < 5:
+			hitbox_upleft = Vector2( -21, 3)
+			hitbox_downright = Vector2(25, 38)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
+		if animatedSprite.frame >= 5 and animatedSprite.frame < 6:
+			hitbox_upleft = Vector2( - 42, - 13)
+			hitbox_downright = Vector2(4, 35)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
+		if animatedSprite.frame >= 6 and animatedSprite.frame < 7:
+			hitbox_upleft = Vector2( - 48, - 25)
+			hitbox_downright = Vector2(-8, 34)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
+		if animatedSprite.frame >= 7 and animatedSprite.frame < 8:
+			hitbox_upleft = Vector2( - 46, - 44)
+			hitbox_downright = Vector2(5, 14)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
+		if animatedSprite.frame >= 8 and animatedSprite.frame < 9:
+			hitbox_upleft = Vector2( - 24, - 50)
+			hitbox_downright = Vector2(21, - 16)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
+		if animatedSprite.frame >= 9 and animatedSprite.frame < 10:
+			hitbox_upleft = Vector2( - 4, - 51)
+			hitbox_downright = Vector2(42, -3)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
+		if animatedSprite.frame >= 10 and animatedSprite.frame < 11:
+			hitbox_upleft = Vector2( 9, - 47)
+			hitbox_downright = Vector2(48, 12)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
+			
 	reset_hitbox()
 
 func end_saber_state():
 	if animatedSprite.animation == "saber_jump" or animatedSprite.animation == "saber_land":
 		return animatedSprite.frame >= 8
+	if animatedSprite.animation == "saber_ensuizan":
+		if first_time_use:
+			return animatedSprite.frame >= 7
+		else:
+			return animatedSprite.frame >= 11
+	else:
+		return animatedSprite.frame >= 0
 
 func is_in_buffer_window() -> bool:
 	if animatedSprite.animation == "saber_jump":
@@ -102,32 +169,93 @@ func should_add_saber_combo():
 		return false
 
 func set_saber_animations():
-	if not character.is_on_floor():
-		animatedSprite.animation = "saber_jump"
-		animatedSprite.frame = 0
 	if character.is_on_floor():
 		animatedSprite.animation = "saber_land"
 		animatedSprite.frame = 0
-	saber_sound.play()
-	
+		saber_sound.play()
+	if not character.is_on_floor():
+		if can_use and CharacterManager.awakened_zero_armor and character.get_action_pressed("move_up"):
+			create()
+		elif can_use and CharacterManager.extra_saber_01 and CharacterManager.extra_saber_combo and character.get_action_pressed("select_special") and character.get_action_pressed("move_up") and not CharacterManager.awakened_zero_armor:
+			if use_genmu.has_ammo_expent(CharacterManager.buster_base_energy * 0.5):
+				create()
+				use_genmu.reduce_ammo(CharacterManager.buster_base_energy * 0.5)
+		elif CharacterManager.extra_saber_combo and not character.get_action_pressed("select_special") and character.get_action_pressed("move_up"):
+			animatedSprite.animation = "saber_ensuizan"
+			animatedSprite.frame = 0
+			saber_sound.play()
+		else:
+			animatedSprite.animation = "saber_jump"
+			animatedSprite.frame = 0
+			saber_sound.play()
+
+
+func create() -> void :
+	can_use = false
+	first_time_use = false
+	last_direction = character.get_facing_direction()
+	animatedSprite.animation = "saber_ensuizan"
+	animatedSprite.frame = 0
+	swordwave_sound.play()
+	create_rasetsusen()
+	Tools.timer(0.03, "create_rasetsusen", self)
+	Tools.timer(0.06, "create_rasetsusen", self)
+	Tools.timer(0.09, "create_rasetsusen", self)
+	Tools.timer(0.12, "create_rasetsusen", self)
+	Tools.timer(0.15, "create_rasetsusen", self)
+	Tools.timer(0.18, "create_rasetsusen", self)
+	Tools.timer(0.24, "first_time", self)
+
+func reset_can_use() -> void :
+	can_use = true
+
+func first_time() -> void :
+	first_time_use = true
+
+func create_rasetsusen() -> void :
+	if shot_time == 0:
+		create_swordwave(global_position,  10, 300, 0, 0)
+	if shot_time == 1:
+		create_swordwave(global_position,  10, 259, 150, 0.5235987755)
+	if shot_time == 2:
+		create_swordwave(global_position,  10, 150, 259, 1.0471975511)
+	if shot_time == 3:
+		create_swordwave(global_position,  10, 0, 300, 1.5707963267)
+	if shot_time == 4:
+		create_swordwave(global_position,  10, -150, 259, 2.0943951023)
+	if shot_time == 4:
+		create_swordwave(global_position,  10, -259, 150, 2.6179938779)
+	if shot_time == 6:
+		create_swordwave(global_position,  10, -300, 0, 3.1415926535)
+	shot_time += 1
+
+func create_swordwave(ground_position,  damage_value, xspeed: float, yspeed: float, rotation_degress) -> void :
+	var instance = swordwave.instance()
+	ground_position.y += -9
+	instance.damage =  damage_value * hitbox_extra_damage * 2
+	instance.damage_to_bosses =  damage_value * hitbox_extra_damage_boss
+	instance.damage_to_weakness =  damage_value * hitbox_extra_damage_weakness
+	instance.tracking = true
+	instance.rotation = rotation_degress * last_direction
+	instance.scale.x = last_direction
+	instance.scale.y = last_direction
+	instance.set_horizontal_speed(xspeed * last_direction)
+	instance.set_vertical_speed(yspeed)
+	get_tree().current_scene.get_node("Objects").call_deferred("add_child", instance, true)
+	instance.set_global_position(ground_position)
+	instance.set_creator(creator)
+	instance.call_deferred("initialize", get_facing_direction())
+
 func _StartCondition() -> bool:
+	if CharacterManager.extra_saber_combo and CharacterManager.extra_saber_04:
+		if character.get_action_pressed("move_down") and not character.get_action_pressed("move_left") and not character.get_action_pressed("move_right"):
+			return false
 	var _animation = get_parent().get_animation()
-	for _ani in character.saber_animations:
-		if _animation == "saber_dash":
-			return false
-		if _animation == "juuhazan":
-			return false
-		if _animation == "rasetsusen":
-			return false
-		if _animation == "youdantotsu":
-			return false
-		if _animation == "enkoujin":
-			return false
-		if _animation == "raikousen":
-			return false
-		if _animation == "hyouryuushou":
-			if animatedSprite.frame < 23:
-				return false
+	if _animation in character.saber_animations:
+		return false
+	var saber_charge = character.get_node_or_null("Charge")
+	if saber_charge != null and saber_charge.get_charge_level() >= 1:
+		return false
 	if not executing:
 		if not character.is_on_floor():
 			vertical_last = character.velocity.y
@@ -147,7 +275,9 @@ func _EndCondition() -> bool:
 	return false
 
 func _Setup() -> void :
+	shot_time = 0
 	landed = false
+	first_time_use = true
 	if vertical_last != 0:
 		character.velocity.y = vertical_last
 	set_saber_animations()
@@ -176,12 +306,17 @@ func _Update(_delta: float) -> void :
 		
 	var animation_frame = animatedSprite.frame
 	if character.is_on_floor():
+		can_use = true
 		if not landed:
 			animatedSprite.animation = "saber_land"
 			animatedSprite.frame = animation_frame
 			landed = true
 		set_movement_no_direction(0)
 		update_bonus_horizontal_only_conveyor()
+
+	if animatedSprite.animation == "saber_ensuizan" and not first_time_use:
+		set_horizontal_speed(0)
+		set_vertical_speed(0)
 
 func change_animation_if_falling(_s) -> void :
 	animatedSprite.animation = "fall"

@@ -1,15 +1,102 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://src/Sounds/Text Letter.ogg" type="AudioStream" id=1]
 [ext_resource path="res://src/Effects/Materials/TextColorSwap.tres" type="Material" id=2]
 [ext_resource path="res://src/DialogSystem/portraits/light_dialogue.res" type="SpriteFrames" id=3]
 [ext_resource path="res://src/DialogSystem/portraits/x_dialogue.res" type="SpriteFrames" id=4]
 [ext_resource path="res://src/DialogSystem/next_dialogue.res" type="SpriteFrames" id=5]
-[ext_resource path="res://src/Fonts/X8bitmapfont.fnt" type="BitmapFont" id=6]
+[ext_resource path="res://src/Fonts/x8bitmapfontfinal.fnt" type="BitmapFont" id=6]
 [ext_resource path="res://Zero_mod/DialogSystem/portraits/zero_dialogue.res" type="SpriteFrames" id=7]
 [ext_resource path="res://src/DialogSystem/AnimatedText.gd" type="Script" id=8]
+[ext_resource path="res://X_mod/UltimateX/DialogSystem/armor_dialogue.png" type="Texture" id=9]
+[ext_resource path="res://src/Actors/Props/RideArmor/RepeatAnimation.gd" type="Script" id=10]
 
 [sub_resource type="GradientTexture2D" id=45]
+
+[sub_resource type="AtlasTexture" id=46]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=47]
+animations = [ {
+"frames": [ SubResource( 46 ) ],
+"loop": true,
+"name": "idle",
+"speed": 23.0
+}, {
+"frames": [ SubResource( 46 ) ],
+"loop": true,
+"name": "talk",
+"speed": 26.0
+} ]
+
+[sub_resource type="AtlasTexture" id=48]
+atlas = ExtResource( 9 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=49]
+animations = [ {
+"frames": [ SubResource( 48 ) ],
+"loop": true,
+"name": "idle",
+"speed": 23.0
+}, {
+"frames": [ SubResource( 48 ) ],
+"loop": true,
+"name": "talk",
+"speed": 26.0
+} ]
+
+[sub_resource type="AtlasTexture" id=50]
+atlas = ExtResource( 9 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=51]
+animations = [ {
+"frames": [ SubResource( 50 ) ],
+"loop": true,
+"name": "idle",
+"speed": 23.0
+}, {
+"frames": [ SubResource( 50 ) ],
+"loop": true,
+"name": "talk",
+"speed": 26.0
+} ]
+
+[sub_resource type="AtlasTexture" id=52]
+atlas = ExtResource( 9 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=53]
+animations = [ {
+"frames": [ SubResource( 52 ) ],
+"loop": true,
+"name": "idle",
+"speed": 23.0
+}, {
+"frames": [ SubResource( 52 ) ],
+"loop": true,
+"name": "talk",
+"speed": 26.0
+} ]
+
+[sub_resource type="AtlasTexture" id=54]
+atlas = ExtResource( 9 )
+region = Rect2( 128, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=55]
+animations = [ {
+"frames": [ SubResource( 54 ) ],
+"loop": true,
+"name": "idle",
+"speed": 23.0
+}, {
+"frames": [ SubResource( 54 ) ],
+"loop": true,
+"name": "talk",
+"speed": 26.0
+} ]
 
 [node name="DialogBox" type="Label"]
 material = ExtResource( 2 )
@@ -47,15 +134,53 @@ position = Vector2( 16, 59 )
 z_index = 44
 frames = ExtResource( 4 )
 animation = "idle"
-frame = 95
 playing = true
+
+[node name="icarus_head" type="AnimatedSprite" parent="Portrait1"]
+visible = false
+frames = SubResource( 47 )
+animation = "idle"
+playing = true
+script = ExtResource( 10 )
+reference = NodePath("..")
+
+[node name="hermes_head" type="AnimatedSprite" parent="Portrait1"]
+visible = false
+frames = SubResource( 49 )
+animation = "idle"
+playing = true
+script = ExtResource( 10 )
+reference = NodePath("..")
+
+[node name="icarus_body" type="AnimatedSprite" parent="Portrait1"]
+visible = false
+frames = SubResource( 51 )
+animation = "idle"
+playing = true
+script = ExtResource( 10 )
+reference = NodePath("..")
+
+[node name="hermes_body" type="AnimatedSprite" parent="Portrait1"]
+visible = false
+frames = SubResource( 53 )
+animation = "idle"
+playing = true
+script = ExtResource( 10 )
+reference = NodePath("..")
+
+[node name="ultimate" type="AnimatedSprite" parent="Portrait1"]
+visible = false
+frames = SubResource( 55 )
+animation = "idle"
+playing = true
+script = ExtResource( 10 )
+reference = NodePath("..")
 
 [node name="Portrait2" type="AnimatedSprite" parent="."]
 position = Vector2( 175, 59 )
 z_index = 44
 frames = ExtResource( 3 )
 animation = "idle"
-frame = 18
 playing = true
 
 [node name="next_dialogue" type="AnimatedSprite" parent="."]
@@ -63,7 +188,6 @@ position = Vector2( 95, 74 )
 z_index = 44
 frames = ExtResource( 5 )
 animation = "Tag"
-frame = 7
 playing = true
 
 [node name="portrait_side" type="Label" parent="."]

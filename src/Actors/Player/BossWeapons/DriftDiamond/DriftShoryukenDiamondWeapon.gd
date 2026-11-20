@@ -11,6 +11,7 @@ func fire_charged() -> void :
 	var pos = character.global_position
 	var ss = instantiate_projectile(weapon.charged_shot)
 	ss.global_position = pos
+	set_shot_extra_damage(ss)
 	driftshoryuken = ss
 	var dir = define_direction(driftshoryuken)
 	executing = true

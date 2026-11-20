@@ -1,75 +1,76 @@
-[gd_resource type="SpriteFrames" load_steps=194 format=2]
+[gd_resource type="SpriteFrames" load_steps=195 format=2]
 
 [ext_resource path="res://X_mod/UltimateX/Sprites/x_ultimate.png" type="Texture" id=1]
 [ext_resource path="res://X_mod/UltimateX/Sprites/shoryuuken.png" type="Texture" id=2]
 [ext_resource path="res://X_mod/UltimateX/Sprites/nova_strike.png" type="Texture" id=3]
+[ext_resource path="res://X_mod/UltimateX/Sprites/armor_blink.png" type="Texture" id=4]
+
+[sub_resource type="AtlasTexture" id=341]
+atlas = ExtResource( 4 )
+region = Rect2( 448, 0, 64, 56 )
+
+[sub_resource type="AtlasTexture" id=342]
+atlas = ExtResource( 4 )
+region = Rect2( 512, 0, 64, 56 )
+
+[sub_resource type="AtlasTexture" id=343]
+atlas = ExtResource( 4 )
+region = Rect2( 576, 0, 64, 56 )
+
+[sub_resource type="AtlasTexture" id=344]
+atlas = ExtResource( 4 )
+region = Rect2( 640, 0, 64, 56 )
+
+[sub_resource type="AtlasTexture" id=345]
+atlas = ExtResource( 4 )
+region = Rect2( 704, 0, 64, 56 )
+
+[sub_resource type="AtlasTexture" id=346]
+atlas = ExtResource( 4 )
+region = Rect2( 768, 0, 64, 56 )
+
+[sub_resource type="AtlasTexture" id=347]
+atlas = ExtResource( 4 )
+region = Rect2( 832, 0, 64, 56 )
+
+[sub_resource type="AtlasTexture" id=348]
+atlas = ExtResource( 4 )
+region = Rect2( 896, 0, 64, 56 )
+
+[sub_resource type="AtlasTexture" id=349]
+atlas = ExtResource( 4 )
+region = Rect2( 960, 0, 64, 56 )
+
+[sub_resource type="AtlasTexture" id=350]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 64, 56 )
+
+[sub_resource type="AtlasTexture" id=351]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 0, 64, 56 )
+
+[sub_resource type="AtlasTexture" id=352]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 0, 64, 56 )
+
+[sub_resource type="AtlasTexture" id=353]
+atlas = ExtResource( 4 )
+region = Rect2( 192, 0, 64, 56 )
+
+[sub_resource type="AtlasTexture" id=354]
+atlas = ExtResource( 4 )
+region = Rect2( 256, 0, 64, 56 )
+
+[sub_resource type="AtlasTexture" id=355]
+atlas = ExtResource( 4 )
+region = Rect2( 320, 0, 64, 56 )
+
+[sub_resource type="AtlasTexture" id=356]
+atlas = ExtResource( 4 )
+region = Rect2( 384, 0, 64, 56 )
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/x.png-9be7c3c54dea65b1fe5310849a3d93b6.stex"
-
-[sub_resource type="AtlasTexture" id=209]
-atlas = SubResource( 1 )
-region = Rect2( 128, 112, 64, 56 )
-
-[sub_resource type="AtlasTexture" id=210]
-atlas = SubResource( 1 )
-region = Rect2( 128, 112, 64, 56 )
-
-[sub_resource type="AtlasTexture" id=211]
-atlas = SubResource( 1 )
-region = Rect2( 128, 112, 64, 56 )
-
-[sub_resource type="AtlasTexture" id=212]
-atlas = SubResource( 1 )
-region = Rect2( 128, 112, 64, 56 )
-
-[sub_resource type="AtlasTexture" id=213]
-atlas = SubResource( 1 )
-region = Rect2( 128, 112, 64, 56 )
-
-[sub_resource type="AtlasTexture" id=214]
-atlas = SubResource( 1 )
-region = Rect2( 128, 112, 64, 56 )
-
-[sub_resource type="AtlasTexture" id=215]
-atlas = SubResource( 1 )
-region = Rect2( 128, 112, 64, 56 )
-
-[sub_resource type="AtlasTexture" id=216]
-atlas = SubResource( 1 )
-region = Rect2( 128, 112, 64, 56 )
-
-[sub_resource type="AtlasTexture" id=217]
-atlas = SubResource( 1 )
-region = Rect2( 128, 112, 64, 56 )
-
-[sub_resource type="AtlasTexture" id=202]
-atlas = SubResource( 1 )
-region = Rect2( 128, 112, 64, 56 )
-
-[sub_resource type="AtlasTexture" id=203]
-atlas = SubResource( 1 )
-region = Rect2( 128, 112, 64, 56 )
-
-[sub_resource type="AtlasTexture" id=204]
-atlas = SubResource( 1 )
-region = Rect2( 128, 112, 64, 56 )
-
-[sub_resource type="AtlasTexture" id=205]
-atlas = SubResource( 1 )
-region = Rect2( 128, 112, 64, 56 )
-
-[sub_resource type="AtlasTexture" id=206]
-atlas = SubResource( 1 )
-region = Rect2( 128, 112, 64, 56 )
-
-[sub_resource type="AtlasTexture" id=207]
-atlas = SubResource( 1 )
-region = Rect2( 128, 112, 64, 56 )
-
-[sub_resource type="AtlasTexture" id=208]
-atlas = SubResource( 1 )
-region = Rect2( 128, 112, 64, 56 )
 
 [sub_resource type="AtlasTexture" id=175]
 atlas = SubResource( 1 )
@@ -765,12 +766,12 @@ region = Rect2( 576, 616, 64, 56 )
 
 [resource]
 animations = [ {
-"frames": [ SubResource( 209 ), SubResource( 210 ), SubResource( 211 ), SubResource( 212 ), SubResource( 213 ), SubResource( 214 ), SubResource( 215 ), SubResource( 216 ), SubResource( 217 ) ],
+"frames": [ SubResource( 341 ), SubResource( 342 ), SubResource( 343 ), SubResource( 344 ), SubResource( 345 ), SubResource( 346 ), SubResource( 347 ), SubResource( 348 ), SubResource( 349 ) ],
 "loop": false,
 "name": "armor_blink",
 "speed": 23.0
 }, {
-"frames": [ SubResource( 202 ), SubResource( 203 ), SubResource( 204 ), SubResource( 205 ), SubResource( 206 ), SubResource( 207 ), SubResource( 208 ) ],
+"frames": [ SubResource( 350 ), SubResource( 351 ), SubResource( 352 ), SubResource( 353 ), SubResource( 354 ), SubResource( 355 ), SubResource( 356 ) ],
 "loop": false,
 "name": "armor_receive",
 "speed": 23.0
@@ -870,7 +871,7 @@ animations = [ {
 "name": "jump",
 "speed": 24.0
 }, {
-"frames": [ SubResource( 286 ), SubResource( 287 ), SubResource( 287 ), SubResource( 288 ), SubResource( 288 ), SubResource( 288 ), SubResource( 288 ), SubResource( 288 ), SubResource( 289 ), SubResource( 290 ), SubResource( 295 ), SubResource( 291 ), SubResource( 292 ), SubResource( 295 ), SubResource( 293 ), SubResource( 294 ), SubResource( 295 ), SubResource( 292 ), SubResource( 295 ), SubResource( 291 ), SubResource( 290 ), SubResource( 290 ) ],
+"frames": [ SubResource( 286 ), SubResource( 287 ), SubResource( 287 ), SubResource( 288 ), SubResource( 288 ), SubResource( 288 ), SubResource( 288 ), SubResource( 288 ), SubResource( 289 ), SubResource( 290 ), SubResource( 295 ), SubResource( 291 ), SubResource( 292 ), SubResource( 295 ), SubResource( 293 ), SubResource( 294 ), SubResource( 295 ), SubResource( 292 ), SubResource( 295 ), SubResource( 291 ), SubResource( 290 ), SubResource( 290 ), SubResource( 291 ) ],
 "loop": false,
 "name": "nova_strike",
 "speed": 30.0
@@ -887,7 +888,7 @@ animations = [ {
 }, {
 "frames": [ SubResource( 335 ), SubResource( 335 ), SubResource( 335 ), SubResource( 336 ), SubResource( 337 ), SubResource( 338 ), SubResource( 339 ), SubResource( 340 ), SubResource( 337 ), SubResource( 338 ), SubResource( 338 ) ],
 "loop": false,
-"name": "shoryuuken",
+"name": "shoryuuken_rolling",
 "speed": 23.0
 }, {
 "frames": [ SubResource( 252 ), SubResource( 253 ), SubResource( 253 ), SubResource( 253 ), SubResource( 253 ), SubResource( 253 ), SubResource( 253 ) ],

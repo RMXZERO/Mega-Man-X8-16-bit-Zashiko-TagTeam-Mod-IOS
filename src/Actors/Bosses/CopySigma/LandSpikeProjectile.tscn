@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://src/Actors/Bosses/CopySigma/LandSpikeProjectile.gd" type="Script" id=1]
 [ext_resource path="res://src/Actors/NewStateMachine/audioplayer.gd" type="Script" id=2]
@@ -11,6 +11,10 @@
 [ext_resource path="res://src/Effects/Textures/sigma_spike.png" type="Texture" id=9]
 [ext_resource path="res://src/Effects/Materials/pinkfire_mat.tres" type="Material" id=10]
 [ext_resource path="res://src/Effects/Materials/pinkfire_particles.tres" type="Material" id=11]
+[ext_resource path="res://Zero_mod/Boss_Zero/fire2.png" type="Texture" id=12]
+[ext_resource path="res://Zero_mod/Boss_Zero/fire3.png" type="Texture" id=13]
+[ext_resource path="res://Zero_mod/Boss_Zero/fire1.png" type="Texture" id=14]
+[ext_resource path="res://Zero_mod/Boss_Zero/enkoujin_projectile.tres" type="SpriteFrames" id=15]
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 9 )
@@ -87,8 +91,68 @@ mini_projectile = ExtResource( 4 )
 position = Vector2( 0, 1 )
 frames = SubResource( 20 )
 animation = "idle"
-frame = 3
 playing = true
+
+[node name="fire1" type="Particles2D" parent="animatedSprite"]
+material = ExtResource( 10 )
+position = Vector2( 0, -1 )
+z_index = 1
+amount = 7
+local_coords = false
+process_material = ExtResource( 11 )
+texture = ExtResource( 7 )
+
+[node name="fire2" type="Particles2D" parent="animatedSprite"]
+material = ExtResource( 10 )
+position = Vector2( 0, -1 )
+z_index = 1
+amount = 5
+local_coords = false
+process_material = ExtResource( 11 )
+texture = ExtResource( 6 )
+
+[node name="fire3" type="Particles2D" parent="animatedSprite"]
+material = ExtResource( 10 )
+position = Vector2( 0, -1 )
+z_index = 1
+amount = 6
+local_coords = false
+process_material = ExtResource( 11 )
+texture = ExtResource( 8 )
+
+[node name="animatedSprite_zero" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 0, 1 )
+frames = ExtResource( 15 )
+animation = "idle"
+playing = true
+
+[node name="fire1" type="Particles2D" parent="animatedSprite_zero"]
+material = ExtResource( 10 )
+position = Vector2( 0, -1 )
+z_index = 1
+amount = 7
+local_coords = false
+process_material = ExtResource( 11 )
+texture = ExtResource( 14 )
+
+[node name="fire2" type="Particles2D" parent="animatedSprite_zero"]
+material = ExtResource( 10 )
+position = Vector2( 0, -1 )
+z_index = 1
+amount = 5
+local_coords = false
+process_material = ExtResource( 11 )
+texture = ExtResource( 12 )
+
+[node name="fire3" type="Particles2D" parent="animatedSprite_zero"]
+material = ExtResource( 10 )
+position = Vector2( 0, -1 )
+z_index = 1
+amount = 6
+local_coords = false
+process_material = ExtResource( 11 )
+texture = ExtResource( 13 )
 
 [node name="collisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 1 )
@@ -118,27 +182,3 @@ volume_db = 2.0
 max_distance = 600.0
 bus = "SFX"
 script = ExtResource( 2 )
-
-[node name="fire1" type="Particles2D" parent="."]
-material = ExtResource( 10 )
-z_index = 1
-amount = 7
-local_coords = false
-process_material = ExtResource( 11 )
-texture = ExtResource( 7 )
-
-[node name="fire2" type="Particles2D" parent="."]
-material = ExtResource( 10 )
-z_index = 1
-amount = 5
-local_coords = false
-process_material = ExtResource( 11 )
-texture = ExtResource( 6 )
-
-[node name="fire3" type="Particles2D" parent="."]
-material = ExtResource( 10 )
-z_index = 1
-amount = 6
-local_coords = false
-process_material = ExtResource( 11 )
-texture = ExtResource( 8 )

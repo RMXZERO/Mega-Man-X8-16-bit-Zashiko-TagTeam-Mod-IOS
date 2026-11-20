@@ -23,11 +23,12 @@ func _on_open_doors() -> void :
 	Tools.timer(0.5, "deactivate_particles", self)
 
 func _on_DoorDestroyer_body_entered(body: Node) -> void :
-	if "ThunderDancerCharged" in body.name and is_instance_valid(reward_door):
-		monitoring = false
-		reward_door.queue_free()
-		reward_door_2.queue_free()
-		Tools.timer(0.5, "deactivate_particles", self)
+	if is_instance_valid(reward_door):
+		if "ThunderDancerCharged" in body.name or "Raikousen" in body.name:
+			monitoring = false
+			reward_door.queue_free()
+			reward_door_2.queue_free()
+			Tools.timer(0.5, "deactivate_particles", self)
 
 func deactivate_particles() -> void :
 	troia_particles.emitting = false

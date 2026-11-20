@@ -255,7 +255,6 @@ position = Vector2( 0, -4 )
 z_index = 5
 frames = ExtResource( 75 )
 animation = "idle"
-frame = 89
 playing = true
 
 [node name="visibilityNotifier2D" type="VisibilityNotifier2D" parent="animatedSprite"]
@@ -528,7 +527,6 @@ actions = [ "Event" ]
 debug_logs = false
 first_decay = 1.5
 lifesteal_decay = 0.65
-minimum_time_between_heals = 0.33
 
 [node name="Damage" type="Node2D" parent="."]
 script = ExtResource( 47 )
@@ -549,7 +547,6 @@ position = Vector2( 0, -8 )
 z_index = 5
 frames = SubResource( 44 )
 animation = "sparks"
-frame = 15
 playing = true
 
 [node name="back" type="AnimatedSprite" parent="Damage"]
@@ -557,7 +554,6 @@ visible = false
 position = Vector2( 0, -8 )
 frames = SubResource( 44 )
 animation = "back"
-frame = 6
 playing = true
 
 [node name="Shot" type="Node2D" parent="."]
@@ -642,7 +638,6 @@ modulate = Color( 1, 0.258824, 0.258824, 0.654902 )
 position = Vector2( -1, 3 )
 z_index = 25
 frames = ExtResource( 31 )
-frame = 9
 playing = true
 
 [node name="XDrive" type="Node2D" parent="Shot"]
@@ -669,7 +664,6 @@ modulate = Color( 0.258824, 0.705882, 1, 0.654902 )
 position = Vector2( -1, 3 )
 z_index = 25
 frames = ExtResource( 31 )
-frame = 9
 playing = true
 
 [node name="node" type="Node" parent="Shot/XDrive"]
@@ -845,7 +839,6 @@ position = Vector2( 0, -4 )
 z_index = 4
 frames = ExtResource( 75 )
 animation = "dash"
-frame = 15
 playing = true
 
 [node name="particles2D" type="Particles2D" parent="AirDash"]
@@ -982,7 +975,6 @@ position = Vector2( 0, -4 )
 z_index = 4
 frames = ExtResource( 75 )
 animation = "dash"
-frame = 15
 playing = true
 
 [node name="particles2D" type="Particles2D" parent="Dash"]

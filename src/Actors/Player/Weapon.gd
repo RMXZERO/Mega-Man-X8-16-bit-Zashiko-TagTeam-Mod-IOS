@@ -16,6 +16,7 @@ export  var MainColor4: Color
 export  var MainColor5: Color
 export  var MainColor6: Color
 
+var extra_damage: float = 1
 onready var arm_cannon = get_parent()
 onready var character = get_parent().get_parent()
 

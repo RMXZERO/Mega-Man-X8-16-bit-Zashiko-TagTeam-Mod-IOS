@@ -10,9 +10,10 @@ func _process(_delta: float) -> void :
 	if active and character.is_current_player:
 		var _animation = get_parent().get_animation()
 		if _animation in character.saber_animations:
-			return
-		if get_parent().is_executing("Intro") or get_parent().is_executing("Finish"):
-			return
+			if not "victory" in _animation:
+				return
+		#if get_parent().is_executing("Intro") or get_parent().is_executing("Finish"):
+		#	return
 		if Input.is_action_just_pressed("weapon_select_left"):
 			Event.emit_signal("weapon_select_left")
 		elif Input.is_action_just_pressed("weapon_select_right"):

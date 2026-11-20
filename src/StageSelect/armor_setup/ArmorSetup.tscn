@@ -1,4 +1,4 @@
-[gd_scene load_steps=140 format=2]
+[gd_scene load_steps=266 format=2]
 
 [ext_resource path="res://src/Options/tank_holder.png" type="Texture" id=1]
 [ext_resource path="res://src/Options/KeymapExit.gd" type="Script" id=2]
@@ -110,8 +110,8 @@
 [ext_resource path="res://Zero_mod/HUD/beta_zero_selection.gd" type="Script" id=108]
 [ext_resource path="res://Zero_mod/HUD/beta_zero.png" type="Texture" id=109]
 [ext_resource path="res://System/SFX/error.ogg" type="AudioStream" id=110]
-[ext_resource path="res://src/StageSelect/armor_setup/set_info.gd" type="Script" id=111]
-[ext_resource path="res://Zero_mod/HUD/custom_zero_selection.gd" type="Script" id=112]
+[ext_resource path="res://Zero_mod/HUD/custom_layer_selection.gd" type="Script" id=111]
+[ext_resource path="res://Zero_mod/HUD/awakened_zero_selection.gd" type="Script" id=112]
 [ext_resource path="res://Zero_mod/HUD/custom_zero.png" type="Texture" id=113]
 [ext_resource path="res://src/Options/selectable_locked.png" type="Texture" id=114]
 [ext_resource path="res://src/Options/selectable_remove.png" type="Texture" id=115]
@@ -123,68 +123,80 @@
 [ext_resource path="res://src/Options/mini_holder.png" type="Texture" id=121]
 [ext_resource path="res://src/StageSelect/armor_setup/remove_upgrades.gd" type="Script" id=122]
 [ext_resource path="res://src/StageSelect/armor_setup/heart_increase.gd" type="Script" id=123]
+[ext_resource path="res://src/Options/selectable_alia_logo.png" type="Texture" id=124]
+[ext_resource path="res://Axl_mod/HUD/Char_Selection_Pallette.png" type="Texture" id=125]
+[ext_resource path="res://Zero_mod/HUD/Char_Selection_Layer.png" type="Texture" id=126]
+[ext_resource path="res://src/StageSelect/armor_setup/Char_Selection_Alia.png" type="Texture" id=127]
+[ext_resource path="res://src/StageSelect/armor_setup/VisualEquipAlia.gd" type="Script" id=128]
+[ext_resource path="res://src/StageSelect/armor_setup/ArmorButtonAlia.gd" type="Script" id=129]
+[ext_resource path="res://src/Options/selectable_layer_logo.png" type="Texture" id=130]
+[ext_resource path="res://src/Options/selectable_pallette_logo.png" type="Texture" id=131]
+[ext_resource path="res://Zero_mod/HUD/Pause/Armor/ArmorButtonLayer.gd" type="Script" id=132]
+[ext_resource path="res://Zero_mod/HUD/Pause/Armor/VisualEquipLayer.gd" type="Script" id=133]
+[ext_resource path="res://Axl_mod/HUD/Armor/VisualEquipPallette.gd" type="Script" id=134]
+[ext_resource path="res://Axl_mod/HUD/Armor/ArmorButtonPallette.gd" type="Script" id=135]
+[ext_resource path="res://src/Options/aila_legs.png" type="Texture" id=136]
+[ext_resource path="res://src/Options/aila_body.png" type="Texture" id=137]
+[ext_resource path="res://src/Options/aila_head.png" type="Texture" id=138]
+[ext_resource path="res://src/Options/aila_arms.png" type="Texture" id=139]
+[ext_resource path="res://Zero_mod/HUD/Pause/Armor/layer_head.png" type="Texture" id=140]
+[ext_resource path="res://Zero_mod/HUD/Pause/Armor/layer_body.png" type="Texture" id=141]
+[ext_resource path="res://Zero_mod/HUD/Pause/Armor/layer_arms.png" type="Texture" id=142]
+[ext_resource path="res://Zero_mod/HUD/Pause/Armor/layer_legs.png" type="Texture" id=143]
+[ext_resource path="res://Axl_mod/HUD/Armor/pallette_head.png" type="Texture" id=144]
+[ext_resource path="res://Axl_mod/HUD/Armor/pallette_body.png" type="Texture" id=145]
+[ext_resource path="res://Axl_mod/HUD/Armor/pallette_arms.png" type="Texture" id=146]
+[ext_resource path="res://Axl_mod/HUD/Armor/pallette_legs.png" type="Texture" id=147]
+[ext_resource path="res://Zero_mod/HUD/awaken_zero.png" type="Texture" id=148]
+[ext_resource path="res://Zero_mod/HUD/custom_zero_selection.gd" type="Script" id=149]
+[ext_resource path="res://Axl_mod/HUD/custom_axl.png" type="Texture" id=150]
+[ext_resource path="res://Axl_mod/HUD/custom_axl_selection.gd" type="Script" id=151]
+[ext_resource path="res://Axl_mod/HUD/floppa_axl.png" type="Texture" id=152]
+[ext_resource path="res://Axl_mod/HUD/floppa_axl_selection.gd" type="Script" id=153]
+[ext_resource path="res://Axl_mod/HUD/floppa_axl_auto_hover.png" type="Texture" id=154]
+[ext_resource path="res://Axl_mod/HUD/floppa_axl_auto_cling_wall.png" type="Texture" id=155]
+[ext_resource path="res://Axl_mod/HUD/floppa_axl_auto_cling_wall_selection.gd" type="Script" id=156]
+[ext_resource path="res://Axl_mod/HUD/floppa_axl_auto_hover_selection.gd" type="Script" id=157]
+[ext_resource path="res://src/StageSelect/armor_setup/middle_holder.png" type="Texture" id=158]
+[ext_resource path="res://Axl_mod/HUD/floppa_axl_auto_lock_selection.gd" type="Script" id=159]
+[ext_resource path="res://Axl_mod/HUD/floppa_axl_auto_lock.png" type="Texture" id=160]
+[ext_resource path="res://Zero_mod/HUD/zero_extra_saber_color_selection.gd" type="Script" id=161]
+[ext_resource path="res://Zero_mod/HUD/zero_extra_saber_combo_selection.gd" type="Script" id=162]
+[ext_resource path="res://Zero_mod/HUD/zero_awaken_zero_unlimited_selection.gd" type="Script" id=163]
+[ext_resource path="res://src/Options/selectable_background.png" type="Texture" id=164]
+[ext_resource path="res://Zero_mod/HUD/zero_awakened_unlimited.png" type="Texture" id=165]
+[ext_resource path="res://Zero_mod/HUD/zero_extra_color.png" type="Texture" id=166]
+[ext_resource path="res://Zero_mod/HUD/zero_extra_combo.png" type="Texture" id=167]
+[ext_resource path="res://src/AchievementSystem/icon_bg_gold.png" type="Texture" id=168]
+[ext_resource path="res://X_mod/UltimateX/HUD/x_auto_charge_selection.gd" type="Script" id=169]
+[ext_resource path="res://X_mod/UltimateX/HUD/x_rapid_fire_selection.gd" type="Script" id=170]
+[ext_resource path="res://X_mod/UltimateX/HUD/x_rapid_fire.png" type="Texture" id=171]
+[ext_resource path="res://X_mod/UltimateX/HUD/x_auto_charge.png" type="Texture" id=172]
+[ext_resource path="res://X_mod/UltimateX/HUD/x_ultimate_buster_selection.gd" type="Script" id=173]
+[ext_resource path="res://X_mod/UltimateX/HUD/x_ultimate_buster.png" type="Texture" id=174]
+[ext_resource path="res://Axl_mod/HUD/axl_track_bullet_selection.gd" type="Script" id=175]
+[ext_resource path="res://Axl_mod/HUD/axl_cheat_axl_selection.gd" type="Script" id=176]
+[ext_resource path="res://X_mod/InfiniteX/HUD/Infinite_x.png" type="Texture" id=177]
+[ext_resource path="res://Axl_mod/HUD/cheat_axl.png" type="Texture" id=178]
+[ext_resource path="res://X_mod/InfiniteX/HUD/infinite_x_selection.gd" type="Script" id=179]
+[ext_resource path="res://Axl_mod/HUD/custom_pallette_selection.gd" type="Script" id=180]
+[ext_resource path="res://Axl_mod/HUD/track_bullet.png" type="Texture" id=181]
+[ext_resource path="res://Axl_mod/HUD/axl_share_buff_selection.gd" type="Script" id=182]
+[ext_resource path="res://Axl_mod/HUD/axl_share_buff.png" type="Texture" id=183]
+[ext_resource path="res://Axl_mod/HUD/player_desperation.png" type="Texture" id=184]
+[ext_resource path="res://Axl_mod/HUD/player_desperation_selection.gd" type="Script" id=185]
+[ext_resource path="res://Zero_mod/HUD/weapon_get_zero_selection.gd" type="Script" id=186]
+[ext_resource path="res://Zero_mod/HUD/weapon_get_zero.png" type="Texture" id=187]
+[ext_resource path="res://X_mod/X8/HUD/old_sprites_selection.gd" type="Script" id=188]
+[ext_resource path="res://X_mod/X8/HUD/hide_armor_selection.gd" type="Script" id=189]
+[ext_resource path="res://X_mod/X8/HUD/old_sprite.png" type="Texture" id=190]
+[ext_resource path="res://X_mod/X8/HUD/hide_armor.png" type="Texture" id=191]
+[ext_resource path="res://Axl_mod/HUD/axl_saber_combo.png" type="Texture" id=192]
+[ext_resource path="res://Axl_mod/HUD/axl_saber_selection.gd" type="Script" id=193]
+[ext_resource path="res://X_mod/UltimateX/HUD/x_glow_selection.gd" type="Script" id=194]
+[ext_resource path="res://X_mod/UltimateX/HUD/x_glow.png" type="Texture" id=195]
 
-[sub_resource type="Shader" id=1]
-code = "shader_type canvas_item;
-
-uniform bool grayscale = true;
-
-void fragment() {
-	COLOR = texture(TEXTURE, UV);
-	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
-	COLOR.rgb = COLOR.rgb;
-	if (grayscale){
-		COLOR.rgb = vec3(avg);
-	}
-} "
-
-[sub_resource type="ShaderMaterial" id=3]
-resource_local_to_scene = true
-shader = SubResource( 1 )
-shader_param/grayscale = false
-
-[sub_resource type="ShaderMaterial" id=14]
-resource_local_to_scene = true
-shader = SubResource( 1 )
-shader_param/grayscale = false
-
-[sub_resource type="ShaderMaterial" id=13]
-resource_local_to_scene = true
-shader = SubResource( 1 )
-shader_param/grayscale = false
-
-[sub_resource type="SpriteFrames" id=17]
-animations = [ {
-"frames": [ ExtResource( 115 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
-
-[sub_resource type="SpriteFrames" id=16]
-animations = [ {
-"frames": [ ExtResource( 118 ) ],
-"loop": true,
-"name": "Axl",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 114 ) ],
-"loop": true,
-"name": "Blank",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 116 ) ],
-"loop": true,
-"name": "X",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 117 ) ],
-"loop": true,
-"name": "Zero",
-"speed": 5.0
-} ]
-
-[sub_resource type="Shader" id=11]
+[sub_resource type="Shader" id=100]
 code = "shader_type canvas_item;
 
 uniform bool grayscale = true;
@@ -200,12 +212,26 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=2]
 resource_local_to_scene = true
-shader = SubResource( 11 )
+shader = SubResource( 100 )
 shader_param/grayscale = false
+
+[sub_resource type="Shader" id=101]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
 
 [sub_resource type="ShaderMaterial" id=12]
 resource_local_to_scene = true
-shader = SubResource( 1 )
+shader = SubResource( 101 )
 shader_param/grayscale = true
 
 [sub_resource type="AtlasTexture" id=6]
@@ -234,13 +260,575 @@ animations = [ {
 
 [sub_resource type="ShaderMaterial" id=4]
 resource_local_to_scene = true
-shader = SubResource( 1 )
+shader = SubResource( 101 )
 shader_param/grayscale = true
+
+[sub_resource type="Shader" id=102]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
 
 [sub_resource type="ShaderMaterial" id=5]
 resource_local_to_scene = true
-shader = SubResource( 1 )
+shader = SubResource( 102 )
 shader_param/grayscale = true
+
+[sub_resource type="Shader" id=83]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=3]
+resource_local_to_scene = true
+shader = SubResource( 83 )
+shader_param/grayscale = false
+
+[sub_resource type="Shader" id=67]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=51]
+resource_local_to_scene = true
+shader = SubResource( 67 )
+shader_param/grayscale = false
+
+[sub_resource type="Shader" id=68]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=53]
+resource_local_to_scene = true
+shader = SubResource( 68 )
+shader_param/grayscale = false
+
+[sub_resource type="Shader" id=69]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=55]
+resource_local_to_scene = true
+shader = SubResource( 69 )
+shader_param/grayscale = false
+
+[sub_resource type="Shader" id=94]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=95]
+shader = SubResource( 94 )
+shader_param/grayscale = false
+
+[sub_resource type="Shader" id=96]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=97]
+shader = SubResource( 96 )
+shader_param/grayscale = false
+
+[sub_resource type="Shader" id=103]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=104]
+shader = SubResource( 103 )
+shader_param/grayscale = false
+
+[sub_resource type="Shader" id=65]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=14]
+resource_local_to_scene = true
+shader = SubResource( 65 )
+shader_param/grayscale = false
+
+[sub_resource type="ShaderMaterial" id=47]
+resource_local_to_scene = true
+shader = SubResource( 83 )
+shader_param/grayscale = false
+
+[sub_resource type="Shader" id=70]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=21]
+resource_local_to_scene = true
+shader = SubResource( 70 )
+shader_param/grayscale = false
+
+[sub_resource type="Shader" id=71]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=40]
+resource_local_to_scene = true
+shader = SubResource( 71 )
+shader_param/grayscale = false
+
+[sub_resource type="Shader" id=88]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=89]
+shader = SubResource( 88 )
+shader_param/grayscale = true
+
+[sub_resource type="Shader" id=73]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=44]
+resource_local_to_scene = true
+shader = SubResource( 73 )
+shader_param/grayscale = false
+
+[sub_resource type="Shader" id=74]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=63]
+resource_local_to_scene = true
+shader = SubResource( 74 )
+shader_param/grayscale = false
+
+[sub_resource type="Shader" id=75]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=24]
+resource_local_to_scene = true
+shader = SubResource( 75 )
+shader_param/grayscale = false
+
+[sub_resource type="Shader" id=76]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=26]
+resource_local_to_scene = true
+shader = SubResource( 76 )
+shader_param/grayscale = false
+
+[sub_resource type="Shader" id=77]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=28]
+resource_local_to_scene = true
+shader = SubResource( 77 )
+shader_param/grayscale = false
+
+[sub_resource type="Shader" id=78]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=30]
+resource_local_to_scene = true
+shader = SubResource( 78 )
+shader_param/grayscale = false
+
+[sub_resource type="Shader" id=79]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=32]
+resource_local_to_scene = true
+shader = SubResource( 79 )
+shader_param/grayscale = false
+
+[sub_resource type="Shader" id=80]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=57]
+resource_local_to_scene = true
+shader = SubResource( 80 )
+shader_param/grayscale = false
+
+[sub_resource type="Shader" id=84]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=85]
+shader = SubResource( 84 )
+shader_param/grayscale = false
+
+[sub_resource type="Shader" id=82]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=61]
+resource_local_to_scene = true
+shader = SubResource( 82 )
+shader_param/grayscale = false
+
+[sub_resource type="Shader" id=105]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=106]
+shader = SubResource( 105 )
+shader_param/grayscale = false
+
+[sub_resource type="Shader" id=107]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=108]
+shader = SubResource( 107 )
+shader_param/grayscale = false
+
+[sub_resource type="SpriteFrames" id=17]
+animations = [ {
+"frames": [ ExtResource( 115 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 124 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=19]
+atlas = ExtResource( 130 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=20]
+atlas = ExtResource( 131 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=16]
+animations = [ {
+"frames": [ SubResource( 18 ) ],
+"loop": true,
+"name": "Alia",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 118 ) ],
+"loop": true,
+"name": "Axl",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 114 ) ],
+"loop": true,
+"name": "Blank",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 19 ) ],
+"loop": true,
+"name": "Layer",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 20 ) ],
+"loop": true,
+"name": "Pallette",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 116 ) ],
+"loop": true,
+"name": "X",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 117 ) ],
+"loop": true,
+"name": "Zero",
+"speed": 5.0
+} ]
+
+[sub_resource type="Shader" id=90]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=87]
+shader = SubResource( 90 )
+shader_param/grayscale = true
+
+[sub_resource type="Shader" id=91]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=46]
+resource_local_to_scene = true
+shader = SubResource( 91 )
+shader_param/grayscale = false
+
+[sub_resource type="Shader" id=92]
+code = "shader_type canvas_item;
+
+uniform bool grayscale = true;
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+	float avg = (COLOR.r + COLOR.g + COLOR.b) /  3.5;
+	COLOR.rgb = COLOR.rgb;
+	if (grayscale){
+		COLOR.rgb = vec3(avg);
+	}
+} "
+
+[sub_resource type="ShaderMaterial" id=93]
+shader = SubResource( 92 )
+shader_param/grayscale = false
 
 [node name="ArmorSetup" type="CanvasLayer"]
 layer = 5
@@ -856,6 +1444,931 @@ show_behind_parent = true
 texture = ExtResource( 85 )
 centered = false
 
+[node name="ultimate_holder" type="TextureRect" parent="Menu/textureRect/X"]
+visible = false
+margin_left = -70.0
+margin_top = 13.0
+margin_right = 8.0
+margin_bottom = 97.0
+texture = ExtResource( 1 )
+flip_h = true
+
+[node name="info" type="TextureButton" parent="Menu/textureRect/X/ultimate_holder"]
+material = SubResource( 2 )
+margin_left = 32.0
+margin_top = 13.0
+margin_right = 62.0
+margin_bottom = 43.0
+focus_neighbour_right = NodePath("../../../../prevplayer_holder/prev_player")
+script = ExtResource( 179 )
+menu_path = NodePath("../../../../..")
+legible_name = "ULTIMATE_SET_NAME"
+description = "ULTIMATE_SET_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/X/ultimate_holder/info"]
+modulate = Color( 1, 1, 1, 0.752941 )
+margin_right = 30.0
+margin_bottom = 30.0
+texture = ExtResource( 44 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/X/ultimate_holder/info"]
+modulate = Color( 1, 1, 1, 0.75 )
+material = SubResource( 12 )
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 27.0
+margin_bottom = 27.0
+texture = ExtResource( 72 )
+script = ExtResource( 47 )
+fullset_signal = "full_ultimate"
+
+[node name="icon_bg_gold" type="TextureRect" parent="Menu/textureRect/X/ultimate_holder/info"]
+visible = false
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 31.0
+margin_bottom = 31.0
+texture = ExtResource( 168 )
+
+[node name="infinite_icon" type="TextureRect" parent="Menu/textureRect/X/ultimate_holder/info"]
+visible = false
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 27.0
+margin_bottom = 27.0
+texture = ExtResource( 177 )
+
+[node name="animatedSprite" type="AnimatedSprite" parent="Menu/textureRect/X/ultimate_holder/info"]
+position = Vector2( 16, 14 )
+z_index = 2
+frames = SubResource( 10 )
+playing = true
+
+[node name="hermes_holder" type="TextureRect" parent="Menu/textureRect/X"]
+visible = false
+margin_left = -70.0
+margin_top = 55.0
+margin_right = 8.0
+margin_bottom = 139.0
+texture = ExtResource( 1 )
+flip_h = true
+
+[node name="info" type="TextureButton" parent="Menu/textureRect/X/hermes_holder"]
+material = SubResource( 2 )
+margin_left = 32.0
+margin_top = 13.0
+margin_right = 62.0
+margin_bottom = 43.0
+focus_neighbour_right = NodePath("../../../../prevplayer_holder/prev_player")
+script = ExtResource( 179 )
+menu_path = NodePath("../../../../..")
+legible_name = "HERMES_SET_NAME"
+description = "HERMES_SET_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/X/hermes_holder/info"]
+modulate = Color( 1, 1, 1, 0.752941 )
+margin_right = 30.0
+margin_bottom = 30.0
+texture = ExtResource( 44 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/X/hermes_holder/info"]
+modulate = Color( 1, 1, 1, 0.752941 )
+material = SubResource( 4 )
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 27.0
+margin_bottom = 27.0
+texture = ExtResource( 46 )
+script = ExtResource( 47 )
+fullset_signal = "full_hermes"
+
+[node name="icon_bg_gold" type="TextureRect" parent="Menu/textureRect/X/hermes_holder/info"]
+visible = false
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 31.0
+margin_bottom = 31.0
+texture = ExtResource( 168 )
+
+[node name="infinite_icon" type="TextureRect" parent="Menu/textureRect/X/hermes_holder/info"]
+visible = false
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 27.0
+margin_bottom = 27.0
+texture = ExtResource( 177 )
+
+[node name="animatedSprite" type="AnimatedSprite" parent="Menu/textureRect/X/hermes_holder/info"]
+position = Vector2( 16, 14 )
+z_index = 2
+frames = SubResource( 10 )
+playing = true
+
+[node name="icarus_holder" type="TextureRect" parent="Menu/textureRect/X"]
+visible = false
+margin_left = -70.0
+margin_top = 97.0
+margin_right = 8.0
+margin_bottom = 181.0
+texture = ExtResource( 1 )
+flip_h = true
+
+[node name="info" type="TextureButton" parent="Menu/textureRect/X/icarus_holder"]
+material = SubResource( 2 )
+margin_left = 32.0
+margin_top = 13.0
+margin_right = 62.0
+margin_bottom = 43.0
+focus_neighbour_right = NodePath("../../../../prevplayer_holder/prev_player")
+script = ExtResource( 179 )
+menu_path = NodePath("../../../../..")
+legible_name = "ICARUS_SET_NAME"
+description = "ICARUS_SET_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/X/icarus_holder/info"]
+modulate = Color( 1, 1, 1, 0.752941 )
+margin_right = 30.0
+margin_bottom = 30.0
+texture = ExtResource( 44 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/X/icarus_holder/info"]
+modulate = Color( 1, 1, 1, 0.75 )
+material = SubResource( 5 )
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 27.0
+margin_bottom = 27.0
+texture = ExtResource( 45 )
+script = ExtResource( 47 )
+fullset_signal = "full_icarus"
+
+[node name="icon_bg_gold" type="TextureRect" parent="Menu/textureRect/X/icarus_holder/info"]
+visible = false
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 31.0
+margin_bottom = 31.0
+texture = ExtResource( 168 )
+
+[node name="infinite_icon" type="TextureRect" parent="Menu/textureRect/X/icarus_holder/info"]
+visible = false
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 27.0
+margin_bottom = 27.0
+texture = ExtResource( 177 )
+
+[node name="animatedSprite" type="AnimatedSprite" parent="Menu/textureRect/X/icarus_holder/info"]
+position = Vector2( 16, 14 )
+z_index = 2
+frames = SubResource( 10 )
+playing = true
+
+[node name="x_setting_holder" type="TextureRect" parent="Menu/textureRect/X"]
+visible = false
+margin_left = -70.0
+margin_top = 133.0
+margin_right = 8.0
+margin_bottom = 189.0
+texture = ExtResource( 158 )
+flip_h = true
+
+[node name="Value" type="Label" parent="Menu/textureRect/X/x_setting_holder"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -14.0
+margin_right = 31.0
+custom_colors/font_color_shadow = Color( 0.415686, 0.415686, 0.415686, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+custom_fonts/font = ExtResource( 34 )
+text = "OPTION"
+align = 1
+uppercase = true
+
+[node name="x_setting" type="HBoxContainer" parent="Menu/textureRect/X/x_setting_holder"]
+margin_left = 13.0
+margin_top = 31.0
+margin_right = 69.0
+margin_bottom = 45.0
+custom_constants/separation = 14
+alignment = 1
+
+[node name="auto_charge" type="TextureButton" parent="Menu/textureRect/X/x_setting_holder/x_setting"]
+material = SubResource( 3 )
+margin_left = 14.0
+margin_right = 14.0
+margin_bottom = 14.0
+focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
+script = ExtResource( 169 )
+menu_path = NodePath("../../../../../..")
+legible_name = "AUTOCHARGE_NAME"
+description = "AUTOCHARGE_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/X/x_setting_holder/x_setting/auto_charge"]
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 164 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/X/x_setting_holder/x_setting/auto_charge"]
+material = SubResource( 51 )
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 172 )
+
+[node name="rapid_fire" type="TextureButton" parent="Menu/textureRect/X/x_setting_holder/x_setting"]
+material = SubResource( 3 )
+margin_left = 28.0
+margin_right = 28.0
+margin_bottom = 14.0
+focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
+script = ExtResource( 170 )
+menu_path = NodePath("../../../../../..")
+legible_name = "RAPIDFIRE_NAME"
+description = "RAPIDFIRE_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/X/x_setting_holder/x_setting/rapid_fire"]
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 164 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/X/x_setting_holder/x_setting/rapid_fire"]
+material = SubResource( 53 )
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 171 )
+
+[node name="ultimate_buster" type="TextureButton" parent="Menu/textureRect/X/x_setting_holder/x_setting"]
+material = SubResource( 3 )
+margin_left = 42.0
+margin_right = 42.0
+margin_bottom = 14.0
+focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
+script = ExtResource( 173 )
+menu_path = NodePath("../../../../../..")
+legible_name = "ULTIMATE_BUSTER_NAME"
+description = "ULTIMATE_BUSTER_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/X/x_setting_holder/x_setting/ultimate_buster"]
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 164 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/X/x_setting_holder/x_setting/ultimate_buster"]
+material = SubResource( 55 )
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 174 )
+
+[node name="x_setting2" type="HBoxContainer" parent="Menu/textureRect/X/x_setting_holder"]
+margin_left = 13.0
+margin_top = 17.0
+margin_right = 69.0
+margin_bottom = 31.0
+custom_constants/separation = 14
+alignment = 1
+
+[node name="hide_armor" type="TextureButton" parent="Menu/textureRect/X/x_setting_holder/x_setting2"]
+material = SubResource( 3 )
+margin_left = 14.0
+margin_right = 14.0
+margin_bottom = 14.0
+focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
+script = ExtResource( 189 )
+menu_path = NodePath("../../../../../..")
+legible_name = "HIDEXARMOR_NAME"
+description = "HIDEXARMOR_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/X/x_setting_holder/x_setting2/hide_armor"]
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 164 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/X/x_setting_holder/x_setting2/hide_armor"]
+material = SubResource( 95 )
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 191 )
+
+[node name="old_sprites" type="TextureButton" parent="Menu/textureRect/X/x_setting_holder/x_setting2"]
+material = SubResource( 3 )
+margin_left = 28.0
+margin_right = 28.0
+margin_bottom = 14.0
+focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
+script = ExtResource( 188 )
+menu_path = NodePath("../../../../../..")
+legible_name = "USEOLDSPRITES_NAME"
+description = "USEOLDSPRITES_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/X/x_setting_holder/x_setting2/old_sprites"]
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 164 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/X/x_setting_holder/x_setting2/old_sprites"]
+material = SubResource( 97 )
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 190 )
+
+[node name="infinite_x_glow" type="TextureButton" parent="Menu/textureRect/X/x_setting_holder/x_setting2"]
+material = SubResource( 3 )
+margin_left = 42.0
+margin_right = 42.0
+margin_bottom = 14.0
+focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
+script = ExtResource( 194 )
+menu_path = NodePath("../../../../../..")
+legible_name = "INFINITEXHANDGLOW_NAME"
+description = "INFINITEXHANDGLOW_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/X/x_setting_holder/x_setting2/infinite_x_glow"]
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 164 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/X/x_setting_holder/x_setting2/infinite_x_glow"]
+material = SubResource( 104 )
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 195 )
+
+[node name="Zero" type="Control" parent="Menu/textureRect"]
+visible = false
+margin_right = 284.0
+margin_bottom = 216.0
+
+[node name="Armor" type="Control" parent="Menu/textureRect/Zero"]
+margin_left = 9.0
+margin_top = 9.0
+margin_right = 132.0
+margin_bottom = 213.0
+
+[node name="base_b" type="TextureRect" parent="Menu/textureRect/Zero/Armor"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.5
+margin_top = -92.0
+margin_right = 53.5
+margin_bottom = 92.0
+texture = ExtResource( 90 )
+
+[node name="base_B" type="TextureRect" parent="Menu/textureRect/Zero/Armor"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.5
+margin_top = -92.0
+margin_right = 53.5
+margin_bottom = 92.0
+texture = ExtResource( 93 )
+
+[node name="body" type="TextureRect" parent="Menu/textureRect/Zero/Armor"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.5
+margin_top = -92.0
+margin_right = 53.5
+margin_bottom = 92.0
+texture = ExtResource( 91 )
+
+[node name="black_body" type="TextureRect" parent="Menu/textureRect/Zero/Armor"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.5
+margin_top = -92.0
+margin_right = 53.5
+margin_bottom = 92.0
+texture = ExtResource( 94 )
+
+[node name="head" type="TextureRect" parent="Menu/textureRect/Zero/Armor"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.5
+margin_top = -92.0
+margin_right = 53.5
+margin_bottom = 92.0
+texture = ExtResource( 57 )
+
+[node name="black_head" type="TextureRect" parent="Menu/textureRect/Zero/Armor"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.5
+margin_top = -92.0
+margin_right = 53.5
+margin_bottom = 92.0
+texture = ExtResource( 95 )
+
+[node name="arms" type="TextureRect" parent="Menu/textureRect/Zero/Armor"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.5
+margin_top = -92.0
+margin_right = 53.5
+margin_bottom = 92.0
+texture = ExtResource( 89 )
+
+[node name="black_arms" type="TextureRect" parent="Menu/textureRect/Zero/Armor"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.5
+margin_top = -92.0
+margin_right = 53.5
+margin_bottom = 92.0
+texture = ExtResource( 92 )
+
+[node name="legs" type="TextureRect" parent="Menu/textureRect/Zero/Armor"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.5
+margin_top = -92.0
+margin_right = 53.5
+margin_bottom = 92.0
+texture = ExtResource( 88 )
+
+[node name="black_legs" type="TextureRect" parent="Menu/textureRect/Zero/Armor"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.5
+margin_top = -92.0
+margin_right = 53.5
+margin_bottom = 92.0
+texture = ExtResource( 96 )
+
+[node name="Options Group" type="Control" parent="Menu/textureRect/Zero"]
+margin_left = 146.0
+margin_top = 68.0
+margin_right = 275.0
+margin_bottom = 207.0
+
+[node name="ArmorParts" type="VBoxContainer" parent="Menu/textureRect/Zero/Options Group"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -64.5
+margin_top = 1.0
+margin_right = 64.5
+margin_bottom = 124.0
+custom_constants/separation = 1
+alignment = 1
+
+[node name="HeadParts" type="HBoxContainer" parent="Menu/textureRect/Zero/Options Group/ArmorParts"]
+margin_right = 129.0
+margin_bottom = 30.0
+custom_constants/separation = 10
+alignment = 1
+script = ExtResource( 60 )
+
+[node name="head" type="TextureButton" parent="Menu/textureRect/Zero/Options Group/ArmorParts/HeadParts"]
+margin_left = 29.0
+margin_right = 59.0
+margin_bottom = 30.0
+texture_normal = ExtResource( 59 )
+script = ExtResource( 61 )
+menu_path = NodePath("../../../../../../..")
+legible_name = "ZEROHEAD_NAME"
+description = "ZEROHEAD_DESC"
+
+[node name="sprite" type="Sprite" parent="Menu/textureRect/Zero/Options Group/ArmorParts/HeadParts/head"]
+modulate = Color( 1, 1, 1, 0.588235 )
+show_behind_parent = true
+texture = ExtResource( 85 )
+centered = false
+
+[node name="black_head" type="TextureButton" parent="Menu/textureRect/Zero/Options Group/ArmorParts/HeadParts"]
+margin_left = 69.0
+margin_right = 99.0
+margin_bottom = 30.0
+texture_normal = ExtResource( 78 )
+script = ExtResource( 61 )
+menu_path = NodePath("../../../../../../..")
+legible_name = "BLACKZEROHEAD_NAME"
+description = "BLACKZEROHEAD_DISC"
+
+[node name="sprite" type="Sprite" parent="Menu/textureRect/Zero/Options Group/ArmorParts/HeadParts/black_head"]
+modulate = Color( 1, 1, 1, 0.588235 )
+show_behind_parent = true
+texture = ExtResource( 85 )
+centered = false
+
+[node name="BodyParts" type="HBoxContainer" parent="Menu/textureRect/Zero/Options Group/ArmorParts"]
+margin_top = 31.0
+margin_right = 129.0
+margin_bottom = 61.0
+custom_constants/separation = 10
+alignment = 1
+script = ExtResource( 60 )
+
+[node name="body" type="TextureButton" parent="Menu/textureRect/Zero/Options Group/ArmorParts/BodyParts"]
+margin_left = 29.0
+margin_right = 59.0
+margin_bottom = 30.0
+texture_normal = ExtResource( 58 )
+script = ExtResource( 61 )
+menu_path = NodePath("../../../../../../..")
+legible_name = "ZEROBODY_NAME"
+description = "ZEROBODY_DESC"
+
+[node name="sprite" type="Sprite" parent="Menu/textureRect/Zero/Options Group/ArmorParts/BodyParts/body"]
+modulate = Color( 1, 1, 1, 0.588235 )
+show_behind_parent = true
+texture = ExtResource( 85 )
+centered = false
+
+[node name="black_body" type="TextureButton" parent="Menu/textureRect/Zero/Options Group/ArmorParts/BodyParts"]
+margin_left = 69.0
+margin_right = 99.0
+margin_bottom = 30.0
+texture_normal = ExtResource( 77 )
+script = ExtResource( 61 )
+menu_path = NodePath("../../../../../../..")
+legible_name = "BLACKZEROBODY_NAME"
+description = "BLACKZEROBODY_DISC"
+
+[node name="sprite" type="Sprite" parent="Menu/textureRect/Zero/Options Group/ArmorParts/BodyParts/black_body"]
+modulate = Color( 1, 1, 1, 0.588235 )
+show_behind_parent = true
+texture = ExtResource( 85 )
+centered = false
+
+[node name="ArmParts" type="HBoxContainer" parent="Menu/textureRect/Zero/Options Group/ArmorParts"]
+margin_top = 62.0
+margin_right = 129.0
+margin_bottom = 92.0
+custom_constants/separation = 10
+alignment = 1
+script = ExtResource( 60 )
+
+[node name="arms" type="TextureButton" parent="Menu/textureRect/Zero/Options Group/ArmorParts/ArmParts"]
+margin_left = 29.0
+margin_right = 59.0
+margin_bottom = 30.0
+texture_normal = ExtResource( 74 )
+script = ExtResource( 61 )
+menu_path = NodePath("../../../../../../..")
+legible_name = "ZEROARMS_NAME"
+description = "ZEROARMS_DISC"
+
+[node name="sprite" type="Sprite" parent="Menu/textureRect/Zero/Options Group/ArmorParts/ArmParts/arms"]
+modulate = Color( 1, 1, 1, 0.588235 )
+show_behind_parent = true
+texture = ExtResource( 85 )
+centered = false
+
+[node name="black_arms" type="TextureButton" parent="Menu/textureRect/Zero/Options Group/ArmorParts/ArmParts"]
+margin_left = 69.0
+margin_right = 99.0
+margin_bottom = 30.0
+texture_normal = ExtResource( 75 )
+script = ExtResource( 61 )
+menu_path = NodePath("../../../../../../..")
+legible_name = "BLACKZEROARM_NAME"
+description = "BLACKZEROARM_DISC"
+
+[node name="sprite" type="Sprite" parent="Menu/textureRect/Zero/Options Group/ArmorParts/ArmParts/black_arms"]
+modulate = Color( 1, 1, 1, 0.588235 )
+show_behind_parent = true
+texture = ExtResource( 85 )
+centered = false
+
+[node name="LegParts" type="HBoxContainer" parent="Menu/textureRect/Zero/Options Group/ArmorParts"]
+margin_top = 93.0
+margin_right = 129.0
+margin_bottom = 123.0
+custom_constants/separation = 10
+alignment = 1
+script = ExtResource( 60 )
+
+[node name="legs" type="TextureButton" parent="Menu/textureRect/Zero/Options Group/ArmorParts/LegParts"]
+margin_left = 29.0
+margin_right = 59.0
+margin_bottom = 30.0
+texture_normal = ExtResource( 62 )
+script = ExtResource( 61 )
+menu_path = NodePath("../../../../../../..")
+legible_name = "ZEROLEGS_NAME"
+description = "ZEROLEGS_DISC"
+
+[node name="sprite" type="Sprite" parent="Menu/textureRect/Zero/Options Group/ArmorParts/LegParts/legs"]
+modulate = Color( 1, 1, 1, 0.588235 )
+show_behind_parent = true
+texture = ExtResource( 85 )
+centered = false
+
+[node name="black_legs" type="TextureButton" parent="Menu/textureRect/Zero/Options Group/ArmorParts/LegParts"]
+margin_left = 69.0
+margin_right = 99.0
+margin_bottom = 30.0
+texture_normal = ExtResource( 76 )
+script = ExtResource( 61 )
+menu_path = NodePath("../../../../../../..")
+legible_name = "BLACKZEROLEG_NAME"
+description = "BLACKZEROLEG_DISC"
+
+[node name="sprite" type="Sprite" parent="Menu/textureRect/Zero/Options Group/ArmorParts/LegParts/black_legs"]
+modulate = Color( 1, 1, 1, 0.588235 )
+show_behind_parent = true
+texture = ExtResource( 85 )
+centered = false
+
+[node name="awakenedzero_holder" type="TextureRect" parent="Menu/textureRect/Zero"]
+visible = false
+margin_left = -70.0
+margin_top = 13.0
+margin_right = 8.0
+margin_bottom = 69.0
+texture = ExtResource( 1 )
+flip_h = true
+
+[node name="awakened_zero" type="TextureButton" parent="Menu/textureRect/Zero/awakenedzero_holder"]
+material = SubResource( 3 )
+margin_left = 27.0
+margin_top = 11.0
+margin_right = 69.0
+margin_bottom = 45.0
+focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
+script = ExtResource( 112 )
+menu_path = NodePath("../../../../..")
+legible_name = "AWAKENEDZERO_NAME"
+description = "AWAKENEDZERO_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/Zero/awakenedzero_holder/awakened_zero"]
+margin_left = 5.0
+margin_top = 2.0
+margin_right = 35.0
+margin_bottom = 32.0
+texture = ExtResource( 44 )
+
+[node name="icon_bg_gold" type="TextureRect" parent="Menu/textureRect/Zero/awakenedzero_holder/awakened_zero"]
+visible = false
+margin_left = 4.0
+margin_top = 1.0
+margin_right = 36.0
+margin_bottom = 33.0
+texture = ExtResource( 168 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/Zero/awakenedzero_holder/awakened_zero"]
+material = SubResource( 14 )
+margin_left = 8.0
+margin_top = 5.0
+margin_right = 32.0
+margin_bottom = 29.0
+texture = ExtResource( 148 )
+
+[node name="animatedSprite" type="AnimatedSprite" parent="Menu/textureRect/Zero/awakenedzero_holder/awakened_zero"]
+position = Vector2( 21, 16 )
+z_index = 2
+frames = SubResource( 10 )
+playing = true
+
+[node name="betazero_holder" type="TextureRect" parent="Menu/textureRect/Zero"]
+visible = false
+margin_left = -70.0
+margin_top = 55.0
+margin_right = 8.0
+margin_bottom = 111.0
+texture = ExtResource( 1 )
+flip_h = true
+
+[node name="beta_zero" type="TextureButton" parent="Menu/textureRect/Zero/betazero_holder"]
+material = SubResource( 3 )
+margin_left = 27.0
+margin_top = 11.0
+margin_right = 69.0
+margin_bottom = 45.0
+focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
+script = ExtResource( 108 )
+menu_path = NodePath("../../../../..")
+legible_name = "BETAZERO_NAME"
+description = "BETAZERO_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/Zero/betazero_holder/beta_zero"]
+margin_left = 5.0
+margin_top = 2.0
+margin_right = 35.0
+margin_bottom = 32.0
+texture = ExtResource( 44 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/Zero/betazero_holder/beta_zero"]
+material = SubResource( 47 )
+margin_left = 8.0
+margin_top = 5.0
+margin_right = 32.0
+margin_bottom = 29.0
+texture = ExtResource( 109 )
+
+[node name="animatedSprite" type="AnimatedSprite" parent="Menu/textureRect/Zero/betazero_holder/beta_zero"]
+position = Vector2( 21, 16 )
+z_index = 2
+frames = SubResource( 10 )
+playing = true
+
+[node name="customzero_holder" type="TextureRect" parent="Menu/textureRect/Zero"]
+visible = false
+margin_left = -70.0
+margin_top = 97.0
+margin_right = 8.0
+margin_bottom = 153.0
+texture = ExtResource( 1 )
+flip_h = true
+
+[node name="custom_zero" type="TextureButton" parent="Menu/textureRect/Zero/customzero_holder"]
+material = SubResource( 3 )
+margin_left = 27.0
+margin_top = 11.0
+margin_right = 69.0
+margin_bottom = 45.0
+focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
+script = ExtResource( 149 )
+menu_path = NodePath("../../../../..")
+legible_name = "CUSTOMZERO_NAME"
+description = "CUSTOMZERO_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/Zero/customzero_holder/custom_zero"]
+margin_left = 5.0
+margin_top = 2.0
+margin_right = 35.0
+margin_bottom = 32.0
+texture = ExtResource( 44 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/Zero/customzero_holder/custom_zero"]
+material = SubResource( 21 )
+margin_left = 8.0
+margin_top = 5.0
+margin_right = 32.0
+margin_bottom = 29.0
+texture = ExtResource( 113 )
+
+[node name="animatedSprite" type="AnimatedSprite" parent="Menu/textureRect/Zero/customzero_holder/custom_zero"]
+position = Vector2( 21, 16 )
+z_index = 2
+frames = SubResource( 10 )
+playing = true
+
+[node name="zero_setting_holder" type="TextureRect" parent="Menu/textureRect/Zero"]
+visible = false
+margin_left = -70.0
+margin_top = 133.0
+margin_right = 8.0
+margin_bottom = 189.0
+texture = ExtResource( 158 )
+flip_h = true
+
+[node name="Value" type="Label" parent="Menu/textureRect/Zero/zero_setting_holder"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -14.0
+margin_right = 31.0
+custom_colors/font_color_shadow = Color( 0.415686, 0.415686, 0.415686, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+custom_fonts/font = ExtResource( 34 )
+text = "OPTION"
+align = 1
+uppercase = true
+
+[node name="zero_setting" type="HBoxContainer" parent="Menu/textureRect/Zero/zero_setting_holder"]
+margin_left = 13.0
+margin_top = 28.0
+margin_right = 69.0
+margin_bottom = 42.0
+custom_constants/separation = 14
+alignment = 1
+
+[node name="extra_saber_combo" type="TextureButton" parent="Menu/textureRect/Zero/zero_setting_holder/zero_setting"]
+visible = false
+material = SubResource( 3 )
+margin_left = 21.0
+margin_right = 21.0
+margin_bottom = 14.0
+focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
+script = ExtResource( 162 )
+menu_path = NodePath("../../../../../..")
+legible_name = "EXTRA_SABER_COMBO_NAME"
+description = "EXTRA_SABER_COMBO_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_combo"]
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 164 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_combo"]
+material = SubResource( 40 )
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 167 )
+
+[node name="extra_saber_color" type="TextureButton" parent="Menu/textureRect/Zero/zero_setting_holder/zero_setting"]
+material = SubResource( 3 )
+margin_left = 28.0
+margin_right = 28.0
+margin_bottom = 14.0
+focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
+script = ExtResource( 161 )
+menu_path = NodePath("../../../../../..")
+legible_name = "EXTRA_SABER_COLOR_NAME"
+description = "EXTRA_SABER_COLOR_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_color"]
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 164 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_color"]
+material = SubResource( 89 )
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 166 )
+
+[node name="awakened_zero_limited" type="TextureButton" parent="Menu/textureRect/Zero/zero_setting_holder/zero_setting"]
+visible = false
+material = SubResource( 3 )
+margin_left = 42.0
+margin_right = 42.0
+margin_bottom = 14.0
+focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
+script = ExtResource( 163 )
+menu_path = NodePath("../../../../../..")
+legible_name = "AWAKENED_ZERO_UNLIMITED_NAME"
+description = "AWAKENED_ZERO_UNLIMITED_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/Zero/zero_setting_holder/zero_setting/awakened_zero_limited"]
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 164 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/Zero/zero_setting_holder/zero_setting/awakened_zero_limited"]
+material = SubResource( 44 )
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 165 )
+
 [node name="Axl" type="Control" parent="Menu/textureRect"]
 visible = false
 margin_right = 284.0
@@ -1169,138 +2682,623 @@ show_behind_parent = true
 texture = ExtResource( 85 )
 centered = false
 
-[node name="Zero" type="Control" parent="Menu/textureRect"]
+[node name="cheat_axl_holder" type="TextureRect" parent="Menu/textureRect/Axl"]
+visible = false
+margin_left = -70.0
+margin_top = 13.0
+margin_right = 8.0
+margin_bottom = 69.0
+texture = ExtResource( 1 )
+flip_h = true
+
+[node name="cheat_axl" type="TextureButton" parent="Menu/textureRect/Axl/cheat_axl_holder"]
+material = SubResource( 3 )
+margin_left = 27.0
+margin_top = 11.0
+margin_right = 69.0
+margin_bottom = 45.0
+focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
+script = ExtResource( 176 )
+menu_path = NodePath("../../../../..")
+legible_name = "CHEAT_AXL_NAME"
+description = "CHEAT_AXL_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/Axl/cheat_axl_holder/cheat_axl"]
+margin_left = 5.0
+margin_top = 2.0
+margin_right = 35.0
+margin_bottom = 32.0
+texture = ExtResource( 44 )
+
+[node name="animatedSprite" type="AnimatedSprite" parent="Menu/textureRect/Axl/cheat_axl_holder/cheat_axl"]
+position = Vector2( 21, 16 )
+z_index = 2
+frames = SubResource( 10 )
+playing = true
+
+[node name="icon_bg_gold" type="TextureRect" parent="Menu/textureRect/Axl/cheat_axl_holder/cheat_axl"]
+visible = false
+margin_left = 4.0
+margin_top = 1.0
+margin_right = 36.0
+margin_bottom = 33.0
+texture = ExtResource( 168 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/Axl/cheat_axl_holder/cheat_axl"]
+material = SubResource( 63 )
+margin_left = 8.0
+margin_top = 5.0
+margin_right = 32.0
+margin_bottom = 29.0
+texture = ExtResource( 178 )
+
+[node name="customaxl_holder" type="TextureRect" parent="Menu/textureRect/Axl"]
+visible = false
+margin_left = -70.0
+margin_top = 55.0
+margin_right = 8.0
+margin_bottom = 111.0
+texture = ExtResource( 1 )
+flip_h = true
+
+[node name="custom_axl" type="TextureButton" parent="Menu/textureRect/Axl/customaxl_holder"]
+material = SubResource( 3 )
+margin_left = 27.0
+margin_top = 11.0
+margin_right = 69.0
+margin_bottom = 45.0
+focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
+script = ExtResource( 151 )
+menu_path = NodePath("../../../../..")
+legible_name = "CUSTOMAXL_NAME"
+description = "CUSTOMAXL_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/Axl/customaxl_holder/custom_axl"]
+margin_left = 5.0
+margin_top = 2.0
+margin_right = 35.0
+margin_bottom = 32.0
+texture = ExtResource( 44 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/Axl/customaxl_holder/custom_axl"]
+material = SubResource( 24 )
+margin_left = 8.0
+margin_top = 5.0
+margin_right = 32.0
+margin_bottom = 29.0
+texture = ExtResource( 150 )
+
+[node name="animatedSprite" type="AnimatedSprite" parent="Menu/textureRect/Axl/customaxl_holder/custom_axl"]
+position = Vector2( 21, 16 )
+z_index = 2
+frames = SubResource( 10 )
+playing = true
+
+[node name="floppa_axl_holder" type="TextureRect" parent="Menu/textureRect/Axl"]
+visible = false
+margin_left = -70.0
+margin_top = 97.0
+margin_right = 8.0
+margin_bottom = 153.0
+texture = ExtResource( 1 )
+flip_h = true
+
+[node name="floppa_axl" type="TextureButton" parent="Menu/textureRect/Axl/floppa_axl_holder"]
+material = SubResource( 3 )
+margin_left = 27.0
+margin_top = 11.0
+margin_right = 69.0
+margin_bottom = 45.0
+focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
+script = ExtResource( 153 )
+menu_path = NodePath("../../../../..")
+legible_name = "DIAGONALDASHAXL_NAME"
+description = "DIAGONALDASHAXL_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl"]
+margin_left = 5.0
+margin_top = 2.0
+margin_right = 35.0
+margin_bottom = 32.0
+texture = ExtResource( 44 )
+
+[node name="icon_bg_gold" type="TextureRect" parent="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl"]
+visible = false
+margin_left = 4.0
+margin_top = 1.0
+margin_right = 36.0
+margin_bottom = 33.0
+texture = ExtResource( 168 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl"]
+material = SubResource( 26 )
+margin_left = 8.0
+margin_top = 5.0
+margin_right = 32.0
+margin_bottom = 29.0
+texture = ExtResource( 152 )
+
+[node name="animatedSprite" type="AnimatedSprite" parent="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl"]
+position = Vector2( 21, 16 )
+z_index = 2
+frames = SubResource( 10 )
+playing = true
+
+[node name="floppa_axl_setting_holder" type="TextureRect" parent="Menu/textureRect/Axl/floppa_axl_holder"]
+visible = false
+margin_top = 36.0
+margin_right = 78.0
+margin_bottom = 92.0
+texture = ExtResource( 158 )
+flip_h = true
+
+[node name="Value" type="Label" parent="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -14.0
+margin_right = 31.0
+custom_colors/font_color_shadow = Color( 0.415686, 0.415686, 0.415686, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+custom_fonts/font = ExtResource( 34 )
+text = "OPTION"
+align = 1
+uppercase = true
+
+[node name="flopps_axl_setting" type="HBoxContainer" parent="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder"]
+margin_left = 13.0
+margin_top = 28.0
+margin_right = 70.0
+margin_bottom = 42.0
+custom_constants/separation = 14
+alignment = 1
+
+[node name="auto_hover" type="TextureButton" parent="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting"]
+material = SubResource( 3 )
+margin_left = 14.0
+margin_right = 14.0
+margin_bottom = 14.0
+focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
+script = ExtResource( 157 )
+menu_path = NodePath("../../../../../../..")
+legible_name = "AUTOHOVER_NAME"
+description = "AUTOHOVER_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_hover"]
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 164 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_hover"]
+material = SubResource( 28 )
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 154 )
+
+[node name="auto_cling_wall" type="TextureButton" parent="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting"]
+material = SubResource( 3 )
+margin_left = 28.0
+margin_right = 28.0
+margin_bottom = 14.0
+focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
+script = ExtResource( 156 )
+menu_path = NodePath("../../../../../../..")
+legible_name = "AUTOWALL_NAME"
+description = "AUTOWALL_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_cling_wall"]
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 164 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_cling_wall"]
+material = SubResource( 30 )
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 155 )
+
+[node name="auto_lock" type="TextureButton" parent="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting"]
+material = SubResource( 3 )
+margin_left = 42.0
+margin_right = 42.0
+margin_bottom = 14.0
+focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
+script = ExtResource( 159 )
+menu_path = NodePath("../../../../../../..")
+legible_name = "AUTOLOCK1_NAME"
+legible_name2 = "AUTOLOCK2_NAME"
+description = "AUTOLOCKMODE1_DISC"
+description2 = "AUTOLOCKMODE2_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_lock"]
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 164 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_lock"]
+material = SubResource( 32 )
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 160 )
+
+[node name="axl_setting_holder" type="TextureRect" parent="Menu/textureRect/Axl"]
+visible = false
+margin_left = -70.0
+margin_top = 133.0
+margin_right = 8.0
+margin_bottom = 189.0
+texture = ExtResource( 158 )
+flip_h = true
+
+[node name="Value" type="Label" parent="Menu/textureRect/Axl/axl_setting_holder"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -13.0
+margin_top = -14.0
+margin_right = 31.0
+custom_colors/font_color_shadow = Color( 0.415686, 0.415686, 0.415686, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+custom_fonts/font = ExtResource( 34 )
+text = "OPTION"
+align = 1
+uppercase = true
+
+[node name="axl_setting" type="HBoxContainer" parent="Menu/textureRect/Axl/axl_setting_holder"]
+margin_left = 13.0
+margin_top = 28.0
+margin_right = 70.0
+margin_bottom = 42.0
+custom_constants/separation = 14
+alignment = 1
+
+[node name="track_bullet" type="TextureButton" parent="Menu/textureRect/Axl/axl_setting_holder/axl_setting"]
+visible = false
+material = SubResource( 3 )
+margin_left = 28.0
+margin_right = 28.0
+margin_bottom = 14.0
+focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
+script = ExtResource( 175 )
+menu_path = NodePath("../../../../../..")
+legible_name = "TRACK_BULLET_NAME"
+description = "TRACK_BULLET_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/Axl/axl_setting_holder/axl_setting/track_bullet"]
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 164 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/Axl/axl_setting_holder/axl_setting/track_bullet"]
+material = SubResource( 57 )
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 181 )
+
+[node name="share_buff" type="TextureButton" parent="Menu/textureRect/Axl/axl_setting_holder/axl_setting"]
+visible = false
+material = SubResource( 3 )
+margin_left = 35.0
+margin_right = 35.0
+margin_bottom = 14.0
+focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
+script = ExtResource( 182 )
+menu_path = NodePath("../../../../../..")
+legible_name = "SHARE_AXL_BUFF_NAME"
+description = "SHARE_AXL_BUFF_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/Axl/axl_setting_holder/axl_setting/share_buff"]
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 164 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/Axl/axl_setting_holder/axl_setting/share_buff"]
+material = SubResource( 85 )
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 183 )
+
+[node name="axl_saber_combo" type="TextureButton" parent="Menu/textureRect/Axl/axl_setting_holder/axl_setting"]
+visible = false
+material = SubResource( 3 )
+margin_left = 42.0
+margin_right = 42.0
+margin_bottom = 14.0
+focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
+script = ExtResource( 193 )
+menu_path = NodePath("../../../../../..")
+legible_name = "AXL_SABER_NAME"
+description = "AXL_SABER_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/Axl/axl_setting_holder/axl_setting/axl_saber_combo"]
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 164 )
+
+[node name="icon" type="TextureRect" parent="Menu/textureRect/Axl/axl_setting_holder/axl_setting/axl_saber_combo"]
+material = SubResource( 61 )
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 192 )
+
+[node name="Alia" type="Control" parent="Menu/textureRect"]
+visible = false
 margin_right = 284.0
 margin_bottom = 216.0
 
-[node name="Armor" type="Control" parent="Menu/textureRect/Zero"]
+[node name="Armor" type="Control" parent="Menu/textureRect/Alia"]
 margin_left = 9.0
 margin_top = 9.0
-margin_right = 132.0
-margin_bottom = 213.0
+margin_right = 137.0
+margin_bottom = 207.0
 
-[node name="base_b" type="TextureRect" parent="Menu/textureRect/Zero/Armor"]
+[node name="base_b" type="TextureRect" parent="Menu/textureRect/Alia/Armor"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -53.5
-margin_top = -92.0
-margin_right = 53.5
+margin_left = -56.0
+margin_top = -105.0
+margin_right = 56.0
 margin_bottom = 92.0
-texture = ExtResource( 90 )
+texture = ExtResource( 127 )
 
-[node name="base_B" type="TextureRect" parent="Menu/textureRect/Zero/Armor"]
-visible = false
+[node name="body" type="TextureRect" parent="Menu/textureRect/Alia/Armor"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -53.5
-margin_top = -92.0
-margin_right = 53.5
+margin_left = -56.0
+margin_top = -105.0
+margin_right = 56.0
 margin_bottom = 92.0
-texture = ExtResource( 93 )
+texture = ExtResource( 127 )
 
-[node name="body" type="TextureRect" parent="Menu/textureRect/Zero/Armor"]
+[node name="head" type="TextureRect" parent="Menu/textureRect/Alia/Armor"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -53.5
-margin_top = -92.0
-margin_right = 53.5
+margin_left = -56.0
+margin_top = -105.0
+margin_right = 56.0
 margin_bottom = 92.0
-texture = ExtResource( 91 )
+texture = ExtResource( 127 )
 
-[node name="black_body" type="TextureRect" parent="Menu/textureRect/Zero/Armor"]
-visible = false
+[node name="arms" type="TextureRect" parent="Menu/textureRect/Alia/Armor"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -53.5
-margin_top = -92.0
-margin_right = 53.5
+margin_left = -56.0
+margin_top = -105.0
+margin_right = 56.0
 margin_bottom = 92.0
-texture = ExtResource( 94 )
+texture = ExtResource( 127 )
 
-[node name="head" type="TextureRect" parent="Menu/textureRect/Zero/Armor"]
+[node name="legs" type="TextureRect" parent="Menu/textureRect/Alia/Armor"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -53.5
-margin_top = -92.0
-margin_right = 53.5
+margin_left = -56.0
+margin_top = -105.0
+margin_right = 56.0
 margin_bottom = 92.0
-texture = ExtResource( 57 )
+texture = ExtResource( 127 )
 
-[node name="black_head" type="TextureRect" parent="Menu/textureRect/Zero/Armor"]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -53.5
-margin_top = -92.0
-margin_right = 53.5
-margin_bottom = 92.0
-texture = ExtResource( 95 )
-
-[node name="arms" type="TextureRect" parent="Menu/textureRect/Zero/Armor"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -53.5
-margin_top = -92.0
-margin_right = 53.5
-margin_bottom = 92.0
-texture = ExtResource( 89 )
-
-[node name="black_arms" type="TextureRect" parent="Menu/textureRect/Zero/Armor"]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -53.5
-margin_top = -92.0
-margin_right = 53.5
-margin_bottom = 92.0
-texture = ExtResource( 92 )
-
-[node name="legs" type="TextureRect" parent="Menu/textureRect/Zero/Armor"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -53.5
-margin_top = -92.0
-margin_right = 53.5
-margin_bottom = 92.0
-texture = ExtResource( 88 )
-
-[node name="black_legs" type="TextureRect" parent="Menu/textureRect/Zero/Armor"]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -53.5
-margin_top = -92.0
-margin_right = 53.5
-margin_bottom = 92.0
-texture = ExtResource( 96 )
-
-[node name="Options Group" type="Control" parent="Menu/textureRect/Zero"]
+[node name="Options Group" type="Control" parent="Menu/textureRect/Alia"]
 margin_left = 146.0
 margin_top = 68.0
 margin_right = 275.0
 margin_bottom = 207.0
 
-[node name="ArmorParts" type="VBoxContainer" parent="Menu/textureRect/Zero/Options Group"]
+[node name="ArmorParts" type="VBoxContainer" parent="Menu/textureRect/Alia/Options Group"]
+margin_right = 129.0
+margin_bottom = 126.0
+custom_constants/separation = 1
+alignment = 1
+
+[node name="HeadParts" type="HBoxContainer" parent="Menu/textureRect/Alia/Options Group/ArmorParts"]
+margin_top = 1.0
+margin_right = 129.0
+margin_bottom = 31.0
+custom_constants/separation = 1
+alignment = 1
+script = ExtResource( 128 )
+
+[node name="head" type="TextureButton" parent="Menu/textureRect/Alia/Options Group/ArmorParts/HeadParts"]
+margin_left = 49.0
+margin_right = 79.0
+margin_bottom = 30.0
+focus_neighbour_top = NodePath("../../../../../../exit")
+texture_normal = ExtResource( 138 )
+stretch_mode = 4
+script = ExtResource( 129 )
+menu_path = NodePath("../../../../../../..")
+legible_name = "DEFAULTHEAD_NAME"
+description = "DEFAULTHEAD_DISC"
+
+[node name="sprite" type="Sprite" parent="Menu/textureRect/Alia/Options Group/ArmorParts/HeadParts/head"]
+modulate = Color( 1, 1, 1, 0.588235 )
+show_behind_parent = true
+texture = ExtResource( 85 )
+centered = false
+
+[node name="BodyParts" type="HBoxContainer" parent="Menu/textureRect/Alia/Options Group/ArmorParts"]
+margin_top = 32.0
+margin_right = 129.0
+margin_bottom = 62.0
+custom_constants/separation = 1
+alignment = 1
+script = ExtResource( 128 )
+
+[node name="body" type="TextureButton" parent="Menu/textureRect/Alia/Options Group/ArmorParts/BodyParts"]
+margin_left = 49.0
+margin_right = 79.0
+margin_bottom = 30.0
+texture_normal = ExtResource( 137 )
+script = ExtResource( 129 )
+menu_path = NodePath("../../../../../../..")
+legible_name = "DEFAULTBODY_NAME"
+description = "DEFAULTBODY_DISC"
+
+[node name="sprite" type="Sprite" parent="Menu/textureRect/Alia/Options Group/ArmorParts/BodyParts/body"]
+modulate = Color( 1, 1, 1, 0.588235 )
+show_behind_parent = true
+texture = ExtResource( 85 )
+centered = false
+
+[node name="ArmsParts" type="HBoxContainer" parent="Menu/textureRect/Alia/Options Group/ArmorParts"]
+margin_top = 63.0
+margin_right = 129.0
+margin_bottom = 93.0
+custom_constants/separation = 1
+alignment = 1
+script = ExtResource( 128 )
+
+[node name="arms" type="TextureButton" parent="Menu/textureRect/Alia/Options Group/ArmorParts/ArmsParts"]
+margin_left = 49.0
+margin_right = 79.0
+margin_bottom = 30.0
+texture_normal = ExtResource( 139 )
+script = ExtResource( 129 )
+menu_path = NodePath("../../../../../../..")
+legible_name = "DEFAULTARMS_NAME"
+description = "DEFAULTARMS_DISC"
+
+[node name="sprite" type="Sprite" parent="Menu/textureRect/Alia/Options Group/ArmorParts/ArmsParts/arms"]
+modulate = Color( 1, 1, 1, 0.588235 )
+show_behind_parent = true
+texture = ExtResource( 85 )
+centered = false
+
+[node name="LegsParts" type="HBoxContainer" parent="Menu/textureRect/Alia/Options Group/ArmorParts"]
+margin_top = 94.0
+margin_right = 129.0
+margin_bottom = 124.0
+custom_constants/separation = 1
+alignment = 1
+script = ExtResource( 128 )
+
+[node name="legs" type="TextureButton" parent="Menu/textureRect/Alia/Options Group/ArmorParts/LegsParts"]
+margin_left = 49.0
+margin_right = 79.0
+margin_bottom = 30.0
+texture_normal = ExtResource( 136 )
+script = ExtResource( 129 )
+menu_path = NodePath("../../../../../../..")
+legible_name = "DEFAULTLEGS_NAME"
+description = "DEFAULTLEGS_DISC"
+
+[node name="sprite" type="Sprite" parent="Menu/textureRect/Alia/Options Group/ArmorParts/LegsParts/legs"]
+modulate = Color( 1, 1, 1, 0.588235 )
+show_behind_parent = true
+texture = ExtResource( 85 )
+centered = false
+
+[node name="Layer" type="Control" parent="Menu/textureRect"]
+visible = false
+margin_right = 284.0
+margin_bottom = 216.0
+
+[node name="Armor" type="Control" parent="Menu/textureRect/Layer"]
+margin_left = 9.0
+margin_top = 9.0
+margin_right = 132.0
+margin_bottom = 213.0
+
+[node name="base_b" type="TextureRect" parent="Menu/textureRect/Layer/Armor"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.5
+margin_top = -108.0
+margin_right = 58.5
+margin_bottom = 89.0
+texture = ExtResource( 126 )
+
+[node name="body" type="TextureRect" parent="Menu/textureRect/Layer/Armor"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.5
+margin_top = -108.0
+margin_right = 58.5
+margin_bottom = 89.0
+texture = ExtResource( 126 )
+
+[node name="head" type="TextureRect" parent="Menu/textureRect/Layer/Armor"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.5
+margin_top = -108.0
+margin_right = 58.5
+margin_bottom = 89.0
+texture = ExtResource( 126 )
+
+[node name="arms" type="TextureRect" parent="Menu/textureRect/Layer/Armor"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.5
+margin_top = -108.0
+margin_right = 58.5
+margin_bottom = 89.0
+texture = ExtResource( 126 )
+
+[node name="legs" type="TextureRect" parent="Menu/textureRect/Layer/Armor"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.5
+margin_top = -108.0
+margin_right = 58.5
+margin_bottom = 89.0
+texture = ExtResource( 126 )
+
+[node name="Options Group" type="Control" parent="Menu/textureRect/Layer"]
+margin_left = 146.0
+margin_top = 68.0
+margin_right = 275.0
+margin_bottom = 207.0
+
+[node name="ArmorParts" type="VBoxContainer" parent="Menu/textureRect/Layer/Options Group"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -64.5
@@ -1310,236 +3308,361 @@ margin_bottom = 124.0
 custom_constants/separation = 1
 alignment = 1
 
-[node name="HeadParts" type="HBoxContainer" parent="Menu/textureRect/Zero/Options Group/ArmorParts"]
+[node name="HeadParts" type="HBoxContainer" parent="Menu/textureRect/Layer/Options Group/ArmorParts"]
 margin_right = 129.0
 margin_bottom = 30.0
 custom_constants/separation = 10
 alignment = 1
-script = ExtResource( 60 )
+script = ExtResource( 133 )
 
-[node name="head" type="TextureButton" parent="Menu/textureRect/Zero/Options Group/ArmorParts/HeadParts"]
-margin_left = 29.0
-margin_right = 59.0
+[node name="head" type="TextureButton" parent="Menu/textureRect/Layer/Options Group/ArmorParts/HeadParts"]
+margin_left = 49.0
+margin_right = 79.0
 margin_bottom = 30.0
-texture_normal = ExtResource( 59 )
-script = ExtResource( 61 )
+texture_normal = ExtResource( 140 )
+script = ExtResource( 132 )
 menu_path = NodePath("../../../../../../..")
 legible_name = "ZEROHEAD_NAME"
 description = "ZEROHEAD_DESC"
 
-[node name="sprite" type="Sprite" parent="Menu/textureRect/Zero/Options Group/ArmorParts/HeadParts/head"]
+[node name="sprite" type="Sprite" parent="Menu/textureRect/Layer/Options Group/ArmorParts/HeadParts/head"]
 modulate = Color( 1, 1, 1, 0.588235 )
 show_behind_parent = true
 texture = ExtResource( 85 )
 centered = false
 
-[node name="black_head" type="TextureButton" parent="Menu/textureRect/Zero/Options Group/ArmorParts/HeadParts"]
-margin_left = 69.0
-margin_right = 99.0
-margin_bottom = 30.0
-texture_normal = ExtResource( 78 )
-script = ExtResource( 61 )
-menu_path = NodePath("../../../../../../..")
-legible_name = "BLACKZEROHEAD_NAME"
-description = "BLACKZEROHEAD_DISC"
-
-[node name="sprite" type="Sprite" parent="Menu/textureRect/Zero/Options Group/ArmorParts/HeadParts/black_head"]
-modulate = Color( 1, 1, 1, 0.588235 )
-show_behind_parent = true
-texture = ExtResource( 85 )
-centered = false
-
-[node name="BodyParts" type="HBoxContainer" parent="Menu/textureRect/Zero/Options Group/ArmorParts"]
+[node name="BodyParts" type="HBoxContainer" parent="Menu/textureRect/Layer/Options Group/ArmorParts"]
 margin_top = 31.0
 margin_right = 129.0
 margin_bottom = 61.0
 custom_constants/separation = 10
 alignment = 1
-script = ExtResource( 60 )
+script = ExtResource( 133 )
 
-[node name="body" type="TextureButton" parent="Menu/textureRect/Zero/Options Group/ArmorParts/BodyParts"]
-margin_left = 29.0
-margin_right = 59.0
+[node name="body" type="TextureButton" parent="Menu/textureRect/Layer/Options Group/ArmorParts/BodyParts"]
+margin_left = 49.0
+margin_right = 79.0
 margin_bottom = 30.0
-texture_normal = ExtResource( 58 )
-script = ExtResource( 61 )
+texture_normal = ExtResource( 141 )
+script = ExtResource( 132 )
 menu_path = NodePath("../../../../../../..")
 legible_name = "ZEROBODY_NAME"
 description = "ZEROBODY_DESC"
 
-[node name="sprite" type="Sprite" parent="Menu/textureRect/Zero/Options Group/ArmorParts/BodyParts/body"]
+[node name="sprite" type="Sprite" parent="Menu/textureRect/Layer/Options Group/ArmorParts/BodyParts/body"]
 modulate = Color( 1, 1, 1, 0.588235 )
 show_behind_parent = true
 texture = ExtResource( 85 )
 centered = false
 
-[node name="black_body" type="TextureButton" parent="Menu/textureRect/Zero/Options Group/ArmorParts/BodyParts"]
-margin_left = 69.0
-margin_right = 99.0
-margin_bottom = 30.0
-texture_normal = ExtResource( 77 )
-script = ExtResource( 61 )
-menu_path = NodePath("../../../../../../..")
-legible_name = "BLACKZEROBODY_NAME"
-description = "BLACKZEROBODY_DISC"
-
-[node name="sprite" type="Sprite" parent="Menu/textureRect/Zero/Options Group/ArmorParts/BodyParts/black_body"]
-modulate = Color( 1, 1, 1, 0.588235 )
-show_behind_parent = true
-texture = ExtResource( 85 )
-centered = false
-
-[node name="ArmParts" type="HBoxContainer" parent="Menu/textureRect/Zero/Options Group/ArmorParts"]
+[node name="ArmParts" type="HBoxContainer" parent="Menu/textureRect/Layer/Options Group/ArmorParts"]
 margin_top = 62.0
 margin_right = 129.0
 margin_bottom = 92.0
 custom_constants/separation = 10
 alignment = 1
-script = ExtResource( 60 )
+script = ExtResource( 133 )
 
-[node name="arms" type="TextureButton" parent="Menu/textureRect/Zero/Options Group/ArmorParts/ArmParts"]
-margin_left = 29.0
-margin_right = 59.0
+[node name="arms" type="TextureButton" parent="Menu/textureRect/Layer/Options Group/ArmorParts/ArmParts"]
+margin_left = 49.0
+margin_right = 79.0
 margin_bottom = 30.0
-texture_normal = ExtResource( 74 )
-script = ExtResource( 61 )
+texture_normal = ExtResource( 142 )
+script = ExtResource( 132 )
 menu_path = NodePath("../../../../../../..")
 legible_name = "ZEROARMS_NAME"
-description = "ZEROARMS_DISC"
+description = "LAYERARMS_DISC"
 
-[node name="sprite" type="Sprite" parent="Menu/textureRect/Zero/Options Group/ArmorParts/ArmParts/arms"]
+[node name="sprite" type="Sprite" parent="Menu/textureRect/Layer/Options Group/ArmorParts/ArmParts/arms"]
 modulate = Color( 1, 1, 1, 0.588235 )
 show_behind_parent = true
 texture = ExtResource( 85 )
 centered = false
 
-[node name="black_arms" type="TextureButton" parent="Menu/textureRect/Zero/Options Group/ArmorParts/ArmParts"]
-margin_left = 69.0
-margin_right = 99.0
-margin_bottom = 30.0
-texture_normal = ExtResource( 75 )
-script = ExtResource( 61 )
-menu_path = NodePath("../../../../../../..")
-legible_name = "BLACKZEROARM_NAME"
-description = "BLACKZEROARM_DISC"
-
-[node name="sprite" type="Sprite" parent="Menu/textureRect/Zero/Options Group/ArmorParts/ArmParts/black_arms"]
-modulate = Color( 1, 1, 1, 0.588235 )
-show_behind_parent = true
-texture = ExtResource( 85 )
-centered = false
-
-[node name="LegParts" type="HBoxContainer" parent="Menu/textureRect/Zero/Options Group/ArmorParts"]
+[node name="LegParts" type="HBoxContainer" parent="Menu/textureRect/Layer/Options Group/ArmorParts"]
 margin_top = 93.0
 margin_right = 129.0
 margin_bottom = 123.0
 custom_constants/separation = 10
 alignment = 1
-script = ExtResource( 60 )
+script = ExtResource( 133 )
 
-[node name="legs" type="TextureButton" parent="Menu/textureRect/Zero/Options Group/ArmorParts/LegParts"]
-margin_left = 29.0
-margin_right = 59.0
+[node name="legs" type="TextureButton" parent="Menu/textureRect/Layer/Options Group/ArmorParts/LegParts"]
+margin_left = 49.0
+margin_right = 79.0
 margin_bottom = 30.0
-texture_normal = ExtResource( 62 )
-script = ExtResource( 61 )
+texture_normal = ExtResource( 143 )
+script = ExtResource( 132 )
 menu_path = NodePath("../../../../../../..")
 legible_name = "ZEROLEGS_NAME"
 description = "ZEROLEGS_DISC"
 
-[node name="sprite" type="Sprite" parent="Menu/textureRect/Zero/Options Group/ArmorParts/LegParts/legs"]
+[node name="sprite" type="Sprite" parent="Menu/textureRect/Layer/Options Group/ArmorParts/LegParts/legs"]
 modulate = Color( 1, 1, 1, 0.588235 )
 show_behind_parent = true
 texture = ExtResource( 85 )
 centered = false
 
-[node name="black_legs" type="TextureButton" parent="Menu/textureRect/Zero/Options Group/ArmorParts/LegParts"]
-margin_left = 69.0
-margin_right = 99.0
-margin_bottom = 30.0
-texture_normal = ExtResource( 76 )
-script = ExtResource( 61 )
-menu_path = NodePath("../../../../../../..")
-legible_name = "BLACKZEROLEG_NAME"
-description = "BLACKZEROLEG_DISC"
-
-[node name="sprite" type="Sprite" parent="Menu/textureRect/Zero/Options Group/ArmorParts/LegParts/black_legs"]
-modulate = Color( 1, 1, 1, 0.588235 )
-show_behind_parent = true
-texture = ExtResource( 85 )
-centered = false
-
-[node name="customzero_holder" type="TextureRect" parent="Menu/textureRect/Zero"]
+[node name="customlayer_holder" type="TextureRect" parent="Menu/textureRect/Layer"]
 visible = false
 margin_left = -70.0
-margin_top = 54.0
+margin_top = 97.0
 margin_right = 8.0
-margin_bottom = 138.0
+margin_bottom = 153.0
 texture = ExtResource( 1 )
 flip_h = true
 
-[node name="custom_zero" type="TextureButton" parent="Menu/textureRect/Zero/customzero_holder"]
+[node name="custom_layer" type="TextureButton" parent="Menu/textureRect/Layer/customlayer_holder"]
 material = SubResource( 3 )
 margin_left = 27.0
 margin_top = 11.0
 margin_right = 69.0
 margin_bottom = 45.0
 focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
-script = ExtResource( 112 )
+script = ExtResource( 111 )
 menu_path = NodePath("../../../../..")
-legible_name = "CUSTOMZERO_NAME"
-description = "CUSTOMZERO_DISC"
+legible_name = "CUSTOMLAYER_NAME"
+description = "CUSTOMLAYER_DISC"
 
-[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/Zero/customzero_holder/custom_zero"]
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/Layer/customlayer_holder/custom_layer"]
 margin_left = 5.0
 margin_top = 2.0
 margin_right = 35.0
 margin_bottom = 32.0
 texture = ExtResource( 44 )
 
-[node name="icon" type="TextureRect" parent="Menu/textureRect/Zero/customzero_holder/custom_zero"]
-material = SubResource( 14 )
+[node name="icon" type="TextureRect" parent="Menu/textureRect/Layer/customlayer_holder/custom_layer"]
+material = SubResource( 106 )
 margin_left = 8.0
 margin_top = 5.0
 margin_right = 32.0
 margin_bottom = 29.0
 texture = ExtResource( 113 )
 
-[node name="betazero_holder" type="TextureRect" parent="Menu/textureRect/Zero"]
+[node name="animatedSprite" type="AnimatedSprite" parent="Menu/textureRect/Layer/customlayer_holder/custom_layer"]
+position = Vector2( 21, 16 )
+z_index = 2
+frames = SubResource( 10 )
+playing = true
+
+[node name="Pallette" type="Control" parent="Menu/textureRect"]
+visible = false
+margin_right = 284.0
+margin_bottom = 216.0
+
+[node name="Armor" type="Control" parent="Menu/textureRect/Pallette"]
+margin_left = 9.0
+margin_top = 9.0
+margin_right = 132.0
+margin_bottom = 213.0
+
+[node name="base_b" type="TextureRect" parent="Menu/textureRect/Pallette/Armor"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.5
+margin_top = -108.0
+margin_right = 58.5
+margin_bottom = 89.0
+texture = ExtResource( 125 )
+
+[node name="body" type="TextureRect" parent="Menu/textureRect/Pallette/Armor"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.5
+margin_top = -108.0
+margin_right = 58.5
+margin_bottom = 89.0
+texture = ExtResource( 125 )
+
+[node name="head" type="TextureRect" parent="Menu/textureRect/Pallette/Armor"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.5
+margin_top = -108.0
+margin_right = 58.5
+margin_bottom = 89.0
+texture = ExtResource( 125 )
+
+[node name="arms" type="TextureRect" parent="Menu/textureRect/Pallette/Armor"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.5
+margin_top = -108.0
+margin_right = 58.5
+margin_bottom = 89.0
+texture = ExtResource( 125 )
+
+[node name="legs" type="TextureRect" parent="Menu/textureRect/Pallette/Armor"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -53.5
+margin_top = -108.0
+margin_right = 58.5
+margin_bottom = 89.0
+texture = ExtResource( 125 )
+
+[node name="Options Group" type="Control" parent="Menu/textureRect/Pallette"]
+margin_left = 146.0
+margin_top = 68.0
+margin_right = 275.0
+margin_bottom = 207.0
+
+[node name="ArmorParts" type="VBoxContainer" parent="Menu/textureRect/Pallette/Options Group"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -64.5
+margin_top = 1.0
+margin_right = 64.5
+margin_bottom = 124.0
+custom_constants/separation = 1
+alignment = 1
+
+[node name="HeadParts" type="HBoxContainer" parent="Menu/textureRect/Pallette/Options Group/ArmorParts"]
+margin_right = 129.0
+margin_bottom = 30.0
+custom_constants/separation = 10
+alignment = 1
+script = ExtResource( 134 )
+
+[node name="head" type="TextureButton" parent="Menu/textureRect/Pallette/Options Group/ArmorParts/HeadParts"]
+margin_left = 49.0
+margin_right = 79.0
+margin_bottom = 30.0
+texture_normal = ExtResource( 144 )
+script = ExtResource( 135 )
+menu_path = NodePath("../../../../../../..")
+legible_name = "AXLHEAD_NAME"
+description = "PALLETTEHEAD_DISC"
+
+[node name="sprite" type="Sprite" parent="Menu/textureRect/Pallette/Options Group/ArmorParts/HeadParts/head"]
+modulate = Color( 1, 1, 1, 0.588235 )
+show_behind_parent = true
+texture = ExtResource( 85 )
+centered = false
+
+[node name="BodyParts" type="HBoxContainer" parent="Menu/textureRect/Pallette/Options Group/ArmorParts"]
+margin_top = 31.0
+margin_right = 129.0
+margin_bottom = 61.0
+custom_constants/separation = 10
+alignment = 1
+script = ExtResource( 134 )
+
+[node name="body" type="TextureButton" parent="Menu/textureRect/Pallette/Options Group/ArmorParts/BodyParts"]
+margin_left = 49.0
+margin_right = 79.0
+margin_bottom = 30.0
+texture_normal = ExtResource( 145 )
+script = ExtResource( 135 )
+menu_path = NodePath("../../../../../../..")
+legible_name = "AXLBODY_NAME"
+description = "AXLBODY_DISC"
+
+[node name="sprite" type="Sprite" parent="Menu/textureRect/Pallette/Options Group/ArmorParts/BodyParts/body"]
+modulate = Color( 1, 1, 1, 0.588235 )
+show_behind_parent = true
+texture = ExtResource( 85 )
+centered = false
+
+[node name="ArmParts" type="HBoxContainer" parent="Menu/textureRect/Pallette/Options Group/ArmorParts"]
+margin_top = 62.0
+margin_right = 129.0
+margin_bottom = 92.0
+custom_constants/separation = 10
+alignment = 1
+script = ExtResource( 134 )
+
+[node name="arms" type="TextureButton" parent="Menu/textureRect/Pallette/Options Group/ArmorParts/ArmParts"]
+margin_left = 49.0
+margin_right = 79.0
+margin_bottom = 30.0
+texture_normal = ExtResource( 146 )
+script = ExtResource( 135 )
+menu_path = NodePath("../../../../../../..")
+legible_name = "AXLARMS_NAME"
+description = "AXLARMS_DISC"
+
+[node name="sprite" type="Sprite" parent="Menu/textureRect/Pallette/Options Group/ArmorParts/ArmParts/arms"]
+modulate = Color( 1, 1, 1, 0.588235 )
+show_behind_parent = true
+texture = ExtResource( 85 )
+centered = false
+
+[node name="LegParts" type="HBoxContainer" parent="Menu/textureRect/Pallette/Options Group/ArmorParts"]
+margin_top = 93.0
+margin_right = 129.0
+margin_bottom = 123.0
+custom_constants/separation = 10
+alignment = 1
+script = ExtResource( 134 )
+
+[node name="legs" type="TextureButton" parent="Menu/textureRect/Pallette/Options Group/ArmorParts/LegParts"]
+margin_left = 49.0
+margin_right = 79.0
+margin_bottom = 30.0
+texture_normal = ExtResource( 147 )
+script = ExtResource( 135 )
+menu_path = NodePath("../../../../../../..")
+legible_name = "AXLLEGS_NAME"
+description = "AXLLEGS_DISC"
+
+[node name="sprite" type="Sprite" parent="Menu/textureRect/Pallette/Options Group/ArmorParts/LegParts/legs"]
+modulate = Color( 1, 1, 1, 0.588235 )
+show_behind_parent = true
+texture = ExtResource( 85 )
+centered = false
+
+[node name="custompallette_holder" type="TextureRect" parent="Menu/textureRect/Pallette"]
 visible = false
 margin_left = -70.0
 margin_top = 97.0
 margin_right = 8.0
-margin_bottom = 181.0
+margin_bottom = 153.0
 texture = ExtResource( 1 )
 flip_h = true
 
-[node name="beta_zero" type="TextureButton" parent="Menu/textureRect/Zero/betazero_holder"]
+[node name="custom_pallette" type="TextureButton" parent="Menu/textureRect/Pallette/custompallette_holder"]
 material = SubResource( 3 )
 margin_left = 27.0
 margin_top = 11.0
 margin_right = 69.0
 margin_bottom = 45.0
 focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
-script = ExtResource( 108 )
+script = ExtResource( 180 )
 menu_path = NodePath("../../../../..")
-legible_name = "BETAZERO_NAME"
-description = "BETAZERO_DISC"
+legible_name = "CUSTOMPALLETTE_NAME"
+description = "CUSTOMPALLETTE_DISC"
 
-[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/Zero/betazero_holder/beta_zero"]
+[node name="icon_bg" type="TextureRect" parent="Menu/textureRect/Pallette/custompallette_holder/custom_pallette"]
 margin_left = 5.0
 margin_top = 2.0
 margin_right = 35.0
 margin_bottom = 32.0
 texture = ExtResource( 44 )
 
-[node name="icon" type="TextureRect" parent="Menu/textureRect/Zero/betazero_holder/beta_zero"]
-material = SubResource( 13 )
+[node name="icon" type="TextureRect" parent="Menu/textureRect/Pallette/custompallette_holder/custom_pallette"]
+material = SubResource( 108 )
 margin_left = 8.0
 margin_top = 5.0
 margin_right = 32.0
 margin_bottom = 29.0
-texture = ExtResource( 109 )
+texture = ExtResource( 113 )
+
+[node name="animatedSprite" type="AnimatedSprite" parent="Menu/textureRect/Pallette/custompallette_holder/custom_pallette"]
+position = Vector2( 21, 16 )
+z_index = 2
+frames = SubResource( 10 )
+playing = true
 
 [node name="exit" type="TextureButton" parent="Menu"]
 modulate = Color( 0.407843, 0.792157, 1, 1 )
@@ -1776,16 +3899,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 3.0
+margin_left = 6.0
 margin_top = 3.5
-margin_right = 16.0
+margin_right = 20.0
 margin_bottom = 17.5
 custom_colors/font_color_shadow = Color( 0.415686, 0.415686, 0.415686, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 custom_fonts/font = ExtResource( 34 )
-text = "8"
-align = 1
+text = "12"
 uppercase = true
 
 [node name="equipped" type="Label" parent="Menu/heart_holder/heart_enabler"]
@@ -1793,16 +3915,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -11.0
+margin_left = -18.0
 margin_top = 3.5
-margin_right = 5.0
+margin_right = 6.0
 margin_bottom = 17.5
 custom_colors/font_color_shadow = Color( 0.415686, 0.415686, 0.415686, 1 )
 custom_constants/shadow_offset_x = 1
 custom_constants/shadow_offset_y = 1
 custom_fonts/font = ExtResource( 34 )
-text = "0/"
-align = 1
+text = "12/"
+align = 2
 uppercase = true
 
 [node name="increase_button" type="TextureButton" parent="Menu/heart_holder/heart_enabler"]
@@ -1812,9 +3934,9 @@ anchor_left = 1.6
 anchor_top = 0.632
 anchor_right = 1.6
 anchor_bottom = 0.632
-margin_left = -44.0
+margin_left = -46.0
 margin_top = -0.00800037
-margin_right = -33.0
+margin_right = -35.0
 margin_bottom = 9.992
 focus_neighbour_right = NodePath("../../prevplayer_holder/prev_player")
 script = ExtResource( 123 )
@@ -1824,9 +3946,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -8.5
+margin_left = -9.5
 margin_top = 4.0
-margin_right = 0.5
+margin_right = -0.5
 margin_bottom = 18.0
 rect_rotation = -90.0
 custom_colors/font_color_shadow = Color( 0.415686, 0.415686, 0.415686, 1 )
@@ -1857,9 +3979,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 7.5
+margin_left = 4.5
 margin_top = -4.0
-margin_right = 16.5
+margin_right = 13.5
 margin_bottom = 10.0
 rect_rotation = 90.0
 custom_colors/font_color_shadow = Color( 0.415686, 0.415686, 0.415686, 1 )
@@ -1869,141 +3991,6 @@ custom_fonts/font = ExtResource( 34 )
 text = ">"
 align = 1
 uppercase = true
-
-[node name="special_holder3" type="TextureRect" parent="Menu"]
-visible = false
-margin_left = -13.0
-margin_top = 17.0
-margin_right = 65.0
-margin_bottom = 101.0
-texture = ExtResource( 1 )
-flip_h = true
-
-[node name="info" type="TextureButton" parent="Menu/special_holder3"]
-material = SubResource( 2 )
-margin_left = 32.0
-margin_top = 13.0
-margin_right = 62.0
-margin_bottom = 43.0
-focus_neighbour_right = NodePath("../../prevplayer_holder/prev_player")
-script = ExtResource( 111 )
-menu_path = NodePath("../../..")
-legible_name = "ULTIMATE_SET_NAME"
-description = "ULTIMATE_SET_DISC"
-
-[node name="icon_bg" type="TextureRect" parent="Menu/special_holder3/info"]
-modulate = Color( 1, 1, 1, 0.752941 )
-margin_right = 30.0
-margin_bottom = 30.0
-texture = ExtResource( 44 )
-
-[node name="icon" type="TextureRect" parent="Menu/special_holder3/info"]
-modulate = Color( 1, 1, 1, 0.75 )
-material = SubResource( 12 )
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 27.0
-margin_bottom = 27.0
-texture = ExtResource( 72 )
-script = ExtResource( 47 )
-fullset_signal = "full_ultimate"
-
-[node name="animatedSprite" type="AnimatedSprite" parent="Menu/special_holder3/info"]
-position = Vector2( 16, 14 )
-z_index = 2
-frames = SubResource( 10 )
-frame = 3
-playing = true
-
-[node name="special_holder" type="TextureRect" parent="Menu"]
-visible = false
-margin_left = -13.0
-margin_top = 59.0
-margin_right = 65.0
-margin_bottom = 143.0
-texture = ExtResource( 1 )
-flip_h = true
-
-[node name="info" type="TextureButton" parent="Menu/special_holder"]
-material = SubResource( 2 )
-margin_left = 32.0
-margin_top = 13.0
-margin_right = 62.0
-margin_bottom = 43.0
-focus_neighbour_right = NodePath("../../prevplayer_holder/prev_player")
-script = ExtResource( 111 )
-menu_path = NodePath("../../..")
-legible_name = "HERMES_SET_NAME"
-description = "HERMES_SET_DISC"
-
-[node name="icon_bg" type="TextureRect" parent="Menu/special_holder/info"]
-modulate = Color( 1, 1, 1, 0.752941 )
-margin_right = 30.0
-margin_bottom = 30.0
-texture = ExtResource( 44 )
-
-[node name="icon" type="TextureRect" parent="Menu/special_holder/info"]
-modulate = Color( 1, 1, 1, 0.752941 )
-material = SubResource( 4 )
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 27.0
-margin_bottom = 27.0
-texture = ExtResource( 46 )
-script = ExtResource( 47 )
-fullset_signal = "full_hermes"
-
-[node name="animatedSprite" type="AnimatedSprite" parent="Menu/special_holder/info"]
-position = Vector2( 16, 14 )
-z_index = 2
-frames = SubResource( 10 )
-frame = 3
-playing = true
-
-[node name="special_holder2" type="TextureRect" parent="Menu"]
-visible = false
-margin_left = -13.0
-margin_top = 101.0
-margin_right = 65.0
-margin_bottom = 185.0
-texture = ExtResource( 1 )
-flip_h = true
-
-[node name="info" type="TextureButton" parent="Menu/special_holder2"]
-material = SubResource( 2 )
-margin_left = 32.0
-margin_top = 13.0
-margin_right = 62.0
-margin_bottom = 43.0
-focus_neighbour_right = NodePath("../../prevplayer_holder/prev_player")
-script = ExtResource( 111 )
-menu_path = NodePath("../../..")
-legible_name = "ICARUS_SET_NAME"
-description = "ICARUS_SET_DISC"
-
-[node name="icon_bg" type="TextureRect" parent="Menu/special_holder2/info"]
-modulate = Color( 1, 1, 1, 0.752941 )
-margin_right = 30.0
-margin_bottom = 30.0
-texture = ExtResource( 44 )
-
-[node name="icon" type="TextureRect" parent="Menu/special_holder2/info"]
-modulate = Color( 1, 1, 1, 0.75 )
-material = SubResource( 5 )
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 27.0
-margin_bottom = 27.0
-texture = ExtResource( 45 )
-script = ExtResource( 47 )
-fullset_signal = "full_icarus"
-
-[node name="animatedSprite" type="AnimatedSprite" parent="Menu/special_holder2/info"]
-position = Vector2( 16, 14 )
-z_index = 2
-frames = SubResource( 10 )
-frame = 3
-playing = true
 
 [node name="nextplayer_holder" type="TextureRect" parent="Menu"]
 margin_left = 337.0
@@ -2124,7 +4111,70 @@ text = "name"
 align = 1
 uppercase = true
 
+[node name="player_desperation" type="TextureRect" parent="Menu"]
+margin_left = 383.0
+margin_top = 1.0
+margin_right = 397.0
+margin_bottom = 15.0
+
+[node name="player_desperation" type="TextureButton" parent="Menu/player_desperation"]
+visible = false
+material = SubResource( 87 )
+margin_left = -12.0
+margin_top = 160.0
+margin_right = 2.0
+margin_bottom = 174.0
+focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
+script = ExtResource( 185 )
+menu_path = NodePath("../../..")
+legible_name = "PLAYER_DESPERATION_NAME"
+description = "PLAYER_DESPERATION_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/player_desperation/player_desperation"]
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 114 )
+
+[node name="icon" type="TextureRect" parent="Menu/player_desperation/player_desperation"]
+material = SubResource( 46 )
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 184 )
+
+[node name="weapon_get_zero" type="TextureButton" parent="Menu/player_desperation"]
+visible = false
+material = SubResource( 87 )
+margin_left = -383.0
+margin_top = -1.0
+margin_right = -369.0
+margin_bottom = 13.0
+focus_neighbour_left = NodePath("../../nextplayer_holder/next_player")
+script = ExtResource( 186 )
+menu_path = NodePath("../../..")
+legible_name = "SPECIALWEAPONGETZERO_NAME"
+description = "SPECIALWEAPONGETZERO_DISC"
+
+[node name="icon_bg" type="TextureRect" parent="Menu/player_desperation/weapon_get_zero"]
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 164 )
+
+[node name="icon" type="TextureRect" parent="Menu/player_desperation/weapon_get_zero"]
+material = SubResource( 93 )
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 15.0
+margin_bottom = 15.0
+texture = ExtResource( 187 )
+
 [node name="Fader" type="ColorRect" parent="."]
+visible = false
 margin_right = 398.0
 margin_bottom = 224.0
 mouse_filter = 2
@@ -2159,9 +4209,9 @@ bus = "SFX"
 
 [connection signal="initialize" from="." to="Menu/subtank_holder/subtank_enabler" method="setup"]
 [connection signal="initialize" from="." to="Menu/heart_holder/heart_enabler" method="setup"]
-[connection signal="unlocked_hermes" from="Menu/textureRect/X/Options Group/ArmorParts/HeadParts" to="Menu/special_holder/info/icon" method="display"]
-[connection signal="unlocked_icarus" from="Menu/textureRect/X/Options Group/ArmorParts/HeadParts" to="Menu/special_holder2/info/icon" method="display"]
-[connection signal="unlocked_ultimate" from="Menu/textureRect/X/Options Group/ArmorParts/HeadParts" to="Menu/special_holder3/info/icon" method="display"]
+[connection signal="unlocked_hermes" from="Menu/textureRect/X/Options Group/ArmorParts/HeadParts" to="Menu/textureRect/X/hermes_holder/info/icon" method="display"]
+[connection signal="unlocked_icarus" from="Menu/textureRect/X/Options Group/ArmorParts/HeadParts" to="Menu/textureRect/X/icarus_holder/info/icon" method="display"]
+[connection signal="unlocked_ultimate" from="Menu/textureRect/X/Options Group/ArmorParts/HeadParts" to="Menu/textureRect/X/ultimate_holder/info/icon" method="display"]
 [connection signal="focus_entered" from="Menu/textureRect/X/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/X/Options Group/ArmorParts/HeadParts/head" method="_on_focus_entered"]
 [connection signal="focus_exited" from="Menu/textureRect/X/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/X/Options Group/ArmorParts/HeadParts/head" method="_on_focus_exited"]
 [connection signal="mouse_entered" from="Menu/textureRect/X/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/X/Options Group/ArmorParts/HeadParts/head" method="_on_mouse_entered"]
@@ -2242,46 +4292,51 @@ bus = "SFX"
 [connection signal="mouse_entered" from="Menu/textureRect/X/Options Group/ArmorParts/LegsParts/ultima_legs" to="Menu/textureRect/X/Options Group/ArmorParts/LegsParts/ultima_legs" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Menu/textureRect/X/Options Group/ArmorParts/LegsParts/ultima_legs" to="Menu/textureRect/X/Options Group/ArmorParts/LegsParts/ultima_legs" method="_on_mouse_exited"]
 [connection signal="pressed" from="Menu/textureRect/X/Options Group/ArmorParts/LegsParts/ultima_legs" to="Menu/textureRect/X/Options Group/ArmorParts/LegsParts/ultima_legs" method="_on_pressed"]
-[connection signal="focus_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/head" method="_on_focus_entered"]
-[connection signal="focus_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/head" method="_on_focus_exited"]
-[connection signal="mouse_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/head" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/head" method="_on_mouse_exited"]
-[connection signal="pressed" from="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/head" method="_on_pressed"]
-[connection signal="focus_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/white_head" to="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/white_head" method="_on_focus_entered"]
-[connection signal="focus_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/white_head" to="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/white_head" method="_on_focus_exited"]
-[connection signal="mouse_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/white_head" to="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/white_head" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/white_head" to="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/white_head" method="_on_mouse_exited"]
-[connection signal="pressed" from="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/white_head" to="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/white_head" method="_on_pressed"]
-[connection signal="focus_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/body" method="_on_focus_entered"]
-[connection signal="focus_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/body" method="_on_focus_exited"]
-[connection signal="mouse_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/body" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/body" method="_on_mouse_exited"]
-[connection signal="pressed" from="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/body" method="_on_pressed"]
-[connection signal="focus_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/white_body" to="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/white_body" method="_on_focus_entered"]
-[connection signal="focus_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/white_body" to="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/white_body" method="_on_focus_exited"]
-[connection signal="mouse_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/white_body" to="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/white_body" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/white_body" to="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/white_body" method="_on_mouse_exited"]
-[connection signal="pressed" from="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/white_body" to="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/white_body" method="_on_pressed"]
-[connection signal="focus_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/arms" to="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/arms" method="_on_focus_entered"]
-[connection signal="focus_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/arms" to="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/arms" method="_on_focus_exited"]
-[connection signal="mouse_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/arms" to="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/arms" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/arms" to="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/arms" method="_on_mouse_exited"]
-[connection signal="pressed" from="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/arms" to="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/arms" method="_on_pressed"]
-[connection signal="focus_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/white_arms" to="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/white_arms" method="_on_focus_entered"]
-[connection signal="focus_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/white_arms" to="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/white_arms" method="_on_focus_exited"]
-[connection signal="mouse_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/white_arms" to="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/white_arms" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/white_arms" to="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/white_arms" method="_on_mouse_exited"]
-[connection signal="pressed" from="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/white_arms" to="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/white_arms" method="_on_pressed"]
-[connection signal="focus_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/legs" to="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/legs" method="_on_focus_entered"]
-[connection signal="focus_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/legs" to="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/legs" method="_on_focus_exited"]
-[connection signal="mouse_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/legs" to="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/legs" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/legs" to="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/legs" method="_on_mouse_exited"]
-[connection signal="pressed" from="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/legs" to="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/legs" method="_on_pressed"]
-[connection signal="focus_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/white_legs" to="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/white_legs" method="_on_focus_entered"]
-[connection signal="focus_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/white_legs" to="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/white_legs" method="_on_focus_exited"]
-[connection signal="mouse_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/white_legs" to="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/white_legs" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/white_legs" to="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/white_legs" method="_on_mouse_exited"]
-[connection signal="pressed" from="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/white_legs" to="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/white_legs" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/X/ultimate_holder/info" to="Menu/textureRect/X/ultimate_holder/info" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/X/ultimate_holder/info" to="Menu/textureRect/X/ultimate_holder/info" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/X/ultimate_holder/info" to="Menu/textureRect/X/ultimate_holder/info" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/X/ultimate_holder/info" to="Menu/textureRect/X/ultimate_holder/info" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/X/ultimate_holder/info" to="Menu/textureRect/X/ultimate_holder/info" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/X/hermes_holder/info" to="Menu/textureRect/X/hermes_holder/info" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/X/hermes_holder/info" to="Menu/textureRect/X/hermes_holder/info" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/X/hermes_holder/info" to="Menu/textureRect/X/hermes_holder/info" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/X/hermes_holder/info" to="Menu/textureRect/X/hermes_holder/info" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/X/hermes_holder/info" to="Menu/textureRect/X/hermes_holder/info" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/X/icarus_holder/info" to="Menu/textureRect/X/icarus_holder/info" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/X/icarus_holder/info" to="Menu/textureRect/X/icarus_holder/info" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/X/icarus_holder/info" to="Menu/textureRect/X/icarus_holder/info" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/X/icarus_holder/info" to="Menu/textureRect/X/icarus_holder/info" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/X/icarus_holder/info" to="Menu/textureRect/X/icarus_holder/info" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/X/x_setting_holder/x_setting/auto_charge" to="Menu/textureRect/X/x_setting_holder/x_setting/auto_charge" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/X/x_setting_holder/x_setting/auto_charge" to="Menu/textureRect/X/x_setting_holder/x_setting/auto_charge" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/X/x_setting_holder/x_setting/auto_charge" to="Menu/textureRect/X/x_setting_holder/x_setting/auto_charge" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/X/x_setting_holder/x_setting/auto_charge" to="Menu/textureRect/X/x_setting_holder/x_setting/auto_charge" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/X/x_setting_holder/x_setting/auto_charge" to="Menu/textureRect/X/x_setting_holder/x_setting/auto_charge" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/X/x_setting_holder/x_setting/rapid_fire" to="Menu/textureRect/X/x_setting_holder/x_setting/rapid_fire" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/X/x_setting_holder/x_setting/rapid_fire" to="Menu/textureRect/X/x_setting_holder/x_setting/rapid_fire" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/X/x_setting_holder/x_setting/rapid_fire" to="Menu/textureRect/X/x_setting_holder/x_setting/rapid_fire" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/X/x_setting_holder/x_setting/rapid_fire" to="Menu/textureRect/X/x_setting_holder/x_setting/rapid_fire" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/X/x_setting_holder/x_setting/rapid_fire" to="Menu/textureRect/X/x_setting_holder/x_setting/rapid_fire" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/X/x_setting_holder/x_setting/ultimate_buster" to="Menu/textureRect/X/x_setting_holder/x_setting/ultimate_buster" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/X/x_setting_holder/x_setting/ultimate_buster" to="Menu/textureRect/X/x_setting_holder/x_setting/ultimate_buster" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/X/x_setting_holder/x_setting/ultimate_buster" to="Menu/textureRect/X/x_setting_holder/x_setting/ultimate_buster" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/X/x_setting_holder/x_setting/ultimate_buster" to="Menu/textureRect/X/x_setting_holder/x_setting/ultimate_buster" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/X/x_setting_holder/x_setting/ultimate_buster" to="Menu/textureRect/X/x_setting_holder/x_setting/ultimate_buster" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/X/x_setting_holder/x_setting2/hide_armor" to="Menu/textureRect/X/x_setting_holder/x_setting2/hide_armor" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/X/x_setting_holder/x_setting2/hide_armor" to="Menu/textureRect/X/x_setting_holder/x_setting2/hide_armor" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/X/x_setting_holder/x_setting2/hide_armor" to="Menu/textureRect/X/x_setting_holder/x_setting2/hide_armor" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/X/x_setting_holder/x_setting2/hide_armor" to="Menu/textureRect/X/x_setting_holder/x_setting2/hide_armor" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/X/x_setting_holder/x_setting2/hide_armor" to="Menu/textureRect/X/x_setting_holder/x_setting2/hide_armor" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/X/x_setting_holder/x_setting2/old_sprites" to="Menu/textureRect/X/x_setting_holder/x_setting2/old_sprites" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/X/x_setting_holder/x_setting2/old_sprites" to="Menu/textureRect/X/x_setting_holder/x_setting2/old_sprites" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/X/x_setting_holder/x_setting2/old_sprites" to="Menu/textureRect/X/x_setting_holder/x_setting2/old_sprites" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/X/x_setting_holder/x_setting2/old_sprites" to="Menu/textureRect/X/x_setting_holder/x_setting2/old_sprites" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/X/x_setting_holder/x_setting2/old_sprites" to="Menu/textureRect/X/x_setting_holder/x_setting2/old_sprites" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/X/x_setting_holder/x_setting2/infinite_x_glow" to="Menu/textureRect/X/x_setting_holder/x_setting2/infinite_x_glow" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/X/x_setting_holder/x_setting2/infinite_x_glow" to="Menu/textureRect/X/x_setting_holder/x_setting2/infinite_x_glow" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/X/x_setting_holder/x_setting2/infinite_x_glow" to="Menu/textureRect/X/x_setting_holder/x_setting2/infinite_x_glow" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/X/x_setting_holder/x_setting2/infinite_x_glow" to="Menu/textureRect/X/x_setting_holder/x_setting2/infinite_x_glow" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/X/x_setting_holder/x_setting2/infinite_x_glow" to="Menu/textureRect/X/x_setting_holder/x_setting2/infinite_x_glow" method="_on_pressed"]
 [connection signal="focus_entered" from="Menu/textureRect/Zero/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Zero/Options Group/ArmorParts/HeadParts/head" method="_on_focus_entered"]
 [connection signal="focus_exited" from="Menu/textureRect/Zero/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Zero/Options Group/ArmorParts/HeadParts/head" method="_on_focus_exited"]
 [connection signal="mouse_entered" from="Menu/textureRect/Zero/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Zero/Options Group/ArmorParts/HeadParts/head" method="_on_mouse_entered"]
@@ -2322,16 +4377,191 @@ bus = "SFX"
 [connection signal="mouse_entered" from="Menu/textureRect/Zero/Options Group/ArmorParts/LegParts/black_legs" to="Menu/textureRect/Zero/Options Group/ArmorParts/LegParts/black_legs" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Menu/textureRect/Zero/Options Group/ArmorParts/LegParts/black_legs" to="Menu/textureRect/Zero/Options Group/ArmorParts/LegParts/black_legs" method="_on_mouse_exited"]
 [connection signal="pressed" from="Menu/textureRect/Zero/Options Group/ArmorParts/LegParts/black_legs" to="Menu/textureRect/Zero/Options Group/ArmorParts/LegParts/black_legs" method="_on_pressed"]
-[connection signal="focus_entered" from="Menu/textureRect/Zero/customzero_holder/custom_zero" to="Menu/textureRect/Zero/customzero_holder/custom_zero" method="_on_focus_entered"]
-[connection signal="focus_exited" from="Menu/textureRect/Zero/customzero_holder/custom_zero" to="Menu/textureRect/Zero/customzero_holder/custom_zero" method="_on_focus_exited"]
-[connection signal="mouse_entered" from="Menu/textureRect/Zero/customzero_holder/custom_zero" to="Menu/textureRect/Zero/customzero_holder/custom_zero" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Menu/textureRect/Zero/customzero_holder/custom_zero" to="Menu/textureRect/Zero/customzero_holder/custom_zero" method="_on_mouse_exited"]
-[connection signal="pressed" from="Menu/textureRect/Zero/customzero_holder/custom_zero" to="Menu/textureRect/Zero/customzero_holder/custom_zero" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Zero/awakenedzero_holder/awakened_zero" to="Menu/textureRect/Zero/awakenedzero_holder/awakened_zero" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Zero/awakenedzero_holder/awakened_zero" to="Menu/textureRect/Zero/awakenedzero_holder/awakened_zero" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Zero/awakenedzero_holder/awakened_zero" to="Menu/textureRect/Zero/awakenedzero_holder/awakened_zero" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Zero/awakenedzero_holder/awakened_zero" to="Menu/textureRect/Zero/awakenedzero_holder/awakened_zero" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Zero/awakenedzero_holder/awakened_zero" to="Menu/textureRect/Zero/awakenedzero_holder/awakened_zero" method="_on_pressed"]
 [connection signal="focus_entered" from="Menu/textureRect/Zero/betazero_holder/beta_zero" to="Menu/textureRect/Zero/betazero_holder/beta_zero" method="_on_focus_entered"]
 [connection signal="focus_exited" from="Menu/textureRect/Zero/betazero_holder/beta_zero" to="Menu/textureRect/Zero/betazero_holder/beta_zero" method="_on_focus_exited"]
 [connection signal="mouse_entered" from="Menu/textureRect/Zero/betazero_holder/beta_zero" to="Menu/textureRect/Zero/betazero_holder/beta_zero" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Menu/textureRect/Zero/betazero_holder/beta_zero" to="Menu/textureRect/Zero/betazero_holder/beta_zero" method="_on_mouse_exited"]
 [connection signal="pressed" from="Menu/textureRect/Zero/betazero_holder/beta_zero" to="Menu/textureRect/Zero/betazero_holder/beta_zero" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Zero/customzero_holder/custom_zero" to="Menu/textureRect/Zero/customzero_holder/custom_zero" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Zero/customzero_holder/custom_zero" to="Menu/textureRect/Zero/customzero_holder/custom_zero" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Zero/customzero_holder/custom_zero" to="Menu/textureRect/Zero/customzero_holder/custom_zero" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Zero/customzero_holder/custom_zero" to="Menu/textureRect/Zero/customzero_holder/custom_zero" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Zero/customzero_holder/custom_zero" to="Menu/textureRect/Zero/customzero_holder/custom_zero" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_combo" to="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_combo" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_combo" to="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_combo" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_combo" to="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_combo" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_combo" to="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_combo" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_combo" to="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_combo" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_color" to="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_color" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_color" to="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_color" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_color" to="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_color" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_color" to="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_color" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_color" to="Menu/textureRect/Zero/zero_setting_holder/zero_setting/extra_saber_color" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Zero/zero_setting_holder/zero_setting/awakened_zero_limited" to="Menu/textureRect/Zero/zero_setting_holder/zero_setting/awakened_zero_limited" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Zero/zero_setting_holder/zero_setting/awakened_zero_limited" to="Menu/textureRect/Zero/zero_setting_holder/zero_setting/awakened_zero_limited" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Zero/zero_setting_holder/zero_setting/awakened_zero_limited" to="Menu/textureRect/Zero/zero_setting_holder/zero_setting/awakened_zero_limited" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Zero/zero_setting_holder/zero_setting/awakened_zero_limited" to="Menu/textureRect/Zero/zero_setting_holder/zero_setting/awakened_zero_limited" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Zero/zero_setting_holder/zero_setting/awakened_zero_limited" to="Menu/textureRect/Zero/zero_setting_holder/zero_setting/awakened_zero_limited" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/head" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/head" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/head" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/head" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/head" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/white_head" to="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/white_head" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/white_head" to="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/white_head" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/white_head" to="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/white_head" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/white_head" to="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/white_head" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/white_head" to="Menu/textureRect/Axl/Options Group/ArmorParts/HeadParts/white_head" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/body" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/body" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/body" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/body" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/body" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/white_body" to="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/white_body" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/white_body" to="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/white_body" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/white_body" to="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/white_body" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/white_body" to="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/white_body" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/white_body" to="Menu/textureRect/Axl/Options Group/ArmorParts/BodyParts/white_body" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/arms" to="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/arms" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/arms" to="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/arms" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/arms" to="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/arms" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/arms" to="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/arms" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/arms" to="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/arms" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/white_arms" to="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/white_arms" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/white_arms" to="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/white_arms" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/white_arms" to="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/white_arms" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/white_arms" to="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/white_arms" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/white_arms" to="Menu/textureRect/Axl/Options Group/ArmorParts/ArmParts/white_arms" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/legs" to="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/legs" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/legs" to="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/legs" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/legs" to="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/legs" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/legs" to="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/legs" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/legs" to="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/legs" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/white_legs" to="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/white_legs" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/white_legs" to="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/white_legs" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/white_legs" to="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/white_legs" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/white_legs" to="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/white_legs" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/white_legs" to="Menu/textureRect/Axl/Options Group/ArmorParts/LegParts/white_legs" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Axl/cheat_axl_holder/cheat_axl" to="Menu/textureRect/Axl/cheat_axl_holder/cheat_axl" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Axl/cheat_axl_holder/cheat_axl" to="Menu/textureRect/Axl/cheat_axl_holder/cheat_axl" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Axl/cheat_axl_holder/cheat_axl" to="Menu/textureRect/Axl/cheat_axl_holder/cheat_axl" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Axl/cheat_axl_holder/cheat_axl" to="Menu/textureRect/Axl/cheat_axl_holder/cheat_axl" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Axl/cheat_axl_holder/cheat_axl" to="Menu/textureRect/Axl/cheat_axl_holder/cheat_axl" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Axl/customaxl_holder/custom_axl" to="Menu/textureRect/Axl/customaxl_holder/custom_axl" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Axl/customaxl_holder/custom_axl" to="Menu/textureRect/Axl/customaxl_holder/custom_axl" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Axl/customaxl_holder/custom_axl" to="Menu/textureRect/Axl/customaxl_holder/custom_axl" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Axl/customaxl_holder/custom_axl" to="Menu/textureRect/Axl/customaxl_holder/custom_axl" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Axl/customaxl_holder/custom_axl" to="Menu/textureRect/Axl/customaxl_holder/custom_axl" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl" to="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl" to="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl" to="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl" to="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl" to="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_hover" to="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_hover" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_hover" to="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_hover" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_hover" to="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_hover" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_hover" to="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_hover" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_hover" to="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_hover" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_cling_wall" to="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_cling_wall" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_cling_wall" to="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_cling_wall" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_cling_wall" to="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_cling_wall" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_cling_wall" to="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_cling_wall" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_cling_wall" to="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_cling_wall" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_lock" to="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_lock" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_lock" to="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_lock" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_lock" to="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_lock" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_lock" to="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_lock" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_lock" to="Menu/textureRect/Axl/floppa_axl_holder/floppa_axl_setting_holder/flopps_axl_setting/auto_lock" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Axl/axl_setting_holder/axl_setting/track_bullet" to="Menu/textureRect/Axl/axl_setting_holder/axl_setting/track_bullet" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Axl/axl_setting_holder/axl_setting/track_bullet" to="Menu/textureRect/Axl/axl_setting_holder/axl_setting/track_bullet" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Axl/axl_setting_holder/axl_setting/track_bullet" to="Menu/textureRect/Axl/axl_setting_holder/axl_setting/track_bullet" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Axl/axl_setting_holder/axl_setting/track_bullet" to="Menu/textureRect/Axl/axl_setting_holder/axl_setting/track_bullet" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Axl/axl_setting_holder/axl_setting/track_bullet" to="Menu/textureRect/Axl/axl_setting_holder/axl_setting/track_bullet" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Axl/axl_setting_holder/axl_setting/share_buff" to="Menu/textureRect/Axl/axl_setting_holder/axl_setting/share_buff" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Axl/axl_setting_holder/axl_setting/share_buff" to="Menu/textureRect/Axl/axl_setting_holder/axl_setting/share_buff" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Axl/axl_setting_holder/axl_setting/share_buff" to="Menu/textureRect/Axl/axl_setting_holder/axl_setting/share_buff" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Axl/axl_setting_holder/axl_setting/share_buff" to="Menu/textureRect/Axl/axl_setting_holder/axl_setting/share_buff" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Axl/axl_setting_holder/axl_setting/share_buff" to="Menu/textureRect/Axl/axl_setting_holder/axl_setting/share_buff" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Axl/axl_setting_holder/axl_setting/axl_saber_combo" to="Menu/textureRect/Axl/axl_setting_holder/axl_setting/axl_saber_combo" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Axl/axl_setting_holder/axl_setting/axl_saber_combo" to="Menu/textureRect/Axl/axl_setting_holder/axl_setting/axl_saber_combo" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Axl/axl_setting_holder/axl_setting/axl_saber_combo" to="Menu/textureRect/Axl/axl_setting_holder/axl_setting/axl_saber_combo" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Axl/axl_setting_holder/axl_setting/axl_saber_combo" to="Menu/textureRect/Axl/axl_setting_holder/axl_setting/axl_saber_combo" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Axl/axl_setting_holder/axl_setting/axl_saber_combo" to="Menu/textureRect/Axl/axl_setting_holder/axl_setting/axl_saber_combo" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Alia/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Alia/Options Group/ArmorParts/HeadParts/head" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Alia/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Alia/Options Group/ArmorParts/HeadParts/head" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Alia/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Alia/Options Group/ArmorParts/HeadParts/head" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Alia/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Alia/Options Group/ArmorParts/HeadParts/head" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Alia/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Alia/Options Group/ArmorParts/HeadParts/head" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Alia/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Alia/Options Group/ArmorParts/BodyParts/body" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Alia/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Alia/Options Group/ArmorParts/BodyParts/body" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Alia/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Alia/Options Group/ArmorParts/BodyParts/body" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Alia/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Alia/Options Group/ArmorParts/BodyParts/body" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Alia/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Alia/Options Group/ArmorParts/BodyParts/body" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Alia/Options Group/ArmorParts/ArmsParts/arms" to="Menu/textureRect/Alia/Options Group/ArmorParts/ArmsParts/arms" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Alia/Options Group/ArmorParts/ArmsParts/arms" to="Menu/textureRect/Alia/Options Group/ArmorParts/ArmsParts/arms" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Alia/Options Group/ArmorParts/ArmsParts/arms" to="Menu/textureRect/Alia/Options Group/ArmorParts/ArmsParts/arms" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Alia/Options Group/ArmorParts/ArmsParts/arms" to="Menu/textureRect/Alia/Options Group/ArmorParts/ArmsParts/arms" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Alia/Options Group/ArmorParts/ArmsParts/arms" to="Menu/textureRect/Alia/Options Group/ArmorParts/ArmsParts/arms" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Alia/Options Group/ArmorParts/LegsParts/legs" to="Menu/textureRect/Alia/Options Group/ArmorParts/LegsParts/legs" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Alia/Options Group/ArmorParts/LegsParts/legs" to="Menu/textureRect/Alia/Options Group/ArmorParts/LegsParts/legs" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Alia/Options Group/ArmorParts/LegsParts/legs" to="Menu/textureRect/Alia/Options Group/ArmorParts/LegsParts/legs" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Alia/Options Group/ArmorParts/LegsParts/legs" to="Menu/textureRect/Alia/Options Group/ArmorParts/LegsParts/legs" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Alia/Options Group/ArmorParts/LegsParts/legs" to="Menu/textureRect/Alia/Options Group/ArmorParts/LegsParts/legs" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Layer/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Layer/Options Group/ArmorParts/HeadParts/head" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Layer/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Layer/Options Group/ArmorParts/HeadParts/head" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Layer/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Layer/Options Group/ArmorParts/HeadParts/head" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Layer/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Layer/Options Group/ArmorParts/HeadParts/head" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Layer/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Layer/Options Group/ArmorParts/HeadParts/head" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Layer/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Layer/Options Group/ArmorParts/BodyParts/body" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Layer/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Layer/Options Group/ArmorParts/BodyParts/body" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Layer/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Layer/Options Group/ArmorParts/BodyParts/body" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Layer/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Layer/Options Group/ArmorParts/BodyParts/body" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Layer/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Layer/Options Group/ArmorParts/BodyParts/body" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Layer/Options Group/ArmorParts/ArmParts/arms" to="Menu/textureRect/Layer/Options Group/ArmorParts/ArmParts/arms" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Layer/Options Group/ArmorParts/ArmParts/arms" to="Menu/textureRect/Layer/Options Group/ArmorParts/ArmParts/arms" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Layer/Options Group/ArmorParts/ArmParts/arms" to="Menu/textureRect/Layer/Options Group/ArmorParts/ArmParts/arms" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Layer/Options Group/ArmorParts/ArmParts/arms" to="Menu/textureRect/Layer/Options Group/ArmorParts/ArmParts/arms" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Layer/Options Group/ArmorParts/ArmParts/arms" to="Menu/textureRect/Layer/Options Group/ArmorParts/ArmParts/arms" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Layer/Options Group/ArmorParts/LegParts/legs" to="Menu/textureRect/Layer/Options Group/ArmorParts/LegParts/legs" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Layer/Options Group/ArmorParts/LegParts/legs" to="Menu/textureRect/Layer/Options Group/ArmorParts/LegParts/legs" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Layer/Options Group/ArmorParts/LegParts/legs" to="Menu/textureRect/Layer/Options Group/ArmorParts/LegParts/legs" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Layer/Options Group/ArmorParts/LegParts/legs" to="Menu/textureRect/Layer/Options Group/ArmorParts/LegParts/legs" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Layer/Options Group/ArmorParts/LegParts/legs" to="Menu/textureRect/Layer/Options Group/ArmorParts/LegParts/legs" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Layer/customlayer_holder/custom_layer" to="Menu/textureRect/Layer/customlayer_holder/custom_layer" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Layer/customlayer_holder/custom_layer" to="Menu/textureRect/Layer/customlayer_holder/custom_layer" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Layer/customlayer_holder/custom_layer" to="Menu/textureRect/Layer/customlayer_holder/custom_layer" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Layer/customlayer_holder/custom_layer" to="Menu/textureRect/Layer/customlayer_holder/custom_layer" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Layer/customlayer_holder/custom_layer" to="Menu/textureRect/Layer/customlayer_holder/custom_layer" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Pallette/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Pallette/Options Group/ArmorParts/HeadParts/head" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Pallette/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Pallette/Options Group/ArmorParts/HeadParts/head" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Pallette/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Pallette/Options Group/ArmorParts/HeadParts/head" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Pallette/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Pallette/Options Group/ArmorParts/HeadParts/head" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Pallette/Options Group/ArmorParts/HeadParts/head" to="Menu/textureRect/Pallette/Options Group/ArmorParts/HeadParts/head" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Pallette/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Pallette/Options Group/ArmorParts/BodyParts/body" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Pallette/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Pallette/Options Group/ArmorParts/BodyParts/body" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Pallette/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Pallette/Options Group/ArmorParts/BodyParts/body" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Pallette/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Pallette/Options Group/ArmorParts/BodyParts/body" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Pallette/Options Group/ArmorParts/BodyParts/body" to="Menu/textureRect/Pallette/Options Group/ArmorParts/BodyParts/body" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Pallette/Options Group/ArmorParts/ArmParts/arms" to="Menu/textureRect/Pallette/Options Group/ArmorParts/ArmParts/arms" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Pallette/Options Group/ArmorParts/ArmParts/arms" to="Menu/textureRect/Pallette/Options Group/ArmorParts/ArmParts/arms" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Pallette/Options Group/ArmorParts/ArmParts/arms" to="Menu/textureRect/Pallette/Options Group/ArmorParts/ArmParts/arms" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Pallette/Options Group/ArmorParts/ArmParts/arms" to="Menu/textureRect/Pallette/Options Group/ArmorParts/ArmParts/arms" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Pallette/Options Group/ArmorParts/ArmParts/arms" to="Menu/textureRect/Pallette/Options Group/ArmorParts/ArmParts/arms" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Pallette/Options Group/ArmorParts/LegParts/legs" to="Menu/textureRect/Pallette/Options Group/ArmorParts/LegParts/legs" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Pallette/Options Group/ArmorParts/LegParts/legs" to="Menu/textureRect/Pallette/Options Group/ArmorParts/LegParts/legs" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Pallette/Options Group/ArmorParts/LegParts/legs" to="Menu/textureRect/Pallette/Options Group/ArmorParts/LegParts/legs" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Pallette/Options Group/ArmorParts/LegParts/legs" to="Menu/textureRect/Pallette/Options Group/ArmorParts/LegParts/legs" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Pallette/Options Group/ArmorParts/LegParts/legs" to="Menu/textureRect/Pallette/Options Group/ArmorParts/LegParts/legs" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/textureRect/Pallette/custompallette_holder/custom_pallette" to="Menu/textureRect/Pallette/custompallette_holder/custom_pallette" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/textureRect/Pallette/custompallette_holder/custom_pallette" to="Menu/textureRect/Pallette/custompallette_holder/custom_pallette" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/textureRect/Pallette/custompallette_holder/custom_pallette" to="Menu/textureRect/Pallette/custompallette_holder/custom_pallette" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/textureRect/Pallette/custompallette_holder/custom_pallette" to="Menu/textureRect/Pallette/custompallette_holder/custom_pallette" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/textureRect/Pallette/custompallette_holder/custom_pallette" to="Menu/textureRect/Pallette/custompallette_holder/custom_pallette" method="_on_pressed"]
 [connection signal="focus_entered" from="Menu/exit" to="Menu/exit" method="_on_focus_entered"]
 [connection signal="focus_exited" from="Menu/exit" to="Menu/exit" method="_on_focus_exited"]
 [connection signal="mouse_entered" from="Menu/exit" to="Menu/exit" method="_on_mouse_entered"]
@@ -2372,21 +4602,6 @@ bus = "SFX"
 [connection signal="mouse_entered" from="Menu/heart_holder/heart_enabler/decrease_button" to="Menu/heart_holder/heart_enabler/decrease_button" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Menu/heart_holder/heart_enabler/decrease_button" to="Menu/heart_holder/heart_enabler/decrease_button" method="_on_mouse_exited"]
 [connection signal="pressed" from="Menu/heart_holder/heart_enabler/decrease_button" to="Menu/heart_holder/heart_enabler/decrease_button" method="_on_pressed"]
-[connection signal="focus_entered" from="Menu/special_holder3/info" to="Menu/special_holder3/info" method="_on_focus_entered"]
-[connection signal="focus_exited" from="Menu/special_holder3/info" to="Menu/special_holder3/info" method="_on_focus_exited"]
-[connection signal="mouse_entered" from="Menu/special_holder3/info" to="Menu/special_holder3/info" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Menu/special_holder3/info" to="Menu/special_holder3/info" method="_on_mouse_exited"]
-[connection signal="pressed" from="Menu/special_holder3/info" to="Menu/special_holder3/info" method="_on_pressed"]
-[connection signal="focus_entered" from="Menu/special_holder/info" to="Menu/special_holder/info" method="_on_focus_entered"]
-[connection signal="focus_exited" from="Menu/special_holder/info" to="Menu/special_holder/info" method="_on_focus_exited"]
-[connection signal="mouse_entered" from="Menu/special_holder/info" to="Menu/special_holder/info" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Menu/special_holder/info" to="Menu/special_holder/info" method="_on_mouse_exited"]
-[connection signal="pressed" from="Menu/special_holder/info" to="Menu/special_holder/info" method="_on_pressed"]
-[connection signal="focus_entered" from="Menu/special_holder2/info" to="Menu/special_holder2/info" method="_on_focus_entered"]
-[connection signal="focus_exited" from="Menu/special_holder2/info" to="Menu/special_holder2/info" method="_on_focus_exited"]
-[connection signal="mouse_entered" from="Menu/special_holder2/info" to="Menu/special_holder2/info" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Menu/special_holder2/info" to="Menu/special_holder2/info" method="_on_mouse_exited"]
-[connection signal="pressed" from="Menu/special_holder2/info" to="Menu/special_holder2/info" method="_on_pressed"]
 [connection signal="focus_entered" from="Menu/nextplayer_holder/next_player" to="Menu/nextplayer_holder/next_player" method="_on_focus_entered"]
 [connection signal="focus_exited" from="Menu/nextplayer_holder/next_player" to="Menu/nextplayer_holder/next_player" method="_on_focus_exited"]
 [connection signal="mouse_entered" from="Menu/nextplayer_holder/next_player" to="Menu/nextplayer_holder/next_player" method="_on_mouse_entered"]
@@ -2397,3 +4612,13 @@ bus = "SFX"
 [connection signal="mouse_entered" from="Menu/prevplayer_holder/prev_player" to="Menu/prevplayer_holder/prev_player" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="Menu/prevplayer_holder/prev_player" to="Menu/prevplayer_holder/prev_player" method="_on_mouse_exited"]
 [connection signal="pressed" from="Menu/prevplayer_holder/prev_player" to="Menu/prevplayer_holder/prev_player" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/player_desperation/player_desperation" to="Menu/player_desperation/player_desperation" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/player_desperation/player_desperation" to="Menu/player_desperation/player_desperation" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/player_desperation/player_desperation" to="Menu/player_desperation/player_desperation" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/player_desperation/player_desperation" to="Menu/player_desperation/player_desperation" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/player_desperation/player_desperation" to="Menu/player_desperation/player_desperation" method="_on_pressed"]
+[connection signal="focus_entered" from="Menu/player_desperation/weapon_get_zero" to="Menu/player_desperation/weapon_get_zero" method="_on_focus_entered"]
+[connection signal="focus_exited" from="Menu/player_desperation/weapon_get_zero" to="Menu/player_desperation/weapon_get_zero" method="_on_focus_exited"]
+[connection signal="mouse_entered" from="Menu/player_desperation/weapon_get_zero" to="Menu/player_desperation/weapon_get_zero" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/player_desperation/weapon_get_zero" to="Menu/player_desperation/weapon_get_zero" method="_on_mouse_exited"]
+[connection signal="pressed" from="Menu/player_desperation/weapon_get_zero" to="Menu/player_desperation/weapon_get_zero" method="_on_pressed"]

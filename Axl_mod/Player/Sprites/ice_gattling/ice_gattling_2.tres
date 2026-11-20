@@ -1,8 +1,8 @@
-[gd_resource type="SpriteFrames" load_steps=191 format=2]
+[gd_resource type="SpriteFrames" load_steps=199 format=2]
 
 [ext_resource path="res://Axl_mod/Player/Sprites/ice_gattling/Hover.png" type="Texture" id=1]
 [ext_resource path="res://Axl_mod/Player/Sprites/ice_gattling/Dash.png" type="Texture" id=2]
-[ext_resource path="res://src/Actors/Player/axl_sprites/axl.png" type="Texture" id=3]
+[ext_resource path="res://Axl_mod/Player/Sprites/Ride/axl.png" type="Texture" id=3]
 [ext_resource path="res://Axl_mod/Player/Sprites/ice_gattling/Shot_Air_2.png" type="Texture" id=4]
 [ext_resource path="res://Axl_mod/Player/Sprites/ice_gattling/WallJump.png" type="Texture" id=5]
 [ext_resource path="res://Axl_mod/Player/Sprites/ice_gattling/Hit_B.png" type="Texture" id=6]
@@ -20,6 +20,7 @@
 [ext_resource path="res://Axl_mod/Player/Sprites/ice_gattling/Stance_Weak.png" type="Texture" id=18]
 [ext_resource path="res://Axl_mod/Player/Sprites/ice_gattling/Jump_strip6.png" type="Texture" id=19]
 [ext_resource path="res://Axl_mod/Player/Sprites/ice_gattling/Hit_A.png" type="Texture" id=20]
+[ext_resource path="res://Axl_mod/Player/Sprites/Diagonal_Dash.png" type="Texture" id=21]
 [ext_resource path="res://Axl_mod/Player/Sprites/ice_gattling/Stance.png" type="Texture" id=24]
 [ext_resource path="res://Axl_mod/Player/Sprites/ice_gattling/Intro_strip24.png" type="Texture" id=25]
 [ext_resource path="res://Axl_mod/Player/Sprites/ice_gattling/Crouch.png" type="Texture" id=26]
@@ -248,6 +249,10 @@ region = Rect2( 80, 0, 80, 80 )
 atlas = ExtResource( 2 )
 region = Rect2( 160, 0, 80, 80 )
 
+[sub_resource type="AtlasTexture" id=733]
+atlas = ExtResource( 21 )
+region = Rect2( 1024, 0, 128, 128 )
+
 [sub_resource type="AtlasTexture" id=660]
 atlas = ExtResource( 12 )
 region = Rect2( 0, 0, 80, 80 )
@@ -311,6 +316,30 @@ region = Rect2( 64, 0, 64, 64 )
 [sub_resource type="AtlasTexture" id=340]
 atlas = ExtResource( 3 )
 region = Rect2( 128, 560, 64, 56 )
+
+[sub_resource type="AtlasTexture" id=727]
+atlas = ExtResource( 12 )
+region = Rect2( 400, 0, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=728]
+atlas = ExtResource( 12 )
+region = Rect2( 320, 0, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=729]
+atlas = ExtResource( 12 )
+region = Rect2( 240, 0, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=730]
+atlas = ExtResource( 12 )
+region = Rect2( 160, 0, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=731]
+atlas = ExtResource( 12 )
+region = Rect2( 80, 0, 80, 80 )
+
+[sub_resource type="AtlasTexture" id=732]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 80, 80 )
 
 [sub_resource type="AtlasTexture" id=709]
 atlas = ExtResource( 15 )
@@ -778,6 +807,11 @@ animations = [ {
 "name": "dash",
 "speed": 23.0
 }, {
+"frames": [ SubResource( 733 ) ],
+"loop": true,
+"name": "diagonal_dash",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 660 ), SubResource( 661 ), SubResource( 662 ), SubResource( 663 ), SubResource( 664 ), SubResource( 665 ), SubResource( 647 ), SubResource( 646 ) ],
 "loop": false,
 "name": "dodge",
@@ -812,6 +846,11 @@ animations = [ {
 "loop": false,
 "name": "ride",
 "speed": 23.0
+}, {
+"frames": [ SubResource( 727 ), SubResource( 728 ), SubResource( 729 ), SubResource( 730 ), SubResource( 731 ), SubResource( 732 ) ],
+"loop": false,
+"name": "rolling",
+"speed": 25.0
 }, {
 "frames": [ SubResource( 709 ), SubResource( 710 ), SubResource( 711 ), SubResource( 712 ), SubResource( 713 ) ],
 "loop": false,

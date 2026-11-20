@@ -11,5 +11,5 @@ dest_files=[ "res://.import/vile_loop.ogg-07cea1029f76be1e89e8bdd79f01fcc1.oggst
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

@@ -13,7 +13,9 @@ onready var collision_shape = $collisionShape2D
 onready var deflection_shape = $area2D / collisionShape2D
 onready var deflect_sound = $deflectSound.stream
 onready var saber_effect = preload("res://System/misc/visual_effect.tscn")
-onready var effect_material = preload("res://Zero_mod/X8/Sprites/ZeroX8_Material_Shader.tres")
+onready var effect_material: Material = preload("res://Zero_mod/X8/Sprites/ZeroX8_Material_Shader.tres")
+onready var layer_material: Material = preload("res://Zero_mod/X8/LayerSprites/Layer_Material_Shader.tres")
+onready var axl_material: Material = preload("res://Axl_mod/Player/Axl_Material_Shader.tres")
 onready var sfx_player: = preload("res://System/misc/sound_effect.tscn")
 
 var canhit: bool = true
@@ -64,11 +66,21 @@ func spawn_saber_effect(target):
 			if saber_name in name:
 				if saber_effect and target:
 					var effect_instance = saber_effect.instance()
-					effect_instance.material = effect_material
-					if "Youdantotsu" in name:
-						CharacterManager.set_saberX8_green(effect_instance)
+					if CharacterManager.player_character == "Layer":
+						effect_instance.material = layer_material
+						if "Youdantotsu" in name and not CharacterManager.custom_layer_armor:
+							CharacterManager.set_layer_saber_green(effect_instance)
+						else:
+							CharacterManager.set_layer_colors(effect_instance)
+					elif CharacterManager.player_character == "Axl":
+						effect_instance.material = axl_material
+						CharacterManager.set_axl_colors(effect_instance)
 					else:
-						CharacterManager.set_saberX8_colors(effect_instance)
+						effect_instance.material = effect_material
+						if "Youdantotsu" in name and not CharacterManager.custom_zero_armor:
+							CharacterManager.set_saberX8_green(effect_instance)
+						else:
+							CharacterManager.set_saberX8_colors(effect_instance)
 					effect_instance.global_position = collision_shape.global_position + ((target.global_position - collision_shape.global_position) / 2)
 					get_tree().current_scene.add_child(effect_instance)
 					return
@@ -206,10 +218,12 @@ func _deflect_projectile(body, rotate: bool, flip: bool, type: int) -> void :
 		body.velocity = reflected
 	else:
 		body.velocity *= - type
+		var dmg = 0
+		dmg = body.damage
 		if upgraded:
-			body.damage *= 1.2
-		body.damage_to_bosses = body.damage
-		body.damage_to_weakness = body.damage
+			dmg = body.damage * 1.2
+		body.damage_to_bosses = dmg
+		body.damage_to_weakness = dmg
 		body.remove_from_group("Enemy Projectile")
 		body.add_to_group("Player Projectile")
 

@@ -20,6 +20,7 @@ func _ready() -> void:
 	end()
 
 func start_desperation():
+	$".".show()
 	var fadein = o_modulate
 	fadein.a = 0.5
 	tween.attribute("modulate",fadein,0.2,backflames)
@@ -35,7 +36,7 @@ func activate_damage():
 
 func on_boss_death(enemy_name):
 	if enemy_name is String:
-		if enemy_name == "boss":
+		if enemy_name == "copysigma":
 			end()
 
 func end():

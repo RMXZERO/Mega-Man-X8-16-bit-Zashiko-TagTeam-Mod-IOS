@@ -1,0 +1,1798 @@
+[gd_resource type="VisualShader" load_steps=155 format=2]
+
+[sub_resource type="VisualShaderNodeScalarOp" id=105]
+default_input_values = [ 0, 0.0, 1, 2.0 ]
+operator = 3
+
+[sub_resource type="VisualShaderNodeColorUniform" id=107]
+uniform_name = "LayerWeaponRed2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=108]
+uniform_name = "LayerWeaponRed1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=109]
+uniform_name = "LayerOutlineColor"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=110]
+uniform_name = "R_LayerWeaponRed2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=111]
+uniform_name = "R_LayerWeaponRed1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=112]
+uniform_name = "R_LayerOutlineColor"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=113]
+uniform_name = "LSaberColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=114]
+uniform_name = "LSaberColor2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=115]
+uniform_name = "LSaberColor3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=116]
+uniform_name = "LSaberColor4"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=117]
+uniform_name = "R_LSaberColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=118]
+uniform_name = "R_LSaberColor2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=119]
+uniform_name = "R_LSaberColor3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=120]
+uniform_name = "R_LSaberColor4"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=123]
+uniform_name = "LayerAfterimagesColor"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=124]
+uniform_name = "R_LayerAfterimagesColor"
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=37]
+function = 12
+
+[sub_resource type="VisualShaderNodeInput" id=127]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=128]
+function = 1
+
+[sub_resource type="VisualShaderNodeScalarOp" id=129]
+default_input_values = [ 0, 0.0, 1, 60.0 ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=130]
+uniform_name = "Glow"
+
+[sub_resource type="VisualShaderNodeScalarOp" id=131]
+operator = 2
+
+[sub_resource type="VisualShaderNodeScalarOp" id=132]
+default_input_values = [ 0, 0.0, 1, 0.8 ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeIf" id=133]
+
+[sub_resource type="VisualShaderNodeScalarConstant" id=134]
+constant = 5.0
+
+[sub_resource type="VisualShaderNodeScalarOp" id=135]
+default_input_values = [ 0, 0.0, 1, 1.8 ]
+
+[sub_resource type="VisualShaderNodeVectorOp" id=136]
+operator = 2
+
+[sub_resource type="VisualShaderNodeVectorOp" id=137]
+operator = 2
+
+[sub_resource type="VisualShaderNodeVectorOp" id=138]
+operator = 2
+
+[sub_resource type="VisualShaderNodeVectorOp" id=139]
+operator = 2
+
+[sub_resource type="VisualShaderNodeColorUniform" id=140]
+uniform_name = "LayerWeaponRed3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=141]
+uniform_name = "R_LayerWeaponRed3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=142]
+uniform_name = "LayerArmorColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=143]
+uniform_name = "R_LayerArmorColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=144]
+uniform_name = "LayerArmorColor2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=145]
+uniform_name = "R_LayerArmorColor2"
+
+[sub_resource type="VisualShaderNodeScalarOp" id=39]
+operator = 2
+
+[sub_resource type="VisualShaderNodeColorUniform" id=146]
+uniform_name = "LayerGreyColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=147]
+uniform_name = "R_LayerGreyColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=148]
+uniform_name = "LayerGreyColor2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=149]
+uniform_name = "R_LayerGreyColor2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=150]
+uniform_name = "LayerGreyColor3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=151]
+uniform_name = "R_LayerGreyColor3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=152]
+uniform_name = "LayerSkinColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=153]
+uniform_name = "R_LayerSkinColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=154]
+uniform_name = "LayerSkinColor2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=155]
+uniform_name = "R_LayerSkinColor2"
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=40]
+function = 29
+
+[sub_resource type="VisualShaderNodeColorUniform" id=156]
+uniform_name = "LayerSkinColor3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=157]
+uniform_name = "R_LayerSkinColor3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=158]
+uniform_name = "LayerOutlineColor2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=159]
+uniform_name = "R_LayerOutlineColor2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=160]
+uniform_name = "LayerOutlineColor3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=161]
+uniform_name = "R_LayerOutlineColor3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=162]
+uniform_name = "LayerWeaponYellow1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=163]
+uniform_name = "R_LayerWeaponYellow1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=164]
+uniform_name = "LayerWeaponYellow2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=165]
+uniform_name = "R_LayerWeaponYellow2"
+
+[sub_resource type="VisualShaderNodeScalarOp" id=41]
+default_input_values = [ 0, 0.0, 1, 0.3 ]
+operator = 1
+
+[sub_resource type="VisualShaderNodeColorUniform" id=166]
+uniform_name = "LayerWeaponYellow3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=167]
+uniform_name = "R_LayerWeaponYellow3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=168]
+uniform_name = "LSaberColor5"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=169]
+uniform_name = "R_LSaberColor5"
+
+[sub_resource type="VisualShaderNodeVectorOp" id=170]
+operator = 2
+
+[sub_resource type="VisualShaderNodeColorUniform" id=171]
+uniform_name = "LayerWeaponWhite1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=172]
+uniform_name = "LayerWeaponWhite2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=173]
+uniform_name = "LayerWeaponWhite3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=174]
+uniform_name = "LayerWeaponWhite4"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=175]
+uniform_name = "R_LayerWeaponWhite1"
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=42]
+uniform_name = "Charge"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=176]
+uniform_name = "R_LayerWeaponWhite2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=177]
+uniform_name = "R_LayerWeaponWhite3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=178]
+uniform_name = "R_LayerWeaponWhite4"
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=179]
+uniform_name = "Flash"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=180]
+uniform_name = "LayerWeaponGreen1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=181]
+uniform_name = "R_LayerWeaponGreen1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=182]
+uniform_name = "LayerWeaponGreen2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=183]
+uniform_name = "R_LayerWeaponGreen2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=184]
+uniform_name = "LayerWeaponGreen3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=185]
+uniform_name = "R_LayerWeaponGreen3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=186]
+uniform_name = "LayerSigmaBlade1"
+default_value_enabled = true
+default_value = Color( 0.607843, 0.607843, 0.67451, 1 )
+
+[sub_resource type="VisualShaderNodeColorUniform" id=187]
+uniform_name = "LayerSigmaBlade2"
+default_value_enabled = true
+default_value = Color( 0.407843, 0.407843, 0.501961, 1 )
+
+[sub_resource type="VisualShaderNodeColorUniform" id=188]
+uniform_name = "LayerSigmaBlade3"
+default_value_enabled = true
+default_value = Color( 0.219608, 0.25098, 0.345098, 1 )
+
+[sub_resource type="VisualShaderNodeColorUniform" id=189]
+uniform_name = "LayerSigmaBlade4"
+default_value_enabled = true
+default_value = Color( 0.211765, 0.407843, 0.415686, 1 )
+
+[sub_resource type="VisualShaderNodeColorUniform" id=190]
+uniform_name = "R_LayerSigmaBlade1"
+default_value_enabled = true
+default_value = Color( 0.607843, 0.607843, 0.67451, 1 )
+
+[sub_resource type="VisualShaderNodeColorUniform" id=191]
+uniform_name = "R_LayerSigmaBlade2"
+default_value_enabled = true
+default_value = Color( 0.407843, 0.407843, 0.501961, 1 )
+
+[sub_resource type="VisualShaderNodeColorUniform" id=192]
+uniform_name = "R_LayerSigmaBlade3"
+default_value_enabled = true
+default_value = Color( 0.219608, 0.25098, 0.345098, 1 )
+
+[sub_resource type="VisualShaderNodeColorUniform" id=193]
+uniform_name = "R_LayerSigmaBlade4"
+default_value_enabled = true
+default_value = Color( 0.211765, 0.407843, 0.415686, 1 )
+
+[sub_resource type="VisualShaderNodeColorUniform" id=194]
+uniform_name = "LayerBackCrystalColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=195]
+uniform_name = "LayerBackCrystalColor2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=196]
+uniform_name = "R_LayerBackCrystalColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=197]
+uniform_name = "R_LayerBackCrystalColor2"
+
+[sub_resource type="VisualShaderNodeTexture" id=1]
+source = 2
+
+[sub_resource type="VisualShaderNodeIf" id=46]
+default_input_values = [ 0, 0.0, 1, 0.3, 2, 1e-05, 3, Vector3( 0, 0, 0 ), 4, Vector3( 1, 1, 1 ), 5, Vector3( 0, 0, 0 ) ]
+
+[sub_resource type="VisualShaderNodeScalarConstant" id=47]
+
+[sub_resource type="VisualShaderNodeScalarConstant" id=49]
+constant = 1.0
+
+[sub_resource type="VisualShaderNodeIf" id=51]
+default_input_values = [ 0, 0.0, 1, 0.5, 2, 1e-05, 3, Vector3( 0, 0, 0 ), 4, Vector3( 0, 0, 0 ), 5, Vector3( 0, 0, 0 ) ]
+
+[sub_resource type="VisualShaderNodeColorOp" id=52]
+operator = 2
+
+[sub_resource type="VisualShaderNodeColorUniform" id=53]
+uniform_name = "Color"
+
+[sub_resource type="VisualShaderNodeColorOp" id=54]
+operator = 3
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=55]
+uniform_name = "Alpha"
+
+[sub_resource type="VisualShaderNodeScalarOp" id=56]
+operator = 2
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=57]
+function = 1
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=60]
+function = 29
+
+[sub_resource type="VisualShaderNodeInput" id=61]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeScalarOp" id=62]
+default_input_values = [ 0, 0.0, 1, 120.0 ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeIf" id=63]
+default_input_values = [ 0, 0.0, 1, 1.0, 2, 1e-05, 3, Vector3( 0, 0, 0 ), 4, Vector3( 0, 0, 0 ), 5, Vector3( 0, 0, 0 ) ]
+
+[sub_resource type="VisualShaderNodeScalarOp" id=64]
+operator = 7
+
+[sub_resource type="VisualShaderNodeScalarConstant" id=65]
+constant = 0.5
+
+[sub_resource type="VisualShaderNodeExpression" id=67]
+size = Vector2( 1034.6, 3415.86 )
+expression = "vec3 current_color = texture(TEXTURE, UV).rgb;
+
+if (replace (current_color, crystal_color_1, crystal_replace_1, final_color, tolerance)){}
+else if (replace (current_color, crystal_color_2, crystal_replace_2, final_color, tolerance)){}
+else if (replace (current_color, crystal_color_3, crystal_replace_3, final_color, tolerance)){}
+
+else if (replace (current_color, back_crystal_color_1, back_crystal_replace_1, final_color, tolerance)){}
+else if (replace (current_color, back_crystal_color_2, back_crystal_replace_2, final_color, tolerance)){}
+
+else if (replace (current_color, light_red_color_1, light_red_color_1_replace, final_color, tolerance)){}
+else if (replace (current_color, main_color_1, replace_color_1, final_color, tolerance)){}
+else if (replace (current_color, main_color_2, replace_color_2, final_color, tolerance)){}
+else if (replace (current_color, main_color_3, replace_color_3, final_color, tolerance)){}
+
+else if (replace (current_color, light_hair_color, light_hair_replace, final_color, tolerance)){}
+else if (replace (current_color, main_color_4, replace_color_4, final_color, tolerance)){}
+else if (replace (current_color, main_color_5, replace_color_5, final_color, tolerance)){}
+else if (replace (current_color, main_color_6, replace_color_6, final_color, tolerance)){}
+
+else if (replace (current_color, outline_color, replace_outline_color, final_color, tolerance)){}
+else if (replace (current_color, outline_color_2, replace_outline_color_2, final_color, tolerance)){}
+
+else if (replace (current_color, saber_color_1, saber_replace_1, final_color, tolerance)){}
+else if (replace (current_color, saber_color_2, saber_replace_2, final_color, tolerance)){}
+else if (replace (current_color, saber_color_3, saber_replace_3, final_color, tolerance)){}
+else if (replace (current_color, saber_color_4, saber_replace_4, final_color, tolerance)){}
+else if (replace (current_color, saber_color_5, saber_replace_5, final_color, tolerance)){}
+
+else if (replace (current_color, chest_color_1, chest_replace_1, final_color, tolerance)){}
+else if (replace (current_color, chest_color_2, chest_replace_2, final_color, tolerance)){}
+else if (replace (current_color, chest_color_3, chest_replace_3, final_color, tolerance)){}
+else if (replace (current_color, chest_color_4, chest_replace_4, final_color, tolerance)){}
+else if (replace (current_color, chest_color_5, chest_replace_5, final_color, tolerance)){}
+
+else if (replace (current_color, armor_color_1, armor_replace_1, final_color, tolerance)){}
+else if (replace (current_color, armor_color_2, armor_replace_2, final_color, tolerance)){}
+else if (replace (current_color, armor_color_3, armor_replace_3, final_color, tolerance)){}
+
+else if (replace (current_color, grey_color_1, grey_replace_1, final_color, tolerance)){}
+else if (replace (current_color, grey_color_2, grey_replace_2, final_color, tolerance)){}
+else if (replace (current_color, grey_color_3, grey_replace_3, final_color, tolerance)){}
+else if (replace (current_color, grey_color_4, grey_replace_4, final_color, tolerance)){}
+
+else if (replace (current_color, skin_color_1, skin_replace_1, final_color, tolerance)){}
+else if (replace (current_color, skin_color_2, skin_replace_2, final_color, tolerance)){}
+else if (replace (current_color, skin_color_3, skin_replace_3, final_color, tolerance)){}
+
+else if (replace (current_color, aura_color, aura_color_replace, final_color, tolerance)){}
+else if (replace (current_color, awakened_effect1, awakened_effect_replace1, final_color, tolerance)){}
+else if (replace (current_color, awakened_effect2, awakened_effect_replace2, final_color, tolerance)){}
+else if (replace (current_color, awakened_effect3, awakened_effect_replace3, final_color, tolerance)){}
+else if (replace (current_color, awakened_effect4, awakened_effect_replace4, final_color, tolerance)){}
+else if (replace (current_color, afterimages_color, afterimages_color_replace, final_color, tolerance)){}
+
+else if (replace (current_color, sigma_blade_color_1, sigma_blade_replace_color_1, final_color, tolerance)){}
+else if (replace (current_color, sigma_blade_color_2, sigma_blade_replace_color_2, final_color, tolerance)){}
+else if (replace (current_color, sigma_blade_color_3, sigma_blade_replace_color_3, final_color, tolerance)){}
+else if (replace (current_color, sigma_blade_color_4, sigma_blade_replace_color_4, final_color, tolerance)){}
+
+else {final_color = current_color}"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=68]
+uniform_name = "LayerMainColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=69]
+uniform_name = "LayerMainColor2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=70]
+uniform_name = "LayerMainColor3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=71]
+uniform_name = "LayerMainColor4"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=72]
+uniform_name = "LayerMainColor5"
+
+[sub_resource type="VisualShaderNodeInput" id=32]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=73]
+uniform_name = "LayerMainColor6"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=74]
+uniform_name = "R_LayerMainColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=75]
+uniform_name = "R_LayerMainColor2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=76]
+uniform_name = "R_LayerMainColor3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=77]
+uniform_name = "R_LayerMainColor4"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=78]
+uniform_name = "R_LayerMainColor5"
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=33]
+function = 1
+
+[sub_resource type="VisualShaderNodeColorUniform" id=79]
+uniform_name = "R_LayerMainColor6"
+
+[sub_resource type="VisualShaderNodeGlobalExpression" id=80]
+size = Vector2( 1036.64, 317.838 )
+expression = "bool replace (vec3 color, vec3 main_color, vec3 replace_color, out vec3 output, float tol) 
+{	vec3 diff3 = color - main_color;
+	float m = max(max(abs(diff3.r), abs(diff3.g)), abs(diff3.b));
+	
+	if ((step(m, tol) == 1.0)){ 
+		color = mix(color, replace_color, step(m, tol));
+		output = color;
+		return true;
+	}
+	return false;
+}"
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=81]
+uniform_name = "tolerance"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=82]
+uniform_name = "LayerCrystalColor3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=83]
+uniform_name = "R_LayerCrystalColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=84]
+uniform_name = "R_LayerCrystalColor2"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=85]
+uniform_name = "R_LayerCrystalColor3"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=86]
+uniform_name = "LayerCrystalColor1"
+
+[sub_resource type="VisualShaderNodeColorUniform" id=87]
+uniform_name = "LayerCrystalColor2"
+
+[sub_resource type="VisualShaderNodeInput" id=88]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeScalarFunc" id=89]
+function = 1
+
+[sub_resource type="VisualShaderNodeScalarOp" id=90]
+default_input_values = [ 0, 0.0, 1, 8.5 ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeScalarUniform" id=92]
+uniform_name = "Alert"
+
+[sub_resource type="VisualShaderNodeScalarOp" id=93]
+operator = 2
+
+[sub_resource type="VisualShaderNodeVectorOp" id=94]
+operator = 2
+
+[sub_resource type="VisualShaderNodeVectorOp" id=95]
+operator = 2
+
+[sub_resource type="VisualShaderNodeVectorOp" id=96]
+operator = 2
+
+[sub_resource type="VisualShaderNodeScalarOp" id=35]
+default_input_values = [ 0, 0.0, 1, 42.0 ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeScalarOp" id=97]
+default_input_values = [ 0, 0.0, 1, 1.5 ]
+operator = 2
+
+[sub_resource type="VisualShaderNodeIf" id=98]
+
+[sub_resource type="VisualShaderNodeScalarConstant" id=99]
+constant = 1.0
+
+[sub_resource type="VisualShaderNodeScalarOp" id=100]
+default_input_values = [ 0, 0.0, 1, 1.4 ]
+
+[sub_resource type="VisualShaderNodeIf" id=102]
+default_input_values = [ 0, 0.0, 1, 0.5, 2, 1e-05, 3, Vector3( 0, 0, 0 ), 4, Vector3( 0, 0, 0 ), 5, Vector3( 0, 0, 0 ) ]
+
+[sub_resource type="VisualShaderNodeIf" id=103]
+default_input_values = [ 0, 0.0, 1, 0.5, 2, 1e-05, 3, Vector3( 0, 0, 0 ), 4, Vector3( 1, 1, 1 ), 5, Vector3( 0, 0, 0 ) ]
+
+[sub_resource type="VisualShaderNodeTexture" id=104]
+source = 2
+
+[sub_resource type="VisualShaderNodeScalarOp" id=106]
+default_input_values = [ 0, 0.0, 1, 1.0 ]
+
+[sub_resource type="VisualShaderNodeInput" id=20]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeInput" id=26]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeInput" id=27]
+input_name = "vertex"
+
+[sub_resource type="VisualShaderNodeInput" id=28]
+input_name = "alpha"
+
+[resource]
+code = "shader_type canvas_item;
+uniform float Flash;
+uniform float Charge;
+uniform vec4 Color : hint_color;
+uniform vec4 LayerMainColor1 : hint_color;
+uniform vec4 LayerMainColor2 : hint_color;
+uniform vec4 LayerMainColor3 : hint_color;
+uniform vec4 LayerMainColor4 : hint_color;
+uniform vec4 LayerMainColor5 : hint_color;
+uniform vec4 LayerMainColor6 : hint_color;
+uniform vec4 R_LayerMainColor1 : hint_color;
+uniform vec4 R_LayerMainColor2 : hint_color;
+uniform vec4 R_LayerMainColor3 : hint_color;
+uniform vec4 R_LayerMainColor4 : hint_color;
+uniform vec4 R_LayerMainColor5 : hint_color;
+uniform vec4 R_LayerMainColor6 : hint_color;
+uniform vec4 LayerCrystalColor1 : hint_color;
+uniform vec4 LayerCrystalColor2 : hint_color;
+uniform vec4 LayerCrystalColor3 : hint_color;
+uniform vec4 R_LayerCrystalColor1 : hint_color;
+uniform float Alert;
+uniform vec4 R_LayerCrystalColor2 : hint_color;
+uniform vec4 R_LayerCrystalColor3 : hint_color;
+uniform float tolerance;
+uniform vec4 LayerOutlineColor : hint_color;
+uniform vec4 R_LayerOutlineColor : hint_color;
+uniform vec4 LSaberColor1 : hint_color;
+uniform vec4 LSaberColor2 : hint_color;
+uniform vec4 LSaberColor3 : hint_color;
+uniform vec4 LSaberColor4 : hint_color;
+uniform vec4 R_LSaberColor1 : hint_color;
+uniform float Glow;
+uniform vec4 R_LSaberColor2 : hint_color;
+uniform vec4 R_LSaberColor3 : hint_color;
+uniform vec4 R_LSaberColor4 : hint_color;
+uniform vec4 LayerAfterimagesColor : hint_color;
+uniform vec4 R_LayerAfterimagesColor : hint_color;
+uniform vec4 LayerArmorColor1 : hint_color;
+uniform vec4 LayerArmorColor2 : hint_color;
+uniform vec4 R_LayerArmorColor1 : hint_color;
+uniform vec4 R_LayerArmorColor2 : hint_color;
+uniform vec4 LayerGreyColor1 : hint_color;
+uniform vec4 LayerGreyColor2 : hint_color;
+uniform vec4 LayerGreyColor3 : hint_color;
+uniform vec4 R_LayerGreyColor1 : hint_color;
+uniform vec4 R_LayerGreyColor2 : hint_color;
+uniform vec4 R_LayerGreyColor3 : hint_color;
+uniform vec4 LayerSkinColor1 : hint_color;
+uniform vec4 LayerSkinColor2 : hint_color;
+uniform vec4 LayerSkinColor3 : hint_color;
+uniform vec4 R_LayerSkinColor1 : hint_color;
+uniform vec4 R_LayerSkinColor2 : hint_color;
+uniform vec4 R_LayerSkinColor3 : hint_color;
+uniform vec4 LayerOutlineColor2 : hint_color;
+uniform vec4 R_LayerOutlineColor2 : hint_color;
+uniform vec4 LayerOutlineColor3 : hint_color;
+uniform vec4 R_LayerOutlineColor3 : hint_color;
+uniform vec4 LayerWeaponYellow1 : hint_color;
+uniform vec4 R_LayerWeaponYellow1 : hint_color;
+uniform vec4 LayerWeaponYellow2 : hint_color;
+uniform vec4 R_LayerWeaponYellow2 : hint_color;
+uniform vec4 LayerWeaponYellow3 : hint_color;
+uniform vec4 R_LayerWeaponYellow3 : hint_color;
+uniform vec4 LSaberColor5 : hint_color;
+uniform vec4 R_LSaberColor5 : hint_color;
+uniform vec4 LayerWeaponWhite1 : hint_color;
+uniform vec4 LayerWeaponWhite2 : hint_color;
+uniform vec4 LayerWeaponWhite3 : hint_color;
+uniform vec4 LayerWeaponWhite4 : hint_color;
+uniform vec4 R_LayerWeaponWhite1 : hint_color;
+uniform vec4 R_LayerWeaponWhite2 : hint_color;
+uniform vec4 R_LayerWeaponWhite3 : hint_color;
+uniform vec4 R_LayerWeaponWhite4 : hint_color;
+uniform vec4 LayerWeaponRed1 : hint_color;
+uniform vec4 LayerWeaponRed2 : hint_color;
+uniform vec4 LayerWeaponRed3 : hint_color;
+uniform vec4 LayerWeaponGreen1 : hint_color;
+uniform vec4 R_LayerWeaponRed1 : hint_color;
+uniform vec4 R_LayerWeaponRed2 : hint_color;
+uniform vec4 R_LayerWeaponRed3 : hint_color;
+uniform vec4 R_LayerWeaponGreen1 : hint_color;
+uniform vec4 LayerWeaponGreen2 : hint_color;
+uniform vec4 R_LayerWeaponGreen2 : hint_color;
+uniform vec4 LayerWeaponGreen3 : hint_color;
+uniform vec4 R_LayerWeaponGreen3 : hint_color;
+uniform vec4 LayerSigmaBlade1 : hint_color = vec4(0.607843, 0.607843, 0.674510, 1.000000);
+uniform vec4 LayerSigmaBlade2 : hint_color = vec4(0.407843, 0.407843, 0.501961, 1.000000);
+uniform vec4 LayerSigmaBlade3 : hint_color = vec4(0.219608, 0.250980, 0.345098, 1.000000);
+uniform vec4 LayerSigmaBlade4 : hint_color = vec4(0.211765, 0.407843, 0.415686, 1.000000);
+uniform vec4 R_LayerSigmaBlade1 : hint_color = vec4(0.607843, 0.607843, 0.674510, 1.000000);
+uniform vec4 R_LayerSigmaBlade2 : hint_color = vec4(0.407843, 0.407843, 0.501961, 1.000000);
+uniform vec4 R_LayerSigmaBlade3 : hint_color = vec4(0.219608, 0.250980, 0.345098, 1.000000);
+uniform vec4 R_LayerSigmaBlade4 : hint_color = vec4(0.211765, 0.407843, 0.415686, 1.000000);
+uniform vec4 LayerBackCrystalColor1 : hint_color;
+uniform vec4 LayerBackCrystalColor2 : hint_color;
+uniform vec4 R_LayerBackCrystalColor1 : hint_color;
+uniform vec4 R_LayerBackCrystalColor2 : hint_color;
+uniform float Alpha;
+
+
+// GlobalExpression:0
+	bool replace (vec3 color, vec3 main_color, vec3 replace_color, out vec3 output, float tol) 
+	{	vec3 diff3 = color - main_color;
+		float m = max(max(abs(diff3.r), abs(diff3.g)), abs(diff3.b));
+		
+		if ((step(m, tol) == 1.0)){ 
+			color = mix(color, replace_color, step(m, tol));
+			output = color;
+			return true;
+		}
+		return false;
+	}
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// ScalarUniform:173
+	float n_out173p0 = Flash;
+
+// Input:6
+	float n_out6p0 = TIME;
+
+// ScalarOp:9
+	float n_in9p1 = 42.00000;
+	float n_out9p0 = n_out6p0 * n_in9p1;
+
+// ScalarFunc:7
+	float n_out7p0 = cos(n_out9p0);
+
+// ScalarFunc:12
+	float n_out12p0 = abs(n_out7p0);
+
+// ScalarOp:16
+	float n_in16p1 = 0.30000;
+	float n_out16p0 = n_out12p0 - n_in16p1;
+
+// ScalarFunc:15
+	float n_out15p0 = roundEven(n_out16p0);
+
+// ScalarUniform:17
+	float n_out17p0 = Charge;
+
+// ScalarOp:14
+	float n_out14p0 = n_out15p0 * n_out17p0;
+
+// ColorUniform:39
+	vec3 n_out39p0 = Color.rgb;
+	float n_out39p1 = Color.a;
+
+// ColorUniform:55
+	vec3 n_out55p0 = LayerMainColor1.rgb;
+	float n_out55p1 = LayerMainColor1.a;
+
+// ColorUniform:56
+	vec3 n_out56p0 = LayerMainColor2.rgb;
+	float n_out56p1 = LayerMainColor2.a;
+
+// ColorUniform:57
+	vec3 n_out57p0 = LayerMainColor3.rgb;
+	float n_out57p1 = LayerMainColor3.a;
+
+// ColorUniform:58
+	vec3 n_out58p0 = LayerMainColor4.rgb;
+	float n_out58p1 = LayerMainColor4.a;
+
+// ColorUniform:59
+	vec3 n_out59p0 = LayerMainColor5.rgb;
+	float n_out59p1 = LayerMainColor5.a;
+
+// ColorUniform:60
+	vec3 n_out60p0 = LayerMainColor6.rgb;
+	float n_out60p1 = LayerMainColor6.a;
+
+// ColorUniform:65
+	vec3 n_out65p0 = R_LayerMainColor1.rgb;
+	float n_out65p1 = R_LayerMainColor1.a;
+
+// ColorUniform:66
+	vec3 n_out66p0 = R_LayerMainColor2.rgb;
+	float n_out66p1 = R_LayerMainColor2.a;
+
+// ColorUniform:67
+	vec3 n_out67p0 = R_LayerMainColor3.rgb;
+	float n_out67p1 = R_LayerMainColor3.a;
+
+// ColorUniform:68
+	vec3 n_out68p0 = R_LayerMainColor4.rgb;
+	float n_out68p1 = R_LayerMainColor4.a;
+
+// ColorUniform:69
+	vec3 n_out69p0 = R_LayerMainColor5.rgb;
+	float n_out69p1 = R_LayerMainColor5.a;
+
+// ColorUniform:70
+	vec3 n_out70p0 = R_LayerMainColor6.rgb;
+	float n_out70p1 = R_LayerMainColor6.a;
+
+// ColorUniform:77
+	vec3 n_out77p0 = LayerCrystalColor1.rgb;
+	float n_out77p1 = LayerCrystalColor1.a;
+
+// ColorUniform:78
+	vec3 n_out78p0 = LayerCrystalColor2.rgb;
+	float n_out78p1 = LayerCrystalColor2.a;
+
+// ColorUniform:73
+	vec3 n_out73p0 = LayerCrystalColor3.rgb;
+	float n_out73p1 = LayerCrystalColor3.a;
+
+// ColorUniform:74
+	vec3 n_out74p0 = R_LayerCrystalColor1.rgb;
+	float n_out74p1 = R_LayerCrystalColor1.a;
+
+// ScalarUniform:85
+	float n_out85p0 = Alert;
+
+// Scalar:92
+	float n_out92p0 = 1.000000;
+
+// Input:79
+	float n_out79p0 = TIME;
+
+// ScalarOp:81
+	float n_in81p1 = 8.50000;
+	float n_out81p0 = n_out79p0 * n_in81p1;
+
+// ScalarFunc:80
+	float n_out80p0 = cos(n_out81p0);
+
+// ScalarOp:93
+	float n_in93p1 = 1.40000;
+	float n_out93p0 = n_out80p0 + n_in93p1;
+
+// ScalarOp:90
+	float n_in90p1 = 1.50000;
+	float n_out90p0 = n_out85p0 * n_in90p1;
+
+// ScalarOp:86
+	float n_out86p0 = n_out93p0 * n_out90p0;
+
+// If:91
+	float n_in91p1 = 0.00000;
+	float n_in91p2 = 0.00001;
+	vec3 n_out91p0;
+	if(abs(n_out85p0 - n_in91p1) < n_in91p2)
+	{
+		n_out91p0 = vec3(n_out92p0);
+	}
+	else if(n_out85p0 < n_in91p1)
+	{
+		n_out91p0 = vec3(n_out92p0);
+	}
+	else
+	{
+		n_out91p0 = vec3(n_out86p0);
+	}
+
+// VectorOp:87
+	vec3 n_out87p0 = n_out74p0 * n_out91p0;
+
+// ColorUniform:75
+	vec3 n_out75p0 = R_LayerCrystalColor2.rgb;
+	float n_out75p1 = R_LayerCrystalColor2.a;
+
+// VectorOp:88
+	vec3 n_out88p0 = n_out75p0 * n_out91p0;
+
+// ColorUniform:76
+	vec3 n_out76p0 = R_LayerCrystalColor3.rgb;
+	float n_out76p1 = R_LayerCrystalColor3.a;
+
+// VectorOp:89
+	vec3 n_out89p0 = n_out76p0 * n_out91p0;
+
+// ScalarUniform:72
+	float n_out72p0 = tolerance;
+
+// ColorUniform:103
+	vec3 n_out103p0 = LayerOutlineColor.rgb;
+	float n_out103p1 = LayerOutlineColor.a;
+
+// ColorUniform:106
+	vec3 n_out106p0 = R_LayerOutlineColor.rgb;
+	float n_out106p1 = R_LayerOutlineColor.a;
+
+// ColorUniform:107
+	vec3 n_out107p0 = LSaberColor1.rgb;
+	float n_out107p1 = LSaberColor1.a;
+
+// ColorUniform:108
+	vec3 n_out108p0 = LSaberColor2.rgb;
+	float n_out108p1 = LSaberColor2.a;
+
+// ColorUniform:109
+	vec3 n_out109p0 = LSaberColor3.rgb;
+	float n_out109p1 = LSaberColor3.a;
+
+// ColorUniform:110
+	vec3 n_out110p0 = LSaberColor4.rgb;
+	float n_out110p1 = LSaberColor4.a;
+
+// ColorUniform:111
+	vec3 n_out111p0 = R_LSaberColor1.rgb;
+	float n_out111p1 = R_LSaberColor1.a;
+
+// ScalarUniform:124
+	float n_out124p0 = Glow;
+
+// Scalar:128
+	float n_out128p0 = 5.000000;
+
+// Input:121
+	float n_out121p0 = TIME;
+
+// ScalarOp:123
+	float n_in123p1 = 60.00000;
+	float n_out123p0 = n_out121p0 * n_in123p1;
+
+// ScalarFunc:122
+	float n_out122p0 = cos(n_out123p0);
+
+// ScalarOp:129
+	float n_in129p1 = 1.80000;
+	float n_out129p0 = n_out122p0 + n_in129p1;
+
+// ScalarOp:126
+	float n_in126p1 = 0.80000;
+	float n_out126p0 = n_out124p0 * n_in126p1;
+
+// ScalarOp:125
+	float n_out125p0 = n_out129p0 * n_out126p0;
+
+// If:127
+	float n_in127p1 = 0.00000;
+	float n_in127p2 = 0.00001;
+	vec3 n_out127p0;
+	if(abs(n_out124p0 - n_in127p1) < n_in127p2)
+	{
+		n_out127p0 = vec3(n_out128p0);
+	}
+	else if(n_out124p0 < n_in127p1)
+	{
+		n_out127p0 = vec3(n_out128p0);
+	}
+	else
+	{
+		n_out127p0 = vec3(n_out125p0);
+	}
+
+// VectorOp:133
+	vec3 n_out133p0 = n_out111p0 * n_out127p0;
+
+// ColorUniform:112
+	vec3 n_out112p0 = R_LSaberColor2.rgb;
+	float n_out112p1 = R_LSaberColor2.a;
+
+// VectorOp:130
+	vec3 n_out130p0 = n_out112p0 * n_out127p0;
+
+// ColorUniform:113
+	vec3 n_out113p0 = R_LSaberColor3.rgb;
+	float n_out113p1 = R_LSaberColor3.a;
+
+// VectorOp:131
+	vec3 n_out131p0 = n_out113p0 * n_out127p0;
+
+// ColorUniform:114
+	vec3 n_out114p0 = R_LSaberColor4.rgb;
+	float n_out114p1 = R_LSaberColor4.a;
+
+// VectorOp:132
+	vec3 n_out132p0 = n_out114p0 * n_out127p0;
+
+// ColorUniform:117
+	vec3 n_out117p0 = LayerAfterimagesColor.rgb;
+	float n_out117p1 = LayerAfterimagesColor.a;
+
+// ColorUniform:118
+	vec3 n_out118p0 = R_LayerAfterimagesColor.rgb;
+	float n_out118p1 = R_LayerAfterimagesColor.a;
+
+// ColorUniform:136
+	vec3 n_out136p0 = LayerArmorColor1.rgb;
+	float n_out136p1 = LayerArmorColor1.a;
+
+// ColorUniform:138
+	vec3 n_out138p0 = LayerArmorColor2.rgb;
+	float n_out138p1 = LayerArmorColor2.a;
+
+// ColorUniform:137
+	vec3 n_out137p0 = R_LayerArmorColor1.rgb;
+	float n_out137p1 = R_LayerArmorColor1.a;
+
+// ColorUniform:139
+	vec3 n_out139p0 = R_LayerArmorColor2.rgb;
+	float n_out139p1 = R_LayerArmorColor2.a;
+
+// ColorUniform:140
+	vec3 n_out140p0 = LayerGreyColor1.rgb;
+	float n_out140p1 = LayerGreyColor1.a;
+
+// ColorUniform:142
+	vec3 n_out142p0 = LayerGreyColor2.rgb;
+	float n_out142p1 = LayerGreyColor2.a;
+
+// ColorUniform:144
+	vec3 n_out144p0 = LayerGreyColor3.rgb;
+	float n_out144p1 = LayerGreyColor3.a;
+
+// ColorUniform:141
+	vec3 n_out141p0 = R_LayerGreyColor1.rgb;
+	float n_out141p1 = R_LayerGreyColor1.a;
+
+// ColorUniform:143
+	vec3 n_out143p0 = R_LayerGreyColor2.rgb;
+	float n_out143p1 = R_LayerGreyColor2.a;
+
+// ColorUniform:145
+	vec3 n_out145p0 = R_LayerGreyColor3.rgb;
+	float n_out145p1 = R_LayerGreyColor3.a;
+
+// ColorUniform:146
+	vec3 n_out146p0 = LayerSkinColor1.rgb;
+	float n_out146p1 = LayerSkinColor1.a;
+
+// ColorUniform:148
+	vec3 n_out148p0 = LayerSkinColor2.rgb;
+	float n_out148p1 = LayerSkinColor2.a;
+
+// ColorUniform:150
+	vec3 n_out150p0 = LayerSkinColor3.rgb;
+	float n_out150p1 = LayerSkinColor3.a;
+
+// ColorUniform:147
+	vec3 n_out147p0 = R_LayerSkinColor1.rgb;
+	float n_out147p1 = R_LayerSkinColor1.a;
+
+// ColorUniform:149
+	vec3 n_out149p0 = R_LayerSkinColor2.rgb;
+	float n_out149p1 = R_LayerSkinColor2.a;
+
+// ColorUniform:151
+	vec3 n_out151p0 = R_LayerSkinColor3.rgb;
+	float n_out151p1 = R_LayerSkinColor3.a;
+
+// ColorUniform:152
+	vec3 n_out152p0 = LayerOutlineColor2.rgb;
+	float n_out152p1 = LayerOutlineColor2.a;
+
+// ColorUniform:153
+	vec3 n_out153p0 = R_LayerOutlineColor2.rgb;
+	float n_out153p1 = R_LayerOutlineColor2.a;
+
+// ColorUniform:154
+	vec3 n_out154p0 = LayerOutlineColor3.rgb;
+	float n_out154p1 = LayerOutlineColor3.a;
+
+// ColorUniform:155
+	vec3 n_out155p0 = R_LayerOutlineColor3.rgb;
+	float n_out155p1 = R_LayerOutlineColor3.a;
+
+// ColorUniform:156
+	vec3 n_out156p0 = LayerWeaponYellow1.rgb;
+	float n_out156p1 = LayerWeaponYellow1.a;
+
+// ColorUniform:157
+	vec3 n_out157p0 = R_LayerWeaponYellow1.rgb;
+	float n_out157p1 = R_LayerWeaponYellow1.a;
+
+// ColorUniform:158
+	vec3 n_out158p0 = LayerWeaponYellow2.rgb;
+	float n_out158p1 = LayerWeaponYellow2.a;
+
+// ColorUniform:159
+	vec3 n_out159p0 = R_LayerWeaponYellow2.rgb;
+	float n_out159p1 = R_LayerWeaponYellow2.a;
+
+// ColorUniform:160
+	vec3 n_out160p0 = LayerWeaponYellow3.rgb;
+	float n_out160p1 = LayerWeaponYellow3.a;
+
+// ColorUniform:161
+	vec3 n_out161p0 = R_LayerWeaponYellow3.rgb;
+	float n_out161p1 = R_LayerWeaponYellow3.a;
+
+// ColorUniform:162
+	vec3 n_out162p0 = LSaberColor5.rgb;
+	float n_out162p1 = LSaberColor5.a;
+
+// ColorUniform:163
+	vec3 n_out163p0 = R_LSaberColor5.rgb;
+	float n_out163p1 = R_LSaberColor5.a;
+
+// VectorOp:164
+	vec3 n_out164p0 = n_out163p0 * n_out127p0;
+
+// ColorUniform:165
+	vec3 n_out165p0 = LayerWeaponWhite1.rgb;
+	float n_out165p1 = LayerWeaponWhite1.a;
+
+// ColorUniform:166
+	vec3 n_out166p0 = LayerWeaponWhite2.rgb;
+	float n_out166p1 = LayerWeaponWhite2.a;
+
+// ColorUniform:167
+	vec3 n_out167p0 = LayerWeaponWhite3.rgb;
+	float n_out167p1 = LayerWeaponWhite3.a;
+
+// ColorUniform:168
+	vec3 n_out168p0 = LayerWeaponWhite4.rgb;
+	float n_out168p1 = LayerWeaponWhite4.a;
+
+// ColorUniform:169
+	vec3 n_out169p0 = R_LayerWeaponWhite1.rgb;
+	float n_out169p1 = R_LayerWeaponWhite1.a;
+
+// ColorUniform:170
+	vec3 n_out170p0 = R_LayerWeaponWhite2.rgb;
+	float n_out170p1 = R_LayerWeaponWhite2.a;
+
+// ColorUniform:171
+	vec3 n_out171p0 = R_LayerWeaponWhite3.rgb;
+	float n_out171p1 = R_LayerWeaponWhite3.a;
+
+// ColorUniform:172
+	vec3 n_out172p0 = R_LayerWeaponWhite4.rgb;
+	float n_out172p1 = R_LayerWeaponWhite4.a;
+
+// ColorUniform:102
+	vec3 n_out102p0 = LayerWeaponRed1.rgb;
+	float n_out102p1 = LayerWeaponRed1.a;
+
+// ColorUniform:101
+	vec3 n_out101p0 = LayerWeaponRed2.rgb;
+	float n_out101p1 = LayerWeaponRed2.a;
+
+// ColorUniform:134
+	vec3 n_out134p0 = LayerWeaponRed3.rgb;
+	float n_out134p1 = LayerWeaponRed3.a;
+
+// ColorUniform:174
+	vec3 n_out174p0 = LayerWeaponGreen1.rgb;
+	float n_out174p1 = LayerWeaponGreen1.a;
+
+// ColorUniform:105
+	vec3 n_out105p0 = R_LayerWeaponRed1.rgb;
+	float n_out105p1 = R_LayerWeaponRed1.a;
+
+// ColorUniform:104
+	vec3 n_out104p0 = R_LayerWeaponRed2.rgb;
+	float n_out104p1 = R_LayerWeaponRed2.a;
+
+// ColorUniform:135
+	vec3 n_out135p0 = R_LayerWeaponRed3.rgb;
+	float n_out135p1 = R_LayerWeaponRed3.a;
+
+// ColorUniform:175
+	vec3 n_out175p0 = R_LayerWeaponGreen1.rgb;
+	float n_out175p1 = R_LayerWeaponGreen1.a;
+
+// ColorUniform:176
+	vec3 n_out176p0 = LayerWeaponGreen2.rgb;
+	float n_out176p1 = LayerWeaponGreen2.a;
+
+// ColorUniform:177
+	vec3 n_out177p0 = R_LayerWeaponGreen2.rgb;
+	float n_out177p1 = R_LayerWeaponGreen2.a;
+
+// ColorUniform:178
+	vec3 n_out178p0 = LayerWeaponGreen3.rgb;
+	float n_out178p1 = LayerWeaponGreen3.a;
+
+// ColorUniform:179
+	vec3 n_out179p0 = R_LayerWeaponGreen3.rgb;
+	float n_out179p1 = R_LayerWeaponGreen3.a;
+
+// ColorUniform:180
+	vec3 n_out180p0 = LayerSigmaBlade1.rgb;
+	float n_out180p1 = LayerSigmaBlade1.a;
+
+// ColorUniform:181
+	vec3 n_out181p0 = LayerSigmaBlade2.rgb;
+	float n_out181p1 = LayerSigmaBlade2.a;
+
+// ColorUniform:182
+	vec3 n_out182p0 = LayerSigmaBlade3.rgb;
+	float n_out182p1 = LayerSigmaBlade3.a;
+
+// ColorUniform:183
+	vec3 n_out183p0 = LayerSigmaBlade4.rgb;
+	float n_out183p1 = LayerSigmaBlade4.a;
+
+// ColorUniform:184
+	vec3 n_out184p0 = R_LayerSigmaBlade1.rgb;
+	float n_out184p1 = R_LayerSigmaBlade1.a;
+
+// ColorUniform:185
+	vec3 n_out185p0 = R_LayerSigmaBlade2.rgb;
+	float n_out185p1 = R_LayerSigmaBlade2.a;
+
+// ColorUniform:186
+	vec3 n_out186p0 = R_LayerSigmaBlade3.rgb;
+	float n_out186p1 = R_LayerSigmaBlade3.a;
+
+// ColorUniform:187
+	vec3 n_out187p0 = R_LayerSigmaBlade4.rgb;
+	float n_out187p1 = R_LayerSigmaBlade4.a;
+
+// ColorUniform:188
+	vec3 n_out188p0 = LayerBackCrystalColor1.rgb;
+	float n_out188p1 = LayerBackCrystalColor1.a;
+
+// ColorUniform:189
+	vec3 n_out189p0 = LayerBackCrystalColor2.rgb;
+	float n_out189p1 = LayerBackCrystalColor2.a;
+
+// ColorUniform:190
+	vec3 n_out190p0 = R_LayerBackCrystalColor1.rgb;
+	float n_out190p1 = R_LayerBackCrystalColor1.a;
+
+// ColorUniform:191
+	vec3 n_out191p0 = R_LayerBackCrystalColor2.rgb;
+	float n_out191p1 = R_LayerBackCrystalColor2.a;
+
+// Expression:54
+	vec3 n_out54p0;
+	vec3 n_out54p1;
+	n_out54p0 = vec3(0.0, 0.0, 0.0);
+	n_out54p1 = vec3(0.0, 0.0, 0.0);
+	{
+		vec3 current_color = texture(TEXTURE, UV).rgb;
+		
+		if (replace (current_color, n_out77p0, n_out87p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out78p0, n_out88p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out73p0, n_out89p0, n_out54p0, n_out72p0)){}
+		
+		else if (replace (current_color, n_out188p0, n_out190p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out189p0, n_out191p0, n_out54p0, n_out72p0)){}
+		
+		else if (replace (current_color, n_out117p0, n_out118p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out55p0, n_out65p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out56p0, n_out66p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out57p0, n_out67p0, n_out54p0, n_out72p0)){}
+		
+		else if (replace (current_color, n_out154p0, n_out155p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out58p0, n_out68p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out59p0, n_out69p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out60p0, n_out70p0, n_out54p0, n_out72p0)){}
+		
+		else if (replace (current_color, n_out103p0, n_out106p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out176p0, n_out177p0, n_out54p0, n_out72p0)){}
+		
+		else if (replace (current_color, n_out107p0, n_out133p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out108p0, n_out130p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out109p0, n_out131p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out110p0, n_out132p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out162p0, n_out164p0, n_out54p0, n_out72p0)){}
+		
+		else if (replace (current_color, n_out102p0, n_out105p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out101p0, n_out104p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out134p0, n_out135p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out174p0, n_out175p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out178p0, n_out179p0, n_out54p0, n_out72p0)){}
+		
+		else if (replace (current_color, n_out136p0, n_out137p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out138p0, n_out139p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out152p0, n_out153p0, n_out54p0, n_out72p0)){}
+		
+		else if (replace (current_color, n_out140p0, n_out141p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out142p0, n_out143p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out144p0, n_out145p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out156p0, n_out157p0, n_out54p0, n_out72p0)){}
+		
+		else if (replace (current_color, n_out146p0, n_out147p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out148p0, n_out149p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out150p0, n_out151p0, n_out54p0, n_out72p0)){}
+		
+		else if (replace (current_color, n_out158p0, n_out159p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out165p0, n_out169p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out166p0, n_out170p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out167p0, n_out171p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out168p0, n_out172p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out160p0, n_out161p0, n_out54p0, n_out72p0)){}
+		
+		else if (replace (current_color, n_out180p0, n_out184p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out181p0, n_out185p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out182p0, n_out186p0, n_out54p0, n_out72p0)){}
+		else if (replace (current_color, n_out183p0, n_out187p0, n_out54p0, n_out72p0)){}
+		
+		else {n_out54p0 = current_color}
+	}
+
+// Scalar:34
+	float n_out34p0 = 1.000000;
+
+// Scalar:30
+	float n_out30p0 = 0.000000;
+
+// If:23
+	float n_in23p1 = 0.30000;
+	float n_in23p2 = 0.00001;
+	vec3 n_out23p0;
+	if(abs(dot(n_out54p0, vec3(0.333333, 0.333333, 0.333333)) - n_in23p1) < n_in23p2)
+	{
+		n_out23p0 = vec3(n_out34p0);
+	}
+	else if(dot(n_out54p0, vec3(0.333333, 0.333333, 0.333333)) < n_in23p1)
+	{
+		n_out23p0 = vec3(n_out34p0);
+	}
+	else
+	{
+		n_out23p0 = vec3(n_out30p0);
+	}
+
+// ColorOp:38
+	vec3 n_out38p0 = min(n_out39p0, n_out23p0);
+
+// ColorOp:40
+	vec3 n_out40p0 = max(n_out38p0, n_out54p0);
+
+// If:37
+	float n_in37p1 = 0.50000;
+	float n_in37p2 = 0.00001;
+	vec3 n_in37p3 = vec3(0.00000, 0.00000, 0.00000);
+	vec3 n_out37p0;
+	if(abs(n_out14p0 - n_in37p1) < n_in37p2)
+	{
+		n_out37p0 = n_in37p3;
+	}
+	else if(n_out14p0 < n_in37p1)
+	{
+		n_out37p0 = n_out54p0;
+	}
+	else
+	{
+		n_out37p0 = n_out40p0;
+	}
+
+// If:96
+	float n_in96p1 = 0.50000;
+	float n_in96p2 = 0.00001;
+	vec3 n_in96p3 = vec3(0.00000, 0.00000, 0.00000);
+	vec3 n_out96p0;
+	if(abs(n_out173p0 - n_in96p1) < n_in96p2)
+	{
+		n_out96p0 = n_in96p3;
+	}
+	else if(n_out173p0 < n_in96p1)
+	{
+		n_out96p0 = n_out37p0;
+	}
+	else
+	{
+		n_out96p0 = vec3(n_out173p0);
+	}
+
+// Texture:98
+	vec3 n_out98p0;
+	float n_out98p1;
+	{
+		vec4 _tex_read = texture(TEXTURE , UV.xy);
+		n_out98p0 = _tex_read.rgb;
+		n_out98p1 = _tex_read.a;
+	}
+
+// ScalarUniform:41
+	float n_out41p0 = Alpha;
+
+// Texture:2
+	vec3 n_out2p0;
+	float n_out2p1;
+	{
+		vec4 _tex_read = texture(TEXTURE , UV.xy);
+		n_out2p0 = _tex_read.rgb;
+		n_out2p1 = _tex_read.a;
+	}
+
+// Input:47
+	float n_out47p0 = TIME;
+
+// ScalarOp:48
+	float n_in48p1 = 120.00000;
+	float n_out48p0 = n_out47p0 * n_in48p1;
+
+// ScalarFunc:43
+	float n_out43p0 = cos(n_out48p0);
+
+// ScalarOp:99
+	float n_in99p1 = 1.00000;
+	float n_out99p0 = n_out43p0 + n_in99p1;
+
+// ScalarOp:100
+	float n_in100p1 = 2.00000;
+	float n_out100p0 = n_out99p0 / n_in100p1;
+
+// ScalarFunc:46
+	float n_out46p0 = roundEven(n_out100p0);
+
+// ScalarOp:42
+	float n_out42p0 = n_out2p1 * n_out46p0;
+
+// If:50
+	float n_in50p1 = 1.00000;
+	float n_in50p2 = 0.00001;
+	vec3 n_out50p0;
+	if(abs(n_out41p0 - n_in50p1) < n_in50p2)
+	{
+		n_out50p0 = vec3(n_out2p1);
+	}
+	else if(n_out41p0 < n_in50p1)
+	{
+		n_out50p0 = vec3(n_out42p0);
+	}
+	else
+	{
+		n_out50p0 = vec3(n_out2p1);
+	}
+
+// If:97
+	float n_in97p1 = 0.50000;
+	float n_in97p2 = 0.00001;
+	vec3 n_in97p3 = vec3(0.00000, 0.00000, 0.00000);
+	vec3 n_out97p0;
+	if(abs(n_out173p0 - n_in97p1) < n_in97p2)
+	{
+		n_out97p0 = n_in97p3;
+	}
+	else if(n_out173p0 < n_in97p1)
+	{
+		n_out97p0 = n_out50p0;
+	}
+	else
+	{
+		n_out97p0 = vec3(n_out98p1);
+	}
+
+// Output:0
+	COLOR.rgb = n_out96p0;
+	COLOR.a = dot(n_out97p0, vec3(0.333333, 0.333333, 0.333333));
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -2456.06, 2412.82 )
+mode = 1
+flags/light_only = false
+nodes/vertex/2/node = SubResource( 20 )
+nodes/vertex/2/position = Vector2( 0, 200 )
+nodes/vertex/3/node = SubResource( 26 )
+nodes/vertex/3/position = Vector2( 140, 180 )
+nodes/vertex/4/node = SubResource( 27 )
+nodes/vertex/4/position = Vector2( 220, 120 )
+nodes/vertex/5/node = SubResource( 28 )
+nodes/vertex/5/position = Vector2( 120, 300 )
+nodes/fragment/0/position = Vector2( 1780, 740 )
+nodes/fragment/2/node = SubResource( 1 )
+nodes/fragment/2/position = Vector2( 660, 1380 )
+nodes/fragment/6/node = SubResource( 32 )
+nodes/fragment/6/position = Vector2( -500, 300 )
+nodes/fragment/7/node = SubResource( 33 )
+nodes/fragment/7/position = Vector2( -180, 300 )
+nodes/fragment/9/node = SubResource( 35 )
+nodes/fragment/9/position = Vector2( -340, 300 )
+nodes/fragment/12/node = SubResource( 37 )
+nodes/fragment/12/position = Vector2( 0, 300 )
+nodes/fragment/14/node = SubResource( 39 )
+nodes/fragment/14/position = Vector2( 700, 300 )
+nodes/fragment/15/node = SubResource( 40 )
+nodes/fragment/15/position = Vector2( 360, 300 )
+nodes/fragment/16/node = SubResource( 41 )
+nodes/fragment/16/position = Vector2( 180, 300 )
+nodes/fragment/17/node = SubResource( 42 )
+nodes/fragment/17/position = Vector2( 360, 380 )
+nodes/fragment/23/node = SubResource( 46 )
+nodes/fragment/23/position = Vector2( -20, 580 )
+nodes/fragment/30/node = SubResource( 47 )
+nodes/fragment/30/position = Vector2( -440, 660 )
+nodes/fragment/34/node = SubResource( 49 )
+nodes/fragment/34/position = Vector2( -440, 580 )
+nodes/fragment/37/node = SubResource( 51 )
+nodes/fragment/37/position = Vector2( 1060, 900 )
+nodes/fragment/38/node = SubResource( 52 )
+nodes/fragment/38/position = Vector2( 200, 540 )
+nodes/fragment/39/node = SubResource( 53 )
+nodes/fragment/39/position = Vector2( -120, 440 )
+nodes/fragment/40/node = SubResource( 54 )
+nodes/fragment/40/position = Vector2( 400, 580 )
+nodes/fragment/41/node = SubResource( 55 )
+nodes/fragment/41/position = Vector2( 660, 1260 )
+nodes/fragment/42/node = SubResource( 56 )
+nodes/fragment/42/position = Vector2( 880, 1480 )
+nodes/fragment/43/node = SubResource( 57 )
+nodes/fragment/43/position = Vector2( 180, 1520 )
+nodes/fragment/46/node = SubResource( 60 )
+nodes/fragment/46/position = Vector2( 680, 1520 )
+nodes/fragment/47/node = SubResource( 61 )
+nodes/fragment/47/position = Vector2( -140, 1520 )
+nodes/fragment/48/node = SubResource( 62 )
+nodes/fragment/48/position = Vector2( 20, 1520 )
+nodes/fragment/50/node = SubResource( 63 )
+nodes/fragment/50/position = Vector2( 1060, 1260 )
+nodes/fragment/51/node = SubResource( 64 )
+nodes/fragment/51/position = Vector2( 1080, 1480 )
+nodes/fragment/52/node = SubResource( 65 )
+nodes/fragment/52/position = Vector2( 860, 1600 )
+nodes/fragment/54/node = SubResource( 67 )
+nodes/fragment/54/position = Vector2( -1280, 1000 )
+nodes/fragment/54/size = Vector2( 1034.6, 3415.86 )
+nodes/fragment/54/input_ports = "0,1,main_color_1;1,1,main_color_2;2,1,main_color_3;3,1,main_color_4;4,1,main_color_5;5,1,main_color_6;6,1,replace_color_1;7,1,replace_color_2;8,1,replace_color_3;9,1,replace_color_4;10,1,replace_color_5;11,1,replace_color_6;12,1,crystal_color_1;13,1,crystal_color_2;14,1,crystal_color_3;15,1,crystal_replace_1;16,1,crystal_replace_2;17,1,crystal_replace_3;18,0,tolerance;19,1,outline_color;20,1,replace_outline_color;21,1,saber_color_1;22,1,saber_color_2;23,1,saber_color_3;24,1,saber_color_4;25,1,saber_replace_1;26,1,saber_replace_2;27,1,saber_replace_3;28,1,saber_replace_4;29,1,light_red_color_1;30,1,light_red_color_1_replace;31,1,armor_color_1;32,1,armor_color_2;33,1,armor_replace_1;34,1,armor_replace_2;35,1,grey_color_1;36,1,grey_color_2;37,1,grey_color_3;38,1,grey_replace_1;39,1,grey_replace_2;40,1,grey_replace_3;41,1,skin_color_1;42,1,skin_color_2;43,1,skin_color_3;44,1,skin_replace_1;45,1,skin_replace_2;46,1,skin_replace_3;47,1,armor_color_3;48,1,armor_replace_3;49,1,light_hair_color;50,1,light_hair_replace;51,1,grey_color_4;52,1,grey_replace_4;53,1,aura_color;54,1,aura_color_replace;55,1,afterimages_color;56,1,afterimages_color_replace;57,1,saber_color_5;58,1,saber_replace_5;59,1,awakened_effect1;60,1,awakened_effect2;61,1,awakened_effect3;62,1,awakened_effect4;63,1,awakened_effect_replace1;64,1,awakened_effect_replace2;65,1,awakened_effect_replace3;66,1,awakened_effect_replace4;67,1,chest_color_1;68,1,chest_color_2;69,1,chest_color_3;70,1,chest_color_4;71,1,chest_replace_1;72,1,chest_replace_2;73,1,chest_replace_3;74,1,chest_replace_4;75,1,outline_color_2;76,1,replace_outline_color_2;77,1,chest_color_5;78,1,chest_replace_5;79,1,sigma_blade_color_1;80,1,sigma_blade_color_2;81,1,sigma_blade_color_3;82,1,sigma_blade_color_4;83,1,sigma_blade_replace_color_1;84,1,sigma_blade_replace_color_2;85,1,sigma_blade_replace_color_3;86,1,sigma_blade_replace_color_4;87,1,back_crystal_color_1;88,1,back_crystal_color_2;89,1,back_crystal_replace_1;90,1,back_crystal_replace_2;"
+nodes/fragment/54/output_ports = "0,1,final_color;1,1,crystal_colors;"
+nodes/fragment/54/expression = "vec3 current_color = texture(TEXTURE, UV).rgb;
+
+if (replace (current_color, crystal_color_1, crystal_replace_1, final_color, tolerance)){}
+else if (replace (current_color, crystal_color_2, crystal_replace_2, final_color, tolerance)){}
+else if (replace (current_color, crystal_color_3, crystal_replace_3, final_color, tolerance)){}
+
+else if (replace (current_color, back_crystal_color_1, back_crystal_replace_1, final_color, tolerance)){}
+else if (replace (current_color, back_crystal_color_2, back_crystal_replace_2, final_color, tolerance)){}
+
+else if (replace (current_color, light_red_color_1, light_red_color_1_replace, final_color, tolerance)){}
+else if (replace (current_color, main_color_1, replace_color_1, final_color, tolerance)){}
+else if (replace (current_color, main_color_2, replace_color_2, final_color, tolerance)){}
+else if (replace (current_color, main_color_3, replace_color_3, final_color, tolerance)){}
+
+else if (replace (current_color, light_hair_color, light_hair_replace, final_color, tolerance)){}
+else if (replace (current_color, main_color_4, replace_color_4, final_color, tolerance)){}
+else if (replace (current_color, main_color_5, replace_color_5, final_color, tolerance)){}
+else if (replace (current_color, main_color_6, replace_color_6, final_color, tolerance)){}
+
+else if (replace (current_color, outline_color, replace_outline_color, final_color, tolerance)){}
+else if (replace (current_color, outline_color_2, replace_outline_color_2, final_color, tolerance)){}
+
+else if (replace (current_color, saber_color_1, saber_replace_1, final_color, tolerance)){}
+else if (replace (current_color, saber_color_2, saber_replace_2, final_color, tolerance)){}
+else if (replace (current_color, saber_color_3, saber_replace_3, final_color, tolerance)){}
+else if (replace (current_color, saber_color_4, saber_replace_4, final_color, tolerance)){}
+else if (replace (current_color, saber_color_5, saber_replace_5, final_color, tolerance)){}
+
+else if (replace (current_color, chest_color_1, chest_replace_1, final_color, tolerance)){}
+else if (replace (current_color, chest_color_2, chest_replace_2, final_color, tolerance)){}
+else if (replace (current_color, chest_color_3, chest_replace_3, final_color, tolerance)){}
+else if (replace (current_color, chest_color_4, chest_replace_4, final_color, tolerance)){}
+else if (replace (current_color, chest_color_5, chest_replace_5, final_color, tolerance)){}
+
+else if (replace (current_color, armor_color_1, armor_replace_1, final_color, tolerance)){}
+else if (replace (current_color, armor_color_2, armor_replace_2, final_color, tolerance)){}
+else if (replace (current_color, armor_color_3, armor_replace_3, final_color, tolerance)){}
+
+else if (replace (current_color, grey_color_1, grey_replace_1, final_color, tolerance)){}
+else if (replace (current_color, grey_color_2, grey_replace_2, final_color, tolerance)){}
+else if (replace (current_color, grey_color_3, grey_replace_3, final_color, tolerance)){}
+else if (replace (current_color, grey_color_4, grey_replace_4, final_color, tolerance)){}
+
+else if (replace (current_color, skin_color_1, skin_replace_1, final_color, tolerance)){}
+else if (replace (current_color, skin_color_2, skin_replace_2, final_color, tolerance)){}
+else if (replace (current_color, skin_color_3, skin_replace_3, final_color, tolerance)){}
+
+else if (replace (current_color, aura_color, aura_color_replace, final_color, tolerance)){}
+else if (replace (current_color, awakened_effect1, awakened_effect_replace1, final_color, tolerance)){}
+else if (replace (current_color, awakened_effect2, awakened_effect_replace2, final_color, tolerance)){}
+else if (replace (current_color, awakened_effect3, awakened_effect_replace3, final_color, tolerance)){}
+else if (replace (current_color, awakened_effect4, awakened_effect_replace4, final_color, tolerance)){}
+else if (replace (current_color, afterimages_color, afterimages_color_replace, final_color, tolerance)){}
+
+else if (replace (current_color, sigma_blade_color_1, sigma_blade_replace_color_1, final_color, tolerance)){}
+else if (replace (current_color, sigma_blade_color_2, sigma_blade_replace_color_2, final_color, tolerance)){}
+else if (replace (current_color, sigma_blade_color_3, sigma_blade_replace_color_3, final_color, tolerance)){}
+else if (replace (current_color, sigma_blade_color_4, sigma_blade_replace_color_4, final_color, tolerance)){}
+
+else {final_color = current_color}"
+nodes/fragment/55/node = SubResource( 68 )
+nodes/fragment/55/position = Vector2( -2080, 440 )
+nodes/fragment/56/node = SubResource( 69 )
+nodes/fragment/56/position = Vector2( -2080, 560 )
+nodes/fragment/57/node = SubResource( 70 )
+nodes/fragment/57/position = Vector2( -2080, 680 )
+nodes/fragment/58/node = SubResource( 71 )
+nodes/fragment/58/position = Vector2( -2080, 800 )
+nodes/fragment/59/node = SubResource( 72 )
+nodes/fragment/59/position = Vector2( -2080, 920 )
+nodes/fragment/60/node = SubResource( 73 )
+nodes/fragment/60/position = Vector2( -2080, 1040 )
+nodes/fragment/65/node = SubResource( 74 )
+nodes/fragment/65/position = Vector2( -1780, 440 )
+nodes/fragment/66/node = SubResource( 75 )
+nodes/fragment/66/position = Vector2( -1780, 560 )
+nodes/fragment/67/node = SubResource( 76 )
+nodes/fragment/67/position = Vector2( -1780, 680 )
+nodes/fragment/68/node = SubResource( 77 )
+nodes/fragment/68/position = Vector2( -1780, 800 )
+nodes/fragment/69/node = SubResource( 78 )
+nodes/fragment/69/position = Vector2( -1780, 920 )
+nodes/fragment/70/node = SubResource( 79 )
+nodes/fragment/70/position = Vector2( -1780, 1040 )
+nodes/fragment/71/node = SubResource( 80 )
+nodes/fragment/71/position = Vector2( -1280, 4420 )
+nodes/fragment/71/size = Vector2( 1036.64, 317.838 )
+nodes/fragment/71/input_ports = ""
+nodes/fragment/71/output_ports = ""
+nodes/fragment/71/expression = "bool replace (vec3 color, vec3 main_color, vec3 replace_color, out vec3 output, float tol) 
+{	vec3 diff3 = color - main_color;
+	float m = max(max(abs(diff3.r), abs(diff3.g)), abs(diff3.b));
+	
+	if ((step(m, tol) == 1.0)){ 
+		color = mix(color, replace_color, step(m, tol));
+		output = color;
+		return true;
+	}
+	return false;
+}"
+nodes/fragment/72/node = SubResource( 81 )
+nodes/fragment/72/position = Vector2( -1740, 2240 )
+nodes/fragment/73/node = SubResource( 82 )
+nodes/fragment/73/position = Vector2( -2340, 2080 )
+nodes/fragment/74/node = SubResource( 83 )
+nodes/fragment/74/position = Vector2( -2040, 1840 )
+nodes/fragment/75/node = SubResource( 84 )
+nodes/fragment/75/position = Vector2( -2040, 1960 )
+nodes/fragment/76/node = SubResource( 85 )
+nodes/fragment/76/position = Vector2( -2040, 2080 )
+nodes/fragment/77/node = SubResource( 86 )
+nodes/fragment/77/position = Vector2( -2340, 1840 )
+nodes/fragment/78/node = SubResource( 87 )
+nodes/fragment/78/position = Vector2( -2340, 1960 )
+nodes/fragment/79/node = SubResource( 88 )
+nodes/fragment/79/position = Vector2( -2960, 2380 )
+nodes/fragment/80/node = SubResource( 89 )
+nodes/fragment/80/position = Vector2( -2640, 2380 )
+nodes/fragment/81/node = SubResource( 90 )
+nodes/fragment/81/position = Vector2( -2800, 2360 )
+nodes/fragment/85/node = SubResource( 92 )
+nodes/fragment/85/position = Vector2( -2720, 2180 )
+nodes/fragment/86/node = SubResource( 93 )
+nodes/fragment/86/position = Vector2( -2140, 2300 )
+nodes/fragment/87/node = SubResource( 94 )
+nodes/fragment/87/position = Vector2( -1660, 1860 )
+nodes/fragment/88/node = SubResource( 95 )
+nodes/fragment/88/position = Vector2( -1660, 1980 )
+nodes/fragment/89/node = SubResource( 96 )
+nodes/fragment/89/position = Vector2( -1660, 2100 )
+nodes/fragment/90/node = SubResource( 97 )
+nodes/fragment/90/position = Vector2( -2380, 2260 )
+nodes/fragment/91/node = SubResource( 98 )
+nodes/fragment/91/position = Vector2( -1940, 2220 )
+nodes/fragment/92/node = SubResource( 99 )
+nodes/fragment/92/position = Vector2( -2160, 2420 )
+nodes/fragment/93/node = SubResource( 100 )
+nodes/fragment/93/position = Vector2( -2380, 2380 )
+nodes/fragment/96/node = SubResource( 102 )
+nodes/fragment/96/position = Vector2( 1500, 740 )
+nodes/fragment/97/node = SubResource( 103 )
+nodes/fragment/97/position = Vector2( 1480, 1040 )
+nodes/fragment/98/node = SubResource( 104 )
+nodes/fragment/98/position = Vector2( 1060, 1100 )
+nodes/fragment/99/node = SubResource( 106 )
+nodes/fragment/99/position = Vector2( 360, 1520 )
+nodes/fragment/100/node = SubResource( 105 )
+nodes/fragment/100/position = Vector2( 520, 1520 )
+nodes/fragment/101/node = SubResource( 107 )
+nodes/fragment/101/position = Vector2( -2000, 3520 )
+nodes/fragment/102/node = SubResource( 108 )
+nodes/fragment/102/position = Vector2( -2000, 3400 )
+nodes/fragment/103/node = SubResource( 109 )
+nodes/fragment/103/position = Vector2( -2880, 3680 )
+nodes/fragment/104/node = SubResource( 110 )
+nodes/fragment/104/position = Vector2( -1700, 3520 )
+nodes/fragment/105/node = SubResource( 111 )
+nodes/fragment/105/position = Vector2( -1700, 3400 )
+nodes/fragment/106/node = SubResource( 112 )
+nodes/fragment/106/position = Vector2( -2580, 3680 )
+nodes/fragment/107/node = SubResource( 113 )
+nodes/fragment/107/position = Vector2( -1800, -480 )
+nodes/fragment/108/node = SubResource( 114 )
+nodes/fragment/108/position = Vector2( -1800, -360 )
+nodes/fragment/109/node = SubResource( 115 )
+nodes/fragment/109/position = Vector2( -1800, -240 )
+nodes/fragment/110/node = SubResource( 116 )
+nodes/fragment/110/position = Vector2( -1800, -120 )
+nodes/fragment/111/node = SubResource( 117 )
+nodes/fragment/111/position = Vector2( -1520, -480 )
+nodes/fragment/112/node = SubResource( 118 )
+nodes/fragment/112/position = Vector2( -1520, -360 )
+nodes/fragment/113/node = SubResource( 119 )
+nodes/fragment/113/position = Vector2( -1520, -240 )
+nodes/fragment/114/node = SubResource( 120 )
+nodes/fragment/114/position = Vector2( -1520, -120 )
+nodes/fragment/117/node = SubResource( 123 )
+nodes/fragment/117/position = Vector2( -2080, 320 )
+nodes/fragment/118/node = SubResource( 124 )
+nodes/fragment/118/position = Vector2( -1780, 320 )
+nodes/fragment/121/node = SubResource( 127 )
+nodes/fragment/121/position = Vector2( -2000, -580 )
+nodes/fragment/122/node = SubResource( 128 )
+nodes/fragment/122/position = Vector2( -1600, -580 )
+nodes/fragment/123/node = SubResource( 129 )
+nodes/fragment/123/position = Vector2( -1800, -600 )
+nodes/fragment/124/node = SubResource( 130 )
+nodes/fragment/124/position = Vector2( -1800, -720 )
+nodes/fragment/125/node = SubResource( 131 )
+nodes/fragment/125/position = Vector2( -1200, -680 )
+nodes/fragment/126/node = SubResource( 132 )
+nodes/fragment/126/position = Vector2( -1400, -720 )
+nodes/fragment/127/node = SubResource( 133 )
+nodes/fragment/127/position = Vector2( -1000, -720 )
+nodes/fragment/128/node = SubResource( 134 )
+nodes/fragment/128/position = Vector2( -1200, -560 )
+nodes/fragment/129/node = SubResource( 135 )
+nodes/fragment/129/position = Vector2( -1400, -600 )
+nodes/fragment/130/node = SubResource( 136 )
+nodes/fragment/130/position = Vector2( -1120, -340 )
+nodes/fragment/131/node = SubResource( 137 )
+nodes/fragment/131/position = Vector2( -1120, -220 )
+nodes/fragment/132/node = SubResource( 138 )
+nodes/fragment/132/position = Vector2( -1120, -100 )
+nodes/fragment/133/node = SubResource( 139 )
+nodes/fragment/133/position = Vector2( -1120, -460 )
+nodes/fragment/134/node = SubResource( 140 )
+nodes/fragment/134/position = Vector2( -2000, 3640 )
+nodes/fragment/135/node = SubResource( 141 )
+nodes/fragment/135/position = Vector2( -1700, 3640 )
+nodes/fragment/136/node = SubResource( 142 )
+nodes/fragment/136/position = Vector2( -2800, 1240 )
+nodes/fragment/137/node = SubResource( 143 )
+nodes/fragment/137/position = Vector2( -2500, 1240 )
+nodes/fragment/138/node = SubResource( 144 )
+nodes/fragment/138/position = Vector2( -2800, 1360 )
+nodes/fragment/139/node = SubResource( 145 )
+nodes/fragment/139/position = Vector2( -2500, 1360 )
+nodes/fragment/140/node = SubResource( 146 )
+nodes/fragment/140/position = Vector2( -1200, 320 )
+nodes/fragment/141/node = SubResource( 147 )
+nodes/fragment/141/position = Vector2( -900, 320 )
+nodes/fragment/142/node = SubResource( 148 )
+nodes/fragment/142/position = Vector2( -1200, 460 )
+nodes/fragment/143/node = SubResource( 149 )
+nodes/fragment/143/position = Vector2( -900, 460 )
+nodes/fragment/144/node = SubResource( 150 )
+nodes/fragment/144/position = Vector2( -1200, 600 )
+nodes/fragment/145/node = SubResource( 151 )
+nodes/fragment/145/position = Vector2( -900, 600 )
+nodes/fragment/146/node = SubResource( 152 )
+nodes/fragment/146/position = Vector2( -2000, 2600 )
+nodes/fragment/147/node = SubResource( 153 )
+nodes/fragment/147/position = Vector2( -1700, 2600 )
+nodes/fragment/148/node = SubResource( 154 )
+nodes/fragment/148/position = Vector2( -2000, 2720 )
+nodes/fragment/149/node = SubResource( 155 )
+nodes/fragment/149/position = Vector2( -1700, 2720 )
+nodes/fragment/150/node = SubResource( 156 )
+nodes/fragment/150/position = Vector2( -2000, 2840 )
+nodes/fragment/151/node = SubResource( 157 )
+nodes/fragment/151/position = Vector2( -1700, 2840 )
+nodes/fragment/152/node = SubResource( 158 )
+nodes/fragment/152/position = Vector2( -2880, 3920 )
+nodes/fragment/153/node = SubResource( 159 )
+nodes/fragment/153/position = Vector2( -2580, 3920 )
+nodes/fragment/154/node = SubResource( 160 )
+nodes/fragment/154/position = Vector2( -2880, 3800 )
+nodes/fragment/155/node = SubResource( 161 )
+nodes/fragment/155/position = Vector2( -2580, 3800 )
+nodes/fragment/156/node = SubResource( 162 )
+nodes/fragment/156/position = Vector2( -3300, 3020 )
+nodes/fragment/157/node = SubResource( 163 )
+nodes/fragment/157/position = Vector2( -3000, 3020 )
+nodes/fragment/158/node = SubResource( 164 )
+nodes/fragment/158/position = Vector2( -3300, 3140 )
+nodes/fragment/159/node = SubResource( 165 )
+nodes/fragment/159/position = Vector2( -3000, 3140 )
+nodes/fragment/160/node = SubResource( 166 )
+nodes/fragment/160/position = Vector2( -3300, 3260 )
+nodes/fragment/161/node = SubResource( 167 )
+nodes/fragment/161/position = Vector2( -3000, 3260 )
+nodes/fragment/162/node = SubResource( 168 )
+nodes/fragment/162/position = Vector2( -1800, 0 )
+nodes/fragment/163/node = SubResource( 169 )
+nodes/fragment/163/position = Vector2( -1520, 0 )
+nodes/fragment/164/node = SubResource( 170 )
+nodes/fragment/164/position = Vector2( -1120, 20 )
+nodes/fragment/165/node = SubResource( 171 )
+nodes/fragment/165/position = Vector2( -2600, 2600 )
+nodes/fragment/166/node = SubResource( 172 )
+nodes/fragment/166/position = Vector2( -2600, 2740 )
+nodes/fragment/167/node = SubResource( 173 )
+nodes/fragment/167/position = Vector2( -2600, 2880 )
+nodes/fragment/168/node = SubResource( 174 )
+nodes/fragment/168/position = Vector2( -2600, 3020 )
+nodes/fragment/169/node = SubResource( 175 )
+nodes/fragment/169/position = Vector2( -2300, 2600 )
+nodes/fragment/170/node = SubResource( 176 )
+nodes/fragment/170/position = Vector2( -2300, 2740 )
+nodes/fragment/171/node = SubResource( 177 )
+nodes/fragment/171/position = Vector2( -2300, 2880 )
+nodes/fragment/172/node = SubResource( 178 )
+nodes/fragment/172/position = Vector2( -2300, 3020 )
+nodes/fragment/173/node = SubResource( 179 )
+nodes/fragment/173/position = Vector2( 1060, 740 )
+nodes/fragment/174/node = SubResource( 180 )
+nodes/fragment/174/position = Vector2( -2000, 3800 )
+nodes/fragment/175/node = SubResource( 181 )
+nodes/fragment/175/position = Vector2( -1700, 3800 )
+nodes/fragment/176/node = SubResource( 182 )
+nodes/fragment/176/position = Vector2( -2000, 3920 )
+nodes/fragment/177/node = SubResource( 183 )
+nodes/fragment/177/position = Vector2( -1700, 3920 )
+nodes/fragment/178/node = SubResource( 184 )
+nodes/fragment/178/position = Vector2( -2000, 4040 )
+nodes/fragment/179/node = SubResource( 185 )
+nodes/fragment/179/position = Vector2( -1700, 4040 )
+nodes/fragment/180/node = SubResource( 186 )
+nodes/fragment/180/position = Vector2( -2000, 4200 )
+nodes/fragment/181/node = SubResource( 187 )
+nodes/fragment/181/position = Vector2( -2000, 4360 )
+nodes/fragment/182/node = SubResource( 188 )
+nodes/fragment/182/position = Vector2( -2000, 4520 )
+nodes/fragment/183/node = SubResource( 189 )
+nodes/fragment/183/position = Vector2( -2000, 4680 )
+nodes/fragment/184/node = SubResource( 190 )
+nodes/fragment/184/position = Vector2( -1700, 4200 )
+nodes/fragment/185/node = SubResource( 191 )
+nodes/fragment/185/position = Vector2( -1700, 4360 )
+nodes/fragment/186/node = SubResource( 192 )
+nodes/fragment/186/position = Vector2( -1700, 4520 )
+nodes/fragment/187/node = SubResource( 193 )
+nodes/fragment/187/position = Vector2( -1700, 4680 )
+nodes/fragment/188/node = SubResource( 194 )
+nodes/fragment/188/position = Vector2( -2880, 4120 )
+nodes/fragment/189/node = SubResource( 195 )
+nodes/fragment/189/position = Vector2( -2880, 4260 )
+nodes/fragment/190/node = SubResource( 196 )
+nodes/fragment/190/position = Vector2( -2580, 4120 )
+nodes/fragment/191/node = SubResource( 197 )
+nodes/fragment/191/position = Vector2( -2580, 4260 )
+nodes/fragment/connections = PoolIntArray( 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 127, 0, 130, 1, 127, 0, 131, 1, 127, 0, 132, 1, 112, 0, 130, 0, 113, 0, 131, 0, 114, 0, 132, 0, 127, 0, 133, 1, 111, 0, 133, 0, 103, 0, 54, 19, 103, 0, 54, 19, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 130, 0, 54, 26, 131, 0, 54, 27, 132, 0, 54, 28, 133, 0, 54, 25, 117, 0, 54, 29, 118, 0, 54, 30, 117, 0, 54, 29, 118, 0, 54, 30, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 127, 0, 130, 1, 127, 0, 131, 1, 127, 0, 132, 1, 112, 0, 130, 0, 113, 0, 131, 0, 114, 0, 132, 0, 127, 0, 133, 1, 111, 0, 133, 0, 103, 0, 54, 19, 103, 0, 54, 19, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 130, 0, 54, 26, 131, 0, 54, 27, 132, 0, 54, 28, 133, 0, 54, 25, 117, 0, 54, 29, 118, 0, 54, 30, 117, 0, 54, 29, 118, 0, 54, 30, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 127, 0, 130, 1, 127, 0, 131, 1, 127, 0, 132, 1, 112, 0, 130, 0, 113, 0, 131, 0, 114, 0, 132, 0, 127, 0, 133, 1, 111, 0, 133, 0, 103, 0, 54, 19, 103, 0, 54, 19, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 130, 0, 54, 26, 131, 0, 54, 27, 132, 0, 54, 28, 133, 0, 54, 25, 117, 0, 54, 29, 118, 0, 54, 30, 117, 0, 54, 29, 118, 0, 54, 30, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 127, 0, 130, 1, 127, 0, 131, 1, 127, 0, 132, 1, 112, 0, 130, 0, 113, 0, 131, 0, 114, 0, 132, 0, 127, 0, 133, 1, 111, 0, 133, 0, 103, 0, 54, 19, 103, 0, 54, 19, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 130, 0, 54, 26, 131, 0, 54, 27, 132, 0, 54, 28, 133, 0, 54, 25, 117, 0, 54, 29, 118, 0, 54, 30, 117, 0, 54, 29, 118, 0, 54, 30, 163, 0, 164, 0, 127, 0, 164, 1, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 127, 0, 130, 1, 127, 0, 131, 1, 127, 0, 132, 1, 112, 0, 130, 0, 113, 0, 131, 0, 114, 0, 132, 0, 127, 0, 133, 1, 111, 0, 133, 0, 103, 0, 54, 19, 103, 0, 54, 19, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 130, 0, 54, 26, 131, 0, 54, 27, 132, 0, 54, 28, 133, 0, 54, 25, 117, 0, 54, 29, 118, 0, 54, 30, 117, 0, 54, 29, 118, 0, 54, 30, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 127, 0, 130, 1, 127, 0, 131, 1, 127, 0, 132, 1, 112, 0, 130, 0, 113, 0, 131, 0, 114, 0, 132, 0, 127, 0, 133, 1, 111, 0, 133, 0, 103, 0, 54, 19, 103, 0, 54, 19, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 130, 0, 54, 26, 131, 0, 54, 27, 132, 0, 54, 28, 133, 0, 54, 25, 117, 0, 54, 29, 118, 0, 54, 30, 117, 0, 54, 29, 118, 0, 54, 30, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 127, 0, 130, 1, 127, 0, 131, 1, 127, 0, 132, 1, 112, 0, 130, 0, 113, 0, 131, 0, 114, 0, 132, 0, 127, 0, 133, 1, 111, 0, 133, 0, 103, 0, 54, 19, 103, 0, 54, 19, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 130, 0, 54, 26, 131, 0, 54, 27, 132, 0, 54, 28, 133, 0, 54, 25, 117, 0, 54, 29, 118, 0, 54, 30, 117, 0, 54, 29, 118, 0, 54, 30, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 6, 0, 9, 0, 7, 0, 12, 0, 12, 0, 16, 0, 16, 0, 15, 0, 9, 0, 7, 0, 15, 0, 14, 0, 23, 0, 38, 1, 17, 0, 14, 1, 34, 0, 23, 3, 34, 0, 23, 5, 30, 0, 23, 4, 38, 0, 40, 0, 2, 1, 42, 0, 47, 0, 48, 0, 48, 0, 43, 0, 46, 0, 42, 1, 41, 0, 50, 0, 42, 0, 51, 0, 52, 0, 51, 1, 2, 1, 50, 4, 2, 1, 50, 3, 42, 0, 50, 5, 55, 0, 54, 0, 56, 0, 54, 1, 57, 0, 54, 2, 58, 0, 54, 3, 59, 0, 54, 4, 60, 0, 54, 5, 65, 0, 54, 6, 66, 0, 54, 7, 67, 0, 54, 8, 68, 0, 54, 9, 69, 0, 54, 10, 70, 0, 54, 11, 54, 0, 23, 0, 54, 0, 40, 1, 39, 0, 38, 0, 72, 0, 54, 18, 77, 0, 54, 12, 78, 0, 54, 13, 73, 0, 54, 14, 79, 0, 81, 0, 81, 0, 80, 0, 74, 0, 87, 0, 75, 0, 88, 0, 76, 0, 89, 0, 87, 0, 54, 15, 88, 0, 54, 16, 89, 0, 54, 17, 40, 0, 37, 4, 85, 0, 90, 0, 90, 0, 86, 1, 85, 0, 91, 0, 92, 0, 91, 3, 92, 0, 91, 5, 86, 0, 91, 4, 91, 0, 89, 1, 91, 0, 88, 1, 91, 0, 87, 1, 54, 0, 37, 5, 80, 0, 93, 0, 93, 0, 86, 0, 37, 0, 96, 5, 96, 0, 0, 0, 50, 0, 97, 5, 97, 0, 0, 1, 98, 1, 97, 4, 43, 0, 99, 0, 99, 0, 100, 0, 100, 0, 46, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 121, 0, 123, 0, 123, 0, 122, 0, 124, 0, 126, 0, 126, 0, 125, 1, 124, 0, 127, 0, 128, 0, 127, 3, 128, 0, 127, 5, 125, 0, 127, 4, 122, 0, 129, 0, 129, 0, 125, 0, 127, 0, 130, 1, 127, 0, 131, 1, 127, 0, 132, 1, 112, 0, 130, 0, 113, 0, 131, 0, 114, 0, 132, 0, 127, 0, 133, 1, 111, 0, 133, 0, 103, 0, 54, 19, 103, 0, 54, 19, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 106, 0, 54, 20, 107, 0, 54, 21, 108, 0, 54, 22, 109, 0, 54, 23, 110, 0, 54, 24, 130, 0, 54, 26, 131, 0, 54, 27, 132, 0, 54, 28, 133, 0, 54, 25, 117, 0, 54, 29, 118, 0, 54, 30, 117, 0, 54, 29, 118, 0, 54, 30, 163, 0, 164, 0, 127, 0, 164, 1, 14, 0, 37, 0, 173, 0, 96, 0, 173, 0, 96, 4, 173, 0, 97, 0, 136, 0, 54, 31, 138, 0, 54, 32, 137, 0, 54, 33, 139, 0, 54, 34, 140, 0, 54, 35, 142, 0, 54, 36, 144, 0, 54, 37, 141, 0, 54, 38, 143, 0, 54, 39, 145, 0, 54, 40, 146, 0, 54, 41, 148, 0, 54, 42, 150, 0, 54, 43, 147, 0, 54, 44, 149, 0, 54, 45, 151, 0, 54, 46, 136, 0, 54, 31, 138, 0, 54, 32, 137, 0, 54, 33, 139, 0, 54, 34, 140, 0, 54, 35, 142, 0, 54, 36, 144, 0, 54, 37, 141, 0, 54, 38, 143, 0, 54, 39, 145, 0, 54, 40, 146, 0, 54, 41, 148, 0, 54, 42, 150, 0, 54, 43, 147, 0, 54, 44, 149, 0, 54, 45, 151, 0, 54, 46, 152, 0, 54, 47, 153, 0, 54, 48, 154, 0, 54, 49, 155, 0, 54, 50, 156, 0, 54, 51, 157, 0, 54, 52, 136, 0, 54, 31, 138, 0, 54, 32, 137, 0, 54, 33, 139, 0, 54, 34, 140, 0, 54, 35, 142, 0, 54, 36, 144, 0, 54, 37, 141, 0, 54, 38, 143, 0, 54, 39, 145, 0, 54, 40, 146, 0, 54, 41, 148, 0, 54, 42, 150, 0, 54, 43, 147, 0, 54, 44, 149, 0, 54, 45, 151, 0, 54, 46, 136, 0, 54, 31, 138, 0, 54, 32, 137, 0, 54, 33, 139, 0, 54, 34, 140, 0, 54, 35, 142, 0, 54, 36, 144, 0, 54, 37, 141, 0, 54, 38, 143, 0, 54, 39, 145, 0, 54, 40, 146, 0, 54, 41, 148, 0, 54, 42, 150, 0, 54, 43, 147, 0, 54, 44, 149, 0, 54, 45, 151, 0, 54, 46, 152, 0, 54, 47, 153, 0, 54, 48, 154, 0, 54, 49, 155, 0, 54, 50, 156, 0, 54, 51, 157, 0, 54, 52, 158, 0, 54, 53, 159, 0, 54, 54, 160, 0, 54, 55, 161, 0, 54, 56, 162, 0, 54, 57, 164, 0, 54, 58, 165, 0, 54, 59, 166, 0, 54, 60, 167, 0, 54, 61, 168, 0, 54, 62, 169, 0, 54, 63, 170, 0, 54, 64, 171, 0, 54, 65, 172, 0, 54, 66, 136, 0, 54, 31, 138, 0, 54, 32, 137, 0, 54, 33, 139, 0, 54, 34, 140, 0, 54, 35, 142, 0, 54, 36, 144, 0, 54, 37, 141, 0, 54, 38, 143, 0, 54, 39, 145, 0, 54, 40, 146, 0, 54, 41, 148, 0, 54, 42, 150, 0, 54, 43, 147, 0, 54, 44, 149, 0, 54, 45, 151, 0, 54, 46, 136, 0, 54, 31, 138, 0, 54, 32, 137, 0, 54, 33, 139, 0, 54, 34, 140, 0, 54, 35, 142, 0, 54, 36, 144, 0, 54, 37, 141, 0, 54, 38, 143, 0, 54, 39, 145, 0, 54, 40, 146, 0, 54, 41, 148, 0, 54, 42, 150, 0, 54, 43, 147, 0, 54, 44, 149, 0, 54, 45, 151, 0, 54, 46, 152, 0, 54, 47, 153, 0, 54, 48, 154, 0, 54, 49, 155, 0, 54, 50, 156, 0, 54, 51, 157, 0, 54, 52, 136, 0, 54, 31, 138, 0, 54, 32, 137, 0, 54, 33, 139, 0, 54, 34, 140, 0, 54, 35, 142, 0, 54, 36, 144, 0, 54, 37, 141, 0, 54, 38, 143, 0, 54, 39, 145, 0, 54, 40, 146, 0, 54, 41, 148, 0, 54, 42, 150, 0, 54, 43, 147, 0, 54, 44, 149, 0, 54, 45, 151, 0, 54, 46, 136, 0, 54, 31, 138, 0, 54, 32, 137, 0, 54, 33, 139, 0, 54, 34, 140, 0, 54, 35, 142, 0, 54, 36, 144, 0, 54, 37, 141, 0, 54, 38, 143, 0, 54, 39, 145, 0, 54, 40, 146, 0, 54, 41, 148, 0, 54, 42, 150, 0, 54, 43, 147, 0, 54, 44, 149, 0, 54, 45, 151, 0, 54, 46, 152, 0, 54, 47, 153, 0, 54, 48, 154, 0, 54, 49, 155, 0, 54, 50, 156, 0, 54, 51, 157, 0, 54, 52, 158, 0, 54, 53, 159, 0, 54, 54, 160, 0, 54, 55, 161, 0, 54, 56, 162, 0, 54, 57, 164, 0, 54, 58, 165, 0, 54, 59, 166, 0, 54, 60, 167, 0, 54, 61, 168, 0, 54, 62, 169, 0, 54, 63, 170, 0, 54, 64, 171, 0, 54, 65, 172, 0, 54, 66, 102, 0, 54, 67, 101, 0, 54, 68, 174, 0, 54, 70, 175, 0, 54, 74, 105, 0, 54, 71, 104, 0, 54, 72, 135, 0, 54, 73, 134, 0, 54, 69, 176, 0, 54, 75, 177, 0, 54, 76, 178, 0, 54, 77, 179, 0, 54, 78, 180, 0, 54, 79, 181, 0, 54, 80, 182, 0, 54, 81, 183, 0, 54, 82, 184, 0, 54, 83, 185, 0, 54, 84, 186, 0, 54, 85, 187, 0, 54, 86, 188, 0, 54, 87, 189, 0, 54, 88, 190, 0, 54, 89, 191, 0, 54, 90 )

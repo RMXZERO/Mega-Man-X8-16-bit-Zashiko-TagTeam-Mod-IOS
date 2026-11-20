@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/Fonts/X8bitmapfont.fnt" type="BitmapFont" id=1]
 [ext_resource path="res://src/Effects/Textures/alysson_signature.png" type="Texture" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://src/Title/signature.gd" type="Script" id=6]
 [ext_resource path="res://src/Effects/Textures/twitch_icon.png" type="Texture" id=7]
 [ext_resource path="res://src/Sounds/OST - IntroJingle.ogg" type="AudioStream" id=8]
+[ext_resource path="res://System/Android/AndroidControls.gd" type="Script" id=9]
+[ext_resource path="res://System/Android/Sprites/android_nothing.png" type="Texture" id=10]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 4 )
@@ -67,3 +69,16 @@ texture = ExtResource( 3 )
 [node name="jingle" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
 bus = "Music"
+
+[node name="AndroidControls" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="Pause" type="TouchScreenButton" parent="AndroidControls"]
+modulate = Color( 1, 1, 1, 0.392157 )
+self_modulate = Color( 1, 1, 1, 0.392157 )
+scale = Vector2( 12.4375, 7 )
+normal = ExtResource( 10 )
+action = "pause"
+visibility_mode = 1
+script = ExtResource( 9 )
+_action = "pause"

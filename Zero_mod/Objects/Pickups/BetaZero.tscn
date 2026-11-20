@@ -40,7 +40,6 @@ pause_mode = 1
 position = Vector2( 0, -36 )
 frames = ExtResource( 2 )
 animation = "Beta_Body"
-frame = 1
 playing = true
 
 [node name="Foot" type="AnimatedSprite" parent="."]
@@ -67,7 +66,6 @@ visible = false
 position = Vector2( 0, -146 )
 frames = ExtResource( 5 )
 animation = "idle"
-frame = 5
 playing = true
 
 [node name="staticBody2D" type="StaticBody2D" parent="."]

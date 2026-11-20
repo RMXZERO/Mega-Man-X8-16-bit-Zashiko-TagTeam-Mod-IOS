@@ -7,7 +7,7 @@ func _Setup():
 	Event.emit_signal("enemy_kill",character)
 	explosions.emitting = true
 	sprite.play("defeat_fall")
-	force_move
+	#force_move
 	#sprite.playing = false
 	#sprite.material.set_shader_param("Alpha_Blink", 1)
 	#extra_actions_at_death_start()

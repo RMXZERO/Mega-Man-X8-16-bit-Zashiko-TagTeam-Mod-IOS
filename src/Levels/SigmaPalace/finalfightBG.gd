@@ -4,7 +4,10 @@ onready var sigmapalace_map: Node2D = $"../../sigmapalace_map"
 onready var hole_fillers: CollisionShape2D = $"../../hole_blocker/collisionShape2D"
 onready var final_clouds: Node2D = $"../../FinalClouds"
 onready var foreground: ParallaxLayer = $"../../../parallaxBackground2/foreground"
-onready var final_platform: Node2D = $"../../final_platform"
+onready var djsigma: ParallaxLayer = $"../djsigma"
+onready var djsigmaground: TileMap = $"../../CollisionDJSigma/CollisionDJSigma"
+onready var djsigmaground2: TileMap = $"../../CollisionDJSigma/CollisionDJSigma2"
+onready var final_platform: Node2D = $"../../final_platform/final_platform"
 
 onready var tween: = TweenController.new(self, false)
 
@@ -14,10 +17,14 @@ func _ready() -> void :
 
 func activate():
 	visible = true
+	#djsigma.visible = false
 	foreground.visible = false
 	final_clouds.visible = true
 	tween.attribute("modulate:a", 1, 1, final_clouds)
 	sigmapalace_map.visible = false
+	djsigmaground.visible = true
+	djsigmaground2.visible = false
+	djsigmaground2.position.y += 2000
 	hole_fillers.disabled = true
 	final_platform.visible = true
 

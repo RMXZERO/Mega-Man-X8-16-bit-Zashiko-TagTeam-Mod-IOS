@@ -96,7 +96,7 @@ func fire_achievements():
 	if has_achievement_for(defeated):
 		Achievements.unlock(defeated.get_id())
 	
-func damage_check(character = self) -> void :
+func damage_check(_character = self) -> void :
 	if not taken_damage:
 		taken_damage = true
 
@@ -104,7 +104,10 @@ func damage_check(character = self) -> void :
 func upgrade_check() -> void :
 	has_upgrades = GameManager.player.using_upgrades
 	if is_instance_valid(GameManager.inactive_player):
-		has_upgrades = GameManager.player.using_upgrades and GameManager.inactive_player.using_upgrades
+		if not GameManager.player.using_upgrades and not GameManager.inactive_player.using_upgrades:
+			has_upgrades = false
+		else:
+			has_upgrades = true
 	if has_upgrades:
 		
 		pass

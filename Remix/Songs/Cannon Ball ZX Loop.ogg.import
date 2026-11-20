@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Cannon Ball ZX Loop.ogg-a80ae3720e7c87b9143af5edd2e710ff.oggstr"
+
+[deps]
+
+source_file="res://Remix/Songs/Cannon Ball ZX Loop.ogg"
+dest_files=[ "res://.import/Cannon Ball ZX Loop.ogg-a80ae3720e7c87b9143af5edd2e710ff.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

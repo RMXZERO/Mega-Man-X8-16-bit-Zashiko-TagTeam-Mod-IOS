@@ -34,6 +34,7 @@ var gravity_factor: float = 1.25
 var default_gravity: float = 900.0
 var rotation_speed: float = 30.0
 
+var player_spike_invincibility: bool = false
 var player_knockback: bool = false
 var player_reduction: float = 1.0
 var walk_speed: float
@@ -104,6 +105,13 @@ func set_stage() -> void :
 
 func _physics_process(delta: float) -> void :
 	._physics_process(delta)
+	if not CharacterManager.player_character == "Axl":
+		if "share_axl_buff" in GameManager.collectibles:
+			if not CharacterManager.share_axl_buff:
+				deactivate()
+		else:
+			deactivate()
+	
 	if attack_stage == 1:
 		play_animation("shield_start")
 		create_sfx.play()
@@ -155,6 +163,7 @@ func handle_shield_blink(delta) -> void :
 		animatedSprite.visible = not animatedSprite.visible
 
 func set_defense_buff() -> void :
+	Event.emit_signal("axl_special_ability", "boundblaster")
 	backup_original_values()
 	player_damage.prevent_knockbacks = true
 	player_damage.extra_damage_reduction = damage_reduction
@@ -191,12 +200,13 @@ func set_defense_buff() -> void :
 	player_fall.default_gravity *= gravity_factor
 
 func unset_defense_buff() -> void :
+	Event.emit_signal("axl_special_ability", "remove")
 	restore_original_values()
-	character.spike_invincibility = false
 	collision_shape.disabled = true
 	deflection_shape.disabled = true
 
 func restore_original_values() -> void :
+	character.spike_invincibility = player_spike_invincibility
 	player_damage.prevent_knockbacks = player_knockback
 	player_damage.extra_damage_reduction = player_reduction
 	
@@ -231,6 +241,7 @@ func restore_original_values() -> void :
 	player_fall.default_gravity = default_gravity
 
 func backup_original_values() -> void :
+	player_spike_invincibility = character.spike_invincibility
 	player_knockback = player_damage.prevent_knockbacks
 	player_reduction = player_damage.extra_damage_reduction
 	

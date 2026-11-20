@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Sigma_X8_Fifght_Loop.ogg-ad3748a33b277cb5c8b0cc3c44cc71d2.oggstr"
+
+[deps]
+
+source_file="res://Remix/Songs/Sigma_X8_Fifght_Loop.ogg"
+dest_files=[ "res://.import/Sigma_X8_Fifght_Loop.ogg-ad3748a33b277cb5c8b0cc3c44cc71d2.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

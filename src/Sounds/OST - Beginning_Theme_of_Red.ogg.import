@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/OST - Beginning_Theme_of_Red.ogg-19c11e0ec247ca31a664cffba8f4ee45.oggstr"
+
+[deps]
+
+source_file="res://src/Sounds/OST - Beginning_Theme_of_Red.ogg"
+dest_files=[ "res://.import/OST - Beginning_Theme_of_Red.ogg-19c11e0ec247ca31a664cffba8f4ee45.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -1,7 +1,6 @@
 extends Weapon
 class_name Buster
 
-
 func _ready() -> void :
 	._ready()
 	Event.listen("shot_lemon", self, "on_lemon_shot_created")
@@ -14,6 +13,9 @@ func add_projectile_to_scene(charge_level: int):
 	var shot: KinematicBody2D = .add_projectile_to_scene(charge_level)
 	if charge_level < 1:
 		Event.emit_signal("shot_lemon", self, shot)
+	shot.damage *= extra_damage
+	shot.damage_to_bosses *= extra_damage
+	shot.damage_to_weakness *= extra_damage
 
 func has_ammo() -> bool:
 	return shots_currently_alive < max_shots_alive

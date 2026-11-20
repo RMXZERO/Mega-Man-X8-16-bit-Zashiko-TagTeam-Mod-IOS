@@ -1,6 +1,14 @@
 extends GenericIntro
 
 export var projectile : PackedScene
+onready var space: Node = $"../Space"
+
+func _ready() -> void:
+	._ready()
+	if CharacterManager.nightshade_zero_armor:
+		call_deferred("prepare_for_intro")
+	if CharacterManager.nightshade_zero_armor:
+		animatedSprite.modulate.a = 0.0
 
 func _Setup() -> void:
 	GameManager.start_cutscene()
@@ -19,6 +27,7 @@ func _Update(_delta) -> void:
 		next_attack_stage()
 
 	elif attack_stage == 0 and timer > 1:
+		animatedSprite.modulate.a = 1.0
 		make_visible()
 		turn_player_towards_boss()
 		play_animation("land")
@@ -48,4 +57,5 @@ func _Update(_delta) -> void:
 
 	elif attack_stage == 6 and has_finished_last_animation():
 		play_animation("idle")
+		space.define_arena()
 		EndAbility()

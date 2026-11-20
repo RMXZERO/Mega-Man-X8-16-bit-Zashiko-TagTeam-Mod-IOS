@@ -14,6 +14,7 @@ func _ready() -> void :
 
 func on_character_switch_end() -> void:
 	EndAbility()
+	character.interrupt_all_moves()
 	
 func _Setup():
 	character.deactivate()

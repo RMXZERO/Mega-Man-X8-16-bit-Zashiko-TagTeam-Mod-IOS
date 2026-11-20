@@ -5,11 +5,18 @@ onready var throne: TileMap = $"../Throne"
 onready var throne_particles: Particles2D = $"../throne_particles"
 onready var throne_explosion: AudioStreamPlayer2D = $"../throne_explosion"
 onready var flash: Sprite = $flash
+var no_damage: bool = false
 
 func connect_start_events() -> void:
 	Log("Connecting boss events")
 	Event.listen("warning_done",self,"execute_intro")
 	Event.connect("character_talking",self,"on_talk")
+	character.get_node_or_null("BossDeath").connect("screen_flash", self, "teleport_sigma_blade")
+	Event.listen("damage", self, "on_damage_player")
+
+func execute_intro() -> void:
+	if is_player_nearby_horizontally(400) and is_player_above(-128):
+		.execute_intro()
 
 func on_talk(character):
 	if character == "Sigma":
@@ -20,7 +27,14 @@ func on_talk(character):
 
 func _ready() -> void:
 	call_deferred("play_animation","seated_loop")
-	
+
+func teleport_sigma_blade() -> void:
+	if no_damage:
+		Event.emit_signal("set_object", "sigma_blade", character.global_position, 1)
+
+func on_damage_player() -> void:
+	if no_damage:
+		no_damage = false
 
 func _Update(_delta) -> void:
 	if attack_stage == 0:
@@ -36,6 +50,7 @@ func _Update(_delta) -> void:
 	
 	elif attack_stage == 3 and timer > 0.25:
 		play_animation("intro")
+		Event.emit_signal("call_fade_out_intro")
 		Event.emit_signal("play_boss_music")
 		next_attack_stage()
 	
@@ -64,3 +79,7 @@ func _Update(_delta) -> void:
 		
 	elif attack_stage == 8 and has_finished_last_animation():
 		EndAbility()
+
+func _Interrupt():
+	._Interrupt()
+	no_damage = true

@@ -49,7 +49,7 @@
 [ext_resource path="res://src/Actors/Enemies/Big Tractor/AttackIdle.gd" type="Script" id=47]
 [ext_resource path="res://src/Actors/Enemies/EnemyStun.gd" type="Script" id=48]
 [ext_resource path="res://src/Actors/Enemies/Big Tractor/SimpleEnemyShot.gd" type="Script" id=49]
-[ext_resource path="res://src/WeaponGet/TestLevelModifier.gd" type="Script" id=50]
+[ext_resource path="res://Axl_mod/WeaponGet/TestLevelModifier.gd" type="Script" id=50]
 [ext_resource path="res://src/Actors/Enemies/EnemyShield.gd" type="Script" id=51]
 [ext_resource path="res://src/Levels/skip_ready.gd" type="Script" id=52]
 [ext_resource path="res://src/Sounds/HIT.wav" type="AudioStream" id=53]
@@ -567,7 +567,6 @@ script = ExtResource( 42 )
 
 [node name="animatedSprite" parent="Objects/Servbot" index="1"]
 material = SubResource( 69 )
-frame = 14
 
 [node name="EnemyDeath" parent="Objects/Servbot" index="8"]
 should_spawn_item = false
@@ -577,7 +576,6 @@ position = Vector2( 238, -23 )
 
 [node name="animatedSprite" parent="Objects/Servbot2" index="1"]
 material = SubResource( 70 )
-frame = 14
 
 [node name="EnemyDeath" parent="Objects/Servbot2" index="8"]
 should_spawn_item = false
@@ -587,7 +585,6 @@ position = Vector2( 286, -35 )
 
 [node name="animatedSprite" parent="Objects/Servbot3" index="1"]
 material = SubResource( 71 )
-frame = 14
 
 [node name="EnemyDeath" parent="Objects/Servbot3" index="8"]
 should_spawn_item = false
@@ -622,7 +619,6 @@ position = Vector2( 0, -16 )
 z_index = 1
 frames = ExtResource( 46 )
 animation = "idle"
-frame = 1
 playing = true
 flip_h = true
 
@@ -782,7 +778,6 @@ position = Vector2( 180, -2 )
 
 [node name="animatedSprite" parent="Objects/Drone2" index="1"]
 material = SubResource( 72 )
-frame = 0
 
 [node name="animatedSprite" parent="Objects/Drone2/animatedSprite" index="0"]
 material = SubResource( 72 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://src/Sounds/16 - MMX - X Upgrade Complete.wav" type="AudioStream" id=1]
 [ext_resource path="res://src/Effects/Materials/Player_Material_Shader.tres" type="Material" id=2]
@@ -10,10 +10,12 @@
 [ext_resource path="res://src/Levels/JakobElevator/elevator.png" type="Texture" id=8]
 [ext_resource path="res://src/Actors/Player/x_sprites/x.res" type="SpriteFrames" id=9]
 [ext_resource path="res://src/Levels/SigmaPalace/ElevatorWalls.gd" type="Script" id=10]
+[ext_resource path="res://System/Android/AndroidControls.gd" type="Script" id=11]
 [ext_resource path="res://Final Cutscene/ElevatorCutscene.gd" type="Script" id=12]
 [ext_resource path="res://src/DialogSystem/DialogBox.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Final Cutscene/Final_Elevator.tres" type="Resource" id=14]
 [ext_resource path="res://src/Levels/music_player.gd" type="Script" id=15]
+[ext_resource path="res://System/Android/Sprites/android_skip.png" type="Texture" id=16]
 [ext_resource path="res://src/Sounds/OST - Capsule.ogg" type="AudioStream" id=17]
 [ext_resource path="res://src/Sounds/OST - TrueSigma - Loop.ogg" type="AudioStream" id=18]
 [ext_resource path="res://src/Sounds/OST - Vile - Loop.ogg" type="AudioStream" id=19]
@@ -22,10 +24,13 @@
 [ext_resource path="res://src/Sounds/OST - AngryBoss - Loop.ogg" type="AudioStream" id=22]
 [ext_resource path="res://src/Levels/PitchBlack/light.png" type="Texture" id=23]
 [ext_resource path="res://src/Sounds/Bike - RunLoop.wav" type="AudioStream" id=24]
+[ext_resource path="res://System/Android/Sprites/android_nothing.png" type="Texture" id=25]
 [ext_resource path="res://Final Cutscene/Final_Elevator2.tres" type="Resource" id=26]
+[ext_resource path="res://Zero_mod/X8/Sprites/zbuster/zbuster.tres" type="SpriteFrames" id=27]
 [ext_resource path="res://src/Effects/Textures/simple_gradient4.png" type="Texture" id=28]
+[ext_resource path="res://Zero_mod/X8/Sprites/ZeroX8_Material_Shader.tres" type="Material" id=29]
+[ext_resource path="res://Axl_mod/Player/Axl_Material_Shader.tres" type="Material" id=30]
 [ext_resource path="res://Axl_mod/Player/Sprites/axl.tres" type="SpriteFrames" id=32]
-[ext_resource path="res://Zero_mod/Sprites/zero.tres" type="SpriteFrames" id=33]
 
 [node name="Elevator_Cutscene" type="Node2D"]
 script = ExtResource( 12 )
@@ -54,6 +59,7 @@ script = ExtResource( 3 )
 position = Vector2( -12, -13 )
 
 [node name="Axl" type="AnimatedSprite" parent="Visuals/ElevatorPlatform"]
+material = ExtResource( 30 )
 position = Vector2( 39, -30 )
 z_index = 1
 frames = ExtResource( 32 )
@@ -66,15 +72,14 @@ position = Vector2( 19, -30 )
 z_index = 1
 frames = ExtResource( 9 )
 animation = "crouch"
-frame = 10
 playing = true
 
 [node name="Zero" type="AnimatedSprite" parent="Visuals/ElevatorPlatform"]
+material = ExtResource( 29 )
 position = Vector2( -53, -31 )
 z_index = 1
-frames = ExtResource( 33 )
+frames = ExtResource( 27 )
 animation = "blink"
-frame = 5
 playing = true
 flip_h = true
 
@@ -148,5 +153,28 @@ stream = ExtResource( 1 )
 volume_db = -8.0
 max_distance = 600.0
 bus = "SFX"
+
+[node name="AndroidControls" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="Jump" type="TouchScreenButton" parent="AndroidControls"]
+modulate = Color( 1, 1, 1, 0.392157 )
+self_modulate = Color( 1, 1, 1, 0.392157 )
+scale = Vector2( 12.4375, 7 )
+normal = ExtResource( 25 )
+passby_press = true
+action = "ui_accept"
+visibility_mode = 1
+script = ExtResource( 11 )
+_action = "ui_accept"
+
+[node name="Pause" type="TouchScreenButton" parent="AndroidControls"]
+position = Vector2( 363, 188 )
+normal = ExtResource( 25 )
+pressed = ExtResource( 16 )
+action = "pause"
+visibility_mode = 1
+script = ExtResource( 11 )
+_action = "pause"
 
 [connection signal="dialog_concluded" from="DialogBox" to="." method="_on_dialog_concluded"]

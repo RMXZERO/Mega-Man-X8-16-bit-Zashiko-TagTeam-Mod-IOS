@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/hadoken_sound.ogg-f2f0d904d82187dca98550c6fdb7f560.oggstr"
+
+[deps]
+
+source_file="res://X_mod/InfiniteX/SFX/hadoken_sound.ogg"
+dest_files=[ "res://.import/hadoken_sound.ogg-f2f0d904d82187dca98550c6fdb7f560.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

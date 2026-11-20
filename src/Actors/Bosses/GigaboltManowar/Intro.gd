@@ -2,6 +2,13 @@ extends GenericIntro
 onready var spin: AudioStreamPlayer2D = $"../GigaStomp/spin"
 onready var space: Node = $"../Space"
 
+func _ready() -> void:
+	._ready()
+	if CharacterManager.nightshade_zero_armor:
+		call_deferred("prepare_for_intro")
+	if CharacterManager.nightshade_zero_armor:
+		animatedSprite.modulate.a = 0.0
+
 func prepare_for_intro() -> void:
 	Log("Preparing for Intro")
 	make_invisible()
@@ -11,6 +18,7 @@ func _Update(_delta) -> void:
 		space.define_arena()
 		character.global_position.y -= 100
 		character.global_position.x += 100
+		animatedSprite.modulate.a = 1.0
 		play_animation("thunder_loop")
 		turn_and_face_player()
 		make_visible()

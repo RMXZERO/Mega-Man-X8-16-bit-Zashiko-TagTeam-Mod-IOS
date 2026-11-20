@@ -1,6 +1,6 @@
 extends BossDamage
 
-const exceptions = ["RideArmor", "Optic", "Fire", "Flame", "Enkoujin", "Juuhazan", "Enkoujin_Charged", "Enkoujin_Charged_B"]
+const exceptions = ["RideArmor", "Optic", "Fire", "Flame", "Enkoujin", "Juuhazan", "Enkoujin_Charged", "Enkoujin_Charged_B", "GigaCrashCharged", "Genmuzerowave", "GenmuzeroCharged", "Rekohouha", "Shingetsurin", "NovaStrikeCharged", "ShoryuukenCharged", "Player_Desperation"]
 
 func should_ignore_damage(inflicter) -> bool:
 		

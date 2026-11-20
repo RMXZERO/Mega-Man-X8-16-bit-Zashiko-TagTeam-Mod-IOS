@@ -13,6 +13,8 @@ var _dash
 var emitted_dash: = false
 var left_ground_timer: = 0.0
 var can_dash: = true
+var land_dash_up: = false
+var can_dash_up: = false
 
 export  var shot_pos_adjust: = Vector2(18, 4)
 func get_shot_adust_position() -> Vector2:
@@ -21,7 +23,17 @@ func get_shot_adust_position() -> Vector2:
 func _ready() -> void :
 	sprite_effect = get_node("duringImage")
 	ghost_particle = get_node("particles2D")
+	character.listen("jump", self, "cannt_dash_up")
+	character.listen("land", self, "reset_can_dash_up")
+	can_dash_up = true
 	
+func reset_can_dash_up() -> void :
+	if character.is_on_floor():
+		can_dash_up = true
+
+func cannt_dash_up() -> void :
+	can_dash_up = false
+
 func get_activation_leeway_time() -> float:
 	return leeway
 
@@ -38,6 +50,10 @@ func _Setup() -> void :
 	can_dash = true
 	deactivate_low_jumpcasts()
 	jumpcast_timer = 0
+	land_dash_up = false
+	if character.is_on_floor():
+		if should_dash_up():
+			land_dash_up = true
 
 func emit_dash_particle():
 	if not emitted_dash:
@@ -50,12 +66,21 @@ func emit_dash_particle():
 func _Update(_delta: float) -> void :
 	process_invulnerability()
 	increase_left_ground_timer(_delta)
-	if can_dash and should_dash():
+	if can_dash and should_dash() and not land_dash_up:
 		on_dash()
 		force_movement(horizontal_velocity)
 		emit_dash_particle()
 		if not character.is_on_floor():
 			character.set_vertical_speed(0)
+	elif can_dash and should_dash_up() and land_dash_up:
+		on_dash()
+		force_movement(horizontal_velocity)
+		emit_dash_particle()
+		character.set_vertical_speed( - horizontal_velocity)
+		yield(get_tree().create_timer(0.5), "timeout")
+		print()
+		land_dash_up = false
+		can_dash_up = false
 	else:
 		can_dash = false
 		if left_ground_timer == 0.0:
@@ -65,6 +90,11 @@ func _Update(_delta: float) -> void :
 		change_animation_if_falling("fall")
 		set_movement_and_direction(horizontal_velocity)
 		process_gravity(_delta)
+	if character.is_on_floor():
+		can_dash_up = true
+
+	if character.is_executing("SaberCombo"):
+		EndAbility()
 
 func increase_left_ground_timer(_delta: float) -> void :
 	if left_ground_timer > 0.0:
@@ -111,7 +141,10 @@ func process_invulnerability():
 			invulnerable(false)
 
 func should_dash() -> bool:
-	return character.is_on_floor()
+	return character.is_on_floor() and not character.get_action_pressed("move_up")
+
+func should_dash_up() -> bool:
+	return character.get_action_pressed("move_up") and can_dash_up
 
 func _StartCondition() -> bool:
 	if character.is_shooting:
@@ -120,11 +153,15 @@ func _StartCondition() -> bool:
 		return false
 	if facing_a_wall():
 		return false
+	if should_dash_up():
+		return true
 	if should_dash():
 		return true
 	return false
 
 func _EndCondition() -> bool:
+	if character.is_executing("SaberCombo"):
+		return true
 	if facing_a_wall():
 		return true
 	if character.is_on_floor():

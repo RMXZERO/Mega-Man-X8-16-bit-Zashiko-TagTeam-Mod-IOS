@@ -28,6 +28,7 @@ func blink():
 		sprite.modulate.a = 1.0
 
 func appear():
+	$".".show()
 	start_blink()
 	tween.attribute("self_modulate:a",1,.5,sprite)
 	tween.attribute("modulate:a",1,.5,light)

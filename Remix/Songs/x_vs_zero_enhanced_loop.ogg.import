@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/x_vs_zero_enhanced_loop.ogg-828bb1d373125356249aa1917d8d5958.oggstr"
+
+[deps]
+
+source_file="res://Remix/Songs/x_vs_zero_enhanced_loop.ogg"
+dest_files=[ "res://.import/x_vs_zero_enhanced_loop.ogg-828bb1d373125356249aa1917d8d5958.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

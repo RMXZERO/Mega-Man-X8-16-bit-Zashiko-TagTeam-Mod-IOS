@@ -5,17 +5,22 @@ onready var detector_collider: CollisionShape2D = $damage_detector / collisionSh
 onready var remains_particles: Particles2D = $remains_particles
 onready var _break: AudioStreamPlayer2D = $break
 onready var current_rotation = get_parent().rotation_degrees
-
+export  var can_destroyed: bool = true
 var destroyed: bool = false
+export  var typeadd: String = "spike"
 
+func _ready() -> void :
+	death_plane.type = typeadd
 
 func _on_damage_detector_body_entered(body: Node) -> void :
+	if not can_destroyed:
+		return
 	if destroyed:
 		return
 	if "BlastLaunch" in body.name:
 		body.hit(self)
 		call_deferred("destroy")
-	elif "Juuhazan_Charged_B" in body.name:
+	elif "Juuhazan_Charged" in body.name:
 		call_deferred("destroy")
 	elif "Youdantotsu" in body.name:
 		call_deferred("destroy")
@@ -34,15 +39,24 @@ func _on_damage_detector_body_entered(body: Node) -> void :
 			call_deferred("destroy")
 	elif "RideArmorPunch" in body.name:
 		call_deferred("destroy")
+	elif "GenmuzeroCharged" in body.name:
+		call_deferred("destroy")
+	elif "Genmuzerowave" in body.name:
+		call_deferred("destroy")
+	elif "Player_Desperation" in body.name:
+		call_deferred("destroy")
+	elif "SaberCharged" in body.name:
+		call_deferred("destroy")
 
 func destroy() -> void :
-	destroyed = true
-	death_plane.deactivate()
-	_break.play_rp()
-	detector_collider.disabled = true
-	play(animation + "_destroyed")
-	remains_particles.rotation_degrees = - current_rotation
-	remains_particles.emitting = true
+	if can_destroyed:
+		destroyed = true
+		death_plane.deactivate()
+		_break.play_rp()
+		detector_collider.disabled = true
+		play(animation + "_destroyed")
+		remains_particles.rotation_degrees = - current_rotation
+		remains_particles.emitting = true
 
 func damage(_d = null, _s = null) -> float:
 	return 1.0

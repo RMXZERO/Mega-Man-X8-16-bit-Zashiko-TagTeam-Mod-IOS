@@ -1,4 +1,4 @@
-[gd_scene load_steps=138 format=2]
+[gd_scene load_steps=153 format=2]
 
 [ext_resource path="res://src/Effects/Materials/mat_x_death.tres" type="Material" id=1]
 [ext_resource path="res://src/Sounds/FX - Subtank Charge.ogg" type="AudioStream" id=2]
@@ -121,37 +121,25 @@
 [ext_resource path="res://src/Effects/Materials/x_supercharged_particle.tres" type="Material" id=119]
 [ext_resource path="res://X_mod/UltimateX/Sprites/x_ultimate.tres" type="SpriteFrames" id=120]
 [ext_resource path="res://X_mod/UltimateX/Sprites/x_ultimate_arm.tres" type="SpriteFrames" id=121]
-[ext_resource path="res://src/Actors/Player/charge_shader.tres" type="Shader" id=122]
+[ext_resource path="res://X_mod/UltimateX/Sprites/x_ultimate_material.tres" type="Material" id=122]
 [ext_resource path="res://TagTeam_Mod/CharacterSwitchWarpIn.gd" type="Script" id=123]
 [ext_resource path="res://TagTeam_Mod/CharSwitchRevive.gd" type="Script" id=124]
-
-[sub_resource type="ShaderMaterial" id=46]
-resource_local_to_scene = true
-shader = ExtResource( 122 )
-shader_param/Flash = null
-shader_param/Charge = 0.0
-shader_param/Color = Color( 0, 0, 0, 1 )
-shader_param/MainColor1 = Color( 0.501961, 0.501961, 0.501961, 1 )
-shader_param/MainColor2 = Color( 0.52549, 0.345098, 0.458824, 1 )
-shader_param/MainColor3 = Color( 0.34902, 0.211765, 0.298039, 1 )
-shader_param/MainColor4 = Color( 0.909804, 0.878431, 0.25098, 1 )
-shader_param/MainColor5 = Color( 0.945098, 0.6, 0.27451, 1 )
-shader_param/MainColor6 = Color( 0.670588, 0.313726, 0.266667, 1 )
-shader_param/R_MainColor1 = Color( 0.501961, 0.501961, 0.501961, 1 )
-shader_param/R_MainColor2 = Color( 0.52549, 0.345098, 0.458824, 1 )
-shader_param/R_MainColor3 = Color( 0.34902, 0.211765, 0.298039, 1 )
-shader_param/R_MainColor4 = Color( 0.909804, 0.878431, 0.25098, 1 )
-shader_param/R_MainColor5 = Color( 0.945098, 0.6, 0.27451, 1 )
-shader_param/R_MainColor6 = Color( 0.670588, 0.313726, 0.266667, 1 )
-shader_param/CrystalColor1 = Color( 0.909804, 1, 0.733333, 1 )
-shader_param/CrystalColor2 = Color( 0.541176, 0.854902, 0.341176, 1 )
-shader_param/CrystalColor3 = Color( 0.207843, 0.619608, 0.415686, 1 )
-shader_param/R_CrystalColor1 = Color( 0.941176, 0.941176, 0.941176, 1 )
-shader_param/Alert = 0.0
-shader_param/R_CrystalColor2 = Color( 0.941176, 0.25098, 0.0627451, 1 )
-shader_param/R_CrystalColor3 = Color( 0.447059, 0.133333, 0.215686, 1 )
-shader_param/tolerance = 0.01
-shader_param/Alpha = 1.0
+[ext_resource path="res://src/Actors/Weapons/Projectiles/Charged Buster.tscn" type="PackedScene" id=125]
+[ext_resource path="res://src/Actors/Weapons/Projectiles/Laser Buster.tscn" type="PackedScene" id=126]
+[ext_resource path="res://src/Actors/Weapons/Projectiles/Triad Charged Buster Weak.tscn" type="PackedScene" id=127]
+[ext_resource path="res://Axl_mod/Player/Projectiles/BossSpecials/Other Character/Buff_Other_Special.tscn" type="PackedScene" id=128]
+[ext_resource path="res://X_mod/UltimateX/Player/NovaStrike/NovaStrike_Skill.gd" type="Script" id=129]
+[ext_resource path="res://src/Actors/Weapons/Projectiles/Lemon.tscn" type="PackedScene" id=130]
+[ext_resource path="res://X_mod/UltimateX/Player/NovaStrike/NovaStrike.tres" type="Resource" id=131]
+[ext_resource path="res://X_mod/InfiniteX/Player/GigaCrash/UX_Desperation_Skill.gd" type="Script" id=132]
+[ext_resource path="res://X_mod/UltimateX/Player/NovaStrike/NovaStrike.gd" type="Script" id=133]
+[ext_resource path="res://X_mod/UltimateX/Player/Shoryuuken/Shoryuuken.gd" type="Script" id=134]
+[ext_resource path="res://X_mod/UltimateX/Player/afterImages.gd" type="Script" id=135]
+[ext_resource path="res://src/Actors/Weapons/Projectiles/Medium Buster.tscn" type="PackedScene" id=136]
+[ext_resource path="res://X_mod/UltimateX/Player/Projectiles/Ultimate_Shot.tscn" type="PackedScene" id=137]
+[ext_resource path="res://X_mod/UltimateX/Player/NovaStrike/nova_strike.wav" type="AudioStream" id=138]
+[ext_resource path="res://X_mod/InfiniteX/SFX/shoryuuken.ogg" type="AudioStream" id=139]
+[ext_resource path="res://src/Sounds/Rooster - DashStart.ogg" type="AudioStream" id=140]
 
 [sub_resource type="RectangleShape2D" id=32]
 extents = Vector2( 6.995, 7 )
@@ -307,21 +295,20 @@ position = Vector2( 0, -4 )
 z_index = 5
 frames = ExtResource( 88 )
 animation = "idle"
-frame = 56
 playing = true
 
 [node name="head_armor" type="AnimatedSprite" parent="animatedSprite"]
 visible = false
 material = ExtResource( 37 )
 frames = ExtResource( 34 )
-animation = "idle"
+animation = "empty"
 script = ExtResource( 43 )
 
 [node name="body_armor" type="AnimatedSprite" parent="animatedSprite"]
 visible = false
 material = ExtResource( 47 )
 frames = ExtResource( 36 )
-animation = "idle"
+animation = "empty"
 script = ExtResource( 43 )
 __meta__ = {
 "_editor_description_": ""
@@ -331,32 +318,32 @@ __meta__ = {
 visible = false
 material = ExtResource( 49 )
 frames = ExtResource( 35 )
-animation = "idle"
+animation = "empty"
 script = ExtResource( 43 )
 
 [node name="cannon_armor" type="AnimatedSprite" parent="animatedSprite"]
 visible = false
 material = ExtResource( 50 )
 frames = ExtResource( 31 )
-animation = "shot"
+animation = "empty"
 script = ExtResource( 43 )
 
 [node name="legs_armor" type="AnimatedSprite" parent="animatedSprite"]
 visible = false
 material = ExtResource( 48 )
 frames = ExtResource( 33 )
-animation = "idle"
+animation = "empty"
 script = ExtResource( 43 )
 
 [node name="ultimate_armor" type="AnimatedSprite" parent="animatedSprite"]
 visible = false
-material = SubResource( 46 )
+material = ExtResource( 122 )
 frames = ExtResource( 120 )
 animation = "idle"
 
 [node name="ultimate_canon" type="AnimatedSprite" parent="animatedSprite"]
 visible = false
-material = SubResource( 46 )
+material = ExtResource( 122 )
 frames = ExtResource( 121 )
 animation = "idle"
 
@@ -444,6 +431,14 @@ _animatedSprite = NodePath("..")
 
 [node name="afterImages" type="Node" parent="animatedSprite"]
 script = ExtResource( 44 )
+frequency = 0.055
+duration = 0.35
+initial_color = Color( 0.435294, 0.419608, 0.913725, 0.47451 )
+final_color = Color( 0.258824, 0.172549, 0.576471, 0 )
+
+[node name="NovaStrike" type="Node" parent="animatedSprite"]
+script = ExtResource( 135 )
+active = true
 frequency = 0.055
 duration = 0.35
 initial_color = Color( 0.435294, 0.419608, 0.913725, 0.47451 )
@@ -628,10 +623,10 @@ actions = [ "Event" ]
 animation = "empty"
 
 [node name="LifeSteal" parent="." instance=ExtResource( 73 )]
+active = true
 debug_logs = false
-first_decay = 1.5
-lifesteal_decay = 0.65
-minimum_time_between_heals = 0.33
+first_decay = 0.5
+minimum_time_between_heals = 0.2
 
 [node name="Damage" type="Node2D" parent="."]
 script = ExtResource( 60 )
@@ -652,7 +647,6 @@ position = Vector2( 0, -8 )
 z_index = 5
 frames = SubResource( 44 )
 animation = "sparks"
-frame = 15
 playing = true
 
 [node name="back" type="AnimatedSprite" parent="Damage"]
@@ -660,7 +654,6 @@ visible = false
 position = Vector2( 0, -8 )
 frames = SubResource( 44 )
 animation = "back"
-frame = 6
 playing = true
 
 [node name="Shot" type="Node2D" parent="."]
@@ -668,15 +661,26 @@ script = ExtResource( 85 )
 __meta__ = {
 "_editor_description_": ""
 }
-conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "Nothing" ]
+conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "NovaStrike", "Shoryuuken", "Desperation", "Nothing" ]
 actions = [ "fire" ]
 normal_sprites = ExtResource( 88 )
 arm_pointing_sprites = ExtResource( 89 )
 
 [node name="Icarus Buster" parent="Shot" instance=ExtResource( 72 )]
 active = false
+shots = [ ExtResource( 71 ), ExtResource( 125 ), ExtResource( 127 ), ExtResource( 126 ) ]
 
 [node name="Hermes Buster" parent="Shot" instance=ExtResource( 74 )]
+
+[node name="Ultimate Buster" parent="Shot" instance=ExtResource( 74 )]
+active = false
+shots = [ ExtResource( 130 ), ExtResource( 136 ), ExtResource( 125 ), ExtResource( 137 ) ]
+MainColor1 = Color( 0.301961, 0.329412, 0.490196, 1 )
+MainColor2 = Color( 0.160784, 0.203922, 0.356863, 1 )
+MainColor3 = Color( 0.0745098, 0.133333, 0.278431, 1 )
+MainColor4 = Color( 0.407843, 0.486275, 0.8, 1 )
+MainColor5 = Color( 0.313726, 0.376471, 0.564706, 1 )
+MainColor6 = Color( 0.172549, 0.223529, 0.337255, 1 )
 
 [node name="OpticShield" type="Node" parent="Shot"]
 script = ExtResource( 28 )
@@ -745,7 +749,6 @@ modulate = Color( 1, 0.258824, 0.258824, 0.654902 )
 position = Vector2( -1, 3 )
 z_index = 25
 frames = ExtResource( 32 )
-frame = 9
 playing = true
 
 [node name="XDrive" type="Node2D" parent="Shot"]
@@ -772,7 +775,6 @@ modulate = Color( 0.258824, 0.705882, 1, 0.654902 )
 position = Vector2( -1, 3 )
 z_index = 25
 frames = ExtResource( 32 )
-frame = 9
 playing = true
 
 [node name="node" type="Node" parent="Shot/XDrive"]
@@ -818,6 +820,31 @@ local_coords = false
 process_material = ExtResource( 22 )
 texture = ExtResource( 39 )
 
+[node name="NovaStrike" type="Node2D" parent="Shot"]
+script = ExtResource( 133 )
+__meta__ = {
+"_editor_description_": ""
+}
+active = false
+shots = [ ExtResource( 14 ) ]
+max_shots_alive = 1
+max_charged_shots_alive = 1
+max_ammo = 60.0
+ammo_per_shot = 60.0
+MainColor1 = Color( 0.909804, 0.878431, 0.25098, 1 )
+MainColor2 = Color( 0.945098, 0.6, 0.27451, 1 )
+MainColor3 = Color( 0.670588, 0.313726, 0.266667, 1 )
+MainColor4 = Color( 0.407843, 0.486275, 0.8, 1 )
+MainColor5 = Color( 0.313726, 0.376471, 0.564706, 1 )
+MainColor6 = Color( 0.172549, 0.223529, 0.337255, 1 )
+weapon = ExtResource( 131 )
+
+[node name="break_vfx" type="AnimatedSprite" parent="Shot/NovaStrike"]
+position = Vector2( -1, 3 )
+z_index = 25
+frames = ExtResource( 32 )
+playing = true
+
 [node name="audioStreamPlayer" type="AudioStreamPlayer" parent="Shot"]
 pause_mode = 2
 volume_db = -10.0
@@ -835,9 +862,67 @@ volume_db = -8.0
 pitch_scale = 0.94
 bus = "SFX"
 
+[node name="NovaStrike" type="Node2D" parent="."]
+script = ExtResource( 129 )
+active = false
+conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "Forced", "Desperation" ]
+actions = [ "select_special" ]
+animation = "nova_strike"
+upgraded = false
+
+[node name="sfx" type="AudioStreamPlayer" parent="NovaStrike"]
+pause_mode = 1
+stream = ExtResource( 138 )
+volume_db = -8.0
+pitch_scale = 0.94
+bus = "SFX"
+
+[node name="Shoryuuken" type="Node2D" parent="."]
+script = ExtResource( 134 )
+active = false
+conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "Forced", "Shot", "Desperation" ]
+actions = [ "alt_fire" ]
+animation = "shoryuuken_rolling"
+horizontal_velocity = 150.0
+jump_velocity = 500.0
+
+[node name="whirl" type="AudioStreamPlayer" parent="Shoryuuken"]
+pause_mode = 1
+stream = ExtResource( 139 )
+volume_db = -8.0
+pitch_scale = 0.94
+bus = "SFX"
+
+[node name="fire" type="AudioStreamPlayer" parent="Shoryuuken"]
+pause_mode = 1
+stream = ExtResource( 140 )
+volume_db = -8.0
+pitch_scale = 0.94
+bus = "SFX"
+
+[node name="Desperation" type="Node2D" parent="."]
+script = ExtResource( 132 )
+active = false
+conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "Forced" ]
+actions = [ "select_special" ]
+animation = "nova_strike"
+
+[node name="sfx" type="AudioStreamPlayer" parent="Desperation"]
+pause_mode = 1
+stream = ExtResource( 138 )
+volume_db = -8.0
+pitch_scale = 0.94
+bus = "SFX"
+
+[node name="victory" type="AudioStreamPlayer2D" parent="Desperation"]
+stream = ExtResource( 4 )
+volume_db = -8.0
+max_distance = 600.0
+bus = "SFX"
+
 [node name="Charge" type="Node2D" parent="."]
 script = ExtResource( 82 )
-conflicting_moves = [ "Death", "WeaponStasis", "Nothing" ]
+conflicting_moves = [ "Death", "WeaponStasis", "Shoryuuken", "Desperation", "Nothing" ]
 actions = [ "fire" ]
 sound = ExtResource( 38 )
 super_charged_sound = ExtResource( 112 )
@@ -862,7 +947,7 @@ script = ExtResource( 86 )
 __meta__ = {
 "_editor_description_": ""
 }
-conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "Nothing" ]
+conflicting_moves = [ "Death", "WeaponStasis", "Damage", "Ride", "NovaStrike", "Shoryuuken", "Desperation", "Nothing" ]
 actions = [ "alt_fire" ]
 normal_sprites = ExtResource( 88 )
 arm_pointing_sprites = ExtResource( 89 )
@@ -876,11 +961,11 @@ max_charged_shots_alive = 0
 
 [node name="DashWallJump" type="Node2D" parent="."]
 script = ExtResource( 97 )
-conflicting_moves = [ "DashWallJump", "WallJump", "AirDash" ]
+conflicting_moves = [ "DashWallJump", "WallJump", "AirDash", "NovaStrike", "Shoryuuken", "Desperation" ]
 actions = [ "jump" ]
 animation = "walljump"
 sound = ExtResource( 100 )
-horizontal_velocity = 210.0
+horizontal_velocity = 260.0
 shot_pos_adjust = Vector2( 4, 0 )
 leeway_time = 0.0
 minimum_upwards_time = 0.235
@@ -894,7 +979,7 @@ bus = "SFX"
 
 [node name="WallJump" type="Node2D" parent="."]
 script = ExtResource( 59 )
-conflicting_moves = [ "WallJump", "DashWallJump", "AirDash" ]
+conflicting_moves = [ "WallJump", "DashWallJump", "AirDash", "NovaStrike", "Shoryuuken", "Desperation" ]
 actions = [ "jump" ]
 animation = "walljump"
 sound = ExtResource( 100 )
@@ -910,11 +995,11 @@ bus = "SFX"
 
 [node name="AirDash" type="Node2D" parent="."]
 script = ExtResource( 98 )
-conflicting_moves = [ "DashWallJump", "WallJump", "WallSlide", "DashJump", "AirDash", "AirJump" ]
+conflicting_moves = [ "DashWallJump", "WallJump", "WallSlide", "DashJump", "AirDash", "AirJump", "NovaStrike", "Shoryuuken", "Desperation" ]
 actions = [ "dash" ]
 animation = "dash"
 sound = ExtResource( 101 )
-horizontal_velocity = 210.0
+horizontal_velocity = 260.0
 dash_duration = 0.475
 leeway = 0.0
 shot_pos_adjust = Vector2( 14, 4 )
@@ -948,7 +1033,6 @@ position = Vector2( 0, -4 )
 z_index = 4
 frames = ExtResource( 88 )
 animation = "dash"
-frame = 15
 playing = true
 
 [node name="particles2D" type="Particles2D" parent="AirDash"]
@@ -977,7 +1061,7 @@ text = "3w"
 
 [node name="WallSlide" type="Node2D" parent="."]
 script = ExtResource( 64 )
-conflicting_moves = [ "WallJump", "DashWallJump", "Walk" ]
+conflicting_moves = [ "WallJump", "DashWallJump", "Walk", "NovaStrike", "Shoryuuken", "Desperation" ]
 actions = [ "move_right", "move_left" ]
 animation = "slide"
 sound = ExtResource( 99 )
@@ -990,11 +1074,11 @@ bus = "SFX"
 
 [node name="DashJump" type="Node2D" parent="."]
 script = ExtResource( 95 )
-conflicting_moves = [ "WallSlide", "WallJump", "DashWallJump", "AirJump", "AirDash" ]
+conflicting_moves = [ "WallSlide", "WallJump", "DashWallJump", "AirJump", "AirDash", "NovaStrike", "Shoryuuken", "Desperation" ]
 actions = [ "jump" ]
 animation = "jump"
 sound = ExtResource( 100 )
-horizontal_velocity = 210.0
+horizontal_velocity = 260.0
 shot_pos_adjust = Vector2( 4, 0 )
 
 [node name="audioStreamPlayer" type="AudioStreamPlayer" parent="DashJump"]
@@ -1003,7 +1087,7 @@ bus = "SFX"
 
 [node name="Jump" type="Node2D" parent="."]
 script = ExtResource( 91 )
-conflicting_moves = [ "DashJump", "WallSlide", "AirDash", "WallJump", "DashWallJump", "AirJump" ]
+conflicting_moves = [ "DashJump", "WallSlide", "AirDash", "WallJump", "DashWallJump", "AirJump", "NovaStrike", "Shoryuuken", "Desperation" ]
 actions = [ "jump" ]
 animation = "jump"
 sound = ExtResource( 100 )
@@ -1018,7 +1102,7 @@ script = ExtResource( 105 )
 __meta__ = {
 "_editor_description_": ""
 }
-conflicting_moves = [ "WallSlide", "AirDash" ]
+conflicting_moves = [ "WallSlide", "AirDash", "NovaStrike", "Shoryuuken", "Desperation" ]
 actions = [ "jump" ]
 animation = "jump"
 sound = ExtResource( 100 )
@@ -1050,11 +1134,11 @@ fade_out = true
 
 [node name="Dash" type="Node2D" parent="."]
 script = ExtResource( 93 )
-conflicting_moves = [ "Jump", "DashJump", "WallJump", "WallSlide", "AirDash" ]
+conflicting_moves = [ "Jump", "DashJump", "WallJump", "WallSlide", "AirDash", "NovaStrike", "Shoryuuken", "Desperation" ]
 actions = [ "dash" ]
 animation = "dash"
 sound = ExtResource( 101 )
-horizontal_velocity = 210.0
+horizontal_velocity = 260.0
 
 [node name="audioStreamPlayer" type="AudioStreamPlayer" parent="Dash"]
 pause_mode = 2
@@ -1085,7 +1169,6 @@ position = Vector2( 0, -4 )
 z_index = 4
 frames = ExtResource( 88 )
 animation = "dash"
-frame = 15
 playing = true
 
 [node name="particles2D" type="Particles2D" parent="Dash"]
@@ -1106,7 +1189,7 @@ fade_out = true
 
 [node name="Walk" type="Node2D" parent="."]
 script = ExtResource( 92 )
-conflicting_moves = [ "Dash", "Jump", "WallJump", "DashJump", "Fall" ]
+conflicting_moves = [ "Dash", "Jump", "WallJump", "DashJump", "Fall", "NovaStrike", "Shoryuuken", "Desperation" ]
 actions = [ "move_right", "move_left" ]
 animation = "walk"
 
@@ -1184,9 +1267,16 @@ bus = "SFX"
 [node name="CharSwitchRevive" type="Node" parent="."]
 script = ExtResource( 124 )
 
+[node name="Axl_Buff_Other_Character" parent="." instance=ExtResource( 128 )]
+player_x = true
+initial_color = Color( 0, 0.25098, 0.992157, 1 )
+final_color = Color( 0.12549, 0.188235, 0.501961, 1 )
+
 [connection signal="at_max_hp" from="." to="Damage" method="set_death_protection"]
 [connection signal="zero_health" from="." to="animatedSprite/afterImages" method="deactivate"]
 [connection signal="max_subtank_used" from="Subtanks" to="Damage" method="set_death_protection"]
 [connection signal="ability_start" from="Forced" to="Shot/DriftDiamond" method="_on_Forced_ability_start"]
 [connection signal="activated" from="Shot/XDrive" to="animatedSprite/afterImages" method="activate"]
 [connection signal="deactivated" from="Shot/XDrive" to="animatedSprite/afterImages" method="deactivate"]
+[connection signal="activated" from="Shot/NovaStrike" to="animatedSprite/NovaStrike" method="activate"]
+[connection signal="deactivated" from="Shot/NovaStrike" to="animatedSprite/NovaStrike" method="deactivate"]

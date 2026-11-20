@@ -2,6 +2,12 @@ extends Character
 
 export  var skip_intro: bool = false
 
+onready var x_sprites: Resource = preload("res://src/Actors/Player/x_sprites/x.res")
+onready var x_sprites_arm: Resource = preload("res://src/Actors/Player/x_sprites/x_leftarm.res")
+onready var x_x8_sprites: Resource = preload("res://X_mod/X8/Sprites/X_X8.tres")
+onready var x_x8_sprites_arm: Resource = preload("res://X_mod/X8/Sprites/X_X8_leftarm.tres")
+onready var normal_material: Material = preload("res://src/Effects/Materials/Player_Material_Shader.tres")
+
 var current_armor: Array = ["no_head", "no_body", "no_arms", "no_legs"]
 var armor_sprites: Array = []
 var flash_timer: float = 0.0
@@ -14,8 +20,6 @@ var using_upgrades: bool = false
 var grabbed: bool = false
 var ride_eject_delay: float = 0.0
 onready var lowjumpcast: Label = $lowjumpcast
-
-var execute_nova_strike: bool = false
 
 signal walljump
 signal wallslide
@@ -121,10 +125,45 @@ func _ready() -> void :
 	Event.listen("collected", self, "collect")
 	listen("land", self, "on_land")
 	save_original_colors()
+	set_sprite()
+	call("equip_parts", "collectible")
 	armor_sprites = get_armor_sprites()
+	CharacterManager.weaponget = false
 	if is_current_player:
 		GameManager.set_player(self)
 		Event.call_deferred("emit_signal", "player_set")
+	if not "desperation_nova_strike" in GameManager.collectibles:
+		GameManager.add_collectible_to_savedata("desperation_nova_strike")
+	
+	Event.emit_signal("is_zashiko_ultimate_x")
+	CharacterManager.switch_armor_in_stage = false
+	print("start level as zashiko ultimate x, need block switch armor")
+
+func set_sprite():
+	if CharacterManager.hide_x_armor:
+		if CharacterManager.use_old_sprite:
+			get_node("animatedSprite").frames = x_sprites
+			get_node("animatedSprite").material = normal_material
+			get_node("Shot").normal_sprites = x_sprites
+			get_node("Shot").arm_pointing_sprites = x_sprites_arm
+			get_node("AltFire").normal_sprites = x_sprites
+			get_node("AltFire").arm_pointing_sprites = x_sprites_arm
+		else:
+			get_node("animatedSprite").frames = x_x8_sprites
+			get_node("animatedSprite").material = normal_material
+			get_node("Shot").normal_sprites = x_x8_sprites
+			get_node("Shot").arm_pointing_sprites = x_x8_sprites_arm
+			get_node("AltFire").normal_sprites = x_x8_sprites
+			get_node("AltFire").arm_pointing_sprites = x_x8_sprites_arm
+		get_node("Shot").get_node("NovaStrike").MainColor1 = Color("#0080f8")
+		get_node("Shot").get_node("NovaStrike").MainColor2 = Color("#0040f0")
+		get_node("Shot").get_node("NovaStrike").MainColor3 = Color("#203080")
+		get_node("Shot").get_node("NovaStrike").OriginalMainColor1 = Color("#0080f8")
+		get_node("Shot").get_node("NovaStrike").OriginalMainColor2 = Color("#0040f0")
+		get_node("Shot").get_node("NovaStrike").OriginalMainColor3 = Color("#203080")
+		get_node("Shot").get_node("NovaStrike").MainColor4 = Color("#78d8f0")
+		get_node("Shot").get_node("NovaStrike").MainColor5 = Color("#50a0f0")
+		get_node("Shot").get_node("NovaStrike").MainColor6 = Color("#1858b0")
 
 func get_armor_sprites() -> Array:
 	var sprites = []
@@ -145,7 +184,7 @@ func process_flash(delta):
 			end_flash()
 	
 func equip_ultima_head_parts():
-	get_node("Charge").charge_time_reduction = 0.35
+	get_node("Charge").charge_time_reduction = 0.60
 	get_node("JumpDamage").activate()
 
 func equip_ultima_body_parts():
@@ -153,7 +192,14 @@ func equip_ultima_body_parts():
 	dmg.damage_reduction = 50
 	dmg.prevent_knockbacks = true
 	dmg.conflicting_moves = ["Death", "Nothing"]
-	get_node("LifeSteal").activate()
+	var lifesteal = get_node("LifeSteal")
+	lifesteal.activate()
+	lifesteal.first_decay = 999999.0
+	lifesteal.lifesteal_decay = 999999.0
+	lifesteal.minimum_time_between_heals = 0.1
+	
+	get_node("Desperation").desperation_reduce_ammo = 1.5
+	get_node("Desperation").desperation_damage = 16
 
 func equip_ultima_arms_parts():
 	var cannon = get_node("Shot")
@@ -183,33 +229,57 @@ func equip_ultima_legs_parts():
 	airdash.max_airdashes = 2
 	airdash.airdash_count = 2
 	
-	dash.get_node("particles2D").texture = load("res://src/Effects/Textures/follow_shot_ultimate.png")
-	airdash.get_node("particles2D").texture = load("res://src/Effects/Textures/follow_shot_ultimate.png")
+	if not CharacterManager.hide_x_armor:
+		dash.get_node("particles2D").texture = load("res://src/Effects/Textures/follow_shot_ultimate.png")
+		airdash.get_node("particles2D").texture = load("res://src/Effects/Textures/follow_shot_ultimate.png")
 	
 	airjump.set_max_air_jumps(4)
-	get_node("Jump").max_jump_time = 0.625
-	get_node("Jump").jump_velocity = 320
-	get_node("DashJump").max_jump_time = 0.625
-	get_node("DashJump").jump_velocity = 320
-	get_node("WallJump").max_jump_time = 0.625
-	get_node("WallJump").jump_velocity = 320
-	get_node("DashWallJump").max_jump_time = 0.625
-	get_node("DashWallJump").jump_velocity = 320
-	airjump.jump_velocity = 190
+	get_node("Jump").max_jump_time = 0.75
+	get_node("Jump").jump_velocity = 420
+	get_node("DashJump").max_jump_time = 0.75
+	get_node("DashJump").jump_velocity = 420
+	get_node("WallJump").max_jump_time = 0.75
+	get_node("WallJump").jump_velocity = 420
+	get_node("DashWallJump").max_jump_time = 0.75
+	get_node("DashWallJump").jump_velocity = 420
+	airjump.jump_velocity = 240
 	
 	get_node("Walk").horizontal_velocity = 120
 	get_node("Jump").horizontal_velocity = 120
-	get_node("Jump").dash_momentum = 250
-	get_node("DashJump").horizontal_velocity = 250
+	get_node("Jump").dash_momentum = 320
+	get_node("DashJump").horizontal_velocity = 320
 	get_node("WallJump").horizontal_velocity = 120
-	get_node("DashWallJump").horizontal_velocity = 250
+	get_node("DashWallJump").horizontal_velocity = 320
 	airjump.horizontal_velocity = 120
 	airjump.normal_momentum = 120
-	airjump.dash_momentum = 250
-	dash.horizontal_velocity = 250
-	airdash.horizontal_velocity = 250
+	airjump.dash_momentum = 320
+	dash.horizontal_velocity = 320
+	airdash.horizontal_velocity = 320
 	fall.horizontal_velocity = 120
-	fall.dash_momentum = 250
+	fall.normal_momentum = 120
+	fall.dash_momentum = 320
+
+func equip_axl_flameburner_parts() -> void :
+	var dmg_multiplikator = 1.5
+	var shot_node = get_node("Shot").get_children()
+	var alt_shot_node = get_node("AltFire").get_children()
+	for buster in shot_node:
+		if buster is Weapon or buster is BossWeapon:
+			buster.extra_damage = dmg_multiplikator
+	for alt_buster in alt_shot_node:
+		if alt_buster is Weapon or alt_buster is BossWeapon:
+			alt_buster.extra_damage = dmg_multiplikator
+	
+func equip_cancel_axl_flameburner_parts() -> void :
+	var dmg_multiplikator = 1.0
+	var shot_node = get_node("Shot").get_children()
+	var alt_shot_node = get_node("AltFire").get_children()
+	for buster in shot_node:
+		if buster is Weapon or buster is BossWeapon:
+			buster.extra_damage = dmg_multiplikator
+	for alt_buster in alt_shot_node:
+		if alt_buster is Weapon or alt_buster is BossWeapon:
+			alt_buster.extra_damage = dmg_multiplikator
 
 func is_full_armor() -> String:
 	return "ultimate"
@@ -221,6 +291,13 @@ func equip_parts(collectible: String):
 	call("equip_ultima_legs_parts")
 	emit_signal("equipped_armor")
 	using_upgrades = true
+		
+	if CharacterManager.player_desperation:
+		get_node("Desperation").active = true
+		using_upgrades = true
+		
+	if CharacterManager.ultimate_buster:
+		using_upgrades = true
 		
 	if is_heart(collectible):
 		equip_heart()
@@ -315,37 +392,59 @@ func save_original_colors():
 func change_palette(new_colors, paint_armor: = true):
 	if not animatedSprite:
 		animatedSprite = get_node("animatedSprite")
+	set_new_colors_on_shader_parameters(animatedSprite, new_colors)
 	if paint_armor:
 		set_new_colors_on_shader_parameters(animatedSprite, new_colors)
 	else:
 		reset_colors_for_armor_on_shader_parameters(animatedSprite)
 
 func set_new_colors_on_shader_parameters(object, new_colors) -> void :
-	object.material.set_shader_param("R_ArmorColor1", new_colors[0])
-	object.material.set_shader_param("R_ArmorColor2", new_colors[1])
-	object.material.set_shader_param("R_ArmorColor3", new_colors[2])
+	if not CharacterManager.hide_x_armor:
+		object.material.set_shader_param("R_ArmorColor1", new_colors[0])
+		object.material.set_shader_param("R_ArmorColor2", new_colors[1])
+		object.material.set_shader_param("R_ArmorColor3", new_colors[2])
 	
-	object.material.set_shader_param("R_MainColor4", new_colors[3])
-	object.material.set_shader_param("R_MainColor5", new_colors[4])
-	object.material.set_shader_param("R_MainColor6", new_colors[5])
+		object.material.set_shader_param("R_MainColor4", new_colors[3])
+		object.material.set_shader_param("R_MainColor5", new_colors[4])
+		object.material.set_shader_param("R_MainColor6", new_colors[5])
+	else:
+		object.material.set_shader_param("R_MainColor1", new_colors[0])
+		object.material.set_shader_param("R_MainColor2", new_colors[1])
+		object.material.set_shader_param("R_MainColor3", new_colors[2])
+		object.material.set_shader_param("R_MainColor4", new_colors[3])
+		object.material.set_shader_param("R_MainColor5", new_colors[4])
+		object.material.set_shader_param("R_MainColor6", new_colors[5])
 	
 func reset_colors_for_armor_on_shader_parameters(object) -> void :
-	object.material.set_shader_param("R_MainColor1", Color("#4d547d"))
-	object.material.set_shader_param("R_MainColor2", Color("#29345b"))
-	object.material.set_shader_param("R_MainColor3", Color("#132247"))
+	if not CharacterManager.hide_x_armor:
+		object.material.set_shader_param("R_MainColor1", Color("#4d547d"))
+		object.material.set_shader_param("R_MainColor2", Color("#29345b"))
+		object.material.set_shader_param("R_MainColor3", Color("#132247"))
 	
-	object.material.set_shader_param("R_MainColor4", Color("#687ccc"))
-	object.material.set_shader_param("R_MainColor5", Color("#506090"))
-	object.material.set_shader_param("R_MainColor6", Color("#2c3956"))
+		object.material.set_shader_param("R_MainColor4", Color("#687ccc"))
+		object.material.set_shader_param("R_MainColor5", Color("#506090"))
+		object.material.set_shader_param("R_MainColor6", Color("#2c3956"))
 	
-	object.material.set_shader_param("R_CrystalColor1", Color("#d77be6"))
-	object.material.set_shader_param("R_CrystalColor2", Color("#8d2bba"))
-	object.material.set_shader_param("R_CrystalColor3", Color("#60008d"))
-	object.material.set_shader_param("R_CrystalColor4", Color("#ffb4ff"))
+		object.material.set_shader_param("R_CrystalColor1", Color("#d77be6"))
+		object.material.set_shader_param("R_CrystalColor2", Color("#8d2bba"))
+		object.material.set_shader_param("R_CrystalColor3", Color("#60008d"))
+		object.material.set_shader_param("R_CrystalColor4", Color("#ffb4ff"))
 	
-	object.material.set_shader_param("R_ArmorColor1", Color("#e8e040"))
-	object.material.set_shader_param("R_ArmorColor2", Color("#f19946"))
-	object.material.set_shader_param("R_ArmorColor3", Color("#ab5044"))
+		object.material.set_shader_param("R_ArmorColor1", Color("#e8e040"))
+		object.material.set_shader_param("R_ArmorColor2", Color("#f19946"))
+		object.material.set_shader_param("R_ArmorColor3", Color("#ab5044"))
+	else:
+		object.material.set_shader_param("R_MainColor1", Color("#0080f8"))
+		object.material.set_shader_param("R_MainColor2", Color("#0040f0"))
+		object.material.set_shader_param("R_MainColor3", Color("#203080"))
+		object.material.set_shader_param("R_MainColor4", Color("#78d8f0"))
+		object.material.set_shader_param("R_MainColor5", Color("#50a0f0"))
+		object.material.set_shader_param("R_MainColor6", Color("#1858b0"))
+
+		object.material.set_shader_param("R_CrystalColor1", Color("#f0f0f0"))
+		object.material.set_shader_param("R_CrystalColor2", Color("#f04010"))
+		object.material.set_shader_param("R_CrystalColor3", Color("#722237"))
+		object.material.set_shader_param("R_CrystalColor4", Color("#ffb4ff"))
 
 func disable_collision():
 	colliding = false

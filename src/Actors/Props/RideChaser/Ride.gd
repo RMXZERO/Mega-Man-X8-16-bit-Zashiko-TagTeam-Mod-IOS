@@ -26,13 +26,15 @@ func is_able_to_ride(_body) -> bool:
 	if GameManager.player:
 		if not GameManager.player.listening_to_inputs:
 			return false
+		if not GameManager.player.can_eject:
+			return false
 	if character.has_health() and not get_tree().paused:
 		if _body.is_in_group("Props"):
 			return false
 		elif _body.is_in_group("Player") and GameManager.player.ride == null:
 			var collider = _body.get_character()
 			if collider == GameManager.player:
-				if collider.listening_to_inputs and rider == null and collider != character and collider != recent_rider:
+				if collider.listening_to_inputs and collider.can_eject and rider == null and collider != character and collider != recent_rider:
 					var non_states := ["Ride","Forced","Finish","Intro"]
 					if not collider.is_executing_either(non_states):
 						return true
@@ -55,6 +57,8 @@ func make_rider(_body: Node) -> void:
 	_OnPlayerAssumeControl()
 	Log("Controlled by " + rider.name)
 	ExecuteOnce()
+	yield(get_tree().create_timer(0.001), "timeout")
+	Input.action_release("auto_charge")
 
 func parent_rider_to_self():
 	rider_original_parent = rider.get_parent()
@@ -66,6 +70,14 @@ func eject():
 	remove_rider()
 	_Eject()
 	rider = null
+	auto_charge()
+
+func auto_charge() -> void:
+	yield(get_tree().create_timer(0.01), "timeout")
+	if CharacterManager.player_character == "X" or CharacterManager.player_character == "Alia":
+		if CharacterManager.auto_charge and not GameManager.player.is_executing("Ride"):
+			if not character.get_action_pressed("auto_charge"):
+				Input.action_press("auto_charge")
 
 func enemy_eject():
 	remove_rider()
@@ -91,7 +103,6 @@ func remove_rider():
 		rider.enable_collision()
 		rider.eject(character)
 	character.stop_listening_to_inputs()
-
 
 func return_rider_to_original_parent():
 	get_parent().remove_child(rider)

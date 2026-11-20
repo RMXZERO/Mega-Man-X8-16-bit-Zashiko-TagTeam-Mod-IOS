@@ -1,6 +1,12 @@
 extends WallSlideZero
 class_name SaberZeroX8Wall
 
+onready var zbuster: PackedScene = preload("res://Zero_mod/X8/Sprites/zbuster/object/zbuster.tscn")
+onready var shingetsurin: PackedScene = preload("res://Zero_mod/X8/Sprites/zbuster/object/shingetsurin.tscn")
+onready var use_genmu: Node2D = $"../Special/Genmuzero"
+var creator: Node2D
+var use_shingetsurin: bool = false
+
 export  var saber_hitbox: PackedScene = preload("res://Zero_mod/Player/Hitboxes/Saber_Hitbox.tscn")
 export  var upgraded: = false
 export  var damage: float = 4.0
@@ -10,7 +16,13 @@ export  var hitbox_break_guards: bool = false
 
 onready var animatedSprite = character.get_node("animatedSprite")
 onready var saber_sound: AudioStreamPlayer = $saber
+onready var bfan_sound: AudioStreamPlayer = $bfan
+onready var dglaive_sound: AudioStreamPlayer = $dglaive
 onready var breaker_sound: AudioStreamPlayer = $breaker
+onready var zbuster_sound: AudioStreamPlayer = $zbuster
+onready var shingetsurin_sound: AudioStreamPlayer = $shingetsurin
+onready var rogueslash_sound: AudioStreamPlayer = $rogueslash
+onready var sigmablade_sound: AudioStreamPlayer = $sigmablade
 
 var current_hitbox = null
 var hitbox_upleft: Vector2 = Vector2(0, 0)
@@ -25,6 +37,7 @@ var hitbox_extra_damage: float = 1
 var hitbox_extra_damage_boss: float = 1
 var hitbox_extra_damage_weakness: float = 1
 var hitbox_extra_break_guard_value: float = 1
+var hitbox_extra_scale: float = 1
 var deflectable: bool = false
 var deflectable_type: int = 0
 var only_deflect_weak: bool = false
@@ -33,7 +46,6 @@ var ending_saber_state: bool = false
 var slashing: bool = false
 var slashes = 0
 var vertical_last = 0
-
 
 func _ready() -> void :
 	animatedSprite.connect("animation_finished", self, "_on_animation_finished")
@@ -94,6 +106,7 @@ func spawn_hitbox(_hitbox_upleft: Vector2, _hitbox_downright: Vector2):
 	current_hitbox.deflectable = deflectable
 	current_hitbox.deflectable_type = deflectable_type
 	current_hitbox.only_deflect_weak = only_deflect_weak
+	current_hitbox.scale *= hitbox_extra_scale
 
 func hitbox_and_position():
 	if character.saber_node.current_weapon.name == "Saber":
@@ -102,9 +115,9 @@ func hitbox_and_position():
 		hitbox_damage_weakness = damage_weakness
 		hitbox_break_guard_value = 0.25
 		hitbox_break_guards = false
-		if animatedSprite.frame >= 2 and animatedSprite.frame < 4:
+		if animatedSprite.frame >= 2 and animatedSprite.frame < 6:
 			hitbox_upleft = Vector2(0, - 40)
-			hitbox_downright = Vector2(61, 17)
+			hitbox_downright = Vector2(61, 45)
 			spawn_hitbox(hitbox_upleft, hitbox_downright)
 
 	if character.saber_node.current_weapon.name == "B-Fan":
@@ -113,9 +126,9 @@ func hitbox_and_position():
 		hitbox_damage_weakness = damage_weakness
 		hitbox_break_guard_value = 0.25
 		hitbox_break_guards = false
-		if animatedSprite.frame >= 2 and animatedSprite.frame < 4:
+		if animatedSprite.frame >= 2 and animatedSprite.frame < 6:
 			hitbox_upleft = Vector2(0, - 40)
-			hitbox_downright = Vector2(71, 40)
+			hitbox_downright = Vector2(71, 55)
 			spawn_hitbox(hitbox_upleft, hitbox_downright)
 
 	elif character.saber_node.current_weapon.name == "D-Glaive":
@@ -138,6 +151,10 @@ func hitbox_and_position():
 			hitbox_upleft = Vector2(59, 20)
 			hitbox_downright = Vector2(112, 40)
 			spawn_hitbox(hitbox_upleft, hitbox_downright)
+		elif animatedSprite.frame >= 4 and animatedSprite.frame < 6:
+			hitbox_upleft = Vector2(20, 40)
+			hitbox_downright = Vector2(90, 115)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
 
 	elif character.saber_node.current_weapon.name == "T-Breaker":
 		hitbox_damage = damage
@@ -149,9 +166,43 @@ func hitbox_and_position():
 			hitbox_upleft = Vector2( - 5, - 68)
 			hitbox_downright = Vector2(75, 0)
 			spawn_hitbox(hitbox_upleft, hitbox_downright)
-		elif animatedSprite.frame >= 3 and animatedSprite.frame < 4:
+		elif animatedSprite.frame >= 3 and animatedSprite.frame < 5:
 			hitbox_upleft = Vector2(18, - 48)
 			hitbox_downright = Vector2(70, 50)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
+
+	elif character.saber_node.current_weapon.name == "Rogue-Blade":
+		hitbox_damage = damage
+		hitbox_damage_boss = damage_boss
+		hitbox_damage_weakness = damage_weakness
+		hitbox_break_guard_value = 0.25
+		hitbox_break_guards = false
+		if animatedSprite.frame >= 2 and animatedSprite.frame < 6:
+			hitbox_upleft = Vector2(0, - 65)
+			hitbox_downright = Vector2(75, 55)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
+
+	elif character.saber_node.current_weapon.name == "Sigma-Blade":
+		hitbox_damage = damage
+		hitbox_damage_boss = damage_boss
+		hitbox_damage_weakness = damage_weakness
+		hitbox_rehit_time = 0.025
+		hitbox_break_guards = true
+		if animatedSprite.frame >= 2 and animatedSprite.frame < 3:
+			hitbox_upleft = Vector2( 0, - 100)
+			hitbox_downright = Vector2(117, -8)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
+		elif animatedSprite.frame >= 3 and animatedSprite.frame < 4:
+			hitbox_upleft = Vector2(35, - 8)
+			hitbox_downright = Vector2(105, 50)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
+		elif animatedSprite.frame >= 4 and animatedSprite.frame < 5:
+			hitbox_upleft = Vector2(5, 15)
+			hitbox_downright = Vector2(100, 95)
+			spawn_hitbox(hitbox_upleft, hitbox_downright)
+		elif animatedSprite.frame >= 5 and animatedSprite.frame < 7:
+			hitbox_upleft = Vector2(5, 15)
+			hitbox_downright = Vector2(38, 95)
 			spawn_hitbox(hitbox_upleft, hitbox_downright)
 
 	reset_hitbox()
@@ -165,10 +216,50 @@ func should_add_saber_combo():
 func set_saber_animations():
 	animatedSprite.animation = "saber_slide"
 	animatedSprite.frame = 0
-	if character.saber_node.current_weapon.name == "T-Breaker":
+	if character.saber_node.current_weapon.name == "Saber":
+		saber_sound.play()
+	elif character.saber_node.current_weapon.name == "B-Fan":
+		bfan_sound.play()
+	elif character.saber_node.current_weapon.name == "D-Glaive":
+		dglaive_sound.play()
+	elif character.saber_node.current_weapon.name == "T-Breaker":
 		breaker_sound.play()
+	elif character.saber_node.current_weapon.name == "Z-Breaker":
+		if use_shingetsurin:
+			shingetsurin_sound.play()
+			create_shingetsurin(global_position)
+		else:
+			zbuster_sound.play()
+			create_zbuster(global_position)
+	elif character.saber_node.current_weapon.name == "Rogue-Blade":
+		rogueslash_sound.play()
+	elif character.saber_node.current_weapon.name == "Sigma-Blade":
+		sigmablade_sound.play()
 	else:
 		saber_sound.play()
+
+
+func create_zbuster(ground_position) -> void :
+	var instance = zbuster.instance()
+	ground_position.y += -3
+	instance.damage = CharacterManager.z_buster_base_damage * hitbox_extra_damage
+	instance.damage_to_bosses = CharacterManager.z_buster_base_damage * hitbox_extra_damage_boss
+	instance.damage_to_weakness = CharacterManager.z_buster_base_damage * hitbox_extra_damage_weakness
+	get_tree().current_scene.get_node("Objects").call_deferred("add_child", instance, true)
+	instance.set_global_position(ground_position)
+	instance.set_creator(creator)
+	instance.call_deferred("initialize", get_facing_direction())
+
+func create_shingetsurin(ground_position) -> void :
+	var instance = shingetsurin.instance()
+	ground_position.y += -3
+	instance.damage = CharacterManager.z_buster_base_damage * hitbox_extra_damage * 2
+	instance.damage_to_bosses = CharacterManager.z_buster_base_damage * hitbox_extra_damage_boss * 2
+	instance.damage_to_weakness = CharacterManager.z_buster_base_damage * hitbox_extra_damage_weakness * 2
+	get_tree().current_scene.get_node("Objects").call_deferred("add_child", instance, true)
+	instance.set_global_position(ground_position)
+	instance.set_creator(creator)
+	instance.call_deferred("initialize", get_facing_direction())
 
 func _StartCondition() -> bool:
 	var _animation = get_parent().get_animation()

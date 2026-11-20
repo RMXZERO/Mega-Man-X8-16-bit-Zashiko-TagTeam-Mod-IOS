@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/dj_dash.ogg-c9a83c161c29896255e80300604b52f4.oggstr"
+
+[deps]
+
+source_file="res://Zero_mod/Boss_DJSigma/SFX/dj_dash.ogg"
+dest_files=[ "res://.import/dj_dash.ogg-c9a83c161c29896255e80300604b52f4.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

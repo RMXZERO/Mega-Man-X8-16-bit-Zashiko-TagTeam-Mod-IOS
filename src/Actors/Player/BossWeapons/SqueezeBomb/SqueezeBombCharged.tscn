@@ -18,7 +18,6 @@ foward_start = 32.0
 
 [node name="animatedSprite" parent="." index="0"]
 animation = "idle_big"
-frame = 12
 
 [node name="collisionShape2D" parent="." index="2"]
 z_index = 0
