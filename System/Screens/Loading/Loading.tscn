@@ -94,7 +94,7 @@ uppercase = true
 
 [node name="scrollContainer" type="ScrollContainer" parent="Menu"]
 margin_left = 66.0
-margin_top = 42.0
+margin_top = 37.0
 margin_right = 332.0
 margin_bottom = 201.0
 theme = ExtResource( 17 )

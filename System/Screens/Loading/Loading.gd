@@ -133,6 +133,11 @@ func set_current_slot(slot: int) -> void :
 func load_all_slots() -> void :
 	for child in save_button_container.get_children():
 		child.free()
+	# 첫 슬롯 위쪽에 여백을 둬서 난이도 글씨(한글)가 스크롤 영역 위에서 잘리지 않게 함
+	var top_spacer: = Control.new()
+	top_spacer.rect_min_size = Vector2(0, 9)
+	top_spacer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	save_button_container.add_child(top_spacer)
 	for slot_index in range(Savefile.max_slots):
 		var btn = SlotButtonScene.instance()
 		save_button_container.add_child(btn)
@@ -329,6 +334,7 @@ func load_all_slots() -> void :
 			focus = btn
 
 	var children: = save_button_container.get_children()
+	children.pop_front()
 	var total: = children.size()
 	for i in range(children.size()):
 		var btn = children[i]
