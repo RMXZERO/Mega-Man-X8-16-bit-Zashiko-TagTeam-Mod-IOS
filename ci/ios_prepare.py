@@ -179,6 +179,7 @@ const BASE_SIZE = Vector2(398.0, 224.0)  # 게임 기준 해상도 (16:9)
 const ASPECT_STRETCH = 0   # 비율 무시, 화면 전체로 늘림
 const ASPECT_KEEP = 1      # 비율 유지 (양옆 검은 띠)
 const ASPECT_WIDE = 2      # 화면 비율에 맞춰 가로로 더 넓게 보이게
+const ASPECT_43 = 3        # 스테이지에서 좌우를 검게 가려 4:3 으로 (캐릭터 크기는 그대로)
 const DEFAULT_ASPECT = __DEFAULT_ASPECT__
 
 var stick_frame = Rect2(0.0265, 0.5353, 0.2470, 0.4095)
@@ -218,6 +219,9 @@ var press_if: Dictionary = {}      # 액션별 눌린 시점의 idle 프레임
 var pending_release: Dictionary = {}  # 게임이 한 번도 못 본 채 떼어진 액션 (보류)
 var last_extra: float = 0.0           # 마지막으로 반영한 '양옆 늘어난 폭의 절반'
 var last_aspect: int = -1             # 마지막으로 적용한 stretch aspect
+var crop_layer = null                 # 4:3 모드 가림막 레이어
+var crop_rects: Array = []            # 가림막 (왼쪽, 오른쪽)
+var hud_layers: Array = []            # HUD 레이어들 (4:3 모드에서 가림막 위로 올림)
 
 
 func _ready() -> void:
@@ -260,6 +264,7 @@ func _process(delta: float) -> void:
 	timer = 0.15
 	_apply_stretch()
 	_update_layer_transform()
+	_update_crop()
 	var want_show = OS.get_name() == "iOS" and Input.get_connected_joypads().size() == 0 and _in_stage()
 	if want_show != shown:
 		set_shown(want_show)
@@ -276,6 +281,49 @@ func aspect_mode() -> int:
 		if v != null:
 			return int(v)
 	return DEFAULT_ASPECT
+
+
+# ---- 4:3 모드: 스테이지에서 화면 좌우를 검게 가려서 4:3 으로 보이게 함 ----
+# 세계 화면만 잘리고(캐릭터 크기는 그대로), HUD 는 가림막 위로 올려서 검은 띠 위에 그대로 보인다.
+# 메뉴/일시정지 화면은 레이어가 더 위라서 잘리지 않는다.
+func _crop_active() -> bool:
+	return aspect_mode() == ASPECT_43 and _in_stage()
+
+
+func _ensure_crop() -> void:
+	if crop_layer != null:
+		return
+	crop_layer = CanvasLayer.new()
+	crop_layer.layer = 1
+	crop_layer.pause_mode = Node.PAUSE_MODE_PROCESS
+	for i in range(2):
+		var r = ColorRect.new()
+		r.color = Color(0, 0, 0, 1)
+		r.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		r.visible = false
+		crop_layer.add_child(r)
+		crop_rects.append(r)
+	get_tree().root.call_deferred("add_child", crop_layer)
+
+
+func _update_crop() -> void:
+	var on = _crop_active()
+	if on:
+		_ensure_crop()
+	if crop_layer != null and crop_rects.size() == 2:
+		var bw = (BASE_SIZE.x - BASE_SIZE.y * 4.0 / 3.0) * 0.5
+		crop_rects[0].rect_position = Vector2(0.0, 0.0)
+		crop_rects[0].rect_size = Vector2(bw, BASE_SIZE.y)
+		crop_rects[1].rect_position = Vector2(BASE_SIZE.x - bw, 0.0)
+		crop_rects[1].rect_size = Vector2(bw, BASE_SIZE.y)
+		crop_rects[0].visible = on
+		crop_rects[1].visible = on
+	for l in hud_layers:
+		if is_instance_valid(l):
+			if on:
+				l.layer = 2
+			else:
+				l.layer = 1
 
 
 # 다른 스크립트(GameManager 등)가 set_screen_stretch 에 넘길 비율 모드
@@ -356,6 +404,11 @@ func _on_node_added(n: Node) -> void:
 func _adopt_layer(l) -> void:
 	if not is_instance_valid(l) or not (l is CanvasLayer):
 		return
+	if l == crop_layer:
+		return
+	var hs = l.get_script()
+	if hs != null and hs.resource_path == "res://src/Levels/HUD.gd" and not hud_layers.has(l):
+		hud_layers.append(l)
 	if l.is_in_group("wide_ui"):
 		return
 	if l.layer >= 120 and l.name != "AchievementsScreen":
@@ -899,9 +952,9 @@ def patch_overlay():
 # 기본 화면 모드: wide(가로로 더 넓게) / stretch(화면 전체로 늘림) / keep(검은 띠).
 # 빌드할 때 환경변수 ASPECT_DEFAULT 로 바꿀 수 있음 (게임 옵션 'Aspect Ratio' 에서도 바꿀 수 있음)
 ASPECT_DEFAULT = os.environ.get("ASPECT_DEFAULT", "wide").strip().lower()
-ASPECT_NUM = {"stretch": 0, "keep": 1, "wide": 2}
+ASPECT_NUM = {"stretch": 0, "keep": 1, "wide": 2, "4:3": 3}
 if ASPECT_DEFAULT not in ASPECT_NUM:
-    sys.exit("[error] ASPECT_DEFAULT 는 wide / stretch / keep 중 하나여야 함: " + ASPECT_DEFAULT)
+    sys.exit("[error] ASPECT_DEFAULT 는 wide / 4:3 / stretch / keep 중 하나여야 함: " + ASPECT_DEFAULT)
 
 
 def _sub(path, old, new, label):
@@ -948,13 +1001,13 @@ def patch_stretch():
     # 3) 옵션 'Aspect Ratio': 값 2(WIDE) 추가, 기본값은 ASPECT_DEFAULT
     opt = "src/Options/Fullscreen.gd"
     first = ASPECT_NUM[ASPECT_DEFAULT]
-    order = [first] + [v for v in (2, 0, 1) if v != first]
+    order = [first] + [v for v in (2, 3, 0, 1) if v != first]
     _sub(opt, "var aspect_options = [0, 1]\n",
          "var aspect_options = [" + ", ".join(str(v) for v in order) + "]\n", "옵션 순환 목록")
     _sub(opt,
          "\t\tget_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_KEEP, GameManager.Resolution)\n",
          "\t\tget_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, SceneTree.STRETCH_ASPECT_KEEP, GameManager.Resolution)\n"
-         "\telif aspect_value == 2:\n"
+         "\telif aspect_value >= 2:\n"
          "\t\tget_tree().set_screen_stretch(SceneTree.STRETCH_MODE_2D, IOSTouchOverlay.aspect(), GameManager.Resolution)\n",
          "WIDE 적용")
     _sub(opt,
@@ -962,6 +1015,11 @@ def patch_stretch():
          "\t\telif get_aspect_ratio() == 1:\n\t\t\tdisplay_value(\"KEEP_VALUE\")\n"
          "\t\telif get_aspect_ratio() == 2:\n\t\t\tdisplay_value(\"WIDE\")\n",
          "WIDE 표시")
+    _sub(opt,
+         "\t\telif get_aspect_ratio() == 2:\n\t\t\tdisplay_value(\"WIDE\")\n",
+         "\t\telif get_aspect_ratio() == 2:\n\t\t\tdisplay_value(\"WIDE\")\n"
+         "\t\telif get_aspect_ratio() == 3:\n\t\t\tdisplay_value(\"4:3\")\n",
+         "4:3 표시")
     _sub(opt, "func get_aspect_ratio():\n\treturn Configurations.get(\"Aspect\")\n",
          "func get_aspect_ratio():\n\treturn IOSTouchOverlay.aspect_mode()\n", "Aspect 기본값")
 
