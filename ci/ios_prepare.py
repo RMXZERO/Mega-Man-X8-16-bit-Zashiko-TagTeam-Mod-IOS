@@ -531,11 +531,38 @@ func _stick_vector(sf: Rect2, cap: Dictionary) -> Vector2:
 	return n / mag * rescaled
 
 
+# 안내 화면 -> 서명 -> 크레딧 -> 캡콤 로고 연출 -> 타이틀 까지는 화면 아무 곳이나 터치하면 넘어간다.
+# (안드로이드판은 화면 전체 투명 버튼으로 하던 것을 iOS 에서는 지우기 때문에 여기서 대신 pause 입력을 보냄)
+const TITLE_FLOW_SCENES = [
+	"res://src/Title/DisclaimerScreen.tscn",
+	"res://src/Title/IntroAlysson.tscn",
+	"res://System/Screens/Title/CreditStartScreen.tscn",
+]
+
+
+func _title_flow_active() -> bool:
+	var sc = get_tree().current_scene
+	if sc == null:
+		return false
+	var f = sc.filename
+	if TITLE_FLOW_SCENES.has(f):
+		return true
+	if f == "res://src/Title/IntroCapcom.tscn":
+		# 타이틀 메뉴가 열리기 전(잠겨 있는 동안)만
+		var mm = sc.get_node_or_null("MainMenu")
+		return mm != null and mm.get("locked") == true
+	return false
+
+
 func _input(event: InputEvent) -> void:
 	if OS.get_name() != "iOS":
 		return
 	if event is InputEventScreenTouch:
 		if event.pressed:
+			if _title_flow_active():
+				_send_action("pause", true)
+				_send_action("pause", false)
+				return
 			var p = event.position
 			var pp = _to_pad(p)
 			var id = ""
