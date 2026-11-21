@@ -219,6 +219,7 @@ var press_pf: Dictionary = {}      # 액션별 눌린 시점의 물리 프레임
 var press_if: Dictionary = {}      # 액션별 눌린 시점의 idle 프레임
 var pending_release: Dictionary = {}  # 게임이 한 번도 못 본 채 떼어진 액션 (보류)
 var last_extra: float = 0.0           # 마지막으로 반영한 '양옆 늘어난 폭의 절반'
+var last_crop: bool = false           # 마지막으로 반영한 4:3 가림막 상태
 var last_aspect: int = -1             # 마지막으로 적용한 stretch aspect
 var crop_layer = null                 # 4:3 모드 가림막 레이어
 var crop_rects: Array = []            # 가림막 (왼쪽, 오른쪽)
@@ -234,6 +235,8 @@ var hud_layers: Array = []            # HUD 레이어들 (4:3 모드에서 가�
 func _ready() -> void:
 	layer = 100
 	pause_mode = Node.PAUSE_MODE_PROCESS
+	if OS.get_name() == "iOS":
+		TranslationServer.set_locale("ko")  # 한국어만 지원
 	canvas = Control.new()
 	canvas.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(canvas)
@@ -313,18 +316,43 @@ func _ensure_crop() -> void:
 	get_tree().root.call_deferred("add_child", crop_layer)
 
 
+# 4:3 영역 양옆을 가리는 폭 (게임 좌표)
+func _crop_bw() -> float:
+	return (BASE_SIZE.x - BASE_SIZE.y * 4.0 / 3.0) * 0.5
+
+
+# 카메라가 쓰는 화면 폭. 4:3 모드에서는 보이는 폭(4:3)만큼만 써서
+# 카메라 한계 끝에서 캐릭터가 가림막(검은 띠) 안으로 들어가지 않게 한다
+func camera_width() -> float:
+	if _crop_active():
+		return BASE_SIZE.y * 4.0 / 3.0
+	return view_width()
+
+
+# 이 레이어를 옮겨야 하는 양 (WIDE 모드의 가운데 정렬 + 4:3 모드에서 HUD 를 보이는 영역 안으로)
+func _layer_extra(l) -> float:
+	var e = wide_extra()
+	if l != null and _crop_active() and hud_layers.has(l):
+		e += _crop_bw()
+	return e
+
+
 func _update_crop() -> void:
 	var on = _crop_active()
 	if on:
 		_ensure_crop()
 	if crop_layer != null and crop_rects.size() == 2:
-		var bw = (BASE_SIZE.x - BASE_SIZE.y * 4.0 / 3.0) * 0.5
-		crop_rects[0].rect_position = Vector2(0.0, 0.0)
-		crop_rects[0].rect_size = Vector2(bw, BASE_SIZE.y)
-		crop_rects[1].rect_position = Vector2(BASE_SIZE.x - bw, 0.0)
-		crop_rects[1].rect_size = Vector2(bw, BASE_SIZE.y)
+		var bw = _crop_bw()
+		# 화면 바깥쪽으로 넉넉히 넓히고 안쪽도 조금 겹치게: 가장자리 반올림 틈으로 게임 화면이 비쳐 보이는 것 방지
+		crop_rects[0].rect_position = Vector2(-32.0, -32.0)
+		crop_rects[0].rect_size = Vector2(bw + 32.0 + 0.75, BASE_SIZE.y + 64.0)
+		crop_rects[1].rect_position = Vector2(BASE_SIZE.x - bw - 0.75, -32.0)
+		crop_rects[1].rect_size = Vector2(bw + 32.0 + 0.75, BASE_SIZE.y + 64.0)
 		crop_rects[0].visible = on
 		crop_rects[1].visible = on
+	if on != last_crop:
+		last_crop = on
+		_refresh_wide()
 	for l in hud_layers:
 		if is_instance_valid(l):
 			if on:
@@ -438,7 +466,7 @@ func _apply_layer(l) -> void:
 	var base = Vector2.ZERO
 	if l.has_meta("wide_base"):
 		base = l.get_meta("wide_base")
-	l.offset = base + Vector2(wide_extra(), 0.0)
+	l.offset = base + Vector2(_layer_extra(l), 0.0)
 	for c in l.get_children():
 		_adopt_control(c)
 
@@ -454,6 +482,9 @@ func _adopt_control(c) -> void:
 	if not is_instance_valid(c) or not (c is Control):
 		return
 	var s = wide_extra()
+	var par = c.get_parent()
+	if par != null and par is CanvasLayer:
+		s = _layer_extra(par)
 	var done = 0.0
 	if c.has_meta("wide_done"):
 		done = c.get_meta("wide_done")
@@ -1127,7 +1158,7 @@ def patch_stretch():
     cam = "src/System/StateCamera.gd"
     _sub(cam, "const width: = 398\n", "var width: = 398.0   # iOS-PORT: 화면 폭 (WIDE 모드에서 넓어짐)\n", "width 상수 -> 변수")
     _sub(cam, "func _process(delta: float) -> void :\n\tvar new_pos: = global_position\n",
-         "func _process(delta: float) -> void :\n\twidth = IOSTouchOverlay.view_width()\n\tvar new_pos: = global_position\n",
+         "func _process(delta: float) -> void :\n\twidth = IOSTouchOverlay.camera_width()\n\tvar new_pos: = global_position\n",
          "매 프레임 폭 갱신")
     _sub(cam,
          "func get_boundary_position_left() -> float:\n\treturn custom_limits_left + float(width) / 2\n"
@@ -1535,6 +1566,58 @@ def patch_scroll_touch():
          "슬롯: 끌어서 스크롤한 터치는 눌림 무시")
 
 
+# 언어: 한국어만 선택/사용 가능하게 한다.
+# - project.godot 번역 목록에서 br / es / ja_JP / pr 제거 (영어(en)는 기본 대체 언어라 남겨 둠, 선택 목록에는 안 나옴)
+# - 옵션 'Language' 는 한국어만 돌고, 예전에 저장된 다른 언어 설정이 있어도 한국어로 강제
+LANG_REMOVE = ["br", "es", "ja_JP", "pr"]
+LANG_MARK = "# iOS-PORT: 한국어만"
+
+
+def patch_languages():
+    # 1) 번역 목록에서 다른 언어 제거
+    path = "project.godot"
+    src = read(path)
+    m = re.search(r"(translations=PoolStringArray\()(.*?)(\s*\))", src, re.S)
+    if not m:
+        print("[warn] project.godot 번역 목록을 찾지 못함")
+    else:
+        items = re.findall(r'"([^"]+)"', m.group(2))
+        keep = [t for t in items
+                if not any(t.endswith("real_translations." + l + ".translation") for l in LANG_REMOVE)]
+        if keep == items:
+            print("[skip] project.godot (다른 언어 이미 제거됨)")
+        else:
+            new = ", ".join('"' + t + '"' for t in keep)
+            src = src[:m.start(2)] + " " + new + src[m.end(2):]
+            write(path, src)
+            print(f"[ok]   project.godot 번역 목록: {len(items)}개 -> {len(keep)}개 (" + ", ".join(l for l in LANG_REMOVE) + " 제거)")
+
+    # 2) 옵션 Language: 한국어만
+    path = "src/Options/Language.gd"
+    src = read(path)
+    if LANG_MARK in src:
+        print(f"[skip] {path} (이미 패치됨)")
+        return
+    nl = "\r\n" if "\r\n" in src else "\n"
+    old = "onready var locales := TranslationServer.get_loaded_locales()"
+    if old not in src:
+        print(f"[warn] {path}: locales 줄을 찾지 못함")
+        return
+    src = src.replace(old, LANG_MARK + " (선택 목록)" + nl + 'onready var locales := ["ko"]', 1)
+    i = src.find("func get_current_language():")
+    if i < 0:
+        print(f"[warn] {path}: get_current_language 를 찾지 못함")
+        return
+    src = src[:i] + nl.join([
+        "func get_current_language():",
+        "\t" + LANG_MARK + ": 예전에 저장된 다른 언어 설정이 있어도 한국어",
+        "\treturn \"ko\"",
+        "",
+    ])
+    write(path, src)
+    print(f"[ok]   {path}: 한국어만 선택 가능")
+
+
 if __name__ == "__main__":
     if not os.path.exists("project.godot"):
         sys.exit("[error] 저장소 루트(project.godot가 있는 곳)에서 실행하세요")
@@ -1555,5 +1638,6 @@ if __name__ == "__main__":
     patch_clear_color()
     apply_korean()
     patch_ko_extra()
+    patch_languages()
     patch_tagteam_fonts()
     patch_tagteam_layout()
