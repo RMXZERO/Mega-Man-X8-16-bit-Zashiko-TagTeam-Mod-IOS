@@ -26,7 +26,7 @@ const STRINGS = {
 	"SENTSUIZAN_DISC": "최대 차지 미만(공중)",
 	"CHARGE_SABER_WPNMENU": "차지 세이버",
 	"CHARGE_SABER_DISC": "최대 차지",
-	"ZBUSTER_WPNMENU": "Z-버스터",
+	"ZBUSTER_WPNMENU": "Z 버스터",
 	"ROGUEBLADE_WPNMENU": "로그 블레이드",
 	"GENMUZERO_WPNMENU": "겐무 제로",
 	"LAYER_WPNMENU": "L-세이버",
