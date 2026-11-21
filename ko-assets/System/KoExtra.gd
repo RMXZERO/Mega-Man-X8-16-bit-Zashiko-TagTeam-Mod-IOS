@@ -28,7 +28,7 @@ const STRINGS = {
 	"CHARGE_SABER_DISC": "최대 차지",
 	"ZBUSTER_WPNMENU": "Z 버스터",
 	"ROGUEBLADE_WPNMENU": "로그 블레이드",
-	"GENMUZERO_WPNMENU": "겐무 제로",
+	"GENMUZERO_WPNMENU": "환몽영",
 	"LAYER_WPNMENU": "L-세이버",
 	"ICARUSBODY1_AZ": "I thought something like this might happen someday, so I've prepared parts for X.",
 	"ICARUSBODY2_AZ": "This time, I want you to bring him Body Parts I.",
