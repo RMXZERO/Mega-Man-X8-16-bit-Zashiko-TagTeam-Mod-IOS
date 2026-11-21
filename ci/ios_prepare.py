@@ -12,7 +12,7 @@ import os
 import re
 import sys
 
-BUNDLE_ID = os.environ.get("BUNDLE_ID", "com.mmx8.allinone.ios")
+BUNDLE_ID = os.environ.get("BUNDLE_ID", "com.mmx.allinone.ios")
 TEAM_ID = os.environ.get("TEAM_ID", "AAAAAAAAAA")  # 서명 안 하므로 형식만 맞는 더미
 
 
@@ -1505,6 +1505,24 @@ def patch_title_version_text():
          "타이틀 버전 글자")
 
 
+def patch_loading_slot_menu():
+    """불러오기 슬롯: Loading.tscn 에 Pad 컨테이너가 한 단계 더 생겨서, 슬롯의 menu_path(위로 4칸)가
+    불러오기 메뉴 본체가 아니라 Menu 컨트롤을 가리킴 -> 슬롯을 눌러도 loaded_end() 호출이 실패해 로드가 안 됨.
+    Pad 가 있을 때만 위로 5칸으로 고친다."""
+    scene = os.path.join("System", "Screens", "Loading", "Loading.tscn")
+    slot = os.path.join("System", "Screens", "Loading", "SlotButton.tscn")
+    if not (os.path.exists(scene) and os.path.exists(slot)):
+        print("[warn] 불러오기 씬 없음 - 건너뜀")
+        return
+    if 'name="Pad"' not in read(scene):
+        print("[skip] Loading.tscn: Pad 없음 - 슬롯 경로 그대로")
+        return
+    _sub(slot,
+         'menu_path = NodePath("../../../..")',
+         'menu_path = NodePath("../../../../..")',
+         "슬롯 menu_path (Pad 때문에 한 칸 더 위로)")
+
+
 def patch_scroll_touch():
     """끌어서 스크롤한 터치가 버튼 눌림(옵션 토글, 슬롯 불러오기)으로 처리되지 않게 막는다."""
     _sub(os.path.join("src", "Options", "Button.gd"),
@@ -1528,6 +1546,7 @@ if __name__ == "__main__":
     patch_hide_android_controls()
     patch_weaponround_touch()
     patch_title_difficulty_touch()
+    patch_loading_slot_menu()
     patch_scroll_touch()
     patch_title_version_text()
     patch_hotswap_onscreen()
