@@ -215,10 +215,10 @@ var timer: float = 0.0
 var tap_index: int = -1
 var tap_button = null
 var tap_fired: bool = false
-var dbg_btn = null                 # 타이틀 옵션 버튼 (디버그 해금 버튼)
-var dbg_idle: float = 0.0          # 입력 없이 지난 시간
-var dbg_armed: bool = true         # 옵션에서 한 번 토글하면, 다른 곳에 갔다 올 때까지 다시 토글하지 않음
-const DEBUG_IDLE_SEC = 8.0
+var dbg_idle: float = 0.0          # 타이틀 메뉴에서 입력 없이 지난 시간
+var dbg_armed: bool = true         # 한 번 토글하면, 다른 메뉴에 들어갔다 나올 때까지 다시 토글하지 않음
+var dbg_visited: bool = false      # 토글한 뒤 하위 메뉴에 들어갔다 왔는지
+const DEBUG_IDLE_SEC = 20.0
 var toast_layer = null
 var toast_label = null
 var toast_left: float = 0.0
@@ -518,10 +518,9 @@ func _release_mode_in_scroll(b) -> void:
 	if not is_instance_valid(b) or not (b is BaseButton) or not b.is_inside_tree():
 		return
 	# 디버그 해금 버튼(타이틀 옵션): 원래 on_press 는 select_special 을 안 누르면 디버그를 꺼 버리므로
-	# 해금 플래그를 꺼 두고, 옵션에 8초 동안 가만히 있으면 직접 켜고/끈다 (_debug_idle_tick)
+	# 해금 플래그를 꺼 두고, 타이틀에서 20초 동안 가만히 있으면 직접 켜고/끈다 (_debug_idle_tick)
 	if b.get("able_to_unlock_debug") != null:
 		b.able_to_unlock_debug = false
-		dbg_btn = b
 		return
 	var p = b.get_parent()
 	while p != null:
@@ -847,30 +846,38 @@ func _on_tap_probe() -> void:
 	tap_fired = true
 
 
-# 타이틀 옵션에서 8초 동안 아무 입력 없이 두면 디버그를 켜고/끈다 (옵션 버튼에 커서가 있거나 옵션 메뉴가 열려 있을 때).
-# 다른 메뉴에 갔다가 다시 와서 8초 두면 반대로 토글. 화면 상단 가운데에 3초 알림.
+# 타이틀 메뉴에서 20초 동안 아무 입력(터치 등) 없이 두면 디버그를 켠다. 다른 메뉴에 들어갔다 나와서
+# 다시 20초 두면 이번엔 끈다. 화면 상단 가운데에 3초 알림.
 func _debug_idle_tick(delta: float) -> void:
 	if toast_left > 0.0:
 		toast_left -= delta
 		if toast_left <= 0.0 and toast_label != null:
 			toast_label.visible = false
-	if dbg_btn == null or not is_instance_valid(dbg_btn) or not dbg_btn.is_inside_tree():
-		return
-	var here = dbg_btn.is_visible_in_tree() and dbg_btn.has_focus() and dbg_btn.focus_mode != Control.FOCUS_NONE
-	if dbg_btn.get_child_count() > 0:
-		var sub = dbg_btn.get_child(0)
-		if sub != null and sub.get("active") == true:
-			here = true
-	if not here:
+	var sc = get_tree().current_scene
+	var mm = null
+	if sc != null and sc.filename == "res://src/Title/IntroCapcom.tscn":
+		mm = sc.get_node_or_null("MainMenu")
+	if mm == null:
 		dbg_idle = 0.0
-		dbg_armed = true
+		return
+	if _submenu_open(mm):
+		dbg_idle = 0.0
+		dbg_visited = true  # 옵션/키 설정 같은 하위 메뉴에 들어감
+		return
+	if mm.get("locked") != false:
+		dbg_idle = 0.0  # 타이틀 연출 중
 		return
 	if not dbg_armed:
-		return
+		if dbg_visited:
+			dbg_armed = true
+			dbg_visited = false
+		else:
+			return
 	dbg_idle += delta
 	if dbg_idle < DEBUG_IDLE_SEC:
 		return
 	dbg_armed = false
+	dbg_visited = false
 	dbg_idle = 0.0
 	var on = not GameManager.debug_enabled
 	GameManager.debug_enabled = on
