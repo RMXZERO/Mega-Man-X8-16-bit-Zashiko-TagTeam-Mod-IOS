@@ -174,6 +174,7 @@ const STICK_ACTIVATION_RADIUS = 0.308
 const STICK_DPAD_RING_RADIUS = 0.32
 const WIDE_SCREEN_SAFE_MARGIN = 0.055
 const DIGITAL_THRESHOLD = 0.25
+const SCROLL_SLOP = 3.0  # 이 거리(게임 좌표)보다 끌면 탭이 아니라 스크롤
 const HIT_GROW = 1.5  # 버튼 터치 판정 배율 (그려진 크기 대비)
 const BASE_SIZE = Vector2(398.0, 224.0)  # 게임 기준 해상도 (16:9)
 const ASPECT_STRETCH = 0   # 비율 무시, 화면 전체로 늘림
@@ -221,6 +222,12 @@ var last_extra: float = 0.0           # 마지막으로 반영한 '양옆 늘어
 var last_aspect: int = -1             # 마지막으로 적용한 stretch aspect
 var crop_layer = null                 # 4:3 모드 가림막 레이어
 var crop_rects: Array = []            # 가림막 (왼쪽, 오른쪽)
+var scroll_node = null                # 손가락으로 끌어 스크롤 중인 ScrollContainer
+var scroll_index: int = -1
+var scroll_start: Vector2 = Vector2.ZERO
+var scroll_origin: float = 0.0
+var scroll_moved: bool = false
+var scroll_drag_block: bool = false   # 스크롤하려고 끈 터치: 버튼 눌림으로 처리하지 않음
 var hud_layers: Array = []            # HUD 레이어들 (4:3 모드에서 가림막 위로 올림)
 
 
@@ -392,6 +399,8 @@ func _update_layer_transform() -> void:
 # ---- 넓은 화면(WIDE) 모드: 게임의 UI 를 16:9 영역 가운데로 ----
 # 세계(스테이지)는 화면 전체로 넓어지고, HUD/메뉴/대화창은 지금까지처럼 가운데 16:9 영역에 그려진다.
 func _on_node_added(n: Node) -> void:
+	if n is BaseButton:
+		call_deferred("_release_mode_in_scroll", n)
 	if n is CanvasLayer:
 		if n != self and not (n is ParallaxBackground):
 			call_deferred("_adopt_layer", n)
@@ -463,6 +472,18 @@ func _adopt_control(c) -> void:
 		c.rect_position = Vector2(c.rect_position.x - d, c.rect_position.y)
 		c.rect_size = Vector2(c.rect_size.x + 2.0 * d, c.rect_size.y)
 	c.set_meta("wide_done", s)
+
+
+# 스크롤 영역 안의 버튼은 '손가락을 뗄 때' 눌리게 한다 (누르는 순간 눌리면 끌어서 스크롤을 못 함)
+func _release_mode_in_scroll(b) -> void:
+	if not is_instance_valid(b) or not (b is BaseButton) or not b.is_inside_tree():
+		return
+	var p = b.get_parent()
+	while p != null:
+		if p is ScrollContainer:
+			b.action_mode = BaseButton.ACTION_MODE_BUTTON_RELEASE
+			return
+		p = p.get_parent()
 
 
 # 화면(뷰포트) 터치 좌표 -> 패드 좌표 (위 레이어 변환의 역변환)
@@ -614,7 +635,28 @@ func _title_flow_active() -> bool:
 	if f == "res://src/Title/IntroCapcom.tscn":
 		# 타이틀 메뉴가 열리기 전(잠겨 있는 동안)만
 		var mm = sc.get_node_or_null("MainMenu")
-		return mm != null and mm.get("locked") == true
+		if mm == null or mm.get("locked") != true:
+			return false
+		# 옵션/키설정/불러오기 같은 하위 메뉴가 열려 있으면 메인메뉴도 잠기는데, 이건 '연출 중'이 아님
+		# (이때 터치마다 pause 를 보내면 옵션 메뉴가 바로 닫혀 버림)
+		return not _submenu_open(mm)
+	return false
+
+
+# mm 아래에 열려 있는(active) 하위 X8Menu(옵션, 키 설정, 불러오기 등)가 있는지
+func _submenu_open(mm: Node) -> bool:
+	for c in mm.get_children():
+		if _has_active_menu(c):
+			return true
+	return false
+
+
+func _has_active_menu(n: Node) -> bool:
+	if n is CanvasLayer and n.get("exit_action") != null and n.get("active") == true:
+		return true
+	for c in n.get_children():
+		if _has_active_menu(c):
+			return true
 	return false
 
 
@@ -623,6 +665,7 @@ func _input(event: InputEvent) -> void:
 		return
 	if event is InputEventScreenTouch:
 		if event.pressed:
+			scroll_drag_block = false
 			if _title_flow_active():
 				_send_action("pause", true)
 				_send_action("pause", false)
@@ -635,6 +678,7 @@ func _input(event: InputEvent) -> void:
 			if shown:
 				id = _find_control(pp)
 			if id == "":
+				_begin_scroll(event.index, p)
 				_begin_tap(event.index, p)
 				return
 			var cap = {"control": id, "origin": id, "zone": "", "anchor": pp, "current": pp}
@@ -644,6 +688,9 @@ func _input(event: InputEvent) -> void:
 				cap["anchor"] = sfc.position + sfc.size * 0.5  # 스틱 중심 고정
 			captures[event.index] = cap
 		else:
+			if event.index == scroll_index:
+				scroll_node = null
+				scroll_index = -1
 			if event.index == tap_index:
 				_end_tap(event.position)
 			if captures.has(event.index):
@@ -656,6 +703,16 @@ func _input(event: InputEvent) -> void:
 			captures.erase(event.index)
 		_apply()
 	elif event is InputEventScreenDrag:
+		if event.index == scroll_index and scroll_node != null and is_instance_valid(scroll_node):
+			var dy = event.position.y - scroll_start.y
+			if not scroll_moved and abs(dy) > SCROLL_SLOP:
+				scroll_moved = true
+				scroll_drag_block = true
+				_clear_tap()
+			if scroll_moved:
+				scroll_node.scroll_vertical = int(round(scroll_origin - dy))
+				get_tree().set_input_as_handled()
+				return
 		if captures.has(event.index):
 			var cp = captures[event.index]
 			var dp = _to_pad(event.position)
@@ -666,6 +723,35 @@ func _input(event: InputEvent) -> void:
 				if nid != "" and nid != cp["control"]:
 					cp["control"] = nid  # 누른 채 문질러서 다른 버튼 위로 이동
 			_apply()
+
+
+# 손가락을 끌어 올리고 내리는 스크롤 (옵션/불러오기 같은 ScrollContainer)
+func _find_scroll_at(node: Node, p: Vector2):
+	if node == self:
+		return null
+	var kids = node.get_children()
+	for i in range(kids.size() - 1, -1, -1):
+		var f = _find_scroll_at(kids[i], p)
+		if f != null:
+			return f
+	if node is ScrollContainer and node.is_visible_in_tree() and _button_has_point(node, p):
+		var sb = node.get_v_scrollbar()
+		if sb.max_value > sb.page + 1.0:
+			return node
+	return null
+
+
+func _begin_scroll(index: int, p: Vector2) -> void:
+	scroll_node = null
+	scroll_index = -1
+	scroll_moved = false
+	var sc = _find_scroll_at(get_tree().root, p)
+	if sc == null:
+		return
+	scroll_node = sc
+	scroll_index = index
+	scroll_start = p
+	scroll_origin = float(sc.scroll_vertical)
 
 
 # 메뉴의 화살표 같은 X8 버튼을 직접 눌렀을 때: 기본 마우스 에뮬레이션으로 눌리지 않으면 대신 눌러 줌
@@ -729,13 +815,14 @@ func _end_tap(p: Vector2) -> void:
 		_clear_tap()
 		return
 	var inside = _button_has_point(b, p)
+	var dragged = scroll_drag_block
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
 	var fired = tap_fired
 	if is_instance_valid(b):
 		if b.is_connected("pressed", self, "_on_tap_probe"):
 			b.disconnect("pressed", self, "_on_tap_probe")
-		if inside and not fired and b.focus_mode != Control.FOCUS_NONE:
+		if inside and not fired and not dragged and b.focus_mode != Control.FOCUS_NONE:
 			if b.is_visible_in_tree():
 				b.grab_focus()
 			b.emit_signal("pressed")
@@ -1327,7 +1414,7 @@ def patch_ko_extra():
 
 # 타이틀 첫 버튼(새 게임)은 왼쪽/오른쪽 키로 난이도를 고르는데 터치로는 방법이 없음
 # -> 버튼 양옆에 < > 화살표를 붙이고, 탭은 IOSTouchOverlay 가 처리 (난이도를 바꿀 수 있을 때만 보임)
-GAMESTART_MARK = "# iOS-PORT: 터치 난이도 선택"
+GAMESTART_MARK = "# iOS-PORT: 터치 난이도 선택"  # v2: 삼각형 직접 그리기
 
 
 def patch_title_difficulty_touch():
@@ -1359,32 +1446,42 @@ func _ios_make_arrows() -> void:
 		return
 	for i in range(2):
 		var a = Label.new()
-		a.text = "<" if i == 0 else ">"
-		a.align = Label.ALIGN_CENTER
-		a.valign = Label.VALIGN_CENTER
+		a.text = ""
 		a.mouse_filter = Control.MOUSE_FILTER_STOP
-		a.rect_position = Vector2(96.0 if i == 0 else 266.0, 0.0)
-		a.rect_size = Vector2(36.0, 16.0)
-		a.add_font_override("font", label.get_font("font"))
-		a.add_color_override("font_color", Color(1, 1, 1, 1))
+		a.rect_size = Vector2(48.0, 16.0)
+		a.rect_position = Vector2(199.0 - 74.0 - 24.0 if i == 0 else 199.0 + 74.0 - 24.0, 0.0)
 		a.set_meta("dir", -1 if i == 0 else 1)
 		a.add_to_group("ios_title_arrow")
-		a.visible = false
+		a.connect("draw", self, "_ios_draw_arrow", [a])
 		add_child(a)
 		ios_arrows.append(a)
+
+
+# 글자 대신 직접 삼각형으로 그림 (폰트에 < > 가 없거나 색이 묻혀도 항상 보이게)
+func _ios_draw_arrow(a: Control) -> void:
+	var d = int(a.get_meta("dir"))
+	var c = a.rect_size * 0.5
+	var h = 5.0
+	var w = 4.0
+	var pts = PoolVector2Array([
+		c + Vector2(-d * w, 0.0),
+		c + Vector2(d * w, -h),
+		c + Vector2(d * w, h)])
+	a.draw_colored_polygon(pts, Color(1, 1, 1, 1))
 
 
 func _ios_update_arrows() -> void:
 	if ios_arrows.empty():
 		return
-	var can = (not CharacterManager.game_mode_set) and modes.size() > 1 and is_visible_in_tree() and focus_mode != Control.FOCUS_NONE
+	var show = modes.size() > 1
+	var can = show and not CharacterManager.game_mode_set
 	var idx = modes.find(CharacterManager.game_mode)
 	for a in ios_arrows:
-		a.visible = can
-		if can:
+		a.visible = show
+		if show:
 			var d = int(a.get_meta("dir"))
-			var ok = (d < 0 and idx > 0) or (d > 0 and idx < modes.size() - 1)
-			a.modulate = Color(1, 1, 1, 1.0 if ok else 0.3)
+			var ok = can and ((d < 0 and idx > 0) or (d > 0 and idx < modes.size() - 1))
+			a.modulate = Color(1, 1, 1, 1.0 if ok else 0.25)
 
 
 func ios_step_mode(d: int) -> void:
@@ -1400,6 +1497,26 @@ func ios_step_mode(d: int) -> void:
     print(f"[ok]   {path}: 터치용 난이도 화살표 추가")
 
 
+def patch_title_version_text():
+    """타이틀 오른쪽 아래 버전 글자를 바꾼다 (표시용 문자열이라 다른 곳에는 영향 없음)."""
+    _sub(os.path.join("src", "Scripts", "GameManager.gd"),
+         'var version: String = "Touch Mod After 3 Ver"',
+         'var version: String = "All In One MOD"',
+         "타이틀 버전 글자")
+
+
+def patch_scroll_touch():
+    """끌어서 스크롤한 터치가 버튼 눌림(옵션 토글, 슬롯 불러오기)으로 처리되지 않게 막는다."""
+    _sub(os.path.join("src", "Options", "Button.gd"),
+         "func _on_pressed() -> void :\n\tif focus_mode == 0:\n\t\treturn\n",
+         "func _on_pressed() -> void :\n\tif focus_mode == 0:\n\t\treturn\n\tif OS.get_name() == \"iOS\" and IOSTouchOverlay.scroll_drag_block:  # iOS-PORT\n\t\treturn\n",
+         "끌어서 스크롤한 터치는 눌림 무시")
+    _sub(os.path.join("System", "Screens", "Loading", "slot_load.gd"),
+         "func _on_pressed() -> void :\n\tmodulate = Color(3, 3, 3, 1)\n",
+         "func _on_pressed() -> void :\n\tif OS.get_name() == \"iOS\" and IOSTouchOverlay.scroll_drag_block:  # iOS-PORT\n\t\treturn\n\tmodulate = Color(3, 3, 3, 1)\n",
+         "슬롯: 끌어서 스크롤한 터치는 눌림 무시")
+
+
 if __name__ == "__main__":
     if not os.path.exists("project.godot"):
         sys.exit("[error] 저장소 루트(project.godot가 있는 곳)에서 실행하세요")
@@ -1411,6 +1528,8 @@ if __name__ == "__main__":
     patch_hide_android_controls()
     patch_weaponround_touch()
     patch_title_difficulty_touch()
+    patch_scroll_touch()
+    patch_title_version_text()
     patch_hotswap_onscreen()
     patch_save_version()
     patch_stretch()
