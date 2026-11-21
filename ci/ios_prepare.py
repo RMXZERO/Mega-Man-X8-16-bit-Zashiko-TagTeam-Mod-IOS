@@ -215,6 +215,13 @@ var timer: float = 0.0
 var tap_index: int = -1
 var tap_button = null
 var tap_fired: bool = false
+var lp_button = null               # 3초 길게 누르기를 기다리는 디버그 해금 버튼(타이틀의 옵션)
+var lp_time: float = 0.0
+var lp_focus: int = 2
+var toast_layer = null
+var toast_label = null
+var toast_left: float = 0.0
+const LONG_PRESS_SEC = 3.0
 var press_pf: Dictionary = {}      # 액션별 눌린 시점의 물리 프레임
 var press_if: Dictionary = {}      # 액션별 눌린 시점의 idle 프레임
 var pending_release: Dictionary = {}  # 게임이 한 번도 못 본 채 떼어진 액션 (보류)
@@ -268,6 +275,7 @@ func _physics_process(_delta: float) -> void:
 
 func _process(delta: float) -> void:
 	_flush_releases()
+	_long_press_tick(delta)
 	timer -= delta
 	if timer > 0.0:
 		return
@@ -826,13 +834,83 @@ func _begin_tap(index: int, p: Vector2) -> void:
 	tap_button = b
 	tap_fired = false
 	b.connect("pressed", self, "_on_tap_probe")
+	# 옵션 버튼(디버그 해금 가능): 누르는 즉시 열리지 않게 막고, 손을 떼면 그때 일반 탭으로 열거나 3초 누르면 디버그를 켜고/끈다
+	# (원래 on_press 는 select_special 을 안 누르면 디버그를 끄므로, 버튼의 해금 플래그는 꺼 두고 여기서 직접 토글)
+	if b.get("able_to_unlock_debug") == true:
+		b.able_to_unlock_debug = false
+		b.set_meta("ios_dbg_toggle", true)
+	if b.has_meta("ios_dbg_toggle"):
+		lp_button = b
+		lp_time = 0.0
+		lp_focus = b.focus_mode
+		b.focus_mode = Control.FOCUS_NONE
 
 
 func _on_tap_probe() -> void:
 	tap_fired = true
 
 
+func _lp_cancel(restore: bool) -> void:
+	if restore and lp_button != null and is_instance_valid(lp_button):
+		lp_button.focus_mode = lp_focus
+	lp_button = null
+	lp_time = 0.0
+
+
+# 옵션 버튼을 3초 이상 누르고 있으면 디버그를 켜고/끈다 (옵션 메뉴는 열지 않음). 화면 상단 가운데에 3초 알림.
+func _long_press_tick(delta: float) -> void:
+	if toast_left > 0.0:
+		toast_left -= delta
+		if toast_left <= 0.0 and toast_label != null:
+			toast_label.visible = false
+	if lp_button == null:
+		return
+	if not is_instance_valid(lp_button) or not lp_button.is_visible_in_tree():
+		_lp_cancel(false)
+		return
+	lp_time += delta
+	if lp_time < LONG_PRESS_SEC:
+		return
+	var b = lp_button
+	lp_button = null
+	lp_time = 0.0
+	b.focus_mode = lp_focus
+	var on = not GameManager.debug_enabled
+	GameManager.debug_enabled = on
+	if not on:
+		Configurations.set("ShowDebug", false)
+	_show_toast("디버그 켜짐" if on else "디버그 꺼짐")
+	_clear_tap()
+
+
+func _show_toast(text: String) -> void:
+	if toast_layer == null:
+		toast_layer = CanvasLayer.new()
+		toast_layer.layer = 120
+		toast_layer.pause_mode = Node.PAUSE_MODE_PROCESS
+		add_child(toast_layer)
+		toast_label = Label.new()
+		toast_label.align = Label.ALIGN_CENTER
+		toast_label.valign = Label.VALIGN_CENTER
+		toast_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var f = load("res://src/Fonts/menuFont.tres")
+		if f != null:
+			toast_label.add_font_override("font", f)
+		toast_label.add_color_override("font_color", Color(1, 1, 1, 1))
+		var sb = StyleBoxFlat.new()
+		sb.bg_color = Color(0, 0, 0, 0.75)
+		toast_label.add_stylebox_override("normal", sb)
+		toast_layer.add_child(toast_label)
+	toast_label.text = text
+	var vs = get_viewport().get_visible_rect().size
+	toast_label.rect_size = Vector2(120.0, 20.0)
+	toast_label.rect_position = Vector2((vs.x - 120.0) * 0.5, 10.0)
+	toast_label.visible = true
+	toast_left = 3.0
+
+
 func _clear_tap() -> void:
+	_lp_cancel(true)
 	if tap_button != null and is_instance_valid(tap_button):
 		if tap_button.is_connected("pressed", self, "_on_tap_probe"):
 			tap_button.disconnect("pressed", self, "_on_tap_probe")
@@ -845,6 +923,10 @@ func _end_tap(p: Vector2) -> void:
 	if b == null or not is_instance_valid(b):
 		_clear_tap()
 		return
+	if lp_button == b:
+		# 3초 전에 뗐다: 보류했던 일반 탭으로 처리
+		_lp_cancel(true)
+		tap_fired = false
 	var inside = _button_has_point(b, p)
 	var dragged = scroll_drag_block
 	yield(get_tree(), "idle_frame")
