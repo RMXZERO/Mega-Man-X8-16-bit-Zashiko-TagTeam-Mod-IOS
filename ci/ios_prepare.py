@@ -1495,9 +1495,9 @@ func _ios_draw_arrow(a: Control) -> void:
 	var h = 5.0
 	var w = 4.0
 	var pts = PoolVector2Array([
-		c + Vector2(-d * w, 0.0),
-		c + Vector2(d * w, -h),
-		c + Vector2(d * w, h)])
+		c + Vector2(d * w, 0.0),
+		c + Vector2(-d * w, -h),
+		c + Vector2(-d * w, h)])
 	a.draw_colored_polygon(pts, Color(1, 1, 1, 1))
 
 
