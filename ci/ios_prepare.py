@@ -358,8 +358,9 @@ func _adopt_layer(l) -> void:
 		return
 	if l.is_in_group("wide_ui"):
 		return
-	if l.layer >= 120:
+	if l.layer >= 120 and l.name != "AchievementsScreen":
 		# CRT 같은 전체 화면 효과 레이어: 옮기지 않고 폭만 넓힌다
+		# (업적 화면은 일시정지 메뉴 안에서 레이어 127 로 쓰이지만 메뉴라서 다른 메뉴처럼 가운데로 옮긴다)
 		for c in l.get_children():
 			if c is ColorRect:
 				c.rect_size = Vector2(view_width(), c.rect_size.y)
@@ -1180,6 +1181,52 @@ def patch_save_version():
     print(f"[ok]   {path}: 버전이 달라도 세이브 적용")
 
 
+# 무기 선택 퀵 버튼(weaponround): Area2D 의 _input 이 화면 터치 좌표를 그대로 쓰기 때문에,
+# 와이드 모드(폰처럼 가로로 긴 화면)에서 UI 레이어가 옆으로 밀려 있으면 버튼을 눌러도 반응하지 않는다.
+# (태블릿은 4:3 이라 레이어가 안 밀려서 잘 됨) -> 터치 좌표를 캔버스 레이어 기준으로 바꿔서 비교
+WEAPONROUND_MARK = "# iOS-PORT: 터치 좌표를 캔버스 레이어 기준으로"
+
+
+def patch_weaponround_touch():
+    path = os.path.join("System", "Android", "weaponround.gd")
+    if not os.path.exists(path):
+        print(f"[warn] {path} 없음 - 건너뜀")
+        return
+    src = read(path)
+    if WEAPONROUND_MARK in src:
+        print(f"[skip] {path} (이미 패치됨)")
+        return
+    n = src.count("event.position")
+    if n == 0:
+        print(f"[warn] {path}: event.position 을 찾지 못함 - 소스가 바뀌었는지 확인")
+        return
+    nl = "\r\n" if "\r\n" in src else "\n"
+    src = src.replace("event.position", "_ios_pos(event)")
+    src = src.rstrip() + nl + nl + WEAPONROUND_MARK + nl
+    src += "func _ios_pos(event) -> Vector2:" + nl
+    src += "\treturn get_canvas_transform().affine_inverse().xform(event.position)" + nl
+    write(path, src)
+    print(f"[ok]   {path}: 터치 좌표 보정 ({n}곳)")
+
+
+# 한국어 번역에 빠진 키 보충 (ko-assets/System/KoExtra.gd 는 apply_korean 이 System/ 으로 복사해 줌)
+def patch_ko_extra():
+    if not os.path.exists(os.path.join("System", "KoExtra.gd")):
+        print("[skip] System/KoExtra.gd 없음 (한국어 보충 번역 미적용)")
+        return
+    proj = read("project.godot")
+    if "KoExtra=" in proj:
+        print("[skip] project.godot (KoExtra 이미 등록됨)")
+        return
+    nl = "\r\n" if "\r\n" in proj else "\n"
+    m = re.search(r"^\[autoload\]\s*$", proj, re.M)
+    if not m:
+        sys.exit("[error] project.godot에 [autoload] 섹션이 없음")
+    line = 'KoExtra="*res://System/KoExtra.gd"'
+    write("project.godot", proj[: m.end()] + nl + line + proj[m.end():])
+    print("[ok]   project.godot += KoExtra autoload (한국어 보충 번역)")
+
+
 if __name__ == "__main__":
     if not os.path.exists("project.godot"):
         sys.exit("[error] 저장소 루트(project.godot가 있는 곳)에서 실행하세요")
@@ -1189,10 +1236,12 @@ if __name__ == "__main__":
     patch_presets()
     patch_overlay()
     patch_hide_android_controls()
+    patch_weaponround_touch()
     patch_hotswap_onscreen()
     patch_save_version()
     patch_stretch()
     patch_clear_color()
     apply_korean()
+    patch_ko_extra()
     patch_tagteam_fonts()
     patch_tagteam_layout()
