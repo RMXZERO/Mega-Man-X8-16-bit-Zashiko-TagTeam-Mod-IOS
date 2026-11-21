@@ -593,6 +593,17 @@ const TITLE_FLOW_SCENES = [
 ]
 
 
+# 타이틀의 난이도 선택 화살표(< >)를 탭했는지: 맞으면 난이도를 바꾸고 true
+func _title_arrow_tap(p: Vector2) -> bool:
+	for a in get_tree().get_nodes_in_group("ios_title_arrow"):
+		if is_instance_valid(a) and a.is_visible_in_tree() and _button_has_point(a, p):
+			var btn = a.get_parent()
+			if btn != null and btn.has_method("ios_step_mode"):
+				btn.ios_step_mode(int(a.get_meta("dir")))
+			return true
+	return false
+
+
 func _title_flow_active() -> bool:
 	var sc = get_tree().current_scene
 	if sc == null:
@@ -617,6 +628,8 @@ func _input(event: InputEvent) -> void:
 				_send_action("pause", false)
 				return
 			var p = event.position
+			if _title_arrow_tap(p):
+				return
 			var pp = _to_pad(p)
 			var id = ""
 			if shown:
@@ -1312,6 +1325,81 @@ def patch_ko_extra():
     print("[ok]   project.godot += KoExtra autoload (한국어 보충 번역)")
 
 
+# 타이틀 첫 버튼(새 게임)은 왼쪽/오른쪽 키로 난이도를 고르는데 터치로는 방법이 없음
+# -> 버튼 양옆에 < > 화살표를 붙이고, 탭은 IOSTouchOverlay 가 처리 (난이도를 바꿀 수 있을 때만 보임)
+GAMESTART_MARK = "# iOS-PORT: 터치 난이도 선택"
+
+
+def patch_title_difficulty_touch():
+    path = os.path.join("src", "Options", "GameStartButton.gd")
+    if not os.path.exists(path):
+        print(f"[warn] {path} 없음 - 건너뜀")
+        return
+    if GAMESTART_MARK in read(path):
+        print(f"[skip] {path} (이미 패치됨)")
+        return
+    _sub(path,
+         "func _ready() -> void :\n\tbuild_mode_list()\n\tupdate_game_mode(CharacterManager.game_mode)\n",
+         "func _ready() -> void :\n\tbuild_mode_list()\n\tupdate_game_mode(CharacterManager.game_mode)\n\t_ios_make_arrows()\n",
+         "화살표 만들기")
+    _sub(path,
+         "func _process(_delta: float) -> void :\n\tif not has_focus() or CharacterManager.game_mode_set:\n",
+         "func _process(_delta: float) -> void :\n\t_ios_update_arrows()\n\tif not has_focus() or CharacterManager.game_mode_set:\n",
+         "화살표 갱신")
+    src = read(path)
+    nl = "\r\n" if "\r\n" in src else "\n"
+    add = """
+
+# iOS-PORT: 터치 난이도 선택
+var ios_arrows: Array = []
+
+
+func _ios_make_arrows() -> void:
+	if OS.get_name() != "iOS":
+		return
+	for i in range(2):
+		var a = Label.new()
+		a.text = "<" if i == 0 else ">"
+		a.align = Label.ALIGN_CENTER
+		a.valign = Label.VALIGN_CENTER
+		a.mouse_filter = Control.MOUSE_FILTER_STOP
+		a.rect_position = Vector2(96.0 if i == 0 else 266.0, 0.0)
+		a.rect_size = Vector2(36.0, 16.0)
+		a.add_font_override("font", label.get_font("font"))
+		a.add_color_override("font_color", Color(1, 1, 1, 1))
+		a.set_meta("dir", -1 if i == 0 else 1)
+		a.add_to_group("ios_title_arrow")
+		a.visible = false
+		add_child(a)
+		ios_arrows.append(a)
+
+
+func _ios_update_arrows() -> void:
+	if ios_arrows.empty():
+		return
+	var can = (not CharacterManager.game_mode_set) and modes.size() > 1 and is_visible_in_tree() and focus_mode != Control.FOCUS_NONE
+	var idx = modes.find(CharacterManager.game_mode)
+	for a in ios_arrows:
+		a.visible = can
+		if can:
+			var d = int(a.get_meta("dir"))
+			var ok = (d < 0 and idx > 0) or (d > 0 and idx < modes.size() - 1)
+			a.modulate = Color(1, 1, 1, 1.0 if ok else 0.3)
+
+
+func ios_step_mode(d: int) -> void:
+	if CharacterManager.game_mode_set:
+		return
+	var ni = modes.find(CharacterManager.game_mode) + d
+	if ni < 0 or ni >= modes.size():
+		return
+	update_game_mode(modes[ni])
+	_on_focus_entered()
+""".replace("\n", nl)
+    write(path, src.rstrip() + nl + add)
+    print(f"[ok]   {path}: 터치용 난이도 화살표 추가")
+
+
 if __name__ == "__main__":
     if not os.path.exists("project.godot"):
         sys.exit("[error] 저장소 루트(project.godot가 있는 곳)에서 실행하세요")
@@ -1322,6 +1410,7 @@ if __name__ == "__main__":
     patch_overlay()
     patch_hide_android_controls()
     patch_weaponround_touch()
+    patch_title_difficulty_touch()
     patch_hotswap_onscreen()
     patch_save_version()
     patch_stretch()
