@@ -1,7 +1,7 @@
 info face="xclassicfontfinalx8bitmapfontfinal" size=12 bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=0 aa=1 padding=0,0,0,0 spacing=0,0 outline=0
-common lineHeight=11 base=11 scaleW=330 scaleH=624 pages=1 packed=0 alphaChnl=0 redChnl=0 greenChnl=0 blueChnl=0
+common lineHeight=11 base=11 scaleW=330 scaleH=638 pages=1 packed=0 alphaChnl=0 redChnl=0 greenChnl=0 blueChnl=0
 page id=0 file="x8bitmapfontfinal.png"
-chars count=1573
+chars count=1574
 char id=32 x=0 y=0 width=4 height=12 xoffset=0 yoffset=0 xadvance=4 page=0 chnl=15
 char id=33 x=11 y=0 width=3 height=12 xoffset=0 yoffset=0 xadvance=3 page=0 chnl=15
 char id=34 x=22 y=0 width=4 height=12 xoffset=0 yoffset=0 xadvance=4 page=0 chnl=15
@@ -1575,4 +1575,5 @@ char id=55176 x=310 y=600 width=9 height=12 xoffset=0 yoffset=0 xadvance=10 page
 char id=55180 x=320 y=600 width=9 height=12 xoffset=0 yoffset=0 xadvance=10 page=0 chnl=15
 char id=55184 x=0 y=612 width=9 height=12 xoffset=0 yoffset=0 xadvance=10 page=0 chnl=15
 char id=55192 x=10 y=612 width=9 height=12 xoffset=0 yoffset=0 xadvance=10 page=0 chnl=15
+char id=51664 x=1 y=625 width=9 height=12 xoffset=0 yoffset=0 xadvance=10 page=0 chnl=15
 kernings count=0

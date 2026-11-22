@@ -1,7 +1,7 @@
 info face="MMXBossTitleAcce" size=-16 bold=0 italic=0 charset="" unicode=1 stretchH=100 smooth=0 aa=1 padding=0,0,0,0 spacing=1,0 outline=0
-common lineHeight=16 base=12 scaleW=256 scaleH=592 pages=1 packed=0 alphaChnl=1 redChnl=0 greenChnl=0 blueChnl=0
+common lineHeight=16 base=12 scaleW=256 scaleH=610 pages=1 packed=0 alphaChnl=1 redChnl=0 greenChnl=0 blueChnl=0
 page id=0 file="X8Bossfont_0.png"
-chars count=816
+chars count=817
 char id=32   x=208   y=32    width=3     height=16    xoffset=-1    yoffset=0     xadvance=5     page=0  chnl=15
 char id=33   x=234   y=32    width=2     height=16    xoffset=0     yoffset=0     xadvance=3     page=0  chnl=15
 char id=34   x=150   y=0     width=6     height=16    xoffset=0     yoffset=0     xadvance=7     page=0  chnl=15
@@ -818,3 +818,4 @@ char id=55176 x=228 y=560 width=11 height=16 xoffset=0 yoffset=0 xadvance=12 pag
 char id=55180 x=240 y=560 width=11 height=16 xoffset=0 yoffset=0 xadvance=12 page=0 chnl=15
 char id=55184 x=0 y=576 width=11 height=16 xoffset=0 yoffset=0 xadvance=12 page=0 chnl=15
 char id=55192 x=12 y=576 width=11 height=16 xoffset=0 yoffset=0 xadvance=12 page=0 chnl=15
+char id=51664 x=1 y=593 width=11 height=16 xoffset=0 yoffset=0 xadvance=12 page=0 chnl=15
