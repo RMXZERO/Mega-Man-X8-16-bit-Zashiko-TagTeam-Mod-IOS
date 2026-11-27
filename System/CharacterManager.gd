@@ -41,6 +41,7 @@ var nightshade_zero_armor: bool = false
 
 var only_x: bool = false
 var auto_charge: bool = false
+var zero_auto_attack: bool = false
 var rapid_fire: bool = false
 var ultimate_buster: bool = false
 var hide_x_armor: bool = false
@@ -345,6 +346,7 @@ func _save() -> void :
 		"player_desperation": player_desperation,
 		
 		"auto_charge": auto_charge, 
+		"zero_auto_attack": zero_auto_attack,
 		"rapid_fire": rapid_fire, 
 		"ultimate_buster": ultimate_buster,
 		"hide_x_armor": hide_x_armor,
@@ -445,6 +447,7 @@ func _load() -> void :
 			beaten_ninjagaiden = bool(save_data.get("beaten_ninjagaiden",false))
 			
 			auto_charge = bool(save_data.get("auto_charge", false))
+			zero_auto_attack = bool(save_data.get("zero_auto_attack", false))
 			rapid_fire = bool(save_data.get("rapid_fire", false))
 			hide_x_armor = bool(save_data.get("hide_x_armor", false))
 			use_old_sprite = bool(save_data.get("use_old_sprite", false))
@@ -621,6 +624,14 @@ func _ready() -> void :
 	set_process(true)
 	pause_mode = PAUSE_MODE_PROCESS
 	Event.listen("character_switch_end", self, "on_character_switch_end")
+
+func _physics_process(delta: float) -> void :
+	var p = GameManager.player
+	if p == null or not is_instance_valid(p):
+		return
+	if p.has_method("check_zero_auto_attack"):
+		p.check_zero_auto_attack(delta)
+		p.check_x_auto_charge(delta)
 
 func _process(_delta: float) -> void :
 #	if started_fresh_game:

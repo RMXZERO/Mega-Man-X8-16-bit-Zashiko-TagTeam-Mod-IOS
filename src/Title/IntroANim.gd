@@ -111,6 +111,8 @@ func appear_x8() -> void :
 		tween3.tween_property(x8_color, "modulate", Color.white, 5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 		tween3.tween_property(x8_shinefull, "modulate", white_zero, 2.5)
 		tween3.tween_property(blackness, "modulate", Color.white, 0.75)
+		# X8 로고가 완전히 나타난 뒤(위 트윈이 모두 끝난 뒤) 음성 재생
+		tween3.connect("finished", self, "play_title_voice")
 		next_step()
 	elif step == 13 and timer > 1.25:
 		appear(demo)
@@ -226,3 +228,23 @@ func appear(object) -> void :
 	object.visible = true
 	var t = create_tween()
 	t.tween_property(object, "modulate", Color.white, 1)
+
+
+# 타이틀 로고가 완전히 뜬 뒤 한 번 재생되는 음성 (SFX 버스)
+const TITLE_VOICE_PATH := "res://src/Title/rockman_x8_voice.wav"
+const TITLE_VOICE_VOLUME_DB := -2.0
+var _voice_played: bool = false
+
+func play_title_voice() -> void:
+	if _voice_played:
+		return
+	_voice_played = true
+	var stream = load(TITLE_VOICE_PATH)
+	if stream == null:
+		return
+	var player := AudioStreamPlayer.new()
+	player.stream = stream
+	player.bus = "SFX"
+	player.volume_db = TITLE_VOICE_VOLUME_DB
+	add_child(player)
+	player.play()

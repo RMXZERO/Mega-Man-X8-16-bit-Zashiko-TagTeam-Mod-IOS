@@ -48,6 +48,11 @@ func fire_charged(_charge_level) -> void :
 	ExecuteOnce()
 
 func _StartCondition() -> bool:
+	# 자동 차지로 차지가 모인 상태에서 공격을 누르면 기본탄 없이 차지샷만 나가게 한다
+	# (X 의 Shot 노드는 이 PrimaryShot 이라 Shot.gd 의 검사가 적용되지 않아 여기에도 필요)
+	var blocked = character.get("auto_charge_block_basic")
+	if blocked != null and blocked > 0.0:
+		return false
 	if current_weapon and character.has_control():
 		if current_weapon.name == "XDrive":
 			return current_weapon.has_ammo()

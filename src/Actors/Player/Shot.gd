@@ -36,6 +36,10 @@ func check() -> void :
 				Input.action_press("auto_charge")
 
 func _StartCondition() -> bool:
+	# 자동 차지로 차지가 모인 상태에서 공격을 누르면 기본탄 없이 차지샷만 나가게 한다
+	var blocked = character.get("auto_charge_block_basic")
+	if blocked != null and blocked > 0.0:
+		return false
 	if current_weapon:
 		return current_weapon.has_ammo()
 	return false
@@ -70,11 +74,6 @@ func _Update(_delta: float) -> void :
 			fire(current_weapon)
 
 	if not character.is_executing("Ride") and not CharacterManager.weaponget:
-		if CharacterManager.auto_charge:
-			if character.get_action_pressed("fire"):
-				Input.action_release("auto_charge")
-			if not character.get_action_pressed("auto_charge"):
-				Input.action_press("auto_charge")
 		if CharacterManager.rapid_fire:
 			if character.get_action_pressed("alt_fire") and not rapid_alt_shot:
 				if _StartCondition():
