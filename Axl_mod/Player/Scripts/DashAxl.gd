@@ -147,8 +147,6 @@ func should_dash_up() -> bool:
 	return character.get_action_pressed("move_up") and can_dash_up
 
 func _StartCondition() -> bool:
-	if character.is_shooting:
-		return false
 	if character.holding_down:
 		return false
 	if facing_a_wall():

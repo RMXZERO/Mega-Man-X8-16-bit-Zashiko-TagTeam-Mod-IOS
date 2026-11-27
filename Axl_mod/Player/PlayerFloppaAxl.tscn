@@ -2244,7 +2244,7 @@ bus = "SFX"
 
 [node name="Jump" type="Node2D" parent="."]
 script = ExtResource( 4 )
-conflicting_moves = [ "DashJump", "WallSlide", "AirDash", "WallJump", "DashWallJump", "AirJump", "Dodge", "Shot", "AltFire", "Desperation" ]
+conflicting_moves = [ "DashJump", "WallSlide", "AirDash", "WallJump", "DashWallJump", "AirJump", "Dodge", "Desperation" ]
 actions = [ "jump" ]
 animation = "jump"
 sound = ExtResource( 3 )

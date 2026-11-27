@@ -118,8 +118,6 @@ func should_dash() -> bool:
 	return character.is_on_floor()
 
 func _StartCondition() -> bool:
-	if character.is_shooting:
-		return false
 	if character.holding_down:
 		return false
 	if facing_a_wall():
