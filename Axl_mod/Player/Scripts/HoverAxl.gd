@@ -105,7 +105,8 @@ func _Update(_delta: float) -> void :
 		play_hover_sound()
 		zero_bonus_horizontal_speed()
 		if character.is_shooting:
-			set_movement_and_direction(0)
+			# 호버링 중 사격해도 좌우 이동 가능 (상하는 조준 입력과 겹쳐서 고정)
+			set_movement_and_direction(horizontal_velocity, _delta)
 			character.set_vertical_speed(0)
 		else:
 			set_movement_and_direction(horizontal_velocity, _delta)

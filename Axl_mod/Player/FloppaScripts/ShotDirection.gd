@@ -12,6 +12,9 @@ onready var weapon_x_offset: int = 0
 onready var weapon_y_offset: int = 0
 
 var current_frame: int = 2
+# 자동 사격(AXL AUTO FIRE)이 정해 주는 조준 프레임 (-1 = 사용 안 함). 방향키로 직접 위/아래를 누르면 그쪽이 우선.
+var auto_aim_frame: int = -1
+var _auto_aim_used: bool = false
 var exclusive_ground_animations: Array = [
 	"walk_start", 
 	"walk", 
@@ -55,7 +58,11 @@ func set_frame_to_direction() -> void :
 	var move_up = key_up or (analog_direction.y < - diagonal_tolerance)
 	var move_down = key_down or (analog_direction.y > diagonal_tolerance)
 	
-	if not move_left and not move_right and not move_up and not move_down:
+	_auto_aim_used = false
+	if auto_aim_frame >= 0 and not move_up and not move_down:
+		current_frame = auto_aim_frame
+		_auto_aim_used = true
+	elif not move_left and not move_right and not move_up and not move_down:
 		current_frame = 2;
 	elif (move_left or move_right) and not move_up and not move_down:
 		current_frame = 2;
@@ -88,6 +95,12 @@ func update_sprite_direction() -> void :
 
 func projectile_speed_control(_projectile, _speed, horizontal_dir, vertical_dir) -> void :
 	var _animation = character.get_animation()
+	if _auto_aim_used:
+		# 자동 조준 중에는 방향키 대신 조준 프레임으로 위/아래 방향을 정한다
+		if current_frame <= 1:
+			vertical_dir = - 1
+		elif current_frame >= 3:
+			vertical_dir = 1
 	offset_manager.get_offset()
 	x_offset = offset_manager.x_offset
 	y_offset = offset_manager.y_offset

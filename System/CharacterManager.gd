@@ -42,6 +42,7 @@ var nightshade_zero_armor: bool = false
 var only_x: bool = false
 var auto_charge: bool = false
 var zero_auto_attack: bool = false
+var axl_auto_attack: bool = false
 var rapid_fire: bool = false
 var ultimate_buster: bool = false
 var hide_x_armor: bool = false
@@ -347,6 +348,7 @@ func _save() -> void :
 		
 		"auto_charge": auto_charge, 
 		"zero_auto_attack": zero_auto_attack,
+		"axl_auto_attack": axl_auto_attack,
 		"rapid_fire": rapid_fire, 
 		"ultimate_buster": ultimate_buster,
 		"hide_x_armor": hide_x_armor,
@@ -448,6 +450,7 @@ func _load() -> void :
 			
 			auto_charge = bool(save_data.get("auto_charge", false))
 			zero_auto_attack = bool(save_data.get("zero_auto_attack", false))
+			axl_auto_attack = bool(save_data.get("axl_auto_attack", false))
 			rapid_fire = bool(save_data.get("rapid_fire", false))
 			hide_x_armor = bool(save_data.get("hide_x_armor", false))
 			use_old_sprite = bool(save_data.get("use_old_sprite", false))
@@ -628,10 +631,106 @@ func _ready() -> void :
 func _physics_process(delta: float) -> void :
 	var p = GameManager.player
 	if p == null or not is_instance_valid(p):
+		_release_axl_auto_fire()
 		return
 	if p.has_method("check_zero_auto_attack"):
 		p.check_zero_auto_attack(delta)
 		p.check_x_auto_charge(delta)
+	_check_axl_auto_fire(p)
+
+# ---- Axl AUTO FIRE (8방향 자동 조준) ----
+# 옵션이 켜져 있으면, 화면 안의 가장 가까운 적을 향해 "fire" 입력을 대신 눌러 주고
+# ShotDirection.auto_aim_frame 으로 5가지 조준 프레임(위/대각 위/정면/대각 아래/아래)을 정해 준다.
+# 보는 방향 앞쪽의 적, 그리고 바로 위/아래(수직 범위)의 적을 대상으로 하며, 뒤쪽 적을 위해 돌아서지는 않는다.
+# (사벨은 alt_fire 를 쓰므로 영향 없음)
+const AXL_AIM_VERTICAL_DEG: float = 67.5   # 이 각도 이상이면 정확히 위/아래로 조준
+const AXL_AIM_DIAGONAL_DEG: float = 22.5   # 이 각도 이상이면 대각선, 미만이면 정면
+var _axl_auto_fire_pressed: bool = false
+var _axl_aim_node = null
+
+func _clear_axl_auto_aim() -> void :
+	if _axl_aim_node != null and is_instance_valid(_axl_aim_node):
+		_axl_aim_node.auto_aim_frame = - 1
+	_axl_aim_node = null
+
+func _release_axl_auto_fire() -> void :
+	_clear_axl_auto_aim()
+	if _axl_auto_fire_pressed:
+		Input.action_release("fire")
+		_axl_auto_fire_pressed = false
+
+func _check_axl_auto_fire(p) -> void :
+	if not axl_auto_attack or player_character != "Axl" or get_tree().paused:
+		_release_axl_auto_fire()
+		return
+	if not p.listening_to_inputs or not p.has_health() or p.is_executing("Ride"):
+		_release_axl_auto_fire()
+		return
+	# 플레이어가 직접 fire 를 누르고 있으면 건드리지 않는다
+	if Input.is_action_pressed("fire") and not _axl_auto_fire_pressed:
+		_clear_axl_auto_aim()
+		return
+	var shot_direction = p.get_node_or_null("ShotDirection")
+	var frame: int = - 1
+	if shot_direction != null and "auto_aim_frame" in shot_direction:
+		frame = _axl_find_aim_frame(p)
+	if frame >= 0:
+		shot_direction.auto_aim_frame = frame
+		_axl_aim_node = shot_direction
+		# 터치 등으로 중간에 떼어져도 다시 눌러 준다
+		Input.action_press("fire")
+		_axl_auto_fire_pressed = true
+	else:
+		_release_axl_auto_fire()
+
+# 가장 가까운 대상 적의 조준 프레임(0~4)을 돌려준다. 대상이 없으면 -1.
+func _axl_find_aim_frame(p) -> int:
+	var facing: int = p.get_facing_direction()
+	var origin: Vector2 = p.global_position + Vector2(0, - 8)
+	var best_frame: int = - 1
+	var best_dist: float = INF
+	for node in get_tree().get_nodes_in_group("Enemies"):
+		if not is_instance_valid(node):
+			continue
+		var body = node
+		var ed = null
+		if node is EnemyDamage:
+			if not node.active:
+				continue
+			ed = node
+			body = node.character
+		if not is_instance_valid(body) or not (body is Node2D):
+			continue
+		if body.has_method("has_health") and not body.has_health():
+			continue
+		if not GameManager.is_on_screen(body.global_position):
+			continue
+		var center: Vector2 = body.global_position
+		if p.has_method("_get_enemy_rect"):
+			var rect: Rect2 = p._get_enemy_rect(ed, body)
+			center = rect.position + rect.size * 0.5
+		var dx: float = center.x - origin.x
+		var dy: float = center.y - origin.y
+		var angle: float = rad2deg(atan2( - dy, abs(dx)))   # +90 = 바로 위, -90 = 바로 아래
+		var frame: int
+		if angle >= AXL_AIM_VERTICAL_DEG:
+			frame = 0
+		elif angle <= - AXL_AIM_VERTICAL_DEG:
+			frame = 4
+		else:
+			if dx * facing <= 0:
+				continue   # 뒤쪽 적은 대상이 아님
+			if angle >= AXL_AIM_DIAGONAL_DEG:
+				frame = 1
+			elif angle <= - AXL_AIM_DIAGONAL_DEG:
+				frame = 3
+			else:
+				frame = 2
+		var dist: float = dx * dx + dy * dy
+		if dist < best_dist:
+			best_dist = dist
+			best_frame = frame
+	return best_frame
 
 func _process(_delta: float) -> void :
 #	if started_fresh_game:
