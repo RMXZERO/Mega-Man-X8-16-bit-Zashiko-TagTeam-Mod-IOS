@@ -1,6 +1,8 @@
 extends Node
 onready var megaman: Sprite = $megaman
 onready var megaman2: Sprite = $megaman2
+onready var rockman: Sprite = $rockman
+onready var rockman2: Sprite = $rockman2
 onready var x8_big: Sprite = $x8_big
 onready var x8_outer: Sprite = $x8_outer
 onready var x8_color: Sprite = $x8_color
@@ -19,6 +21,7 @@ export  var final_megaman_position: Vector2
 onready var blackness: Sprite = $blackness
 onready var demo: Label = $demo_02
 
+var is_rockman: bool = true
 var timer: = 0.0
 var step: = 0
 func next_step() -> void :
@@ -33,11 +36,26 @@ func _ready() -> void :
 		else:
 			break
 	
+	if Configurations.exists("TitleType"):
+		if Configurations.get("TitleType"):
+			is_rockman = false
+		else:
+			is_rockman = true
+	
 	set_physics_process(false)
+	# 재생 시점에 파일을 읽으면 순간 끊길 수 있어서 미리 불러 둔다
+	_voice_stream = load(TITLE_VOICE_PATH)
 
 func _physics_process(delta: float) -> void :
 	timer += delta
-	appear_megaman_logo()
+	if is_rockman:
+		appear_rockman_logo()
+		megaman.visible = false
+		megaman2.visible = false
+	else:
+		appear_megaman_logo()
+		rockman.visible = false
+		rockman2.visible = false
 	appear_x8()
 		
 	pass
@@ -95,6 +113,8 @@ func appear_x8() -> void :
 		tween3.tween_property(x8_color, "modulate", Color.white, 5).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 		tween3.tween_property(x8_shinefull, "modulate", white_zero, 2.5)
 		tween3.tween_property(blackness, "modulate", Color.white, 0.75)
+		# X8 로고가 완전히 나타난 뒤(위 트윈이 모두 끝난 뒤) 음성 재생
+		tween3.connect("finished", self, "play_title_voice")
 		next_step()
 	elif step == 13 and timer > 1.25:
 		appear(demo)
@@ -144,6 +164,44 @@ func appear_megaman_logo() -> void :
 		send_downwards(megaman2)
 		next_step()
 	
+func appear_rockman_logo() -> void :
+	if step == 0 and timer > 0.5:
+		send_downwards(rockman)
+		next_step()
+	
+	elif step == 1 and timer > 0.3:
+		fade(rockman)
+		send_downwards(rockman2)
+		next_step()
+
+	elif step == 2 and timer > 0.3:
+		send_downwards(rockman)
+		fade(rockman2)
+		next_step()
+
+	elif step == 3 and timer > 0.3:
+		fade(rockman)
+		send_downwards(rockman2)
+		next_step()
+
+	elif step == 4 and timer > 0.3:
+		send_downwards(rockman)
+		fade(rockman2)
+		next_step()
+	
+	elif step == 5 and timer > 0.25:
+		fade(rockman)
+		send_downwards(rockman2)
+		next_step()
+
+	elif step == 6 and timer > 0.25:
+		send_downwards(rockman)
+		fade(rockman2)
+		next_step()
+	
+	elif step == 7 and timer > 0.25:
+		send_downwards(rockman2)
+		next_step()
 
 func send_downwards(object, duration: = 0.3) -> void :
 	object.z_index = - 1
@@ -172,3 +230,26 @@ func appear(object) -> void :
 	object.visible = true
 	var t = create_tween()
 	t.tween_property(object, "modulate", Color.white, 1)
+
+
+# 타이틀 로고가 완전히 뜬 뒤 한 번 재생되는 음성 (SFX 버스)
+const TITLE_VOICE_PATH := "res://src/Title/rockman_x8_voice.wav"
+const TITLE_VOICE_VOLUME_DB := -2.0
+var _voice_played: bool = false
+var _voice_stream = null
+
+func play_title_voice() -> void:
+	if _voice_played:
+		return
+	_voice_played = true
+	var stream = _voice_stream
+	if stream == null:
+		stream = load(TITLE_VOICE_PATH)
+	if stream == null:
+		return
+	var player := AudioStreamPlayer.new()
+	player.stream = stream
+	player.bus = "SFX"
+	player.volume_db = TITLE_VOICE_VOLUME_DB
+	add_child(player)
+	player.play()
