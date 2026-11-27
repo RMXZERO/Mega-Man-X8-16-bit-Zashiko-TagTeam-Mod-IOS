@@ -297,6 +297,11 @@ func _process(delta):
 func _input(event: InputEvent) -> void :
 	if gamestart_button.game_started or animating:
 		return
+
+	if event is InputEventScreenTouch:
+		if event.pressed:
+			handle_touch(event.position)
+		return
 		
 	if Input.is_action_just_pressed("move_right"):
 		emit_signal("switch_character", "right")
@@ -310,36 +315,56 @@ func _input(event: InputEvent) -> void :
 		
 	if Input.is_action_just_pressed("ui_accept") and accept_pressed <= 0:
 		accept_pressed = accept_timer
-		
-		var char_name = "none"
-		if "X" in characters[1].name:
-			char_name = "X"
-		elif "Zero" in characters[1].name:
-			char_name = "Zero"
-		elif "Axl" in characters[1].name:
-			char_name = "Axl"
-		elif "Alia" in characters[1].name:
-			char_name = "Alia"
-		elif "Layer" in characters[1].name:
-			char_name = "Layer"
-		elif "Pallette" in characters[1].name:
-			char_name = "Pallette"
-		
-		if char_name in CharacterManager.team:
-			unequip.play()
-			CharacterManager.remove_player_from_team(char_name)
-			characters[1].modulate = Color("#2c2c2c")
-		elif not char_name == "none" and not char_name in CharacterManager.team:
-			pick.play()
-			CharacterManager.add_player_to_team(char_name) 
-			characters[1].modulate = Color("#ffffff")
-		
-		update_game_start_label()
-		
-		if (CharacterManager.team.size() == CharacterManager.max_team_size) or (CharacterManager.team.size() == 1 and char_name == "none"):
-			gamestart_button.can_start_game = true
-			gamestart_button.game_started = true
-			gamestart_button.on_press()
+		toggle_current_character()
+
+func get_current_char_name() -> String:
+	var char_name = "none"
+	if "X" in characters[1].name:
+		char_name = "X"
+	elif "Zero" in characters[1].name:
+		char_name = "Zero"
+	elif "Axl" in characters[1].name:
+		char_name = "Axl"
+	elif "Alia" in characters[1].name:
+		char_name = "Alia"
+	elif "Layer" in characters[1].name:
+		char_name = "Layer"
+	elif "Pallette" in characters[1].name:
+		char_name = "Pallette"
+	return char_name
+
+# 선택/해제 (키보드 ui_accept 와 터치가 같이 사용)
+func toggle_current_character() -> void:
+	var char_name = get_current_char_name()
+
+	if char_name in CharacterManager.team:
+		unequip.play()
+		CharacterManager.remove_player_from_team(char_name)
+		characters[1].modulate = Color("#2c2c2c")
+	elif not char_name == "none" and not char_name in CharacterManager.team:
+		pick.play()
+		CharacterManager.add_player_to_team(char_name)
+		characters[1].modulate = Color("#ffffff")
+
+	update_game_start_label()
+
+	if (CharacterManager.team.size() == CharacterManager.max_team_size) or (CharacterManager.team.size() == 1 and char_name == "none"):
+		gamestart_button.can_start_game = true
+		gamestart_button.game_started = true
+		gamestart_button.on_press()
+
+# 터치: 가운데 캐릭터 = 선택/해제, 양옆 캐릭터 = 좌우 이동
+func handle_touch(pos: Vector2) -> void:
+	if not is_visible_in_tree() or characters.size() < 3:
+		return
+	if characters[1].get_global_rect().has_point(pos):
+		if accept_pressed <= 0:
+			accept_pressed = accept_timer
+			toggle_current_character()
+	elif characters[2].get_global_rect().has_point(pos):
+		emit_signal("switch_character", "right")
+	elif characters[0].get_global_rect().has_point(pos):
+		emit_signal("switch_character", "left")
 
 func has_icarus_armor() -> bool:
 	var part: int = 0
