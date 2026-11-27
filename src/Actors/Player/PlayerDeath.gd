@@ -12,15 +12,33 @@ var emitted_sound: bool = false
 var game_paused: bool = false
 var death_location: Vector2
 
+# 캐릭터별 죽을 때 보이스 (캐릭터 루트 노드 이름 기준: X / Zero / Axl)
+const DEATH_VOICES := {
+	"X": "res://src/Actors/Player/DeathVoice/x_die.wav",
+	"Zero": "res://src/Actors/Player/DeathVoice/zero_die.wav",
+	"Axl": "res://src/Actors/Player/DeathVoice/axl_die.wav"
+}
+# 보이스가 폭발음(죽는 효과음)을 가리지 않도록 보이스는 줄이고, 보이스가 있는 캐릭터의 폭발음은 키운다
+const DEATH_VOICE_VOLUME_DB := -10.0
+const DEATH_SFX_BOOST_DB := 8.0
+var _death_voice_stream = null
+
 
 func play_sound_on_initialize():
 	pass
 
 func _ready() -> void :
 	character.listen("zero_health", self, "_on_zero_health")
+	var voice_path = DEATH_VOICES.get(character.name, "")
+	if voice_path != "":
+		_death_voice_stream = load(voice_path)
+		var sfx_player = get_node_or_null("audioStreamPlayer")
+		if sfx_player != null:
+			sfx_player.volume_db += DEATH_SFX_BOOST_DB
 
 func _Setup() -> void :
 	Event.emit_signal("player_death")
+	play_death_voice()
 	death_location = global_position
 	background.set_scale(Vector2(100, 40))
 	GameManager.pause("PlayerDeath")
@@ -34,6 +52,18 @@ func _Setup() -> void :
 	call_deferred("disable_collision")
 	background.material.set_shader_param("Alpha", alpha)
 	Log("finished Setup")
+
+func play_death_voice() -> void :
+	if _death_voice_stream == null:
+		return
+	var player := AudioStreamPlayer.new()
+	player.pause_mode = Node.PAUSE_MODE_PROCESS   # 죽는 순간의 정지 중에도 재생
+	player.stream = _death_voice_stream
+	player.bus = "SFX"
+	player.volume_db = DEATH_VOICE_VOLUME_DB
+	add_child(player)
+	player.connect("finished", player, "queue_free")
+	player.play()
 
 func disable_collision() -> void :
 	collision.disabled = true

@@ -5,6 +5,21 @@ class_name CharacterSwitchWarpIn
 export  var beam_speed: = 420.0
 export  var enable_movement: = true
 var descending: = false
+
+# 태그로 들어올 때(교대 투입) 재생되는 캐릭터별 보이스, 2개 중 랜덤 (캐릭터 루트 노드 이름 기준)
+const TAG_VOICES := {
+	"X": ["res://TagTeam_Mod/Voices/x_tag1.wav", "res://TagTeam_Mod/Voices/x_tag2.wav"],
+	"Zero": ["res://TagTeam_Mod/Voices/tag_zero1.wav", "res://TagTeam_Mod/Voices/tag_zero2.wav"],
+	"Axl": ["res://TagTeam_Mod/Voices/axl_tag1.wav", "res://TagTeam_Mod/Voices/axl_tag2.wav"]
+}
+# 보이스가 태그 효과음(빔 소리)을 가리지 않도록 보이스는 낮추고, 보이스가 있는 캐릭터의 효과음은 살짝 키운다
+const TAG_VOICE_VOLUME_DB := -9.0
+const TAG_SFX_BOOST_DB := 3.0
+# true  : 교대로 '빠지는' 캐릭터의 보이스를 빠지는 순간에 재생 (CharacterSwitchWarpOut 에서 재생)
+# false : 교대로 '등장하는' 캐릭터의 보이스를 등장하는 순간에 재생 (이 파일에서 재생)
+const TAG_VOICE_ON_WARP_OUT := true
+var _tag_voice_streams: Array = []
+var _tag_rng := RandomNumberGenerator.new()
 onready var animatedSprite = get_parent().get_node("animatedSprite")
 onready var beam_sound = get_node("audioStreamPlayer")
 
@@ -12,6 +27,13 @@ onready var beam_sound = get_node("audioStreamPlayer")
 func _ready() -> void :
 	animatedSprite.connect("animation_finished", self, "on_animation_finished")
 	Event.listen("character_switch_end", self, "on_character_switch_end")
+	_tag_rng.randomize()
+	for path in TAG_VOICES.get(character.name, []):
+		var stream = load(path)
+		if stream != null:
+			_tag_voice_streams.append(stream)
+	if not _tag_voice_streams.empty():
+		beam_sound.volume_db += TAG_SFX_BOOST_DB
 
 func on_character_switch_end() -> void:
 	EndAbility()
@@ -22,6 +44,20 @@ func _Setup():
 	descending = true
 	animatedSprite.position.y = position.y - 160
 	beam_sound.play()
+	if not TAG_VOICE_ON_WARP_OUT:
+		play_tag_voice()
+
+func play_tag_voice() -> void:
+	if _tag_voice_streams.empty():
+		return
+	var player := AudioStreamPlayer.new()
+	player.pause_mode = Node.PAUSE_MODE_PROCESS   # 교대 중 정지 상태에서도 재생
+	player.stream = _tag_voice_streams[_tag_rng.randi() % _tag_voice_streams.size()]
+	player.bus = "SFX"
+	player.volume_db = TAG_VOICE_VOLUME_DB
+	add_child(player)
+	player.connect("finished", player, "queue_free")
+	player.play()
 
 func _Update(_delta):
 	if descending:
