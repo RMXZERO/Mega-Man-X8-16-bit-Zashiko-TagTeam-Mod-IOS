@@ -39,6 +39,10 @@ func skip() -> void :
 
 func hide_intro() -> void :
 	if is_instance_valid(intro_anim):
+		# 로고를 스킵하고 메뉴로 넘어갈 때도 타이틀 음성을 재생 (이미 재생됐으면 무시됨)
+		var title_card = intro_anim.get_node_or_null("title_card_intro")
+		if title_card and title_card.has_method("play_title_voice"):
+			title_card.play_title_voice()
 		intro_anim.queue_free()
 	$MainMenu.start()
 	capcom_logo.visible = false

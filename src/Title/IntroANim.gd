@@ -232,24 +232,26 @@ func appear(object) -> void :
 	t.tween_property(object, "modulate", Color.white, 1)
 
 
-# 타이틀 로고가 완전히 뜬 뒤 한 번 재생되는 음성 (SFX 버스)
+# 타이틀 음성 (SFX 버스). 로고 애니메이션이 끝났을 때, 또는 로고를 스킵하고
+# 메뉴로 넘어갈 때(IntroCapcom.hide_intro) 호출되며, 한 번만 재생된다.
+# 플레이어를 현재 씬에 붙여서 IntroAnim이 queue_free 되어도 소리가 끊기지 않는다.
 const TITLE_VOICE_PATH := "res://src/Title/rockman_x8_voice.wav"
 const TITLE_VOICE_VOLUME_DB := -2.0
-var _voice_played: bool = false
 var _voice_stream = null
 
 func play_title_voice() -> void:
-	if _voice_played:
+	var scene = get_tree().current_scene
+	if scene == null or scene.has_node("TitleVoice"):
 		return
-	_voice_played = true
 	var stream = _voice_stream
 	if stream == null:
 		stream = load(TITLE_VOICE_PATH)
 	if stream == null:
 		return
 	var player := AudioStreamPlayer.new()
+	player.name = "TitleVoice"
 	player.stream = stream
 	player.bus = "SFX"
 	player.volume_db = TITLE_VOICE_VOLUME_DB
-	add_child(player)
+	scene.add_child(player)
 	player.play()
