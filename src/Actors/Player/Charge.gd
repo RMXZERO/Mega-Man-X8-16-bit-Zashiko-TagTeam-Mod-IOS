@@ -86,6 +86,7 @@ func BANDAID_stop_audio_if_not_executing():
 			Log("Forcefully stopped undesired playing sound")
 
 func _StartCondition() -> bool:
+	reset_input()
 	if not current_weapon:
 		update_current_weapon(arm_cannon.current_weapon)
 	if current_weapon is BossWeapon and not arm_cannon.upgraded:

@@ -482,6 +482,7 @@ var _auto_attack_cd: float = 0.0
 var _auto_window_anim: String = ""
 var auto_charge_block_basic: float = 0.0
 var _fire_was_down: bool = false
+var _auto_charge_was_on: bool = false
 
 func is_zero_player() -> bool:
 	return get_node_or_null("SaberCharge") != null
@@ -714,6 +715,14 @@ func get_auto_attack_direction() -> int:
 func check_x_auto_charge(delta: float) -> void:
 	if auto_charge_block_basic > 0.0:
 		auto_charge_block_basic -= delta
+	# 게임 중(옵션 메뉴 등)에 자동 차지가 켜지거나 꺼진 순간, 차지가 쓰는 입력(fire/auto_charge)을
+	# 새 설정으로 바꾸고 auto_charge 입력을 한 번 떼어, 아래에서 새로 눌린 것으로 인식되게 한다
+	if CharacterManager.auto_charge != _auto_charge_was_on:
+		_auto_charge_was_on = CharacterManager.auto_charge
+		var _charge_node = get_node_or_null("Charge")
+		if _charge_node != null and _charge_node.has_method("reset_input"):
+			_charge_node.reset_input()
+		Input.action_release("auto_charge")
 	# 공격 버튼 "방금 눌림"을 프레임 타이밍에 의존하지 않고 직접 판별한다
 	var fire_down: bool = Input.is_action_pressed("fire")
 	var fire_just: bool = fire_down and not _fire_was_down
