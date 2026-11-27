@@ -43,6 +43,8 @@ func _ready() -> void :
 			is_rockman = true
 	
 	set_physics_process(false)
+	# 재생 시점에 파일을 읽으면 순간 끊길 수 있어서 미리 불러 둔다
+	_voice_stream = load(TITLE_VOICE_PATH)
 
 func _physics_process(delta: float) -> void :
 	timer += delta
@@ -234,12 +236,15 @@ func appear(object) -> void :
 const TITLE_VOICE_PATH := "res://src/Title/rockman_x8_voice.wav"
 const TITLE_VOICE_VOLUME_DB := -2.0
 var _voice_played: bool = false
+var _voice_stream = null
 
 func play_title_voice() -> void:
 	if _voice_played:
 		return
 	_voice_played = true
-	var stream = load(TITLE_VOICE_PATH)
+	var stream = _voice_stream
+	if stream == null:
+		stream = load(TITLE_VOICE_PATH)
 	if stream == null:
 		return
 	var player := AudioStreamPlayer.new()
