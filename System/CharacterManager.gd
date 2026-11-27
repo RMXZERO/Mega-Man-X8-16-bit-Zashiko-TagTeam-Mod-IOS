@@ -645,6 +645,9 @@ func _physics_process(delta: float) -> void :
 # (사벨은 alt_fire 를 쓰므로 영향 없음)
 const AXL_AIM_VERTICAL_DEG: float = 67.5   # 이 각도 이상이면 정확히 위/아래로 조준
 const AXL_AIM_DIAGONAL_DEG: float = 22.5   # 이 각도 이상이면 대각선, 미만이면 정면
+const AXL_AIM_RANGE_X: float = 170.0       # Axl 기준 가로 최대 거리 (줄일수록 가까운 적만 쏨)
+const AXL_AIM_RANGE_Y: float = 100.0       # Axl 기준 세로 최대 거리
+const AXL_AIM_SCREEN_MARGIN: float = 8.0   # 화면 가장자리에서 이만큼 안쪽에 있어야 대상 (화면 절반: 가로 199, 세로 112)
 var _axl_auto_fire_pressed: bool = false
 var _axl_aim_node = null
 
@@ -683,6 +686,19 @@ func _check_axl_auto_fire(p) -> void :
 	else:
 		_release_axl_auto_fire()
 
+func _axl_in_aim_range(center: Vector2, origin: Vector2) -> bool:
+	var cam = GameManager.camera
+	if cam == null:
+		return false
+	var c: Vector2 = cam.get_camera_screen_center()
+	if abs(center.x - c.x) > 199.0 - AXL_AIM_SCREEN_MARGIN:
+		return false
+	if abs(center.y - c.y) > 112.0 - AXL_AIM_SCREEN_MARGIN:
+		return false
+	if abs(center.x - origin.x) > AXL_AIM_RANGE_X or abs(center.y - origin.y) > AXL_AIM_RANGE_Y:
+		return false
+	return true
+
 # 가장 가까운 대상 적의 조준 프레임(0~4)을 돌려준다. 대상이 없으면 -1.
 func _axl_find_aim_frame(p) -> int:
 	var facing: int = p.get_facing_direction()
@@ -709,6 +725,9 @@ func _axl_find_aim_frame(p) -> int:
 		if p.has_method("_get_enemy_rect"):
 			var rect: Rect2 = p._get_enemy_rect(ed, body)
 			center = rect.position + rect.size * 0.5
+		# 화면에 완전히 보이는 적, 그리고 Axl 에서 일정 거리 안의 적만 대상으로 한다
+		if not _axl_in_aim_range(center, origin):
+			continue
 		var dx: float = center.x - origin.x
 		var dy: float = center.y - origin.y
 		var angle: float = rad2deg(atan2( - dy, abs(dx)))   # +90 = 바로 위, -90 = 바로 아래
