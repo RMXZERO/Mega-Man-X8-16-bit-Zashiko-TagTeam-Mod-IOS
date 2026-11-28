@@ -102,6 +102,26 @@ var pallette_right_desc: String = "\n\n" + tr("PALLETTE_RIGHT_DESC")
 
 signal switch_character(direction)
 
+# 캐릭터를 선택(팀에 추가)할 때 재생되는 보이스, 캐릭터당 2개 중 랜덤
+const SELECT_VOICES := {
+	"X": ["res://System/Screens/CharacterSelection/Voices/x_start.wav", "res://System/Screens/CharacterSelection/Voices/x_start2.wav"],
+	"Zero": ["res://System/Screens/CharacterSelection/Voices/zero_start.wav", "res://System/Screens/CharacterSelection/Voices/zero_start2.wav"],
+	"Axl": ["res://System/Screens/CharacterSelection/Voices/axl_start.wav", "res://System/Screens/CharacterSelection/Voices/axl_start2.wav"]
+}
+# 파일별 음량 보정(dB): 선택/픽 효과음과 비슷한 크기가 되도록 측정해서 맞춘 값
+const SELECT_VOICE_DB := {
+	"res://System/Screens/CharacterSelection/Voices/x_start.wav": 0.0,
+	"res://System/Screens/CharacterSelection/Voices/x_start2.wav": -1.2,
+	"res://System/Screens/CharacterSelection/Voices/zero_start.wav": -1.5,
+	"res://System/Screens/CharacterSelection/Voices/zero_start2.wav": -0.3,
+	"res://System/Screens/CharacterSelection/Voices/axl_start.wav": -2.1,
+	"res://System/Screens/CharacterSelection/Voices/axl_start2.wav": -2.0
+}
+const SELECT_VOICE_MASTER_DB := 0.0   # 선택 보이스 전체를 한꺼번에 키우거나 줄이고 싶을 때
+var _select_voice_rng := RandomNumberGenerator.new()
+var _select_voice_seeded: bool = false
+var _select_voice_cache: Dictionary = {}
+
 func update_text():
 	x_left_desc = "\n\n[color=#47a1fc]" + tr("X_LEFT_TITLE_1") + "[/color]\n" + tr("X_LEFT_DESC_1") + "\n\n[color=#47a1fc]" + tr("X_LEFT_TITLE_2") + "[/color]\n" + tr("X_LEFT_DESC_2") +  "\n\n[color=#47a1fc]" + tr("X_LEFT_TITLE_3") + "[/color]\n" + tr("X_LEFT_DESC_3") + "\n\n[color=#47a1fc]" + tr("X_LEFT_TITLE_4") + "[/color]\n" + tr("X_LEFT_DESC_4")
 	x_right_desc = "\n\n" + tr("X_RIGHT_DESC")
@@ -343,6 +363,7 @@ func toggle_current_character() -> void:
 		characters[1].modulate = Color("#2c2c2c")
 	elif not char_name == "none" and not char_name in CharacterManager.team:
 		pick.play()
+		play_select_voice(char_name)
 		CharacterManager.add_player_to_team(char_name)
 		characters[1].modulate = Color("#ffffff")
 
@@ -352,6 +373,31 @@ func toggle_current_character() -> void:
 		gamestart_button.can_start_game = true
 		gamestart_button.game_started = true
 		gamestart_button.on_press()
+
+# 선택 보이스 재생 (마지막 캐릭터를 고르면 바로 게임이 시작되어 이 화면이 사라지므로,
+# 플레이어를 화면 노드가 아닌 루트에 붙여서 소리가 끊기지 않게 한다)
+func play_select_voice(char_name: String) -> void:
+	if not SELECT_VOICES.has(char_name):
+		return
+	if not _select_voice_seeded:
+		_select_voice_rng.randomize()
+		_select_voice_seeded = true
+	var paths: Array = SELECT_VOICES[char_name]
+	var path: String = paths[_select_voice_rng.randi() % paths.size()]
+	var stream = _select_voice_cache.get(path)
+	if stream == null:
+		stream = load(path)
+		if stream == null:
+			return
+		_select_voice_cache[path] = stream
+	var player := AudioStreamPlayer.new()
+	player.pause_mode = Node.PAUSE_MODE_PROCESS
+	player.stream = stream
+	player.bus = "SFX"
+	player.volume_db = SELECT_VOICE_DB.get(path, -4.0) + SELECT_VOICE_MASTER_DB
+	get_tree().root.add_child(player)
+	player.connect("finished", player, "queue_free")
+	player.play()
 
 # 터치: 가운데 캐릭터 = 선택/해제, 양옆 캐릭터 = 좌우 이동
 func handle_touch(pos: Vector2) -> void:

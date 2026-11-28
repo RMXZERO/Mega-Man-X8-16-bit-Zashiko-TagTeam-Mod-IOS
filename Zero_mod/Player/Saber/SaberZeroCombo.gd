@@ -117,7 +117,42 @@ func should_add_saber_combo():
 		return false
 	return false
 
+# 제로 3단 베기 보이스 (1단 / 2단 / 3단)
+const COMBO_VOICES := [
+	"res://Zero_mod/Voices/zero_1dangiri.wav",
+	"res://Zero_mod/Voices/zero_2dangiri.wav",
+	"res://Zero_mod/Voices/zero_3dangiri.wav"
+]
+# 단계별 음량 보정(dB): 세이버 효과음보다 조금 크게 들리도록 측정해서 맞춘 값 (1단, 2단, 3단)
+const COMBO_VOICE_DB := [-5.0, -4.5, -3.0]
+const COMBO_VOICE_MASTER_DB := 0.0   # 콤보 보이스 전체를 한꺼번에 키우거나 줄이고 싶을 때
+var _combo_voice_cache: Dictionary = {}
+
+func play_combo_voice() -> void:
+	if slashes < 0 or slashes >= COMBO_VOICES.size():
+		return
+	var path: String = COMBO_VOICES[slashes]
+	var stream = _combo_voice_cache.get(path)
+	if stream == null:
+		stream = load(path)
+		if stream == null:
+			return
+		_combo_voice_cache[path] = stream
+	var player := AudioStreamPlayer.new()
+	player.stream = stream
+	player.bus = "SFX"
+	player.volume_db = COMBO_VOICE_DB[slashes] + COMBO_VOICE_MASTER_DB
+	add_child(player)
+	player.connect("finished", player, "queue_free")
+	player.play()
+
+func play_combo_voice_if_slash() -> void:
+	# 지상 3단 베기에서만 (아래 누른 Z-버스터 변형은 제외)
+	if character.is_on_floor() and not character.get_action_pressed("move_down"):
+		play_combo_voice()
+
 func set_saber_animations():
+	play_combo_voice_if_slash()
 	if character.is_on_floor():
 		if slashes == 0:
 			if not character.get_action_pressed("move_down"):
