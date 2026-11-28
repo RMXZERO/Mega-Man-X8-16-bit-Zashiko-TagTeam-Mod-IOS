@@ -163,7 +163,7 @@ func play_boss_voice() -> void:
 	_boss_voice_player = AudioStreamPlayer.new()
 	_boss_voice_player.pause_mode = Node.PAUSE_MODE_PROCESS
 	_boss_voice_player.stream = _boss_voice_stream
-	_boss_voice_player.bus = "SFX"
+	_boss_voice_player.bus = "Voice"
 	_boss_voice_player.volume_db = BOSS_VOICE_VOLUME_DB
 	add_child(_boss_voice_player)
 	_boss_voice_player.connect("finished", _boss_voice_player, "queue_free")

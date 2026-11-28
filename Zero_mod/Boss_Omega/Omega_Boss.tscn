@@ -1015,19 +1015,19 @@ bus = "SFX"
 pause_mode = 1
 stream = ExtResource( 42 )
 volume_db = -5.0
-bus = "SFX"
+bus = "Voice"
 
 [node name="oz_voice_2" type="AudioStreamPlayer" parent="."]
 pause_mode = 1
 stream = ExtResource( 44 )
 volume_db = -5.0
-bus = "SFX"
+bus = "Voice"
 
 [node name="oz_voice_3" type="AudioStreamPlayer" parent="."]
 pause_mode = 1
 stream = ExtResource( 46 )
 volume_db = -5.0
-bus = "SFX"
+bus = "Voice"
 
 [node name="oz_dash" type="AudioStreamPlayer" parent="."]
 pause_mode = 1

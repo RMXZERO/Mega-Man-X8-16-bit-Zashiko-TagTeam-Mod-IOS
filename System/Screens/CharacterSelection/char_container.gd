@@ -393,7 +393,7 @@ func play_select_voice(char_name: String) -> void:
 	var player := AudioStreamPlayer.new()
 	player.pause_mode = Node.PAUSE_MODE_PROCESS
 	player.stream = stream
-	player.bus = "SFX"
+	player.bus = "Voice"
 	player.volume_db = SELECT_VOICE_DB.get(path, -4.0) + SELECT_VOICE_MASTER_DB
 	get_tree().root.add_child(player)
 	player.connect("finished", player, "queue_free")

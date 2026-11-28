@@ -59,7 +59,7 @@ func play_death_voice() -> void :
 	var player := AudioStreamPlayer.new()
 	player.pause_mode = Node.PAUSE_MODE_PROCESS   # 죽는 순간의 정지 중에도 재생
 	player.stream = _death_voice_stream
-	player.bus = "SFX"
+	player.bus = "Voice"
 	player.volume_db = DEATH_VOICE_VOLUME_DB
 	add_child(player)
 	player.connect("finished", player, "queue_free")

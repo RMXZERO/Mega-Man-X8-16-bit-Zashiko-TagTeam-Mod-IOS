@@ -140,7 +140,7 @@ func play_combo_voice() -> void:
 		_combo_voice_cache[path] = stream
 	var player := AudioStreamPlayer.new()
 	player.stream = stream
-	player.bus = "SFX"
+	player.bus = "Voice"
 	player.volume_db = COMBO_VOICE_DB[slashes] + COMBO_VOICE_MASTER_DB
 	add_child(player)
 	player.connect("finished", player, "queue_free")

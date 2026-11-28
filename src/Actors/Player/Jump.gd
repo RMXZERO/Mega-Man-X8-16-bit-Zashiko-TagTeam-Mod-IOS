@@ -18,8 +18,31 @@ func get_activation_leeway_time() -> float:
 		return leeway_time
 	return 0.0
 
+# X 가 점프할 때 나오는 보이스 (캐릭터 루트 노드 이름 기준: X)
+# 기존 전투 보이스(제로 콤보 보이스, 실제 재생 기준 약 -14.6dBFS RMS)와 체감 음량을 맞춘 볼륨
+const JUMP_VOICE_PATH := "res://src/Actors/Player/JumpVoice/x_jump.wav"
+const JUMP_VOICE_VOLUME_DB := -3.3
+
+func play_jump_voice() -> void :
+	if character == null or character.name != "X":
+		return
+	# 점프 / 대시점프 / 벽차기 등이 같은 플레이어 노드를 공유한다
+	var voice_player = character.get_node_or_null("JumpVoice")
+	if voice_player == null:
+		var stream = load(JUMP_VOICE_PATH)
+		if stream == null:
+			return
+		voice_player = AudioStreamPlayer.new()
+		voice_player.name = "JumpVoice"
+		voice_player.stream = stream
+		voice_player.bus = "Voice"
+		voice_player.volume_db = JUMP_VOICE_VOLUME_DB
+		character.add_child(voice_player)
+	voice_player.play()
+
 func _Setup() -> void :
 	emit_jump_signal()
+	play_jump_voice()
 	fullspeed_time = 0
 	slowdown_time = 0
 	changed_animation = false

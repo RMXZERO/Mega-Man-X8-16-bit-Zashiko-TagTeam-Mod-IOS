@@ -197,7 +197,7 @@ func check_jump_voice() -> void:
 			return
 	var player := AudioStreamPlayer.new()
 	player.stream = _jump_voice_stream
-	player.bus = "SFX"
+	player.bus = "Voice"
 	player.volume_db = JUMP_VOICE_DB + JUMP_VOICE_MASTER_DB
 	add_child(player)
 	player.connect("finished", player, "queue_free")

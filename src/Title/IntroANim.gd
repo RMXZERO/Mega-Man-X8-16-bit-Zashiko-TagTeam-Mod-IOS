@@ -251,7 +251,7 @@ func play_title_voice() -> void:
 	var player := AudioStreamPlayer.new()
 	player.name = "TitleVoice"
 	player.stream = stream
-	player.bus = "SFX"
+	player.bus = "Voice"
 	player.volume_db = TITLE_VOICE_VOLUME_DB
 	scene.add_child(player)
 	player.play()

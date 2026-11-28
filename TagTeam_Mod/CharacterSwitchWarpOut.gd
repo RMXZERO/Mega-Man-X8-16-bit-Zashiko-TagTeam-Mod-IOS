@@ -37,7 +37,7 @@ func play_tag_voice() -> void:
 	var player := AudioStreamPlayer.new()
 	player.pause_mode = Node.PAUSE_MODE_PROCESS   # 교대 중 정지 상태에서도 재생
 	player.stream = _tag_voice_streams[_tag_rng.randi() % _tag_voice_streams.size()]
-	player.bus = "SFX"
+	player.bus = "Voice"
 	player.volume_db = CharacterSwitchWarpIn.TAG_VOICE_VOLUME_DB
 	# 이 능력 노드는 교대 후 정지/숨김될 수 있으므로 현재 씬에 붙여 끝까지 재생
 	get_tree().current_scene.add_child(player)

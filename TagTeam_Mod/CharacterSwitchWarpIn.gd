@@ -53,7 +53,7 @@ func play_tag_voice() -> void:
 	var player := AudioStreamPlayer.new()
 	player.pause_mode = Node.PAUSE_MODE_PROCESS   # 교대 중 정지 상태에서도 재생
 	player.stream = _tag_voice_streams[_tag_rng.randi() % _tag_voice_streams.size()]
-	player.bus = "SFX"
+	player.bus = "Voice"
 	player.volume_db = TAG_VOICE_VOLUME_DB
 	add_child(player)
 	player.connect("finished", player, "queue_free")
