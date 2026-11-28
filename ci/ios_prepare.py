@@ -107,8 +107,8 @@ application/app_store_team_id="{team}"
 application/identifier="{bundle}"
 application/bundle_identifier="{bundle}"
 icons/app_store_1024x1024="res://ci_icon_1024.png"
-application/short_version="1.0.6"
-application/version="1.0.6"
+application/short_version="1.0.5"
+application/version="1.0.5"
 application/launch_screens_interpolation=0
 application/targeted_device_family=2
 orientation/portrait=false
@@ -1550,6 +1550,9 @@ def patch_title_difficulty_touch():
 
 # iOS-PORT: 터치 난이도 선택
 var ios_arrows: Array = []
+# 화살표를 누르는 영역 폭과, 글자 끝에서 화살표 중심까지의 거리 (글자에 바짝 붙도록 작게)
+const IOS_ARROW_W := 28.0
+const IOS_ARROW_PAD := 10.0
 
 
 func _ios_make_arrows() -> void:
@@ -1559,13 +1562,25 @@ func _ios_make_arrows() -> void:
 		var a = Label.new()
 		a.text = ""
 		a.mouse_filter = Control.MOUSE_FILTER_STOP
-		a.rect_size = Vector2(48.0, 16.0)
-		a.rect_position = Vector2(199.0 - 74.0 - 24.0 if i == 0 else 199.0 + 74.0 - 24.0, 0.0)
+		a.rect_size = Vector2(IOS_ARROW_W, 16.0)
 		a.set_meta("dir", -1 if i == 0 else 1)
 		a.add_to_group("ios_title_arrow")
 		a.connect("draw", self, "_ios_draw_arrow", [a])
 		add_child(a)
 		ios_arrows.append(a)
+	_ios_place_arrows()
+
+
+# 지금 표시 중인 난이도 글자의 폭에 맞춰 화살표를 글자 양옆에 붙인다 (엑스 캐릭터에 닿지 않게)
+func _ios_place_arrows() -> void:
+	var half = 24.0
+	var font = label.get_font("font")
+	if font != null:
+		half = font.get_string_size(label.text).x * 0.5
+	var cx = rect_size.x * 0.5
+	for a in ios_arrows:
+		var d = int(a.get_meta("dir"))
+		a.rect_position = Vector2(cx + d * (half + IOS_ARROW_PAD) - IOS_ARROW_W * 0.5, 0.0)
 
 
 # 글자 대신 직접 삼각형으로 그림 (폰트에 < > 가 없거나 색이 묻혀도 항상 보이게)
@@ -1584,6 +1599,7 @@ func _ios_draw_arrow(a: Control) -> void:
 func _ios_update_arrows() -> void:
 	if ios_arrows.empty():
 		return
+	_ios_place_arrows()
 	var show = modes.size() > 1
 	var can = show and not CharacterManager.game_mode_set
 	var idx = modes.find(CharacterManager.game_mode)
