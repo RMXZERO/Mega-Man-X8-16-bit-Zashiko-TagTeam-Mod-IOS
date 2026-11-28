@@ -14,9 +14,9 @@ const TAG_VOICES := {
 }
 # 보이스가 태그 효과음(빔 소리)을 가리지 않도록 보이스는 낮추고, 보이스가 있는 캐릭터의 효과음은 살짝 키운다
 const TAG_VOICE_VOLUME_DB := -9.0
-# 파일별 음량 보정(dB). 목록에 없는 파일은 0. x_tag1 이 x_tag2 보다 작게 들려서 키움 (값을 바꾸면 크기가 바뀜)
+# 파일별 음량 보정(dB). 목록에 없는 파일은 0. x_tag2 가 x_tag1 보다 작아서 키움 (값을 바꾸면 크기가 바뀜)
 const TAG_VOICE_GAIN_DB := {
-	"res://TagTeam_Mod/Voices/x_tag1.wav": 3.0
+	"res://TagTeam_Mod/Voices/x_tag2.wav": 1.0
 }
 const TAG_SFX_BOOST_DB := 3.0
 # true  : 교대로 '빠지는' 캐릭터의 보이스를 빠지는 순간에 재생 (CharacterSwitchWarpOut 에서 재생)
