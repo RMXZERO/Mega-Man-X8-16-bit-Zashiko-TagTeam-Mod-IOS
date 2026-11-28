@@ -2,6 +2,22 @@ extends Node2D
 
 const beats: Array = [0.01, 1.66, 3.32, 4.97, 5.59, 10.8]
 
+# 보스 이름이 뜨는 순간(5.59초, final_beat)에 재생되는 보스 보이스
+# name_id(StageInfo) -> 보이스 파일 이름
+const BOSS_VOICE_DIR := "res://src/Actors/Bosses/BossIntro/BossVoice/"
+const BOSS_VOICES := {
+	"PANDA": "BambooPandamonium",
+	"YETI": "AvalancheYeti",
+	"MANOWAR": "GigaboltManowar",
+	"ROOSTER": "BurnRooster",
+	"TRILOBYTE": "EarthrockTrilobyte",
+	"MANTIS": "DarkMantis",
+	"ANTONION": "GravityAntonion",
+	"SUNFLOWER": "OpticSunflower",
+}
+# BGM(약 -19 dB) 위로 들리도록 맞춘 값. 크면 올리고 작으면 내린다
+const BOSS_VOICE_VOLUME_DB := -2.0
+
 export  var stage_info: Resource
 export  var debug_logs: bool = false
 
@@ -26,6 +42,8 @@ onready var shake: AnimationPlayer = $animationPlayer
 
 var ending: bool = false
 var animations: Array
+var _boss_voice_stream = null
+var _boss_voice_player: AudioStreamPlayer = null
 
 signal start
 signal stop
@@ -38,6 +56,8 @@ func _input(event: InputEvent) -> void :
 func skip() -> void :
 	if not ending:
 		tween.reset()
+		if _boss_voice_player != null and is_instance_valid(_boss_voice_player):
+			_boss_voice_player.stop()
 		end()
 
 func _ready() -> void :
@@ -59,6 +79,7 @@ func prepare() -> void :
 	toggle(red_bg)
 	boss_name.text = stage_info.get_boss()
 	boss_name_shadow.text = stage_info.get_boss()
+	_load_boss_voice()
 	boss.frames = stage_info.sprite_frames
 	animations = stage_info.animation_beats
 	if stage_info.inverse_sprites:
@@ -125,6 +146,28 @@ func final_beat() -> void :
 	red_bg.modulate = Color(0.75, 0.75, 0.75, 1)
 	play_animation(animations.size() - 1)
 	flash()
+	play_boss_voice()
+
+func _load_boss_voice() -> void:
+	_boss_voice_stream = null
+	var voice_name = BOSS_VOICES.get(stage_info.name_id, "")
+	if voice_name == "":
+		return
+	var path = BOSS_VOICE_DIR + voice_name + ".ogg"
+	if ResourceLoader.exists(path):
+		_boss_voice_stream = load(path)
+
+func play_boss_voice() -> void:
+	if _boss_voice_stream == null or ending:
+		return
+	_boss_voice_player = AudioStreamPlayer.new()
+	_boss_voice_player.pause_mode = Node.PAUSE_MODE_PROCESS
+	_boss_voice_player.stream = _boss_voice_stream
+	_boss_voice_player.bus = "SFX"
+	_boss_voice_player.volume_db = BOSS_VOICE_VOLUME_DB
+	add_child(_boss_voice_player)
+	_boss_voice_player.connect("finished", _boss_voice_player, "queue_free")
+	_boss_voice_player.play()
 
 func end() -> void :
 	Log("end")

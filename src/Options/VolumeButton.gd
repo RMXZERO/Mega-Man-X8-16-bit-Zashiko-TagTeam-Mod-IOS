@@ -2,6 +2,12 @@ extends X8OptionButton
 
 export  var key: = "Music"
 var step: = 1.0
+
+func uses_arrows() -> bool:
+	return true
+
+func arrow_value_digits() -> int:
+	return 3
 	
 func setup() -> void :
 	set_volume(get_volume())

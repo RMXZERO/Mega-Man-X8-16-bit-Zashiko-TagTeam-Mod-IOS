@@ -4,6 +4,12 @@ const native = Vector2(398, 224)
 const w_size: = "WindowSize"
 var current_multiplier = 1
 
+func uses_arrows() -> bool:
+	return true
+
+func arrow_value_digits() -> int:
+	return 2
+
 
 func setup() -> void :
 	current_multiplier = get_windowsize()
