@@ -14,11 +14,16 @@ const TAG_VOICES := {
 }
 # 보이스가 태그 효과음(빔 소리)을 가리지 않도록 보이스는 낮추고, 보이스가 있는 캐릭터의 효과음은 살짝 키운다
 const TAG_VOICE_VOLUME_DB := -9.0
+# 파일별 음량 보정(dB). 목록에 없는 파일은 0. x_tag1 이 x_tag2 보다 작게 들려서 키움 (값을 바꾸면 크기가 바뀜)
+const TAG_VOICE_GAIN_DB := {
+	"res://TagTeam_Mod/Voices/x_tag1.wav": 3.0
+}
 const TAG_SFX_BOOST_DB := 3.0
 # true  : 교대로 '빠지는' 캐릭터의 보이스를 빠지는 순간에 재생 (CharacterSwitchWarpOut 에서 재생)
 # false : 교대로 '등장하는' 캐릭터의 보이스를 등장하는 순간에 재생 (이 파일에서 재생)
 const TAG_VOICE_ON_WARP_OUT := true
 var _tag_voice_streams: Array = []
+var _tag_voice_gains: Array = []
 var _tag_rng := RandomNumberGenerator.new()
 onready var animatedSprite = get_parent().get_node("animatedSprite")
 onready var beam_sound = get_node("audioStreamPlayer")
@@ -32,6 +37,7 @@ func _ready() -> void :
 		var stream = load(path)
 		if stream != null:
 			_tag_voice_streams.append(stream)
+			_tag_voice_gains.append(float(TAG_VOICE_GAIN_DB.get(path, 0.0)))
 	if not _tag_voice_streams.empty():
 		beam_sound.volume_db += TAG_SFX_BOOST_DB
 
@@ -52,9 +58,10 @@ func play_tag_voice() -> void:
 		return
 	var player := AudioStreamPlayer.new()
 	player.pause_mode = Node.PAUSE_MODE_PROCESS   # 교대 중 정지 상태에서도 재생
-	player.stream = _tag_voice_streams[_tag_rng.randi() % _tag_voice_streams.size()]
+	var idx: int = _tag_rng.randi() % _tag_voice_streams.size()
+	player.stream = _tag_voice_streams[idx]
 	player.bus = "Voice"
-	player.volume_db = TAG_VOICE_VOLUME_DB
+	player.volume_db = TAG_VOICE_VOLUME_DB + _tag_voice_gains[idx]
 	add_child(player)
 	player.connect("finished", player, "queue_free")
 	player.play()

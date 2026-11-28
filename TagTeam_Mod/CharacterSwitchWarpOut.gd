@@ -9,6 +9,7 @@ onready var animatedSprite = get_parent().get_node("animatedSprite")
 
 # 교대로 빠질 때 재생되는 캐릭터별 보이스 (목록/볼륨은 CharacterSwitchWarpIn 과 공유)
 var _tag_voice_streams: Array = []
+var _tag_voice_gains: Array = []
 var _tag_rng := RandomNumberGenerator.new()
 
 
@@ -20,6 +21,7 @@ func _ready() -> void :
 		var stream = load(path)
 		if stream != null:
 			_tag_voice_streams.append(stream)
+			_tag_voice_gains.append(float(CharacterSwitchWarpIn.TAG_VOICE_GAIN_DB.get(path, 0.0)))
 
 func on_character_switch_end() -> void:
 	EndAbility()
@@ -36,9 +38,10 @@ func play_tag_voice() -> void:
 		return
 	var player := AudioStreamPlayer.new()
 	player.pause_mode = Node.PAUSE_MODE_PROCESS   # 교대 중 정지 상태에서도 재생
-	player.stream = _tag_voice_streams[_tag_rng.randi() % _tag_voice_streams.size()]
+	var idx: int = _tag_rng.randi() % _tag_voice_streams.size()
+	player.stream = _tag_voice_streams[idx]
 	player.bus = "Voice"
-	player.volume_db = CharacterSwitchWarpIn.TAG_VOICE_VOLUME_DB
+	player.volume_db = CharacterSwitchWarpIn.TAG_VOICE_VOLUME_DB + _tag_voice_gains[idx]
 	# 이 능력 노드는 교대 후 정지/숨김될 수 있으므로 현재 씬에 붙여 끝까지 재생
 	get_tree().current_scene.add_child(player)
 	player.connect("finished", player, "queue_free")
