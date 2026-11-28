@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource( 1 )
-short_name = "Genmu Zero"
+short_name = "환몽영"
 collectible = "genmuzero_zero"
 icon = ExtResource( 2 )
 faded_icon = ExtResource( 2 )
