@@ -168,6 +168,41 @@ func should_add_saber_combo():
 	else:
 		return false
 
+# 제로 점프 1타 보이스 (지상 1단 베기와 같은 보이스 파일, 점프 베기 1타에서만)
+# 베기를 시작한 직후가 아니라 "다음 프레임에도 여전히 일반 점프 베기일 때" 재생한다.
+# (팽이처럼 도는 기술 등 다른 기술이 같은 프레임에 이어받으면 보이스를 내지 않기 위함)
+const JUMP_VOICE_PATH := "res://Zero_mod/Voices/zero_1dangiri.wav"
+const JUMP_VOICE_DB := -5.0            # 지상 1단 보이스와 같은 음량
+const JUMP_VOICE_MASTER_DB := 0.0      # 점프 보이스만 키우거나 줄이고 싶을 때
+var _jump_voice_stream = null
+var _jump_voice_played: bool = false
+var _jump_voice_pending: bool = false
+
+func request_jump_voice() -> void:
+	if _jump_voice_played:
+		return
+	_jump_voice_played = true
+	_jump_voice_pending = true
+
+func check_jump_voice() -> void:
+	if not _jump_voice_pending:
+		return
+	_jump_voice_pending = false
+	# 일반 점프 베기가 아니면(위 방향 입력, 도는 기술 등) 보이스를 내지 않는다
+	if animatedSprite.animation != "saber_jump" or character.get_action_pressed("move_up"):
+		return
+	if _jump_voice_stream == null:
+		_jump_voice_stream = load(JUMP_VOICE_PATH)
+		if _jump_voice_stream == null:
+			return
+	var player := AudioStreamPlayer.new()
+	player.stream = _jump_voice_stream
+	player.bus = "SFX"
+	player.volume_db = JUMP_VOICE_DB + JUMP_VOICE_MASTER_DB
+	add_child(player)
+	player.connect("finished", player, "queue_free")
+	player.play()
+
 func set_saber_animations():
 	if character.is_on_floor():
 		animatedSprite.animation = "saber_land"
@@ -188,6 +223,7 @@ func set_saber_animations():
 			animatedSprite.animation = "saber_jump"
 			animatedSprite.frame = 0
 			saber_sound.play()
+			request_jump_voice()
 
 
 func create() -> void :
@@ -280,6 +316,8 @@ func _Setup() -> void :
 	first_time_use = true
 	if vertical_last != 0:
 		character.velocity.y = vertical_last
+	_jump_voice_played = false
+	_jump_voice_pending = false
 	set_saber_animations()
 	if character.dashjumps_since_jump > 0:
 		horizontal_velocity = dashjump_speed
@@ -288,6 +326,7 @@ func _Setup() -> void :
 		horizontal_velocity = 90
 
 func _Update(_delta: float) -> void :
+	check_jump_voice()
 	hitbox_and_position()
 	
 	if is_in_buffer_window() and character.get_action_just_pressed(actions[0]):
