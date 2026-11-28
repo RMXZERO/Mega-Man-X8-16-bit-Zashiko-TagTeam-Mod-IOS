@@ -124,7 +124,7 @@ const COMBO_VOICES := [
 	"res://Zero_mod/Voices/zero_3dangiri.wav"
 ]
 # 단계별 음량 보정(dB): 세이버 효과음보다 조금 크게 들리도록 측정해서 맞춘 값 (1단, 2단, 3단)
-const COMBO_VOICE_DB := [-5.0, -4.5, -3.0]
+const COMBO_VOICE_DB := [-10.5, -10.1, -8.7]   # 태그 보이스와 같은 음량(약 -19.8dBFS RMS)
 const COMBO_VOICE_MASTER_DB := 0.0   # 콤보 보이스 전체를 한꺼번에 키우거나 줄이고 싶을 때
 var _combo_voice_cache: Dictionary = {}
 

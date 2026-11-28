@@ -13,7 +13,7 @@ const ATTACK_VOICES := [
 	"res://src/Actors/Player/AttackVoice/axl_gun_attack2.wav"
 ]
 # 기존 전투 보이스(제로 콤보 보이스, 실제 재생 기준 약 -14.6dBFS RMS)와 체감 음량을 맞춘 파일별 볼륨
-const ATTACK_VOICE_VOLUMES_DB := [-2.5, 0.0]
+const ATTACK_VOICE_VOLUMES_DB := [-9.9, -7.7]
 # 총알이 나갈 때 보이스가 나올 확률 (1.0 = 매번, 0.5 = 절반)
 const ATTACK_VOICE_CHANCE := 1.0
 var _attack_voice_streams: Array = []

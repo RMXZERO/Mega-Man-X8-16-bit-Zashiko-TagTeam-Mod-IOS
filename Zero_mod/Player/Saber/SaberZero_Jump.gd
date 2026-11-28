@@ -172,7 +172,7 @@ func should_add_saber_combo():
 # 베기를 시작한 직후가 아니라 "다음 프레임에도 여전히 일반 점프 베기일 때" 재생한다.
 # (팽이처럼 도는 기술 등 다른 기술이 같은 프레임에 이어받으면 보이스를 내지 않기 위함)
 const JUMP_VOICE_PATH := "res://Zero_mod/Voices/zero_1dangiri.wav"
-const JUMP_VOICE_DB := -5.0            # 지상 1단 보이스와 같은 음량
+const JUMP_VOICE_DB := -10.5           # 지상 1단 보이스와 같은 음량
 const JUMP_VOICE_MASTER_DB := 0.0      # 점프 보이스만 키우거나 줄이고 싶을 때
 var _jump_voice_stream = null
 var _jump_voice_played: bool = false

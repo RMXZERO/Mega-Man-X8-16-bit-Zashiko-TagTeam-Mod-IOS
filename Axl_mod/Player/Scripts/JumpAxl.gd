@@ -21,9 +21,9 @@ func get_activation_leeway_time() -> float:
 	return 0.0
 
 # Axl 가 점프할 때 나오는 보이스 (캐릭터 루트 노드 이름 기준: Axl)
-# 기존 전투 보이스(제로 콤보 보이스, 실제 재생 기준 약 -14.6dBFS RMS)와 체감 음량을 맞춘 볼륨
+# 태그 보이스와 같은 음량(실제 재생 기준 약 -21.1dBFS RMS)으로 맞춘 볼륨
 const JUMP_VOICE_PATH := "res://src/Actors/Player/JumpVoice/axl_jump.wav"
-const JUMP_VOICE_VOLUME_DB := -2.5
+const JUMP_VOICE_VOLUME_DB := -10.6
 
 func play_jump_voice() -> void :
 	if character == null or character.name != "Axl":

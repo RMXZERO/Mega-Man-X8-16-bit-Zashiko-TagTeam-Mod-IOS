@@ -19,9 +19,9 @@ func get_activation_leeway_time() -> float:
 	return 0.0
 
 # X 가 점프할 때 나오는 보이스 (캐릭터 루트 노드 이름 기준: X)
-# 기존 전투 보이스(제로 콤보 보이스, 실제 재생 기준 약 -14.6dBFS RMS)와 체감 음량을 맞춘 볼륨
+# 태그 보이스와 같은 음량(실제 재생 기준 약 -21.7dBFS RMS)으로 맞춘 볼륨
 const JUMP_VOICE_PATH := "res://src/Actors/Player/JumpVoice/x_jump.wav"
-const JUMP_VOICE_VOLUME_DB := -3.3
+const JUMP_VOICE_VOLUME_DB := -10.9
 
 func play_jump_voice() -> void :
 	if character == null or character.name != "X":

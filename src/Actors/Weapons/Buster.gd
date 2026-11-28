@@ -6,8 +6,8 @@ const CHARGE_VOICES := [
 	"res://src/Actors/Player/AttackVoice/x_buster_attack1.wav",
 	"res://src/Actors/Player/AttackVoice/x_buster_attack2.wav"
 ]
-# 기존 전투 보이스(제로 콤보 보이스, 실제 재생 기준 약 -14.6dBFS RMS)와 체감 음량을 맞춘 파일별 볼륨
-const CHARGE_VOICE_VOLUMES_DB := [-2.2, -2.6]
+# 태그 보이스와 같은 음량(실제 재생 기준 약 -21.7dBFS RMS)으로 맞춘 파일별 볼륨
+const CHARGE_VOICE_VOLUMES_DB := [-9.7, -10.6]
 var _charge_voice_streams: Array = []
 var _charge_voice_player: AudioStreamPlayer = null
 
